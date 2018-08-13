@@ -64,11 +64,13 @@ tasks.compileKotlin {
         freeCompilerArgs += listOf(
             "-Xallow-kotlin-package",
             "-Xmulti-platform",
-            "-Xcommon-sources=${commonSources.joinToString(File.pathSeparator)}",
             "-opt-in=kotlin.RequiresOptIn",
             "-opt-in=kotlin.contracts.ExperimentalContracts"
         )
         moduleName = "kotlin-stdlib"
+    }
+    doFirst {
+        kotlinOptions.freeCompilerArgs += listOf("-Xcommon-sources=${commonSources.joinToString(File.pathSeparator)}")
     }
 }
 
