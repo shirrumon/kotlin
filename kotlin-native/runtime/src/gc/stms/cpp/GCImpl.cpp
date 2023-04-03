@@ -19,11 +19,11 @@ gc::GC::ThreadData::ThreadData(GC& gc, gcScheduler::GCSchedulerThreadData& gcSch
 gc::GC::ThreadData::~ThreadData() = default;
 
 ALWAYS_INLINE void gc::GC::ThreadData::SafePointFunctionPrologue() noexcept {
-    mm::SuspendIfRequested();
+    mm::SafePoint();
 }
 
 ALWAYS_INLINE void gc::GC::ThreadData::SafePointLoopBody() noexcept {
-    mm::SuspendIfRequested();
+    mm::SafePoint();
 }
 
 void gc::GC::ThreadData::Schedule() noexcept {
