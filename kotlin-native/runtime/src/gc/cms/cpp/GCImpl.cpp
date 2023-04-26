@@ -8,6 +8,7 @@
 #include "GC.hpp"
 #include "GCStatistics.hpp"
 #include "MarkAndSweepUtils.hpp"
+#include "ObjectOps.hpp"
 #include "ThreadSuspension.hpp"
 #include "std_support/Memory.hpp"
 
@@ -116,4 +117,13 @@ ALWAYS_INLINE void gc::GC::processFieldInMark(void* state, ObjHeader* field) noe
 
 void gc::GC::Schedule() noexcept {
     impl_->gc().Schedule();
+}
+
+bool gc::isMarked(ObjHeader* object) noexcept {
+    auto& objectData = mm::ObjectFactory<gc::ConcurrentMarkAndSweep>::NodeRef::From(object).ObjectData();
+    return objectData.marked();
+}
+
+ALWAYS_INLINE OBJ_GETTER(gc::tryRef, ObjHeader* object) noexcept {
+    RETURN_RESULT_OF(gc::WeakRefRead, object);
 }

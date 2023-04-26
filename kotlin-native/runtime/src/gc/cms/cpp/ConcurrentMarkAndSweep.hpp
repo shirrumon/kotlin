@@ -9,6 +9,7 @@
 #include <cstddef>
 
 #include "Allocator.hpp"
+#include "Barriers.hpp"
 #include "FinalizerProcessor.hpp"
 #include "GCScheduler.hpp"
 #include "GCState.hpp"
@@ -93,12 +94,15 @@ public:
 
         Allocator CreateAllocator() noexcept { return Allocator(gc::Allocator(), *this); }
 
+        BarriersThreadData& barriers() { return barriersThreadData_; };
+
     private:
         friend ConcurrentMarkAndSweep;
         ConcurrentMarkAndSweep& gc_;
         mm::ThreadData& threadData_;
         gcScheduler::GCSchedulerThreadData& gcScheduler_;
         std::atomic<bool> marking_;
+        BarriersThreadData barriersThreadData_;
     };
 
     using Allocator = ThreadData::Allocator;
