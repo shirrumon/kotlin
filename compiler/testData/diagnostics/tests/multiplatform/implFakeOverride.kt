@@ -3,7 +3,7 @@
 // FILE: common.kt
 
 expect class Foo {
-    fun bar(): String
+    fun <!IMPLICIT_ACTUALIZATION_BY_SUPER_CLASS{JVM}!>bar<!>(): String
 }
 
 // MODULE: m2-jvm()()(m1-common)

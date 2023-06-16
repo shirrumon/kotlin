@@ -102,6 +102,8 @@ class ExpectedActualDeclarationChecker(
                 reportOn, descriptor, actuals, trace, leafModule, checkActualModifier, expectActualTracker
             )
 
+            checkExpectedDeclarationIsNotActualizedByFakeOverride(reportOn, descriptor, actuals, trace)
+
             checkExpectedDeclarationHasAtMostOneActual(
                 reportOn, descriptor, actuals, allActualizationPaths, trace
             )
@@ -153,6 +155,21 @@ class ExpectedActualDeclarationChecker(
                         .sortedBy { it.name.asString() }
                 ))
             }
+        }
+    }
+
+    private fun checkExpectedDeclarationIsNotActualizedByFakeOverride(
+        reportOn: KtNamedDeclaration,
+        expectDescriptor: MemberDescriptor,
+        actuals: ActualsMap,
+        trace: BindingTrace,
+    ) {
+        fun ActualsMap.actuals() =
+            filter { (compatibility, _) -> compatibility.isCompatibleOrWeakCompatible() }
+                .flatMap { (_, members) -> members }
+
+        if (actuals.actuals().any { (it as? CallableMemberDescriptor)?.kind == CallableMemberDescriptor.Kind.FAKE_OVERRIDE }) {
+            trace.report(Errors.IMPLICIT_ACTUALIZATION_BY_SUPER_CLASS.on(reportOn, expectDescriptor, expectDescriptor.module))
         }
     }
 

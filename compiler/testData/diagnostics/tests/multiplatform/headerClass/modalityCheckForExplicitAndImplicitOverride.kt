@@ -6,11 +6,11 @@ expect class Foo1 {
 }
 
 expect class Foo2 {
-    val x: String
+    val <!IMPLICIT_ACTUALIZATION_BY_SUPER_CLASS{JVM}!>x<!>: String
 }
 
 expect class Foo3 {
-    val x: String
+    val <!IMPLICIT_ACTUALIZATION_BY_SUPER_CLASS{JVM}!>x<!>: String
 }
 
 // MODULE: m2-jvm()()(m1-common)
