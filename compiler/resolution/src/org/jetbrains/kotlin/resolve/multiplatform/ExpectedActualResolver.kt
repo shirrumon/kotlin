@@ -23,11 +23,11 @@ object ExpectedActualResolver {
         return when (expected) {
             is CallableMemberDescriptor -> {
                 expected.findNamesakesFromModule(context, platformModule, moduleVisibilityFilter).filter { actual ->
-                    expected != actual && !actual.isExpect &&
+                    expected != actual && !actual.isExpect //&&
                             // TODO: use some other way to determine that the declaration is from Kotlin.
                             //       This way behavior differs between fast and PSI-based Java class reading mode
                             // TODO: support non-source definitions (e.g. from Java)
-                            actual.couldHaveASource
+                            // actual.couldHaveASource
                 }.groupBy { actual ->
                     AbstractExpectActualCompatibilityChecker.areCompatibleCallables(
                         expected,
