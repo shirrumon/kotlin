@@ -12,7 +12,6 @@ bool TrySetSafePointAction(SafePointAction action) noexcept;
 void UnsetSafePointAction() noexcept;
 bool IsSafePointActionRequested() noexcept;
 
-void SafePoint() noexcept;
 void SafePoint(ThreadData& threadData) noexcept;
 
 class ScopedSafePointAction : private MoveOnly {

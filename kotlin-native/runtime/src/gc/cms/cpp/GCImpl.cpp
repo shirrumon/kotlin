@@ -17,7 +17,6 @@ namespace {
 
 ALWAYS_INLINE void SafePointRegular(gc::GC::ThreadData& threadData, size_t weight) noexcept {
     threadData.impl().gcScheduler().OnSafePointRegular(weight);
-    mm::SafePoint();
 }
 
 } // namespace
@@ -28,10 +27,12 @@ gc::GC::ThreadData::~ThreadData() = default;
 
 ALWAYS_INLINE void gc::GC::ThreadData::SafePointFunctionPrologue() noexcept {
     SafePointRegular(*this, GCSchedulerThreadData::kFunctionPrologueWeight);
+    mm::SafePoint(impl().threadData());
 }
 
 ALWAYS_INLINE void gc::GC::ThreadData::SafePointLoopBody() noexcept {
     SafePointRegular(*this, GCSchedulerThreadData::kLoopBodyWeight);
+    mm::SafePoint(impl().threadData());
 }
 
 void gc::GC::ThreadData::Schedule() noexcept {
