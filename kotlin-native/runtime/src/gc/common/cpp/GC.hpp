@@ -27,7 +27,7 @@ public:
     public:
         class Impl;
 
-        ThreadData(GC& gc, gcScheduler::GCSchedulerThreadData& gcScheduler, mm::ThreadData& threadData) noexcept;
+        ThreadData(GC& gc, mm::ThreadData& threadData) noexcept;
         ~ThreadData();
 
         Impl& impl() noexcept { return *impl_; }

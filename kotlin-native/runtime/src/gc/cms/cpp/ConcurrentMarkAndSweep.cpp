@@ -59,10 +59,6 @@ struct ProcessWeaksTraits {
 
 } // namespace
 
-void gc::ConcurrentMarkAndSweep::ThreadData::SafePointAllocation(size_t size) noexcept {
-    gcScheduler_.OnSafePointAllocation(size);
-}
-
 void gc::ConcurrentMarkAndSweep::ThreadData::Schedule() noexcept {
     RuntimeLogInfo({kTagGC}, "Scheduling GC manually");
     ThreadStateGuard guard(ThreadState::kNative);
@@ -181,8 +177,6 @@ void gc::ConcurrentMarkAndSweep::PerformFullGC(int64_t epoch) noexcept {
     gc::Mark<internal::MarkTraits>(gcHandle, markQueue_);
 
     mm::WaitForThreadsSuspension();
-    auto markStats = gcHandle.getMarked();
-    scheduler.gcData().UpdateAliveSetBytes(markStats.markedSizeBytes);
 
     gc::processWeaks<ProcessWeaksTraits>(gcHandle, mm::SpecialRefRegistry::instance());
 
@@ -206,6 +200,7 @@ void gc::ConcurrentMarkAndSweep::PerformFullGC(int64_t epoch) noexcept {
     // also sweeps extraObjects
     auto finalizerQueue = heap_.Sweep(gcHandle);
 #endif
+    scheduler.gcData().UpdateAliveSetBytes(allocatedBytes());
     state_.finish(epoch);
     gcHandle.finalizersScheduled(finalizerQueue.size());
     gcHandle.finished();
