@@ -31,18 +31,15 @@ private:
 class GC::ThreadData::Impl : private Pinned {
 public:
     Impl(GC& gc, mm::ThreadData& threadData) noexcept :
-        threadData_(threadData),
         gcScheduler_(gc.impl_->gcScheduler().NewThreadData()),
         gc_(gc.impl_->gc(), threadData, gcScheduler_),
         objectFactoryThreadQueue_(gc.impl_->objectFactory(), gc_.CreateAllocator()) {}
 
-    mm::ThreadData& threadData() noexcept { return threadData_; }
     GCSchedulerThreadData& gcScheduler() noexcept { return gcScheduler_; }
     GCImpl::ThreadData& gc() noexcept { return gc_; }
     mm::ObjectFactory<GCImpl>::ThreadQueue& objectFactoryThreadQueue() noexcept { return objectFactoryThreadQueue_; }
 
 private:
-    mm::ThreadData& threadData_;
     GCSchedulerThreadData gcScheduler_;
     GCImpl::ThreadData gc_;
     mm::ObjectFactory<GCImpl>::ThreadQueue objectFactoryThreadQueue_;

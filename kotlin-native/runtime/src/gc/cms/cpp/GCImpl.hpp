@@ -43,7 +43,6 @@ private:
 class GC::ThreadData::Impl : private Pinned {
 public:
     Impl(GC& gc, mm::ThreadData& threadData) noexcept :
-        threadData_(threadData),
         gcScheduler_(gc.impl_->gcScheduler().NewThreadData()),
         gc_(gc.impl_->gc(), threadData, gcScheduler_),
 #ifndef CUSTOM_ALLOCATOR
@@ -52,7 +51,6 @@ public:
         alloc_(gc.impl_->gc().heap(), gcScheduler_) {}
 #endif
 
-    mm::ThreadData& threadData() noexcept { return threadData_; }
     GCSchedulerThreadData& gcScheduler() noexcept { return gcScheduler_; }
     GCImpl::ThreadData& gc() noexcept { return gc_; }
 #ifdef CUSTOM_ALLOCATOR
@@ -62,7 +60,6 @@ public:
 #endif
 
 private:
-    mm::ThreadData& threadData_;
     GCSchedulerThreadData gcScheduler_;
     GCImpl::ThreadData gc_;
 #ifdef CUSTOM_ALLOCATOR
