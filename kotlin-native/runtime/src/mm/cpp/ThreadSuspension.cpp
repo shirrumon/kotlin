@@ -80,8 +80,11 @@ bool kotlin::mm::RequestThreadsSuspension() noexcept {
     RuntimeAssert(gSuspensionRequestedByCurrentThread == false, "Current thread already suspended threads.");
     {
         std::unique_lock lock(gSuspensionMutex);
-        bool safePointSet = mm::TrySetSafePointAction([](mm::ThreadData& threadData) {
-            threadData.suspensionData().suspendIfRequested();
+        bool safePointSet = mm::TrySetSafePointAction([](mm::ThreadData* threadData) {
+            if (!threadData) {
+                threadData = kotlin::mm::ThreadRegistry::Instance().CurrentThreadData();
+            }
+            threadData->suspensionData().suspendIfRequested();
         });
         if (!safePointSet) return false;
         RuntimeAssert(!IsThreadSuspensionRequested(), "Suspension must not be requested without altering safe point action");

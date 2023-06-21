@@ -6,7 +6,7 @@
 
 namespace kotlin::mm {
 
-using SafePointAction = void(*)(mm::ThreadData&);
+using SafePointAction = void(*)(mm::ThreadData*);
 
 bool TrySetSafePointAction(SafePointAction action) noexcept;
 void UnsetSafePointAction() noexcept;
