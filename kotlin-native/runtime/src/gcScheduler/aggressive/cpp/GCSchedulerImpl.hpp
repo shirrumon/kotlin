@@ -16,13 +16,12 @@
 
 namespace kotlin::gcScheduler::internal {
 
+// The slowpath will trigger GC if this thread didn't meet this safepoint/allocation site before.
 class GCSchedulerDataAggressive : public GCSchedulerData {
 public:
     GCSchedulerDataAggressive(GCSchedulerConfig& config, std::function<void()> scheduleGC) noexcept :
         scheduleGC_(std::move(scheduleGC)), heapGrowthController_(config) {
-        // Trigger the slowpath on each safepoint and on each allocation.
-        // The slowpath will trigger GC if this thread didn't meet this safepoint/allocation site before.
-        config.threshold = 1;
+        // Trigger the slowpath on each allocation.
         config.allocationThresholdBytes = 1;
         RuntimeLogInfo({kTagGC}, "Aggressive GC scheduler initialized");
     }
@@ -34,14 +33,20 @@ public:
             // might be "met", so that's the only trigger to not run out of memory.
             RuntimeLogDebug({kTagGC}, "Scheduling GC by allocation");
             scheduleGC_();
-        } else if (safePointTracker_.registerCurrentSafePoint(1)) {
-            RuntimeLogDebug({kTagGC}, "Scheduling GC by safepoint");
-            scheduleGC_();
+        } else {
+            safePoint();
         }
     }
 
     void OnPerformFullGC() noexcept override { heapGrowthController_.OnPerformFullGC(); }
     void UpdateAliveSetBytes(size_t bytes) noexcept override { heapGrowthController_.UpdateAliveSetBytes(bytes); }
+
+    void safePoint() noexcept {
+        if (safePointTracker_.registerCurrentSafePoint(1)) {
+            RuntimeLogDebug({kTagGC}, "Scheduling GC by safepoint");
+            scheduleGC_();
+        }
+    }
 
 private:
     std::function<void()> scheduleGC_;

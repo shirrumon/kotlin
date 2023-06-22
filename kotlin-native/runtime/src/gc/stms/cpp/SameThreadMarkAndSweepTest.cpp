@@ -734,7 +734,7 @@ TEST_F(SameThreadMarkAndSweepTest, MultipleMutatorsCollect) {
 
     for (int i = 1; i < kDefaultThreadCount; ++i) {
         gcFutures[i] =
-                mutators[i].Execute([](mm::ThreadData& threadData, Mutator& mutator) { threadData.gc().SafePointFunctionPrologue(); });
+                mutators[i].Execute([](mm::ThreadData& threadData, Mutator& mutator) { mm::SafePoint(); });
     }
 
     for (auto& future : gcFutures) {
@@ -868,7 +868,7 @@ TEST_F(SameThreadMarkAndSweepTest, MultipleMutatorsAddToRootSetAfterCollectionRe
     for (int i = 1; i < kDefaultThreadCount; ++i) {
         gcFutures[i] = mutators[i].Execute([i, expandRootSet](mm::ThreadData& threadData, Mutator& mutator) {
             expandRootSet(threadData, mutator, i);
-            threadData.gc().SafePointFunctionPrologue();
+            mm::SafePoint();
         });
     }
 
@@ -933,7 +933,7 @@ TEST_F(SameThreadMarkAndSweepTest, CrossThreadReference) {
 
     for (int i = 1; i < kDefaultThreadCount; ++i) {
         gcFutures[i] =
-                mutators[i].Execute([](mm::ThreadData& threadData, Mutator& mutator) { threadData.gc().SafePointFunctionPrologue(); });
+                mutators[i].Execute([](mm::ThreadData& threadData, Mutator& mutator) { mm::SafePoint(); });
     }
 
     for (auto& future : gcFutures) {
@@ -997,7 +997,7 @@ TEST_F(SameThreadMarkAndSweepTest, MultipleMutatorsWeaks) {
 
     for (int i = 1; i < kDefaultThreadCount; ++i) {
         gcFutures[i] = mutators[i].Execute([weak](mm::ThreadData& threadData, Mutator& mutator) {
-            threadData.gc().SafePointFunctionPrologue();
+            mm::SafePoint();
             EXPECT_THAT(weak->get(), nullptr);
         });
     }
@@ -1056,7 +1056,7 @@ TEST_F(SameThreadMarkAndSweepTest, NewThreadsWhileRequestingCollection) {
     // All the other threads are stopping at safe points.
     for (int i = 1; i < kDefaultThreadCount; ++i) {
         gcFutures[i] =
-                mutators[i].Execute([](mm::ThreadData& threadData, Mutator& mutator) { threadData.gc().SafePointFunctionPrologue(); });
+                mutators[i].Execute([](mm::ThreadData& threadData, Mutator& mutator) { mm::SafePoint(); });
     }
 
     // GC will be completed first
@@ -1129,7 +1129,7 @@ TEST_F(SameThreadMarkAndSweepTest, FreeObjectWithFreeWeakReversedOrder) {
         auto& weak_local = InstallWeakReference(threadData, object1.load()->header(), holder.slot());
         weak = &weak_local;
         *holder.slot() = nullptr;
-        while (!done) threadData.gc().SafePointLoopBody();
+        while (!done) mm::SafePoint();
     });
 
     f0.wait();

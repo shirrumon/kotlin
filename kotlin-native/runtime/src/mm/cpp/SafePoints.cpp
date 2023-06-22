@@ -1,6 +1,8 @@
 #include "SafePoint.hpp"
-#include "ThreadData.hpp"
+
 #include "KAssert.h"
+#include "ThreadData.hpp"
+#include "ThreadState.hpp"
 
 namespace {
 
@@ -36,6 +38,8 @@ bool kotlin::mm::IsSafePointActionRequested() noexcept {
 }
 
 ALWAYS_INLINE void kotlin::mm::SafePoint() noexcept {
+    AssertThreadState(ThreadState::kRunnable);
+    mm::GlobalData::Instance().gcScheduler().safePoint();
     // TODO nullable action VS flag + action call
     auto action = safePointAction.load(std::memory_order_relaxed);
     if (action != nullptr) /*[[unlikely]]*/ {
@@ -43,6 +47,8 @@ ALWAYS_INLINE void kotlin::mm::SafePoint() noexcept {
     }
 }
 
-void kotlin::mm::SafePoint(mm::ThreadData& threadData) noexcept {
+ALWAYS_INLINE void kotlin::mm::SafePoint(mm::ThreadData& threadData) noexcept {
+    AssertThreadState(&threadData, ThreadState::kRunnable);
+    mm::GlobalData::Instance().gcScheduler().safePoint();
     slowPath(threadData);
 }
