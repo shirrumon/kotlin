@@ -7,5 +7,5 @@ package kotlin
 fun foo() {}
 
 fun test() {
-    <!DEPRECATION!>foo<!>()
+    <!DEPRECATION("fun foo(): Unit; foo test")!>foo<!>()
 }

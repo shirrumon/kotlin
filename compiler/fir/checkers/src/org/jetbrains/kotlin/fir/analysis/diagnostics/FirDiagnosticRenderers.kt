@@ -33,10 +33,12 @@ object FirDiagnosticRenderers {
     val SYMBOL = Renderer { symbol: FirBasedSymbol<*> ->
         when (symbol) {
             is FirClassLikeSymbol<*>,
-            is FirCallableSymbol<*> -> FirRenderer(
+            is FirCallableSymbol<*>
+            -> FirRenderer(
                 typeRenderer = ConeTypeRenderer(),
                 idRenderer = ConeIdShortRenderer(),
                 classMemberRenderer = FirNoClassMemberRenderer(),
+                annotationRenderer = null,
                 bodyRenderer = null,
                 propertyAccessorRenderer = null,
                 callArgumentsRenderer = FirCallNoArgumentsRenderer(),
