@@ -8,6 +8,7 @@
 #include "Common.h"
 #include "ThreadData.hpp"
 #include "ThreadState.hpp"
+#include "Natives.h"
 
 using namespace kotlin;
 
@@ -39,7 +40,6 @@ ALWAYS_INLINE void mm::SetHeapRefAtomicSeqCst(ObjHeader** location, ObjHeader* v
     __atomic_store_n(location, value, __ATOMIC_SEQ_CST);
 }
 
-
 ALWAYS_INLINE OBJ_GETTER(mm::ReadHeapRefAtomic, ObjHeader** location) noexcept {
     AssertThreadState(ThreadState::kRunnable);
     // TODO: Make this work with GCs that can stop thread at any point.
@@ -68,6 +68,81 @@ ALWAYS_INLINE OBJ_GETTER(mm::GetAndSetHeapRef, ObjHeader** location, ObjHeader* 
     RETURN_OBJ(actual);
 }
 
+// Atomic operations for primitive types
+
+// There is already ReadHeapRefAtomic function: the only difference is that this function uses __ATOMIC_SEQ_CST instead of __ATOMIC_ACQUIRE
+ALWAYS_INLINE OBJ_GETTER(mm::GetHeapRefSeqCst, ObjHeader** location) noexcept {
+    AssertThreadState(ThreadState::kRunnable);
+    auto result = __atomic_load_n(location, __ATOMIC_SEQ_CST);
+    RETURN_OBJ(result);
+}
+
+// Atomic operations for int fields
+ALWAYS_INLINE int mm::GetIntFieldSeqCst(int* location) noexcept {
+    AssertThreadState(ThreadState::kRunnable);
+    return __atomic_load_n(location, __ATOMIC_SEQ_CST);
+}
+
+ALWAYS_INLINE void mm::SetIntFieldSeqCst(int* location, int newValue) noexcept {
+    AssertThreadState(ThreadState::kRunnable);
+    __atomic_store_n(location, newValue, __ATOMIC_SEQ_CST);
+}
+
+// Writes newValue into *location, and returns the previous contents of *location.
+ALWAYS_INLINE int mm::GetAndSetIntField(int* location, int newValue) noexcept {
+    AssertThreadState(ThreadState::kRunnable);
+    return __atomic_exchange_n(location, newValue,  __ATOMIC_SEQ_CST);
+}
+
+ALWAYS_INLINE int mm::FetchAndAddIntField(int* location, int delta) noexcept {
+    AssertThreadState(ThreadState::kRunnable);
+    return __atomic_fetch_add(location, delta,  __ATOMIC_SEQ_CST);
+}
+
+ALWAYS_INLINE int mm::CompareAndExchangeIntField(int* location, int *expectedValue, int newValue) noexcept {
+    AssertThreadState(ThreadState::kRunnable);
+    __atomic_compare_exchange_n(location, expectedValue, newValue, false, __ATOMIC_SEQ_CST, __ATOMIC_SEQ_CST);
+    return *expectedValue;
+}
+
+ALWAYS_INLINE bool mm::CompareAndSetIntField(int* location, int *expectedValue, int newValue) noexcept {
+    AssertThreadState(ThreadState::kRunnable);
+    return __atomic_compare_exchange_n(location, expectedValue, newValue, false, __ATOMIC_SEQ_CST, __ATOMIC_SEQ_CST);
+}
+
+// Atomic operations for Long fields
+
+ALWAYS_INLINE long long mm::GetLongFieldSeqCst(long long* location) noexcept {
+    AssertThreadState(ThreadState::kRunnable);
+    return __atomic_load_n(location, __ATOMIC_SEQ_CST);
+}
+
+ALWAYS_INLINE void mm::SetLongFieldSeqCst(long long* location, long long newValue) noexcept {
+    AssertThreadState(ThreadState::kRunnable);
+    __atomic_store_n(location, newValue, __ATOMIC_SEQ_CST);
+}
+
+// Writes newValue into *location, and returns the previous contents of *location.
+ALWAYS_INLINE long long mm::GetAndSetLongField(long long* location, long long newValue) noexcept {
+    AssertThreadState(ThreadState::kRunnable);
+    return __atomic_exchange_n(location, newValue,  __ATOMIC_SEQ_CST);
+}
+
+ALWAYS_INLINE long long mm::FetchAndAddLongField(long long* location, long long delta) noexcept {
+    AssertThreadState(ThreadState::kRunnable);
+    return __atomic_fetch_add(location, delta,  __ATOMIC_SEQ_CST);
+}
+
+ALWAYS_INLINE long long mm::CompareAndExchangeLongField(long long* location, long long *expectedValue, long long newValue) noexcept {
+    AssertThreadState(ThreadState::kRunnable);
+    __atomic_compare_exchange_n(location, expectedValue, newValue, false, __ATOMIC_SEQ_CST, __ATOMIC_SEQ_CST);
+    return *expectedValue;
+}
+
+ALWAYS_INLINE bool mm::CompareAndSetLongField(long long* location, long long *expectedValue, long long newValue) noexcept {
+    AssertThreadState(ThreadState::kRunnable);
+    return __atomic_compare_exchange_n(location, expectedValue, newValue, false, __ATOMIC_SEQ_CST, __ATOMIC_SEQ_CST);
+}
 
 #pragma clang diagnostic pop
 

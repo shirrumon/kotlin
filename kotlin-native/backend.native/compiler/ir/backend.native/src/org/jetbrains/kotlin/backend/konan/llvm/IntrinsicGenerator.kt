@@ -16,9 +16,9 @@ import org.jetbrains.kotlin.ir.declarations.IrField
 import org.jetbrains.kotlin.ir.declarations.IrFunction
 import org.jetbrains.kotlin.ir.expressions.*
 import org.jetbrains.kotlin.ir.symbols.IrConstructorSymbol
-import org.jetbrains.kotlin.ir.types.classOrNull
-import org.jetbrains.kotlin.ir.types.getClass
+import org.jetbrains.kotlin.ir.types.*
 import org.jetbrains.kotlin.ir.util.findAnnotation
+import org.jetbrains.kotlin.ir.util.render
 
 internal enum class IntrinsicType {
     PLUS,
@@ -103,6 +103,13 @@ internal enum class IntrinsicType {
     COMPARE_AND_EXCHANGE,
     GET_AND_SET,
     GET_AND_ADD,
+    // Atomic arrays
+    ATOMIC_GET_ARRAY_ELEMENT,
+    ATOMIC_SET_ARRAY_ELEMENT,
+    COMPARE_AND_EXCHANGE_ARRAY_ELEMENT,
+    COMPARE_AND_SET_ARRAY_ELEMENT,
+    GET_AND_SET_ARRAY_ELEMENT,
+    GET_AND_ADD_ARRAY_ELEMENT
 }
 
 internal enum class ConstantConstructorIntrinsicType {
@@ -261,6 +268,12 @@ internal class IntrinsicGenerator(private val environment: IntrinsicGeneratorEnv
                 IntrinsicType.COMPARE_AND_EXCHANGE -> emitCompareAndSwap(callSite, args, resultSlot)
                 IntrinsicType.GET_AND_SET -> emitGetAndSet(callSite, args, resultSlot)
                 IntrinsicType.GET_AND_ADD -> emitGetAndAdd(callSite, args)
+                IntrinsicType.ATOMIC_GET_ARRAY_ELEMENT -> emitAtomicGetArrayElement(callSite, args, resultSlot)
+                IntrinsicType.ATOMIC_SET_ARRAY_ELEMENT -> emitAtomicSetArrayElement(callSite, args, resultSlot)
+                IntrinsicType.COMPARE_AND_EXCHANGE_ARRAY_ELEMENT -> emitCompareAndExchangeArrayElement(callSite, args, resultSlot)
+                IntrinsicType.COMPARE_AND_SET_ARRAY_ELEMENT -> emitCompareAndSetArrayElement(callSite, args, resultSlot)
+                IntrinsicType.GET_AND_SET_ARRAY_ELEMENT -> emitGetAndSetArrayElement(callSite, args, resultSlot)
+                IntrinsicType.GET_AND_ADD_ARRAY_ELEMENT -> emitGetAndAddArrayElement(callSite, args)
                 IntrinsicType.GET_CONTINUATION,
                 IntrinsicType.RETURN_IF_SUSPENDED,
                 IntrinsicType.INTEROP_BITS_TO_FLOAT,
@@ -398,6 +411,161 @@ internal class IntrinsicGenerator(private val environment: IntrinsicGeneratorEnv
         return emitAtomicRMW(callSite, args, LLVMAtomicRMWBinOp.LLVMAtomicRMWBinOpAdd, null)
     }
 
+    private fun FunctionGenerationContext.emitAtomicSetArrayElement(callSite: IrCall, args: List<LLVMValueRef>, resultSlot: LLVMValueRef?): LLVMValueRef {
+        val field = getFieldReceiverOfTheIntrinsicCall(callSite)
+        val arrayAddress: LLVMValueRef
+        val index: LLVMValueRef
+        val newValue: LLVMValueRef
+        if (callSite.dispatchReceiver != null) {
+            require(!field.isStatic)
+            require(args.size == 3)
+            arrayAddress = environment.getObjectFieldPointer(args[0], field)
+            index = args[1]
+            newValue = args[2]
+        } else {
+            require(field.isStatic)
+            require(args.size == 2)
+            arrayAddress = environment.getStaticFieldPointer(field)
+            index = args[0]
+            newValue = args[1]
+        }
+        return when {
+            field.type.isIntArray() -> call(llvm.AtomicSetIntArrayElement, listOf(arrayAddress, index, newValue))
+            field.type.isLongArray() -> call(llvm.AtomicSetLongArrayElement, listOf(arrayAddress, index, newValue))
+            field.type.isArray() -> call(llvm.AtomicSetArrayElement, listOf(arrayAddress, index, newValue), environment.calculateLifetime(callSite), resultSlot = resultSlot)
+            else -> error("Only IntArray, LongArray and Array<T> are supported for ${IntrinsicType.ATOMIC_SET_ARRAY_ELEMENT} intrinsic.")
+        }
+    }
+
+    private fun FunctionGenerationContext.emitAtomicGetArrayElement(callSite: IrCall, args: List<LLVMValueRef>, resultSlot: LLVMValueRef?): LLVMValueRef {
+        val field = getFieldReceiverOfTheIntrinsicCall(callSite)
+        val arrayAddress: LLVMValueRef
+        val index: LLVMValueRef
+        if (callSite.dispatchReceiver != null) {
+            require(!field.isStatic)
+            require(args.size == 2)
+            arrayAddress = environment.getObjectFieldPointer(args[0], field)
+            index = args[1]
+        } else {
+            require(field.isStatic)
+            require(args.size == 1)
+            arrayAddress = environment.getStaticFieldPointer(field)
+            index = args[0]
+        }
+        return when {
+            field.type.isIntArray() -> call(llvm.AtomicGetIntArrayElement, listOf(arrayAddress, index))
+            field.type.isLongArray() -> call(llvm.AtomicGetLongArrayElement, listOf(arrayAddress, index))
+            field.type.isArray() -> call(llvm.AtomicGetArrayElement, listOf(arrayAddress, index), environment.calculateLifetime(callSite), resultSlot = resultSlot)
+            else -> error("Only IntArray, LongArray and Array<T> are supported for ${IntrinsicType.ATOMIC_GET_ARRAY_ELEMENT} intrinsic.")
+        }
+    }
+
+    private fun FunctionGenerationContext.emitGetAndSetArrayElement(callSite: IrCall, args: List<LLVMValueRef>, resultSlot: LLVMValueRef?): LLVMValueRef {
+        val field = getFieldReceiverOfTheIntrinsicCall(callSite)
+        val arrayAddress: LLVMValueRef
+        val index: LLVMValueRef
+        val newValue: LLVMValueRef
+        if (callSite.dispatchReceiver != null) {
+            require(!field.isStatic)
+            require(args.size == 3)
+            arrayAddress = environment.getObjectFieldPointer(args[0], field)
+            index = args[1]
+            newValue = args[2]
+        } else {
+            require(field.isStatic)
+            require(args.size == 2)
+            arrayAddress = environment.getStaticFieldPointer(field)
+            index = args[0]
+            newValue = args[1]
+        }
+        return when {
+            field.type.isIntArray() -> call(llvm.GetAndSetIntArrayElement, listOf(arrayAddress, index, newValue))
+            field.type.isLongArray() -> call(llvm.GetAndSetLongArrayElement, listOf(arrayAddress, index, newValue))
+            field.type.isArray() -> call(llvm.GetAndSetArrayElement, listOf(arrayAddress, index, newValue), environment.calculateLifetime(callSite), resultSlot = resultSlot)
+            else -> error("Only IntArray, LongArray and Array<T> are supported for ${IntrinsicType.GET_AND_SET_ARRAY_ELEMENT} intrinsic")
+        }
+    }
+
+    private fun FunctionGenerationContext.emitGetAndAddArrayElement(callSite: IrCall, args: List<LLVMValueRef>): LLVMValueRef {
+        val field = getFieldReceiverOfTheIntrinsicCall(callSite)
+        val arrayAddress: LLVMValueRef
+        val index: LLVMValueRef
+        val delta: LLVMValueRef
+        if (callSite.dispatchReceiver != null) {
+            require(!field.isStatic)
+            require(args.size == 3)
+            arrayAddress = environment.getObjectFieldPointer(args[0], field)
+            index = args[1]
+            delta = args[2]
+        } else {
+            require(field.isStatic)
+            require(args.size == 2)
+            arrayAddress = environment.getStaticFieldPointer(field)
+            index = args[0]
+            delta = args[1]
+        }
+        return when {
+            field.type.isIntArray() -> call(llvm.GetAndAddIntArrayElement, listOf(arrayAddress, index, delta))
+            field.type.isLongArray() -> call(llvm.GetAndAddLongArrayElement, listOf(arrayAddress, index, delta))
+            else -> error("Only IntArray and LongArray are supported for ${IntrinsicType.GET_AND_ADD_ARRAY_ELEMENT} intrinsic.")
+        }
+    }
+
+    private fun FunctionGenerationContext.emitCompareAndExchangeArrayElement(callSite: IrCall, args: List<LLVMValueRef>, resultSlot: LLVMValueRef?): LLVMValueRef =
+            emitCmpExchangeArrayElement(callSite, args, CmpExchangeMode.SWAP, resultSlot)
+
+    private fun FunctionGenerationContext.emitCompareAndSetArrayElement(callSite: IrCall, args: List<LLVMValueRef>, resultSlot: LLVMValueRef?): LLVMValueRef =
+            emitCmpExchangeArrayElement(callSite, args, CmpExchangeMode.SET, resultSlot)
+
+    private fun FunctionGenerationContext.emitCmpExchangeArrayElement(callSite: IrCall, args: List<LLVMValueRef>, mode: CmpExchangeMode, resultSlot: LLVMValueRef?): LLVMValueRef {
+        val field = getFieldReceiverOfTheIntrinsicCall(callSite)
+        val arrayAddress: LLVMValueRef
+        val index: LLVMValueRef
+        val expectedValue: LLVMValueRef
+        val newValue: LLVMValueRef
+        if (callSite.dispatchReceiver != null) {
+            require(!field.isStatic)
+            require(args.size == 4)
+            arrayAddress = environment.getObjectFieldPointer(args[0], field)
+            index = args[1]
+            expectedValue = args[2]
+            newValue = args[3]
+        } else {
+            require(field.isStatic)
+            require(args.size == 3)
+            arrayAddress = environment.getStaticFieldPointer(field)
+            index = args[0]
+            expectedValue = args[1]
+            newValue = args[2]
+        }
+        return when {
+            field.type.isIntArray() -> {
+                if (mode == CmpExchangeMode.SWAP) {
+                    call(llvm.CompareAndExchangeIntArrayElement, listOf(arrayAddress, index, expectedValue, newValue))
+                } else {
+                    call(llvm.CompareAndSetIntArrayElement, listOf(arrayAddress, index, expectedValue, newValue))
+                }
+            }
+            field.type.isLongArray() -> {
+                if (mode == CmpExchangeMode.SWAP) {
+                    call(llvm.CompareAndExchangeLongArrayElement, listOf(arrayAddress, index, expectedValue, newValue))
+                } else {
+                    call(llvm.CompareAndSetLongArrayElement, listOf(arrayAddress, index, expectedValue, newValue))
+                }
+            }
+            field.type.isArray() -> {
+                if (mode == CmpExchangeMode.SWAP) {
+                    call(llvm.CompareAndExchangeArrayElement, listOf(arrayAddress, index, expectedValue, newValue), environment.calculateLifetime(callSite), resultSlot = resultSlot)
+                } else {
+                    call(llvm.CompareAndSetArrayElement, listOf(arrayAddress, index, expectedValue, newValue))
+                }
+            }
+            else -> error("Only IntArray, LongArray and Array<T> are supported for ${if (mode == CmpExchangeMode.SWAP) IntrinsicType.COMPARE_AND_EXCHANGE_ARRAY_ELEMENT else IntrinsicType.COMPARE_AND_SET_ARRAY_ELEMENT}.")
+        }
+    }
+
+    private fun getFieldReceiverOfTheIntrinsicCall(callSite: IrCall) =
+            context.mapping.functionToVolatileField[callSite.symbol.owner] ?: error("Array intrinsic ${callSite.symbol.owner.render()} was not registered.")
 
     private fun FunctionGenerationContext.emitGetNativeNullPtr(): LLVMValueRef =
             llvm.kNullInt8Ptr

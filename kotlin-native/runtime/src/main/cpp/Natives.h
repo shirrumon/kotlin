@@ -62,6 +62,14 @@ inline const KInt* IntArrayAddressOfElementAt(const ArrayHeader* obj, KInt index
   return AddressOfElementAt<KInt>(obj, index);
 }
 
+inline KLong* LongArrayAddressOfElementAt(ArrayHeader* obj, KInt index) {
+  return AddressOfElementAt<KLong>(obj, index);
+}
+
+inline const KLong* LongArrayAddressOfElementAt(const ArrayHeader* obj, KInt index) {
+  return AddressOfElementAt<KLong>(obj, index);
+}
+
 // Consider aligning of base to sizeof(T).
 template <typename T>
 inline T* PrimitiveArrayAddressOfElementAt(ArrayHeader* obj, KInt index) {

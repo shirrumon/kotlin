@@ -260,6 +260,27 @@ OBJ_GETTER(CompareAndSwapVolatileHeapRef, ObjHeader** location, ObjHeader* expec
 bool CompareAndSetVolatileHeapRef(ObjHeader** location, ObjHeader* expectedValue, ObjHeader* newValue) RUNTIME_NOTHROW;
 OBJ_GETTER(GetAndSetVolatileHeapRef, ObjHeader** location, ObjHeader* newValue) RUNTIME_NOTHROW;
 
+// Array intrinsics
+int AtomicGetIntArrayElement(ObjHeader** obj, int index) RUNTIME_NOTHROW;
+void AtomicSetIntArrayElement(ObjHeader** obj, int index, int newValue) RUNTIME_NOTHROW;
+int GetAndSetIntArrayElement(ObjHeader** location, int index, int newValue) RUNTIME_NOTHROW;
+int GetAndAddIntArrayElement(ObjHeader** location, int index, int delta) RUNTIME_NOTHROW;
+int CompareAndExchangeIntArrayElement(ObjHeader** location, int index, int expectValue, int newValue) RUNTIME_NOTHROW;
+bool CompareAndSetIntArrayElement(ObjHeader** location, int index, int expectValue, int newValue) RUNTIME_NOTHROW;
+
+long long AtomicGetLongArrayElement(ObjHeader** obj, int index) RUNTIME_NOTHROW;
+void AtomicSetLongArrayElement(ObjHeader** obj, int index, long long newValue) RUNTIME_NOTHROW;
+long long GetAndSetLongArrayElement(ObjHeader** location, int index, long long newValue) RUNTIME_NOTHROW;
+long long GetAndAddLongArrayElement(ObjHeader** location, int index, long long delta) RUNTIME_NOTHROW;
+long long CompareAndExchangeLongArrayElement(ObjHeader** location, int index, long long expectValue, long long newValue) RUNTIME_NOTHROW;
+bool CompareAndSetLongArrayElement(ObjHeader** location, int index, long long expectValue, long long newValue) RUNTIME_NOTHROW;
+
+OBJ_GETTER(AtomicGetArrayElement, ObjHeader** location, int index) RUNTIME_NOTHROW;
+void AtomicSetArrayElement(ObjHeader** location, int index, ObjHeader* newValue) RUNTIME_NOTHROW;
+OBJ_GETTER(GetAndSetArrayElement, ObjHeader** location, int index, ObjHeader* newValue) RUNTIME_NOTHROW;
+OBJ_GETTER(CompareAndExchangeArrayElement, ObjHeader** location, int index, ObjHeader* expectValue, ObjHeader* newValue) RUNTIME_NOTHROW;
+bool CompareAndSetArrayElement(ObjHeader** location, int index, ObjHeader* expectValue, ObjHeader* newValue) RUNTIME_NOTHROW;
+
 // Updates heap/static data in one array.
 void UpdateHeapRefsInsideOneArray(const ArrayHeader* array, int fromIndex, int toIndex, int count) RUNTIME_NOTHROW;
 // Updates location if it is null, atomically.
