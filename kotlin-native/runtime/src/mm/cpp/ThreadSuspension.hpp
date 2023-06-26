@@ -9,7 +9,6 @@
 #include <atomic>
 
 #include "Memory.h"
-#include "SafePoint.hpp"
 
 namespace kotlin {
 namespace mm {
@@ -70,24 +69,6 @@ inline bool SuspendThreads() noexcept {
  * Does not wait until all such threads are actually resumed.
  */
 void ResumeThreads() noexcept;
-
-class ScopedSTWRequest : private MoveOnly {
-public:
-    ScopedSTWRequest() noexcept : suspensionRequested_(RequestThreadsSuspension()) {}
-    explicit ScopedSTWRequest(const char* reasonToForce) noexcept : ScopedSTWRequest() {
-            RuntimeAssert(suspensionRequested(), "%s", reasonToForce);
-    }
-    ~ScopedSTWRequest() noexcept {
-        if (suspensionRequested_) {
-            ResumeThreads();
-        }
-    }
-    bool suspensionRequested() const {
-        return suspensionRequested_;
-    }
-private:
-    bool suspensionRequested_;
-};
 
 } // namespace mm
 } // namespace kotlin
