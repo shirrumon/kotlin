@@ -16,6 +16,7 @@
 #include "ObjectOps.hpp"
 #include "Porting.h"
 #include "Runtime.h"
+#include "SafePoint.hpp"
 #include "StableRef.hpp"
 #include "ThreadData.hpp"
 #include "ThreadRegistry.hpp"
@@ -543,11 +544,11 @@ extern "C" void CheckGlobalsAccessible() {
 
 // it would be inlined manually in RemoveRedundantSafepointsPass
 extern "C" RUNTIME_NOTHROW NO_INLINE void Kotlin_mm_safePointFunctionPrologue() {
-    mm::SafePoint();
+    mm::safePoint();
 }
 
 extern "C" RUNTIME_NOTHROW CODEGEN_INLINE_POLICY void Kotlin_mm_safePointWhileLoopBody() {
-    mm::SafePoint();
+    mm::safePoint();
 }
 
 extern "C" CODEGEN_INLINE_POLICY RUNTIME_NOTHROW void Kotlin_mm_switchThreadStateNative() {

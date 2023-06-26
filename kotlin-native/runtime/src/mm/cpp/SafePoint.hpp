@@ -1,37 +1,22 @@
+/*
+ * Copyright 2010-2023 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license
+ * that can be found in the LICENSE file.
+ */
+
 #pragma once
 
 #include <atomic>
 
-#include "ThreadData.hpp"
-
 namespace kotlin::mm {
 
-using SafePointAction = void(*)(mm::ThreadData&);
+class ThreadData;
 
-bool TrySetSafePointAction(SafePointAction action) noexcept;
-void UnsetSafePointAction() noexcept;
-bool IsSafePointActionRequested() noexcept;
+using SafePointAction = void (*)(mm::ThreadData&);
 
-void SafePoint() noexcept;
-void SafePoint(ThreadData& threadData) noexcept;
+bool trySetSafePointAction(SafePointAction action) noexcept;
+void unsetSafePointAction() noexcept;
 
-class ScopedSafePointAction : private MoveOnly {
-public:
-    explicit ScopedSafePointAction(SafePointAction action) noexcept : actionSet_(TrySetSafePointAction(action)) {}
-    ScopedSafePointAction(SafePointAction action, const char* reasonToForce) noexcept : ScopedSafePointAction(action) {
-        RuntimeAssert(actionSet(), "%s", reasonToForce);
-    }
-    ~ScopedSafePointAction() noexcept {
-        if (actionSet_) {
-            UnsetSafePointAction();
-        }
-    }
-    bool actionSet() const {
-        return actionSet_;
-    }
-private:
-    bool actionSet_;
-};
+void safePoint() noexcept;
+void safePoint(ThreadData& threadData) noexcept;
 
-}
-
+} // namespace kotlin::mm
