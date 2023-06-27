@@ -16,14 +16,7 @@ using namespace kotlin;
 
 namespace {
 
-[[clang::no_destroy]] std::mutex safePointActionMutex;
-int64_t activeCount = 0;
-std::atomic<void(*)(mm::ThreadData&)> safePointAction = nullptr;
-
-void safePointActionImpl(mm::ThreadData& threadData) noexcept {
-    threadData.suspensionData().suspendIfRequested();
-    mm::GlobalData::Instance().gcScheduler().safePoint();
-}
+std::atomic<int64_t> activeCount = 0;
 
 ALWAYS_INLINE void slowPathImpl(mm::ThreadData& threadData) noexcept {
     // Changing thread state can lead to a safe point.
@@ -40,10 +33,13 @@ ALWAYS_INLINE void slowPathImpl(mm::ThreadData& threadData) noexcept {
     } guard;
 
     // reread an action to avoid register pollution outside the function
-    auto action = safePointAction.load(std::memory_order_seq_cst);
-    if (action != nullptr) {
-        action(threadData);
+    auto count = activeCount.load(std::memory_order_acquire);
+    RuntimeAssert(count >= 0, "Unexpected activeCount: %" PRId64, count);
+    if (count == 0) {
+        return;
     }
+    threadData.suspensionData().suspendIfRequested();
+    mm::GlobalData::Instance().gcScheduler().safePoint();
 }
 
 NO_INLINE void slowPath() noexcept {
@@ -55,23 +51,13 @@ NO_INLINE void slowPath(mm::ThreadData& threadData) noexcept {
 }
 
 void incrementActiveCount() noexcept {
-    std::unique_lock guard{safePointActionMutex};
-    ++activeCount;
-    RuntimeAssert(activeCount >= 1, "Unexpected activeCount: %" PRId64, activeCount);
-    if (activeCount == 1) {
-        auto prev = safePointAction.exchange(safePointActionImpl, std::memory_order_seq_cst);
-        RuntimeAssert(prev == nullptr, "Action cannot have been set. Was %p", prev);
-    }
+    auto count = activeCount.fetch_add(1, std::memory_order_release);
+    RuntimeAssert(count >= 0, "Unexpected activeCount: %" PRId64, count);
 }
 
 void decrementActiveCount() noexcept {
-    std::unique_lock guard{safePointActionMutex};
-    --activeCount;
-    RuntimeAssert(activeCount >= 0, "Unexpected activeCount: %" PRId64, activeCount);
-    if (activeCount == 0) {
-        auto prev = safePointAction.exchange(nullptr, std::memory_order_seq_cst);
-        RuntimeAssert(prev == safePointActionImpl, "Action must have been %p. Was %p", safePointActionImpl, prev);
-    }
+    auto count = activeCount.fetch_sub(1, std::memory_order_release);
+    RuntimeAssert(count >= 1, "Unexpected activeCount: %" PRId64, count);
 }
 
 } // namespace
@@ -88,16 +74,18 @@ mm::SafePointActivator::~SafePointActivator() {
 
 ALWAYS_INLINE void mm::safePoint() noexcept {
     AssertThreadState(ThreadState::kRunnable);
-    auto action = safePointAction.load(std::memory_order_relaxed);
-    if (__builtin_expect(action != nullptr, false)) {
+    auto count = activeCount.load(std::memory_order_relaxed);
+    RuntimeAssert(count >= 0, "Unexpected activeCount: %" PRId64, count);
+    if (__builtin_expect(count > 0, false)) {
         slowPath();
     }
 }
 
 ALWAYS_INLINE void mm::safePoint(mm::ThreadData& threadData) noexcept {
     AssertThreadState(&threadData, ThreadState::kRunnable);
-    auto action = safePointAction.load(std::memory_order_relaxed);
-    if (__builtin_expect(action != nullptr, false)) {
+    auto count = activeCount.load(std::memory_order_relaxed);
+    RuntimeAssert(count >= 0, "Unexpected activeCount: %" PRId64, count);
+    if (__builtin_expect(count > 0, false)) {
         slowPath(threadData);
     }
 }
