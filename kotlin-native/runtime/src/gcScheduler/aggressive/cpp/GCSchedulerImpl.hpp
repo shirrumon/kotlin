@@ -12,6 +12,7 @@
 #include "GCSchedulerConfig.hpp"
 #include "HeapGrowthController.hpp"
 #include "Logging.hpp"
+#include "SafePoint.hpp"
 #include "SafePointTracker.hpp"
 
 namespace kotlin::gcScheduler::internal {
@@ -52,6 +53,7 @@ private:
     std::function<void()> scheduleGC_;
     HeapGrowthController heapGrowthController_;
     SafePointTracker<> safePointTracker_;
+    mm::SafePointActivator safePointActivator_;
 };
 
 } // namespace kotlin::gcScheduler::internal

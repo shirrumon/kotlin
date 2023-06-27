@@ -16,9 +16,29 @@ using namespace kotlin;
 
 namespace {
 
-std::atomic<mm::SafePointAction> safePointAction = nullptr;
+[[clang::no_destroy]] std::mutex safePointActionMutex;
+int64_t activeCount = 0;
+std::atomic<void(*)(mm::ThreadData&)> safePointAction = nullptr;
 
-ALWAYS_INLINE void safePointActionImpl(mm::ThreadData& threadData) noexcept {
+void safePointActionImpl(mm::ThreadData& threadData) noexcept {
+    threadData.suspensionData().suspendIfRequested();
+    mm::GlobalData::Instance().gcScheduler().safePoint();
+}
+
+ALWAYS_INLINE void slowPathImpl(mm::ThreadData& threadData) noexcept {
+    // Changing thread state can lead to a safe point.
+    // Thread state change may come from inside safe point procedure.
+    // Let's just guard against it.
+    static thread_local bool recursion = false;
+    if (recursion) {
+        return;
+    }
+    class RecursionGuard : private Pinned {
+    public:
+        RecursionGuard() noexcept { recursion = true; }
+        ~RecursionGuard() { recursion = false; }
+    } guard;
+
     // reread an action to avoid register pollution outside the function
     auto action = safePointAction.load(std::memory_order_seq_cst);
     if (action != nullptr) {
@@ -27,29 +47,47 @@ ALWAYS_INLINE void safePointActionImpl(mm::ThreadData& threadData) noexcept {
 }
 
 NO_INLINE void slowPath() noexcept {
-    safePointActionImpl(*mm::ThreadRegistry::Instance().CurrentThreadData());
+    slowPathImpl(*mm::ThreadRegistry::Instance().CurrentThreadData());
 }
 
 NO_INLINE void slowPath(mm::ThreadData& threadData) noexcept {
-    safePointActionImpl(threadData);
+    slowPathImpl(threadData);
+}
+
+void incrementActiveCount() noexcept {
+    std::unique_lock guard{safePointActionMutex};
+    ++activeCount;
+    RuntimeAssert(activeCount >= 1, "Unexpected activeCount: %" PRId64, activeCount);
+    if (activeCount == 1) {
+        auto prev = safePointAction.exchange(safePointActionImpl, std::memory_order_seq_cst);
+        RuntimeAssert(prev == nullptr, "Action cannot have been set. Was %p", prev);
+    }
+}
+
+void decrementActiveCount() noexcept {
+    std::unique_lock guard{safePointActionMutex};
+    --activeCount;
+    RuntimeAssert(activeCount >= 0, "Unexpected activeCount: %" PRId64, activeCount);
+    if (activeCount == 0) {
+        auto prev = safePointAction.exchange(nullptr, std::memory_order_seq_cst);
+        RuntimeAssert(prev == safePointActionImpl, "Action must have been %p. Was %p", safePointActionImpl, prev);
+    }
 }
 
 } // namespace
 
-bool mm::trySetSafePointAction(mm::SafePointAction action) noexcept {
-    mm::SafePointAction expected = nullptr;
-    mm::SafePointAction desired = action;
-    return safePointAction.compare_exchange_strong(expected, desired, std::memory_order_seq_cst);
+mm::SafePointActivator::SafePointActivator() noexcept : active_(true) {
+    incrementActiveCount();
 }
 
-void mm::unsetSafePointAction() noexcept {
-    auto prevAction = safePointAction.exchange(nullptr, std::memory_order_seq_cst);
-    RuntimeAssert(prevAction != nullptr, "Some safe point action must have been set");
+mm::SafePointActivator::~SafePointActivator() {
+    if (active_) {
+        decrementActiveCount();
+    }
 }
 
 ALWAYS_INLINE void mm::safePoint() noexcept {
     AssertThreadState(ThreadState::kRunnable);
-    mm::GlobalData::Instance().gcScheduler().safePoint();
     auto action = safePointAction.load(std::memory_order_relaxed);
     if (__builtin_expect(action != nullptr, false)) {
         slowPath();
@@ -58,7 +96,6 @@ ALWAYS_INLINE void mm::safePoint() noexcept {
 
 ALWAYS_INLINE void mm::safePoint(mm::ThreadData& threadData) noexcept {
     AssertThreadState(&threadData, ThreadState::kRunnable);
-    mm::GlobalData::Instance().gcScheduler().safePoint();
     auto action = safePointAction.load(std::memory_order_relaxed);
     if (__builtin_expect(action != nullptr, false)) {
         slowPath(threadData);

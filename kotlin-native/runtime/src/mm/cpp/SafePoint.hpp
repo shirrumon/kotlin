@@ -5,14 +5,36 @@
 
 #pragma once
 
+#include <utility>
+
+#include "Utils.hpp"
+
 namespace kotlin::mm {
 
 class ThreadData;
 
-using SafePointAction = void (*)(mm::ThreadData&);
+class SafePointActivator : private MoveOnly {
+public:
+    SafePointActivator() noexcept;
+    ~SafePointActivator();
 
-bool trySetSafePointAction(SafePointAction action) noexcept;
-void unsetSafePointAction() noexcept;
+    SafePointActivator(SafePointActivator&& rhs) noexcept : active_(rhs.active_) {
+        rhs.active_ = false;
+    }
+
+    SafePointActivator& operator=(SafePointActivator&& rhs) noexcept {
+        SafePointActivator other(std::move(rhs));
+        swap(other);
+        return *this;
+    }
+
+    void swap(SafePointActivator& rhs) noexcept {
+        std::swap(active_, rhs.active_);
+    }
+
+private:
+    bool active_;
+};
 
 void safePoint() noexcept;
 void safePoint(ThreadData& threadData) noexcept;

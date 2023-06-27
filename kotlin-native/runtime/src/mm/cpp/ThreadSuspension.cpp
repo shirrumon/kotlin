@@ -15,6 +15,8 @@
 #include "SafePoint.hpp"
 #include "StackTrace.hpp"
 
+using namespace kotlin;
+
 namespace {
 
 template<typename F>
@@ -37,7 +39,7 @@ void yield() noexcept {
     std::this_thread::yield();
 }
 
-THREAD_LOCAL_VARIABLE bool gSuspensionRequestedByCurrentThread = false;
+[[clang::no_destroy]] thread_local std::optional<mm::SafePointActivator> gSafePointActivator = std::nullopt;
 [[clang::no_destroy]] std::mutex gSuspensionMutex;
 [[clang::no_destroy]] std::condition_variable gSuspensionCondVar;
 
@@ -71,15 +73,16 @@ NO_EXTERNAL_CALLS_CHECK void kotlin::mm::ThreadSuspensionData::suspendIfRequeste
 bool kotlin::mm::RequestThreadsSuspension() noexcept {
     CallsCheckerIgnoreGuard guard;
 
-    RuntimeAssert(gSuspensionRequestedByCurrentThread == false, "Current thread already suspended threads.");
+    RuntimeAssert(gSafePointActivator == std::nullopt, "Current thread already suspended threads.");
     {
         std::unique_lock lock(gSuspensionMutex);
-        bool safePointSet = mm::trySetSafePointAction([](mm::ThreadData& threadData) { threadData.suspensionData().suspendIfRequested(); });
-        if (!safePointSet) return false;
-        RuntimeAssert(!IsThreadSuspensionRequested(), "Suspension must not be requested without altering safe point action");
-        internal::gSuspensionRequested = true;
+        // Someone else has already suspended threads.
+        if (internal::gSuspensionRequested.load(std::memory_order_relaxed)) {
+            return false;
+        }
+        gSafePointActivator = mm::SafePointActivator();
+        internal::gSuspensionRequested.store(true);
     }
-    gSuspensionRequestedByCurrentThread = true;
 
     return true;
 }
@@ -92,15 +95,16 @@ void kotlin::mm::WaitForThreadsSuspension() noexcept {
 }
 
 void kotlin::mm::ResumeThreads() noexcept {
+    RuntimeAssert(gSafePointActivator != std::nullopt, "Current thread must have suspended threads");
+    gSafePointActivator = std::nullopt;
+
     // From the std::condition_variable docs:
     // Even if the shared variable is atomic, it must be modified under
     // the mutex in order to correctly publish the modification to the waiting thread.
     // https://en.cppreference.com/w/cpp/thread/condition_variable
     {
         std::unique_lock lock(gSuspensionMutex);
-        internal::gSuspensionRequested = false;
-        mm::unsetSafePointAction();
+        internal::gSuspensionRequested.store(false);
     }
-    gSuspensionRequestedByCurrentThread = false;
     gSuspensionCondVar.notify_all();
 }
