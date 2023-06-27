@@ -16,16 +16,7 @@ using namespace kotlin;
 
 namespace {
 
-[[clang::no_destroy]] std::mutex safePointActionMutex;
-int64_t activeCount = 0;
-std::atomic<void(*)(mm::ThreadData&)> safePointAction = nullptr;
-
 void safePointActionImpl(mm::ThreadData& threadData) noexcept {
-    threadData.suspensionData().suspendIfRequested();
-    mm::GlobalData::Instance().gcScheduler().safePoint();
-}
-
-ALWAYS_INLINE void slowPathImpl(mm::ThreadData& threadData) noexcept {
     // Changing thread state can lead to a safe point.
     // Thread state change may come from inside safe point procedure.
     // Let's just guard against it.
@@ -39,28 +30,31 @@ ALWAYS_INLINE void slowPathImpl(mm::ThreadData& threadData) noexcept {
         ~RecursionGuard() { recursion = false; }
     } guard;
 
-    // reread an action to avoid register pollution outside the function
-    auto action = safePointAction.load(std::memory_order_seq_cst);
-    if (action != nullptr) {
-        action(threadData);
-    }
+    std::atomic_thread_fence(std::memory_order_acquire);
+    threadData.suspensionData().suspendIfRequested();
+    mm::GlobalData::Instance().gcScheduler().safePoint();
 }
 
-NO_INLINE void slowPath() noexcept {
-    slowPathImpl(*mm::ThreadRegistry::Instance().CurrentThreadData());
+void safePointActionImpl() noexcept {
+    safePointActionImpl(*mm::ThreadRegistry::Instance().CurrentThreadData());
 }
 
-NO_INLINE void slowPath(mm::ThreadData& threadData) noexcept {
-    slowPathImpl(threadData);
-}
+void safePointActionNoop(mm::ThreadData& threadData) noexcept {}
+void safePointActionNoop() noexcept {}
+
+[[clang::no_destroy]] std::mutex safePointActionMutex;
+int64_t activeCount = 0;
+std::atomic<void(*)(mm::ThreadData&)> safePointAction = safePointActionImpl;
+std::atomic<void(*)()> safePointActionNoThreadData = safePointActionNoop;
 
 void incrementActiveCount() noexcept {
     std::unique_lock guard{safePointActionMutex};
     ++activeCount;
     RuntimeAssert(activeCount >= 1, "Unexpected activeCount: %" PRId64, activeCount);
     if (activeCount == 1) {
-        auto prev = safePointAction.exchange(safePointActionImpl, std::memory_order_seq_cst);
-        RuntimeAssert(prev == nullptr, "Action cannot have been set. Was %p", prev);
+        safePointAction.store(safePointActionImpl, std::memory_order_relaxed);
+        safePointActionNoThreadData.store(safePointActionImpl, std::memory_order_relaxed);
+        std::atomic_thread_fence(std::memory_order_release);
     }
 }
 
@@ -69,8 +63,9 @@ void decrementActiveCount() noexcept {
     --activeCount;
     RuntimeAssert(activeCount >= 0, "Unexpected activeCount: %" PRId64, activeCount);
     if (activeCount == 0) {
-        auto prev = safePointAction.exchange(nullptr, std::memory_order_seq_cst);
-        RuntimeAssert(prev == safePointActionImpl, "Action must have been %p. Was %p", safePointActionImpl, prev);
+        safePointAction.store(safePointActionNoop, std::memory_order_relaxed);
+        safePointActionNoThreadData.store(safePointActionNoop, std::memory_order_relaxed);
+        std::atomic_thread_fence(std::memory_order_release);
     }
 }
 
@@ -88,16 +83,10 @@ mm::SafePointActivator::~SafePointActivator() {
 
 ALWAYS_INLINE void mm::safePoint() noexcept {
     AssertThreadState(ThreadState::kRunnable);
-    auto action = safePointAction.load(std::memory_order_relaxed);
-    if (__builtin_expect(action != nullptr, false)) {
-        slowPath();
-    }
+    safePointActionNoThreadData.load(std::memory_order_relaxed)();
 }
 
 ALWAYS_INLINE void mm::safePoint(mm::ThreadData& threadData) noexcept {
     AssertThreadState(&threadData, ThreadState::kRunnable);
-    auto action = safePointAction.load(std::memory_order_relaxed);
-    if (__builtin_expect(action != nullptr, false)) {
-        slowPath(threadData);
-    }
+    safePointAction.load(std::memory_order_relaxed)(threadData);
 }
