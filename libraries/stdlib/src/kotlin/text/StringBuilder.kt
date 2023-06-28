@@ -329,6 +329,7 @@ public expect fun StringBuilder.deleteRange(startIndex: Int, endIndex: Int): Str
  */
 @SinceKotlin("1.4")
 @WasExperimental(ExperimentalStdlibApi::class)
+@Suppress("NO_ACTUAL_FOR_EXPECT") // Counterpart for ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS
 public expect fun StringBuilder.toCharArray(destination: CharArray, destinationOffset: Int = 0, startIndex: Int = 0, endIndex: Int = this.length)
 
 /**

@@ -147,6 +147,7 @@ public expect fun CharArray.concatToString(): String
  */
 @SinceKotlin("1.4")
 @WasExperimental(ExperimentalStdlibApi::class)
+@Suppress("NO_ACTUAL_FOR_EXPECT") // Counterpart for ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS
 public expect fun CharArray.concatToString(startIndex: Int = 0, endIndex: Int = this.size): String
 
 /**
@@ -167,6 +168,7 @@ public expect fun String.toCharArray(): CharArray
  */
 @SinceKotlin("1.4")
 @WasExperimental(ExperimentalStdlibApi::class)
+@Suppress("NO_ACTUAL_FOR_EXPECT") // Counterpart for ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS
 public expect fun String.toCharArray(startIndex: Int = 0, endIndex: Int = this.length): CharArray
 
 /**
@@ -191,6 +193,7 @@ public expect fun ByteArray.decodeToString(): String
  */
 @SinceKotlin("1.4")
 @WasExperimental(ExperimentalStdlibApi::class)
+@Suppress("NO_ACTUAL_FOR_EXPECT") // Counterpart for ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS
 public expect fun ByteArray.decodeToString(
     startIndex: Int = 0,
     endIndex: Int = this.size,
@@ -219,6 +222,7 @@ public expect fun String.encodeToByteArray(): ByteArray
  */
 @SinceKotlin("1.4")
 @WasExperimental(ExperimentalStdlibApi::class)
+@Suppress("NO_ACTUAL_FOR_EXPECT") // Counterpart for ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS
 public expect fun String.encodeToByteArray(
     startIndex: Int = 0,
     endIndex: Int = this.length,
@@ -246,6 +250,7 @@ public expect fun CharSequence.repeat(n: Int): String
  * 
  * @sample samples.text.Strings.replace
  */
+@Suppress("NO_ACTUAL_FOR_EXPECT") // Counterpart for ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS
 expect fun String.replace(oldChar: Char, newChar: Char, ignoreCase: Boolean = false): String
 
 /**
@@ -254,17 +259,20 @@ expect fun String.replace(oldChar: Char, newChar: Char, ignoreCase: Boolean = fa
  *
  * @sample samples.text.Strings.replace
  */
+@Suppress("NO_ACTUAL_FOR_EXPECT") // Counterpart for ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS
 expect fun String.replace(oldValue: String, newValue: String, ignoreCase: Boolean = false): String
 
 /**
  * Returns a new string with the first occurrence of [oldChar] replaced with [newChar].
  */
+@Suppress("NO_ACTUAL_FOR_EXPECT") // Counterpart for ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS
 expect fun String.replaceFirst(oldChar: Char, newChar: Char, ignoreCase: Boolean = false): String
 
 /**
  * Returns a new string obtained by replacing the first occurrence of the [oldValue] substring in this string
  * with the specified [newValue] string.
  */
+@Suppress("NO_ACTUAL_FOR_EXPECT") // Counterpart for ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS
 expect fun String.replaceFirst(oldValue: String, newValue: String, ignoreCase: Boolean = false): String
 
 /**
@@ -275,6 +283,7 @@ expect fun String.replaceFirst(oldValue: String, newValue: String, ignoreCase: B
  *
  * @param ignoreCase `true` to ignore character case when comparing strings. By default `false`.
  */
+@Suppress("NO_ACTUAL_FOR_EXPECT") // Counterpart for ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS
 expect fun String?.equals(other: String?, ignoreCase: Boolean = false): Boolean
 
 /**
@@ -283,11 +292,15 @@ expect fun String?.equals(other: String?, ignoreCase: Boolean = false): Boolean
  * If [ignoreCase] is true, the result of `Char.uppercaseChar().lowercaseChar()` on each character is compared.
  */
 @SinceKotlin("1.2")
+@Suppress("NO_ACTUAL_FOR_EXPECT") // Counterpart for ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS
 expect fun String.compareTo(other: String, ignoreCase: Boolean = false): Int
 
 
+@Suppress("NO_ACTUAL_FOR_EXPECT") // Counterpart for ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS
 public expect fun String.startsWith(prefix: String, ignoreCase: Boolean = false): Boolean
+@Suppress("NO_ACTUAL_FOR_EXPECT") // Counterpart for ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS
 public expect fun String.startsWith(prefix: String, startIndex: Int, ignoreCase: Boolean = false): Boolean
+@Suppress("NO_ACTUAL_FOR_EXPECT") // Counterpart for ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS
 public expect fun String.endsWith(suffix: String, ignoreCase: Boolean = false): Boolean
 
 // From stringsCode.kt
@@ -303,6 +316,7 @@ expect fun CharSequence.isBlank(): Boolean
  * @param otherOffset the start offset in the other char sequence of the substring to compare.
  * @param length the length of the substring to compare.
  */
+@Suppress("NO_ACTUAL_FOR_EXPECT") // Counterpart for ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS
 expect fun CharSequence.regionMatches(
     thisOffset: Int,
     other: CharSequence,
@@ -319,6 +333,7 @@ expect fun CharSequence.regionMatches(
  * @param length the length of the substring to compare.
  */
 @SinceKotlin("1.9")
+@Suppress("NO_ACTUAL_FOR_EXPECT") // Counterpart for ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS
 public expect fun String.regionMatches(
     thisOffset: Int,
     other: String,

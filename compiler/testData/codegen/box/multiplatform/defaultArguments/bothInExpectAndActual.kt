@@ -5,6 +5,7 @@
 
 // FILE: common.kt
 
+@Suppress("NO_ACTUAL_FOR_EXPECT")
 public expect fun <T> Array<out T>.copyInto(
     destination: Array<T>, destinationOffset: Int = 0, startIndex: Int = 0, endIndex: Int = size
 ): Array<T>

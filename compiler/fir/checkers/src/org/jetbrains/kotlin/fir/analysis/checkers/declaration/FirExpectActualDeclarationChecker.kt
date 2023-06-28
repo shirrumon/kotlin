@@ -6,6 +6,7 @@
 package org.jetbrains.kotlin.fir.analysis.checkers.declaration
 
 import org.jetbrains.kotlin.KtFakeSourceElementKind
+import org.jetbrains.kotlin.KtSourceElement
 import org.jetbrains.kotlin.config.LanguageFeature
 import org.jetbrains.kotlin.descriptors.ClassKind
 import org.jetbrains.kotlin.diagnostics.DiagnosticReporter
@@ -26,9 +27,10 @@ import org.jetbrains.kotlin.fir.scopes.getDeclaredConstructors
 import org.jetbrains.kotlin.fir.scopes.impl.declaredMemberScope
 import org.jetbrains.kotlin.fir.symbols.FirBasedSymbol
 import org.jetbrains.kotlin.fir.symbols.SymbolInternals
-import org.jetbrains.kotlin.fir.symbols.impl.*
-import org.jetbrains.kotlin.fir.types.coneType
-import org.jetbrains.kotlin.fir.types.toSymbol
+import org.jetbrains.kotlin.fir.symbols.impl.FirClassSymbol
+import org.jetbrains.kotlin.fir.symbols.impl.FirRegularClassSymbol
+import org.jetbrains.kotlin.fir.symbols.impl.FirTypeAliasSymbol
+import org.jetbrains.kotlin.fir.symbols.impl.FirValueParameterSymbol
 import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.resolve.multiplatform.ExpectActualCompatibility
 import org.jetbrains.kotlin.resolve.multiplatform.ExpectActualCompatibility.*
@@ -163,13 +165,26 @@ object FirExpectActualDeclarationChecker : FirBasicDeclarationChecker() {
             }
 
             Compatible !in compatibilityToMembersMap -> {
-                reporter.reportOn(
-                    source,
-                    FirErrors.ACTUAL_WITHOUT_EXPECT,
-                    symbol,
-                    compatibilityToMembersMap,
-                    context
-                )
+                val paramsWithDefaultValues =
+                    when (declaration is FirFunction && compatibilityToMembersMap.keys.any { it is Incompatible.ActualFunctionWithDefaultParameters }) {
+                        true -> declaration.valueParameters.filter { it.defaultValue != null }.map { it.source }
+                        false -> emptyList()
+                    }
+                // A nicer diagnostic for functions with default params
+                if (paramsWithDefaultValues.isNotEmpty() && paramsWithDefaultValues.all { it != null }) {
+                    @Suppress("UNCHECKED_CAST")
+                    for (parameter in paramsWithDefaultValues as List<KtSourceElement>) {
+                        reporter.reportOn(parameter, FirErrors.ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS, context)
+                    }
+                } else {
+                    reporter.reportOn(
+                        source,
+                        FirErrors.ACTUAL_WITHOUT_EXPECT,
+                        symbol,
+                        compatibilityToMembersMap,
+                        context
+                    )
+                }
             }
 
             else -> {}

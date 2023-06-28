@@ -25,7 +25,9 @@ import org.jetbrains.kotlin.resolve.calls.mpp.ExpectActualMatchingContext
 import org.jetbrains.kotlin.types.AbstractTypeChecker
 import org.jetbrains.kotlin.types.TypeCheckerState
 import org.jetbrains.kotlin.types.Variance
-import org.jetbrains.kotlin.types.model.*
+import org.jetbrains.kotlin.types.model.KotlinTypeMarker
+import org.jetbrains.kotlin.types.model.TypeSubstitutorMarker
+import org.jetbrains.kotlin.types.model.TypeSystemContext
 import org.jetbrains.kotlin.utils.addToStdlib.UnsafeCastFunction
 import org.jetbrains.kotlin.utils.addToStdlib.castAll
 import org.jetbrains.kotlin.utils.addToStdlib.shouldNotBeCalled
@@ -275,6 +277,11 @@ internal abstract class IrExpectActualMatchingContext(
             onValueParameter = { emptyList() },
             onEnumEntry = { emptyList() }
         )
+
+    override fun FunctionSymbolMarker.overridden(): Collection<CallableSymbolMarker> =
+        throw NotImplementedError("Not implemented because it's unused")
+
+    override val isBackend: Boolean get() = true
 
     override val FunctionSymbolMarker.valueParameters: List<ValueParameterSymbolMarker>
         get() = asIr().valueParameters.map { it.symbol }

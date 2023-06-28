@@ -339,6 +339,22 @@ object AbstractExpectActualCompatibilityChecker {
             return Incompatible.ParameterTypes
         }
 
+        // This incompatibility is often suppressed in the source code (e.g. in kotlin-stdlib).
+        // The backend must be able to do expect-actual matching to emit bytecode
+        if (!isBackend) {
+            // "Default parameters in actual" check is required only for functions, because only functions can have parameters
+            if (actualDeclaration is FunctionSymbolMarker && expectDeclaration is FunctionSymbolMarker) {
+                // Actual annotation constructors can have default argument values; their consistency with arguments in the expected annotation
+                // is checked in ExpectedActualDeclarationChecker.checkAnnotationConstructors
+                if (!actualDeclaration.isAnnotationConstructor() &&
+                    (actualDeclaration.overridden() - expectDeclaration.overridden().toSet() + actualDeclaration)
+                        .flatMap { it.valueParameters }.any { it.hasDefaultValue }
+                ) {
+                    return Incompatible.ActualFunctionWithDefaultParameters
+                }
+            }
+        }
+
         if (shouldCheckReturnTypesOfCallables) {
             if (!areCompatibleExpectActualTypes(substitutor.safeSubstitute(expectDeclaration.returnType), actualDeclaration.returnType)) {
                 return Incompatible.ReturnType

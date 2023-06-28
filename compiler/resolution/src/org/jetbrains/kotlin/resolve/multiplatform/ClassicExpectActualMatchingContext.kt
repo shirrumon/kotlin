@@ -14,9 +14,8 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.resolve.DescriptorUtils
 import org.jetbrains.kotlin.resolve.calls.components.ClassicTypeSystemContextForCS
 import org.jetbrains.kotlin.resolve.calls.mpp.ExpectActualMatchingContext
-import org.jetbrains.kotlin.resolve.descriptorUtil.classId
-import org.jetbrains.kotlin.resolve.descriptorUtil.getKotlinTypeRefiner
-import org.jetbrains.kotlin.resolve.descriptorUtil.isTypeRefinementEnabled
+import org.jetbrains.kotlin.resolve.descriptorUtil.*
+import org.jetbrains.kotlin.resolve.findTopMostOverriddenDescriptors
 import org.jetbrains.kotlin.resolve.scopes.DescriptorKindFilter
 import org.jetbrains.kotlin.resolve.scopes.MemberScope
 import org.jetbrains.kotlin.resolve.scopes.getDescriptorsFiltered
@@ -188,6 +187,9 @@ class ClassicExpectActualMatchingContext(val platformModule: ModuleDescriptor) :
         get() = asDescriptor().isCrossinline
     override val ValueParameterSymbolMarker.hasDefaultValue: Boolean
         get() = asDescriptor().declaresDefaultValue()
+    override fun FunctionSymbolMarker.overridden(): Collection<CallableSymbolMarker> = asDescriptor().overriddenDescriptors
+
+    override val isBackend: Boolean get() = false
 
     override fun CallableSymbolMarker.isAnnotationConstructor(): Boolean {
         val descriptor = safeAsDescriptor<ConstructorDescriptor>() ?: return false

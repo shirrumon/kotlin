@@ -3,9 +3,9 @@
 
 expect fun ok(x: Int, y: String = "")
 
-expect fun failX<!NO_ACTUAL_FOR_EXPECT{JVM}!>(x: Int, y: String = "")<!>
+expect fun failX(x: Int, y: String = "")
 
-expect fun failY<!NO_ACTUAL_FOR_EXPECT{JVM}!>(x: Int, y: String = "")<!>
+expect fun failY(x: Int, y: String = "")
 
 expect open class Foo {
     fun ok(x: Int, y: String = "")
