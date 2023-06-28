@@ -155,6 +155,9 @@ public interface KtTypeProviderMixIn : KtAnalysisSessionMixIn {
     public fun KtCallableSymbol.getDispatchReceiverType(): KtType? =
         withValidityAssertion { analysisSession.typeProvider.getDispatchReceiverType(this) }
 
+    /**
+     * If provided [KtType] is a primitive type array or [Array], returns the type of the array's elements. Otherwise, returns null.
+     */
     public fun KtType.getArrayElementType(): KtType? =
         withValidityAssertion { analysisSession.typeProvider.getArrayElementType(this) }
 }
