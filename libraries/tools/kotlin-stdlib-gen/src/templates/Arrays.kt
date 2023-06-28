@@ -922,6 +922,9 @@ object ArrayOps : TemplateGroupBase() {
                     }
                 }
             }
+            on(Platform.Common) {
+                suppress("NO_ACTUAL_FOR_EXPECT") // Counterpart for ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS
+            }
         }
     }
 
@@ -1399,6 +1402,9 @@ object ArrayOps : TemplateGroupBase() {
                 }
             }
         }
+        on(Platform.Common) {
+            suppress("NO_ACTUAL_FOR_EXPECT") // Counterpart for ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS
+        }
     }
 
     val f_sortWith_range = fn("sortWith(comparator: Comparator<in T>, fromIndex: Int = 0, toIndex: Int = size)") {
@@ -1438,6 +1444,9 @@ object ArrayOps : TemplateGroupBase() {
                 sortArrayWith(this, fromIndex, toIndex, comparator)
                 """
             }
+        }
+        on(Platform.Common) {
+            suppress("NO_ACTUAL_FOR_EXPECT") // Counterpart for ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS
         }
     }
 
@@ -1657,6 +1666,7 @@ object ArrayOps : TemplateGroupBase() {
             }
             on(Platform.Common) {
                 since("1.3")
+                suppress("NO_ACTUAL_FOR_EXPECT") // Counterpart for ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS
             }
         }
     }

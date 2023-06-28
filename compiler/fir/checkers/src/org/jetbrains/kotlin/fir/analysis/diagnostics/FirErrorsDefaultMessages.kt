@@ -52,7 +52,6 @@ import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors.ABSTRACT_SUPER_CA
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors.ABSTRACT_SUPER_CALL_WARNING
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors.ACCESSOR_FOR_DELEGATED_PROPERTY
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors.ACTUAL_ANNOTATION_CONFLICTING_DEFAULT_ARGUMENT_VALUE
-import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors.ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors.ACTUAL_MISSING
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors.ACTUAL_TYPE_ALIAS_NOT_TO_CLASS
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors.ACTUAL_TYPE_ALIAS_TO_CLASS_WITH_DECLARATION_SITE_VARIANCE
@@ -1800,10 +1799,6 @@ object FirErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
         map.put(
             ACTUAL_TYPE_ALIAS_WITH_COMPLEX_SUBSTITUTION,
             "Type arguments in the right-hand side of actual type alias should be its type parameters in the same order, e.g. 'actual typealias Foo<A, B> = Bar<A, B>'"
-        )
-        map.put(
-            ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS,
-            "Actual function cannot have default argument values, they should be declared in the expected function"
         )
         map.put(
             DEFAULT_ARGUMENTS_IN_EXPECT_WITH_ACTUAL_TYPEALIAS,

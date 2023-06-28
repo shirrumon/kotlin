@@ -8,12 +8,14 @@ package org.jetbrains.kotlin.fir.resolve.transformers.mpp
 import org.jetbrains.kotlin.descriptors.ClassKind
 import org.jetbrains.kotlin.descriptors.Modality
 import org.jetbrains.kotlin.descriptors.Visibility
+import org.jetbrains.kotlin.fir.*
 import org.jetbrains.kotlin.fir.FirSession
 import org.jetbrains.kotlin.fir.declarations.FirDeclarationOrigin
 import org.jetbrains.kotlin.fir.declarations.FirResolvePhase
 import org.jetbrains.kotlin.fir.declarations.collectEnumEntries
 import org.jetbrains.kotlin.fir.declarations.isAnnotationConstructor
 import org.jetbrains.kotlin.fir.isSubstitutionOrIntersectionOverride
+import org.jetbrains.kotlin.fir.declarations.utils.isOverride
 import org.jetbrains.kotlin.fir.resolve.*
 import org.jetbrains.kotlin.fir.resolve.substitution.ConeSubstitutor
 import org.jetbrains.kotlin.fir.scopes.*
@@ -28,7 +30,10 @@ import org.jetbrains.kotlin.resolve.calls.mpp.ExpectActualMatchingContext
 import org.jetbrains.kotlin.types.AbstractTypeChecker
 import org.jetbrains.kotlin.types.TypeCheckerState
 import org.jetbrains.kotlin.types.Variance
-import org.jetbrains.kotlin.types.model.*
+import org.jetbrains.kotlin.types.model.KotlinTypeMarker
+import org.jetbrains.kotlin.types.model.SimpleTypeMarker
+import org.jetbrains.kotlin.types.model.TypeSubstitutorMarker
+import org.jetbrains.kotlin.types.model.TypeSystemContext
 import org.jetbrains.kotlin.utils.addToStdlib.UnsafeCastFunction
 import org.jetbrains.kotlin.utils.addToStdlib.castAll
 
@@ -234,6 +239,21 @@ class FirExpectActualMatchingContext(
         get() = asSymbol().resolvedReturnType.type
     override val CallableSymbolMarker.typeParameters: List<TypeParameterSymbolMarker>
         get() = asSymbol().typeParameterSymbols
+
+    override fun FunctionSymbolMarker.overridden(): Collection<CallableSymbolMarker> {
+        return when (val symbol = asSymbol()) {
+            is FirConstructorSymbol, is FirFunctionWithoutNameSymbol -> emptyList()
+            is FirNamedFunctionSymbol -> {
+                val session = symbol.moduleData.session
+                val containingClass = symbol.containingClassLookupTag()?.toFirRegularClassSymbol(session)
+                    ?: return emptyList()
+                symbol.overriddenFunctions(containingClass, session, scopeSession)
+            }
+        }
+    }
+
+    override val isBackend: Boolean get() = false
+
     override val FunctionSymbolMarker.valueParameters: List<ValueParameterSymbolMarker>
         get() = asSymbol().valueParameterSymbols
 

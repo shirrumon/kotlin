@@ -7053,6 +7053,7 @@ public expect fun CharArray?.contentToString(): String
  * @return the [destination] array.
  */
 @SinceKotlin("1.3")
+@Suppress("NO_ACTUAL_FOR_EXPECT")
 public expect fun <T> Array<out T>.copyInto(destination: Array<T>, destinationOffset: Int = 0, startIndex: Int = 0, endIndex: Int = size): Array<T>
 
 /**
@@ -7072,6 +7073,7 @@ public expect fun <T> Array<out T>.copyInto(destination: Array<T>, destinationOf
  * @return the [destination] array.
  */
 @SinceKotlin("1.3")
+@Suppress("NO_ACTUAL_FOR_EXPECT")
 public expect fun ByteArray.copyInto(destination: ByteArray, destinationOffset: Int = 0, startIndex: Int = 0, endIndex: Int = size): ByteArray
 
 /**
@@ -7091,6 +7093,7 @@ public expect fun ByteArray.copyInto(destination: ByteArray, destinationOffset: 
  * @return the [destination] array.
  */
 @SinceKotlin("1.3")
+@Suppress("NO_ACTUAL_FOR_EXPECT")
 public expect fun ShortArray.copyInto(destination: ShortArray, destinationOffset: Int = 0, startIndex: Int = 0, endIndex: Int = size): ShortArray
 
 /**
@@ -7110,6 +7113,7 @@ public expect fun ShortArray.copyInto(destination: ShortArray, destinationOffset
  * @return the [destination] array.
  */
 @SinceKotlin("1.3")
+@Suppress("NO_ACTUAL_FOR_EXPECT")
 public expect fun IntArray.copyInto(destination: IntArray, destinationOffset: Int = 0, startIndex: Int = 0, endIndex: Int = size): IntArray
 
 /**
@@ -7129,6 +7133,7 @@ public expect fun IntArray.copyInto(destination: IntArray, destinationOffset: In
  * @return the [destination] array.
  */
 @SinceKotlin("1.3")
+@Suppress("NO_ACTUAL_FOR_EXPECT")
 public expect fun LongArray.copyInto(destination: LongArray, destinationOffset: Int = 0, startIndex: Int = 0, endIndex: Int = size): LongArray
 
 /**
@@ -7148,6 +7153,7 @@ public expect fun LongArray.copyInto(destination: LongArray, destinationOffset: 
  * @return the [destination] array.
  */
 @SinceKotlin("1.3")
+@Suppress("NO_ACTUAL_FOR_EXPECT")
 public expect fun FloatArray.copyInto(destination: FloatArray, destinationOffset: Int = 0, startIndex: Int = 0, endIndex: Int = size): FloatArray
 
 /**
@@ -7167,6 +7173,7 @@ public expect fun FloatArray.copyInto(destination: FloatArray, destinationOffset
  * @return the [destination] array.
  */
 @SinceKotlin("1.3")
+@Suppress("NO_ACTUAL_FOR_EXPECT")
 public expect fun DoubleArray.copyInto(destination: DoubleArray, destinationOffset: Int = 0, startIndex: Int = 0, endIndex: Int = size): DoubleArray
 
 /**
@@ -7186,6 +7193,7 @@ public expect fun DoubleArray.copyInto(destination: DoubleArray, destinationOffs
  * @return the [destination] array.
  */
 @SinceKotlin("1.3")
+@Suppress("NO_ACTUAL_FOR_EXPECT")
 public expect fun BooleanArray.copyInto(destination: BooleanArray, destinationOffset: Int = 0, startIndex: Int = 0, endIndex: Int = size): BooleanArray
 
 /**
@@ -7205,6 +7213,7 @@ public expect fun BooleanArray.copyInto(destination: BooleanArray, destinationOf
  * @return the [destination] array.
  */
 @SinceKotlin("1.3")
+@Suppress("NO_ACTUAL_FOR_EXPECT")
 public expect fun CharArray.copyInto(destination: CharArray, destinationOffset: Int = 0, startIndex: Int = 0, endIndex: Int = size): CharArray
 
 /**
@@ -7481,6 +7490,7 @@ public expect fun CharArray.copyOfRange(fromIndex: Int, toIndex: Int): CharArray
  * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
  */
 @SinceKotlin("1.3")
+@Suppress("NO_ACTUAL_FOR_EXPECT")
 public expect fun <T> Array<T>.fill(element: T, fromIndex: Int = 0, toIndex: Int = size): Unit
 
 /**
@@ -7493,6 +7503,7 @@ public expect fun <T> Array<T>.fill(element: T, fromIndex: Int = 0, toIndex: Int
  * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
  */
 @SinceKotlin("1.3")
+@Suppress("NO_ACTUAL_FOR_EXPECT")
 public expect fun ByteArray.fill(element: Byte, fromIndex: Int = 0, toIndex: Int = size): Unit
 
 /**
@@ -7505,6 +7516,7 @@ public expect fun ByteArray.fill(element: Byte, fromIndex: Int = 0, toIndex: Int
  * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
  */
 @SinceKotlin("1.3")
+@Suppress("NO_ACTUAL_FOR_EXPECT")
 public expect fun ShortArray.fill(element: Short, fromIndex: Int = 0, toIndex: Int = size): Unit
 
 /**
@@ -7517,6 +7529,7 @@ public expect fun ShortArray.fill(element: Short, fromIndex: Int = 0, toIndex: I
  * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
  */
 @SinceKotlin("1.3")
+@Suppress("NO_ACTUAL_FOR_EXPECT")
 public expect fun IntArray.fill(element: Int, fromIndex: Int = 0, toIndex: Int = size): Unit
 
 /**
@@ -7529,6 +7542,7 @@ public expect fun IntArray.fill(element: Int, fromIndex: Int = 0, toIndex: Int =
  * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
  */
 @SinceKotlin("1.3")
+@Suppress("NO_ACTUAL_FOR_EXPECT")
 public expect fun LongArray.fill(element: Long, fromIndex: Int = 0, toIndex: Int = size): Unit
 
 /**
@@ -7541,6 +7555,7 @@ public expect fun LongArray.fill(element: Long, fromIndex: Int = 0, toIndex: Int
  * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
  */
 @SinceKotlin("1.3")
+@Suppress("NO_ACTUAL_FOR_EXPECT")
 public expect fun FloatArray.fill(element: Float, fromIndex: Int = 0, toIndex: Int = size): Unit
 
 /**
@@ -7553,6 +7568,7 @@ public expect fun FloatArray.fill(element: Float, fromIndex: Int = 0, toIndex: I
  * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
  */
 @SinceKotlin("1.3")
+@Suppress("NO_ACTUAL_FOR_EXPECT")
 public expect fun DoubleArray.fill(element: Double, fromIndex: Int = 0, toIndex: Int = size): Unit
 
 /**
@@ -7565,6 +7581,7 @@ public expect fun DoubleArray.fill(element: Double, fromIndex: Int = 0, toIndex:
  * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
  */
 @SinceKotlin("1.3")
+@Suppress("NO_ACTUAL_FOR_EXPECT")
 public expect fun BooleanArray.fill(element: Boolean, fromIndex: Int = 0, toIndex: Int = size): Unit
 
 /**
@@ -7577,6 +7594,7 @@ public expect fun BooleanArray.fill(element: Boolean, fromIndex: Int = 0, toInde
  * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
  */
 @SinceKotlin("1.3")
+@Suppress("NO_ACTUAL_FOR_EXPECT")
 public expect fun CharArray.fill(element: Char, fromIndex: Int = 0, toIndex: Int = size): Unit
 
 /**
@@ -8047,6 +8065,7 @@ public expect fun <T : Comparable<T>> Array<out T>.sort(): Unit
  * @sample samples.collections.Arrays.Sorting.sortRangeOfArrayOfComparable
  */
 @SinceKotlin("1.4")
+@Suppress("NO_ACTUAL_FOR_EXPECT")
 public expect fun <T : Comparable<T>> Array<out T>.sort(fromIndex: Int = 0, toIndex: Int = size): Unit
 
 /**
@@ -8061,6 +8080,7 @@ public expect fun <T : Comparable<T>> Array<out T>.sort(fromIndex: Int = 0, toIn
  * @sample samples.collections.Arrays.Sorting.sortRangeOfArray
  */
 @SinceKotlin("1.4")
+@Suppress("NO_ACTUAL_FOR_EXPECT")
 public expect fun ByteArray.sort(fromIndex: Int = 0, toIndex: Int = size): Unit
 
 /**
@@ -8075,6 +8095,7 @@ public expect fun ByteArray.sort(fromIndex: Int = 0, toIndex: Int = size): Unit
  * @sample samples.collections.Arrays.Sorting.sortRangeOfArray
  */
 @SinceKotlin("1.4")
+@Suppress("NO_ACTUAL_FOR_EXPECT")
 public expect fun ShortArray.sort(fromIndex: Int = 0, toIndex: Int = size): Unit
 
 /**
@@ -8089,6 +8110,7 @@ public expect fun ShortArray.sort(fromIndex: Int = 0, toIndex: Int = size): Unit
  * @sample samples.collections.Arrays.Sorting.sortRangeOfArray
  */
 @SinceKotlin("1.4")
+@Suppress("NO_ACTUAL_FOR_EXPECT")
 public expect fun IntArray.sort(fromIndex: Int = 0, toIndex: Int = size): Unit
 
 /**
@@ -8103,6 +8125,7 @@ public expect fun IntArray.sort(fromIndex: Int = 0, toIndex: Int = size): Unit
  * @sample samples.collections.Arrays.Sorting.sortRangeOfArray
  */
 @SinceKotlin("1.4")
+@Suppress("NO_ACTUAL_FOR_EXPECT")
 public expect fun LongArray.sort(fromIndex: Int = 0, toIndex: Int = size): Unit
 
 /**
@@ -8117,6 +8140,7 @@ public expect fun LongArray.sort(fromIndex: Int = 0, toIndex: Int = size): Unit
  * @sample samples.collections.Arrays.Sorting.sortRangeOfArray
  */
 @SinceKotlin("1.4")
+@Suppress("NO_ACTUAL_FOR_EXPECT")
 public expect fun FloatArray.sort(fromIndex: Int = 0, toIndex: Int = size): Unit
 
 /**
@@ -8131,6 +8155,7 @@ public expect fun FloatArray.sort(fromIndex: Int = 0, toIndex: Int = size): Unit
  * @sample samples.collections.Arrays.Sorting.sortRangeOfArray
  */
 @SinceKotlin("1.4")
+@Suppress("NO_ACTUAL_FOR_EXPECT")
 public expect fun DoubleArray.sort(fromIndex: Int = 0, toIndex: Int = size): Unit
 
 /**
@@ -8145,6 +8170,7 @@ public expect fun DoubleArray.sort(fromIndex: Int = 0, toIndex: Int = size): Uni
  * @sample samples.collections.Arrays.Sorting.sortRangeOfArray
  */
 @SinceKotlin("1.4")
+@Suppress("NO_ACTUAL_FOR_EXPECT")
 public expect fun CharArray.sort(fromIndex: Int = 0, toIndex: Int = size): Unit
 
 /**
@@ -8294,6 +8320,7 @@ public expect fun <T> Array<out T>.sortWith(comparator: Comparator<in T>): Unit
  * @throws IndexOutOfBoundsException if [fromIndex] is less than zero or [toIndex] is greater than the size of this array.
  * @throws IllegalArgumentException if [fromIndex] is greater than [toIndex].
  */
+@Suppress("NO_ACTUAL_FOR_EXPECT")
 public expect fun <T> Array<out T>.sortWith(comparator: Comparator<in T>, fromIndex: Int = 0, toIndex: Int = size): Unit
 
 /**

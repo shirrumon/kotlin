@@ -114,6 +114,9 @@ interface ExpectActualMatchingContext<T : DeclarationSymbolMarker> : TypeSystemC
     val CallableSymbolMarker.returnType: KotlinTypeMarker
     val CallableSymbolMarker.typeParameters: List<TypeParameterSymbolMarker>
     val FunctionSymbolMarker.valueParameters: List<ValueParameterSymbolMarker>
+    fun FunctionSymbolMarker.overridden(): Collection<CallableSymbolMarker>
+
+    val isBackend: Boolean
 
     val CallableSymbolMarker.valueParameters: List<ValueParameterSymbolMarker>
         get() = (this as? FunctionSymbolMarker)?.valueParameters ?: emptyList()
