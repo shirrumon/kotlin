@@ -251,10 +251,6 @@ class DeclarationsChecker(
         checkVarargParameters(trace, constructorDescriptor)
         checkConstructorVisibility(constructorDescriptor, declaration)
         checkExpectedClassConstructor(constructorDescriptor, declaration)
-
-        if (constructorDescriptor.isActual) {
-            checkActualFunction(declaration, constructorDescriptor)
-        }
     }
 
     private fun checkExpectedClassConstructor(constructorDescriptor: ClassConstructorDescriptor, declaration: KtConstructor<*>) {
@@ -928,9 +924,6 @@ class DeclarationsChecker(
         if (functionDescriptor.isExpect) {
             checkExpectedFunction(function, functionDescriptor)
         }
-        if (functionDescriptor.isActual) {
-            checkActualFunction(function, functionDescriptor)
-        }
 
         shadowedExtensionChecker.checkDeclaration(function, functionDescriptor)
     }
@@ -941,22 +934,6 @@ class DeclarationsChecker(
         }
 
         checkExpectDeclarationModifiers(function, functionDescriptor)
-    }
-
-    private fun checkActualFunction(element: KtDeclaration, functionDescriptor: FunctionDescriptor) {
-        // Actual annotation constructors can have default argument values; their consistency with arguments in the expected annotation
-        // is checked in ExpectedActualDeclarationChecker.checkAnnotationConstructors
-        if (!functionDescriptor.isAnnotationConstructor()) {
-            for (valueParameter in functionDescriptor.valueParameters) {
-                if (valueParameter.declaresDefaultValue()) {
-                    trace.report(
-                        ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS.on(
-                            DescriptorToSourceUtils.descriptorToDeclaration(valueParameter) ?: element
-                        )
-                    )
-                }
-            }
-        }
     }
 
     private fun checkImplicitCallableType(declaration: KtCallableDeclaration, descriptor: CallableDescriptor) {
