@@ -65,6 +65,12 @@ The following declaration is incompatible because upper bounds of type parameter
 
 expect fun <A, B : Comparable<A>> f13()
            ^
+compiler/testData/multiplatform/incompatibleCallables/common.kt:26:15: error: expected function 'f16' has no actual declaration in module <main> for JVM
+The following declaration is incompatible because actual function cannot have default argument values, they should be declared in the expected function:
+    public actual fun f16(s: String = ...): Unit
+
+expect fun f16(s: String)
+              ^
 compiler/testData/multiplatform/incompatibleCallables/common.kt:32:15: error: expected function 'f21' has no actual declaration in module <main> for JVM
 The following declaration is incompatible because parameter types are different:
     public actual fun f21(c: Unit.() -> Unit): Unit
