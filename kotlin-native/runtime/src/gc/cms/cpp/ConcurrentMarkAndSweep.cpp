@@ -193,7 +193,7 @@ void gc::ConcurrentMarkAndSweep::PerformFullGC(int64_t epoch) noexcept {
 
     if (compiler::concurrentWeakSweep()) {
         // Expected to happen inside STW.
-        gc::EnableWeakRefBarriers(true);
+        gc::EnableWeakRefBarriers();
 
         mm::ResumeThreads();
         gcHandle.threadsAreResumed();
@@ -202,7 +202,8 @@ void gc::ConcurrentMarkAndSweep::PerformFullGC(int64_t epoch) noexcept {
     gc::processWeaks<ProcessWeaksTraits>(gcHandle, mm::SpecialRefRegistry::instance());
 
     if (compiler::concurrentWeakSweep()) {
-        gc::DisableWeakRefBarriers(false);
+        // Expected to happen outside STW.
+        gc::DisableWeakRefBarriers();
     } else {
         mm::ResumeThreads();
         gcHandle.threadsAreResumed();

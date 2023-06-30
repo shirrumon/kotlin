@@ -49,6 +49,8 @@ ALWAYS_INLINE ArrayHeader* gc::GC::ThreadData::CreateArray(const TypeInfo* typeI
 
 void gc::GC::ThreadData::OnSuspendForGC() noexcept { }
 
+void gc::GC::ThreadData::safePoint() noexcept {}
+
 gc::GC::GC(gcScheduler::GCScheduler& gcScheduler) noexcept : impl_(std_support::make_unique<Impl>(gcScheduler)) {}
 
 gc::GC::~GC() = default;

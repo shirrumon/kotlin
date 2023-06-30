@@ -740,19 +740,6 @@ TEST_P(ConcurrentMarkAndSweepTest, MultipleMutatorsCollect) {
         gcFutures[i] = mutators[i].Execute([](mm::ThreadData& threadData, Mutator& mutator) { mm::safePoint(threadData); });
     }
 
-    for (int i = 1; i < kDefaultThreadCount; ++i) {
-        gcFutures[i].wait();
-    }
-
-    // Spin until barriers confirmation is requested.
-    while (!mm::IsSafePointActionRequested()) {}
-
-    for (int i = 1; i < kDefaultThreadCount; ++i) {
-        gcFutures[i] = mutators[i].Execute([](mm::ThreadData& threadData, Mutator& mutator) {
-            threadData.gc().SafePointFunctionPrologue();
-        });
-    }
-
     for (auto& future : gcFutures) {
         future.wait();
     }
@@ -887,19 +874,6 @@ TEST_P(ConcurrentMarkAndSweepTest, MultipleMutatorsAddToRootSetAfterCollectionRe
         });
     }
 
-    for (int i = 1; i < kDefaultThreadCount; ++i) {
-        gcFutures[i].wait();
-    }
-
-    // Spin until barriers confirmation is requested.
-    while (!mm::IsSafePointActionRequested()) {}
-
-    for (int i = 1; i < kDefaultThreadCount; ++i) {
-        gcFutures[i] = mutators[i].Execute([](mm::ThreadData& threadData, Mutator& mutator) {
-            threadData.gc().SafePointFunctionPrologue();
-        });
-    }
-
     for (auto& future : gcFutures) {
         future.wait();
     }
@@ -960,19 +934,6 @@ TEST_P(ConcurrentMarkAndSweepTest, CrossThreadReference) {
 
     for (int i = 1; i < kDefaultThreadCount; ++i) {
         gcFutures[i] = mutators[i].Execute([](mm::ThreadData& threadData, Mutator& mutator) { mm::safePoint(threadData); });
-    }
-
-    for (int i = 1; i < kDefaultThreadCount; ++i) {
-        gcFutures[i].wait();
-    }
-
-    // Spin until barriers confirmation is requested.
-    while (!mm::IsSafePointActionRequested()) {}
-
-    for (int i = 1; i < kDefaultThreadCount; ++i) {
-        gcFutures[i] = mutators[i].Execute([](mm::ThreadData& threadData, Mutator& mutator) {
-            threadData.gc().SafePointFunctionPrologue();
-        });
     }
 
     for (auto& future : gcFutures) {
@@ -1041,20 +1002,6 @@ TEST_P(ConcurrentMarkAndSweepTest, MultipleMutatorsWeaks) {
         });
     }
 
-    for (int i = 1; i < kDefaultThreadCount; ++i) {
-        gcFutures[i].wait();
-    }
-
-    // Spin until barriers confirmation is requested.
-    while (!mm::IsSafePointActionRequested()) {}
-
-    for (int i = 1; i < kDefaultThreadCount; ++i) {
-        gcFutures[i] = mutators[i].Execute([weak](mm::ThreadData& threadData, Mutator& mutator) {
-            threadData.gc().SafePointFunctionPrologue();
-            EXPECT_THAT(weak->get(), nullptr);
-        });
-    }
-
     for (auto& future : gcFutures) {
         future.wait();
     }
@@ -1108,25 +1055,6 @@ TEST_P(ConcurrentMarkAndSweepTest, NewThreadsWhileRequestingCollection) {
     // All the other threads are stopping at safe points.
     for (int i = 1; i < kDefaultThreadCount; ++i) {
         gcFutures[i] = mutators[i].Execute([](mm::ThreadData& threadData, Mutator& mutator) { mm::safePoint(threadData); });
-    }
-
-    for (int i = 1; i < kDefaultThreadCount; ++i) {
-        gcFutures[i].wait();
-    }
-
-    // Spin until barriers confirmation is requested.
-    while (!mm::IsSafePointActionRequested()) {}
-
-    for (int i = 1; i < kDefaultThreadCount; ++i) {
-        gcFutures[i] = mutators[i].Execute([](mm::ThreadData& threadData, Mutator& mutator) {
-            threadData.gc().SafePointFunctionPrologue();
-        });
-    }
-
-    for (int i = 0; i < kDefaultThreadCount; ++i) {
-        attachFutures[i] = newMutators[i].Execute([](mm::ThreadData& threadData, Mutator& mutator) {
-            threadData.gc().SafePointFunctionPrologue();
-        });
     }
 
     // GC will be completed first

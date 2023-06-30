@@ -1,9 +1,17 @@
+/*
+ * Copyright 2010-2023 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license
+ * that can be found in the LICENSE file.
+ */
+
 #include "Barriers.hpp"
 
+#include <algorithm>
+#include <atomic>
+
+#include "GCImpl.hpp"
+#include "SafePoint.hpp"
 #include "ThreadData.hpp"
 #include "ThreadRegistry.hpp"
-#include "GCImpl.hpp"
-#include <atomic>
 
 using namespace kotlin;
 
@@ -11,64 +19,46 @@ namespace {
 
 [[clang::no_destroy]] std::atomic<bool> weakRefBarriersEnabled = false;
 
-template<typename Iterable, typename Pred>
-bool forall(Iterable& iterable, Pred&& pred) {
-    for (auto& item : iterable) {
-        if (!pred(item)) return false;
-    }
-    return true;
-}
-
-void checkpointAction(mm::ThreadData& thread) {
-    thread.gc().impl().gc().barriers().onCheckpoint();
-}
-
 void waitForThreadsToReachCheckpoint() {
-    // resetCheckpoint
-    for (auto& thr: mm::ThreadRegistry::Instance().LockForIter()) {
+    // Reset checkpoint on all threads.
+    for (auto& thr : mm::ThreadRegistry::Instance().LockForIter()) {
         thr.gc().impl().gc().barriers().resetCheckpoint();
     }
 
-    // requestCheckpoint
-    bool safePointSet = mm::TrySetSafePointAction(checkpointAction);
-    RuntimeAssert(safePointSet, "Only the GC thread can request safepoint actions, and STW must have already finished");
+    mm::SafePointActivator safePointActivator;
 
-    // waitForAllThreadsToVisitCheckpoint
+    // Disable new threads coming and going.
     auto threads = mm::ThreadRegistry::Instance().LockForIter();
-    while (!forall(threads, [](mm::ThreadData& thr) { return thr.gc().impl().gc().barriers().visitedCheckpoint() || thr.suspensionData().suspendedOrNative(); })) {
+    // And wait for all threads to either have passed safepoint or to be in the native state.
+    // Either of these mean that none of them are inside a weak reference accessing code.
+    while (!std::all_of(threads.begin(), threads.end(), [](mm::ThreadData& thread) noexcept {
+        return thread.gc().impl().gc().barriers().visitedCheckpoint() || thread.suspensionData().suspendedOrNative();
+    })) {
         std::this_thread::yield();
     }
-
-    //unsetSafePointAction
-    mm::UnsetSafePointAction();
 }
 
+} // namespace
+
+void gc::BarriersThreadData::onCheckpoint() noexcept {
+    visitedCheckpoint_.store(true, std::memory_order_release);
 }
 
-void gc::BarriersThreadData::onCheckpoint() {
-    visitedCheckpoint_.store(true, std::memory_order_seq_cst);
+void gc::BarriersThreadData::resetCheckpoint() noexcept {
+    visitedCheckpoint_.store(false, std::memory_order_release);
 }
 
-void gc::BarriersThreadData::resetCheckpoint() {
-    visitedCheckpoint_.store(false, std::memory_order_seq_cst);
+bool gc::BarriersThreadData::visitedCheckpoint() const noexcept {
+    return visitedCheckpoint_.load(std::memory_order_acquire);
 }
 
-bool gc::BarriersThreadData::visitedCheckpoint() const {
-    return visitedCheckpoint_.load(std::memory_order_relaxed);
-}
-
-void gc::EnableWeakRefBarriers(bool inSTW) {
+void gc::EnableWeakRefBarriers() noexcept {
     weakRefBarriersEnabled.store(true, std::memory_order_seq_cst);
-    if (!inSTW) {
-        waitForThreadsToReachCheckpoint();
-    }
 }
 
-void gc::DisableWeakRefBarriers(bool inSTW) {
+void gc::DisableWeakRefBarriers() noexcept {
     weakRefBarriersEnabled.store(false, std::memory_order_seq_cst);
-    if (!inSTW) {
-        waitForThreadsToReachCheckpoint();
-    }
+    waitForThreadsToReachCheckpoint();
 }
 
 OBJ_GETTER(kotlin::gc::WeakRefRead, ObjHeader* weakReferee) noexcept {
@@ -86,4 +76,3 @@ OBJ_GETTER(kotlin::gc::WeakRefRead, ObjHeader* weakReferee) noexcept {
     }
     RETURN_OBJ(weakReferee);
 }
-

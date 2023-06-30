@@ -92,9 +92,11 @@ public:
 
         void OnSuspendForGC() noexcept;
 
+        void safePoint() noexcept { barriers_.onCheckpoint(); }
+
         Allocator CreateAllocator() noexcept { return Allocator(gc::Allocator(), *this); }
 
-        BarriersThreadData& barriers() { return barriersThreadData_; };
+        BarriersThreadData& barriers() noexcept { return barriers_; }
 
     private:
         friend ConcurrentMarkAndSweep;
@@ -102,7 +104,7 @@ public:
         mm::ThreadData& threadData_;
         gcScheduler::GCSchedulerThreadData& gcScheduler_;
         std::atomic<bool> marking_;
-        BarriersThreadData barriersThreadData_;
+        BarriersThreadData barriers_;
     };
 
     using Allocator = ThreadData::Allocator;

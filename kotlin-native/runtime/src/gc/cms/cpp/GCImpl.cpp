@@ -63,6 +63,10 @@ void gc::GC::ThreadData::OnSuspendForGC() noexcept {
     impl_->gc().OnSuspendForGC();
 }
 
+void gc::GC::ThreadData::safePoint() noexcept {
+    impl_->gc().safePoint();
+}
+
 gc::GC::GC(gcScheduler::GCScheduler& gcScheduler) noexcept : impl_(std_support::make_unique<Impl>(gcScheduler)) {}
 
 gc::GC::~GC() = default;

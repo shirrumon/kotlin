@@ -44,6 +44,8 @@ public:
 
         void OnSuspendForGC() noexcept;
 
+        void safePoint() noexcept;
+
     private:
         std_support::unique_ptr<Impl> impl_;
     };
