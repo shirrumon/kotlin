@@ -17,7 +17,24 @@ using namespace kotlin;
 
 namespace {
 
-[[clang::no_destroy]] std::atomic<bool> weakRefBarriersEnabled = false;
+std::atomic<ObjHeader* (*)(ObjHeader*)> weakRefBarrier = nullptr;
+
+ObjHeader* weakRefBarrierImpl(ObjHeader* weakReferee) noexcept {
+    if (!weakReferee)
+        return nullptr;
+    // When weak ref barriers are enabled, marked state cannot change and the
+    // object cannot be deleted.
+    if (!gc::isMarked(weakReferee)) {
+        return nullptr;
+    }
+    return weakReferee;
+}
+
+NO_INLINE ObjHeader* weakRefReadSlowPath(ObjHeader* weakReferee) noexcept {
+    // reread an action to avoid register pollution outside the function
+    auto barrier = weakRefBarrier.load(std::memory_order_seq_cst);
+    return barrier ? barrier(weakReferee) : weakReferee;
+}
 
 void waitForThreadsToReachCheckpoint() {
     // Reset checkpoint on all threads.
@@ -53,26 +70,25 @@ bool gc::BarriersThreadData::visitedCheckpoint() const noexcept {
 }
 
 void gc::EnableWeakRefBarriers() noexcept {
-    weakRefBarriersEnabled.store(true, std::memory_order_seq_cst);
+    weakRefBarrier.store(weakRefBarrierImpl, std::memory_order_seq_cst);
 }
 
 void gc::DisableWeakRefBarriers() noexcept {
-    weakRefBarriersEnabled.store(false, std::memory_order_seq_cst);
+    weakRefBarrier.store(nullptr, std::memory_order_seq_cst);
     waitForThreadsToReachCheckpoint();
 }
 
 OBJ_GETTER(kotlin::gc::WeakRefRead, ObjHeader* weakReferee) noexcept {
-    if (compiler::concurrentWeakSweep()) {
-        if (weakReferee != nullptr) {
-            // weakRefBarriersEnabled changes are synchronized with checkpoints or STW
-            if (weakRefBarriersEnabled.load(std::memory_order_relaxed)) {
-                // When weak ref barriers are enabled, marked state cannot change and the
-                // object cannot be deleted.
-                if (!gc::isMarked(weakReferee)) {
-                    RETURN_OBJ(nullptr);
-                }
-            }
-        }
+    // TODO: Make this work with GCs that can stop thread at any point.
+
+    if (!compiler::concurrentWeakSweep()) {
+        RETURN_OBJ(weakReferee);
     }
-    RETURN_OBJ(weakReferee);
+
+    auto barrier = weakRefBarrier.load(std::memory_order_relaxed);
+    ObjHeader* result = weakReferee;
+    if (__builtin_expect(barrier != nullptr, false)) {
+        result = weakRefReadSlowPath(weakReferee);
+    }
+    RETURN_OBJ(result);
 }
