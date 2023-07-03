@@ -85,7 +85,8 @@ ALWAYS_INLINE void gc::GC::processArrayInMark(void* state, ArrayHeader* array) n
 // static
 ALWAYS_INLINE void gc::GC::processFieldInMark(void* state, ObjHeader* field) noexcept {}
 
-void gc::GC::Schedule() noexcept {}
+int64_t gc::GC::Schedule() noexcept { return 0; }
+void gc::GC::WaitFinalizers(int64_t epoch) noexcept {}
 
 bool gc::isMarked(ObjHeader* object) noexcept {
     RuntimeAssert(false, "Should not reach here");

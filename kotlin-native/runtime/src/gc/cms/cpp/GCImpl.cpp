@@ -119,8 +119,12 @@ ALWAYS_INLINE void gc::GC::processFieldInMark(void* state, ObjHeader* field) noe
     gc::internal::processFieldInMark<gc::internal::MarkTraits>(state, field);
 }
 
-void gc::GC::Schedule() noexcept {
-    impl_->gc().Schedule();
+int64_t gc::GC::Schedule() noexcept {
+    return impl_->gc().Schedule();
+}
+
+void gc::GC::WaitFinalizers(int64_t epoch) noexcept {
+    impl_->gc().WaitFinalized(epoch);
 }
 
 bool gc::isMarked(ObjHeader* object) noexcept {

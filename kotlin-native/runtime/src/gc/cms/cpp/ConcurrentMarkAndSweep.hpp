@@ -136,7 +136,10 @@ public:
     alloc::Heap& heap() noexcept { return heap_; }
 #endif
 
-    void Schedule() noexcept { state_.schedule(); }
+    int64_t Schedule() noexcept { return state_.schedule(); }
+    void WaitFinalized(int64_t epoch) noexcept {
+        state_.waitEpochFinalized(epoch);
+    }
 
 private:
     void PerformFullGC(int64_t epoch) noexcept;
