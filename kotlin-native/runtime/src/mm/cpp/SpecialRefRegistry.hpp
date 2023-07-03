@@ -78,13 +78,14 @@ class SpecialRefRegistry : private Pinned {
             auto rc = rc_.exchange(disposedMarker, std::memory_order_release);
             if (compiler::runtimeAssertsEnabled()) {
                 if (rc > 0) {
+                    auto* obj = obj_.load(std::memory_order_relaxed);
                     // In objc export if ObjCClass extends from KtClass
                     // doing retain+autorelease inside [ObjCClass dealloc] will cause
                     // this->dispose() be called after this->retain() but before
                     // subsequent this->release().
                     // However, since this happens in dealloc, the stored object must
                     // have been cleared already.
-                    RuntimeAssert(obj_ == nullptr, "Disposing StableRef@%p with rc %d and uncleaned object %p", this, rc, obj_);
+                    RuntimeAssert(obj == nullptr, "Disposing StableRef@%p with rc %d and uncleaned object %p", this, rc, obj);
                 }
                 RuntimeAssert(rc >= 0, "Disposing StableRef@%p with rc %d", this, rc);
             }
@@ -96,13 +97,13 @@ class SpecialRefRegistry : private Pinned {
                 auto rc = rc_.load(std::memory_order_relaxed);
                 RuntimeAssert(rc >= 0, "Dereferencing StableRef@%p with rc %d", this, rc);
             }
-            return obj_;
+            return obj_.load(std::memory_order_relaxed);
         }
 
         OBJ_GETTER0(tryRef) noexcept {
             AssertThreadState(ThreadState::kRunnable);
             // TODO: Weak read barrier with CMS.
-            RETURN_RESULT_OF(kotlin::gc::tryRef, obj_);
+            RETURN_RESULT_OF(kotlin::gc::tryRef, obj_.load(std::memory_order_relaxed));
         }
 
         void retainRef() noexcept {
@@ -113,7 +114,7 @@ class SpecialRefRegistry : private Pinned {
                         position_ == std_support::list<Node>::iterator{},
                         "Retaining StableRef@%p with fast deletion optimization is disallowed", this);
 
-                if (!obj_) {
+                if (!obj_.load(std::memory_order_relaxed)) {
                     // In objc export if ObjCClass extends from KtClass
                     // calling retain inside [ObjCClass dealloc] will cause
                     // node.retainRef() be called after node.obj_ was cleared but
@@ -162,7 +163,8 @@ class SpecialRefRegistry : private Pinned {
         //   be nulled, and disable the barriers when the phase is completed.
         //   Synchronization between GC and mutators happens via enabling/disabling
         //   the barriers.
-        ObjHeader* obj_ = nullptr;
+        // TODO: Try to handle it atomically only when the GC is in progress.
+        std::atomic<ObjHeader*> obj_ = nullptr;
         // Only ever updated using relaxed memory ordering. Any synchronization
         // with nextRoot_ is achieved via acquire-release of nextRoot_.
         std::atomic<Rc> rc_ = 0; // After dispose() will be disposedMarker.
@@ -245,7 +247,7 @@ public:
         ObjHeader* operator*() const noexcept {
             // Ignoring rc here. If someone nulls out rc during root
             // scanning, it's okay to be conservative and still make it a root.
-            return node_->obj_;
+            return node_->obj_.load(std::memory_order_relaxed);
         }
 
         RootsIterator& operator++() noexcept {
@@ -282,7 +284,7 @@ public:
 
     class Iterator {
     public:
-        ObjHeader*& operator*() noexcept { return iterator_->obj_; }
+        std::atomic<ObjHeader*>& operator*() noexcept { return iterator_->obj_; }
 
         Iterator& operator++() noexcept {
             iterator_ = owner_->findAliveNode(std::next(iterator_));
