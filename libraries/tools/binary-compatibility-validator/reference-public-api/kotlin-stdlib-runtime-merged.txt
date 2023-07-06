@@ -3390,6 +3390,9 @@ public abstract interface annotation class kotlin/js/ExperimentalJsFileName : ja
 public abstract interface annotation class kotlin/js/ExperimentalJsReflectionCreateInstance : java/lang/annotation/Annotation {
 }
 
+public abstract interface annotation class kotlin/jvm/ImplicitlyActualizedByNonKotlin : java/lang/annotation/Annotation {
+}
+
 public final class kotlin/jvm/JvmClassMappingKt {
 	public static final fun getAnnotationClass (Ljava/lang/annotation/Annotation;)Lkotlin/reflect/KClass;
 	public static final fun getJavaClass (Ljava/lang/Object;)Ljava/lang/Class;
@@ -3466,9 +3469,6 @@ public abstract interface annotation class kotlin/jvm/Throws : java/lang/annotat
 }
 
 public abstract interface annotation class kotlin/jvm/Transient : java/lang/annotation/Annotation {
-}
-
-public abstract interface annotation class kotlin/jvm/ImplicitlyActualizedByNonKotlin : java/lang/annotation/Annotation {
 }
 
 public abstract interface annotation class kotlin/jvm/Volatile : java/lang/annotation/Annotation {
