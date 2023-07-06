@@ -59,22 +59,21 @@ public expect annotation class JvmMultifileClass()
  * Implicit actualization bypasses safety features, potentially leading to errors or unexpected behavior. If you use this annotation, some
  * of the expect-actual invariants are not checked.
  *
- * Please, don't use this annotation unless you have any other choice. The annotation might stop working in future Kotlin versions without
- * a prior notice.
+ * Use this annotation only as a last resort. The annotation might stop working in future Kotlin versions without prior notice.
  *
- * If you use this annotation, consider describing your use-cases in [KT-58545](https://youtrack.jetbrains.com/issue/KT-58545) comments.
+ * If you use this annotation, consider describing your use cases in [KT-58545](https://youtrack.jetbrains.com/issue/KT-58545) comments.
  *
  * # Migration
  *
  * Rewrite the code using explicit `actual typealias`. Unfortunately, it requires you to move your expect declarations into another
  * package. Refer to [KT-58545](https://youtrack.jetbrains.com/issue/KT-58545) for more detailed migration example.
  */
-@RequiresOptIn
-@Retention(AnnotationRetention.BINARY)
+@Retention(AnnotationRetention.SOURCE)
 @Target(AnnotationTarget.CLASS)
 @MustBeDocumented
 @SinceKotlin("1.9")
-public annotation class ImplicitlyActualizedByNonKotlin
+@OptionalExpectation
+public expect annotation class ImplicitlyActualizedByNonKotlin()
 
 /**
  * Instructs the Kotlin compiler not to generate getters/setters for this property and expose it as a field.

@@ -124,7 +124,6 @@ class ExpectedActualDeclarationChecker(
         module: ModuleDescriptor,
         context: DeclarationCheckerContext
     ) {
-        val settings = context.languageVersionSettings
         val actualMembers = actuals
             .filter { (compatibility, _) -> compatibility.isCompatibleOrWeakCompatible() }
             .flatMap { (_, members) -> members }
@@ -134,7 +133,8 @@ class ExpectedActualDeclarationChecker(
         if (actualMembers.any {
                 it is MppJavaImplicitActualizatorMarker &&
                         with(OptInUsageChecker) {
-                            !expectPsi.isOptInAllowed(implicitlyActualizedByNonKotlinAnnotationFqn, settings, context.trace.bindingContext)
+                            !expectPsi
+                                .isDeclarationAnnotatedWith(implicitlyActualizedByNonKotlinAnnotationFqn, context.trace.bindingContext)
                         }
             }
         ) {
