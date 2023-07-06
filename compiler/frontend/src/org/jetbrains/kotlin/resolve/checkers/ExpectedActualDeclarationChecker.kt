@@ -42,7 +42,7 @@ import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.utils.addToStdlib.cast
 import java.io.File
 
-private val implicitlyActualizedByNonKotlinAnnotationFqn = FqName("kotlin.jvm.ImplicitlyActualizedByNonKotlin")
+private val implicitlyActualizedAnnotationFqn = FqName("kotlin.jvm.ImplicitlyActualizedByJvmDeclaration")
 
 class ExpectedActualDeclarationChecker(
     val moduleStructureOracle: ModuleStructureOracle,
@@ -133,8 +133,7 @@ class ExpectedActualDeclarationChecker(
         if (actualMembers.any {
                 it is MppJavaImplicitActualizatorMarker &&
                         with(OptInUsageChecker) {
-                            !expectPsi
-                                .isDeclarationAnnotatedWith(implicitlyActualizedByNonKotlinAnnotationFqn, context.trace.bindingContext)
+                            !expectPsi.isDeclarationAnnotatedWith(implicitlyActualizedAnnotationFqn, context.trace.bindingContext)
                         }
             }
         ) {
