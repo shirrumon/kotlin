@@ -5,7 +5,7 @@
 
 import kotlin.jvm.ImplicitlyActualizedByNonKotlin
 
-@OptIn(ImplicitlyActualizedByNonKotlin::class)
+@ImplicitlyActualizedByNonKotlin
 expect class Foo() {
     fun foo()
 }
