@@ -1,0 +1,21 @@
+plugins {
+    id 'org.jetbrains.kotlin.multiplatform'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+kotlin {
+    jvm("customTargetName")
+
+    sourceSets.configureEach {
+        languageSettings {
+            languageVersion = "2.0"
+        }
+    }
+}

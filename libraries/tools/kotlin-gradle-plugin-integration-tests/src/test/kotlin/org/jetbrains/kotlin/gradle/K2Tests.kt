@@ -120,4 +120,14 @@ class CustomK2Tests : KGPBaseTest() {
             }
         }
     }
+
+    @DisplayName("Compile project with custom target name with kotlinx.benchmark and K2 (KT-59540)")
+    @GradleTest
+    fun `test targetWithCustomNameMppK2`(gradleVersion: GradleVersion) {
+        project("k2-mpp-target-with-custom-name", gradleVersion) {
+            build(":assemble") {
+                assertTasksExecuted(":assemble")
+            }
+        }
+    }
 }
