@@ -119,7 +119,7 @@ public annotation class Throws(vararg val exceptionClasses: KClass<out Throwable
 @Target(AnnotationTarget.CLASS)
 @MustBeDocumented
 @SinceKotlin("1.9")
-public actual annotation class ImplicitlyActualizedByNonKotlin
+public actual annotation class ImplicitlyActualizedByJvmDeclaration
 
 /**
  * Instructs the Kotlin compiler not to generate getters/setters for this property and expose it as a field.

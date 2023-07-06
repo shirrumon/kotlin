@@ -3,9 +3,9 @@
 // MODULE: m1-common
 // FILE: common.kt
 
-import kotlin.jvm.ImplicitlyActualizedByNonKotlin
+import kotlin.jvm.ImplicitlyActualizedByJvmDeclaration
 
-@ImplicitlyActualizedByNonKotlin
+@ImplicitlyActualizedByJvmDeclaration
 expect class Foo() {
     fun foo()
 }

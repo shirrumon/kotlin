@@ -73,7 +73,7 @@ public expect annotation class JvmMultifileClass()
 @MustBeDocumented
 @SinceKotlin("1.9")
 @OptionalExpectation
-public expect annotation class ImplicitlyActualizedByNonKotlin()
+public expect annotation class ImplicitlyActualizedByJvmDeclaration()
 
 /**
  * Instructs the Kotlin compiler not to generate getters/setters for this property and expose it as a field.
