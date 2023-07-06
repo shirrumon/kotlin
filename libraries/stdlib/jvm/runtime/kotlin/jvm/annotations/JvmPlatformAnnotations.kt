@@ -115,7 +115,7 @@ public annotation class Throws(vararg val exceptionClasses: KClass<out Throwable
  * Rewrite the code using explicit `actual typealias`. Unfortunately, it requires you to move your expect declarations into another
  * package. Refer to [KT-58545](https://youtrack.jetbrains.com/issue/KT-58545) for more detailed migration example.
  */
-@Retention(AnnotationRetention.SOURCE)
+@Retention(AnnotationRetention.BINARY)
 @Target(AnnotationTarget.CLASS)
 @MustBeDocumented
 @SinceKotlin("1.9")

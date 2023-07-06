@@ -54,7 +54,7 @@ public expect annotation class JvmMultifileClass()
 /**
  * This annotation marks Kotlin `expect` declarations that are implicitly actualized by Java.
  *
- * # Safety Risks
+ * ## Safety Risks
  *
  * Implicit actualization bypasses safety features, potentially leading to errors or unexpected behavior. If you use this annotation, some
  * of the expect-actual invariants are not checked.
@@ -63,12 +63,12 @@ public expect annotation class JvmMultifileClass()
  *
  * If you use this annotation, consider describing your use cases in [KT-58545](https://youtrack.jetbrains.com/issue/KT-58545) comments.
  *
- * # Migration
+ * ## Migration
  *
  * Rewrite the code using explicit `actual typealias`. Unfortunately, it requires you to move your expect declarations into another
  * package. Refer to [KT-58545](https://youtrack.jetbrains.com/issue/KT-58545) for more detailed migration example.
  */
-@Retention(AnnotationRetention.SOURCE)
+@Retention(AnnotationRetention.BINARY)
 @Target(AnnotationTarget.CLASS)
 @MustBeDocumented
 @SinceKotlin("1.9")
