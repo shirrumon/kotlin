@@ -242,7 +242,7 @@ fun <F> prepareCommonSessions(
 
 private typealias FirSessionProducer<F> = (List<F>, FirModuleData, FirProjectSessionProvider, FirSessionConfigurator.() -> Unit) -> FirSession
 
-private inline fun <F> prepareSessions(
+private  fun <F> prepareSessions(
     files: List<F>,
     configuration: CompilerConfiguration,
     rootModuleName: Name,
@@ -312,14 +312,14 @@ private inline fun <F> createSingleSession(
     return SessionWithSources(session, files)
 }
 
-private inline fun <F> createSessionsForLegacyMppProject(
+private fun <F> createSessionsForLegacyMppProject(
     files: List<F>,
     rootModuleName: Name,
     libraryList: DependencyListForCliModule,
     targetPlatform: TargetPlatform,
     analyzerServices: PlatformDependentAnalyzerServices,
     sessionProvider: FirProjectSessionProvider,
-    noinline sessionConfigurator: FirSessionConfigurator.() -> Unit,
+    sessionConfigurator: FirSessionConfigurator.() -> Unit,
     isCommonSource: (F) -> Boolean,
     createFirSession: FirSessionProducer<F>,
 ): List<SessionWithSources<F>> {
@@ -356,7 +356,7 @@ private inline fun <F> createSessionsForLegacyMppProject(
     )
 }
 
-private inline fun <F> createSessionsForHmppProject(
+private  fun <F> createSessionsForHmppProject(
     files: List<F>,
     rootModuleName: Name,
     hmppModuleStructure: HmppCliModuleStructure,
@@ -364,7 +364,7 @@ private inline fun <F> createSessionsForHmppProject(
     targetPlatform: TargetPlatform,
     analyzerServices: PlatformDependentAnalyzerServices,
     sessionProvider: FirProjectSessionProvider,
-    noinline sessionConfigurator: FirSessionConfigurator.() -> Unit,
+     sessionConfigurator: FirSessionConfigurator.() -> Unit,
     fileBelongsToModule: (F, String) -> Boolean,
     createFirSession: FirSessionProducer<F>,
 ): List<SessionWithSources<F>> {

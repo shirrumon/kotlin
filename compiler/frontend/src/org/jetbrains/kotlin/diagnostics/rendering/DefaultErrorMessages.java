@@ -372,7 +372,7 @@ public class DefaultErrorMessages {
                 "Expected function source is not found, therefore it's impossible to generate default argument values declared there. " +
                 "Please add the corresponding file to compilation sources");
 
-        MAP.put(NO_ACTUAL_FOR_EXPECT, "Expected {0} has no actual declaration in module {1}{2}", DECLARATION_NAME_WITH_KIND,
+        MAP.put(NO_ACTUAL_FOR_EXPECT, "(K1) Expected {0} has no actual declaration in module {1}{2}", DECLARATION_NAME_WITH_KIND,
                 MODULE_WITH_PLATFORM, adaptGenerics1(PlatformIncompatibilityDiagnosticRenderer.TEXT));
         MAP.put(ACTUAL_WITHOUT_EXPECT, "{0} has no corresponding expected declaration{1}", CAPITALIZED_DECLARATION_NAME_WITH_KIND_AND_PLATFORM,
                 adaptGenerics1(PlatformIncompatibilityDiagnosticRenderer.TEXT));

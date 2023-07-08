@@ -34,7 +34,7 @@ object KtDefaultCommonBackendErrorMessages : BaseDiagnosticRendererFactory() {
     override val MAP = KtDiagnosticFactoryToRendererMap("KT").also { map ->
         map.put(
             CommonBackendErrors.NO_ACTUAL_FOR_EXPECT,
-            "Expected {0} has no actual declaration in module {1}",
+            "(K2) Expected has no actual declaration in module {1}",
             STRING,
             MODULE_WITH_PLATFORM,
         )

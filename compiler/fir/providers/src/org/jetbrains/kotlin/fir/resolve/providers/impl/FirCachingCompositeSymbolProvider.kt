@@ -32,6 +32,18 @@ class FirCachingCompositeSymbolProvider(
     // we are not assumed to use it.
     private val expectedCachesToBeCleanedOnce: Boolean = false,
 ) : FirSymbolProvider(session) {
+    companion object {
+        var x = 0
+    }
+
+    init {
+        if (providers.size == 4) {
+            if (x == 1) {
+                Unit
+            }
+            x++
+        }
+    }
 
     private val classLikeCache = session.firCachesFactory.createCache(::computeClass)
     private val topLevelCallableCache = session.firCachesFactory.createCache(::computeTopLevelCallables)

@@ -11,7 +11,11 @@ import org.jetbrains.kotlin.fir.*
 class FirCliSession @PrivateSessionConstructor constructor(
     sessionProvider: FirProjectSessionProvider,
     kind: Kind
-) : FirSession(sessionProvider, kind)
+) : FirSession(sessionProvider, kind) {
+    init {
+        Unit
+    }
+}
 
 class FirProjectSessionProvider : FirSessionProvider() {
     override fun getSession(moduleData: FirModuleData): FirSession? {

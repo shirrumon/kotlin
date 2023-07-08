@@ -11,11 +11,18 @@ repositories {
 }
 
 kotlin {
-    jvm("customTargetName")
+    //jvm()
+    jvm("myJvm")
+    //js("myJs", IR) { nodejs() }
 
-    sourceSets.configureEach {
-        languageSettings {
-            languageVersion = "2.0"
+    sourceSets {
+        commonMain {
         }
+        jvmMain {
+            myJvmMain.dependsOn(it)
+        }
+        /*jsMain {
+            myJsMain.dependsOn(it)
+        }*/
     }
 }

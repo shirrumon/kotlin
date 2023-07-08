@@ -123,8 +123,24 @@ class CustomK2Tests : KGPBaseTest() {
 
     @DisplayName("Compile project with custom target name with kotlinx.benchmark and K2 (KT-59540)")
     @GradleTest
-    fun `test targetWithCustomNameMppK2`(gradleVersion: GradleVersion) {
-        project("k2-mpp-target-with-custom-name", gradleVersion) {
+    fun `test targetWithCustomTargetNameMppK2`(gradleVersion: GradleVersion) {
+        with(
+            project(
+                "k2-mpp-target-with-custom-name",
+                gradleVersion,
+                //buildOptions = defaultBuildOptions.copy(languageVersion = "2.0"),
+            )
+        ) {
+            build(":assemble", kotlinDaemonDebugPort = 5006) {
+                assertTasksExecuted(":assemble")
+            }
+        }
+    }
+
+    @DisplayName("Compile project with actualizing shared source set and K2 (KT-56554)")
+    @GradleTest
+    fun `test classActualizingInSharedSourceSet`(gradleVersion: GradleVersion) {
+        project("k2-mpp-actualization-in-shared-source-set", gradleVersion) {
             build(":assemble") {
                 assertTasksExecuted(":assemble")
             }

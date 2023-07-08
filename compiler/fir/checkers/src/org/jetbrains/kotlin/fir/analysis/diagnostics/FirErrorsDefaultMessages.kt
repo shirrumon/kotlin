@@ -1819,7 +1819,7 @@ object FirErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
         )
         map.put(
             NO_ACTUAL_FOR_EXPECT,
-            "Expected {0} has no actual declaration in module {1}{2}",
+            "(K2) Expected {0} has no actual declaration in module {1}{2}",
             SYMBOL,
             MODULE_DATA,
             FirPlatformIncompatibilityDiagnosticRenderer.TEXT

@@ -78,7 +78,11 @@ class FirModuleDataImpl(
     override val platform: TargetPlatform,
     override val analyzerServices: PlatformDependentAnalyzerServices,
     override val capabilities: FirModuleCapabilities = FirModuleCapabilities.Empty
-) : FirModuleData()
+) : FirModuleData() {
+    init {
+        Unit
+    }
+}
 
 val FirSession.nullableModuleData: FirModuleData? by FirSession.nullableSessionComponentAccessor()
 val FirSession.moduleData: FirModuleData
