@@ -15,10 +15,7 @@ import org.jetbrains.kotlin.descriptors.DeclarationDescriptor
 import org.jetbrains.kotlin.descriptors.ModuleDescriptor
 import org.jetbrains.kotlin.ir.IrBuiltIns
 import org.jetbrains.kotlin.ir.builders.TranslationPluginContext
-import org.jetbrains.kotlin.ir.declarations.IrDeclaration
-import org.jetbrains.kotlin.ir.declarations.IrFile
-import org.jetbrains.kotlin.ir.declarations.IrFunction
-import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
+import org.jetbrains.kotlin.ir.declarations.*
 import org.jetbrains.kotlin.ir.linkage.IrDeserializer
 import org.jetbrains.kotlin.ir.symbols.*
 import org.jetbrains.kotlin.ir.util.*
@@ -293,7 +290,7 @@ abstract class KotlinIrLinker(
     ) where Owner : IrDeclaration,
             DelegatingSymbol : IrDelegatingSymbol<DelegateSymbol, Owner, *>,
             DelegateSymbol : IrBindableSymbol<*, Owner> {
-        require(actualSymbol is DelegateSymbol)
+        require(actualSymbol is DelegateSymbol) { "$actualSymbol (${actualSymbol::class}) must be ${DelegateSymbol::class}" }
         val expectDeclaration = expectSymbol.owner
         val actualDeclaration = actualSymbol.owner
         actualizer(expectDeclaration, actualDeclaration)

@@ -17,13 +17,16 @@ interface I2 {
     val p: Int
 }
 
-expect class C() : I1, I2
+expect class C() : I1, I2 {
+    override fun f(): String
+    override val p: Int
+}
 
 // MODULE: platform()()(common)
 // FILE: platform.kt
 
 actual class C : I1, I2 {
-    override fun f() = "OK"
+    actual override fun f() = "OK"
 
-    override val p = 42
+    actual override val p = 42
 }

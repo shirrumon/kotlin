@@ -19,6 +19,10 @@ interface I2 {
 
 expect class C : I1, I2 {
   expect constructor() /* primary */
+  expect override fun f(): String
+
+  expect override val p: Int
+    override get
 
 }
 
