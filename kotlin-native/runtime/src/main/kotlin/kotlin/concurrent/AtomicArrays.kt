@@ -16,6 +16,8 @@ import kotlin.native.concurrent.*
  * Provides sequential consistent ordering guarantees.
  *
  * If the given [array][this] is not a compile-time known property, [IllegalArgumentException] would be thrown.
+ *
+ * NOTE: Ensure that the provided [index] does not exceed the size of the [array][this]. Exceeding the array size may result in undefined behavior.
  */
 @TypedIntrinsic(IntrinsicType.ATOMIC_GET_ARRAY_ELEMENT)
 internal external fun IntArray.atomicGet(index: Int): Int
@@ -26,6 +28,8 @@ internal external fun IntArray.atomicGet(index: Int): Int
  * Provides sequential consistent ordering guarantees.
  *
  * If the given [array][this] is not a compile-time known property, [IllegalArgumentException] would be thrown.
+ *
+ * NOTE: Ensure that the provided [index] does not exceed the size of the [array][this]. Exceeding the array size may result in undefined behavior.
  */
 @TypedIntrinsic(IntrinsicType.ATOMIC_SET_ARRAY_ELEMENT)
 internal external fun IntArray.atomicSet(index: Int, newValue: Int)
@@ -37,6 +41,8 @@ internal external fun IntArray.atomicSet(index: Int, newValue: Int)
  * Provides sequential consistent ordering guarantees.
  *
  * If the given [array][this] is not a compile-time known property, [IllegalArgumentException] would be thrown.
+ *
+ * NOTE: Ensure that the provided [index] does not exceed the size of the [array][this]. Exceeding the array size may result in undefined behavior.
  */
 @TypedIntrinsic(IntrinsicType.GET_AND_SET_ARRAY_ELEMENT)
 internal external fun IntArray.getAndSet(index: Int, newValue: Int): Int
@@ -48,6 +54,8 @@ internal external fun IntArray.getAndSet(index: Int, newValue: Int): Int
  * Provides sequential consistent ordering guarantees.
  *
  * If the given [array][this] is not a compile-time known property, [IllegalArgumentException] would be thrown.
+ *
+ * NOTE: Ensure that the provided [index] does not exceed the size of the [array][this]. Exceeding the array size may result in undefined behavior.
  */
 @TypedIntrinsic(IntrinsicType.GET_AND_ADD_ARRAY_ELEMENT)
 internal external fun IntArray.getAndAdd(index: Int, delta: Int): Int
@@ -59,6 +67,8 @@ internal external fun IntArray.getAndAdd(index: Int, delta: Int): Int
  * Provides sequential consistent ordering guarantees and never fails spuriously.
  *
  * If the given [array][this] is not a compile-time known property, [IllegalArgumentException] would be thrown.
+ *
+ * NOTE: Ensure that the provided [index] does not exceed the size of the [array][this]. Exceeding the array size may result in undefined behavior.
  */
 @TypedIntrinsic(IntrinsicType.COMPARE_AND_EXCHANGE_ARRAY_ELEMENT)
 internal external fun IntArray.compareAndExchange(index: Int, expectedValue: Int, newValue: Int): Int
@@ -71,6 +81,8 @@ internal external fun IntArray.compareAndExchange(index: Int, expectedValue: Int
  * Provides sequential consistent ordering guarantees and never fails spuriously.
  *
  * If the given [array][this] is not a compile-time known property, [IllegalArgumentException] would be thrown.
+ *
+ * NOTE: Ensure that the provided [index] does not exceed the size of the [array][this]. Exceeding the array size may result in undefined behavior.
  */
 @TypedIntrinsic(IntrinsicType.COMPARE_AND_SET_ARRAY_ELEMENT)
 internal external fun IntArray.compareAndSet(index: Int, expectedValue: Int, newValue: Int): Boolean
@@ -81,6 +93,8 @@ internal external fun IntArray.compareAndSet(index: Int, expectedValue: Int, new
  * Provides sequential consistent ordering guarantees.
  *
  * If the given [array][this] is not a compile-time known property, [IllegalArgumentException] would be thrown.
+ *
+ * NOTE: Ensure that the provided [index] does not exceed the size of the [array][this]. Exceeding the array size may result in undefined behavior.
  */
 @TypedIntrinsic(IntrinsicType.ATOMIC_GET_ARRAY_ELEMENT)
 internal external fun LongArray.atomicGet(index: Int): Long
@@ -91,6 +105,8 @@ internal external fun LongArray.atomicGet(index: Int): Long
  * Provides sequential consistent ordering guarantees.
  *
  * If the given [array][this] is not a compile-time known property, [IllegalArgumentException] would be thrown.
+ *
+ * NOTE: Ensure that the provided [index] does not exceed the size of the [array][this]. Exceeding the array size may result in undefined behavior.
  */
 @TypedIntrinsic(IntrinsicType.ATOMIC_SET_ARRAY_ELEMENT)
 internal external fun LongArray.atomicSet(index: Int, newValue: Long)
@@ -102,6 +118,8 @@ internal external fun LongArray.atomicSet(index: Int, newValue: Long)
  * Provides sequential consistent ordering guarantees.
  *
  * If the given [array][this] is not a compile-time known property, [IllegalArgumentException] would be thrown.
+ *
+ * NOTE: Ensure that the provided [index] does not exceed the size of the [array][this]. Exceeding the array size may result in undefined behavior.
  */
 @TypedIntrinsic(IntrinsicType.GET_AND_SET_ARRAY_ELEMENT)
 internal external fun LongArray.getAndSet(index: Int, newValue: Long): Long
@@ -113,6 +131,8 @@ internal external fun LongArray.getAndSet(index: Int, newValue: Long): Long
  * Provides sequential consistent ordering guarantees.
  *
  * If the given [array][this] is not a compile-time known property, [IllegalArgumentException] would be thrown.
+ *
+ * NOTE: Ensure that the provided [index] does not exceed the size of the [array][this]. Exceeding the array size may result in undefined behavior.
  */
 @TypedIntrinsic(IntrinsicType.GET_AND_ADD_ARRAY_ELEMENT)
 internal external fun LongArray.getAndAdd(index: Int, delta: Long): Long
@@ -124,6 +144,8 @@ internal external fun LongArray.getAndAdd(index: Int, delta: Long): Long
  * Provides sequential consistent ordering guarantees and never fails spuriously.
  *
  * If the given [array][this] is not a compile-time known property, [IllegalArgumentException] would be thrown.
+ *
+ * NOTE: Ensure that the provided [index] does not exceed the size of the [array][this]. Exceeding the array size may result in undefined behavior.
  */
 @TypedIntrinsic(IntrinsicType.COMPARE_AND_EXCHANGE_ARRAY_ELEMENT)
 internal external fun LongArray.compareAndExchange(index: Int, expectedValue: Long, newValue: Long): Long
@@ -136,6 +158,8 @@ internal external fun LongArray.compareAndExchange(index: Int, expectedValue: Lo
  * Provides sequential consistent ordering guarantees and never fails spuriously.
  *
  * If the given [array][this] is not a compile-time known property, [IllegalArgumentException] would be thrown.
+ *
+ * NOTE: Ensure that the provided [index] does not exceed the size of the [array][this]. Exceeding the array size may result in undefined behavior.
  */
 @TypedIntrinsic(IntrinsicType.COMPARE_AND_SET_ARRAY_ELEMENT)
 internal external fun LongArray.compareAndSet(index: Int, expectedValue: Long, newValue: Long): Boolean
@@ -146,6 +170,8 @@ internal external fun LongArray.compareAndSet(index: Int, expectedValue: Long, n
  * Provides sequential consistent ordering guarantees.
  *
  * If the given [array][this] is not a compile-time known property, [IllegalArgumentException] would be thrown.
+ *
+ * NOTE: Ensure that the provided [index] does not exceed the size of the [array][this]. Exceeding the array size may result in undefined behavior.
  */
 @TypedIntrinsic(IntrinsicType.ATOMIC_GET_ARRAY_ELEMENT)
 internal external fun <T> Array<T>.atomicGet(index: Int): T
@@ -156,6 +182,8 @@ internal external fun <T> Array<T>.atomicGet(index: Int): T
  * Provides sequential consistent ordering guarantees.
  *
  * If the given [array][this] is not a compile-time known property, [IllegalArgumentException] would be thrown.
+ *
+ * NOTE: Ensure that the provided [index] does not exceed the size of the [array][this]. Exceeding the array size may result in undefined behavior.
  */
 @TypedIntrinsic(IntrinsicType.ATOMIC_SET_ARRAY_ELEMENT)
 internal external fun <T> Array<T>.atomicSet(index: Int, newValue: T)
@@ -167,6 +195,8 @@ internal external fun <T> Array<T>.atomicSet(index: Int, newValue: T)
  * Provides sequential consistent ordering guarantees.
  *
  * If the given [array][this] is not a compile-time known property, [IllegalArgumentException] would be thrown.
+ *
+ * NOTE: Ensure that the provided [index] does not exceed the size of the [array][this]. Exceeding the array size may result in undefined behavior.
  */
 @TypedIntrinsic(IntrinsicType.GET_AND_SET_ARRAY_ELEMENT)
 internal external fun <T> Array<T>.getAndSet(index: Int, value: T): T
@@ -180,6 +210,8 @@ internal external fun <T> Array<T>.getAndSet(index: Int, value: T): T
  * Provides sequential consistent ordering guarantees and never fails spuriously.
  *
  * If the given [array][this] is not a compile-time known property, [IllegalArgumentException] would be thrown.
+ *
+ * NOTE: Ensure that the provided [index] does not exceed the size of the [array][this]. Exceeding the array size may result in undefined behavior.
  */
 @TypedIntrinsic(IntrinsicType.COMPARE_AND_EXCHANGE_ARRAY_ELEMENT)
 internal external fun <T> Array<T>.compareAndExchange(index: Int, expectedValue: T, newValue: T): T
@@ -194,6 +226,8 @@ internal external fun <T> Array<T>.compareAndExchange(index: Int, expectedValue:
  * Provides sequential consistent ordering guarantees and never fails spuriously.
  *
  * If the given [array][this] is not a compile-time known property, [IllegalArgumentException] would be thrown.
+ *
+ * NOTE: Ensure that the provided [index] does not exceed the size of the [array][this]. Exceeding the array size may result in undefined behavior.
  */
 @TypedIntrinsic(IntrinsicType.COMPARE_AND_SET_ARRAY_ELEMENT)
 internal external fun <T> Array<T>.compareAndSet(index: Int, expectedValue: T, newValue: T): Boolean
