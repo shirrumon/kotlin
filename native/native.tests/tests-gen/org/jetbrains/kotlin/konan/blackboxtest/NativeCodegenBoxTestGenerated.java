@@ -39498,6 +39498,12 @@ public class NativeCodegenBoxTestGenerated extends AbstractNativeCodegenBoxTest 
             }
 
             @Test
+            @TestMetadata("atomicArrayIntrinsics.kt")
+            public void testAtomicArrayIntrinsics() throws Exception {
+                runTest("compiler/testData/codegen/box/volatile/atomicArrayIntrinsics.kt");
+            }
+
+            @Test
             @TestMetadata("crossModuleIntrinsic.kt")
             public void testCrossModuleIntrinsic() throws Exception {
                 runTest("compiler/testData/codegen/box/volatile/crossModuleIntrinsic.kt");
@@ -39507,12 +39513,6 @@ public class NativeCodegenBoxTestGenerated extends AbstractNativeCodegenBoxTest 
             @TestMetadata("intrinsics.kt")
             public void testIntrinsics() throws Exception {
                 runTest("compiler/testData/codegen/box/volatile/intrinsics.kt");
-            }
-
-            @Test
-            @TestMetadata("atomicArrayIntrinsics.kt")
-            public void testAtomicArrayIntrinsics() throws Exception {
-                runTest("compiler/testData/codegen/box/volatile/atomicArrayIntrinsics.kt");
             }
 
             @Test

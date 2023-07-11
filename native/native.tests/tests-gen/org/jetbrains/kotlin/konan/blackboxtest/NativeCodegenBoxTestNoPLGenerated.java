@@ -40013,6 +40013,12 @@ public class NativeCodegenBoxTestNoPLGenerated extends AbstractNativeCodegenBoxT
             }
 
             @Test
+            @TestMetadata("atomicArrayIntrinsics.kt")
+            public void testAtomicArrayIntrinsics() throws Exception {
+                runTest("compiler/testData/codegen/box/volatile/atomicArrayIntrinsics.kt");
+            }
+
+            @Test
             @TestMetadata("crossModuleIntrinsic.kt")
             public void testCrossModuleIntrinsic() throws Exception {
                 runTest("compiler/testData/codegen/box/volatile/crossModuleIntrinsic.kt");
