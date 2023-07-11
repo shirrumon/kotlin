@@ -22667,6 +22667,30 @@ public class DiagnosticTestGenerated extends AbstractDiagnosticTest {
             }
 
             @Test
+            @TestMetadata("expectFakeOverride.kt")
+            public void testExpectFakeOverride() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/multiplatform/expectFakeOverride.kt");
+            }
+
+            @Test
+            @TestMetadata("expectFakeOverride_actualizeWithoutActualKeyword.kt")
+            public void testExpectFakeOverride_actualizeWithoutActualKeyword() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/multiplatform/expectFakeOverride_actualizeWithoutActualKeyword.kt");
+            }
+
+            @Test
+            @TestMetadata("expectFakeOverride_checkModality.kt")
+            public void testExpectFakeOverride_checkModality() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/multiplatform/expectFakeOverride_checkModality.kt");
+            }
+
+            @Test
+            @TestMetadata("expectFakeOverride_substitutionOverrideClash.kt")
+            public void testExpectFakeOverride_substitutionOverrideClash() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/multiplatform/expectFakeOverride_substitutionOverrideClash.kt");
+            }
+
+            @Test
             @TestMetadata("expectInterfaceApplicability.kt")
             public void testExpectInterfaceApplicability() throws Exception {
                 runTest("compiler/testData/diagnostics/tests/multiplatform/expectInterfaceApplicability.kt");
@@ -22736,6 +22760,54 @@ public class DiagnosticTestGenerated extends AbstractDiagnosticTest {
             @TestMetadata("incompatibles.kt")
             public void testIncompatibles() throws Exception {
                 runTest("compiler/testData/diagnostics/tests/multiplatform/incompatibles.kt");
+            }
+
+            @Test
+            @TestMetadata("isFakeOverrideOfDeclarationsFromCommonHierarchy.kt")
+            public void testIsFakeOverrideOfDeclarationsFromCommonHierarchy() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/multiplatform/isFakeOverrideOfDeclarationsFromCommonHierarchy.kt");
+            }
+
+            @Test
+            @TestMetadata("isFakeOverrideOfDeclarationsFromCommonHierarchy2.kt")
+            public void testIsFakeOverrideOfDeclarationsFromCommonHierarchy2() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/multiplatform/isFakeOverrideOfDeclarationsFromCommonHierarchy2.kt");
+            }
+
+            @Test
+            @TestMetadata("isFakeOverrideOfDeclarationsFromCommonHierarchy3.kt")
+            public void testIsFakeOverrideOfDeclarationsFromCommonHierarchy3() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/multiplatform/isFakeOverrideOfDeclarationsFromCommonHierarchy3.kt");
+            }
+
+            @Test
+            @TestMetadata("isFakeOverrideOfDeclarationsFromCommonHierarchy4.kt")
+            public void testIsFakeOverrideOfDeclarationsFromCommonHierarchy4() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/multiplatform/isFakeOverrideOfDeclarationsFromCommonHierarchy4.kt");
+            }
+
+            @Test
+            @TestMetadata("isFakeOverrideOfDeclarationsFromCommonHierarchy5.kt")
+            public void testIsFakeOverrideOfDeclarationsFromCommonHierarchy5() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/multiplatform/isFakeOverrideOfDeclarationsFromCommonHierarchy5.kt");
+            }
+
+            @Test
+            @TestMetadata("isFakeOverrideOfDeclarationsFromCommonHierarchy6.kt")
+            public void testIsFakeOverrideOfDeclarationsFromCommonHierarchy6() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/multiplatform/isFakeOverrideOfDeclarationsFromCommonHierarchy6.kt");
+            }
+
+            @Test
+            @TestMetadata("isFakeOverrideOfDeclarationsFromCommonHierarchy7.kt")
+            public void testIsFakeOverrideOfDeclarationsFromCommonHierarchy7() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/multiplatform/isFakeOverrideOfDeclarationsFromCommonHierarchy7.kt");
+            }
+
+            @Test
+            @TestMetadata("isFakeOverrideOfDeclarationsFromCommonHierarchy8.kt")
+            public void testIsFakeOverrideOfDeclarationsFromCommonHierarchy8() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/multiplatform/isFakeOverrideOfDeclarationsFromCommonHierarchy8.kt");
             }
 
             @Test
