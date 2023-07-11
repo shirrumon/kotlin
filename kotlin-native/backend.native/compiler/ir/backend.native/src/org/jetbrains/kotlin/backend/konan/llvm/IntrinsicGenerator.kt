@@ -18,7 +18,6 @@ import org.jetbrains.kotlin.ir.expressions.*
 import org.jetbrains.kotlin.ir.symbols.IrConstructorSymbol
 import org.jetbrains.kotlin.ir.types.*
 import org.jetbrains.kotlin.ir.util.findAnnotation
-import org.jetbrains.kotlin.ir.util.render
 
 internal enum class IntrinsicType {
     PLUS,
@@ -269,9 +268,9 @@ internal class IntrinsicGenerator(private val environment: IntrinsicGeneratorEnv
                 IntrinsicType.GET_AND_SET -> emitGetAndSet(callSite, args, resultSlot)
                 IntrinsicType.GET_AND_ADD -> emitGetAndAdd(callSite, args)
                 IntrinsicType.ATOMIC_GET_ARRAY_ELEMENT -> emitAtomicGetArrayElement(callSite, args, resultSlot)
-                IntrinsicType.ATOMIC_SET_ARRAY_ELEMENT -> emitAtomicSetArrayElement(callSite, args, resultSlot)
+                IntrinsicType.ATOMIC_SET_ARRAY_ELEMENT -> emitAtomicSetArrayElement(callSite, args)
                 IntrinsicType.COMPARE_AND_EXCHANGE_ARRAY_ELEMENT -> emitCompareAndExchangeArrayElement(callSite, args, resultSlot)
-                IntrinsicType.COMPARE_AND_SET_ARRAY_ELEMENT -> emitCompareAndSetArrayElement(callSite, args, resultSlot)
+                IntrinsicType.COMPARE_AND_SET_ARRAY_ELEMENT -> emitCompareAndSetArrayElement(callSite, args)
                 IntrinsicType.GET_AND_SET_ARRAY_ELEMENT -> emitGetAndSetArrayElement(callSite, args, resultSlot)
                 IntrinsicType.GET_AND_ADD_ARRAY_ELEMENT -> emitGetAndAddArrayElement(callSite, args)
                 IntrinsicType.GET_CONTINUATION,
@@ -393,106 +392,48 @@ internal class IntrinsicGenerator(private val environment: IntrinsicGeneratorEnv
         return emitAtomicRMW(callSite, transformArgsForVolatile(callSite, args), LLVMAtomicRMWBinOp.LLVMAtomicRMWBinOpAdd, null)
     }
 
-    private fun FunctionGenerationContext.emitAtomicSetArrayElement(callSite: IrCall, args: List<LLVMValueRef>, resultSlot: LLVMValueRef?): LLVMValueRef {
+    private fun FunctionGenerationContext.arrayGetElementAddress(callSite: IrCall, array: LLVMValueRef, index: LLVMValueRef): LLVMValueRef {
         val receiver = callSite.extensionReceiver
         require(receiver != null)
-        require(args.size == 3)
-        val arrayAddress = args[0]
-        val index = args[1]
-        val newValue = args[2]
         return when {
-            receiver.type.isIntArray() -> call(llvm.AtomicSetIntArrayElement, listOf(arrayAddress, index, newValue))
-            receiver.type.isLongArray() -> call(llvm.AtomicSetLongArrayElement, listOf(arrayAddress, index, newValue))
-            receiver.type.isArray() -> call(llvm.AtomicSetArrayElement, listOf(arrayAddress, index, newValue), environment.calculateLifetime(callSite), resultSlot = resultSlot)
-            else -> error("Only IntArray, LongArray and Array<T> are supported for ${IntrinsicType.ATOMIC_SET_ARRAY_ELEMENT} intrinsic.")
+            receiver.type.isIntArray() -> call(llvm.Kotlin_intArrayGetElementAddress, listOf(array, index))
+            receiver.type.isLongArray() -> call(llvm.Kotlin_longArrayGetElementAddress, listOf(array, index))
+            receiver.type.isArray() -> call(llvm.Kotlin_arrayGetElementAddress, listOf(array, index), environment.calculateLifetime(callSite))
+            else -> error("Only IntArray, LongArray and Array<T> are supported for atomic array intrinsics.")
         }
+    }
+
+    private fun FunctionGenerationContext.emitAtomicSetArrayElement(callSite: IrCall, args: List<LLVMValueRef>): LLVMValueRef {
+        val address = arrayGetElementAddress(callSite, args[0], args[1])
+        storeAny(args[2], address, onStack = false, isVolatile = true)
+        return theUnitInstanceRef.llvm
     }
 
     private fun FunctionGenerationContext.emitAtomicGetArrayElement(callSite: IrCall, args: List<LLVMValueRef>, resultSlot: LLVMValueRef?): LLVMValueRef {
-        val receiver = callSite.extensionReceiver
-        require(receiver != null)
-        require(args.size == 2)
-        val arrayAddress = args[0]
-        val index = args[1]
-        return when {
-            receiver.type.isIntArray() -> call(llvm.AtomicGetIntArrayElement, listOf(arrayAddress, index))
-            receiver.type.isLongArray() -> call(llvm.AtomicGetLongArrayElement, listOf(arrayAddress, index))
-            receiver.type.isArray() -> call(llvm.AtomicGetArrayElement, listOf(arrayAddress, index), environment.calculateLifetime(callSite), resultSlot = resultSlot)
-            else -> error("Only IntArray, LongArray and Array<T> are supported for ${IntrinsicType.ATOMIC_GET_ARRAY_ELEMENT} intrinsic.")
-        }
+        val address = arrayGetElementAddress(callSite, args[0], args[1])
+        return loadSlot(address, isVar = true, resultSlot, memoryOrder = LLVMAtomicOrdering.LLVMAtomicOrderingSequentiallyConsistent)
+    }
+
+    private fun FunctionGenerationContext.transformArgsForAtomicArray(callSite: IrCall, args: List<LLVMValueRef>): List<LLVMValueRef> {
+        val address = arrayGetElementAddress(callSite, args[0], args[1])
+        return listOf(address) + args.drop(2)
     }
 
     private fun FunctionGenerationContext.emitGetAndSetArrayElement(callSite: IrCall, args: List<LLVMValueRef>, resultSlot: LLVMValueRef?): LLVMValueRef {
-        val receiver = callSite.extensionReceiver
-        require(receiver != null)
-        require(args.size == 3)
-        val arrayAddress = args[0]
-        val index = args[1]
-        val newValue = args[2]
-        return when {
-            receiver.type.isIntArray() -> call(llvm.GetAndSetIntArrayElement, listOf(arrayAddress, index, newValue))
-            receiver.type.isLongArray() -> call(llvm.GetAndSetLongArrayElement, listOf(arrayAddress, index, newValue))
-            receiver.type.isArray() -> call(llvm.GetAndSetArrayElement, listOf(arrayAddress, index, newValue), environment.calculateLifetime(callSite), resultSlot = resultSlot)
-            else -> error("Only IntArray, LongArray and Array<T> are supported for ${IntrinsicType.GET_AND_SET_ARRAY_ELEMENT} intrinsic")
-        }
+        return emitAtomicRMW(callSite, transformArgsForAtomicArray(callSite, args), LLVMAtomicRMWBinOp.LLVMAtomicRMWBinOpXchg, resultSlot)
     }
 
     private fun FunctionGenerationContext.emitGetAndAddArrayElement(callSite: IrCall, args: List<LLVMValueRef>): LLVMValueRef {
-        val receiver = callSite.extensionReceiver
-        require(receiver != null)
-        require(args.size == 3)
-        val arrayAddress = args[0]
-        val index = args[1]
-        val delta = args[2]
-        return when {
-            receiver.type.isIntArray() -> call(llvm.GetAndAddIntArrayElement, listOf(arrayAddress, index, delta))
-            receiver.type.isLongArray() -> call(llvm.GetAndAddLongArrayElement, listOf(arrayAddress, index, delta))
-            else -> error("Only IntArray and LongArray are supported for ${IntrinsicType.GET_AND_ADD_ARRAY_ELEMENT} intrinsic.")
-        }
+        return emitAtomicRMW(callSite, transformArgsForAtomicArray(callSite, args), LLVMAtomicRMWBinOp.LLVMAtomicRMWBinOpAdd, null)
     }
 
-    private fun FunctionGenerationContext.emitCompareAndExchangeArrayElement(callSite: IrCall, args: List<LLVMValueRef>, resultSlot: LLVMValueRef?): LLVMValueRef =
-            emitCmpExchangeArrayElement(callSite, args, CmpExchangeMode.SWAP, resultSlot)
-
-    private fun FunctionGenerationContext.emitCompareAndSetArrayElement(callSite: IrCall, args: List<LLVMValueRef>, resultSlot: LLVMValueRef?): LLVMValueRef =
-            emitCmpExchangeArrayElement(callSite, args, CmpExchangeMode.SET, resultSlot)
-
-    private fun FunctionGenerationContext.emitCmpExchangeArrayElement(callSite: IrCall, args: List<LLVMValueRef>, mode: CmpExchangeMode, resultSlot: LLVMValueRef?): LLVMValueRef {
-        val receiver = callSite.extensionReceiver
-        require(receiver != null)
-        require(args.size == 4)
-        val arrayAddress = args[0]
-        val index = args[1]
-        val expectedValue = args[2]
-        val newValue = args[3]
-        return when {
-            receiver.type.isIntArray() -> {
-                if (mode == CmpExchangeMode.SWAP) {
-                    call(llvm.CompareAndExchangeIntArrayElement, listOf(arrayAddress, index, expectedValue, newValue))
-                } else {
-                    call(llvm.CompareAndSetIntArrayElement, listOf(arrayAddress, index, expectedValue, newValue))
-                }
-            }
-            receiver.type.isLongArray() -> {
-                if (mode == CmpExchangeMode.SWAP) {
-                    call(llvm.CompareAndExchangeLongArrayElement, listOf(arrayAddress, index, expectedValue, newValue))
-                } else {
-                    call(llvm.CompareAndSetLongArrayElement, listOf(arrayAddress, index, expectedValue, newValue))
-                }
-            }
-            receiver.type.isArray() -> {
-                if (mode == CmpExchangeMode.SWAP) {
-                    call(llvm.CompareAndExchangeArrayElement, listOf(arrayAddress, index, expectedValue, newValue), environment.calculateLifetime(callSite), resultSlot = resultSlot)
-                } else {
-                    call(llvm.CompareAndSetArrayElement, listOf(arrayAddress, index, expectedValue, newValue))
-                }
-            }
-            else -> error("Only IntArray, LongArray and Array<T> are supported for ${if (mode == CmpExchangeMode.SWAP) IntrinsicType.COMPARE_AND_EXCHANGE_ARRAY_ELEMENT else IntrinsicType.COMPARE_AND_SET_ARRAY_ELEMENT}.")
-        }
+    private fun FunctionGenerationContext.emitCompareAndExchangeArrayElement(callSite: IrCall, args: List<LLVMValueRef>, resultSlot: LLVMValueRef?): LLVMValueRef {
+        return emitCmpExchange(callSite, transformArgsForAtomicArray(callSite, args), CmpExchangeMode.SWAP, resultSlot)
     }
 
-    private fun getFieldReceiverOfTheIntrinsicCall(callSite: IrCall) =
-            context.mapping.functionToVolatileField[callSite.symbol.owner] ?: error("Array intrinsic ${callSite.symbol.owner.render()} was not registered.")
+    private fun FunctionGenerationContext.emitCompareAndSetArrayElement(callSite: IrCall, args: List<LLVMValueRef>): LLVMValueRef {
+        return emitCmpExchange(callSite, transformArgsForAtomicArray(callSite, args), CmpExchangeMode.SET, null)
+    }
 
     private fun FunctionGenerationContext.emitGetNativeNullPtr(): LLVMValueRef =
             llvm.kNullInt8Ptr

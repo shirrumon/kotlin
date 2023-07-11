@@ -488,25 +488,10 @@ internal class CodegenLlvmHelpers(private val generationState: NativeGenerationS
     val CompareAndSwapVolatileHeapRef by lazyRtFunction
     val GetAndSetVolatileHeapRef by lazyRtFunction
 
-    val AtomicGetIntArrayElement by lazyRtFunction
-    val AtomicSetIntArrayElement by lazyRtFunction
-    val GetAndSetIntArrayElement by lazyRtFunction
-    val GetAndAddIntArrayElement by lazyRtFunction
-    val CompareAndExchangeIntArrayElement by lazyRtFunction
-    val CompareAndSetIntArrayElement by lazyRtFunction
-
-    val AtomicGetLongArrayElement by lazyRtFunction
-    val AtomicSetLongArrayElement by lazyRtFunction
-    val GetAndSetLongArrayElement by lazyRtFunction
-    val GetAndAddLongArrayElement by lazyRtFunction
-    val CompareAndExchangeLongArrayElement by lazyRtFunction
-    val CompareAndSetLongArrayElement by lazyRtFunction
-
-    val AtomicGetArrayElement by lazyRtFunction
-    val AtomicSetArrayElement by lazyRtFunction
-    val GetAndSetArrayElement by lazyRtFunction
-    val CompareAndExchangeArrayElement by lazyRtFunction
-    val CompareAndSetArrayElement by lazyRtFunction
+    // TODO: Consider implementing them directly in the code generator.
+    val Kotlin_arrayGetElementAddress by lazyRtFunction
+    val Kotlin_intArrayGetElementAddress by lazyRtFunction
+    val Kotlin_longArrayGetElementAddress by lazyRtFunction
 
     val tlsMode by lazy {
         when (target) {

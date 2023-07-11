@@ -32,21 +32,6 @@ OBJ_GETTER(GetAndSetHeapRef, ObjHeader** location, ObjHeader* value) noexcept;
 OBJ_GETTER(AllocateObject, ThreadData* threadData, const TypeInfo* typeInfo) noexcept;
 OBJ_GETTER(AllocateArray, ThreadData* threadData, const TypeInfo* typeInfo, uint32_t elements) noexcept;
 
-OBJ_GETTER(GetHeapRefSeqCst, ObjHeader** location) noexcept;
-int GetIntFieldSeqCst(int* location) noexcept;
-void SetIntFieldSeqCst(int* location, int newValue) noexcept;
-int GetAndSetIntField(int* location, int newValue) noexcept;
-int FetchAndAddIntField(int* location, int delta) noexcept;
-int CompareAndExchangeIntField(int* location, int* expectValue, int newValue) noexcept;
-bool CompareAndSetIntField(int* location, int *expectedValue, int newValue) noexcept;
-
-long long GetLongFieldSeqCst(long long* location) noexcept;
-void SetLongFieldSeqCst(long long* location, long long newValue) noexcept;
-long long GetAndSetLongField(long long* location, long long newValue) noexcept;
-long long FetchAndAddLongField(long long* location, long long delta) noexcept;
-long long CompareAndExchangeLongField(long long* location, long long* expectValue, long long newValue) noexcept;
-bool CompareAndSetLongField(long long* location, long long *expectedValue, long long newValue) noexcept;
-
 // This does not take into account how much storage did the underlying allocator (malloc/mimalloc) reserved.
 size_t GetAllocatedHeapSize(ObjHeader* object) noexcept;
 

@@ -98,6 +98,9 @@ void Kotlin_io_Console_println0();
 void Kotlin_io_Console_println0ToStdErr();
 void Kotlin_NativePtrArray_set(KRef thiz, KInt index, KNativePtr value);
 KNativePtr Kotlin_NativePtrArray_get(KConstRef thiz, KInt index);
+RUNTIME_NOTHROW RUNTIME_PURE KRef* Kotlin_arrayGetElementAddress(KRef array, KInt index);
+RUNTIME_NOTHROW RUNTIME_PURE KInt* Kotlin_intArrayGetElementAddress(KRef array, KInt index);
+RUNTIME_NOTHROW RUNTIME_PURE KLong* Kotlin_longArrayGetElementAddress(KRef array, KInt index);
 
 #ifdef __cplusplus
 }

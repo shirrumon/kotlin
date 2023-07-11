@@ -114,4 +114,16 @@ void Kotlin_CPointer_CopyMemory(KNativePtr to, KNativePtr from, KInt count) {
   memcpy(to, from, count);
 }
 
+RUNTIME_NOTHROW RUNTIME_PURE KRef* Kotlin_arrayGetElementAddress(KRef array, KInt index) {
+    return ArrayAddressOfElementAt(array->array(), index);
+}
+
+RUNTIME_NOTHROW RUNTIME_PURE KInt* Kotlin_intArrayGetElementAddress(KRef array, KInt index) {
+    return IntArrayAddressOfElementAt(array->array(), index);
+}
+
+RUNTIME_NOTHROW RUNTIME_PURE KLong* Kotlin_longArrayGetElementAddress(KRef array, KInt index) {
+    return LongArrayAddressOfElementAt(array->array(), index);
+}
+
 }  // extern "C"

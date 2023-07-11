@@ -9,6 +9,7 @@
 #include "Runtime.h"
 #include "Exceptions.h"
 #include "MemorySharedRefs.hpp"
+#include "Natives.h"
 
 #define touchType(type) void touch##type(type*) {}
 #define touchFunction(function) void* touch##function() { return reinterpret_cast<void*>(&::function); }
@@ -38,28 +39,6 @@ touchFunction(UpdateVolatileHeapRef)
 touchFunction(CompareAndSwapVolatileHeapRef)
 touchFunction(CompareAndSetVolatileHeapRef)
 touchFunction(GetAndSetVolatileHeapRef)
-
-// Array intrinsics
-touchFunction(AtomicGetIntArrayElement)
-touchFunction(AtomicSetIntArrayElement)
-touchFunction(GetAndSetIntArrayElement)
-touchFunction(GetAndAddIntArrayElement)
-touchFunction(CompareAndExchangeIntArrayElement)
-touchFunction(CompareAndSetIntArrayElement)
-
-touchFunction(AtomicGetLongArrayElement)
-touchFunction(AtomicSetLongArrayElement)
-touchFunction(GetAndSetLongArrayElement)
-touchFunction(GetAndAddLongArrayElement)
-touchFunction(CompareAndExchangeLongArrayElement)
-touchFunction(CompareAndSetLongArrayElement)
-
-touchFunction(AtomicGetArrayElement)
-touchFunction(AtomicSetArrayElement)
-touchFunction(GetAndSetArrayElement)
-touchFunction(CompareAndExchangeArrayElement)
-touchFunction(CompareAndSetArrayElement)
-
 touchFunction(UpdateReturnRef)
 touchFunction(ZeroHeapRef)
 touchFunction(ZeroArrayRefs)
@@ -104,6 +83,10 @@ touchFunction(Kotlin_processObjectInMark)
 touchFunction(Kotlin_processArrayInMark)
 touchFunction(Kotlin_processFieldInMark)
 touchFunction(Kotlin_processEmptyObjectInMark)
+
+touchFunction(Kotlin_arrayGetElementAddress)
+touchFunction(Kotlin_intArrayGetElementAddress)
+touchFunction(Kotlin_longArrayGetElementAddress)
 
 #ifdef __cplusplus
 } // extern "C"
