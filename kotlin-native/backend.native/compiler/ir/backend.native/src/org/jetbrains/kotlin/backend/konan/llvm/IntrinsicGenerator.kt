@@ -412,101 +412,59 @@ internal class IntrinsicGenerator(private val environment: IntrinsicGeneratorEnv
     }
 
     private fun FunctionGenerationContext.emitAtomicSetArrayElement(callSite: IrCall, args: List<LLVMValueRef>, resultSlot: LLVMValueRef?): LLVMValueRef {
-        val field = getFieldReceiverOfTheIntrinsicCall(callSite)
-        val arrayAddress: LLVMValueRef
-        val index: LLVMValueRef
-        val newValue: LLVMValueRef
-        if (callSite.dispatchReceiver != null) {
-            require(!field.isStatic)
-            require(args.size == 3)
-            arrayAddress = environment.getObjectFieldPointer(args[0], field)
-            index = args[1]
-            newValue = args[2]
-        } else {
-            require(field.isStatic)
-            require(args.size == 2)
-            arrayAddress = environment.getStaticFieldPointer(field)
-            index = args[0]
-            newValue = args[1]
-        }
+        val receiver = callSite.extensionReceiver
+        require(receiver != null)
+        require(args.size == 3)
+        val arrayAddress = args[0]
+        val index = args[1]
+        val newValue = args[2]
         return when {
-            field.type.isIntArray() -> call(llvm.AtomicSetIntArrayElement, listOf(arrayAddress, index, newValue))
-            field.type.isLongArray() -> call(llvm.AtomicSetLongArrayElement, listOf(arrayAddress, index, newValue))
-            field.type.isArray() -> call(llvm.AtomicSetArrayElement, listOf(arrayAddress, index, newValue), environment.calculateLifetime(callSite), resultSlot = resultSlot)
+            receiver.type.isIntArray() -> call(llvm.AtomicSetIntArrayElement, listOf(arrayAddress, index, newValue))
+            receiver.type.isLongArray() -> call(llvm.AtomicSetLongArrayElement, listOf(arrayAddress, index, newValue))
+            receiver.type.isArray() -> call(llvm.AtomicSetArrayElement, listOf(arrayAddress, index, newValue), environment.calculateLifetime(callSite), resultSlot = resultSlot)
             else -> error("Only IntArray, LongArray and Array<T> are supported for ${IntrinsicType.ATOMIC_SET_ARRAY_ELEMENT} intrinsic.")
         }
     }
 
     private fun FunctionGenerationContext.emitAtomicGetArrayElement(callSite: IrCall, args: List<LLVMValueRef>, resultSlot: LLVMValueRef?): LLVMValueRef {
-        val field = getFieldReceiverOfTheIntrinsicCall(callSite)
-        val arrayAddress: LLVMValueRef
-        val index: LLVMValueRef
-        if (callSite.dispatchReceiver != null) {
-            require(!field.isStatic)
-            require(args.size == 2)
-            arrayAddress = environment.getObjectFieldPointer(args[0], field)
-            index = args[1]
-        } else {
-            require(field.isStatic)
-            require(args.size == 1)
-            arrayAddress = environment.getStaticFieldPointer(field)
-            index = args[0]
-        }
+        val receiver = callSite.extensionReceiver
+        require(receiver != null)
+        require(args.size == 2)
+        val arrayAddress = args[0]
+        val index = args[1]
         return when {
-            field.type.isIntArray() -> call(llvm.AtomicGetIntArrayElement, listOf(arrayAddress, index))
-            field.type.isLongArray() -> call(llvm.AtomicGetLongArrayElement, listOf(arrayAddress, index))
-            field.type.isArray() -> call(llvm.AtomicGetArrayElement, listOf(arrayAddress, index), environment.calculateLifetime(callSite), resultSlot = resultSlot)
+            receiver.type.isIntArray() -> call(llvm.AtomicGetIntArrayElement, listOf(arrayAddress, index))
+            receiver.type.isLongArray() -> call(llvm.AtomicGetLongArrayElement, listOf(arrayAddress, index))
+            receiver.type.isArray() -> call(llvm.AtomicGetArrayElement, listOf(arrayAddress, index), environment.calculateLifetime(callSite), resultSlot = resultSlot)
             else -> error("Only IntArray, LongArray and Array<T> are supported for ${IntrinsicType.ATOMIC_GET_ARRAY_ELEMENT} intrinsic.")
         }
     }
 
     private fun FunctionGenerationContext.emitGetAndSetArrayElement(callSite: IrCall, args: List<LLVMValueRef>, resultSlot: LLVMValueRef?): LLVMValueRef {
-        val field = getFieldReceiverOfTheIntrinsicCall(callSite)
-        val arrayAddress: LLVMValueRef
-        val index: LLVMValueRef
-        val newValue: LLVMValueRef
-        if (callSite.dispatchReceiver != null) {
-            require(!field.isStatic)
-            require(args.size == 3)
-            arrayAddress = environment.getObjectFieldPointer(args[0], field)
-            index = args[1]
-            newValue = args[2]
-        } else {
-            require(field.isStatic)
-            require(args.size == 2)
-            arrayAddress = environment.getStaticFieldPointer(field)
-            index = args[0]
-            newValue = args[1]
-        }
+        val receiver = callSite.extensionReceiver
+        require(receiver != null)
+        require(args.size == 3)
+        val arrayAddress = args[0]
+        val index = args[1]
+        val newValue = args[2]
         return when {
-            field.type.isIntArray() -> call(llvm.GetAndSetIntArrayElement, listOf(arrayAddress, index, newValue))
-            field.type.isLongArray() -> call(llvm.GetAndSetLongArrayElement, listOf(arrayAddress, index, newValue))
-            field.type.isArray() -> call(llvm.GetAndSetArrayElement, listOf(arrayAddress, index, newValue), environment.calculateLifetime(callSite), resultSlot = resultSlot)
+            receiver.type.isIntArray() -> call(llvm.GetAndSetIntArrayElement, listOf(arrayAddress, index, newValue))
+            receiver.type.isLongArray() -> call(llvm.GetAndSetLongArrayElement, listOf(arrayAddress, index, newValue))
+            receiver.type.isArray() -> call(llvm.GetAndSetArrayElement, listOf(arrayAddress, index, newValue), environment.calculateLifetime(callSite), resultSlot = resultSlot)
             else -> error("Only IntArray, LongArray and Array<T> are supported for ${IntrinsicType.GET_AND_SET_ARRAY_ELEMENT} intrinsic")
         }
     }
 
     private fun FunctionGenerationContext.emitGetAndAddArrayElement(callSite: IrCall, args: List<LLVMValueRef>): LLVMValueRef {
-        val field = getFieldReceiverOfTheIntrinsicCall(callSite)
-        val arrayAddress: LLVMValueRef
-        val index: LLVMValueRef
-        val delta: LLVMValueRef
-        if (callSite.dispatchReceiver != null) {
-            require(!field.isStatic)
-            require(args.size == 3)
-            arrayAddress = environment.getObjectFieldPointer(args[0], field)
-            index = args[1]
-            delta = args[2]
-        } else {
-            require(field.isStatic)
-            require(args.size == 2)
-            arrayAddress = environment.getStaticFieldPointer(field)
-            index = args[0]
-            delta = args[1]
-        }
+        val receiver = callSite.extensionReceiver
+        require(receiver != null)
+        require(args.size == 3)
+        val arrayAddress = args[0]
+        val index = args[1]
+        val delta = args[2]
         return when {
-            field.type.isIntArray() -> call(llvm.GetAndAddIntArrayElement, listOf(arrayAddress, index, delta))
-            field.type.isLongArray() -> call(llvm.GetAndAddLongArrayElement, listOf(arrayAddress, index, delta))
+            receiver.type.isIntArray() -> call(llvm.GetAndAddIntArrayElement, listOf(arrayAddress, index, delta))
+            receiver.type.isLongArray() -> call(llvm.GetAndAddLongArrayElement, listOf(arrayAddress, index, delta))
             else -> error("Only IntArray and LongArray are supported for ${IntrinsicType.GET_AND_ADD_ARRAY_ELEMENT} intrinsic.")
         }
     }
@@ -518,42 +476,29 @@ internal class IntrinsicGenerator(private val environment: IntrinsicGeneratorEnv
             emitCmpExchangeArrayElement(callSite, args, CmpExchangeMode.SET, resultSlot)
 
     private fun FunctionGenerationContext.emitCmpExchangeArrayElement(callSite: IrCall, args: List<LLVMValueRef>, mode: CmpExchangeMode, resultSlot: LLVMValueRef?): LLVMValueRef {
-        val field = getFieldReceiverOfTheIntrinsicCall(callSite)
-        val arrayAddress: LLVMValueRef
-        val index: LLVMValueRef
-        val expectedValue: LLVMValueRef
-        val newValue: LLVMValueRef
-        if (callSite.dispatchReceiver != null) {
-            require(!field.isStatic)
-            require(args.size == 4)
-            arrayAddress = environment.getObjectFieldPointer(args[0], field)
-            index = args[1]
-            expectedValue = args[2]
-            newValue = args[3]
-        } else {
-            require(field.isStatic)
-            require(args.size == 3)
-            arrayAddress = environment.getStaticFieldPointer(field)
-            index = args[0]
-            expectedValue = args[1]
-            newValue = args[2]
-        }
+        val receiver = callSite.extensionReceiver
+        require(receiver != null)
+        require(args.size == 4)
+        val arrayAddress = args[0]
+        val index = args[1]
+        val expectedValue = args[2]
+        val newValue = args[3]
         return when {
-            field.type.isIntArray() -> {
+            receiver.type.isIntArray() -> {
                 if (mode == CmpExchangeMode.SWAP) {
                     call(llvm.CompareAndExchangeIntArrayElement, listOf(arrayAddress, index, expectedValue, newValue))
                 } else {
                     call(llvm.CompareAndSetIntArrayElement, listOf(arrayAddress, index, expectedValue, newValue))
                 }
             }
-            field.type.isLongArray() -> {
+            receiver.type.isLongArray() -> {
                 if (mode == CmpExchangeMode.SWAP) {
                     call(llvm.CompareAndExchangeLongArrayElement, listOf(arrayAddress, index, expectedValue, newValue))
                 } else {
                     call(llvm.CompareAndSetLongArrayElement, listOf(arrayAddress, index, expectedValue, newValue))
                 }
             }
-            field.type.isArray() -> {
+            receiver.type.isArray() -> {
                 if (mode == CmpExchangeMode.SWAP) {
                     call(llvm.CompareAndExchangeArrayElement, listOf(arrayAddress, index, expectedValue, newValue), environment.calculateLifetime(callSite), resultSlot = resultSlot)
                 } else {
