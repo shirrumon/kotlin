@@ -55,12 +55,12 @@ public:
 
     void OnPerformFullGC() { scheduler_.OnPerformFullGC(); }
 
-    void UpdateAliveSetBytes(size_t bytes) {
+    void onGCFinish(int64_t epoch, size_t bytes) {
         allocatedBytes_.store(bytes);
-        scheduler_.UpdateAliveSetBytes(bytes);
+        scheduler_.onGCFinish(epoch, bytes);
     }
 
-    testing::MockFunction<void()>& scheduleGC() { return scheduleGC_; }
+    testing::MockFunction<int64_t()>& scheduleGC() { return scheduleGC_; }
 
     template <typename Duration>
     void advance_time(Duration duration) {
@@ -70,7 +70,7 @@ public:
 private:
     std::atomic<size_t> allocatedBytes_ = 0;
     std_support::vector<std_support::unique_ptr<MutatorThread>> mutators_;
-    testing::MockFunction<void()> scheduleGC_;
+    testing::MockFunction<int64_t()> scheduleGC_;
     gcScheduler::internal::GCSchedulerDataAdaptive<test_support::manual_clock> scheduler_;
 };
 
@@ -104,7 +104,7 @@ TEST_F(AdaptiveSchedulerTest, CollectOnTargetHeapReached) {
     schedulerTestApi.Allocate(0, 10).get();
     testing::Mock::VerifyAndClearExpectations(&schedulerTestApi.scheduleGC());
     schedulerTestApi.OnPerformFullGC();
-    schedulerTestApi.UpdateAliveSetBytes(0);
+    schedulerTestApi.onGCFinish(0, 0);
 
     EXPECT_CALL(schedulerTestApi.scheduleGC(), Call()).Times(0);
     schedulerTestApi.Allocate(0, 10).get();
@@ -115,7 +115,7 @@ TEST_F(AdaptiveSchedulerTest, CollectOnTargetHeapReached) {
     testing::Mock::VerifyAndClearExpectations(&schedulerTestApi.scheduleGC());
     testing::Mock::VerifyAndClearExpectations(&schedulerTestApi.scheduleGC());
     schedulerTestApi.OnPerformFullGC();
-    schedulerTestApi.UpdateAliveSetBytes(0);
+    schedulerTestApi.onGCFinish(1, 0);
 }
 
 TEST_F(AdaptiveSchedulerTest, CollectOnTimeoutReached) {
@@ -135,7 +135,7 @@ TEST_F(AdaptiveSchedulerTest, CollectOnTimeoutReached) {
     test_support::manual_clock::waitForPending(test_support::manual_clock::now() + microseconds(10));
     testing::Mock::VerifyAndClearExpectations(&schedulerTestApi.scheduleGC());
     schedulerTestApi.OnPerformFullGC();
-    schedulerTestApi.UpdateAliveSetBytes(0);
+    schedulerTestApi.onGCFinish(0, 0);
 }
 
 TEST_F(AdaptiveSchedulerTest, FullTimeoutAfterLastGC) {
@@ -155,7 +155,7 @@ TEST_F(AdaptiveSchedulerTest, FullTimeoutAfterLastGC) {
     schedulerTestApi.Allocate(0, 10).get();
     testing::Mock::VerifyAndClearExpectations(&schedulerTestApi.scheduleGC());
     schedulerTestApi.OnPerformFullGC();
-    schedulerTestApi.UpdateAliveSetBytes(0);
+    schedulerTestApi.onGCFinish(0, 0);
 
     // pending should restart to be 10us since the previous collection without scheduling another GC.
     EXPECT_CALL(schedulerTestApi.scheduleGC(), Call()).Times(0);
@@ -176,7 +176,7 @@ TEST_F(AdaptiveSchedulerTest, DoNotTuneTargetHeap) {
     schedulerTestApi.Allocate(0, 10).get();
     testing::Mock::VerifyAndClearExpectations(&schedulerTestApi.scheduleGC());
     schedulerTestApi.OnPerformFullGC();
-    schedulerTestApi.UpdateAliveSetBytes(10);
+    schedulerTestApi.onGCFinish(0, 10);
 
     EXPECT_THAT(config.targetHeapBytes.load(), 10);
 }
@@ -197,7 +197,7 @@ TEST_F(AdaptiveSchedulerTest, TuneTargetHeap) {
     schedulerTestApi.Allocate(0, 10).get();
     testing::Mock::VerifyAndClearExpectations(&schedulerTestApi.scheduleGC());
     schedulerTestApi.OnPerformFullGC();
-    schedulerTestApi.UpdateAliveSetBytes(10);
+    schedulerTestApi.onGCFinish(0, 10);
 
     EXPECT_THAT(config.targetHeapBytes.load(), 20);
 
@@ -206,7 +206,7 @@ TEST_F(AdaptiveSchedulerTest, TuneTargetHeap) {
     schedulerTestApi.Allocate(0, 10).get();
     testing::Mock::VerifyAndClearExpectations(&schedulerTestApi.scheduleGC());
     schedulerTestApi.OnPerformFullGC();
-    schedulerTestApi.UpdateAliveSetBytes(20);
+    schedulerTestApi.onGCFinish(1, 20);
 
     EXPECT_THAT(config.targetHeapBytes.load(), 40);
 
@@ -215,7 +215,7 @@ TEST_F(AdaptiveSchedulerTest, TuneTargetHeap) {
     schedulerTestApi.Allocate(0, 40).get();
     testing::Mock::VerifyAndClearExpectations(&schedulerTestApi.scheduleGC());
     schedulerTestApi.OnPerformFullGC();
-    schedulerTestApi.UpdateAliveSetBytes(60);
+    schedulerTestApi.onGCFinish(2, 60);
 
     // But we will keep the 50, which means we will trigger GC every allocation, until alive set falls down
     EXPECT_THAT(config.targetHeapBytes.load(), 50);
@@ -225,7 +225,7 @@ TEST_F(AdaptiveSchedulerTest, TuneTargetHeap) {
     schedulerTestApi.Allocate(0, 0).get();
     testing::Mock::VerifyAndClearExpectations(&schedulerTestApi.scheduleGC());
     schedulerTestApi.OnPerformFullGC();
-    schedulerTestApi.UpdateAliveSetBytes(60);
+    schedulerTestApi.onGCFinish(3, 60);
 
     EXPECT_THAT(config.targetHeapBytes.load(), 50);
 
@@ -234,7 +234,7 @@ TEST_F(AdaptiveSchedulerTest, TuneTargetHeap) {
     testing::Mock::VerifyAndClearExpectations(&schedulerTestApi.scheduleGC());
     schedulerTestApi.OnPerformFullGC();
     // Dropping to 40
-    schedulerTestApi.UpdateAliveSetBytes(40);
+    schedulerTestApi.onGCFinish(4, 40);
 
     EXPECT_THAT(config.targetHeapBytes.load(), 50);
 
@@ -244,7 +244,7 @@ TEST_F(AdaptiveSchedulerTest, TuneTargetHeap) {
     testing::Mock::VerifyAndClearExpectations(&schedulerTestApi.scheduleGC());
     schedulerTestApi.OnPerformFullGC();
     // Dropping to 1
-    schedulerTestApi.UpdateAliveSetBytes(1);
+    schedulerTestApi.onGCFinish(5, 1);
 
     // But the minimum is set to 5.
     EXPECT_THAT(config.targetHeapBytes.load(), 5);
@@ -283,5 +283,5 @@ TEST_F(AdaptiveSchedulerTest, DoNotCollectOnTimerInBackground) {
     test_support::manual_clock::waitForPending(test_support::manual_clock::now() + microseconds(10));
     testing::Mock::VerifyAndClearExpectations(&schedulerTestApi.scheduleGC());
     schedulerTestApi.OnPerformFullGC();
-    schedulerTestApi.UpdateAliveSetBytes(0);
+    schedulerTestApi.onGCFinish(0, 0);
 }
