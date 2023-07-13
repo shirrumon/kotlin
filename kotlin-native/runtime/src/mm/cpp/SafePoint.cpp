@@ -92,3 +92,7 @@ ALWAYS_INLINE void mm::safePoint(mm::ThreadData& threadData) noexcept {
         slowPath(threadData);
     }
 }
+
+ALWAYS_INLINE bool mm::test_support::safePointsAreActive() noexcept {
+    return safePointAction.load(std::memory_order_relaxed) != nullptr;
+}

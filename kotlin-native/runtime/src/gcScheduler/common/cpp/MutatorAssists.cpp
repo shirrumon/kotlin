@@ -30,10 +30,8 @@ void gcScheduler::internal::MutatorAssists::ThreadData::safePoint() noexcept {
     RuntimeAssert(prevState == ThreadState::kNative, "Expected native state");
 }
 
-bool gcScheduler::internal::MutatorAssists::ThreadData::completedEpoch(Epoch epoch) noexcept {
-    auto value = startedWaiting_.load(std::memory_order_acquire);
-    auto waitingEpoch = value / 2;
-    bool isWaiting = value % 2 == 0;
+bool gcScheduler::internal::MutatorAssists::ThreadData::completedEpoch(Epoch epoch) const noexcept {
+    auto [waitingEpoch, isWaiting] = startedWaiting(std::memory_order_acquire);
     if (waitingEpoch > epoch)
         // Waiting for an epoch bigger than `epoch` => `epoch` is done here.
         return true;
