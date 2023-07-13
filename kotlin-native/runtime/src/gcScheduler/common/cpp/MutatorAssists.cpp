@@ -12,7 +12,7 @@
 using namespace kotlin;
 
 void gcScheduler::internal::MutatorAssists::ThreadData::safePoint() noexcept {
-    int64_t epoch = owner_.assistsEpoch_.load(std::memory_order_acquire);
+    Epoch epoch = owner_.assistsEpoch_.load(std::memory_order_acquire);
     auto noNeedToWait = [this, epoch] { return owner_.completedEpoch_.load(std::memory_order_acquire) >= epoch; };
     if (noNeedToWait()) return;
     auto prevState = thread_.suspensionData().setStateNoSwitch(ThreadState::kNative);
@@ -30,7 +30,7 @@ void gcScheduler::internal::MutatorAssists::ThreadData::safePoint() noexcept {
     RuntimeAssert(prevState == ThreadState::kNative, "Expected native state");
 }
 
-bool gcScheduler::internal::MutatorAssists::ThreadData::completedEpoch(int64_t epoch) noexcept {
+bool gcScheduler::internal::MutatorAssists::ThreadData::completedEpoch(Epoch epoch) noexcept {
     auto value = startedWaiting_.load(std::memory_order_acquire);
     auto waitingEpoch = value / 2;
     bool isWaiting = value % 2 == 0;
@@ -40,12 +40,12 @@ bool gcScheduler::internal::MutatorAssists::ThreadData::completedEpoch(int64_t e
     return !isWaiting;
 }
 
-void gcScheduler::internal::MutatorAssists::requestAssists(int64_t epoch) noexcept {
+void gcScheduler::internal::MutatorAssists::requestAssists(Epoch epoch) noexcept {
     RuntimeLogDebug({kTagGC}, "Enabling assists for epoch %" PRId64, epoch);
     assistsEpoch_.store(epoch, std::memory_order_release);
 }
 
-void gcScheduler::internal::MutatorAssists::markEpochCompleted(int64_t epoch) noexcept {
+void gcScheduler::internal::MutatorAssists::markEpochCompleted(Epoch epoch) noexcept {
     RuntimeLogDebug({kTagGC}, "Disabling assists for epoch %" PRId64, epoch);
     {
         std::unique_lock guard(m_);

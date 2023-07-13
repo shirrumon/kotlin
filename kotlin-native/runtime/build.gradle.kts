@@ -342,6 +342,7 @@ bitcode {
             headersDirs.from(files("src/gc/common/cpp", "src/mm/cpp", "src/main/cpp"))
             sourceSets {
                 main {}
+                test {}
             }
 
             onlyIf { target.supportsThreads() }

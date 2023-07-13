@@ -17,6 +17,8 @@ namespace kotlin::gcScheduler::internal {
 
 class MutatorAssists : private Pinned {
 public:
+    using Epoch = int64_t;
+
     class ThreadData : private Pinned {
     public:
         ThreadData(MutatorAssists& owner, mm::ThreadData& thread) noexcept : owner_(owner), thread_(thread) {}
@@ -26,28 +28,28 @@ public:
     private:
         friend class MutatorAssists;
 
-        bool completedEpoch(int64_t epoch) noexcept;
+        bool completedEpoch(Epoch epoch) noexcept;
 
         MutatorAssists& owner_;
         mm::ThreadData& thread_;
         // Contains epoch * 2. The lower bit is 1, if completed waiting.
-        std::atomic<int64_t> startedWaiting_ = 1;
+        std::atomic<Epoch> startedWaiting_ = 1;
     };
 
-    void requestAssists(int64_t epoch) noexcept;
+    void requestAssists(Epoch epoch) noexcept;
 
     template <typename F>
-    void completeEpoch(int64_t epoch, F&& f) noexcept {
+    void completeEpoch(Epoch epoch, F&& f) noexcept {
         markEpochCompleted(epoch);
         mm::ThreadRegistry::Instance().waitAllThreads(
                 [f = std::forward<F>(f), epoch](mm::ThreadData& threadData) noexcept { return f(threadData).completedEpoch(epoch); });
     }
 
 private:
-    void markEpochCompleted(int64_t epoch) noexcept;
+    void markEpochCompleted(Epoch epoch) noexcept;
 
-    std::atomic<int64_t> assistsEpoch_ = 0;
-    std::atomic<int64_t> completedEpoch_ = 0;
+    std::atomic<Epoch> assistsEpoch_ = 0;
+    std::atomic<Epoch> completedEpoch_ = 0;
     std::mutex m_;
     std::condition_variable cv_;
 };
