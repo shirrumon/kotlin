@@ -5,6 +5,7 @@
 
 #include "MutatorAssists.hpp"
 
+#include "CallsChecker.hpp"
 #include "KAssert.h"
 #include "Logging.hpp"
 #include "ThreadData.hpp"
@@ -39,8 +40,21 @@ bool gcScheduler::internal::MutatorAssists::ThreadData::completedEpoch(Epoch epo
 }
 
 void gcScheduler::internal::MutatorAssists::requestAssists(Epoch epoch) noexcept {
-    RuntimeLogDebug({kTagGC}, "Enabling assists for epoch %" PRId64, epoch);
+    RuntimeLogDebug({kTagGC}, "Requesting assists for epoch %" PRId64, epoch);
+    CallsCheckerIgnoreGuard guard;
+    std::unique_lock lockGuard(m_);
+    if (assistsEpoch_.load(std::memory_order_relaxed) >= epoch) {
+        return;
+    }
     assistsEpoch_.store(epoch, std::memory_order_release);
+    if (completedEpoch_.load(std::memory_order_relaxed) >= epoch) {
+        return;
+    }
+
+    RuntimeLogDebug({kTagGC}, "Enabling assists for epoch %" PRId64, epoch);
+    if (!safePointActivator_) {
+        safePointActivator_ = mm::SafePointActivator();
+    }
 }
 
 void gcScheduler::internal::MutatorAssists::markEpochCompleted(Epoch epoch) noexcept {
@@ -49,6 +63,9 @@ void gcScheduler::internal::MutatorAssists::markEpochCompleted(Epoch epoch) noex
         std::unique_lock guard(m_);
         auto previousEpoch = completedEpoch_.exchange(epoch, std::memory_order_release);
         RuntimeAssert(previousEpoch == epoch - 1, "Epochs must be increasing by 1. Previous: %" PRId64 ". Setting: %" PRId64, previousEpoch, epoch);
+        if (epoch >= assistsEpoch_.load(std::memory_order_relaxed)) {
+            safePointActivator_ = std::nullopt;
+        }
     }
     cv_.notify_all();
 }

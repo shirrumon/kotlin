@@ -9,6 +9,7 @@
 
 #include "GCScheduler.hpp"
 #include "KAssert.h"
+#include "Logging.hpp"
 #include "ThreadData.hpp"
 #include "ThreadState.hpp"
 
@@ -50,6 +51,7 @@ void incrementActiveCount() noexcept {
     ++activeCount;
     RuntimeAssert(activeCount >= 1, "Unexpected activeCount: %" PRId64, activeCount);
     if (activeCount == 1) {
+        RuntimeLogDebug({kTagMM}, "Enabling safe points");
         auto prev = safePointAction.exchange(safePointActionImpl, std::memory_order_seq_cst);
         RuntimeAssert(prev == nullptr, "Action cannot have been set. Was %p", prev);
     }
@@ -62,6 +64,7 @@ void decrementActiveCount() noexcept {
     if (activeCount == 0) {
         auto prev = safePointAction.exchange(nullptr, std::memory_order_seq_cst);
         RuntimeAssert(prev == safePointActionImpl, "Action must have been %p. Was %p", safePointActionImpl, prev);
+        RuntimeLogDebug({kTagMM}, "Disabled safe points");
     }
 }
 

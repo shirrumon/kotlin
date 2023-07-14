@@ -21,16 +21,10 @@ using Epoch = MutatorAssists::Epoch;
 
 namespace {
 
-std::string mutatorName(size_t id) noexcept {
-    std::stringstream ss;
-    ss << "Mutator#" << id;
-    return ss.str();
-}
-
 class Mutator {
 public:
     template <typename F>
-    Mutator(MutatorAssists& assists, size_t id, F&& f) noexcept : thread_(ScopedThread::attributes().name(mutatorName(id)), [f = std::forward<F>(f), this, &assists]() noexcept {
+    Mutator(MutatorAssists& assists, F&& f) noexcept : thread_([f = std::forward<F>(f), this, &assists]() noexcept {
         ScopedMemoryInit memory;
         {
             std::unique_lock guard(initializedMutex_);
@@ -67,9 +61,9 @@ public:
 
         template <typename F>
         MutatorToken(MutatorAssistsTest& owner, F&& f) noexcept : owner_(&owner) {
-            size_t id = owner.mutatorsSize_++;
-            RuntimeAssert(!owner.mutators_[id].has_value(), "Mutator with id %zu already exists", id);
-            auto& m = owner.mutators_[id].emplace(owner.assists_, id, std::forward<F>(f));
+            id_ = owner.mutatorsSize_++;
+            RuntimeAssert(!owner.mutators_[id_].has_value(), "Mutator with id %zu already exists", id_);
+            auto& m = owner.mutators_[id_].emplace(owner.assists_, std::forward<F>(f));
             auto [_, inserted] = owner.mutatorMap_.insert(std::make_pair(&m.threadData(), &m));
             RuntimeAssert(inserted, "Mutator was already inserted");
         }
@@ -145,7 +139,7 @@ TEST_F(MutatorAssistsTest, StressEnableSafePointsByMutators) {
             while (!canStart.load(std::memory_order_relaxed)) {
                 std::this_thread::yield();
             }
-            requestAssists(i % epochsCount);
+            requestAssists((i % epochsCount) + 1);
             enabled[i % epochsCount].store(true, std::memory_order_relaxed);
             while (!canStop.load(std::memory_order_relaxed)) {
                 m.assists().safePoint();
@@ -154,12 +148,13 @@ TEST_F(MutatorAssistsTest, StressEnableSafePointsByMutators) {
     }
 
     ASSERT_FALSE(mm::test_support::safePointsAreActive());
+    canStart.store(true, std::memory_order_relaxed);
     for (Epoch i = 0; i < epochsCount; ++i) {
         while (!enabled[i].load(std::memory_order_relaxed)) {
             std::this_thread::yield();
         }
         EXPECT_TRUE(mm::test_support::safePointsAreActive());
-        completeEpoch(i);
+        completeEpoch(i + 1);
     }
     EXPECT_FALSE(mm::test_support::safePointsAreActive());
     canStop.store(true, std::memory_order_relaxed);
