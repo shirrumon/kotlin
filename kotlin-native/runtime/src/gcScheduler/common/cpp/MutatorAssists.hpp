@@ -42,15 +42,15 @@ public:
 
         void safePoint() noexcept;
 
-    private:
-        friend class MutatorAssists;
-
         std::pair<Epoch, bool> startedWaiting(std::memory_order ordering) const noexcept {
             auto value = startedWaiting_.load(ordering);
             auto waitingEpoch = value / 2;
             bool isWaiting = value % 2 == 0;
             return { waitingEpoch, isWaiting };
         }
+
+    private:
+        friend class MutatorAssists;
 
         bool completedEpoch(Epoch epoch) const noexcept;
 
