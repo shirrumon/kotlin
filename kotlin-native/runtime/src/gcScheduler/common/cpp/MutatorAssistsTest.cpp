@@ -19,76 +19,42 @@ using namespace kotlin;
 using gcScheduler::internal::MutatorAssists;
 using Epoch = MutatorAssists::Epoch;
 
-namespace {
-
-class Mutator {
-public:
-    template <typename F>
-    Mutator(MutatorAssists& assists, F&& f) noexcept : thread_([f = std::forward<F>(f), this, &assists]() noexcept {
-        ScopedMemoryInit memory;
-        {
-            std::unique_lock guard(initializedMutex_);
-            threadData_ = memory.memoryState()->GetThreadData();
-            assists_.emplace(assists, *threadData_);
-        }
-        initialized_.notify_one();
-        f(*this);
-    }) {
-        std::unique_lock guard(initializedMutex_);
-        initialized_.wait(guard, [this] { return threadData_ && assists_.has_value(); });
-    }
-
-    mm::ThreadData& threadData() noexcept { return *threadData_; }
-    MutatorAssists::ThreadData& assists() noexcept { return *assists_; }
-
-private:
-    ScopedThread thread_;
-    std::condition_variable initialized_;
-    std::mutex initializedMutex_;
-    mm::ThreadData* threadData_;
-    std::optional<MutatorAssists::ThreadData> assists_;
-};
-
-}
-
 class MutatorAssistsTest : public ::testing::Test {
 public:
-    class [[nodiscard]] MutatorToken : private MoveOnly {
+    class Mutator {
     public:
-        MutatorToken() noexcept = default;
-        MutatorToken(MutatorToken&&) noexcept = default;
-        MutatorToken& operator=(MutatorToken&&) noexcept = default;
-
         template <typename F>
-        MutatorToken(MutatorAssistsTest& owner, F&& f) noexcept : owner_(&owner) {
-            id_ = owner.mutatorsSize_++;
-            RuntimeAssert(!owner.mutators_[id_].has_value(), "Mutator with id %zu already exists", id_);
-            auto& m = owner.mutators_[id_].emplace(owner.assists_, std::forward<F>(f));
-            auto [_, inserted] = owner.mutatorMap_.insert(std::make_pair(&m.threadData(), &m));
+        Mutator(MutatorAssistsTest& owner, F&& f) noexcept : owner_(&owner), thread_([f = std::forward<F>(f), this]() noexcept {
+            ScopedMemoryInit memory;
+            {
+                std::unique_lock guard(initializedMutex_);
+                threadData_ = memory.memoryState()->GetThreadData();
+                assists_.emplace(owner_->assists_, *threadData_);
+            }
+            initialized_.notify_one();
+            f(*this);
+        }) {
+            std::unique_lock guard(initializedMutex_);
+            initialized_.wait(guard, [this] { return threadData_ && assists_.has_value(); });
+            auto [_, inserted] = owner_->mutatorMap_.insert(std::make_pair(threadData_, this));
             RuntimeAssert(inserted, "Mutator was already inserted");
         }
 
-        ~MutatorToken() {
-            if (!owner_)
-                return;
-            auto& threadData = (*this)->threadData();
-            auto count = owner_->mutatorMap_.erase(&threadData);
+        ~Mutator() {
+            thread_.join();
+            auto count = owner_->mutatorMap_.erase(threadData_);
             RuntimeAssert(count == 1, "Mutator must be in the map");
-            owner_->mutators_[id_] = std::nullopt; // blocking.
         }
-
-        Mutator& operator*() const noexcept {
-            RuntimeAssert(owner_ != nullptr, "Must not be moved-from");
-            auto& result = owner_->mutators_[id_];
-            RuntimeAssert(result.has_value(), "Mutator with id %zu must exist", id_);
-            return *result;
-        }
-
-        Mutator* operator->() const noexcept { return &**this; }
 
     private:
-        raw_ptr<MutatorAssistsTest> owner_;
-        size_t id_ = 0;
+        friend MutatorAssistsTest;
+
+        MutatorAssistsTest* owner_ = nullptr;
+        ScopedThread thread_;
+        std::condition_variable initialized_;
+        std::mutex initializedMutex_;
+        mm::ThreadData* threadData_;
+        std::optional<MutatorAssists::ThreadData> assists_;
     };
 
     void requestAssists(Epoch epoch) noexcept {
@@ -97,14 +63,19 @@ public:
 
     void completeEpoch(Epoch epoch) noexcept {
         assists_.completeEpoch(epoch, [this](mm::ThreadData& threadData) noexcept -> MutatorAssists::ThreadData& {
-            return mutatorMap_[&threadData]->assists();
+            return *mutatorMap_[&threadData]->assists_;
         });
+    }
+
+    void safePoint() noexcept {
+        if (!mm::test_support::safePointsAreActive())
+            return;
+        auto* threadData = mm::ThreadRegistry::Instance().CurrentThreadData();
+        mutatorMap_[threadData]->assists_->safePoint();
     }
 
 private:
     MutatorAssists assists_;
-    size_t mutatorsSize_ = 0;
-    std::array<std::optional<Mutator>, 1024> mutators_;
     std_support::map<mm::ThreadData*, Mutator*> mutatorMap_;
 };
 
@@ -133,18 +104,18 @@ TEST_F(MutatorAssistsTest, StressEnableSafePointsByMutators) {
     std::array<std::atomic<bool>, epochsCount> enabled = { false };
     std::atomic<bool> canStart = false;
     std::atomic<bool> canStop = false;
-    std_support::vector<MutatorToken> mutators;
+    std_support::vector<std_support::unique_ptr<Mutator>> mutators;
     for (int i = 0; i < kDefaultThreadCount; ++i) {
-        mutators.emplace_back(*this, [&, i](Mutator& m) noexcept {
+        mutators.emplace_back(std_support::make_unique<Mutator>(*this, [&, i](Mutator&) noexcept {
             while (!canStart.load(std::memory_order_relaxed)) {
                 std::this_thread::yield();
             }
             requestAssists((i % epochsCount) + 1);
             enabled[i % epochsCount].store(true, std::memory_order_relaxed);
             while (!canStop.load(std::memory_order_relaxed)) {
-                m.assists().safePoint();
+                safePoint();
             }
-        });
+        }));
     }
 
     ASSERT_FALSE(mm::test_support::safePointsAreActive());
@@ -169,14 +140,14 @@ TEST_F(MutatorAssistsTest, Basic) {
         kAcceptedContinue,
     };
     std::atomic<MutatorState> state = MutatorState::kWaiting;
-    MutatorToken m(*this, [&state](Mutator& m) noexcept {
+    Mutator m(*this, [&](Mutator&) noexcept {
         while(true) {
             switch (state.load(std::memory_order_relaxed)) {
                 case MutatorState::kWaiting:
                     continue;
                 case MutatorState::kEngage:
                     state.store(MutatorState::kAcceptedEngage, std::memory_order_relaxed);
-                    m.assists().safePoint();
+                    safePoint();
                     ASSERT_THAT(state.load(std::memory_order_relaxed), MutatorState::kContinue);
                     state.store(MutatorState::kAcceptedContinue, std::memory_order_relaxed);
                     continue;
