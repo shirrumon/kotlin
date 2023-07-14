@@ -93,6 +93,10 @@ ALWAYS_INLINE void mm::safePoint(mm::ThreadData& threadData) noexcept {
     }
 }
 
-ALWAYS_INLINE bool mm::test_support::safePointsAreActive() noexcept {
+bool mm::test_support::safePointsAreActive() noexcept {
     return safePointAction.load(std::memory_order_relaxed) != nullptr;
+}
+
+void mm::test_support::setSafePointAction(void (*action)(mm::ThreadData&)) noexcept {
+    safePointAction.store(action, std::memory_order_seq_cst);
 }
