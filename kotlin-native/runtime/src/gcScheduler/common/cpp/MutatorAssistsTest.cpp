@@ -162,6 +162,7 @@ TEST_F(MutatorAssistsTest, StressEnableSafePointsByMutators) {
         completeEpoch(i);
     }
     EXPECT_FALSE(mm::test_support::safePointsAreActive());
+    canStop.store(true, std::memory_order_relaxed);
 }
 
 TEST_F(MutatorAssistsTest, Basic) {
