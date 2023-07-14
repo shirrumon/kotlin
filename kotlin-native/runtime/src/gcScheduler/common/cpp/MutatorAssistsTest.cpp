@@ -166,12 +166,16 @@ TEST_F(MutatorAssistsTest, Assist) {
         while (started[epoch].load(std::memory_order_relaxed) < mutators.size()) {
             std::this_thread::yield();
         }
+        while (!std::all_of(mutators.begin(), mutators.end(), [epoch](auto& m) noexcept {
+            auto [waitingEpoch, waiting] = m->assists().startedWaiting(std::memory_order_relaxed);
+            return waitingEpoch == epoch + 1 && waiting;
+        })) {
+            std::this_thread::yield();
+        }
         gcCompleted.store(epoch, std::memory_order_relaxed);
         for (auto& m: mutators) {
             EXPECT_THAT(m->threadData().state(), ThreadState::kNative);
-            auto [waitingEpoch, waiting] = m->assists().startedWaiting(std::memory_order_relaxed);
-            EXPECT_THAT(waitingEpoch, epoch + 1);
-            EXPECT_TRUE(waiting);
+            // And already checked that all of them have started waiting for epoch.
         }
         completeEpoch(epoch + 1);
         while (finished[epoch].load(std::memory_order_relaxed) < mutators.size()) {
