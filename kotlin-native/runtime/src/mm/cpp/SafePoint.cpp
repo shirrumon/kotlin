@@ -27,6 +27,7 @@ void safePointActionImpl(mm::ThreadData& threadData) noexcept {
     AutoReset guard(&recursion, true);
 
     threadData.gcScheduler().safePoint();
+    threadData.gc().safePoint();
     threadData.suspensionData().suspendIfRequested();
 }
 
