@@ -43,8 +43,11 @@ public:
         std::atomic<Epoch> startedWaiting_ = 1;
     };
 
+    // Can be called multiple times per `epoch`, and `epoch` may point to the past.
     void requestAssists(Epoch epoch) noexcept;
 
+    // Can only be called once per `epoch`, and `epoch` must be increasing
+    // by exactly 1 every time.
     template <typename F>
     void completeEpoch(Epoch epoch, F&& f) noexcept {
         markEpochCompleted(epoch);

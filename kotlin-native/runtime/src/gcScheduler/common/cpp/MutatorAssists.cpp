@@ -47,7 +47,8 @@ void gcScheduler::internal::MutatorAssists::markEpochCompleted(Epoch epoch) noex
     RuntimeLogDebug({kTagGC}, "Disabling assists for epoch %" PRId64, epoch);
     {
         std::unique_lock guard(m_);
-        completedEpoch_.store(epoch, std::memory_order_release);
+        auto previousEpoch = completedEpoch_.exchange(epoch, std::memory_order_release);
+        RuntimeAssert(previousEpoch == epoch - 1, "Epochs must be increasing by 1. Previous: %" PRId64 ". Setting: %" PRId64, previousEpoch, epoch);
     }
     cv_.notify_all();
 }
