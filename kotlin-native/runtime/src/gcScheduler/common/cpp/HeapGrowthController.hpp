@@ -59,6 +59,9 @@ public:
         }
     }
 
+    size_t targetHeapBytes() const noexcept { return targetHeapBytes_; }
+    size_t softTargetHeapBytes() const noexcept { return softTargetHeapBytes_; }
+
 private:
     GCSchedulerConfig& config_;
     size_t targetHeapBytes_ = 0;
