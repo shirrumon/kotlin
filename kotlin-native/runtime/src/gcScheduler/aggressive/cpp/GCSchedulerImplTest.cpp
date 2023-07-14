@@ -52,12 +52,17 @@ TEST(AggressiveSchedulerTest, TriggerGCOnAllocationThreshold) {
         gcScheduler::GCSchedulerConfig config;
         config.autoTune = false;
         config.targetHeapBytes = 10;
+        config.targetHeapSoftCoefficient = 0.9;
         gcScheduler::internal::GCSchedulerDataAggressive scheduler(config, scheduleGC.AsStdFunction());
 
         int i = 0;
         // We trigger GC on the first iteration, when the unique allocation point is faced,
+        // on the second to last iteration when weak target heap size is reached,
         // and on the last iteration when target heap size is reached.
-        EXPECT_CALL(scheduleGC, Call()).WillOnce([&i]() { EXPECT_THAT(i, 0); return 0; }).WillOnce([&i]() { EXPECT_THAT(i, 9); return 1; });
+        EXPECT_CALL(scheduleGC, Call())
+            .WillOnce([&i]() { EXPECT_THAT(i, 0); return 0; })
+            .WillOnce([&i]() { EXPECT_THAT(i, 8); return 1; })
+            .WillOnce([&i]() { EXPECT_THAT(i, 9); return 2; });
 
         for (; i < 10; i++) {
             scheduler.SetAllocatedBytes(i + 1);

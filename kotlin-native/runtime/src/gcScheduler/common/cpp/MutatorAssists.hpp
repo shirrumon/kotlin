@@ -76,6 +76,10 @@ public:
                 [f = std::forward<F>(f), epoch](mm::ThreadData& threadData) noexcept { return f(threadData).completedEpoch(epoch); });
     }
 
+    Epoch assistsRequested(std::memory_order order) noexcept {
+        return assistsEpoch_.load(order);
+    }
+
 private:
     void markEpochCompleted(Epoch epoch) noexcept;
 
