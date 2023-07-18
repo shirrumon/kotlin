@@ -22,9 +22,12 @@ void gcScheduler::internal::MutatorAssists::ThreadData::safePoint() noexcept {
     {
         std::unique_lock guard(owner_.m_);
         RuntimeLogDebug({kTagGC}, "Thread is assisting for epoch %" PRId64, epoch);
-        konan::consoleErrorf("Mutator %p starting to wait for epoch %" PRId64 "\n", this, epoch);
+        while(!noNeedToWait()) {
+            konan::consoleErrorf("Mutator %p starting to wait for epoch %" PRId64 "\n", this, epoch);
+            owner_.cv_.wait(guard);
+            konan::consoleErrorf("Mutator %p has waited for epoch %" PRId64 "\n", this, epoch);
+        }
         owner_.cv_.wait(guard, noNeedToWait);
-        konan::consoleErrorf("Mutator %p has waited for epoch %" PRId64 "\n", this, epoch);
         RuntimeLogDebug({kTagGC}, "Thread has assisted for epoch %" PRId64, epoch);
     }
     startedWaiting_.store(epoch * 2 + 1, std::memory_order_release);
