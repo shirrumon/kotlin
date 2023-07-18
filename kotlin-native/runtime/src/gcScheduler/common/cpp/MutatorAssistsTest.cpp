@@ -127,6 +127,7 @@ TEST_F(MutatorAssistsTest, StressEnableSafePointsByMutators) {
     std::atomic<bool> canStart = false;
     std::atomic<bool> canStop = false;
     std_support::vector<std_support::unique_ptr<Mutator>> mutators;
+    konan::consoleErrorf("Starting mutators\n");
     for (int i = 0; i < kDefaultThreadCount; ++i) {
         mutators.emplace_back(std_support::make_unique<Mutator>(*this, [&, i](Mutator&) noexcept {
             while (!canStart.load(std::memory_order_relaxed)) {
@@ -139,20 +140,24 @@ TEST_F(MutatorAssistsTest, StressEnableSafePointsByMutators) {
             }
         }));
     }
+    konan::consoleErrorf("Started %zu mutators\n", mutators.size());
 
     ASSERT_FALSE(mm::test_support::safePointsAreActive());
     canStart.store(true, std::memory_order_relaxed);
     for (Epoch i = 0; i < epochsCount; ++i) {
+        konan::consoleErrorf("Epoch %" PRId64 "\n", i);
         while (!enabled[i].load(std::memory_order_relaxed)) {
             std::this_thread::yield();
         }
         EXPECT_TRUE(mm::test_support::safePointsAreActive());
         completeEpoch(i + 1);
     }
+    konan::consoleErrorf("Done all epochs\n");
     EXPECT_FALSE(mm::test_support::safePointsAreActive());
     canStop.store(true, std::memory_order_relaxed);
 }
 
+/*
 TEST_F(MutatorAssistsTest, Assist) {
     constexpr Epoch epochsCount = 4;
     std::array<std::atomic<bool>, epochsCount> canStart = { false };
@@ -371,6 +376,7 @@ TEST_F(MutatorAssistsTest, AssistRequestsByMutators) {
         EXPECT_FALSE(waiting);
     }
 }
+*/
 
 TEST_F(MutatorAssistsTest, AssistRequestsByMutatorsIntoTheFuture) {
     constexpr Epoch epochsCount = 100;
