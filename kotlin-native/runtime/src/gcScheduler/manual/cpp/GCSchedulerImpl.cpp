@@ -5,6 +5,7 @@
 
 #include "GCSchedulerImpl.hpp"
 
+#include "CallsChecker.hpp"
 #include "GC.hpp"
 #include "GlobalData.hpp"
 
@@ -26,17 +27,19 @@ void gcScheduler::GCScheduler::schedule() noexcept {
 
 void gcScheduler::GCScheduler::scheduleAndWaitFinished() noexcept {
     RuntimeLogInfo({kTagGC}, "Scheduling GC manually");
+    CallsCheckerIgnoreGuard guard;
     auto& gc = mm::GlobalData::Instance().gc();
     auto epoch = gc.Schedule();
-    NativeOrUnregisteredThreadGuard guard(/* reentrant = */ true);
+    NativeOrUnregisteredThreadGuard stateGuard(/* reentrant = */ true);
     gc.WaitFinished(epoch);
 }
 
 void gcScheduler::GCScheduler::scheduleAndWaitFinalized() noexcept {
     RuntimeLogInfo({kTagGC}, "Scheduling GC manually");
+    CallsCheckerIgnoreGuard guard;
     auto& gc = mm::GlobalData::Instance().gc();
     auto epoch = gc.Schedule();
-    NativeOrUnregisteredThreadGuard guard(/* reentrant = */ true);
+    NativeOrUnregisteredThreadGuard stateGuard(/* reentrant = */ true);
     gc.WaitFinalizers(epoch);
 }
 
