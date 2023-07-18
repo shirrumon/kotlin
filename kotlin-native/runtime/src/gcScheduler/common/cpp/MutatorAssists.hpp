@@ -15,6 +15,12 @@
 #include "ThreadRegistry.hpp"
 #include "Utils.hpp"
 
+#if KONAN_WINDOWS
+#include "ConditionVariable.hpp"
+#else
+#include <condition_variable>
+#endif
+
 namespace kotlin::gcScheduler::internal {
 
 /**
@@ -87,7 +93,11 @@ private:
     std::atomic<Epoch> completedEpoch_ = 0;
     std::optional<mm::SafePointActivator> safePointActivator_;
     std::mutex m_;
+#if KONAN_WINDOWS
+    ConditionVariableSpin cv_;
+#else
     std::condition_variable cv_;
+#endif
 };
 
 } // namespace kotlin::gcScheduler::internal
