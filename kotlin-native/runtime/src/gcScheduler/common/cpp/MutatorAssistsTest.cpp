@@ -5,6 +5,7 @@
 
 #include "MutatorAssists.hpp"
 
+#include <shared_mutex>
 #include <sstream>
 
 #include "gmock/gmock.h"
@@ -24,26 +25,24 @@ public:
     class Mutator {
     public:
         template <typename F>
-        Mutator(MutatorAssistsTest& owner, F&& f) noexcept : owner_(&owner), thread_([f = std::forward<F>(f), this]() noexcept {
+        Mutator(MutatorAssistsTest& owner, F&& f) noexcept : owner_(owner), thread_([f = std::forward<F>(f), this]() noexcept {
             ScopedMemoryInit memory;
             {
                 std::unique_lock guard(initializedMutex_);
                 threadData_ = memory.memoryState()->GetThreadData();
-                assists_.emplace(owner_->assists_, *threadData_);
+                assists_.emplace(owner_.assists_, *threadData_);
             }
+            owner_.registerMutator(*this);
             initialized_.notify_one();
             f(*this);
         }) {
             std::unique_lock guard(initializedMutex_);
             initialized_.wait(guard, [this] { return threadData_ && assists_.has_value(); });
-            auto [_, inserted] = owner_->mutatorMap_.insert(std::make_pair(threadData_, this));
-            RuntimeAssert(inserted, "Mutator was already inserted");
         }
 
         ~Mutator() {
             thread_.join();
-            auto count = owner_->mutatorMap_.erase(threadData_);
-            RuntimeAssert(count == 1, "Mutator must be in the map");
+            owner_.unregisterMutator(*this);
         }
 
         mm::ThreadData& threadData() noexcept { return *threadData_; }
@@ -52,7 +51,7 @@ public:
     private:
         friend MutatorAssistsTest;
 
-        MutatorAssistsTest* owner_ = nullptr;
+        MutatorAssistsTest& owner_;
         std::condition_variable initialized_;
         std::mutex initializedMutex_;
         mm::ThreadData* threadData_;
@@ -66,7 +65,7 @@ public:
 
     void completeEpoch(Epoch epoch) noexcept {
         assists_.completeEpoch(epoch, [this](mm::ThreadData& threadData) noexcept -> MutatorAssists::ThreadData& {
-            return *mutatorMap_[&threadData]->assists_;
+            return getMutator(threadData).assists();
         });
     }
 
@@ -74,11 +73,31 @@ public:
         if (!mm::test_support::safePointsAreActive())
             return;
         auto* threadData = mm::ThreadRegistry::Instance().CurrentThreadData();
-        mutatorMap_[threadData]->assists_->safePoint();
+        getMutator(*threadData).assists().safePoint();
     }
 
 private:
+    void registerMutator(Mutator& mutator) noexcept {
+        std::unique_lock guard(mutatorMapMutex_);
+        auto [_, inserted] = mutatorMap_.insert(std::make_pair(&mutator.threadData(), &mutator));
+        RuntimeAssert(inserted, "Mutator was already inserted");
+    }
+
+    void unregisterMutator(Mutator& mutator) noexcept {
+        std::unique_lock guard(mutatorMapMutex_);
+        auto count = mutatorMap_.erase(&mutator.threadData());
+        RuntimeAssert(count == 1, "Mutator must be in the map");
+    }
+
+    Mutator& getMutator(mm::ThreadData& threadData) noexcept {
+        std::shared_lock guard(mutatorMapMutex_);
+        auto it = mutatorMap_.find(&threadData);
+        RuntimeAssert(it != mutatorMap_.end(), "Mutator must be in the map");
+        return *it->second;
+    }
+
     MutatorAssists assists_;
+    RWSpinLock<MutexThreadStateHandling::kIgnore> mutatorMapMutex_;
     std_support::map<mm::ThreadData*, Mutator*> mutatorMap_;
 };
 
