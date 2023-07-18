@@ -389,6 +389,7 @@ TEST_F(MutatorAssistsTest, AssistRequestsByMutatorsIntoTheFuture) {
         return scheduledEpoch;
     };
     std_support::vector<std_support::unique_ptr<Mutator>> mutators;
+    konan::consoleErrorf("Starting mutators\n");
     for (int i = 0; i < kDefaultThreadCount; ++i) {
         mutators.emplace_back(std_support::make_unique<Mutator>(*this, [&, i](Mutator&) noexcept {
             while (!canStart.load(std::memory_order_relaxed)) {
@@ -406,6 +407,7 @@ TEST_F(MutatorAssistsTest, AssistRequestsByMutatorsIntoTheFuture) {
             finished.fetch_add(1, std::memory_order_relaxed);
         }));
     }
+    konan::consoleErrorf("Started %zu mutators\n", mutators.size());
     for (auto& m: mutators) {
         auto [waitingEpoch, waiting] = m->assists().startedWaiting(std::memory_order_relaxed);
         EXPECT_THAT(waitingEpoch, 0);
@@ -413,6 +415,7 @@ TEST_F(MutatorAssistsTest, AssistRequestsByMutatorsIntoTheFuture) {
     }
     canStart.store(true, std::memory_order_relaxed);
     for (Epoch epoch = 1; epoch <= epochsCount; ++epoch) {
+        konan::consoleErrorf("Epoch %" PRId64 "\n", epoch);
         {
             std::unique_lock guard(mutexEpoch);
             currentEpoch = epoch;
@@ -420,11 +423,13 @@ TEST_F(MutatorAssistsTest, AssistRequestsByMutatorsIntoTheFuture) {
         }
         completeEpoch(epoch);
     }
+    konan::consoleErrorf("Done all epochs\n");
     canStop.store(true, std::memory_order_relaxed);
     completeEpoch(epochsCount + 1); // The last GC.
     while (finished.load(std::memory_order_relaxed) < mutators.size()) {
         std::this_thread::yield();
     }
+    konan::consoleErrorf("Waited for all mutators\n");
     for (auto& m: mutators) {
         auto [waitingEpoch, waiting] = m->assists().startedWaiting(std::memory_order_relaxed);
         EXPECT_THAT(waitingEpoch, testing::Le(epochsCount + 1));
