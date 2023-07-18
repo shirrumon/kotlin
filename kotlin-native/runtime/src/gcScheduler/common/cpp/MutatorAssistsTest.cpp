@@ -73,7 +73,9 @@ public:
         if (!mm::test_support::safePointsAreActive())
             return;
         auto* threadData = mm::ThreadRegistry::Instance().CurrentThreadData();
+        konan::consoleErrorf("Mutator %p entering safePoint\n", threadData);
         getMutator(*threadData).assists().safePoint();
+        konan::consoleErrorf("Mutator %p exited safePoint\n", threadData);
     }
 
 private:
@@ -421,13 +423,15 @@ TEST_F(MutatorAssistsTest, AssistRequestsByMutatorsIntoTheFuture) {
     }
     canStart.store(true, std::memory_order_relaxed);
     for (Epoch epoch = 1; epoch <= epochsCount; ++epoch) {
-        konan::consoleErrorf("Epoch %" PRId64 "\n", epoch);
+        konan::consoleErrorf("Epoch %" PRId64 " will start\n", epoch);
         {
             std::unique_lock guard(mutexEpoch);
             currentEpoch = epoch;
             EXPECT_THAT(currentEpoch, testing::Ge(scheduledEpoch));
         }
+        konan::consoleErrorf("Epoch %" PRId64 " completing\n", epoch);
         completeEpoch(epoch);
+        konan::consoleErrorf("Epoch %" PRId64 " completed\n", epoch);
     }
     konan::consoleErrorf("Done all epochs\n");
     canStop.store(true, std::memory_order_relaxed);
