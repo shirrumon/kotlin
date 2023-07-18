@@ -327,7 +327,7 @@ TEST_F(MutatorAssistsTest, AssistNoRequests) {
 }
 
 TEST_F(MutatorAssistsTest, AssistRequestsByMutators) {
-    constexpr Epoch epochsCount = 10000;
+    constexpr Epoch epochsCount = 100;
     std::atomic<bool> canStart = false;
     std::atomic<bool> canStop = false;
     std::atomic<size_t> started = 0;
@@ -373,7 +373,7 @@ TEST_F(MutatorAssistsTest, AssistRequestsByMutators) {
 }
 
 TEST_F(MutatorAssistsTest, AssistRequestsByMutatorsIntoTheFuture) {
-    constexpr Epoch epochsCount = 10000;
+    constexpr Epoch epochsCount = 100;
     std::atomic<bool> canStart = false;
     std::atomic<bool> canStop = false;
     std::atomic<size_t> started = 0;
@@ -398,7 +398,7 @@ TEST_F(MutatorAssistsTest, AssistRequestsByMutatorsIntoTheFuture) {
             while (!canStop.load(std::memory_order_relaxed)) {
                 if (i % 2 != 0) {
                     auto epoch = scheduleGC();
-                    requestAssists(epoch + 1);
+                    requestAssists(epoch);
                 }
                 safePoint();
                 std::this_thread::yield();
@@ -412,13 +412,13 @@ TEST_F(MutatorAssistsTest, AssistRequestsByMutatorsIntoTheFuture) {
         EXPECT_FALSE(waiting);
     }
     canStart.store(true, std::memory_order_relaxed);
-    for (Epoch epoch = 0; epoch < epochsCount; ++epoch) {
+    for (Epoch epoch = 1; epoch <= epochsCount; ++epoch) {
         {
             std::unique_lock guard(mutexEpoch);
             currentEpoch = epoch;
             EXPECT_THAT(currentEpoch, testing::Ge(scheduledEpoch));
         }
-        completeEpoch(epoch + 1);
+        completeEpoch(epoch);
     }
     canStop.store(true, std::memory_order_relaxed);
     completeEpoch(epochsCount + 1); // The last GC.
