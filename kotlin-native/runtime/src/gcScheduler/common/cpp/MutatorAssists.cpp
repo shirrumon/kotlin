@@ -18,6 +18,7 @@ void gcScheduler::internal::MutatorAssists::ThreadData::safePoint() noexcept {
     if (noNeedToWait()) return;
     auto prevState = thread_.suspensionData().setStateNoSwitch(ThreadState::kNative);
     RuntimeAssert(prevState == ThreadState::kRunnable, "Expected runnable state");
+    konan::consoleErrorf("Mutator %p starting to wait for epoch %" PRId64 "\n", this, epoch);
     startedWaiting_.store(epoch * 2, std::memory_order_release);
     {
         std::unique_lock guard(owner_.m_);
@@ -25,6 +26,7 @@ void gcScheduler::internal::MutatorAssists::ThreadData::safePoint() noexcept {
         owner_.cv_.wait(guard, noNeedToWait);
         RuntimeLogDebug({kTagGC}, "Thread has assisted for epoch %" PRId64, epoch);
     }
+    konan::consoleErrorf("Mutator %p has waited for epoch %" PRId64 "\n", this, epoch);
     startedWaiting_.store(epoch * 2 + 1, std::memory_order_release);
     // Not doing a safe point. We're a safe point.
     prevState = thread_.suspensionData().setStateNoSwitch(ThreadState::kRunnable);
@@ -51,6 +53,7 @@ void gcScheduler::internal::MutatorAssists::requestAssists(Epoch epoch) noexcept
         return;
     }
 
+    konan::consoleErrorf("Enabling assists for epoch %" PRId64 "\n", epoch);
     RuntimeLogDebug({kTagGC}, "Enabling assists for epoch %" PRId64, epoch);
     if (!safePointActivator_) {
         safePointActivator_ = mm::SafePointActivator();
@@ -58,6 +61,7 @@ void gcScheduler::internal::MutatorAssists::requestAssists(Epoch epoch) noexcept
 }
 
 void gcScheduler::internal::MutatorAssists::markEpochCompleted(Epoch epoch) noexcept {
+    konan::consoleErrorf("Disabling assists for epoch %" PRId64 "\n", epoch);
     RuntimeLogDebug({kTagGC}, "Disabling assists for epoch %" PRId64, epoch);
     {
         std::unique_lock guard(m_);
@@ -68,4 +72,5 @@ void gcScheduler::internal::MutatorAssists::markEpochCompleted(Epoch epoch) noex
         }
     }
     cv_.notify_all();
+    konan::consoleErrorf("Disabled assists for epoch %" PRId64 "\n", epoch);
 }

@@ -73,9 +73,9 @@ public:
         if (!mm::test_support::safePointsAreActive())
             return;
         auto* threadData = mm::ThreadRegistry::Instance().CurrentThreadData();
-        konan::consoleErrorf("Mutator %p entering safePoint\n", threadData);
+        // konan::consoleErrorf("Mutator %p entering safePoint\n", threadData);
         getMutator(*threadData).assists().safePoint();
-        konan::consoleErrorf("Mutator %p exited safePoint\n", threadData);
+        // konan::consoleErrorf("Mutator %p exited safePoint\n", threadData);
     }
 
 private:
