@@ -335,6 +335,8 @@ bitcode {
             }
 
             compilerArgs.add("-DCUSTOM_ALLOCATOR")
+
+            onlyIf { target.supportsThreads() }
         }
 
         module("concurrent_ms_gc") {
