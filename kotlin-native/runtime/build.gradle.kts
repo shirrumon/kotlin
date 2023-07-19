@@ -165,6 +165,8 @@ bitcode {
             }
 
             compilerArgs.add("-DCUSTOM_ALLOCATOR")
+
+            onlyIf { target.supportsThreads() }
         }
 
         module("opt_alloc") {
