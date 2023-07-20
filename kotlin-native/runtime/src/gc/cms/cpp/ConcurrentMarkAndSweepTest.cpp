@@ -1129,7 +1129,7 @@ TEST_P(ConcurrentMarkAndSweepTest, NewThreadsWhileRequestingCollection) {
         expectedAlive.push_back(unreachables[kDefaultThreadCount + i]);
     }
     // All threads see the same alive objects with the custom alloctor, enough to check a single mutator.
-    EXPECT_THAT(mutator[0].Alive(), testing::UnorderedElementsAreArray(expectedAlive));
+    EXPECT_THAT(mutators[0].Alive(), testing::UnorderedElementsAreArray(expectedAlive));
 #endif // CUSTOM_ALLOCATOR
 }
 
