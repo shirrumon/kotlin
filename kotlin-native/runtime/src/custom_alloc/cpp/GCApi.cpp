@@ -99,7 +99,7 @@ void* SafeAlloc(uint64_t size) noexcept {
         konan::abort();
     }
     allocatedBytesCounter.fetch_add(static_cast<size_t>(size), std::memory_order_relaxed);
-    CustomAllocDebug("SafeAlloc(%zu) = %p", size, memory);
+    CustomAllocDebug("SafeAlloc(%zu) = %p", static_cast<size_t>(size), memory);
     return memory;
 }
 
