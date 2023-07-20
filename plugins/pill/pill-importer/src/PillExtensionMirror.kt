@@ -12,8 +12,8 @@ open class PillExtensionMirror(variant: String?, val excludedDirs: List<File>) {
     val variant = if (variant == null) null else Variant.valueOf(variant)
 
     enum class Variant(includesFactory: () -> Set<Variant>) {
-        BASE({ setOf(BASE) }), // Includes compiler and IDE (default)
-        FULL({ setOf(BASE, FULL) }); // Includes compiler, IDE and Gradle plugin
+        BASE({ setOf(BASE) }), // Includes only the compiler (default)
+        FULL({ setOf(BASE, FULL) }); // Includes the compiler and the Gradle plugin
 
         val includes by lazy { includesFactory() }
     }
