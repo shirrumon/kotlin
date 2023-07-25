@@ -120,12 +120,12 @@ internal class FirTowerDataContextAllElementsCollector : FirResolveContextCollec
  */
 private tailrec fun PsiElement.closestParentExpressionWithTheSameContextOrSelf(): KtExpression? =
     when {
-        this is KtExpression && (parent is KtBlockExpression || parent is KtDeclarationWithInitializer || isExpressionInWhenEntry()) -> this
+        this is KtExpression && (parent is KtBlockExpression || parent is KtDeclarationWithInitializer || isExpressionInWhenEntry) -> this
         else -> parent?.closestParentExpressionWithTheSameContextOrSelf()
     }
 
-private fun KtExpression.isExpressionInWhenEntry(): Boolean =
-    this == (parent as? KtWhenEntry)?.expression
+private val KtExpression.isExpressionInWhenEntry: Boolean
+    get() = this == (parent as? KtWhenEntry)?.expression
 
 /**
  * Returns true if [element] is considered to be a part of [this] class header.
