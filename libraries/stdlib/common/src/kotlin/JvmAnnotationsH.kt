@@ -70,6 +70,7 @@ public expect annotation class JvmMultifileClass()
  */
 @Retention(AnnotationRetention.BINARY)
 @Target(AnnotationTarget.CLASS)
+@ExperimentalMultiplatform
 @MustBeDocumented
 @SinceKotlin("1.9")
 @OptionalExpectation

@@ -117,6 +117,7 @@ public annotation class Throws(vararg val exceptionClasses: KClass<out Throwable
  */
 @Retention(AnnotationRetention.BINARY)
 @Target(AnnotationTarget.CLASS)
+@ExperimentalMultiplatform
 @MustBeDocumented
 @SinceKotlin("1.9")
 public actual annotation class ImplicitlyActualizedByJvmDeclaration
