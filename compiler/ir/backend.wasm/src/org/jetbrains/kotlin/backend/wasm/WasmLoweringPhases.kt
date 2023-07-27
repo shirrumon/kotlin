@@ -20,7 +20,9 @@ import org.jetbrains.kotlin.ir.backend.js.lower.coroutines.AddContinuationToFunc
 import org.jetbrains.kotlin.ir.backend.js.lower.coroutines.JsSuspendFunctionsLowering
 import org.jetbrains.kotlin.ir.backend.js.lower.inline.RemoveInlineDeclarationsWithReifiedTypeParametersLowering
 import org.jetbrains.kotlin.ir.backend.wasm.lower.generateMainFunctionCalls
+import org.jetbrains.kotlin.ir.declarations.IrFunction
 import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
+import org.jetbrains.kotlin.ir.util.isTopLevelInPackage
 import org.jetbrains.kotlin.ir.interpreter.IrInterpreterConfiguration
 import org.jetbrains.kotlin.ir.util.patchDeclarationParents
 import org.jetbrains.kotlin.platform.WasmPlatform
@@ -136,10 +138,16 @@ private val functionInliningPhase = makeCustomPhase<WasmBackendContext>(
     { context, module ->
         FunctionInlining(
             context = context,
-            innerClassesSupport = context.innerClassesSupport,
             inlineFunctionResolver = WasmInlineFunctionResolver(context),
+            innerClassesSupport = context.innerClassesSupport,
             insertAdditionalImplicitCasts = true,
-        ).inline(module)
+            alwaysCreateTemporaryVariablesForArguments = true
+        ) {
+            // Erasure results in additional casts, and every cast in `jsCheckIsNullOrUndefinedAdapter` results in infinite recursion.
+            // This is safe as code of `jsCheckIsNullOrUndefinedAdapter` does not have reification-problematic code.
+            if (it !is IrFunction) return@FunctionInlining false
+            it.isTopLevelInPackage("jsCheckIsNullOrUndefinedAdapter", context.kotlinWasmInternalPackageFqn)
+        }.inline(module)
         module.patchDeclarationParents()
     },
     name = "FunctionInliningPhase",
