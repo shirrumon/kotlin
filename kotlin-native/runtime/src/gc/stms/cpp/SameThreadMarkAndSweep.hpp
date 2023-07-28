@@ -71,6 +71,13 @@ public:
 
         ObjectData* next_ = nullptr;
     };
+    static_assert(std::is_trivially_destructible_v<ObjectData>);
+
+    static constexpr size_t ObjectDataSize = sizeof(ObjectData);
+    static constexpr size_t ObjectDataAlignment = alignof(ObjectData);
+    static void ObjectDataConstruct(void* ptr) noexcept {
+        new (ptr) ObjectData();
+    }
 
     using MarkQueue = intrusive_forward_list<ObjectData>;
 
@@ -145,19 +152,19 @@ struct MarkTraits {
 
     static ObjHeader* tryDequeue(MarkQueue& queue) noexcept {
         if (auto* top = queue.try_pop_front()) {
-            auto node = mm::ObjectFactory<gc::SameThreadMarkAndSweep>::NodeRef::From(*top);
+            auto node = mm::ObjectFactory<gc::SameThreadMarkAndSweep>::NodeRef::FromObjectData(*top);
             return node->GetObjHeader();
         }
         return nullptr;
     }
 
     static bool tryEnqueue(MarkQueue& queue, ObjHeader* object) noexcept {
-        auto& objectData = mm::ObjectFactory<gc::SameThreadMarkAndSweep>::NodeRef::From(object).ObjectData();
+        auto& objectData = mm::ObjectFactory<gc::SameThreadMarkAndSweep>::NodeRef::From(object).ObjectData<gc::SameThreadMarkAndSweep::ObjectData>();
         return queue.try_push_front(objectData);
     }
 
     static bool tryMark(ObjHeader* object) noexcept {
-        auto& objectData = mm::ObjectFactory<gc::SameThreadMarkAndSweep>::NodeRef::From(object).ObjectData();
+        auto& objectData = mm::ObjectFactory<gc::SameThreadMarkAndSweep>::NodeRef::From(object).ObjectData<gc::SameThreadMarkAndSweep::ObjectData>();
         return objectData.tryMark();
     }
 

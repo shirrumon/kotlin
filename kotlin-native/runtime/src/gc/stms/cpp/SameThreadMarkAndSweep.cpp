@@ -35,12 +35,12 @@ struct SweepTraits {
     static bool IsMarkedByExtraObject(mm::ExtraObjectData &object) noexcept {
         auto *baseObject = object.GetBaseObject();
         if (!baseObject->heap()) return true;
-        auto& objectData = mm::ObjectFactory<gc::SameThreadMarkAndSweep>::NodeRef::From(baseObject).ObjectData();
+        auto& objectData = mm::ObjectFactory<gc::SameThreadMarkAndSweep>::NodeRef::From(baseObject).ObjectData<gc::SameThreadMarkAndSweep::ObjectData>();
         return objectData.marked();
     }
 
     static bool TryResetMark(ObjectFactory::NodeRef node) noexcept {
-        auto& objectData = node.ObjectData();
+        auto& objectData = node.ObjectData<gc::SameThreadMarkAndSweep::ObjectData>();
         return objectData.tryResetMark();
     }
 };
@@ -51,7 +51,7 @@ struct FinalizeTraits {
 
 struct ProcessWeaksTraits {
     static bool IsMarked(ObjHeader* obj) noexcept {
-        auto& objectData = mm::ObjectFactory<gc::SameThreadMarkAndSweep>::NodeRef::From(obj).ObjectData();
+        auto& objectData = mm::ObjectFactory<gc::SameThreadMarkAndSweep>::NodeRef::From(obj).ObjectData<gc::SameThreadMarkAndSweep::ObjectData>();
         return objectData.marked();
     }
 };

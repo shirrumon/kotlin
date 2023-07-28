@@ -195,7 +195,7 @@ std_support::vector<ObjHeader*> Alive(mm::ThreadData& threadData) {
 
 bool IsMarked(ObjHeader* objHeader) {
     auto nodeRef = mm::ObjectFactory<gc::ConcurrentMarkAndSweep>::NodeRef::From(objHeader);
-    return nodeRef.ObjectData().marked();
+    return nodeRef.ObjectData<gc::ConcurrentMarkAndSweep::ObjectData>().marked();
 }
 
 test_support::RegularWeakReferenceImpl& InstallWeakReference(mm::ThreadData& threadData, ObjHeader* objHeader, ObjHeader** location) {

@@ -13,6 +13,7 @@
 #include <type_traits>
 
 #include "Alignment.hpp"
+#include "Composite.hpp"
 #include "FinalizerHooks.hpp"
 #include "Memory.h"
 #include "Mutex.hpp"
@@ -438,26 +439,36 @@ private:
 
 template <typename Traits>
 class ObjectFactory : private Pinned {
-    using ObjectData = typename Traits::ObjectData;
     using Allocator = typename Traits::Allocator;
 
-    struct HeapObjHeader {
-        [[no_unique_address]]  // to account for GCs with empty ObjectData
-        ObjectData gcData;
-        alignas(kObjectAlignment) ObjHeader object;
+    struct ObjectDataDescriptor {
+        static size_t size() noexcept { return Traits::ObjectDataSize; }
+        static size_t alignment() noexcept { return Traits::ObjectDataAlignment; }
+
+        constexpr bool operator==(const ObjectDataDescriptor& rhs) const noexcept { return true; }
     };
 
-    // Needs to be kept compatible with `HeapObjHeader` just like `ArrayHeader` is compatible
-    // with `ObjHeader`: the former can always be casted to the other.
-    struct HeapArrayHeader {
-        [[no_unique_address]]
-        ObjectData gcData;
-        alignas(kObjectAlignment) ArrayHeader array;
-    };
+    static void ObjectDataConstruct(void* ptr) noexcept {
+        Traits::ObjectDataConstruct(ptr);
+    }
+
+    using ObjHeaderDescriptor = composite::descriptor::Reg<ObjHeader, kObjectAlignment>;
+    using HeapObjHeaderDescriptor = composite::descriptor::Composite<ObjectDataDescriptor, ObjHeaderDescriptor>;
+
+    static composite::Ref<HeapObjHeaderDescriptor> HeapObjHeader(void* ptr) noexcept {
+        return composite::Ref(HeapObjHeaderDescriptor(), ptr);
+    }
+
+    using ArrayHeaderDescriptor = composite::descriptor::Reg<ArrayHeader, kObjectAlignment>;
+    using HeapArrayHeaderDescriptor = composite::descriptor::Composite<ObjectDataDescriptor, ArrayHeaderDescriptor>;
+
+    static composite::Ref<HeapArrayHeaderDescriptor> HeapArrayHeader(void* ptr) noexcept {
+        return composite::Ref(HeapArrayHeaderDescriptor(), ptr);
+    }
 
     static size_t ObjectAllocatedDataSize(const TypeInfo* typeInfo) noexcept {
         size_t membersSize = typeInfo->instanceSize_ - sizeof(ObjHeader);
-        return AlignUp(sizeof(HeapObjHeader) + membersSize, kObjectAlignment);
+        return AlignUp(HeapObjHeaderDescriptor().size() + membersSize, kObjectAlignment);
     }
 
     static uint64_t ArrayAllocatedDataSize(const TypeInfo* typeInfo, uint32_t count) noexcept {
@@ -465,12 +476,12 @@ class ObjectFactory : private Pinned {
         // at about half of uint64_t max.
         uint64_t membersSize = static_cast<uint64_t>(-typeInfo->instanceSize_) * count;
         // Note: array body is aligned, but for size computation it is enough to align the sum.
-        return AlignUp<uint64_t>(sizeof(HeapArrayHeader) + membersSize, kObjectAlignment);
+        return AlignUp<uint64_t>(HeapArrayHeaderDescriptor().size() + membersSize, kObjectAlignment);
     }
 
     struct DataSizeProvider {
         static size_t GetDataSize(void* data) noexcept {
-            ObjHeader* object = &static_cast<HeapObjHeader*>(data)->object;
+            ObjHeader* object = HeapObjHeader(data).template get<1>().get();
             RuntimeAssert(object->heap(), "Object must be a heap object");
             const auto* typeInfo = object->type_info();
             if (typeInfo->IsArray()) {
@@ -490,31 +501,38 @@ public:
 
         static NodeRef From(ObjHeader* object) noexcept {
             RuntimeAssert(object->heap(), "Must be a heap object");
-            auto& heapObject = ownerOf(HeapObjHeader, object, *object);
-            return NodeRef(Storage::Node::FromData(&heapObject));
+            composite::Ref objectField(ObjHeaderDescriptor(), object);
+            auto heapObject = composite::Ref<HeapObjHeaderDescriptor>::template fromField<1>(HeapObjHeaderDescriptor(), objectField);
+            return NodeRef(Storage::Node::FromData(heapObject.data()));
         }
 
         static NodeRef From(ArrayHeader* array) noexcept {
             RuntimeAssert(array->obj()->heap(), "Must be a heap object");
-            auto& heapArray = ownerOf(HeapArrayHeader, array, *array);
-            return NodeRef(Storage::Node::FromData(&heapArray));
+            composite::Ref arrayField(ArrayHeaderDescriptor(), array);
+            auto heapArray = composite::Ref<HeapArrayHeaderDescriptor>::template fromField<1>(HeapArrayHeaderDescriptor(), arrayField);
+            return NodeRef(Storage::Node::FromData(heapArray.data()));
         }
 
-        static NodeRef From(ObjectData& objectData) noexcept {
-            auto& heapObject = ownerOf(HeapObjHeader, gcData, objectData);
-            return NodeRef(Storage::Node::FromData(&heapObject));
+        template <typename T>
+        static NodeRef FromObjectData(T& objectData) noexcept {
+            RuntimeAssert(sizeof(T) == ObjectDataDescriptor::size(), "Incompatible ObjectData");
+            RuntimeAssert(alignof(T) == ObjectDataDescriptor::alignment(), "Incompatible ObjectData");
+            composite::Ref objectDataField(ObjectDataDescriptor(), &objectData);
+            auto heapObject = composite::Ref<HeapObjHeaderDescriptor>::template fromField<0>(HeapObjHeaderDescriptor(), objectDataField);
+            return NodeRef(Storage::Node::FromData(heapObject.data()));
         }
 
         NodeRef* operator->() noexcept { return this; }
 
-        ObjectData& ObjectData() noexcept {
-            // `HeapArrayHeader` and `HeapObjHeader` are kept compatible, so the former can
-            // be always casted to the other.
-            return static_cast<HeapObjHeader*>(node_.Data())->gcData;
+        template <typename T>
+        T& ObjectData() noexcept {
+            RuntimeAssert(sizeof(T) == ObjectDataDescriptor::size(), "Incompatible ObjectData");
+            RuntimeAssert(alignof(T) == ObjectDataDescriptor::alignment(), "Incompatible ObjectData");
+            return *static_cast<T*>(composite::Ref<HeapObjHeaderDescriptor>(HeapObjHeaderDescriptor(), node_.Data()).template get<0>().data());
         }
 
         ObjHeader* GetObjHeader() noexcept {
-            return &static_cast<HeapObjHeader*>(node_.Data())->object;
+            return composite::Ref<HeapObjHeaderDescriptor>(HeapObjHeaderDescriptor(), node_.Data()).template get<1>().get();
         }
 
         bool operator==(const NodeRef& rhs) const noexcept { return &node_ == &rhs.node_; }
@@ -561,8 +579,9 @@ public:
             RuntimeAssert(!typeInfo->IsArray(), "Must not be an array");
             size_t allocSize = ObjectAllocatedDataSize(typeInfo);
             auto& node = producer_.Insert(allocSize);
-            auto* heapObject = new (node.Data()) HeapObjHeader();
-            auto* object = &heapObject->object;
+            auto ref = composite::Ref(HeapObjHeaderDescriptor(), node.Data());
+            ObjectDataConstruct(ref.template get<0>().data());
+            ObjHeader* object = ref.template get<1>().get();
             object->typeInfoOrMeta_ = const_cast<TypeInfo*>(typeInfo);
             // TODO: Consider supporting TF_IMMUTABLE: mark instance as frozen upon creation.
             return object;
@@ -579,8 +598,9 @@ public:
             RuntimeAssert(typeInfo->IsArray(), "Must be an array");
             auto allocSize = ArrayAllocatedDataSize(typeInfo, count);
             auto& node = producer_.Insert(allocSize);
-            auto* heapArray = new (node.Data()) HeapArrayHeader();
-            auto* array = &heapArray->array;
+            auto ref = composite::Ref(HeapArrayHeaderDescriptor(), node.Data());
+            ObjectDataConstruct(ref.template get<0>().data());
+            ArrayHeader* array = ref.template get<1>().get();
             array->typeInfoOrMeta_ = const_cast<TypeInfo*>(typeInfo);
             array->count_ = count;
             // TODO: Consider supporting TF_IMMUTABLE: mark instance as frozen upon creation.

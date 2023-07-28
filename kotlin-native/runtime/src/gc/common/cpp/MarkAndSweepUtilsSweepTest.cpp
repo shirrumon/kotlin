@@ -45,6 +45,12 @@ struct ObjectFactoryTraits {
         State state = State::kUnmarked;
     };
 
+    static constexpr size_t ObjectDataSize = sizeof(ObjectData);
+    static constexpr size_t ObjectDataAlignment = alignof(ObjectData);
+    static void ObjectDataConstruct(void* ptr) noexcept {
+        new (ptr) ObjectData();
+    }
+
     using Allocator = gc::Allocator;
 };
 
@@ -71,7 +77,7 @@ public:
     ObjectFactoryTraits::ObjectData::State state() { return objectData().state; }
 
 private:
-    ObjectFactoryTraits::ObjectData& objectData() { return ObjectFactory::NodeRef::From(header()).ObjectData(); }
+    ObjectFactoryTraits::ObjectData& objectData() { return ObjectFactory::NodeRef::From(header()).ObjectData<ObjectFactoryTraits::ObjectData>(); }
 };
 
 class ObjectArray : public test_support::ObjectArray<3> {
@@ -96,7 +102,7 @@ public:
     ObjectFactoryTraits::ObjectData::State state() { return objectData().state; }
 
 private:
-    ObjectFactoryTraits::ObjectData& objectData() { return ObjectFactory::NodeRef::From(header()).ObjectData(); }
+    ObjectFactoryTraits::ObjectData& objectData() { return ObjectFactory::NodeRef::From(header()).ObjectData<ObjectFactoryTraits::ObjectData>(); }
 };
 
 class CharArray : public test_support::CharArray<3> {
@@ -121,15 +127,15 @@ public:
     ObjectFactoryTraits::ObjectData::State state() { return objectData().state; }
 
 private:
-    ObjectFactoryTraits::ObjectData& objectData() { return ObjectFactory::NodeRef::From(header()).ObjectData(); }
+    ObjectFactoryTraits::ObjectData& objectData() { return ObjectFactory::NodeRef::From(header()).ObjectData<ObjectFactoryTraits::ObjectData>(); }
 };
 
 void MarkWeakReference(test_support::RegularWeakReferenceImpl& weakRef) {
-    ObjectFactory::NodeRef::From(weakRef.header()).ObjectData().state = ObjectFactoryTraits::ObjectData::State::kMarked;
+    ObjectFactory::NodeRef::From(weakRef.header()).ObjectData<ObjectFactoryTraits::ObjectData>().state = ObjectFactoryTraits::ObjectData::State::kMarked;
 }
 
 ObjectFactoryTraits::ObjectData::State GetWeakReferenceState(test_support::RegularWeakReferenceImpl& weakRef) {
-    return ObjectFactory::NodeRef::From(weakRef.header()).ObjectData().state;
+    return ObjectFactory::NodeRef::From(weakRef.header()).ObjectData<ObjectFactoryTraits::ObjectData>().state;
 }
 
 struct SweepTraits {
@@ -137,12 +143,12 @@ struct SweepTraits {
     using ExtraObjectsFactory = mm::ExtraObjectDataFactory;
 
     static bool IsMarkedByExtraObject(mm::ExtraObjectData &object) noexcept {
-        auto& objectData = ObjectFactory::NodeRef::From(object.GetBaseObject()).ObjectData();
+        auto& objectData = ObjectFactory::NodeRef::From(object.GetBaseObject()).ObjectData<ObjectFactoryTraits::ObjectData>();
         return objectData.state != ObjectFactoryTraits::ObjectData::State::kUnmarked;
     }
 
     static bool TryResetMark(ObjectFactory::NodeRef node) {
-        ObjectFactoryTraits::ObjectData& objectData = node.ObjectData();
+        ObjectFactoryTraits::ObjectData& objectData = node.ObjectData<ObjectFactoryTraits::ObjectData>();
         switch (objectData.state) {
             case ObjectFactoryTraits::ObjectData::State::kUnmarked:
                 return false;
@@ -157,7 +163,7 @@ struct SweepTraits {
 
 struct ProcessWeakTraits {
     static bool IsMarked(ObjHeader* object) noexcept {
-        auto& objectData = ObjectFactory::NodeRef::From(object).ObjectData();
+        auto& objectData = ObjectFactory::NodeRef::From(object).ObjectData<ObjectFactoryTraits::ObjectData>();
         return objectData.state != ObjectFactoryTraits::ObjectData::State::kUnmarked;
     }
 };

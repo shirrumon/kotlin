@@ -144,7 +144,7 @@ void gc::GC::WaitFinalizers(int64_t epoch) noexcept {
 }
 
 bool gc::isMarked(ObjHeader* object) noexcept {
-    auto& objectData = mm::ObjectFactory<gc::ConcurrentMarkAndSweep>::NodeRef::From(object).ObjectData();
+    auto& objectData = mm::ObjectFactory<gc::ConcurrentMarkAndSweep>::NodeRef::From(object).ObjectData<gc::ConcurrentMarkAndSweep::ObjectData>();
     return objectData.marked();
 }
 

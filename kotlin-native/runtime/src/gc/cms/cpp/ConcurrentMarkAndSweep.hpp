@@ -67,6 +67,13 @@ public:
 
         std::atomic<ObjectData*> next_ = nullptr;
     };
+    static_assert(std::is_trivially_destructible_v<ObjectData>);
+
+    static constexpr size_t ObjectDataSize = sizeof(ObjectData);
+    static constexpr size_t ObjectDataAlignment = alignof(ObjectData);
+    static void ObjectDataConstruct(void* ptr) noexcept {
+        new (ptr) ObjectData();
+    }
 
     enum MarkingBehavior { kMarkOwnStack, kDoNotMark };
 
@@ -159,19 +166,19 @@ struct MarkTraits {
 
     static ObjHeader* tryDequeue(MarkQueue& queue) noexcept {
         if (auto* top = queue.try_pop_front()) {
-            auto node = mm::ObjectFactory<gc::ConcurrentMarkAndSweep>::NodeRef::From(*top);
+            auto node = mm::ObjectFactory<gc::ConcurrentMarkAndSweep>::NodeRef::FromObjectData(*top);
             return node->GetObjHeader();
         }
         return nullptr;
     }
 
     static bool tryEnqueue(MarkQueue& queue, ObjHeader* object) noexcept {
-        auto& objectData = mm::ObjectFactory<gc::ConcurrentMarkAndSweep>::NodeRef::From(object).ObjectData();
+        auto& objectData = mm::ObjectFactory<gc::ConcurrentMarkAndSweep>::NodeRef::From(object).ObjectData<gc::ConcurrentMarkAndSweep::ObjectData>();
         return queue.try_push_front(objectData);
     }
 
     static bool tryMark(ObjHeader* object) noexcept {
-        auto& objectData = mm::ObjectFactory<gc::ConcurrentMarkAndSweep>::NodeRef::From(object).ObjectData();
+        auto& objectData = mm::ObjectFactory<gc::ConcurrentMarkAndSweep>::NodeRef::From(object).ObjectData<gc::ConcurrentMarkAndSweep::ObjectData>();
         return objectData.tryMark();
     }
 

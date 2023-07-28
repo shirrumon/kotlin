@@ -29,6 +29,13 @@ namespace gc {
 class NoOpGC : private Pinned {
 public:
     class ObjectData {};
+    static_assert(std::is_trivially_destructible_v<ObjectData>);
+
+    static constexpr size_t ObjectDataSize = sizeof(ObjectData);
+    static constexpr size_t ObjectDataAlignment = alignof(ObjectData);
+    static void ObjectDataConstruct(void* ptr) noexcept {
+        new (ptr) ObjectData();
+    }
 
     using Allocator = gc::Allocator;
 

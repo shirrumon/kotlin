@@ -140,7 +140,7 @@ void gc::GC::WaitFinalizers(int64_t epoch) noexcept {
 }
 
 bool gc::isMarked(ObjHeader* object) noexcept {
-    auto& objectData = mm::ObjectFactory<gc::SameThreadMarkAndSweep>::NodeRef::From(object).ObjectData();
+    auto& objectData = mm::ObjectFactory<gc::SameThreadMarkAndSweep>::NodeRef::From(object).ObjectData<gc::SameThreadMarkAndSweep::ObjectData>();
     return objectData.marked();
 }
 

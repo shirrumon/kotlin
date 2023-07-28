@@ -845,6 +845,12 @@ public:
         uint32_t flags = 42;
     };
 
+    static constexpr size_t ObjectDataSize = sizeof(ObjectData);
+    static constexpr size_t ObjectDataAlignment = alignof(ObjectData);
+    static void ObjectDataConstruct(void* ptr) noexcept {
+        new (ptr) ObjectData();
+    }
+
     using Allocator = GlobalMockAllocator;
 };
 
@@ -887,7 +893,7 @@ TEST(ObjectFactoryTest, CreateObject) {
 
     auto node = ObjectFactory::NodeRef::From(object);
     EXPECT_THAT(node.GetObjHeader(), object);
-    EXPECT_THAT(node.ObjectData().flags, 42);
+    EXPECT_THAT(node.ObjectData<ObjectFactoryTraits::ObjectData>().flags, 42);
 
     auto iter = objectFactory.LockForIter();
     auto it = iter.begin();
@@ -922,7 +928,7 @@ TEST(ObjectFactoryTest, CreateObjectArray) {
 
     auto node = ObjectFactory::NodeRef::From(array);
     EXPECT_THAT(node.GetObjHeader()->array(), array);
-    EXPECT_THAT(node.ObjectData().flags, 42);
+    EXPECT_THAT(node.ObjectData<ObjectFactoryTraits::ObjectData>().flags, 42);
 
     auto iter = objectFactory.LockForIter();
     auto it = iter.begin();
@@ -957,7 +963,7 @@ TEST(ObjectFactoryTest, CreateCharArray) {
 
     auto node = ObjectFactory::NodeRef::From(array);
     EXPECT_THAT(node.GetObjHeader()->array(), array);
-    EXPECT_THAT(node.ObjectData().flags, 42);
+    EXPECT_THAT(node.ObjectData<ObjectFactoryTraits::ObjectData>().flags, 42);
 
     auto iter = objectFactory.LockForIter();
     auto it = iter.begin();
