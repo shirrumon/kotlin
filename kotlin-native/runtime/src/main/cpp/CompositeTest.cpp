@@ -8,13 +8,15 @@
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 
+#include "std_support/CStdlib.hpp"
+
 using namespace kotlin;
 
 namespace {
 
 struct TEmpty {};
 
-using CEmpty = composite::Composite<>;
+using CEmpty = composite::descriptor::Composite<>;
 
 struct T323232 {
     int32_t f1;
@@ -22,7 +24,8 @@ struct T323232 {
     int32_t f3;
 };
 
-using C323232 = composite::Composite<composite::Reg<int32_t>, composite::Reg<int32_t>, composite::Reg<int32_t>>;
+using C323232 = composite::descriptor::
+        Composite<composite::descriptor::Reg<int32_t>, composite::descriptor::Reg<int32_t>, composite::descriptor::Reg<int32_t>>;
 
 struct T643232 {
     int64_t f1;
@@ -30,7 +33,8 @@ struct T643232 {
     int32_t f3;
 };
 
-using C643232 = composite::Composite<composite::Reg<int64_t>, composite::Reg<int32_t>, composite::Reg<int32_t>>;
+using C643232 = composite::descriptor::
+        Composite<composite::descriptor::Reg<int64_t>, composite::descriptor::Reg<int32_t>, composite::descriptor::Reg<int32_t>>;
 
 struct T326432 {
     int32_t f1;
@@ -38,7 +42,8 @@ struct T326432 {
     int32_t f3;
 };
 
-using C326432 = composite::Composite<composite::Reg<int32_t>, composite::Reg<int64_t>, composite::Reg<int32_t>>;
+using C326432 = composite::descriptor::
+        Composite<composite::descriptor::Reg<int32_t>, composite::descriptor::Reg<int64_t>, composite::descriptor::Reg<int32_t>>;
 
 struct T323264 {
     int32_t f1;
@@ -46,7 +51,8 @@ struct T323264 {
     int64_t f3;
 };
 
-using C323264 = composite::Composite<composite::Reg<int32_t>, composite::Reg<int32_t>, composite::Reg<int64_t>>;
+using C323264 = composite::descriptor::
+        Composite<composite::descriptor::Reg<int32_t>, composite::descriptor::Reg<int32_t>, composite::descriptor::Reg<int64_t>>;
 
 struct TEmpty326432 {
     [[no_unique_address]] TEmpty f1;
@@ -55,7 +61,8 @@ struct TEmpty326432 {
     int32_t f4;
 };
 
-using CEmpty326432 = composite::Composite<CEmpty, composite::Reg<int32_t>, composite::Reg<int64_t>, composite::Reg<int32_t>>;
+using CEmpty326432 = composite::descriptor::
+        Composite<CEmpty, composite::descriptor::Reg<int32_t>, composite::descriptor::Reg<int64_t>, composite::descriptor::Reg<int32_t>>;
 
 struct T32Empty6432 {
     int32_t f1;
@@ -64,7 +71,8 @@ struct T32Empty6432 {
     int32_t f4;
 };
 
-using C32Empty6432 = composite::Composite<composite::Reg<int32_t>, CEmpty, composite::Reg<int64_t>, composite::Reg<int32_t>>;
+using C32Empty6432 = composite::descriptor::
+        Composite<composite::descriptor::Reg<int32_t>, CEmpty, composite::descriptor::Reg<int64_t>, composite::descriptor::Reg<int32_t>>;
 
 struct T3264Empty32 {
     int32_t f1;
@@ -73,7 +81,8 @@ struct T3264Empty32 {
     int32_t f4;
 };
 
-using C3264Empty32 = composite::Composite<composite::Reg<int32_t>, composite::Reg<int64_t>, CEmpty, composite::Reg<int32_t>>;
+using C3264Empty32 = composite::descriptor::
+        Composite<composite::descriptor::Reg<int32_t>, composite::descriptor::Reg<int64_t>, CEmpty, composite::descriptor::Reg<int32_t>>;
 
 struct T326432Empty {
     int32_t f1;
@@ -82,7 +91,13 @@ struct T326432Empty {
     [[no_unique_address]] TEmpty f4;
 };
 
-using C326432Empty = composite::Composite<composite::Reg<int32_t>, composite::Reg<int64_t>, composite::Reg<int32_t>, CEmpty>;
+using C326432Empty = composite::descriptor::
+        Composite<composite::descriptor::Reg<int32_t>, composite::descriptor::Reg<int64_t>, composite::descriptor::Reg<int32_t>, CEmpty>;
+
+struct ManualStaticDescriptor {
+    static size_t size() noexcept { return 256; }
+    static size_t alignment() noexcept { return 16; }
+};
 
 } // namespace
 
@@ -155,11 +170,25 @@ static_assert(C326432Empty().fieldOffset<3>() == AlignUp(sizeof(int32_t), aligno
 static_assert(C326432Empty().size() == sizeof(T326432Empty));
 static_assert(C326432Empty().alignment() == alignof(T326432Empty));
 
-TEST(CompositeTest, VLA) {
-    composite::Dynamic dyn(3 * sizeof(void*), alignof(void*));
-    composite::Composite comp(composite::Reg<int32_t>(), dyn);
+TEST(CompositeTest, VLADescriptor) {
+    composite::descriptor::Dynamic dyn(3 * sizeof(void*), alignof(void*));
+    composite::descriptor::Composite comp(composite::descriptor::Reg<int32_t>(), dyn);
     EXPECT_THAT(comp.fieldOffset<0>(), 0);
     EXPECT_THAT(comp.fieldOffset<1>(), sizeof(void*));
     EXPECT_THAT(comp.size(), 4 * sizeof(void*));
     EXPECT_THAT(comp.alignment(), alignof(void*));
+}
+
+TEST(CompositeTest, Ref) {
+    composite::descriptor::Composite comp{composite::descriptor::Reg<int32_t>(), ManualStaticDescriptor()};
+    auto* ptr = static_cast<uint8_t*>(std_support::aligned_malloc(comp.alignment(), comp.size()));
+
+    composite::Ref ref(composite::descriptor::Composite(composite::descriptor::Reg<int32_t>(), ManualStaticDescriptor()), ptr);
+    int32_t& first = *ref.get<0>();
+    void* second = ref.get<1>().data();
+
+    EXPECT_THAT(static_cast<void*>(&first), ptr);
+    EXPECT_THAT(second, ptr + ManualStaticDescriptor::alignment());
+
+    std_support::aligned_free(ptr);
 }

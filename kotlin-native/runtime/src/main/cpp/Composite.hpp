@@ -11,6 +11,7 @@
 
 #include "Alignment.hpp"
 #include "KAssert.h"
+#include "RawPtr.hpp"
 
 namespace kotlin::composite {
 
@@ -63,6 +64,8 @@ constexpr size_t size(FieldDescriptors... fieldDescriptors) noexcept {
 
 } // namespace internal
 
+namespace descriptor {
+
 // Descriptor for the regular C++ type.
 template <typename T, size_t alignAs = alignof(T)>
 struct Reg {
@@ -111,8 +114,13 @@ public:
         return std::apply(internal::fieldOffset<index, Fields...>, fields_);
     }
 
+    template <size_t index>
+    constexpr std::tuple_element_t<index, std::tuple<Fields...>> field() const noexcept {
+        return std::get<index>(fields_);
+    }
+
 private:
-    std::tuple<Fields...> fields_;
+    [[no_unique_address]] std::tuple<Fields...> fields_;
 };
 
 template <>
@@ -134,6 +142,65 @@ public:
         static_assert(index == 0);
         return 0;
     }
+};
+
+} // namespace descriptor
+
+template <typename D>
+class Ref {
+public:
+    using Descriptor = D;
+
+    constexpr Ref(Descriptor descriptor, uint8_t* data) noexcept : descriptor_(descriptor), data_(data) {}
+
+    constexpr Descriptor descriptor() const noexcept { return descriptor_; }
+
+    constexpr uint8_t* data() noexcept { return static_cast<uint8_t*>(data_); }
+
+private:
+    [[no_unique_address]] Descriptor descriptor_;
+    raw_ptr<uint8_t> data_;
+};
+
+template <typename T, size_t alignAs>
+class Ref<descriptor::Reg<T, alignAs>> {
+public:
+    using Descriptor = descriptor::Reg<T, alignAs>;
+
+    constexpr Ref(Descriptor descriptor, uint8_t* data) noexcept : data_(data) {}
+
+    constexpr Descriptor descriptor() const noexcept { return Descriptor(); }
+
+    constexpr uint8_t* data() noexcept { return static_cast<uint8_t*>(data_); }
+
+    constexpr T& operator*() noexcept { return *reinterpret_cast<T*>(data()); }
+    constexpr T* operator->() noexcept { return reinterpret_cast<T*>(data()); }
+
+private:
+    raw_ptr<uint8_t> data_;
+};
+
+template <typename... Fields>
+class Ref<descriptor::Composite<Fields...>> {
+public:
+    using Descriptor = descriptor::Composite<Fields...>;
+
+    constexpr Ref(Descriptor descriptor, uint8_t* data) noexcept : descriptor_(descriptor), data_(data) {}
+
+    constexpr Descriptor descriptor() const noexcept { return descriptor_; }
+
+    constexpr uint8_t* data() noexcept { return static_cast<uint8_t*>(data_); }
+
+    template <size_t index>
+    constexpr Ref<std::tuple_element_t<index, std::tuple<Fields...>>> get() noexcept {
+        auto descriptor = descriptor_.template field<index>();
+        auto offset = descriptor_.template fieldOffset<index>();
+        return Ref<decltype(descriptor)>(descriptor, data() + offset);
+    }
+
+private:
+    [[no_unique_address]] Descriptor descriptor_;
+    raw_ptr<uint8_t> data_;
 };
 
 } // namespace kotlin::composite
