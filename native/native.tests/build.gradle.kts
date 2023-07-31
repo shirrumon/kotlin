@@ -2,7 +2,6 @@ import org.jetbrains.kotlin.ideaExt.idea
 
 plugins {
     kotlin("jvm")
-    id("jps-compatible")
 }
 
 project.configureJvmToolchain(JdkMajorVersion.JDK_11_0)
