@@ -858,4 +858,4 @@ if (buildProperties.isKotlinNativeEnabled) {
     project(":kotlin-native-shared").projectDir = "$rootDir/kotlin-native/shared" as File
 }
 
-// gh test 2
+//  test 3
