@@ -410,6 +410,9 @@ void intellij(String imlPath) {
     project(projectName).projectDir = imlFile.parentFile
 }
 
+
+// temp commit
+
 String attachedIntellijVersion = buildProperties.getOrNull("attachedIntellijVersion")
 if (attachedIntellijVersion == "212") { // Latest available platform in scope of KT release cycle
     logger.info("Including kotlin-ide modules in settings.gradle")
