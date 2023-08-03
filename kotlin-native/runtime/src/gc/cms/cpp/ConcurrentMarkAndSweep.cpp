@@ -102,10 +102,6 @@ gc::ConcurrentMarkAndSweep::ConcurrentMarkAndSweep(
         alloc::Allocator& allocator, gcScheduler::GCScheduler& gcScheduler, bool mutatorsCooperate, std::size_t auxGCThreads) noexcept :
     allocator_(allocator),
     gcScheduler_(gcScheduler),
-    finalizerProcessor_([this](int64_t epoch) {
-        GCHandle::getByEpoch(epoch).finalizersDone();
-        state_.finalized(epoch);
-    }),
     markDispatcher_(mutatorsCooperate),
     mainThread_(createGCThread("Main GC thread", [this] { mainGCThreadBody(); })) {
     for (std::size_t i = 0; i < auxGCThreads; ++i) {

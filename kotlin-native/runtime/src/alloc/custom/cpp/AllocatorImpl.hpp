@@ -57,8 +57,12 @@ public:
         CustomAllocator alloc_;
     };
 
+    Allocator() noexcept : finalizerProcessor_([](int64_t epoch) {
+        mm::GlobalData::Instance().gc().onFinalized(epoch);
+    }) {}
+
     Heap& heap() noexcept { return heap_; }
-    FinalizerProcessor<FinalizerQueue, FinalizerQueueTraits>& finalizerProcessor() noexcept { return { finalizerProcessor_; }
+    FinalizerProcessor<FinalizerQueue, FinalizerQueueTraits>& finalizerProcessor() noexcept { return finalizerProcessor_; }
 
     void startFinalizerThreadIfNeeded() noexcept {
         NativeOrUnregisteredThreadGuard guard(true);

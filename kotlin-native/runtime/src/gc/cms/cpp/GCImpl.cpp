@@ -99,6 +99,11 @@ void gc::GC::WaitFinalizers(int64_t epoch) noexcept {
     impl_->gc().state().waitEpochFinalized(epoch);
 }
 
+void gc::GC::onFinalized(int64_t epoch) noexcept {
+    GCHandle::getByEpoch(epoch).finalizersDone();
+    impl_->gc().state().finalized(epoch);
+}
+
 bool gc::isMarked(ObjHeader* object) noexcept {
     return alloc::objectDataForObject(object).marked();
 }

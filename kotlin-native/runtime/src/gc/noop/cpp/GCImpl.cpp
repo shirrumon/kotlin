@@ -84,6 +84,8 @@ void gc::GC::WaitFinished(int64_t epoch) noexcept {}
 
 void gc::GC::WaitFinalizers(int64_t epoch) noexcept {}
 
+void gc::GC::onFinalized(int64_t epoch) noexcept {}
+
 bool gc::isMarked(ObjHeader* object) noexcept {
     RuntimeAssert(false, "Should not reach here");
     return true;

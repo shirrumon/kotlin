@@ -25,10 +25,7 @@ using namespace kotlin;
 gc::SameThreadMarkAndSweep::SameThreadMarkAndSweep(
         alloc::Allocator& allocator, gcScheduler::GCScheduler& gcScheduler) noexcept :
     allocator_(allocator),
-    gcScheduler_(gcScheduler), finalizerProcessor_([this](int64_t epoch) noexcept {
-        GCHandle::getByEpoch(epoch).finalizersDone();
-        state_.finalized(epoch);
-    }) {
+    gcScheduler_(gcScheduler) {
     gcThread_ = ScopedThread(ScopedThread::attributes().name("GC thread"), [this] {
         while (true) {
             auto epoch = state_.waitScheduled();

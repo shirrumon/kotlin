@@ -78,6 +78,7 @@ public:
     int64_t Schedule() noexcept;
     void WaitFinished(int64_t epoch) noexcept;
     void WaitFinalizers(int64_t epoch) noexcept;
+    void onFinalized(int64_t epoch) noexcept;
 
     static void DestroyExtraObjectData(mm::ExtraObjectData& extraObject) noexcept;
 

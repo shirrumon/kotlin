@@ -94,9 +94,13 @@ public:
         ExtraObjectDataFactory::ThreadQueue extraObjectDataFactoryThreadQueue_;
     };
 
+    Allocator() noexcept : finalizerProcessor_([](int64_t epoch) {
+        mm::GlobalData::Instance().gc().onFinalized(epoch);
+    }) {}
+
     gc::ObjectFactory& objectFactory() noexcept { return objectFactory_; }
     ExtraObjectDataFactory& extraObjectDataFactory() noexcept { return extraObjectDataFactory_; }
-    FinalizerProcessor<FinalizerQueue, FinalizerQueueTraits>& finalizerProcessor() noexcept { return { finalizerProcessor_; }
+    FinalizerProcessor<FinalizerQueue, FinalizerQueueTraits>& finalizerProcessor() noexcept { return finalizerProcessor_; }
 
     void startFinalizerThreadIfNeeded() noexcept {
         NativeOrUnregisteredThreadGuard guard(true);
