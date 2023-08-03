@@ -94,10 +94,14 @@ private fun TestProject.formatEnvironmentForScript(envCommand: String): String {
  * @param memorySizeInGb The amount of memory to allocate to the JVM, in gigabytes.
  *                     Defaults to 1 gigabyte.
  */
-fun GradleProject.configureJvmMemory(memorySizeInGb: Number = 1) {
+fun GradleProject.configureJvmMemory(
+    memorySizeInGb: Number = 1,
+    lenient: Boolean = false
+) {
     addPropertyToGradleProperties(
         propertyName = "org.gradle.jvmargs",
-        mapOf("-Xmx" to "-Xmx${memorySizeInGb}g")
+        mapOf("-Xmx" to "-Xmx${memorySizeInGb}g"),
+        lenient
     )
 }
 
@@ -110,10 +114,12 @@ fun GradleProject.configureJvmMemory(memorySizeInGb: Number = 1) {
  *                       Map would be look like: Map.of("-Xmx", "-Xmx2g",
  *                                                      "-XX:MaxMetaspaceSize","-XX:MaxMetaspaceSize=512m",
  *                                                      "-XX:+HeapDumpOnOutOfMemoryError", "-XX:+HeapDumpOnOutOfMemoryError" )
+ * @param lenient don't produce an error if the property is already defined.
  */
 fun GradleProject.addPropertyToGradleProperties(
     propertyName: String,
-    propertyValues: Map<String, String>
+    propertyValues: Map<String, String>,
+    lenient: Boolean = false
 ) {
     if (!gradleProperties.exists()) gradleProperties.createFile()
 
@@ -145,23 +151,25 @@ fun GradleProject.addPropertyToGradleProperties(
             }
         }
 
-        assert(optionsToRewrite.isEmpty()) {
-            """
-            |You are trying to write options: $optionsToRewrite 
-            |for property: $propertyName 
-            |in $gradleProperties
-            |But these options are already exists with another values.
-            |Current property value is: $argsLine
-            """.trimMargin()
+        val isOptionsToRewriteEmpty = optionsToRewrite.isEmpty()
+        assert(!lenient && isOptionsToRewriteEmpty) {
+                """
+                |You are trying to write options: $optionsToRewrite 
+                |for property: $propertyName 
+                |in $gradleProperties
+                |But these options are already exists with another values.
+                |Current property value is: $argsLine
+                """.trimMargin()
+            }
+
+        if (!isOptionsToRewriteEmpty) {
+            gradleProperties.writeText(
+                """
+                |$argsLine$appendedOptions
+                |
+                |${otherLines.joinToString(separator = "\n")}
+                """.trimMargin()
+            )
         }
-
-        gradleProperties.writeText(
-            """
-            |$argsLine$appendedOptions
-            |
-            |${otherLines.joinToString(separator = "\n")}
-            """.trimMargin()
-        )
-
     }
 }
