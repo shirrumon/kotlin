@@ -33,21 +33,9 @@ class SameThreadMarkAndSweep : private Pinned {
 public:
     using MarkQueue = intrusive_forward_list<GC::ObjectData>;
 
-    class ThreadData : private Pinned {
-    public:
-        ThreadData(SameThreadMarkAndSweep& gc, mm::ThreadData& threadData) noexcept {}
-        ~ThreadData() = default;
-    private:
-    };
-
-#ifdef CUSTOM_ALLOCATOR
-    SameThreadMarkAndSweep(gcScheduler::GCScheduler& gcScheduler) noexcept;
-#else
     SameThreadMarkAndSweep(
-            ObjectFactory& objectFactory,
-            alloc::ExtraObjectDataFactory& extraObjectDataFactory,
+            alloc::Allocator& allocator,
             gcScheduler::GCScheduler& gcScheduler) noexcept;
-#endif
 
     ~SameThreadMarkAndSweep();
 
@@ -57,19 +45,10 @@ public:
 
     GCStateHolder& state() noexcept { return state_; }
 
-#ifdef CUSTOM_ALLOCATOR
-    alloc::Heap& heap() noexcept { return heap_; }
-#endif
-
 private:
     void PerformFullGC(int64_t epoch) noexcept;
 
-#ifndef CUSTOM_ALLOCATOR
-    ObjectFactory& objectFactory_;
-    alloc::ExtraObjectDataFactory& extraObjectDataFactory_;
-#else
-    alloc::Heap heap_;
-#endif
+    alloc::Allocator& allocator_;
     gcScheduler::GCScheduler& gcScheduler_;
 
     GCStateHolder state_;

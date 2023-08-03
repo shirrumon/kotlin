@@ -62,17 +62,7 @@ public:
         std::atomic<bool> cooperative_ = false;
     };
 
-#ifdef CUSTOM_ALLOCATOR
-    explicit ConcurrentMarkAndSweep(gcScheduler::GCScheduler& scheduler,
-                                    bool mutatorsCooperate, std::size_t auxGCThreads) noexcept;
-#else
-    ConcurrentMarkAndSweep(
-            ObjectFactory& objectFactory,
-            alloc::ExtraObjectDataFactory& extraObjectDataFactory,
-            gcScheduler::GCScheduler& scheduler,
-            bool mutatorsCooperate,
-            std::size_t auxGCThreads) noexcept;
-#endif
+    ConcurrentMarkAndSweep(alloc::Allocator& allocator, gcScheduler::GCScheduler& scheduler, bool mutatorsCooperate, std::size_t auxGCThreads) noexcept;
     ~ConcurrentMarkAndSweep();
 
     void StartFinalizerThreadIfNeeded() noexcept;
@@ -81,10 +71,6 @@ public:
 
     void reconfigure(std::size_t maxParallelism, bool mutatorsCooperate, size_t auxGCThreads) noexcept;
 
-#ifdef CUSTOM_ALLOCATOR
-    alloc::Heap& heap() noexcept { return heap_; }
-#endif
-
     GCStateHolder& state() noexcept { return state_; }
 
 private:
@@ -92,12 +78,7 @@ private:
     void auxiliaryGCThreadBody();
     void PerformFullGC(int64_t epoch) noexcept;
 
-#ifndef CUSTOM_ALLOCATOR
-    ObjectFactory& objectFactory_;
-    alloc::ExtraObjectDataFactory& extraObjectDataFactory_;
-#else
-    alloc::Heap heap_;
-#endif
+    alloc::Allocator& allocator_;
     gcScheduler::GCScheduler& gcScheduler_;
 
     GCStateHolder state_;

@@ -15,54 +15,25 @@ namespace gc {
 
 class GC::Impl : private Pinned {
 public:
-#ifdef CUSTOM_ALLOCATOR
-    explicit Impl(gcScheduler::GCScheduler& gcScheduler) noexcept : gc_(gcScheduler) {}
-#else
-    explicit Impl(gcScheduler::GCScheduler& gcScheduler) noexcept : gc_(objectFactory_, extraObjectDataFactory_, gcScheduler) {}
+    explicit Impl(gcScheduler::GCScheduler& gcScheduler) noexcept : gc_(allocator_, gcScheduler) {}
 
-    ObjectFactory& objectFactory() noexcept { return objectFactory_; }
-    alloc::ExtraObjectDataFactory& extraObjectDataFactory() noexcept { return extraObjectDataFactory_; }
-#endif
+    alloc::Allocator& allocator() noexcept { return allocator_; }
     SameThreadMarkAndSweep& gc() noexcept { return gc_; }
 
 private:
-#ifndef CUSTOM_ALLOCATOR
-    ObjectFactory objectFactory_;
-    alloc::ExtraObjectDataFactory extraObjectDataFactory_;
-#endif
+    alloc::Allocator allocator_;
     SameThreadMarkAndSweep gc_;
 };
 
 class GC::ThreadData::Impl : private Pinned {
 public:
     Impl(GC& gc, mm::ThreadData& threadData) noexcept :
-        gc_(gc.impl_->gc(), threadData),
-#ifdef CUSTOM_ALLOCATOR
-        alloc_(gc.impl_->gc().heap()) {
-    }
-#else
-        objectFactoryThreadQueue_(gc.impl_->objectFactory(), objectFactoryTraits_.CreateAllocator()),
-        extraObjectDataFactoryThreadQueue_(gc.impl_->extraObjectDataFactory()) {
-    }
-#endif
+        allocator_(gc.impl_->allocator()) {}
 
-    SameThreadMarkAndSweep::ThreadData& gc() noexcept { return gc_; }
-#ifndef CUSTOM_ALLOCATOR
-    ObjectFactory::ThreadQueue& objectFactoryThreadQueue() noexcept { return objectFactoryThreadQueue_; }
-    alloc::ExtraObjectDataFactory::ThreadQueue& extraObjectDataFactoryThreadQueue() noexcept { return extraObjectDataFactoryThreadQueue_; }
-#else
-    alloc::CustomAllocator& alloc() noexcept { return alloc_; }
-#endif
+    alloc::Allocator::ThreadData& allocator() noexcept { return allocator_; }
 
 private:
-    SameThreadMarkAndSweep::ThreadData gc_;
-#ifdef CUSTOM_ALLOCATOR
-    alloc::CustomAllocator alloc_;
-#else
-    [[no_unique_address]] ObjectFactoryTraits objectFactoryTraits_;
-    ObjectFactory::ThreadQueue objectFactoryThreadQueue_;
-    alloc::ExtraObjectDataFactory::ThreadQueue extraObjectDataFactoryThreadQueue_;
-#endif
+    alloc::Allocator::ThreadData allocator_;
 };
 
 } // namespace gc

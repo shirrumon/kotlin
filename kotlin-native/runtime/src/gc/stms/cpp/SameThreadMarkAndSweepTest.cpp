@@ -13,6 +13,7 @@
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 
+#include "AllocatorImplTestSupport.hpp"
 #include "ExtraObjectData.hpp"
 #include "FinalizerHooksTestSupport.hpp"
 #include "GCImpl.hpp"
@@ -180,18 +181,7 @@ test_support::Object<Payload>& AllocateObjectWithFinalizer(mm::ThreadData& threa
 }
 
 std_support::vector<ObjHeader*> Alive(mm::ThreadData& threadData) {
-#ifdef CUSTOM_ALLOCATOR
-    return threadData.gc().impl().alloc().heap().GetAllocatedObjects();
-#else
-    std_support::vector<ObjHeader*> objects;
-    for (auto node : threadData.gc().impl().objectFactoryThreadQueue()) {
-        objects.push_back(node.GetObjHeader());
-    }
-    for (auto node : mm::GlobalData::Instance().gc().impl().objectFactory().LockForIter()) {
-        objects.push_back(node.GetObjHeader());
-    }
-    return objects;
-#endif
+    return alloc::test_support::allocatedObjects(threadData.gc().impl().allocator());
 }
 
 test_support::RegularWeakReferenceImpl& InstallWeakReference(mm::ThreadData& threadData, ObjHeader* objHeader, ObjHeader** location) {
@@ -1079,45 +1069,45 @@ TEST_F(SameThreadMarkAndSweepTest, NewThreadsWhileRequestingCollection) {
         future.wait();
     }
 
-#ifndef CUSTOM_ALLOCATOR
-    // Old mutators don't even see alive objects from the new threads yet (as the latter ones have not published anything).
+    if (alloc::test_support::hasPerThreadLiveness) {
+        // Old mutators don't even see alive objects from the new threads yet (as the latter ones have not published anything).
 
-    std_support::vector<ObjHeader*> expectedAlive;
-    for (int i = 0; i < kDefaultThreadCount; ++i) {
-        expectedAlive.push_back(globals[i]);
-        expectedAlive.push_back(locals[i]);
-        expectedAlive.push_back(reachables[i]);
-    }
+        std_support::vector<ObjHeader*> expectedAlive;
+        for (int i = 0; i < kDefaultThreadCount; ++i) {
+            expectedAlive.push_back(globals[i]);
+            expectedAlive.push_back(locals[i]);
+            expectedAlive.push_back(reachables[i]);
+        }
 
-    for (auto& mutator : mutators) {
-        EXPECT_THAT(mutator.Alive(), testing::UnorderedElementsAreArray(expectedAlive));
-    }
+        for (auto& mutator : mutators) {
+            EXPECT_THAT(mutator.Alive(), testing::UnorderedElementsAreArray(expectedAlive));
+        }
 
-    for (int i = 0; i < kDefaultThreadCount; ++i) {
-        std_support::vector<ObjHeader*> aliveForThisThread(expectedAlive.begin(), expectedAlive.end());
-        aliveForThisThread.push_back(globals[kDefaultThreadCount + i]);
-        aliveForThisThread.push_back(locals[kDefaultThreadCount + i]);
-        aliveForThisThread.push_back(reachables[kDefaultThreadCount + i]);
-        // Unreachables for new threads were not collected.
-        aliveForThisThread.push_back(unreachables[kDefaultThreadCount + i]);
-        EXPECT_THAT(newMutators[i].Alive(), testing::UnorderedElementsAreArray(aliveForThisThread));
+        for (int i = 0; i < kDefaultThreadCount; ++i) {
+            std_support::vector<ObjHeader*> aliveForThisThread(expectedAlive.begin(), expectedAlive.end());
+            aliveForThisThread.push_back(globals[kDefaultThreadCount + i]);
+            aliveForThisThread.push_back(locals[kDefaultThreadCount + i]);
+            aliveForThisThread.push_back(reachables[kDefaultThreadCount + i]);
+            // Unreachables for new threads were not collected.
+            aliveForThisThread.push_back(unreachables[kDefaultThreadCount + i]);
+            EXPECT_THAT(newMutators[i].Alive(), testing::UnorderedElementsAreArray(aliveForThisThread));
+        }
+    } else {
+        // Custom allocator does not have a notion of objects alive only for some thread
+        std_support::vector<ObjHeader*> expectedAlive;
+        for (int i = 0; i < kDefaultThreadCount; ++i) {
+            expectedAlive.push_back(globals[i]);
+            expectedAlive.push_back(locals[i]);
+            expectedAlive.push_back(reachables[i]);
+            expectedAlive.push_back(globals[kDefaultThreadCount + i]);
+            expectedAlive.push_back(locals[kDefaultThreadCount + i]);
+            expectedAlive.push_back(reachables[kDefaultThreadCount + i]);
+            // Unreachables for new threads were not collected.
+            expectedAlive.push_back(unreachables[kDefaultThreadCount + i]);
+        }
+        // All threads see the same alive objects with the custom alloctor, enough to check a single mutator.
+        EXPECT_THAT(mutators[0].Alive(), testing::UnorderedElementsAreArray(expectedAlive));
     }
-#else
-    // Custom allocator does not have a notion of objects alive only for some thread
-    std_support::vector<ObjHeader*> expectedAlive;
-    for (int i = 0; i < kDefaultThreadCount; ++i) {
-        expectedAlive.push_back(globals[i]);
-        expectedAlive.push_back(locals[i]);
-        expectedAlive.push_back(reachables[i]);
-        expectedAlive.push_back(globals[kDefaultThreadCount + i]);
-        expectedAlive.push_back(locals[kDefaultThreadCount + i]);
-        expectedAlive.push_back(reachables[kDefaultThreadCount + i]);
-        // Unreachables for new threads were not collected.
-        expectedAlive.push_back(unreachables[kDefaultThreadCount + i]);
-    }
-    // All threads see the same alive objects with the custom alloctor, enough to check a single mutator.
-    EXPECT_THAT(mutators[0].Alive(), testing::UnorderedElementsAreArray(expectedAlive));
-#endif // CUSTOM_ALLOCATOR
 }
 
 

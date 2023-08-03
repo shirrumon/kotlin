@@ -98,20 +98,9 @@ mm::ThreadData& gc::ConcurrentMarkAndSweep::ThreadData::commonThreadData() const
     return threadData_;
 }
 
-#ifndef CUSTOM_ALLOCATOR
 gc::ConcurrentMarkAndSweep::ConcurrentMarkAndSweep(
-        ObjectFactory& objectFactory,
-        alloc::ExtraObjectDataFactory& extraObjectDataFactory,
-        gcScheduler::GCScheduler& gcScheduler,
-        bool mutatorsCooperate,
-        std::size_t auxGCThreads) noexcept :
-    objectFactory_(objectFactory),
-    extraObjectDataFactory_(extraObjectDataFactory),
-#else
-gc::ConcurrentMarkAndSweep::ConcurrentMarkAndSweep(
-        gcScheduler::GCScheduler& gcScheduler,
-        bool mutatorsCooperate, std::size_t auxGCThreads) noexcept :
-#endif
+        alloc::Allocator& allocator, gcScheduler::GCScheduler& gcScheduler, bool mutatorsCooperate, std::size_t auxGCThreads) noexcept :
+    allocator_(allocator),
     gcScheduler_(gcScheduler),
     finalizerProcessor_([this](int64_t epoch) {
         GCHandle::getByEpoch(epoch).finalizersDone();
@@ -185,9 +174,9 @@ void gc::ConcurrentMarkAndSweep::PerformFullGC(int64_t epoch) noexcept {
 #ifdef CUSTOM_ALLOCATOR
     // This should really be done by each individual thread while waiting
     for (auto& thread : kotlin::mm::ThreadRegistry::Instance().LockForIter()) {
-        thread.gc().impl().alloc().PrepareForGC();
+        thread.gc().impl().allocator().alloc().PrepareForGC();
     }
-    heap_.PrepareForGC();
+    allocator_.heap().PrepareForGC();
 #endif
 
     auto& scheduler = gcScheduler_;
@@ -204,8 +193,8 @@ void gc::ConcurrentMarkAndSweep::PerformFullGC(int64_t epoch) noexcept {
 #ifndef CUSTOM_ALLOCATOR
     // Taking the locks before the pause is completed. So that any destroying thread
     // would not publish into the global state at an unexpected time.
-    std::optional extraObjectFactoryIterable = extraObjectDataFactory_.LockForIter();
-    std::optional objectFactoryIterable = objectFactory_.LockForIter();
+    std::optional extraObjectFactoryIterable = allocator_.extraObjectDataFactory().LockForIter();
+    std::optional objectFactoryIterable = allocator_.objectFactory().LockForIter();
     checkMarkCorrectness(*objectFactoryIterable);
 #endif
 
@@ -235,9 +224,9 @@ void gc::ConcurrentMarkAndSweep::PerformFullGC(int64_t epoch) noexcept {
     alloc::compactObjectPoolInMainThread();
 #else
     // also sweeps extraObjects
-    auto finalizerQueue = heap_.Sweep(gcHandle);
+    auto finalizerQueue = allocator_.heap().Sweep(gcHandle);
     for (auto& thread : kotlin::mm::ThreadRegistry::Instance().LockForIter()) {
-        finalizerQueue.TransferAllFrom(thread.gc().impl().alloc().ExtractFinalizerQueue());
+        finalizerQueue.TransferAllFrom(thread.gc().impl().allocator().alloc().ExtractFinalizerQueue());
     }
 #endif
     scheduler.onGCFinish(epoch, mm::GlobalData::Instance().gc().GetTotalHeapObjectsSizeBytes());

@@ -5,43 +5,11 @@
 
 #include "GCTestSupport.hpp"
 
-#include "gtest/gtest.h"
-#include "gmock/gmock.h"
-
+#include "AllocatorImplTestSupport.hpp"
 #include "GCImpl.hpp"
 
 using namespace kotlin;
 
-namespace {
-
-template <typename T>
-auto collectCopy(T& iterable) {
-    std::vector<std::remove_reference_t<decltype(*iterable.begin())>> result;
-    for (const auto& element : iterable) {
-        result.push_back(element);
-    }
-    return result;
-}
-
-template <typename T>
-auto collectPointers(T& iterable) {
-    std::vector<const std::remove_reference_t<decltype(*iterable.begin())>*> result;
-    for (const auto& element : iterable) {
-        result.push_back(&element);
-    }
-    return result;
-}
-
-} // namespace
-
 void gc::AssertClear(GC& gc) noexcept {
-#ifdef CUSTOM_ALLOCATOR
-    auto objects = gc.impl().gc().heap().GetAllocatedObjects();
-    EXPECT_THAT(collectCopy(objects), testing::UnorderedElementsAre());
-#else
-    auto objects = gc.impl().objectFactory().LockForIter();
-    auto extraObjects = gc.impl().extraObjectDataFactory().LockForIter();
-    EXPECT_THAT(collectCopy(objects), testing::UnorderedElementsAre());
-    EXPECT_THAT(collectPointers(extraObjects), testing::UnorderedElementsAre());
-#endif
+    alloc::test_support::assertClear(gc.impl().allocator());
 }
