@@ -5,6 +5,7 @@
 
 #include "ObjectOps.hpp"
 
+#include "Allocator.hpp"
 #include "Common.h"
 #include "ThreadData.hpp"
 #include "ThreadState.hpp"
@@ -87,5 +88,5 @@ OBJ_GETTER(mm::AllocateArray, ThreadData* threadData, const TypeInfo* typeInfo, 
 }
 
 size_t mm::GetAllocatedHeapSize(ObjHeader* object) noexcept {
-    return gc::GC::GetAllocatedHeapSize(object);
+    return alloc::allocatedHeapSize(object);
 }

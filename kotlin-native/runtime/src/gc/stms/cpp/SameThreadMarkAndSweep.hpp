@@ -9,7 +9,6 @@
 #include <cstddef>
 
 #include "AllocatorImpl.hpp"
-#include "FinalizerProcessor.hpp"
 #include "GC.hpp"
 #include "GCScheduler.hpp"
 #include "GCState.hpp"
@@ -39,10 +38,6 @@ public:
 
     ~SameThreadMarkAndSweep();
 
-    void StartFinalizerThreadIfNeeded() noexcept;
-    void StopFinalizerThreadIfRunning() noexcept;
-    bool FinalizersThreadIsRunning() noexcept;
-
     GCStateHolder& state() noexcept { return state_; }
 
 private:
@@ -53,7 +48,6 @@ private:
 
     GCStateHolder state_;
     ScopedThread gcThread_;
-    FinalizerProcessor<FinalizerQueue, FinalizerQueueTraits> finalizerProcessor_;
 
     MarkQueue markQueue_;
 };
@@ -67,14 +61,14 @@ struct MarkTraits {
 
     static ObjHeader* tryDequeue(MarkQueue& queue) noexcept {
         if (auto* top = queue.try_pop_front()) {
-            return objectForObjectData(*top);
+            return alloc::objectForObjectData(*top);
         }
         return nullptr;
     }
 
-    static bool tryEnqueue(MarkQueue& queue, ObjHeader* object) noexcept { return queue.try_push_front(objectDataForObject(object)); }
+    static bool tryEnqueue(MarkQueue& queue, ObjHeader* object) noexcept { return queue.try_push_front(alloc::objectDataForObject(object)); }
 
-    static bool tryMark(ObjHeader* object) noexcept { return objectDataForObject(object).tryMark(); }
+    static bool tryMark(ObjHeader* object) noexcept { return alloc::objectDataForObject(object).tryMark(); }
 
     static void processInMark(MarkQueue& markQueue, ObjHeader* object) noexcept {
         auto process = object->type_info()->processObjectInMark;

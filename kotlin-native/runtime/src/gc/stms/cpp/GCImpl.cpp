@@ -52,31 +52,21 @@ gc::GC::GC(gcScheduler::GCScheduler& gcScheduler) noexcept : impl_(std_support::
 
 gc::GC::~GC() = default;
 
-// static
-size_t gc::GC::GetAllocatedHeapSize(ObjHeader* object) noexcept {
-    return alloc::allocatedHeapSize(object);
-}
-
-size_t gc::GC::GetTotalHeapObjectsSizeBytes() const noexcept {
-    return alloc::totalHeapObjectsSizeBytes();
-}
-
 void gc::GC::ClearForTests() noexcept {
-    impl_->gc().StopFinalizerThreadIfRunning();
     impl_->allocator().clearForTests();
     GCHandle::ClearForTests();
 }
 
 void gc::GC::StartFinalizerThreadIfNeeded() noexcept {
-    impl_->gc().StartFinalizerThreadIfNeeded();
+    impl_->allocator().startFinalizerThreadIfNeeded();
 }
 
 void gc::GC::StopFinalizerThreadIfRunning() noexcept {
-    impl_->gc().StopFinalizerThreadIfRunning();
+    impl_->allocator().stopFinalizerThreadIfRunning();
 }
 
 bool gc::GC::FinalizersThreadIsRunning() noexcept {
-    return impl_->gc().FinalizersThreadIsRunning();
+    return impl_->allocator().finalizersThreadIsRunning();
 }
 
 // static
@@ -107,7 +97,7 @@ void gc::GC::WaitFinalizers(int64_t epoch) noexcept {
 }
 
 bool gc::isMarked(ObjHeader* object) noexcept {
-    return objectDataForObject(object).marked();
+    return alloc::objectDataForObject(object).marked();
 }
 
 ALWAYS_INLINE OBJ_GETTER(gc::tryRef, std::atomic<ObjHeader*>& object) noexcept {

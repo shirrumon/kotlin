@@ -5,26 +5,13 @@
 
 #pragma once
 
+#include "Allocator.hpp"
 #include "CustomAllocator.hpp"
 #include "CustomFinalizerProcessor.hpp"
 #include "ExtraObjectData.hpp"
+#include "FinalizerProcessor.hpp"
 #include "GCApi.hpp"
 #include "Heap.hpp"
-
-namespace kotlin::gc {
-
-inline GC::ObjectData& objectDataForObject(ObjHeader* object) noexcept {
-    return kotlin::alloc::objectDataForObject(object);
-}
-
-inline ObjHeader* objectForObjectData(GC::ObjectData& objectData) noexcept {
-    return kotlin::alloc::objectForObjectData(objectData);
-}
-
-using FinalizerQueue = alloc::FinalizerQueue;
-using FinalizerQueueTraits = alloc::FinalizerQueueTraits;
-
-} // namespace kotlin::gc
 
 namespace kotlin::alloc {
 
@@ -71,21 +58,31 @@ public:
     };
 
     Heap& heap() noexcept { return heap_; }
+    FinalizerProcessor<FinalizerQueue, FinalizerQueueTraits>& finalizerProcessor() noexcept { return { finalizerProcessor_; }
+
+    void startFinalizerThreadIfNeeded() noexcept {
+        NativeOrUnregisteredThreadGuard guard(true);
+        finalizerProcessor_.StartFinalizerThreadIfNone();
+        finalizerProcessor_.WaitFinalizerThreadInitialized();
+    }
+
+    void stopFinalizerThreadIfRunning() noexcept {
+        NativeOrUnregisteredThreadGuard guard(true);
+        finalizerProcessor_.StopFinalizerThread();
+    }
+
+    bool finalizersThreadIsRunning() noexcept {
+        return finalizerProcessor_.IsRunning();
+    }
 
     void clearForTests() noexcept {
+        stopFinalizerThreadIfRunning();
         heap_.ClearForTests();
     }
 
 private:
     Heap heap_;
+    FinalizerProcessor<FinalizerQueue, FinalizerQueueTraits> finalizerProcessor_;
 };
-
-inline size_t allocatedHeapSize(ObjHeader* object) noexcept {
-    return CustomAllocator::GetAllocatedHeapSize(object);
-}
-
-inline size_t totalHeapObjectsSizeBytes() noexcept {
-    return GetAllocatedBytes();
-}
 
 }

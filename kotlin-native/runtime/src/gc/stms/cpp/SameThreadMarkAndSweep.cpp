@@ -46,21 +46,6 @@ gc::SameThreadMarkAndSweep::~SameThreadMarkAndSweep() {
     state_.shutdown();
 }
 
-void gc::SameThreadMarkAndSweep::StartFinalizerThreadIfNeeded() noexcept {
-    NativeOrUnregisteredThreadGuard guard(true);
-    finalizerProcessor_.StartFinalizerThreadIfNone();
-    finalizerProcessor_.WaitFinalizerThreadInitialized();
-}
-
-void gc::SameThreadMarkAndSweep::StopFinalizerThreadIfRunning() noexcept {
-    NativeOrUnregisteredThreadGuard guard(true);
-    finalizerProcessor_.StopFinalizerThread();
-}
-
-bool gc::SameThreadMarkAndSweep::FinalizersThreadIsRunning() noexcept {
-    return finalizerProcessor_.IsRunning();
-}
-
 void gc::SameThreadMarkAndSweep::PerformFullGC(int64_t epoch) noexcept {
     auto gcHandle = GCHandle::create(epoch);
     bool didSuspend = mm::RequestThreadsSuspension();
@@ -109,7 +94,7 @@ void gc::SameThreadMarkAndSweep::PerformFullGC(int64_t epoch) noexcept {
     }
 #endif
 
-    scheduler.onGCFinish(epoch, mm::GlobalData::Instance().gc().GetTotalHeapObjectsSizeBytes());
+    scheduler.onGCFinish(epoch, alloc::allocatedBytes());
 
     mm::ResumeThreads();
     gcHandle.threadsAreResumed();

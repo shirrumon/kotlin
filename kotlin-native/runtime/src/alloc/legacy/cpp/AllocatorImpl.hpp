@@ -5,7 +5,9 @@
 
 #pragma once
 
+#include "Allocator.hpp"
 #include "ExtraObjectDataFactory.hpp"
+#include "FinalizerProcessor.hpp"
 #include "GC.hpp"
 #include "GlobalData.hpp"
 #include "Logging.hpp"
@@ -31,20 +33,13 @@ struct ObjectFactoryTraits {
 
 using ObjectFactory = alloc::ObjectFactory<ObjectFactoryTraits>;
 
-inline GC::ObjectData& objectDataForObject(ObjHeader* object) noexcept {
-    return ObjectFactory::NodeRef::From(object).ObjectData();
-}
-
-inline ObjHeader* objectForObjectData(GC::ObjectData& objectData) noexcept {
-    return ObjectFactory::NodeRef::From(objectData)->GetObjHeader();
-}
-
-using FinalizerQueue = ObjectFactory::FinalizerQueue;
-using FinalizerQueueTraits = ObjectFactory::FinalizerQueueTraits;
 
 } // namespace kotlin::gc
 
 namespace kotlin::alloc {
+
+using FinalizerQueue = gc::ObjectFactory::FinalizerQueue;
+using FinalizerQueueTraits = gc::ObjectFactory::FinalizerQueueTraits;
 
 class Allocator {
 public:
@@ -101,8 +96,25 @@ public:
 
     gc::ObjectFactory& objectFactory() noexcept { return objectFactory_; }
     ExtraObjectDataFactory& extraObjectDataFactory() noexcept { return extraObjectDataFactory_; }
+    FinalizerProcessor<FinalizerQueue, FinalizerQueueTraits>& finalizerProcessor() noexcept { return { finalizerProcessor_; }
+
+    void startFinalizerThreadIfNeeded() noexcept {
+        NativeOrUnregisteredThreadGuard guard(true);
+        finalizerProcessor_.StartFinalizerThreadIfNone();
+        finalizerProcessor_.WaitFinalizerThreadInitialized();
+    }
+
+    void stopFinalizerThreadIfRunning() noexcept {
+        NativeOrUnregisteredThreadGuard guard(true);
+        finalizerProcessor_.StopFinalizerThread();
+    }
+
+    bool finalizersThreadIsRunning() noexcept {
+        return finalizerProcessor_.IsRunning();
+    }
 
     void clearForTests() noexcept {
+        stopFinalizerThreadIfRunning();
         extraObjectDataFactory_.ClearForTests();
         objectFactory_.ClearForTests();
     }
@@ -110,14 +122,7 @@ public:
 private:
     gc::ObjectFactory objectFactory_;
     ExtraObjectDataFactory extraObjectDataFactory_;
+    FinalizerProcessor<FinalizerQueue, FinalizerQueueTraits> finalizerProcessor_;
 };
-
-inline size_t allocatedHeapSize(ObjHeader* object) noexcept {
-    return gc::ObjectFactory::GetAllocatedHeapSize(object);
-}
-
-inline size_t totalHeapObjectsSizeBytes() noexcept {
-    return allocatedBytes();
-}
 
 }

@@ -54,15 +54,6 @@ gc::GC::GC(gcScheduler::GCScheduler&) noexcept : impl_(std_support::make_unique<
 
 gc::GC::~GC() = default;
 
-// static
-size_t gc::GC::GetAllocatedHeapSize(ObjHeader* object) noexcept {
-    return alloc::allocatedHeapSize(object);
-}
-
-size_t gc::GC::GetTotalHeapObjectsSizeBytes() const noexcept {
-    return alloc::totalHeapObjectsSizeBytes();
-}
-
 void gc::GC::ClearForTests() noexcept {
     impl_->allocator().clearForTests();
     GCHandle::ClearForTests();

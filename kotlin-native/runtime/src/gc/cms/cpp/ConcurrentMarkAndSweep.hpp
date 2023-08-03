@@ -10,7 +10,6 @@
 
 #include "AllocatorImpl.hpp"
 #include "Barriers.hpp"
-#include "FinalizerProcessor.hpp"
 #include "GCScheduler.hpp"
 #include "GCState.hpp"
 #include "GCStatistics.hpp"
@@ -65,10 +64,6 @@ public:
     ConcurrentMarkAndSweep(alloc::Allocator& allocator, gcScheduler::GCScheduler& scheduler, bool mutatorsCooperate, std::size_t auxGCThreads) noexcept;
     ~ConcurrentMarkAndSweep();
 
-    void StartFinalizerThreadIfNeeded() noexcept;
-    void StopFinalizerThreadIfRunning() noexcept;
-    bool FinalizersThreadIsRunning() noexcept;
-
     void reconfigure(std::size_t maxParallelism, bool mutatorsCooperate, size_t auxGCThreads) noexcept;
 
     GCStateHolder& state() noexcept { return state_; }
@@ -82,7 +77,6 @@ private:
     gcScheduler::GCScheduler& gcScheduler_;
 
     GCStateHolder state_;
-    FinalizerProcessor<FinalizerQueue, FinalizerQueueTraits> finalizerProcessor_;
 
     mark::ParallelMark markDispatcher_;
     ScopedThread mainThread_;

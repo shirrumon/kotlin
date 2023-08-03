@@ -5,9 +5,16 @@
 
 #pragma once
 
+#include "GC.hpp"
+#include "Memory.h"
+
 namespace kotlin::alloc {
 
 void initObjectPool() noexcept;
 void compactObjectPoolInCurrentThread() noexcept;
+size_t allocatedBytes() noexcept;
+size_t allocatedHeapSize(ObjHeader* object) noexcept;
+gc::GC::ObjectData& objectDataForObject(ObjHeader* object) noexcept;
+ObjHeader* objectForObjectData(gc::GC::ObjectData& objectData) noexcept;
 
 }

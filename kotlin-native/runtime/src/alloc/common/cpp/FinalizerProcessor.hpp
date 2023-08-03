@@ -24,7 +24,7 @@
 #include <CoreFoundation/CFRunLoop.h>
 #endif
 
-namespace kotlin::gc {
+namespace kotlin::alloc {
 
 template <typename FinalizerQueue, typename FinalizerQueueTraits>
 class FinalizerProcessor : private Pinned {

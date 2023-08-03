@@ -118,21 +118,6 @@ gc::ConcurrentMarkAndSweep::~ConcurrentMarkAndSweep() {
     state_.shutdown();
 }
 
-void gc::ConcurrentMarkAndSweep::StartFinalizerThreadIfNeeded() noexcept {
-    NativeOrUnregisteredThreadGuard guard(true);
-    finalizerProcessor_.StartFinalizerThreadIfNone();
-    finalizerProcessor_.WaitFinalizerThreadInitialized();
-}
-
-void gc::ConcurrentMarkAndSweep::StopFinalizerThreadIfRunning() noexcept {
-    NativeOrUnregisteredThreadGuard guard(true);
-    finalizerProcessor_.StopFinalizerThread();
-}
-
-bool gc::ConcurrentMarkAndSweep::FinalizersThreadIsRunning() noexcept {
-    return finalizerProcessor_.IsRunning();
-}
-
 void gc::ConcurrentMarkAndSweep::mainGCThreadBody() {
     while (true) {
         auto epoch = state_.waitScheduled();
@@ -229,7 +214,7 @@ void gc::ConcurrentMarkAndSweep::PerformFullGC(int64_t epoch) noexcept {
         finalizerQueue.TransferAllFrom(thread.gc().impl().allocator().alloc().ExtractFinalizerQueue());
     }
 #endif
-    scheduler.onGCFinish(epoch, mm::GlobalData::Instance().gc().GetTotalHeapObjectsSizeBytes());
+    scheduler.onGCFinish(epoch, alloc::allocatedBytes());
     state_.finish(epoch);
     gcHandle.finalizersScheduled(finalizerQueue.size());
     gcHandle.finished();
