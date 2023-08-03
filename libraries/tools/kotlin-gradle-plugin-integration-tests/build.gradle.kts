@@ -10,11 +10,14 @@ pill {
     variant = PillExtension.Variant.FULL
 }
 
-testsJar()
-
-kotlin.sourceSets.all {
-    languageSettings.optIn("org.jetbrains.kotlin.gradle.InternalKotlinGradlePluginApi")
+kotlin {
+    compilerOptions {
+        optIn.add("org.jetbrains.kotlin.gradle.InternalKotlinGradlePluginApi")
+        optIn.add("kotlin.io.path.ExperimentalPathApi")
+    }
 }
+
+testsJar()
 
 val kotlinGradlePluginTest = project(":kotlin-gradle-plugin").sourceSets.named("test").map { it.output }
 
@@ -110,10 +113,6 @@ val shortenTempRootName = project.providers.systemProperty("os.name").get().cont
 val splitGradleIntegrationTestTasks =
     project.providers.gradleProperty("gradle.integration.tests.split.tasks").orNull?.toBoolean()
         ?: project.kotlinBuildProperties.isTeamcityBuild
-
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-    kotlinOptions.freeCompilerArgs += "-opt-in=kotlin.io.path.ExperimentalPathApi"
-}
 
 val cleanTestKitCacheTask = tasks.register<Delete>("cleanTestKitCache") {
     group = "Build"
