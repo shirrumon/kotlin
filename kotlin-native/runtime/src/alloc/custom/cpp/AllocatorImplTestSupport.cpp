@@ -3,12 +3,14 @@
  * that can be found in the LICENSE file.
  */
 
-#pragma once
-
-#include "AllocatorImpl.hpp"
+#include "AllocatorTestSupport.hpp"
 
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
+
+#include "AllocatorImpl.hpp"
+
+using namespace kotlin;
 
 namespace {
 
@@ -23,17 +25,13 @@ auto collectCopy(T& iterable) {
 
 }
 
-namespace kotlin::alloc::test_support {
-
-inline void assertClear(Allocator& allocator) noexcept {
-    auto objects = allocator.heap().GetAllocatedObjects();
+void alloc::test_support::assertClear(Allocator& allocator) noexcept {
+    auto objects = allocator.impl().heap().GetAllocatedObjects();
     EXPECT_THAT(collectCopy(objects), testing::UnorderedElementsAre());
 }
 
-inline std_support::vector<ObjHeader*> allocatedObjects(Allocator::ThreadData& allocator) noexcept {
-    return allocator.allocator().heap().GetAllocatedObjects();
+std_support::vector<ObjHeader*> alloc::test_support::allocatedObjects(Allocator::ThreadData& allocator) noexcept {
+    return allocator.impl().allocator().heap().GetAllocatedObjects();
 }
 
-inline constexpr bool hasPerThreadLiveness = false;
-
-}
+const bool alloc::test_support::hasPerThreadLiveness = false;

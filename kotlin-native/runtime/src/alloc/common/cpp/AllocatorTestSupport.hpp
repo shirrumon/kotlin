@@ -13,4 +13,6 @@ namespace kotlin::alloc::test_support {
 void assertClear(Allocator& allocator) noexcept;
 std_support::vector<ObjHeader*> allocatedObjects(Allocator::ThreadData& allocator) noexcept;
 
+extern const bool hasPerThreadLiveness;
+
 }

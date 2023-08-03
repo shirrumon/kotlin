@@ -3,12 +3,12 @@
  * that can be found in the LICENSE file.
  */
 
-#pragma once
-
-#include "AllocatorImpl.hpp"
+#include "AllocatorTestSupport.hpp"
 
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
+
+#include "AllocatorImpl.hpp"
 
 namespace {
 
@@ -32,16 +32,14 @@ auto collectPointers(T& iterable) {
 
 }
 
-namespace kotlin::alloc::test_support {
-
-inline void assertClear(Allocator& allocator) noexcept {
+void alloc::test_support::assertClear(Allocator& allocator) noexcept {
     auto objects = allocator.objectFactory().LockForIter();
     auto extraObjects = allocator.extraObjectDataFactory().LockForIter();
     EXPECT_THAT(collectCopy(objects), testing::UnorderedElementsAre());
     EXPECT_THAT(collectPointers(extraObjects), testing::UnorderedElementsAre());
 }
 
-inline std_support::vector<ObjHeader*> allocatedObjects(Allocator::ThreadData& allocator) noexcept {
+std_support::vector<ObjHeader*> alloc::test_support::allocatedObjects(Allocator::ThreadData& allocator) noexcept {
     std_support::vector<ObjHeader*> objects;
     for (auto node : allocator.objectFactoryThreadQueue()) {
         objects.push_back(node.GetObjHeader());
@@ -52,6 +50,4 @@ inline std_support::vector<ObjHeader*> allocatedObjects(Allocator::ThreadData& a
     return objects;
 }
 
-inline constexpr bool hasPerThreadLiveness = true;
-
-}
+const bool alloc::test_support::hasPerThreadLiveness = true;
