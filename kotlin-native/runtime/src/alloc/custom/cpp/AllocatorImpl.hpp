@@ -16,78 +16,32 @@
 
 namespace kotlin::alloc {
 
-class Allocator {
+class Allocator::Impl {
 public:
-    class ThreadData {
-    public:
-        explicit ThreadData(Allocator& allocator) noexcept
-            : allocator_(allocator), alloc_(allocator.heap()) {}
-
-        Allocator& allocator() noexcept { return allocator_; }
-        CustomAllocator& alloc() noexcept { return alloc_; }
-
-        void publish() noexcept {}
-
-        void clearForTests() noexcept {
-            alloc_.PrepareForGC();
-        }
-
-        ALWAYS_INLINE ObjHeader* allocateObject(const TypeInfo* typeInfo) noexcept {
-            return alloc_.CreateObject(typeInfo);
-        }
-
-        ALWAYS_INLINE ArrayHeader* allocateArray(const TypeInfo* typeInfo, uint32_t elements) noexcept {
-            return alloc_.CreateArray(typeInfo, elements);
-        }
-
-        ALWAYS_INLINE mm::ExtraObjectData& allocateExtraObject(ObjHeader* object, const TypeInfo* typeInfo) noexcept {
-            return alloc_.CreateExtraObjectDataForObject(object, typeInfo);
-        }
-
-        ALWAYS_INLINE void destroyExtraObjectData(mm::ExtraObjectData& extraObject) noexcept {
-            extraObject.ReleaseAssociatedObject();
-            extraObject.setFlag(mm::ExtraObjectData::FLAGS_FINALIZED);
-        }
-
-        ALWAYS_INLINE void destroyUnattachedExtraObjectData(mm::ExtraObjectData& extraObject) noexcept {
-            extraObject.setFlag(mm::ExtraObjectData::FLAGS_SWEEPABLE);
-        }
-
-    private:
-        Allocator& allocator_;
-        CustomAllocator alloc_;
-    };
-
-    Allocator() noexcept : finalizerProcessor_([](int64_t epoch) {
+    Impl() noexcept : finalizerProcessor_([](int64_t epoch) {
         mm::GlobalData::Instance().gc().onFinalized(epoch);
     }) {}
 
     Heap& heap() noexcept { return heap_; }
     FinalizerProcessor<FinalizerQueue, FinalizerQueueTraits>& finalizerProcessor() noexcept { return finalizerProcessor_; }
 
-    void startFinalizerThreadIfNeeded() noexcept {
-        NativeOrUnregisteredThreadGuard guard(true);
-        finalizerProcessor_.StartFinalizerThreadIfNone();
-        finalizerProcessor_.WaitFinalizerThreadInitialized();
-    }
-
-    void stopFinalizerThreadIfRunning() noexcept {
-        NativeOrUnregisteredThreadGuard guard(true);
-        finalizerProcessor_.StopFinalizerThread();
-    }
-
-    bool finalizersThreadIsRunning() noexcept {
-        return finalizerProcessor_.IsRunning();
-    }
-
-    void clearForTests() noexcept {
-        stopFinalizerThreadIfRunning();
-        heap_.ClearForTests();
-    }
 
 private:
     Heap heap_;
     FinalizerProcessor<FinalizerQueue, FinalizerQueueTraits> finalizerProcessor_;
+};
+
+class Allocator::ThreadData::Impl {
+public:
+    explicit Impl(Allocator::Impl& allocator) noexcept
+        : allocator_(allocator), alloc_(allocator.heap()) {}
+
+    Allocator::Impl& allocator() noexcept { return allocator_; }
+    CustomAllocator& alloc() noexcept { return alloc_; }
+
+private:
+    Allocator::Impl& allocator_;
+    CustomAllocator alloc_;
 };
 
 }

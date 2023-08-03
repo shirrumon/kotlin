@@ -155,9 +155,9 @@ void gc::ConcurrentMarkAndSweep::PerformFullGC(int64_t epoch) noexcept {
 #ifdef CUSTOM_ALLOCATOR
     // This should really be done by each individual thread while waiting
     for (auto& thread : kotlin::mm::ThreadRegistry::Instance().LockForIter()) {
-        thread.gc().impl().allocator().alloc().PrepareForGC();
+        thread.gc().impl().allocator().impl().alloc().PrepareForGC();
     }
-    allocator_.heap().PrepareForGC();
+    allocator_.impl().heap().PrepareForGC();
 #endif
 
     auto& scheduler = gcScheduler_;
@@ -174,8 +174,8 @@ void gc::ConcurrentMarkAndSweep::PerformFullGC(int64_t epoch) noexcept {
 #ifndef CUSTOM_ALLOCATOR
     // Taking the locks before the pause is completed. So that any destroying thread
     // would not publish into the global state at an unexpected time.
-    std::optional extraObjectFactoryIterable = allocator_.extraObjectDataFactory().LockForIter();
-    std::optional objectFactoryIterable = allocator_.objectFactory().LockForIter();
+    std::optional extraObjectFactoryIterable = allocator_.impl().extraObjectDataFactory().LockForIter();
+    std::optional objectFactoryIterable = allocator_.impl().objectFactory().LockForIter();
     checkMarkCorrectness(*objectFactoryIterable);
 #endif
 
@@ -205,9 +205,9 @@ void gc::ConcurrentMarkAndSweep::PerformFullGC(int64_t epoch) noexcept {
     alloc::compactObjectPoolInMainThread();
 #else
     // also sweeps extraObjects
-    auto finalizerQueue = allocator_.heap().Sweep(gcHandle);
+    auto finalizerQueue = allocator_.impl().heap().Sweep(gcHandle);
     for (auto& thread : kotlin::mm::ThreadRegistry::Instance().LockForIter()) {
-        finalizerQueue.TransferAllFrom(thread.gc().impl().allocator().alloc().ExtractFinalizerQueue());
+        finalizerQueue.TransferAllFrom(thread.gc().impl().allocator().impl().alloc().ExtractFinalizerQueue());
     }
 #endif
     scheduler.onGCFinish(epoch, alloc::allocatedBytes());
@@ -218,7 +218,7 @@ void gc::ConcurrentMarkAndSweep::PerformFullGC(int64_t epoch) noexcept {
     // This may start a new thread. On some pthreads implementations, this may block waiting for concurrent thread
     // destructors running. So, it must ensured that no locks are held by this point.
     // TODO: Consider having an always on sleeping finalizer thread.
-    allocator_.finalizerProcessor().ScheduleTasks(std::move(finalizerQueue), epoch);
+    allocator_.impl().finalizerProcessor().ScheduleTasks(std::move(finalizerQueue), epoch);
 }
 
 void gc::ConcurrentMarkAndSweep::reconfigure(std::size_t maxParallelism, bool mutatorsCooperate, std::size_t auxGCThreads) noexcept {

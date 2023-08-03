@@ -61,9 +61,9 @@ void gc::SameThreadMarkAndSweep::PerformFullGC(int64_t epoch) noexcept {
 #ifdef CUSTOM_ALLOCATOR
     // This should really be done by each individual thread while waiting
     for (auto& thread : kotlin::mm::ThreadRegistry::Instance().LockForIter()) {
-        thread.gc().impl().allocator().alloc().PrepareForGC();
+        thread.gc().impl().allocator().impl().alloc().PrepareForGC();
     }
-    allocator_.heap().PrepareForGC();
+    allocator_.impl().heap().PrepareForGC();
 #endif
 
     gc::collectRootSet<internal::MarkTraits>(gcHandle, markQueue_, [](mm::ThreadData&) { return true; });
@@ -75,8 +75,8 @@ void gc::SameThreadMarkAndSweep::PerformFullGC(int64_t epoch) noexcept {
 #ifndef CUSTOM_ALLOCATOR
     // Taking the locks before the pause is completed. So that any destroying thread
     // would not publish into the global state at an unexpected time.
-    std::optional extraObjectFactoryIterable = allocator_.extraObjectDataFactory().LockForIter();
-    std::optional objectFactoryIterable = allocator_.objectFactory().LockForIter();
+    std::optional extraObjectFactoryIterable = allocator_.impl().extraObjectDataFactory().LockForIter();
+    std::optional objectFactoryIterable = allocator_.impl().objectFactory().LockForIter();
 
     alloc::SweepExtraObjects<alloc::DefaultSweepTraits<ObjectFactory>>(gcHandle, *extraObjectFactoryIterable);
     extraObjectFactoryIterable = std::nullopt;
@@ -85,9 +85,9 @@ void gc::SameThreadMarkAndSweep::PerformFullGC(int64_t epoch) noexcept {
     alloc::compactObjectPoolInMainThread();
 #else
     // also sweeps extraObjects
-    auto finalizerQueue = allocator_.heap().Sweep(gcHandle);
+    auto finalizerQueue = allocator_.impl().heap().Sweep(gcHandle);
     for (auto& thread : kotlin::mm::ThreadRegistry::Instance().LockForIter()) {
-        finalizerQueue.TransferAllFrom(thread.gc().impl().allocator().alloc().ExtractFinalizerQueue());
+        finalizerQueue.TransferAllFrom(thread.gc().impl().allocator().impl().alloc().ExtractFinalizerQueue());
     }
 #endif
 
@@ -98,5 +98,5 @@ void gc::SameThreadMarkAndSweep::PerformFullGC(int64_t epoch) noexcept {
     state_.finish(epoch);
     gcHandle.finalizersScheduled(finalizerQueue.size());
     gcHandle.finished();
-    allocator_.finalizerProcessor().ScheduleTasks(std::move(finalizerQueue), epoch);
+    allocator_.impl().finalizerProcessor().ScheduleTasks(std::move(finalizerQueue), epoch);
 }

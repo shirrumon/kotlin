@@ -7,8 +7,51 @@
 
 #include "GC.hpp"
 #include "Memory.h"
+#include "Utils.hpp"
+#include "std_support/Memory.hpp"
 
 namespace kotlin::alloc {
+
+class Allocator : private Pinned {
+public:
+    class Impl;
+
+    class ThreadData : private Pinned {
+    public:
+        class Impl;
+
+        ThreadData(Allocator& allocator) noexcept;
+        ~ThreadData();
+
+        Impl& impl() noexcept { return *impl_; }
+
+        void publish() noexcept;
+        void clearForTests() noexcept;
+
+        ObjHeader* allocateObject(const TypeInfo* typeInfo) noexcept;
+        ArrayHeader* allocateArray(const TypeInfo* typeInfo, uint32_t elements) noexcept;
+        mm::ExtraObjectData& allocateExtraObject(ObjHeader* object, const TypeInfo* typeInfo) noexcept;
+        void destroyExtraObjectData(mm::ExtraObjectData& extraObject) noexcept;
+        void destroyUnattachedExtraObjectData(mm::ExtraObjectData& extraObject) noexcept;
+
+    private:
+        std_support::unique_ptr<Impl> impl_;
+    };
+
+    Allocator() noexcept;
+    ~Allocator();
+
+    Impl& impl() noexcept { return *impl_; }
+
+    void clearForTests() noexcept;
+
+    void startFinalizerThreadIfNeeded() noexcept;
+    void stopFinalizerThreadIfRunning() noexcept;
+    bool finalizersThreadIsRunning() noexcept;
+
+private:
+    std_support::unique_ptr<Impl> impl_;
+};
 
 void initObjectPool() noexcept;
 void compactObjectPoolInCurrentThread() noexcept;
