@@ -230,8 +230,6 @@ val allParallelTestsTask = tasks.register<Test>("kgpAllParallelTests") {
     group = KGP_TEST_TASKS_GROUP
     description = "Runs all tests for Kotlin Gradle plugins except daemon ones"
 
-    maxParallelForks = maxParallelTestForks
-
     useJUnitPlatform {
         excludeTags("DaemonsKGP")
         includeEngines("junit-jupiter")
@@ -241,7 +239,6 @@ val allParallelTestsTask = tasks.register<Test>("kgpAllParallelTests") {
 val jvmTestsTask = tasks.register<Test>("kgpJvmTests") {
     group = KGP_TEST_TASKS_GROUP
     description = "Run tests for Kotlin/JVM part of Gradle plugin"
-    maxParallelForks = maxParallelTestForks
     useJUnitPlatform {
         includeTags("JvmKGP")
         excludeTags("JsKGP", "NativeKGP", "DaemonsKGP", "OtherKGP", "MppKGP", "AndroidKGP")
@@ -252,7 +249,6 @@ val jvmTestsTask = tasks.register<Test>("kgpJvmTests") {
 val jsTestsTask = tasks.register<Test>("kgpJsTests") {
     group = KGP_TEST_TASKS_GROUP
     description = "Run tests for Kotlin/JS part of Gradle plugin"
-    maxParallelForks = maxParallelTestForks
     useJUnitPlatform {
         includeTags("JsKGP")
         excludeTags("JvmKGP", "NativeKGP", "DaemonsKGP", "OtherKGP", "MppKGP", "AndroidKGP")
@@ -263,7 +259,6 @@ val jsTestsTask = tasks.register<Test>("kgpJsTests") {
 val nativeTestsTask = tasks.register<Test>("kgpNativeTests") {
     group = KGP_TEST_TASKS_GROUP
     description = "Run tests for Kotlin/Native part of Gradle plugin"
-    maxParallelForks = maxParallelTestForks
     useJUnitPlatform {
         includeTags("NativeKGP")
         excludeTags("JvmKGP", "JsKGP", "DaemonsKGP", "OtherKGP", "MppKGP", "AndroidKGP")
@@ -287,7 +282,6 @@ val daemonsTestsTask = tasks.register<Test>("kgpDaemonTests") {
 val otherPluginsTestTask = tasks.register<Test>("kgpOtherTests") {
     group = KGP_TEST_TASKS_GROUP
     description = "Run tests for all support plugins, such as kapt, allopen, etc"
-    maxParallelForks = maxParallelTestForks
     useJUnitPlatform {
         includeTags("OtherKGP")
         excludeTags("JvmKGP", "JsKGP", "NativeKGP", "DaemonsKGP", "MppKGP", "AndroidKGP")
@@ -298,7 +292,6 @@ val otherPluginsTestTask = tasks.register<Test>("kgpOtherTests") {
 val mppTestsTask = tasks.register<Test>("kgpMppTests") {
     group = KGP_TEST_TASKS_GROUP
     description = "Run Multiplatform Kotlin Gradle plugin tests"
-    maxParallelForks = maxParallelTestForks
     useJUnitPlatform {
         includeTags("MppKGP")
         excludeTags("JvmKGP", "JsKGP", "NativeKGP", "DaemonsKGP", "OtherKGP", "AndroidKGP")
@@ -309,7 +302,6 @@ val mppTestsTask = tasks.register<Test>("kgpMppTests") {
 val androidTestsTask = tasks.register<Test>("kgpAndroidTests") {
     group = KGP_TEST_TASKS_GROUP
     description = "Run Android Kotlin Gradle plugin tests"
-    maxParallelForks = maxParallelTestForks
     useJUnitPlatform {
         includeTags("AndroidKGP")
         excludeTags("JvmKGP", "JsKGP", "NativeKGP", "DaemonsKGP", "OtherKGP", "MppKGP")
@@ -355,6 +347,12 @@ tasks.withType<Test> {
     val jdk16Provider = project.getToolchainJdkHomeFor(JdkMajorVersion.JDK_16_0)
     val jdk17Provider = project.getToolchainJdkHomeFor(JdkMajorVersion.JDK_17_0)
     val mavenLocalRepo = project.providers.systemProperty("maven.repo.local").orNull
+
+    systemProperty("junit.jupiter.execution.parallel.config.strategy", "fixed")
+    systemProperty(
+        "junit.jupiter.execution.parallel.config.fixed.parallelism",
+        if (name !in listOf("test", daemonsTestsTask, "testAdvanceGradleVersion")) maxParallelTestForks else 1
+    )
 
     // Query required JDKs paths only on execution phase to avoid triggering auto-download on project configuration phase
     // names should follow "jdk\\d+Home" regex where number is a major JDK version
