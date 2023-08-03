@@ -39,7 +39,6 @@ val targetList: List<String> by project
 bitcode {
     allTargets {
         module("main") {
-            headersDirs.from(files("src/alloc/common/cpp"))
             sourceSets {
                 main {
                     // TODO: Split out out `base` module and merge it together with `main` into `runtime.bc`
@@ -153,7 +152,7 @@ bitcode {
 
         module("common_alloc") {
             srcRoot.set(layout.projectDirectory.dir("src/alloc/common"))
-            headersDirs.from(files("src/main/cpp"))
+            headersDirs.from(files("src/gcScheduler/common/cpp", "src/gc/common/cpp", "src/mm/cpp", "src/main/cpp"))
             sourceSets {
                 main {}
             }
