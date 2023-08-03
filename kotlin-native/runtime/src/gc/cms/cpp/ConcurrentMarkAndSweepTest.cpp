@@ -13,7 +13,7 @@
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 
-#include "AllocatorImplTestSupport.hpp"
+#include "AllocatorTestSupport.hpp"
 #include "ExtraObjectData.hpp"
 #include "FinalizerHooksTestSupport.hpp"
 #include "GCImpl.hpp"

@@ -5,7 +5,7 @@
 
 #include "GCTestSupport.hpp"
 
-#include "AllocatorImplTestSupport.hpp"
+#include "AllocatorTestSupport.hpp"
 #include "GCImpl.hpp"
 
 using namespace kotlin;
