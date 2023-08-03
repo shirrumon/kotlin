@@ -29,6 +29,7 @@ public:
 
     ~ExtraObjectDataTest() {
         mm::GlobalsRegistry::Instance().ClearForTests();
+        mm::GlobalData::Instance().allocator().clearForTests();
         mm::GlobalData::Instance().gc().ClearForTests();
     }
 };

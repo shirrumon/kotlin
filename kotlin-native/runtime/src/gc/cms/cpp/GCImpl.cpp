@@ -18,31 +18,6 @@ gc::GC::ThreadData::ThreadData(GC& gc, mm::ThreadData& threadData) noexcept : im
 
 gc::GC::ThreadData::~ThreadData() = default;
 
-void gc::GC::ThreadData::Publish() noexcept {
-    impl_->allocator().publish();
-}
-
-void gc::GC::ThreadData::ClearForTests() noexcept {
-    impl_->allocator().clearForTests();
-}
-
-ALWAYS_INLINE ObjHeader* gc::GC::ThreadData::CreateObject(const TypeInfo* typeInfo) noexcept {
-    return impl_->allocator().allocateObject(typeInfo);
-}
-
-ALWAYS_INLINE ArrayHeader* gc::GC::ThreadData::CreateArray(const TypeInfo* typeInfo, uint32_t elements) noexcept {
-    return impl_->allocator().allocateArray(typeInfo, elements);
-}
-
-ALWAYS_INLINE mm::ExtraObjectData& gc::GC::ThreadData::CreateExtraObjectDataForObject(
-        ObjHeader* object, const TypeInfo* typeInfo) noexcept {
-    return impl_->allocator().allocateExtraObject(object, typeInfo);
-}
-
-ALWAYS_INLINE void gc::GC::ThreadData::DestroyUnattachedExtraObjectData(mm::ExtraObjectData& extraObject) noexcept {
-    impl_->allocator().destroyUnattachedExtraObjectData(extraObject);
-}
-
 void gc::GC::ThreadData::OnSuspendForGC() noexcept {
     impl_->gc().OnSuspendForGC();
 }
@@ -51,25 +26,12 @@ void gc::GC::ThreadData::safePoint() noexcept {
     impl_->gc().safePoint();
 }
 
-gc::GC::GC(gcScheduler::GCScheduler& gcScheduler) noexcept : impl_(std_support::make_unique<Impl>(gcScheduler)) {}
+gc::GC::GC(alloc::Allocator& allocator, gcScheduler::GCScheduler& gcScheduler) noexcept : impl_(std_support::make_unique<Impl>(allocator, gcScheduler)) {}
 
 gc::GC::~GC() = default;
 
 void gc::GC::ClearForTests() noexcept {
-    impl_->allocator().clearForTests();
     GCHandle::ClearForTests();
-}
-
-void gc::GC::StartFinalizerThreadIfNeeded() noexcept {
-    impl_->allocator().startFinalizerThreadIfNeeded();
-}
-
-void gc::GC::StopFinalizerThreadIfRunning() noexcept {
-    impl_->allocator().stopFinalizerThreadIfRunning();
-}
-
-bool gc::GC::FinalizersThreadIsRunning() noexcept {
-    return impl_->allocator().finalizersThreadIsRunning();
 }
 
 // static
@@ -114,12 +76,6 @@ ALWAYS_INLINE OBJ_GETTER(gc::tryRef, std::atomic<ObjHeader*>& object) noexcept {
 
 ALWAYS_INLINE bool gc::tryResetMark(GC::ObjectData& objectData) noexcept {
     return objectData.tryResetMark();
-}
-
-// static
-ALWAYS_INLINE void gc::GC::DestroyExtraObjectData(mm::ExtraObjectData& extraObject) noexcept {
-    auto* threadData = mm::ThreadRegistry::Instance().CurrentThreadData();
-    threadData->gc().impl().allocator().destroyExtraObjectData(extraObject);
 }
 
 // static

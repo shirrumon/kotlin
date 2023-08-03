@@ -7,31 +7,12 @@
 
 #include "GC.hpp"
 
-#include "AllocatorImpl.hpp"
-
 namespace kotlin {
 namespace gc {
 
-class GC::Impl : private Pinned {
-public:
-    Impl() noexcept = default;
+class GC::Impl {};
 
-    alloc::Allocator& allocator() noexcept { return allocator_; }
+class GC::ThreadData::Impl {};
 
-private:
-    alloc::Allocator allocator_;
-};
-
-class GC::ThreadData::Impl : private Pinned {
-public:
-    Impl(GC& gc, mm::ThreadData& threadData) noexcept :
-        allocator_(gc.impl_->allocator()) {}
-
-    alloc::Allocator::ThreadData& allocator() noexcept { return allocator_; }
-
-private:
-    alloc::Allocator::ThreadData allocator_;
-};
-
-} // namespace gc
-} // namespace kotlin
+}
+}

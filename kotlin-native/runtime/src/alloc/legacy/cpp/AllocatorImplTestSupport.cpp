@@ -10,6 +10,8 @@
 
 #include "AllocatorImpl.hpp"
 
+using namespace kotlin;
+
 namespace {
 
 template <typename T>
@@ -33,18 +35,18 @@ auto collectPointers(T& iterable) {
 }
 
 void alloc::test_support::assertClear(Allocator& allocator) noexcept {
-    auto objects = allocator.objectFactory().LockForIter();
-    auto extraObjects = allocator.extraObjectDataFactory().LockForIter();
+    auto objects = allocator.impl().objectFactory().LockForIter();
+    auto extraObjects = allocator.impl().extraObjectDataFactory().LockForIter();
     EXPECT_THAT(collectCopy(objects), testing::UnorderedElementsAre());
     EXPECT_THAT(collectPointers(extraObjects), testing::UnorderedElementsAre());
 }
 
 std_support::vector<ObjHeader*> alloc::test_support::allocatedObjects(Allocator::ThreadData& allocator) noexcept {
     std_support::vector<ObjHeader*> objects;
-    for (auto node : allocator.objectFactoryThreadQueue()) {
+    for (auto node : allocator.impl().objectFactoryThreadQueue()) {
         objects.push_back(node.GetObjHeader());
     }
-    for (auto node : allocator.allocator().objectFactory().LockForIter()) {
+    for (auto node : allocator.impl().allocator().objectFactory().LockForIter()) {
         objects.push_back(node.GetObjHeader());
     }
     return objects;

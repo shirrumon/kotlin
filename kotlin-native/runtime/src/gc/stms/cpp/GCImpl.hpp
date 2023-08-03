@@ -15,26 +15,15 @@ namespace gc {
 
 class GC::Impl : private Pinned {
 public:
-    explicit Impl(gcScheduler::GCScheduler& gcScheduler) noexcept : gc_(allocator_, gcScheduler) {}
+    Impl(alloc::Allocator& allocator, gcScheduler::GCScheduler& gcScheduler) noexcept : gc_(allocator, gcScheduler) {}
 
-    alloc::Allocator& allocator() noexcept { return allocator_; }
     SameThreadMarkAndSweep& gc() noexcept { return gc_; }
 
 private:
-    alloc::Allocator allocator_;
     SameThreadMarkAndSweep gc_;
 };
 
-class GC::ThreadData::Impl : private Pinned {
-public:
-    Impl(GC& gc, mm::ThreadData& threadData) noexcept :
-        allocator_(gc.impl_->allocator()) {}
-
-    alloc::Allocator::ThreadData& allocator() noexcept { return allocator_; }
-
-private:
-    alloc::Allocator::ThreadData allocator_;
-};
+class GC::ThreadData::Impl {};
 
 } // namespace gc
 } // namespace kotlin

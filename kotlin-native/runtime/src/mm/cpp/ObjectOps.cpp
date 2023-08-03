@@ -75,14 +75,14 @@ ALWAYS_INLINE OBJ_GETTER(mm::GetAndSetHeapRef, ObjHeader** location, ObjHeader* 
 OBJ_GETTER(mm::AllocateObject, ThreadData* threadData, const TypeInfo* typeInfo) noexcept {
     AssertThreadState(threadData, ThreadState::kRunnable);
     // TODO: Make this work with GCs that can stop thread at any point.
-    auto* object = threadData->gc().CreateObject(typeInfo);
+    auto* object = threadData->allocator().allocateObject(typeInfo);
     RETURN_OBJ(object);
 }
 
 OBJ_GETTER(mm::AllocateArray, ThreadData* threadData, const TypeInfo* typeInfo, uint32_t elements) noexcept {
     AssertThreadState(threadData, ThreadState::kRunnable);
     // TODO: Make this work with GCs that can stop thread at any point.
-    auto* array = threadData->gc().CreateArray(typeInfo, static_cast<uint32_t>(elements));
+    auto* array = threadData->allocator().allocateArray(typeInfo, static_cast<uint32_t>(elements));
     // `ArrayHeader` and `ObjHeader` are expected to be compatible.
     RETURN_OBJ(reinterpret_cast<ObjHeader*>(array));
 }

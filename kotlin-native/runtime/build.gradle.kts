@@ -320,7 +320,6 @@ bitcode {
             headersDirs.from(files("src/alloc/common/cpp", "src/gcScheduler/common/cpp", "src/gc/common/cpp", "src/mm/cpp", "src/main/cpp", "src/alloc/legacy/cpp"))
             sourceSets {
                 main {}
-                testFixtures {}
             }
 
             onlyIf { target.supportsThreads() }
@@ -331,7 +330,6 @@ bitcode {
             headersDirs.from(files("src/alloc/common/cpp", "src/gcScheduler/common/cpp", "src/gc/common/cpp", "src/mm/cpp", "src/main/cpp", "src/alloc/custom/cpp"))
             sourceSets {
                 main {}
-                testFixtures {}
             }
 
             compilerArgs.add("-DCUSTOM_ALLOCATOR")
@@ -344,7 +342,6 @@ bitcode {
             headersDirs.from(files("src/alloc/common/cpp", "src/gcScheduler/common/cpp", "src/gc/common/cpp", "src/mm/cpp", "src/main/cpp", "src/alloc/legacy/cpp"))
             sourceSets {
                 main {}
-                testFixtures {}
                 test {}
             }
 
@@ -356,7 +353,6 @@ bitcode {
             headersDirs.from(files("src/alloc/common/cpp", "src/gcScheduler/common/cpp", "src/gc/common/cpp", "src/mm/cpp", "src/main/cpp", "src/alloc/custom/cpp"))
             sourceSets {
                 main {}
-                testFixtures {}
                 test {}
             }
 
@@ -370,7 +366,6 @@ bitcode {
             headersDirs.from(files("src/alloc/common/cpp", "src/gcScheduler/common/cpp", "src/gc/common/cpp", "src/mm/cpp", "src/main/cpp", "src/alloc/legacy/cpp"))
             sourceSets {
                 main {}
-                testFixtures {}
                 test {}
             }
 
@@ -382,7 +377,6 @@ bitcode {
             headersDirs.from(files("src/alloc/common/cpp", "src/gcScheduler/common/cpp", "src/gc/common/cpp", "src/mm/cpp", "src/main/cpp", "src/alloc/custom/cpp"))
             sourceSets {
                 main {}
-                testFixtures {}
                 test {}
             }
 

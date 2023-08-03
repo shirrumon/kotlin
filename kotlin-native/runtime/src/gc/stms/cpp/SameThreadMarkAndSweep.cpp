@@ -61,7 +61,7 @@ void gc::SameThreadMarkAndSweep::PerformFullGC(int64_t epoch) noexcept {
 #ifdef CUSTOM_ALLOCATOR
     // This should really be done by each individual thread while waiting
     for (auto& thread : kotlin::mm::ThreadRegistry::Instance().LockForIter()) {
-        thread.gc().impl().allocator().impl().alloc().PrepareForGC();
+        thread.allocator().impl().alloc().PrepareForGC();
     }
     allocator_.impl().heap().PrepareForGC();
 #endif
@@ -87,7 +87,7 @@ void gc::SameThreadMarkAndSweep::PerformFullGC(int64_t epoch) noexcept {
     // also sweeps extraObjects
     auto finalizerQueue = allocator_.impl().heap().Sweep(gcHandle);
     for (auto& thread : kotlin::mm::ThreadRegistry::Instance().LockForIter()) {
-        finalizerQueue.TransferAllFrom(thread.gc().impl().allocator().impl().alloc().ExtractFinalizerQueue());
+        finalizerQueue.TransferAllFrom(thread.allocator().impl().alloc().ExtractFinalizerQueue());
     }
 #endif
 

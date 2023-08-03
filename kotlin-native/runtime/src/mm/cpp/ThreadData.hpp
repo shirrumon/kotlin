@@ -8,6 +8,7 @@
 
 #include <atomic>
 
+#include "Allocator.hpp"
 #include "GlobalData.hpp"
 #include "GlobalsRegistry.hpp"
 #include "GC.hpp"
@@ -31,6 +32,7 @@ public:
         threadId_(threadId),
         globalsThreadQueue_(GlobalsRegistry::Instance()),
         specialRefRegistry_(SpecialRefRegistry::instance()),
+        allocator_(GlobalData::Instance().allocator()),
         gcScheduler_(GlobalData::Instance().gcScheduler(), *this),
         gc_(GlobalData::Instance().gc(), *this),
         suspensionData_(ThreadState::kNative, *this) {}
@@ -53,6 +55,8 @@ public:
 
     std_support::vector<std::pair<ObjHeader**, ObjHeader*>>& initializingSingletons() noexcept { return initializingSingletons_; }
 
+    alloc::Allocator::ThreadData& allocator() noexcept { return allocator_; }
+
     gcScheduler::GCScheduler::ThreadData& gcScheduler() noexcept { return gcScheduler_; }
 
     gc::GC::ThreadData& gc() noexcept { return gc_; }
@@ -63,13 +67,13 @@ public:
         // TODO: These use separate locks, which is inefficient.
         globalsThreadQueue_.Publish();
         specialRefRegistry_.publish();
-        gc_.Publish();
+        allocator_.publish();
     }
 
     void ClearForTests() noexcept {
         globalsThreadQueue_.ClearForTests();
         specialRefRegistry_.clearForTests();
-        gc_.ClearForTests();
+        allocator_.clearForTests();
     }
 
 private:
@@ -78,6 +82,7 @@ private:
     ThreadLocalStorage tls_;
     SpecialRefRegistry::ThreadQueue specialRefRegistry_;
     ShadowStack shadowStack_;
+    alloc::Allocator::ThreadData allocator_;
     gcScheduler::GCScheduler::ThreadData gcScheduler_;
     gc::GC::ThreadData gc_;
     std_support::vector<std::pair<ObjHeader**, ObjHeader*>> initializingSingletons_;

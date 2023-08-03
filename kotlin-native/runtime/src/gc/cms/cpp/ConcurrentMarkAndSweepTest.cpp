@@ -180,7 +180,7 @@ test_support::Object<Payload>& AllocateObjectWithFinalizer(mm::ThreadData& threa
 }
 
 std_support::vector<ObjHeader*> Alive(mm::ThreadData& threadData) {
-    return alloc::test_support::allocatedObjects(threadData.gc().impl().allocator());
+    return alloc::test_support::allocatedObjects(threadData.allocator());
 }
 
 test_support::RegularWeakReferenceImpl& InstallWeakReference(mm::ThreadData& threadData, ObjHeader* objHeader, ObjHeader** location) {
@@ -220,6 +220,7 @@ public:
     ~ConcurrentMarkAndSweepTest() {
         mm::GlobalsRegistry::Instance().ClearForTests();
         mm::SpecialRefRegistry::instance().clearForTests();
+        mm::GlobalData::Instance().allocator().clearForTests();
         mm::GlobalData::Instance().gc().ClearForTests();
     }
 
