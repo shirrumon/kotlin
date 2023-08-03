@@ -98,5 +98,5 @@ void gc::SameThreadMarkAndSweep::PerformFullGC(int64_t epoch) noexcept {
     state_.finish(epoch);
     gcHandle.finalizersScheduled(finalizerQueue.size());
     gcHandle.finished();
-    finalizerProcessor_.ScheduleTasks(std::move(finalizerQueue), epoch);
+    allocator_.finalizerProcessor().ScheduleTasks(std::move(finalizerQueue), epoch);
 }

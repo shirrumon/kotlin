@@ -11,6 +11,7 @@
 #include "ExtraObjectData.hpp"
 #include "FinalizerProcessor.hpp"
 #include "GCApi.hpp"
+#include "GlobalData.hpp"
 #include "Heap.hpp"
 
 namespace kotlin::alloc {

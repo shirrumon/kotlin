@@ -11,10 +11,10 @@ size_t alloc::allocatedHeapSize(ObjHeader* object) noexcept {
     return gc::ObjectFactory::GetAllocatedHeapSize(object);
 }
 
-gc::GC::ObjectData& objectDataForObject(ObjHeader* object) noexcept {
+gc::GC::ObjectData& alloc::objectDataForObject(ObjHeader* object) noexcept {
     return gc::ObjectFactory::NodeRef::From(object).ObjectData();
 }
 
-ObjHeader* objectForObjectData(gc::GC::ObjectData& objectData) noexcept {
+ObjHeader* alloc::objectForObjectData(gc::GC::ObjectData& objectData) noexcept {
     return gc::ObjectFactory::NodeRef::From(objectData)->GetObjHeader();
 }
