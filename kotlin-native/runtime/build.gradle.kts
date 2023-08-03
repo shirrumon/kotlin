@@ -155,7 +155,7 @@ bitcode {
             headersDirs.from(files("src/gcScheduler/common/cpp", "src/gc/common/cpp", "src/mm/cpp", "src/main/cpp"))
             sourceSets {
                 main {}
-                testSupport {}
+                testFixtures {}
                 test {}
             }
         }
@@ -173,7 +173,7 @@ bitcode {
             headersDirs.from(files("src/alloc/common/cpp", "src/main/cpp", "src/mm/cpp", "src/gc/common/cpp", "src/gcScheduler/common/cpp"))
             sourceSets {
                 main {}
-                testSupport {}
+                testFixtures {}
                 test {}
             }
 
@@ -197,7 +197,7 @@ bitcode {
             headersDirs.from(files("src/alloc/common/cpp", "src/main/cpp", "src/mm/cpp", "src/gc/common/cpp", "src/gcScheduler/common/cpp"))
             sourceSets {
                 main {}
-                testSupport {}
+                testFixtures {}
                 test {}
             }
 
