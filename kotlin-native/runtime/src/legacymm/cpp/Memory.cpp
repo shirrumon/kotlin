@@ -48,7 +48,6 @@
 #include "MemoryPrivate.hpp"
 #include "Mutex.hpp"
 #include "Natives.h"
-#include "ObjectAlloc.hpp"
 #include "ObjectTraversal.hpp"
 #include "Porting.h"
 #include "Runtime.h"
@@ -91,6 +90,34 @@ namespace {
 ALWAYS_INLINE bool IsStrictMemoryModel() noexcept {
     return CurrentMemoryModel == MemoryModel::kStrict;
 }
+
+void* allocateInObjectPool(size_t size) noexcept {
+    return std_support::calloc(1, size);
+}
+
+void freeInObjectPool(void* ptr, size_t size) noexcept {
+    return std_support::free(ptr);
+}
+
+template <typename T>
+struct ObjectPoolAllocator {
+    using value_type = T;
+    using size_type = std::size_t;
+    using difference_type = std::ptrdiff_t;
+    using propagate_on_container_move_assignment = std::true_type;
+    using is_always_equal = std::true_type;
+
+    constexpr ObjectPoolAllocator() noexcept = default;
+
+    constexpr ObjectPoolAllocator(const ObjectPoolAllocator&) noexcept = default;
+
+    template <typename U>
+    constexpr ObjectPoolAllocator(const ObjectPoolAllocator<U>&) noexcept {}
+
+    T* allocate(std::size_t n) noexcept { return static_cast<T*>(allocateInObjectPool(n * sizeof(T))); }
+
+    void deallocate(T* p, std::size_t n) noexcept { freeInObjectPool(p, n * sizeof(T)); }
+};
 
 inline constexpr ObjectPoolAllocator<char> objectAllocator;
 

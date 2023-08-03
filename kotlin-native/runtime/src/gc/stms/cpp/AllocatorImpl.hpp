@@ -29,20 +29,21 @@ using FinalizerQueueTraits = alloc::FinalizerQueueTraits;
 
 #else
 
-#include "Allocator.hpp"
 #include "ExtraObjectDataFactory.hpp"
 #include "GC.hpp"
 #include "GlobalData.hpp"
 #include "Logging.hpp"
 #include "ObjectFactory.hpp"
+#include "ObjectFactoryAllocator.hpp"
+#include "ObjectFactorySweep.hpp"
 
 namespace kotlin::gc {
 
 struct ObjectFactoryTraits {
-    using Allocator = AllocatorWithGC<Allocator, ObjectFactoryTraits>;
+    using Allocator = alloc::AllocatorWithGC<alloc::AllocatorBasic, ObjectFactoryTraits>;
     using ObjectData = gc::GC::ObjectData;
 
-    Allocator CreateAllocator() noexcept { return Allocator(gc::Allocator(), *this); }
+    Allocator CreateAllocator() noexcept { return Allocator(alloc::AllocatorBasic(), *this); }
 
     void OnOOM(size_t size) noexcept {
         RuntimeLogDebug({kTagGC}, "Attempt to GC on OOM at size=%zu", size);
@@ -51,7 +52,7 @@ struct ObjectFactoryTraits {
     }
 };
 
-using ObjectFactory = mm::ObjectFactory<ObjectFactoryTraits>;
+using ObjectFactory = alloc::ObjectFactory<ObjectFactoryTraits>;
 
 inline GC::ObjectData& objectDataForObject(ObjHeader* object) noexcept {
     return ObjectFactory::NodeRef::From(object).ObjectData();

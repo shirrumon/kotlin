@@ -294,6 +294,7 @@ class KonanConfig(val project: Project, val configuration: CompilerConfiguration
 
     internal val runtimeNativeLibraries: List<String> = mutableListOf<String>().apply {
         if (debug) add("debug.bc")
+        add("common_alloc.bc")
         add("common_gc.bc")
         add("common_gcScheduler.bc")
         when (gcSchedulerType) {
@@ -335,10 +336,12 @@ class KonanConfig(val project: Project, val configuration: CompilerConfiguration
         }
         when (allocationMode) {
             AllocationMode.MIMALLOC -> {
+                add("legacy_alloc.bc")
                 add("opt_alloc.bc")
                 add("mimalloc.bc")
             }
             AllocationMode.STD -> {
+                add("legacy_alloc.bc")
                 add("std_alloc.bc")
             }
             AllocationMode.CUSTOM -> {

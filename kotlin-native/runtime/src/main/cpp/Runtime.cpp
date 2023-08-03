@@ -3,6 +3,7 @@
  * that can be found in the LICENSE file.
  */
 
+#include "Allocator.hpp"
 #include "Atomic.h"
 #include "Cleaner.h"
 #include "CompilerConstants.hpp"
@@ -11,7 +12,6 @@
 #include "MainQueueProcessor.hpp"
 #include "Memory.h"
 #include "ObjCExportInit.h"
-#include "ObjectAlloc.hpp"
 #include "Porting.h"
 #include "Runtime.h"
 #include "RuntimePrivate.hpp"
@@ -88,7 +88,7 @@ volatile GlobalRuntimeStatus globalRuntimeStatus = kGlobalRuntimeUninitialized;
 
 RuntimeState* initRuntime() {
   SetKonanTerminateHandler();
-  initObjectPool();
+  kotlin::alloc::initObjectPool();
   RuntimeState* result = new (std_support::kalloc) RuntimeState();
   if (!result) return kInvalidRuntime;
   RuntimeCheck(!isValidRuntime(), "No active runtimes allowed");
