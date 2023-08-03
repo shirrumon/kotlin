@@ -155,6 +155,8 @@ bitcode {
             headersDirs.from(files("src/gcScheduler/common/cpp", "src/gc/common/cpp", "src/mm/cpp", "src/main/cpp"))
             sourceSets {
                 main {}
+                testSupport {}
+                test {}
             }
         }
 
