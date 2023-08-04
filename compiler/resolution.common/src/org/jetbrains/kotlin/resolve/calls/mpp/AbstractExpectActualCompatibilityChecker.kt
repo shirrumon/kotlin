@@ -401,7 +401,7 @@ object AbstractExpectActualCompatibilityChecker {
 
         areWeakIncompatibleTypeParameters(expectedTypeParameters, actualTypeParameters)?.let { return it }
 
-        if (shouldCheckAbsenceOfDefaultParamsInActual) {
+        if (true || shouldCheckAbsenceOfDefaultParamsInActual) {
             // "Default parameters in actual" check is required only for functions, because only functions can have parameters
             if (actualDeclaration is FunctionSymbolMarker && expectDeclaration is FunctionSymbolMarker) {
                 // Actual annotation constructors can have default argument values; their consistency with arguments in the expected annotation
