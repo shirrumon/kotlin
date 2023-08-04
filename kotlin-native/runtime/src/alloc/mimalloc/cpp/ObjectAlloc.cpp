@@ -7,10 +7,10 @@
 
 #include <mutex>
 
-#include "../../mimalloc/c/include/mimalloc.h"
 #include "Alignment.hpp"
 #include "CompilerConstants.hpp"
 #include "Memory.h"
+#include "mimalloc.h"
 
 #if KONAN_SUPPORTS_GRAND_CENTRAL_DISPATCH
 #include <dispatch/dispatch.h>

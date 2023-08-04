@@ -162,7 +162,7 @@ bitcode {
 
         module("std_alloc") {
             srcRoot.set(layout.projectDirectory.dir("src/alloc/std"))
-            headersDirs.from(files("src/alloc/common/cpp", "src/alloc/legacy/cpp", "src/main/cpp"))
+            headersDirs.from(files("src/alloc/legacy/cpp", "src/alloc/common/cpp", "src/main/cpp", "src/mm/cpp", "src/gc/common/cpp", "src/gcScheduler/common/cpp"))
             sourceSets {
                 main {}
             }
@@ -184,7 +184,7 @@ bitcode {
 
         module("mimalloc_alloc") {
             srcRoot.set(layout.projectDirectory.dir("src/alloc/mimalloc"))
-            headersDirs.from(files("src/alloc/common/cpp", "src/alloc/legacy/cpp", "src/main/cpp"))
+            headersDirs.from(files("src/alloc/legacy/cpp", "src/alloc/common/cpp", "src/main/cpp", "src/mm/cpp", "src/gc/common/cpp", "src/gcScheduler/common/cpp", "src/mimalloc/c/include"))
             sourceSets {
                 main {}
             }
