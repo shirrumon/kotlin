@@ -20,8 +20,6 @@ class alignas(8) SingleObjectPage {
 public:
     using GCSweepScope = gc::GCHandle::GCSweepScope;
 
-    static GCSweepScope currentGCSweepScope(gc::GCHandle& handle) noexcept { return handle.sweep(); }
-
     static SingleObjectPage* Create(uint64_t cellCount) noexcept;
 
     void Destroy() noexcept;

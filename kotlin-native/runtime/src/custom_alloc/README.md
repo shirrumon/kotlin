@@ -20,8 +20,7 @@ different size categories. The typical case is that the thread’s current page
 for the given size can fit the requested allocation. If that is not the case, a
 different page for that size category is requested from the shared allocation
 space. The requested page can either be readily available (already prepared by
-the GC thread), or it might need to be swept first, or it might be newly
-created.
+the GC thread) or it might be newly created.
 
 The GC thread has a new responsibility when using this allocator: While the
 mutator threads are paused at the start of GC, the GC thread must prepare the
@@ -144,9 +143,8 @@ given page is in, determines its current state:
     before the next GC, if not needed before then.
 
 When a page is requested, the page is taken from `ready_`, if there are any.
-Otherwise, an `unswept_` page is taken and swept before returning. If there are
-no unswept pages either, an empty page is taken, if there are any. Otherwise a
-new page is created in the size category. All returned pages are moved to
+Otherwise, an empty page is taken, if there are any. If there are no empty pages
+either, a new page is created in the size category. All returned pages are moved to
 `used_`. During the marking phase, all remaining pages in `empty_` are freed,
 and all other pages are moved to `unswept_`. The GC thread will go through all
 `PageStore`s and sweep the pages in `unswept_` and move them to `ready_`. If one

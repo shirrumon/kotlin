@@ -31,9 +31,8 @@ TEST(CustomAllocTest, HeapReuseFixedBlockPages) {
     const int MIN = MIN_BLOCK_SIZE;
     const int MAX = FIXED_BLOCK_PAGE_MAX_BLOCK_SIZE + 1;
     FixedBlockPage* pages[MAX];
-    kotlin::alloc::FinalizerQueue finalizerQueue;
     for (int blocks = MIN; blocks < MAX; ++blocks) {
-        pages[blocks] = heap.GetFixedBlockPage(blocks, finalizerQueue);
+        pages[blocks] = heap.GetFixedBlockPage(blocks);
         void* obj = pages[blocks]->TryAllocate();
         mark(obj); // to make the page survive a sweep
     }
@@ -41,21 +40,20 @@ TEST(CustomAllocTest, HeapReuseFixedBlockPages) {
     auto gcHandle = kotlin::gc::GCHandle::createFakeForTests();
     heap.Sweep(gcHandle);
     for (int blocks = MIN; blocks < MAX; ++blocks) {
-        EXPECT_EQ(pages[blocks], heap.GetFixedBlockPage(blocks, finalizerQueue));
+        EXPECT_EQ(pages[blocks], heap.GetFixedBlockPage(blocks));
     }
 }
 
 TEST(CustomAllocTest, HeapReuseNextFitPages) {
     Heap heap;
     const uint32_t BLOCKSIZE = FIXED_BLOCK_PAGE_MAX_BLOCK_SIZE + 42;
-    kotlin::alloc::FinalizerQueue finalizerQueue;
-    NextFitPage* page = heap.GetNextFitPage(BLOCKSIZE, finalizerQueue);
+    NextFitPage* page = heap.GetNextFitPage(BLOCKSIZE);
     void* obj = page->TryAllocate(BLOCKSIZE);
     mark(obj); // to make the page survive a sweep
     heap.PrepareForGC();
     auto gcHandle = kotlin::gc::GCHandle::createFakeForTests();
     heap.Sweep(gcHandle);
-    EXPECT_EQ(page, heap.GetNextFitPage(0, finalizerQueue));
+    EXPECT_EQ(page, heap.GetNextFitPage(0));
 }
 
 } // namespace

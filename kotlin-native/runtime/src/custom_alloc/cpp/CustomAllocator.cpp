@@ -84,7 +84,7 @@ mm::ExtraObjectData* CustomAllocator::CreateExtraObject() noexcept {
         }
     }
     CustomAllocDebug("Failed to allocate in current ExtraObjectPage");
-    while ((page = heap_.GetExtraObjectPage(finalizerQueue_))) {
+    while ((page = heap_.GetExtraObjectPage())) {
         mm::ExtraObjectData* block = page->TryAllocate();
         if (block) {
             extraObjectPage_ = page;
@@ -99,10 +99,6 @@ mm::ExtraObjectData& CustomAllocator::CreateExtraObjectDataForObject(
         ObjHeader* baseObject, const TypeInfo* info) noexcept {
     mm::ExtraObjectData* extraObject = CreateExtraObject();
     return *new (extraObject) mm::ExtraObjectData(baseObject, info);
-}
-
-FinalizerQueue CustomAllocator::ExtractFinalizerQueue() noexcept {
-    return std::move(finalizerQueue_);
 }
 
 void CustomAllocator::PrepareForGC() noexcept {
@@ -141,7 +137,7 @@ uint8_t* CustomAllocator::Allocate(uint64_t size) noexcept {
 
 uint8_t* CustomAllocator::AllocateInSingleObjectPage(uint64_t cellCount) noexcept {
     CustomAllocDebug("CustomAllocator::AllocateInSingleObjectPage(%" PRIu64 ")", cellCount);
-    uint8_t* block = heap_.GetSingleObjectPage(cellCount, finalizerQueue_)->TryAllocate();
+    uint8_t* block = heap_.GetSingleObjectPage(cellCount)->TryAllocate();
     return block;
 }
 
@@ -153,7 +149,7 @@ uint8_t* CustomAllocator::AllocateInNextFitPage(uint32_t cellCount) noexcept {
     }
     CustomAllocDebug("Failed to allocate in curPage");
     while (true) {
-        nextFitPage_ = heap_.GetNextFitPage(cellCount, finalizerQueue_);
+        nextFitPage_ = heap_.GetNextFitPage(cellCount);
         uint8_t* block = nextFitPage_->TryAllocate(cellCount);
         if (block) return block;
     }
@@ -167,7 +163,7 @@ uint8_t* CustomAllocator::AllocateInFixedBlockPage(uint32_t cellCount) noexcept 
         if (block) return block;
     }
     CustomAllocDebug("Failed to allocate in current FixedBlockPage");
-    while ((page = heap_.GetFixedBlockPage(cellCount, finalizerQueue_))) {
+    while ((page = heap_.GetFixedBlockPage(cellCount))) {
         uint8_t* block = page->TryAllocate();
         if (block) {
             fixedBlockPages_[cellCount] = page;

@@ -33,8 +33,6 @@ class alignas(8) FixedBlockPage {
 public:
     using GCSweepScope = gc::GCHandle::GCSweepScope;
 
-    static GCSweepScope currentGCSweepScope(gc::GCHandle& handle) noexcept { return handle.sweep(); }
-
     static FixedBlockPage* Create(uint32_t blockSize) noexcept;
 
     void Destroy() noexcept;

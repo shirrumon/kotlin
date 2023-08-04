@@ -21,8 +21,6 @@ class alignas(8) NextFitPage {
 public:
     using GCSweepScope = gc::GCHandle::GCSweepScope;
 
-    static GCSweepScope currentGCSweepScope(gc::GCHandle& handle) noexcept { return handle.sweep(); }
-
     static NextFitPage* Create(uint32_t cellCount) noexcept;
 
     void Destroy() noexcept;
