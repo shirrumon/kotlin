@@ -165,8 +165,6 @@ bitcode {
             }
 
             compilerArgs.add("-DCUSTOM_ALLOCATOR")
-
-            onlyIf { target.supportsThreads() }
         }
 
         module("opt_alloc") {
@@ -260,8 +258,6 @@ bitcode {
                 testFixtures {}
                 test {}
             }
-
-            onlyIf { target.supportsThreads() }
         }
 
         module("experimental_memory_manager_custom") {
@@ -274,8 +270,6 @@ bitcode {
             }
 
             compilerArgs.add("-DCUSTOM_ALLOCATOR")
-
-            onlyIf { target.supportsThreads() }
         }
 
         module("common_gc") {
@@ -285,8 +279,6 @@ bitcode {
                 main {}
                 test {}
             }
-
-            onlyIf { target.supportsThreads() }
         }
 
         module("noop_gc") {
@@ -296,8 +288,6 @@ bitcode {
                 main {}
                 testFixtures {}
             }
-
-            onlyIf { target.supportsThreads() }
         }
 
         module("noop_gc_custom") {
@@ -309,8 +299,6 @@ bitcode {
             }
 
             compilerArgs.add("-DCUSTOM_ALLOCATOR")
-
-            onlyIf { target.supportsThreads() }
         }
 
         module("same_thread_ms_gc") {
@@ -321,8 +309,6 @@ bitcode {
                 testFixtures {}
                 test {}
             }
-
-            onlyIf { target.supportsThreads() }
         }
 
         module("same_thread_ms_gc_custom") {
@@ -335,8 +321,6 @@ bitcode {
             }
 
             compilerArgs.add("-DCUSTOM_ALLOCATOR")
-
-            onlyIf { target.supportsThreads() }
         }
 
         module("concurrent_ms_gc") {
@@ -347,8 +331,6 @@ bitcode {
                 testFixtures {}
                 test {}
             }
-
-            onlyIf { target.supportsThreads() }
         }
 
         module("concurrent_ms_gc_custom") {
@@ -361,8 +343,6 @@ bitcode {
             }
 
             compilerArgs.add("-DCUSTOM_ALLOCATOR")
-
-            onlyIf { target.supportsThreads() }
         }
 
         module("common_gcScheduler") {
@@ -372,8 +352,6 @@ bitcode {
                 main {}
                 test {}
             }
-
-            onlyIf { target.supportsThreads() }
         }
 
         module("manual_gcScheduler") {
@@ -382,8 +360,6 @@ bitcode {
             sourceSets {
                 main {}
             }
-
-            onlyIf { target.supportsThreads() }
         }
 
         module("adaptive_gcScheduler") {
@@ -393,8 +369,6 @@ bitcode {
                 main {}
                 test {}
             }
-
-            onlyIf { target.supportsThreads() }
         }
 
         module("aggressive_gcScheduler") {
@@ -404,8 +378,6 @@ bitcode {
                 main {}
                 test {}
             }
-
-            onlyIf { target.supportsThreads() }
         }
 
         testsGroup("custom_alloc_runtime_tests") {
