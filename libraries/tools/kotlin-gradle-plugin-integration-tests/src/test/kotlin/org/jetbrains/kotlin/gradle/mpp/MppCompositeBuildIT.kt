@@ -25,7 +25,7 @@ import kotlin.test.assertIs
  Testing with maxVersion 8.2, because of significant branching introduced in KT-58157
  We can remove this, once MAX_SUPPORTED is higher or equal to 8.2
  */
-@GradleTestVersions(maxVersion = TestVersions.Gradle.G_8_2)
+@GradleTestVersions(maxVersion = TestVersions.Gradle.G_8_3)
 class MppCompositeBuildIT : KGPBaseTest() {
     @GradleTest
     @Disabled("stdlib publication migration - test data changes")
@@ -406,7 +406,7 @@ class MppCompositeBuildIT : KGPBaseTest() {
     }
 
     @GradleTest
-    @GradleTestVersions(minVersion = TestVersions.Gradle.G_7_0, maxVersion = TestVersions.Gradle.G_8_2)
+    @GradleTestVersions(minVersion = TestVersions.Gradle.G_7_0, maxVersion = TestVersions.Gradle.G_8_3)
     fun `test sample7`(gradleVersion: GradleVersion) {
         val producer = project("mpp-composite-build/sample7-KT-59863-pluginManagement.includeBuild/producerBuild", gradleVersion)
         project(
