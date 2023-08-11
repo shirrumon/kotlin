@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
+#include <algorithm>
 #include <cstdio>
 #include <cstdlib>
+#include <functional>
 #include <limits>
 #include <string.h>
 #include <string>
@@ -388,35 +390,30 @@ KInt Kotlin_String_lastIndexOfChar(KString thiz, KChar ch, KInt fromIndex) {
   return -1;
 }
 
-// TODO: or code up Knuth-Moris-Pratt.
 KInt Kotlin_String_indexOfString(KString thiz, KString other, KInt fromIndex) {
-  if (fromIndex < 0) {
-    fromIndex = 0;
-  }
-  if (static_cast<uint32_t>(fromIndex) >= thiz->count_) {
-    return (other->count_ == 0) ? thiz->count_ : -1;
-  }
-  if (static_cast<KInt>(other->count_) > static_cast<KInt>(thiz->count_) - fromIndex) {
-    return -1;
-  }
-  // An empty string can be always found.
-  if (other->count_ == 0) {
-    return fromIndex;
-  }
-  const KChar* thizRaw = CharArrayAddressOfElementAt(thiz, 0);
-  const KChar* otherRaw = CharArrayAddressOfElementAt(other, 0);
-  const auto otherSize = other->count_ * sizeof(KChar);
-  while (true) {
-    void* result = konan::memmem(thizRaw + fromIndex, (thiz->count_ - fromIndex) * sizeof(KChar),
-                                 otherRaw, otherSize);
-    if (result == nullptr) return -1;
-    auto byteIndex = reinterpret_cast<intptr_t>(result) - reinterpret_cast<intptr_t>(thizRaw);
-    if (byteIndex % sizeof(KChar) == 0) {
-      return byteIndex / sizeof(KChar);
-    } else {
-      fromIndex = byteIndex / sizeof(KChar) + 1;
+    auto thizSpan = spanForCharArray(thiz);
+    // fromIndex can be negative, make it as if we search from the start.
+    size_t from = fromIndex < 0 ? 0 : static_cast<size_t>(fromIndex);
+    // fromIndex can be more than the string's size, make it as if we search from past the end.
+    if (from > thizSpan.size()) {
+        from = thizSpan.size();
     }
-  }
+    thizSpan = thizSpan.subspan(from);
+    auto otherSpan = spanForCharArray(other);
+    if (otherSpan.empty()) {
+        // An empty string can be always found right at the start of the searching range.
+        return from;
+    }
+    if (otherSpan.size() > thizSpan.size()) {
+        return -1;
+    }
+    // TODO: Consider using `std::boyer_moore_searcher` or `std::boyer_moore_horspool_searcher`.
+    auto searcher = std::default_searcher(otherSpan.begin(), otherSpan.end());
+    auto it = std::search(thizSpan.begin(), thizSpan.end(), searcher);
+    if (it == thizSpan.end()) {
+        return -1;
+    }
+    return std::distance(thizSpan.begin(), it) + from;
 }
 
 KInt Kotlin_String_lastIndexOfString(KString thiz, KString other, KInt fromIndex) {

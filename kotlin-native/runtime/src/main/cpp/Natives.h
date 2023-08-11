@@ -20,6 +20,7 @@
 #include "Types.h"
 #include "Exceptions.h"
 #include "Memory.h"
+#include "std_support/Span.hpp"
 
 constexpr size_t alignUp(size_t size, size_t alignment) {
   return (size + alignment - 1) & ~(alignment - 1);
@@ -105,5 +106,51 @@ RUNTIME_NOTHROW RUNTIME_PURE KLong* Kotlin_longArrayGetElementAddress(KRef array
 #ifdef __cplusplus
 }
 #endif
+
+namespace kotlin {
+
+template <typename T = KRef>
+std_support::span<T> spanForArray(ArrayHeader* array) noexcept {
+    return std_support::span<T>(AddressOfElementAt<T>(array, 0), array->count_);
+}
+
+template <typename T = KRef>
+std_support::span<const T> spanForArray(const ArrayHeader* array) noexcept {
+    return std_support::span<const T>(AddressOfElementAt<T>(array, 0), array->count_);
+}
+
+inline std_support::span<KByte> spanForByteArray(ArrayHeader* array) noexcept {
+    return spanForArray<KByte>(array);
+}
+
+inline std_support::span<const KByte> spanForByteArray(const ArrayHeader* array) noexcept {
+    return spanForArray<const KByte>(array);
+}
+
+inline std_support::span<KChar> spanForCharArray(ArrayHeader* array) noexcept {
+    return spanForArray<KChar>(array);
+}
+
+inline std_support::span<const KChar> spanForCharArray(const ArrayHeader* array) noexcept {
+    return spanForArray<const KChar>(array);
+}
+
+inline std_support::span<KInt> spanForIntArray(ArrayHeader* array) noexcept {
+    return spanForArray<KInt>(array);
+}
+
+inline std_support::span<const KInt> spanForIntArray(const ArrayHeader* array) noexcept {
+    return spanForArray<const KInt>(array);
+}
+
+inline std_support::span<KLong> spanForLongArray(ArrayHeader* array) noexcept {
+    return spanForArray<KLong>(array);
+}
+
+inline std_support::span<const KLong> spanForLongArray(const ArrayHeader* array) noexcept {
+    return spanForArray<const KLong>(array);
+}
+
+} // namespace kotlin
 
 #endif // RUNTIME_NATIVES_H
