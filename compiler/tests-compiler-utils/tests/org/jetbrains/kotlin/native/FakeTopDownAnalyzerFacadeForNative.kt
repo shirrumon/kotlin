@@ -38,7 +38,7 @@ object FakeTopDownAnalyzerFacadeForNative {
             compilerEnvironment
         )
 
-        analyzerForNative.analyzeDeclarations(TopDownAnalysisMode.TopLevelDeclarations, files as Collection<com.intellij.psi.PsiElement>)
+        analyzerForNative.analyzeDeclarations(TopDownAnalysisMode.TopLevelDeclarations, files as Collection<com.intellij.psi.PsiElement>, checkExpectClass = true)
         return AnalysisResult.success(trace.bindingContext, moduleContext.module)
     }
 }

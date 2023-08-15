@@ -448,7 +448,7 @@ abstract class AbstractDiagnosticsTest : BaseDiagnosticsTest() {
             )
         )
 
-        container.get<LazyTopDownAnalyzer>().analyzeDeclarations(TopDownAnalysisMode.TopLevelDeclarations, files)
+        container.get<LazyTopDownAnalyzer>().analyzeDeclarations(TopDownAnalysisMode.TopLevelDeclarations, files, checkExpectClass = true)
 
         return AnalysisResult.success(moduleTrace.bindingContext, moduleDescriptor)
     }

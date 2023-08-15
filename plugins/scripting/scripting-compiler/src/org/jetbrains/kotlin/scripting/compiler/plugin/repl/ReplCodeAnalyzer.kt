@@ -128,7 +128,7 @@ open class ReplCodeAnalyzerBase(
     }
 
     protected fun runAnalyzer(linePsi: KtFile, importedScripts: List<KtFile>): TopDownAnalysisContext {
-        return topDownAnalyzer.analyzeDeclarations(topDownAnalysisContext.topDownAnalysisMode, listOf(linePsi) + importedScripts)
+        return topDownAnalyzer.analyzeDeclarations(topDownAnalysisContext.topDownAnalysisMode, listOf(linePsi) + importedScripts, checkExpectClass = true)
     }
 
     private fun doAnalyze(linePsi: KtFile, importedScripts: List<KtFile>, codeLine: SourceCodeByReplLine): ReplLineAnalysisResult {

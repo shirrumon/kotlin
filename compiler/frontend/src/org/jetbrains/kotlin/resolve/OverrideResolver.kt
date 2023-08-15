@@ -52,15 +52,16 @@ class OverrideResolver(
     private val platformSpecificDiagnosticComponents: PlatformSpecificDiagnosticComponents
 ) {
 
-    fun check(c: TopDownAnalysisContext) {
+    fun check(c: TopDownAnalysisContext, checkExpectClass: Boolean) {
         checkVisibility(c)
-        checkOverrides(c)
+        checkOverrides(c, checkExpectClass)
         checkParameterOverridesForAllClasses(c)
     }
 
 
-    private fun checkOverrides(c: TopDownAnalysisContext) {
+    private fun checkOverrides(c: TopDownAnalysisContext, checkExpectClass: Boolean) {
         for ((key, value) in c.declaredClasses) {
+            if (!checkExpectClass && value.isExpect) continue
             checkOverridesInAClass(value, key)
         }
     }

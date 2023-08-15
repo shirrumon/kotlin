@@ -58,6 +58,7 @@ class LazyTopDownAnalyzer(
     fun analyzeDeclarations(
         topDownAnalysisMode: TopDownAnalysisMode,
         declarations: Collection<PsiElement>,
+        checkExpectClass: Boolean,
         outerDataFlowInfo: DataFlowInfo = DataFlowInfo.EMPTY,
         localContext: ExpressionTypingContext? = null
     ): TopDownAnalysisContext {
@@ -218,7 +219,7 @@ class LazyTopDownAnalyzer(
 
         declarationResolver.resolveAnnotationsOnFiles(c, fileScopeProvider)
 
-        overrideResolver.check(c)
+        overrideResolver.check(c, checkExpectClass)
 
         varianceChecker.check(c)
 

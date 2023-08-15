@@ -116,7 +116,7 @@ object TopDownAnalyzerFacadeForJVM {
             }
         }
 
-        container.get<LazyTopDownAnalyzer>().analyzeDeclarations(TopDownAnalysisMode.TopLevelDeclarations, files)
+        container.get<LazyTopDownAnalyzer>().analyzeDeclarations(TopDownAnalysisMode.TopLevelDeclarations, files, checkExpectClass = false)
 
         invokeExtensionsOnAnalysisComplete()?.let { return it }
 

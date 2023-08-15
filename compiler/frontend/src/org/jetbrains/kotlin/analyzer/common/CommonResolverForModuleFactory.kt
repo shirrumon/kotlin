@@ -202,7 +202,7 @@ class CommonResolverForModuleFactory(
             var result = analysisHandlerExtensions.firstNotNullOfOrNull { extension ->
                 extension.doAnalysis(project, moduleDescriptor, projectContext, files, trace, container)
             } ?: run {
-                container.get<LazyTopDownAnalyzer>().analyzeDeclarations(TopDownAnalysisMode.TopLevelDeclarations, files)
+                container.get<LazyTopDownAnalyzer>().analyzeDeclarations(TopDownAnalysisMode.TopLevelDeclarations, files, checkExpectClass = true)
                 AnalysisResult.success(trace.bindingContext, moduleDescriptor)
             }
 

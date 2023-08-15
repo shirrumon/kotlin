@@ -141,7 +141,7 @@ abstract class AbstractTopDownAnalyzerFacadeForWeb {
         var result = analysisHandlerExtensions.firstNotNullOfOrNull { extension ->
             extension.doAnalysis(project, moduleContext.module, moduleContext, files, trace, container)
         } ?: run {
-            container.get<LazyTopDownAnalyzer>().analyzeDeclarations(TopDownAnalysisMode.TopLevelDeclarations, files)
+            container.get<LazyTopDownAnalyzer>().analyzeDeclarations(TopDownAnalysisMode.TopLevelDeclarations, files, checkExpectClass = false)
             AnalysisResult.success(trace.bindingContext, moduleContext.module)
         }
 
