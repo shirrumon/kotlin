@@ -12,6 +12,7 @@ import org.junit.jupiter.api.DisplayName
 import java.nio.file.Path
 import kotlin.io.path.*
 
+@JsGradlePluginTests
 abstract class IncrementalCompilationJsMultiProjectIT : BaseIncrementalCompilationMultiProjectIT() {
     override val defaultProjectName: String = "incrementalMultiproject"
 
@@ -154,27 +155,23 @@ abstract class IncrementalCompilationJsMultiProjectWithPreciseBackupIT : Increme
     override val defaultBuildOptions = super.defaultBuildOptions.copy(usePreciseOutputsBackup = true, keepIncrementalCompilationCachesInMemory = true)
 }
 
-@JsGradlePluginTests
 class IncrementalCompilationK1JsMultiProject : IncrementalCompilationJsMultiProjectIT() {
-    override val defaultBuildOptions: BuildOptions
-        get() = super.defaultBuildOptions.copyEnsuringK1()
-}
-
-class IncrementalCompilationK1JsMultiProjectWithPreciseBackupIT : IncrementalCompilationJsMultiProjectWithPreciseBackupIT() {
-    override val defaultBuildOptions: BuildOptions
-        get() = super.defaultBuildOptions.copyEnsuringK1()
+    override val defaultBuildOptions = super.defaultBuildOptions.copyEnsuringK1()
 }
 
 class IncrementalCompilationK2JsMultiProject : IncrementalCompilationJsMultiProjectIT() {
-    override val defaultBuildOptions: BuildOptions
-        get() = super.defaultBuildOptions.copyEnsuringK2()
+    override val defaultBuildOptions = super.defaultBuildOptions.copyEnsuringK2()
+}
+
+class IncrementalCompilationK1JsMultiProjectWithPreciseBackupIT : IncrementalCompilationJsMultiProjectWithPreciseBackupIT() {
+    override val defaultBuildOptions = super.defaultBuildOptions.copyEnsuringK1()
 }
 
 class IncrementalCompilationK2JsMultiProjectWithPreciseBackupIT : IncrementalCompilationJsMultiProjectWithPreciseBackupIT() {
-    override val defaultBuildOptions: BuildOptions
-        get() = super.defaultBuildOptions.copyEnsuringK2()
+    override val defaultBuildOptions = super.defaultBuildOptions.copyEnsuringK2()
 }
 
+@JvmGradlePluginTests
 abstract class IncrementalCompilationJvmMultiProjectIT : BaseIncrementalCompilationMultiProjectIT() {
     override val additionalLibDependencies: String =
         "implementation \"org.jetbrains.kotlin:kotlin-test:${'$'}kotlin_version\""
@@ -331,19 +328,24 @@ abstract class IncrementalCompilationJvmMultiProjectIT : BaseIncrementalCompilat
     }
 }
 
-class IncrementalCompilationJvmMultiProjectWithPreciseBackupIT : IncrementalCompilationJvmMultiProjectIT() {
+abstract class IncrementalCompilationJvmMultiProjectWithPreciseBackupIT : IncrementalCompilationJvmMultiProjectIT() {
     override val defaultBuildOptions = super.defaultBuildOptions.copy(usePreciseOutputsBackup = true, keepIncrementalCompilationCachesInMemory = true)
 }
 
-@JvmGradlePluginTests
+class IncrementalCompilationK1JvmMultiProjectWithPreciseBackupIT : IncrementalCompilationJvmMultiProjectWithPreciseBackupIT() {
+    override val defaultBuildOptions = super.defaultBuildOptions.copyEnsuringK1()
+}
+
+class IncrementalCompilationK2JvmMultiProjectWithPreciseBackupIT : IncrementalCompilationJvmMultiProjectWithPreciseBackupIT() {
+    override val defaultBuildOptions = super.defaultBuildOptions.copyEnsuringK2()
+}
+
 class IncrementalCompilationK1JvmMultiProjectIT : IncrementalCompilationJvmMultiProjectIT() {
-    override val defaultBuildOptions: BuildOptions
-        get() = super.defaultBuildOptions.copyEnsuringK1()
+    override val defaultBuildOptions: BuildOptions = super.defaultBuildOptions.copyEnsuringK1()
 }
 
 class IncrementalCompilationK2JvmMultiProjectIT : IncrementalCompilationJvmMultiProjectIT() {
-    override val defaultBuildOptions: BuildOptions
-        get() = super.defaultBuildOptions.copyEnsuringK2()
+    override val defaultBuildOptions: BuildOptions = super.defaultBuildOptions.copyEnsuringK2()
 }
 
 open class IncrementalCompilationOldICJvmMultiProjectIT : IncrementalCompilationJvmMultiProjectIT() {

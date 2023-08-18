@@ -10,6 +10,7 @@ import org.gradle.api.logging.configuration.WarningMode
 import org.gradle.internal.logging.LoggingConfigurationBuildOptions.StacktraceOption
 import org.gradle.util.GradleVersion
 import org.jetbrains.kotlin.cli.common.CompilerSystemProperties.COMPILE_INCREMENTAL_WITH_ARTIFACT_TRANSFORM
+import org.jetbrains.kotlin.config.LanguageVersionSettingsImpl
 import org.jetbrains.kotlin.gradle.BaseGradleIT
 import org.jetbrains.kotlin.gradle.dsl.NativeCacheKind
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompilerExecutionStrategy
@@ -51,8 +52,8 @@ data class BuildOptions(
     val compilerExecutionStrategy: KotlinCompilerExecutionStrategy? = null,
     val runViaBuildToolsApi: Boolean? = null,
 ) {
-    val isK2ByDefault: Boolean
-        get() = kotlinVersion.startsWith("2")
+    val isK2ByDefault
+        get() = LanguageVersionSettingsImpl.DEFAULT.languageVersion.usesK2
 
     fun copyEnsuringK1(): BuildOptions =
         copy(languageVersion = if (isK2ByDefault) "1.9" else null)

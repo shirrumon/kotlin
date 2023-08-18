@@ -74,14 +74,12 @@ abstract class KotlinJsIrLibraryGradlePluginITBase : KGPBaseTest() {
 @DisplayName("Kotlin/JS K1 IR library")
 @JsGradlePluginTests
 class KotlinK1JsIrLibraryGradlePluginIT : KotlinJsIrLibraryGradlePluginITBase() {
-    override val defaultBuildOptions: BuildOptions
-        get() = super.defaultBuildOptions.copyEnsuringK1()
+    override val defaultBuildOptions = super.defaultBuildOptions.copyEnsuringK1()
 }
 
 @GradleTestVersions(minVersion = TestVersions.Gradle.G_7_0)
 @DisplayName("Kotlin/JS K2 IR library")
 @JsGradlePluginTests
 class KotlinK2JsIrLibraryGradlePluginIT : KotlinJsIrLibraryGradlePluginITBase() {
-    override val defaultBuildOptions: BuildOptions
-        get() = super.defaultBuildOptions.copyEnsuringK2()
+    override val defaultBuildOptions = super.defaultBuildOptions.copyEnsuringK2()
 }
