@@ -87,7 +87,7 @@ open class IrTypeMapper(private val context: JvmBackendContext) : KotlinTypeMapp
             is IrClass ->
                 return computeClassInternalName(parent, 1 + shortName.length).append("$").append(shortName)
             is IrFunction ->
-                if (parent.isSuspend && parent.parentAsClass.origin == JvmLoweredDeclarationOrigin.DEFAULT_IMPLS) {
+                if (parent.isSuspend && parent.parentAsClass.origin === JvmLoweredDeclarationOrigin.DEFAULT_IMPLS) {
                     val parentName = parent.name.asString()
                     return computeClassInternalName(parent.parentAsClass.parentAsClass, 1 + parentName.length)
                         .append("$").append(parentName)

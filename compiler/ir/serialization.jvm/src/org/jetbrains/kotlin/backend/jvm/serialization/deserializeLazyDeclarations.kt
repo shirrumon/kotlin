@@ -13,6 +13,7 @@ import org.jetbrains.kotlin.backend.common.overrides.FileLocalAwareLinker
 import org.jetbrains.kotlin.backend.common.serialization.*
 import org.jetbrains.kotlin.backend.common.serialization.encodings.BinarySymbolData
 import org.jetbrains.kotlin.backend.common.serialization.signature.IdSignatureSerializer
+import org.jetbrains.kotlin.backend.jvm.JvmLoweredDeclarationOrigin
 import org.jetbrains.kotlin.backend.jvm.serialization.proto.JvmIr
 import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
 import org.jetbrains.kotlin.ir.IrBuiltIns
@@ -20,6 +21,7 @@ import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.backend.jvm.serialization.JvmIrMangler
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrDeclaration
+import org.jetbrains.kotlin.ir.declarations.IrDeclarationOriginImpl
 import org.jetbrains.kotlin.ir.declarations.impl.IrFileImpl
 import org.jetbrains.kotlin.ir.declarations.lazy.LazyIrFactory
 import org.jetbrains.kotlin.ir.linkage.IrProvider
@@ -36,6 +38,17 @@ import org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration as 
 import org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression as ProtoExpression
 import org.jetbrains.kotlin.backend.common.serialization.proto.IrStatement as ProtoStatement
 import org.jetbrains.kotlin.backend.common.serialization.proto.IrType as ProtoType
+
+/**
+ * Stores the mapping of [JvmLoweredDeclarationOrigin] to their corresponding names.
+ *
+ * Provided to [IrDeclarationDeserializer] to ensure that instances of JVM origins are deserialized exactly the same, which allows using
+ * `===` instead `==` in the backend.
+ */
+private val declarationOriginIndexSupplement = JvmLoweredDeclarationOrigin::class.nestedClasses
+    .toList()
+    .mapNotNull { it.objectInstance as? IrDeclarationOriginImpl }
+    .associateBy { it.name }
 
 fun deserializeFromByteArray(
     byteArray: ByteArray,
@@ -88,7 +101,8 @@ fun deserializeFromByteArray(
         fakeOverrideBuilder,
         compatibilityMode = CompatibilityMode.CURRENT,
         partialLinkageEnabled = false,
-        internationService = internationService
+        internationService = internationService,
+        declarationOriginIndexSupplement = declarationOriginIndexSupplement,
     )
     for (declarationProto in irProto.declarationList) {
         deserializer.deserializeDeclaration(declarationProto, setParent = false)

@@ -10,6 +10,8 @@ dependencies {
     api(project(":core:metadata.jvm"))
     implementation(project(":core:deserialization.common.jvm"))
     api(project(":compiler:frontend.java"))
+    implementation(project(":compiler:backend.jvm"))
+    compileOnly(commonDependency("org.jetbrains.kotlin:kotlin-reflect")) { isTransitive = false }
 }
 
 sourceSets {

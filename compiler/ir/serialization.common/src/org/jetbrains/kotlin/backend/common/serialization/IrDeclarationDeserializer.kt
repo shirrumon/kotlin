@@ -79,6 +79,7 @@ class IrDeclarationDeserializer(
     private val compatibilityMode: CompatibilityMode,
     private val partialLinkageEnabled: Boolean,
     private val internationService: IrInterningService,
+    private val declarationOriginIndexSupplement: Map<String, IrDeclarationOriginImpl> = emptyMap(),
 ) {
 
     private val bodyDeserializer = IrBodyDeserializer(builtIns, allowErrorNodes, irFactory, libraryFile, this)
@@ -794,15 +795,18 @@ class IrDeclarationDeserializer(
         }
 
     companion object {
-        private val allKnownDeclarationOrigins = IrDeclarationOrigin::class.nestedClasses.toList()
         private val declarationOriginIndex =
-            allKnownDeclarationOrigins.mapNotNull { it.objectInstance as? IrDeclarationOriginImpl }.associateBy { it.name }
+            IrDeclarationOrigin::class.nestedClasses
+                .toList()
+                .mapNotNull { it.objectInstance as? IrDeclarationOriginImpl }
+                .associateBy { it.name }
     }
 
     private fun deserializeIrDeclarationOrigin(protoName: Int): IrDeclarationOrigin {
         val originName = libraryFile.string(protoName)
         return IrDeclarationOrigin.GeneratedByPlugin.fromSerializedString(originName)
             ?: declarationOriginIndex[originName]
+            ?: declarationOriginIndexSupplement[originName]
             ?: object : IrDeclarationOriginImpl(originName) {}
     }
 
