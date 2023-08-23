@@ -112,8 +112,8 @@ class JpsStatisticsReportService {
     private val finishedModuleStatisticData = ArrayList<JpsCompileStatisticsData>()
     private val log = Logger.getInstance("#org.jetbrains.kotlin.jps.statistic.KotlinBuilderReportService")
     private val loggerAdapter = JpsKotlinLogger(log)
-    private val httpService = httpReportSettings?.let { HttpReportService(it.url, it.user, it.password) }
-    private val httpReportExecutor = HttpReportServiceExecutor()
+    private val httpReportParameters = httpReportSettings?.let { HttpReportParameters(it.url, it.user, it.password) }
+    private val httpReportService = HttpReportService()
 
     fun moduleBuildStarted(chunk: ModuleChunk) {
         val moduleName = chunk.name
@@ -137,11 +137,11 @@ class JpsStatisticsReportService {
         metrics.buildFinish(chunk, context)
         val statisticData = metrics.flush(context)
         finishedModuleStatisticData.add(statisticData)
-        httpService?.also { httpReportExecutor.sendData(it, loggerAdapter) { statisticData } }
+        httpReportParameters?.also { httpReportService.sendData(it, loggerAdapter) { statisticData } }
     }
 
     fun buildFinish(context: CompileContext) {
-        httpService?.also { httpReportExecutor.close(it, loggerAdapter) }
+        httpReportParameters?.also { httpReportService.close(it, loggerAdapter) }
         fileReportSettings?.also {
             FileReportService.reportBuildStatInFile(
                 it.buildReportDir, context.projectDescriptor.project.name, true, finishedModuleStatisticData,

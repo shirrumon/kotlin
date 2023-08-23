@@ -33,7 +33,7 @@ class BuildReportsService {
     private val startTime = System.nanoTime()
     private val buildUuid = UUID.randomUUID().toString()
 
-    private val httpReportExecutorService = HttpReportServiceExecutor()
+    private val httpReportService = HttpReportService()
 
     private val tags = LinkedHashSet<StatTag>()
     private var customValues = 0 // doesn't need to be thread-safe
@@ -55,8 +55,8 @@ class BuildReportsService {
 
         val reportingSettings = parameters.reportingSettings
 
-        parameters.httpService?.also {
-            httpReportExecutorService.sendData(it, loggerAdapter) {
+        parameters.httpReportParameters?.also {
+            httpReportService.sendData(it, loggerAdapter) {
                 reportBuildFinish(parameters)
             }
         }
@@ -81,8 +81,8 @@ class BuildReportsService {
         }
 
         //It's expected that bad internet connection can cause a significant delay for big project
-        parameters.httpService?.also {
-            httpReportExecutorService.close(it, loggerAdapter)
+        parameters.httpReportParameters?.also {
+            httpReportService.close(it, loggerAdapter)
         }
     }
 
@@ -161,8 +161,8 @@ class BuildReportsService {
         buildOperationRecord: BuildOperationRecord,
         parameters: BuildReportParameters,
     ) {
-        parameters.httpService?.also { httpService ->
-            httpReportExecutorService.sendData(httpService, loggerAdapter) {
+        parameters.httpReportParameters?.also { httpService ->
+            httpReportService.sendData(httpService, loggerAdapter) {
                 prepareData(
                     event,
                     parameters.projectName,
@@ -407,7 +407,7 @@ enum class TaskExecutionState {
 data class BuildReportParameters(
     val startParameters: BuildStartParameters,
     val reportingSettings: ReportingSettings,
-    val httpService: HttpReportService?,
+    val httpReportParameters: HttpReportParameters?,
 
     val projectDir: File,
     val label: String?,

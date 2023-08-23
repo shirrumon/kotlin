@@ -25,7 +25,7 @@ import org.gradle.tooling.events.task.TaskFinishEvent
 import org.gradle.tooling.events.task.TaskSkippedResult
 import org.gradle.util.GradleVersion
 import org.jetbrains.kotlin.build.report.metrics.*
-import org.jetbrains.kotlin.build.report.statistics.HttpReportService
+import org.jetbrains.kotlin.build.report.statistics.HttpReportParameters
 import org.jetbrains.kotlin.gradle.plugin.BuildEventsListenerRegistryHolder
 import org.jetbrains.kotlin.gradle.plugin.getKotlinPluginVersion
 import org.jetbrains.kotlin.gradle.plugin.internal.state.TaskExecutionResults
@@ -56,7 +56,7 @@ abstract class BuildMetricsService : BuildService<BuildMetricsService.Parameters
     interface Parameters : BuildServiceParameters {
         val startParameters: Property<BuildStartParameters>
         val reportingSettings: Property<ReportingSettings>
-        val httpService: Property<HttpReportService>
+        val httpService: Property<HttpReportParameters>
 
         val projectDir: DirectoryProperty
         val label: Property<String?>
@@ -182,7 +182,7 @@ abstract class BuildMetricsService : BuildService<BuildMetricsService.Parameters
         private fun Parameters.toBuildReportParameters() = BuildReportParameters(
             startParameters = startParameters.get(),
             reportingSettings = reportingSettings.get(),
-            httpService = httpService.orNull,
+            httpReportParameters = httpService.orNull,
             projectDir = projectDir.asFile.get(),
             label = label.orNull,
             projectName = projectName.get(),
@@ -222,7 +222,7 @@ abstract class BuildMetricsService : BuildService<BuildMetricsService.Parameters
                 it.parameters.reportingSettings.set(reportingSettings)
                 reportingSettings.httpReportSettings?.let { httpSettings ->
                     it.parameters.httpService.set(
-                        HttpReportService(
+                        HttpReportParameters(
                             httpSettings.url,
                             httpSettings.user,
                             httpSettings.password,
