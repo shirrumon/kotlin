@@ -21,8 +21,8 @@ internal expect open class <!NO_ACTUAL_FOR_EXPECT!>Other<!> {
     <!ACTUAL_WITHOUT_EXPECT!>public<!> class <!ACTUAL_MISSING!>InternalNested<!> // should be allowed
 
     public actual fun publicFun() {} // should be allowed
-    public actual fun internalFun() {} // shouldn't be allowed (not reported in K1, because actual isn't matched with expect)
-    public actual fun protectedFun() {} // shouldn't be allowed (not reported in K1, because actual isn't matched with expect)
+    public actual fun internalFun() {} // should be allowed
+    public actual fun protectedFun() {} // should be allowed
 }
 
 public open class PlatformOther { // should be allowed

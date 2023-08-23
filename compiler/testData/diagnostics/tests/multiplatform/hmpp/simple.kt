@@ -1,4 +1,3 @@
-// FIR_IDENTICAL
 
 // MODULE: common
 // TARGET_PLATFORM: Common
