@@ -18,4 +18,4 @@ public class Foo {
 
 // FILE: jvm.kt
 
-actual typealias <!ACTUAL_CLASSIFIER_MUST_HAVE_THE_SAME_MEMBERS_AS_NON_FINAL_EXPECT_CLASSIFIER!>Container<!> = foo.Foo
+actual typealias Container = foo.Foo

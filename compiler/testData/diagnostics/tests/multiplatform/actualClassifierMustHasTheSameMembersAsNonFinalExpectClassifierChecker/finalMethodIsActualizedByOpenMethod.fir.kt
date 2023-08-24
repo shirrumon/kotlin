@@ -9,8 +9,7 @@ expect open class Foo {
 // FILE: jvm.kt
 
 actual open class Foo {
-    // Hypothetically, it's more restricting than necessary. I can't see how actualizing final -> open can breaking anything.
-    // But technically, actual and expect scopes don't match
+    // final -> open is a legal modality change
     actual open fun foo() {
     }
 }
