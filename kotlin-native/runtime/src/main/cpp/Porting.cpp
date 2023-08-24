@@ -252,20 +252,4 @@ NO_EXTERNAL_CALLS_CHECK int currentThreadId() {
 #endif
 }
 
-// String/byte operations.
-// memcpy/memmove are not here intentionally, as frequently implemented/optimized
-// by C compiler.
-void* memmem(const void *big, size_t bigLen, const void *little, size_t littleLen) {
-#if KONAN_NO_MEMMEM
-  for (size_t i = 0; i + littleLen <= bigLen; ++i) {
-    void* pos = ((char*)big) + i;
-    if (::memcmp(little, pos, littleLen) == 0) return pos;
-  }
-  return nullptr;
-#else
-  return ::memmem(big, bigLen, little, littleLen);
-#endif
-
-}
-
 }  // namespace konan

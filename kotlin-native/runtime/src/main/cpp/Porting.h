@@ -40,11 +40,6 @@ void onThreadExit(void (*destructor)(void*), void* destructorParameter);
 bool isOnThreadExitNotSetOrAlreadyStarted();
 int currentThreadId();
 
-// String/byte operations.
-// memcpy/memmove/memcmp are not here intentionally, as frequently implemented/optimized
-// by C compiler.
-void* memmem(const void *big, size_t bigLen, const void *little, size_t littleLen);
-
 }  // namespace konan
 
 #endif  // RUNTIME_PORTING_H
