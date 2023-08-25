@@ -16,7 +16,12 @@
 
 #include <limits.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
+#if KONAN_WINDOWS
+#include <windows.h>
+#endif
 
 #include "KAssert.h"
 #include "Exceptions.h"
@@ -67,6 +72,27 @@ template <typename T> OBJ_GETTER(Kotlin_toStringRadix, T value, KInt radix) {
 
 }  // namespace
 
+#define vsnprintf_impl ::vsnprintf
+
+namespace konan {
+
+int snprintf(char* buffer, size_t size, const char* format, ...) __attribute__((format(printf, 3, 4)));
+int vsnprintf(char* buffer, size_t size, const char* format, va_list args) __attribute__((format(printf, 3, 0)));
+
+int snprintf(char* buffer, size_t size, const char* format, ...) {
+  va_list args;
+  va_start(args, format);
+  int rv = vsnprintf(buffer, size, format, args);
+  va_end(args);
+  return rv;
+}
+
+int vsnprintf(char* buffer, size_t size, const char* format, va_list args) {
+  return vsnprintf_impl(buffer, size, format, args);
+}
+
+}
+
 extern "C" {
 
 OBJ_GETTER(Kotlin_Byte_toString, KByte value) {
@@ -109,7 +135,7 @@ OBJ_GETTER(Kotlin_Long_toStringRadix, KLong value, KInt radix) {
 
 OBJ_GETTER(Kotlin_DurationValue_formatToExactDecimals, KDouble value, KInt decimals) {
   char cstring[40]; // log(2^62*1_000_000) + 2 (sign, decimal point) + 12 (max decimals)
-  snprintf(cstring, sizeof(cstring), "%.*f", decimals, value);
+  konan::snprintf(cstring, sizeof(cstring), "%.*f", decimals, value);
   RETURN_RESULT_OF(CreateStringFromCString, cstring)
 }
 
