@@ -25,6 +25,7 @@ import org.gradle.kotlin.dsl.*
 import org.gradle.language.base.plugins.LifecycleBasePlugin
 import org.jetbrains.kotlin.ExecClang
 import org.jetbrains.kotlin.cpp.*
+import org.jetbrains.kotlin.executors.ExecutorsPlugin
 import org.jetbrains.kotlin.konan.target.KonanTarget
 import org.jetbrains.kotlin.konan.target.SanitizerKind
 import org.jetbrains.kotlin.konan.target.TargetDomainObjectContainer
@@ -662,6 +663,7 @@ open class CompileToBitcodePlugin : Plugin<Project> {
         project.apply<CppConsumerPlugin>()
         project.apply<CompilationDatabasePlugin>()
         project.apply<GitClangFormatPlugin>()
+        project.apply<ExecutorsPlugin>()
         project.extensions.create<CompileToBitcodeExtension>("bitcode", project)
     }
 }
