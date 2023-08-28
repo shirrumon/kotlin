@@ -116,6 +116,10 @@ class DefFile(val file:File?, val config:DefFileConfig, val manifestAddendProper
             properties.getSpaceSeparated("depends")
         }
 
+        val kotlinSources by lazy {
+            properties.getSpaceSeparated("kotlinSources")
+        }
+
         val exportForwardDeclarations by lazy {
             properties.getSpaceSeparated("exportForwardDeclarations")
         }

@@ -8,6 +8,7 @@ import org.jetbrains.kotlin.gradle.plugin.konan.tasks.KonanCacheTask
 import org.jetbrains.kotlin.gradle.plugin.tasks.KonanInteropTask
 import org.jetbrains.kotlin.konan.target.*
 import org.jetbrains.kotlin.konan.util.*
+import java.util.Properties
 
 // These properties are used by the 'konan' plugin, thus we set them before applying it.
 val distDir: File by project
@@ -72,7 +73,17 @@ konanTargetList.forEach { target ->
                 libraries {
                     klibs(df.config.depends.map { "${fileNamePrefix}${it}" })
                 }
-                extraOpts("-Xpurge-user-libs", "-Xshort-module-name", df.name, "-Xdisable-experimental-annotation")
+                extraOpts(
+                    "-Xpurge-user-libs", "-Xshort-module-name", df.name, "-Xdisable-experimental-annotation",
+//                    df.config.properties.getSpaceSeparated("kotlinSources")
+                )
+//                println("__MARKER__: ${libName}")
+                if (libName.endsWith("posix")) {
+//                    error("Foo")
+                    extraOpts(
+                        "-Xkotlinc-option", "/private/var/folders/6l/833hg10x4fq0rh94kxjj1qqw0000kt/T/tmp.QIjamSC0/posix_temp.kt"
+                    )
+                }
                 compilerOpts("-fmodules-cache-path=${project.buildDir}/clangModulesCache")
             }
         }

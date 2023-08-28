@@ -263,6 +263,16 @@ private fun generateLibrary(
     val tmpKlib = tmpDirectory.child(def.libraryName)
 
     try {
+        println("__MARKER__")
+        println(def.shortLibraryName)
+        val extraArgs: Array<String> = if (def.shortLibraryName.endsWith("posix")) {
+            error("Foo")
+//            arrayOf(
+//                "-Xkotlinc-option", "/private/var/folders/6l/833hg10x4fq0rh94kxjj1qqw0000kt/T/tmp.QIjamSC0/posix_temp.kt"
+//            )
+        } else {
+            emptyArray()
+        }
         val cinteropArgs = arrayOf(
                 "-o", tmpKlib.absolutePath,
                 "-target", target.visibleName,
@@ -273,8 +283,10 @@ private fun generateLibrary(
                 "-Xdisable-experimental-annotation",
                 *cinteropOptions.additionalArguments.toTypedArray(),
                 "-$SHORT_MODULE_NAME", def.shortLibraryName,
-                *def.depends.flatMap { listOf("-l", "$outputDirectory/${it.libraryName}") }.toTypedArray()
+                *def.depends.flatMap { listOf("-l", "$outputDirectory/${it.libraryName}") }.toTypedArray(),
+                *extraArgs
         )
+
         logger.verbose("Run cinterop with args: ${cinteropArgs.joinToString(separator = " ")}")
         invokeInterop("native", cinteropArgs, runFromDaemon = false)?.let { K2Native.mainNoExit(it) }
 
