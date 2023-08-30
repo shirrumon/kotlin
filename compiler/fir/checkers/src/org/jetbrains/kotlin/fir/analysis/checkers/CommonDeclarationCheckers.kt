@@ -33,6 +33,7 @@ object CommonDeclarationCheckers : DeclarationCheckers() {
             FirPublishedApiChecker,
             FirOptInMarkedDeclarationChecker,
             FirExpectConsistencyChecker,
+            FirExpectActualClassifiersAreExperimentalChecker,
         )
 
     override val callableDeclarationCheckers: Set<FirCallableDeclarationChecker>
