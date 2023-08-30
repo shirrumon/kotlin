@@ -2068,6 +2068,12 @@ public class FirPsiOldFrontendDiagnosticsTestGenerated extends AbstractFirPsiDia
                 }
 
                 @Test
+                @TestMetadata("lambda.kt")
+                public void testLambda() throws Exception {
+                    runTest("compiler/testData/diagnostics/tests/annotations/annotationParameterMustBeConstant/lambda.kt");
+                }
+
+                @Test
                 @TestMetadata("standaloneInExpression.kt")
                 public void testStandaloneInExpression() throws Exception {
                     runTest("compiler/testData/diagnostics/tests/annotations/annotationParameterMustBeConstant/standaloneInExpression.kt");

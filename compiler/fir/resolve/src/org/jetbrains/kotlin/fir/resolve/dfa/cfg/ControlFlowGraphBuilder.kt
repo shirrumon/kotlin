@@ -253,13 +253,15 @@ class ControlFlowGraphBuilder {
                 // Not in an argument list, won't be called in-place, don't need an exit node.
                 postponedAnonymousFunctionNodes[symbol] = it to null
             }
-        val exitNode = createPostponedLambdaExitNode(anonymousFunctionExpression)
-        // Ideally we'd only add this edge in `exitAnonymousFunction`, but unfortunately it's possible
-        // that the function won't be visited for so long, we'll exit the current graph before that.
-        // So we need an edge right now to enforce ordering, and mark it as dead later if needed.
-        addEdge(enterNode, exitNode)
-        postponedAnonymousFunctionNodes[symbol] = enterNode to exitNode
-        postponedLambdaExits.top().add(exitNode to EdgeKind.Forward)
+        if (postponedLambdaExits.isNotEmpty) {
+            val exitNode = createPostponedLambdaExitNode(anonymousFunctionExpression)
+            // Ideally we'd only add this edge in `exitAnonymousFunction`, but unfortunately it's possible
+            // that the function won't be visited for so long, we'll exit the current graph before that.
+            // So we need an edge right now to enforce ordering, and mark it as dead later if needed.
+            addEdge(enterNode, exitNode)
+            postponedAnonymousFunctionNodes[symbol] = enterNode to exitNode
+            postponedLambdaExits.top().add(exitNode to EdgeKind.Forward)
+        }
         return null
     }
 
