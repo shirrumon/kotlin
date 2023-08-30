@@ -63,11 +63,9 @@ internal class DebugInfo(override val generationState: NativeGenerationState) : 
     val module: DIModuleRef
     val objHeaderPointerType: DITypeOpaqueRef
 
+    val uint64DebugType: DIBasicTypeRef
+    val char16DebugType: DIBasicTypeRef
 //    val stringPointerType: DITypeOpaqueRef
-//    val a: Any
-//    val b: Any
-//    val c: Any
-//    val d: Any
 
     init {
         val path = generationState.outputFile.toFileAndFolder(config)
@@ -135,6 +133,11 @@ internal class DebugInfo(override val generationState: NativeGenerationState) : 
                 refPlace = null
         )!!.reinterpret()
         objHeaderPointerType = dwarfPointerType(objHeaderType)
+
+        uint64DebugType = DICreateBasicType(builder, "uint64", 64, -1, DwarfTypeKind.DW_ATE_unsigned.value.toInt())!!
+        char16DebugType = DICreateBasicType(builder, "char16", 16, -1, DwarfTypeKind.DW_ATE_UTF.value.toInt())!!
+
+//        stringPointerType = DICreateStringPointerType(builder)!!.reinterpret()
 
 //        DICreateStructType(
 //            refBuilder = builder,
@@ -226,6 +229,16 @@ internal class DebugInfo(override val generationState: NativeGenerationState) : 
 ////            refPlace = null
 //        )!!.reinterpret()
 //        stringPointerType = dwarfPointerType(stringType)
+    }
+
+    fun stringDebugEntry(stringLengthVar: DILocalVariableRef): DICompositeTypeRef {
+        return DICreateStringPointerType(
+            builder,
+            objHeaderPointerType.reinterpret(),
+            uint64DebugType,
+            char16DebugType,
+            stringLengthVar
+        )!!
     }
 
     val files = mutableMapOf<String, DIFileRef>()

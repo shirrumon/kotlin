@@ -1396,6 +1396,32 @@ internal class CodeGeneratorVisitor(
         val locationInfo = element.startLocation ?: return null
         val location = codegen.generateLocationInfo(locationInfo)
         val file = (currentCodeContext.fileScope() as FileScope).file.diFileScope()
+
+        if (element is IrVariable && element.type.classFqName?.toString() == "kotlin.String") {
+            val stringLengthVariable = DICreateAutoVariable(
+                builder = debugInfo.builder,
+                scope = locationInfo.scope,
+                name = "string_length${element.debugNameConversion()}",
+                file = null,
+                line = 0,
+                type = debugInfo.uint64DebugType.reinterpret(),
+                flags = LLVMDIFlagZero // LLVMDIFlagArtificial
+            )!!
+            val diType: DITypeOpaqueRef = debugInfo.stringDebugEntry(stringLengthVariable).reinterpret()
+            return if (shouldGenerateDebugInfo(element)) debugInfoLocalVariableLocation(
+                builder       = debugInfo.builder,
+                functionScope = locationInfo.scope,
+                diType        = diType,
+                name          = element.debugNameConversion(),
+                file          = file,
+                line          = locationInfo.line,
+                location      = location,
+                stringLengthVariable = stringLengthVariable,
+                secondLocation = codegen.generateLocationInfo(locationInfo)
+                )
+            else null
+        }
+
         return when (element) {
             is IrVariable -> if (shouldGenerateDebugInfo(element)) debugInfoLocalVariableLocation(
                     builder       = debugInfo.builder,

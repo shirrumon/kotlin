@@ -65,3 +65,5 @@ static int init_sockets() {
 
 static void deinit_sockets() {
 }
+
+void __attribute__((overloadable))	psignal(unsigned int, const char *) asm("_psignal");

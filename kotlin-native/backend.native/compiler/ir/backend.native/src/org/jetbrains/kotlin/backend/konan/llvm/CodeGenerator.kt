@@ -686,6 +686,19 @@ internal abstract class FunctionGenerationContext(
         }
 
         appendingTo(prologueBb) {
+            variableLocation?.stringLengthVariable?.let { stringLengthVar ->
+                val anotherSlotAddress = LLVMBuildAlloca(builder, type, name)!!
+                DIInsertDeclaration(
+                    builder = generationState.debugInfo.builder,
+                    value = anotherSlotAddress,
+                    localVariable = stringLengthVar,
+                    location = null,
+                    bb = prologueBb,
+                    expr = DICreateEmptyExpression(generationState.debugInfo.builder)!!.reinterpret(),
+                    exprCount = 0
+                )
+                kotlin.error("foo")
+            }
             val slotAddress = LLVMBuildAlloca(builder, type, name)!!
             variableLocation?.let {
                 DIInsertDeclaration(
@@ -1395,9 +1408,44 @@ internal abstract class FunctionGenerationContext(
             addPhiIncoming(slotsPhi!!, prologueBb to slots)
             memScoped {
                 slotToVariableLocation.forEach { (slot, variable) ->
-                    val expr = longArrayOf(DwarfOp.DW_OP_plus_uconst.value,
-                            runtime.pointerSize * slot.toLong()).toCValues()
-                    DIInsertDeclaration(
+                    if (variable.stringLengthVariable != null) {
+                        val dereferenceString = longArrayOf(
+                            DwarfOp.DW_OP_plus_uconst.value,
+                            runtime.pointerSize * slot.toLong(),
+                            DwarfOp.DW_OP_deref.value,
+                        )
+                        val calculateStringCount = longArrayOf(
+                            *dereferenceString,
+                            DwarfOp.DW_OP_plus_uconst.value,
+                            runtime.pointerSize * 1L
+                        ).toCValues()
+                        DIInsertDeclaration(
+                            builder       = generationState.debugInfo.builder,
+                            value         = slots,
+                            localVariable = variable.stringLengthVariable,
+                            location      = variable.location,
+                            bb            = prologueBb,
+                            expr          = calculateStringCount,
+                            exprCount     = 5
+                        )
+
+                        val dereferenceStringStart = longArrayOf(
+                            *dereferenceString,
+                            DwarfOp.DW_OP_plus_uconst.value,
+                            runtime.pointerSize * 2L
+                        ).toCValues()
+                        DIInsertDeclaration(
+                            builder       = generationState.debugInfo.builder,
+                            value         = slots,
+                            localVariable = variable.localVariable,
+                            location      = variable.location,
+                            bb            = prologueBb,
+                            expr          = dereferenceStringStart,
+                            exprCount     = 5)
+                    } else {
+                        val expr = longArrayOf(DwarfOp.DW_OP_plus_uconst.value,
+                                               runtime.pointerSize * slot.toLong()).toCValues()
+                        DIInsertDeclaration(
                             builder       = generationState.debugInfo.builder,
                             value         = slots,
                             localVariable = variable.localVariable,
@@ -1405,6 +1453,38 @@ internal abstract class FunctionGenerationContext(
                             bb            = prologueBb,
                             expr          = expr,
                             exprCount     = 2)
+                    }
+
+//                    variable.stringLengthVariable?.let { stringLengthVar ->
+//                        DILocation
+//                        val value = LLVMBuildAlloca(
+//                            builder,
+//                            llvm.int64Type,
+//                            ""
+//                        )
+//                        LLVMBuildStore(
+//                            builder,
+//                        )
+//                        LLVMPointerType(value, 0)
+//                        DIInsertDeclaration(
+//                            builder       = generationState.debugInfo.builder,
+////                            value = null,
+//                            value         = slots,
+//                            localVariable = stringLengthVar,
+//                            location      = variable.location,
+//                            bb            = prologueBb,
+//                            expr          = calculateStringCount,
+//                            exprCount     = 5
+//                        )
+//                    }
+//                    DIInsertDeclaration(
+//                            builder       = generationState.debugInfo.builder,
+//                            value         = slots,
+//                            localVariable = variable.localVariable,
+//                            location      = variable.location,
+//                            bb            = prologueBb,
+//                            expr          = expr,
+//                            exprCount     = 2)
                 }
             }
             br(localsInitBb)

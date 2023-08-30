@@ -131,24 +131,104 @@ DIScopeOpaqueRef DICreateLexicalBlock(DIBuilderRef builderRef, DIScopeOpaqueRef 
   return llvm::wrap(llvm::unwrap(builderRef)->createLexicalBlock(llvm::unwrap(scopeRef), llvm::unwrap(fileRef), line, column));
 }
 
-//DICompositeTypeRef DICreateStringType(
-//    DIBuilderRef refBuilder,
-//) {
-//    auto builder = llvm::unwrap(refBuilder);
-//    builder->createBasicType("ObjHeader(String)", 64, llvm::)
-//    auto typePointer = builder->createPointerType()
+
+DICompositeTypeRef DICreateStringPointerType(
+    DIBuilderRef refBuilder,
+    DIDerivedTypeRef objHeaderPointerType,
+    DIBasicTypeRef stringCharCountType,
+    DIBasicTypeRef charUtf16Type,
+    DILocalVariableRef charCount
+) {
+    auto builder = llvm::unwrap(refBuilder);
+
+//    builder->createTempMacroFile()
+    // Encoding???
+    // Type declarations
+//    auto objHeaderForString = builder->createBasicType("ObjHeader(String)", 64, llvm::dwarf::DW_ATE_signed);
+//    builder->retainType(objHeaderForString);
+//    auto pointerToObjHeaderForString = builder->createPointerType(objHeaderForString, 64);
+//    builder->retainType(pointerToObjHeaderForString);
+//    auto stringCharCountType = builder->createBasicType("StringCharCount", 64, llvm::dwarf::DW_ATE_signed);
+//    builder->retainType(stringCharCountType);
+
+//    uint64_t getCount [] = {
+//            llvm::dwarf::DW_OP_push_object_address,
+//            llvm::dwarf::DW_OP_plus_uconst,
+//    };
+//    auto getCountExpr = builder->createAutoVariable(nullptr, )
+//    auto getCountVar = builder->createAutoVariable()
+//    auto getCountExpr = builder->createExpression(getCount);
+//    auto getCountExpr = builder->createConstantValueExpression(42);
+//    auto var = builder->createAutoVariable(nullptr, "Var", nullptr, 0, stringCharCountInString, true);
+//    builder->insertDeclare(nullptr, var, getCountExpr, nullptr)
+//    builder->insert
+//    getCountExpr.
+
+//    llvm::dwarf::DW_Expr
+
+
+//    builder->createBasicType()
+
+//    assert(getCountExpr != nullptr);
+//    builder->insertDeclare();
+//    builder->createExpression();
+//    llvm::Metadata::ConstantAsMetadataKind;
+//    builder->createAutoVariable()
+
+
+//    auto charType = builder->createBasicType("Utf16Char", 16, llvm::dwarf::DW_ATE_unsigned);
+//    auto stringCharCountInString = builder->createMemberType(nullptr, "charCount", nullptr, 0, 64, 64, 64, llvm::DINode::FlagZero, llvm::unwrap(stringCharCountType));
+//    builder->retainType(charType);
+//    auto charCount = builder->getOrCreateSubrange(0, getCountExpr); //
+//    charCount->replaceOperandWith(0, getCountExpr);
+//    llvm::DISubrange::get()
+//    charCount->replaceOperandWith(0, getCountExpr);
+//    charCount->getRawCountNode()
+//    auto charCount = builder->getOrCreateSubrange(0, 1);
+//    builder->createAutoVariable()
+//    builder->createCo
+//    builder->createConstantValueExpression()
+//builder->insertDeclare()
+    auto length = builder->getOrCreateSubrange(llvm::unwrap(charCount), nullptr, nullptr, nullptr);
+
+    auto charArrayType = builder->createArrayType(
+            0, 0, llvm::unwrap(charUtf16Type),
+            builder->getOrCreateArray({length})
+    );
+
+//    builder->insertDeclare(llvm::AllocaInst, )
+//    llvm::unwrap(charCount)->getScope()
+//    builder->insertDeclare(
 //
+//        llvm::unwrap(charCount),
+//
+//    )
+//    builder->retainType(charArrayType);
+
+    // Member declarations
+//    auto pointerToObjHeaderInString = builder->createMemberType(nullptr, "pointerToObjHeader", nullptr, 0, 64, 64, 0, llvm::DINode::FlagZero, llvm::unwrap(objHeaderPointerType));
+//    builder->retainType(pointerToObjHeaderInString);
+
+//    auto charArrayTypeInString = builder->createMemberType(nullptr, "charArray", nullptr, 0, 64, 64, 128, llvm::DINode::FlagZero, charArrayType);
+//    builder->retainType(charArrayTypeInString);
+
 //    auto kotlinStringType = builder->createStructType(
-//            nullptr, "KotlinString", nullptr, 0,
-//            /* sizeInBits = */ 64 * 2 + 42 * 2,
-//            /* alignment = */ 0,
-//            llvm::DINode::FlagZero, nullptr,
-//
+//        nullptr, "KotlinString", nullptr, 0,
+//        /* SizeInBits= */ 64*3,
+//        /* AlignInBits= = */ 64,
+//        llvm::DINode::FlagZero, nullptr,
+//        builder->getOrCreateArray({
+//                                          pointerToObjHeaderInString,
+//                                          stringCharCountInString,
+//                                          charArrayTypeInString
+//        })
 //    );
 //    builder->retainType(kotlinStringType);
-////    DblTy = DBuilder->createBasicType("double", 64, dwarf::DW_ATE_float);
-//    return DblTy;
-//}
+
+//    auto kotlinStringPointerType = builder->createPointerType(kotlinStringType, 64);
+//    builder->retainType(kotlinStringPointerType);
+    return llvm::wrap(charArrayType);
+}
 
 
 DICompositeTypeRef DICreateStructType(DIBuilderRef refBuilder,
@@ -296,13 +376,13 @@ void DIFunctionAddSubprogram(LLVMValueRef fn, DISubprogramRef sp) {
   }
 }
 
-DILocalVariableRef DICreateAutoVariable(DIBuilderRef builder, DIScopeOpaqueRef scope, const char *name, DIFileRef file, unsigned line, DITypeOpaqueRef type) {
+DILocalVariableRef DICreateAutoVariable(DIBuilderRef builder, DIScopeOpaqueRef scope, const char *name, DIFileRef file, unsigned line, DITypeOpaqueRef type, unsigned flags) {
   return llvm::wrap(llvm::unwrap(builder)->createAutoVariable(
     llvm::unwrap(scope),
     name,
     llvm::unwrap(file),
     line,
-    llvm::unwrap(type)));
+    llvm::unwrap(type), true, (llvm::DINode::DIFlags)flags));
 }
 
 DILocalVariableRef DICreateParameterVariable(DIBuilderRef builder, DIScopeOpaqueRef scope, const char *name, unsigned argNo, DIFileRef file, unsigned line, DITypeOpaqueRef type) {

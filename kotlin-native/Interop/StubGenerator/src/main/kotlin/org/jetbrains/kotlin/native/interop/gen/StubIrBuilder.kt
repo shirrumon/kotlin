@@ -431,7 +431,7 @@ class StubIrBuilder(private val context: StubIrContext) {
 
     private fun generateStubsForFunction(func: FunctionDecl) {
         try {
-            addStubs(FunctionStubBuilder(buildingContext, func, skipOverloads = true).build())
+            addStubs(FunctionStubBuilder(buildingContext, func, skipOverloads = false).build())
         } catch (e: Throwable) {
             context.log("Warning: cannot generate stubs for function ${func.name}")
         }

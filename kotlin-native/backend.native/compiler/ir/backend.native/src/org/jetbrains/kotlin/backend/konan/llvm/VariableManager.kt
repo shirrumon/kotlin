@@ -144,20 +144,21 @@ internal class VariableManager(val functionGenerationContext: FunctionGeneration
     }
 }
 
-internal data class VariableDebugLocation(val localVariable: DILocalVariableRef, val location:DILocationRef?, val file:DIFileRef, val line:Int)
+internal data class VariableDebugLocation(val localVariable: DILocalVariableRef, val location:DILocationRef?, val file:DIFileRef, val line:Int, val stringLengthVariable: DILocalVariableRef? = null, val secondLocation: DILocationRef? = null)
 
 internal fun debugInfoLocalVariableLocation(builder: DIBuilderRef?,
         functionScope: DIScopeOpaqueRef, diType: DITypeOpaqueRef, name:Name, file: DIFileRef, line: Int,
-        location: DILocationRef?): VariableDebugLocation {
+        location: DILocationRef?, stringLengthVariable: DILocalVariableRef? = null, secondLocation: DILocationRef? = null): VariableDebugLocation {
     val variableDeclaration = DICreateAutoVariable(
             builder = builder,
             scope = functionScope,
             name = name.asString(),
             file = file,
             line = line,
-            type = diType)
+            type = diType,
+            flags = LLVMDIFlagZero)
 
-    return VariableDebugLocation(localVariable = variableDeclaration!!, location = location, file = file, line = line)
+    return VariableDebugLocation(localVariable = variableDeclaration!!, location = location, file = file, line = line, stringLengthVariable = stringLengthVariable, secondLocation = secondLocation)
 }
 
 internal fun debugInfoParameterLocation(builder: DIBuilderRef?,

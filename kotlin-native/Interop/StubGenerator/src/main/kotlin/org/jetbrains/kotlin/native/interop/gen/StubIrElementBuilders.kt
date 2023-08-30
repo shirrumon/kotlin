@@ -756,8 +756,12 @@ internal class FunctionStubBuilder(
             else -> context.mirror(func.returnType).argType
         }.toStubIrType()
 
-        if (skipOverloads && context.isOverloading(func.fullName, parameters.map { it.type }))
-            return emptyList()
+//        val dontSkipOverloads = func.name.contains("fooKotlinNativeTest")
+//
+//        if (!dontSkipOverloads) {
+            if (skipOverloads && context.isOverloading(func.fullName, parameters.map { it.type }))
+                return emptyList()
+//        }
 
         val annotations: List<AnnotationStub>
         val mustBeExternal: Boolean
