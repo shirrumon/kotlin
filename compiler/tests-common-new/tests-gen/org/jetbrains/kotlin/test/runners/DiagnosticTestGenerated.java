@@ -23171,15 +23171,9 @@ public class DiagnosticTestGenerated extends AbstractDiagnosticTest {
             }
 
             @Test
-            @TestMetadata("widerVisibilityInFinalActualClassifier.kt")
-            public void testWiderVisibilityInFinalActualClassifier() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/multiplatform/widerVisibilityInFinalActualClassifier.kt");
-            }
-
-            @Test
-            @TestMetadata("widerVisibilityInOpenActualClassifier.kt")
-            public void testWiderVisibilityInOpenActualClassifier() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/multiplatform/widerVisibilityInOpenActualClassifier.kt");
+            @TestMetadata("widerVisibilityInActualClassifier.kt")
+            public void testWiderVisibilityInActualClassifier() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/multiplatform/widerVisibilityInActualClassifier.kt");
             }
 
             @Nested

@@ -1,4 +1,3 @@
-// FIR_IDENTICAL
 // WITH_STDLIB
 // MODULE: m1-common
 // FILE: common.kt
@@ -28,8 +27,5 @@ actual open <!ACTUAL_CLASSIFIER_MUST_HAVE_THE_SAME_MEMBERS_AS_NON_FINAL_EXPECT_C
     actual fun existingMethod() {}
     actual val existingParam: Int = 904
 
-    // It's bug that K2 reports a error here. It shouldn't.
-    // TODO report bug about K2: actual (in platform) -> regular (in common) -> expect (in common)
-    // but expected:             actual (in platform) -> regular (in common) -> actual (in common)
     override fun injected(param: String): <!RETURN_TYPE_CHANGED_IN_NON_FINAL_EXPECT_CLASSIFIER_ACTUALIZATION!>String<!> = "" // covariant override
 }

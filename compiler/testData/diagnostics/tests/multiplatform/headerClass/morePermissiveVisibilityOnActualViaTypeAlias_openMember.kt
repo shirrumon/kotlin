@@ -1,4 +1,3 @@
-// FIR_IDENTICAL
 // !DIAGNOSTICS: -UNUSED_PARAMETER
 // MODULE: m1-common
 // FILE: common.kt
