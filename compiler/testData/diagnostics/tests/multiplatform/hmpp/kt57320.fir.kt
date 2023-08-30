@@ -4,7 +4,7 @@
 // TARGET_PLATFORM: Common
 
 // FILE: StringValue.kt
-<!NO_ACTUAL_FOR_EXPECT{JS}!>expect class StringValue<!>
+<!NO_ACTUAL_FOR_EXPECT{JS}!><!EXPECT_ACTUAL_CLASSIFIERS_ARE_EXPERIMENTAL_WARNING, EXPECT_ACTUAL_CLASSIFIERS_ARE_EXPERIMENTAL_WARNING!>expect<!> class StringValue<!>
 
 <!NO_ACTUAL_FOR_EXPECT{JS}!>expect fun StringValue.plus(other: String): StringValue<!>
 
@@ -12,7 +12,7 @@
 // TARGET_PLATFORM: JS
 
 // FILE: StringValue.kt
-actual class Strin<!NO_ACTUAL_FOR_EXPECT{JS}!>gValue(val value: String<!>)
+<!EXPECT_ACTUAL_CLASSIFIERS_ARE_EXPERIMENTAL_WARNING!>actual<!> class Strin<!NO_ACTUAL_FOR_EXPECT{JS}!>gValue(val value: String<!>)
 <!NO_ACTUAL_FOR_EXPECT{JS}!>
 actual fun StringValue.plus(other: String) = StringVal<!>ue(this.value + other)
 
@@ -20,7 +20,7 @@ actual fun StringValue.plus(other: String) = StringVal<!>ue(this.value + other)
 // TARGET_PLATFORM: Common
 
 // FILE: StringDemoInterface.kt
-expect interface StringDemoInterface
+<!EXPECT_ACTUAL_CLASSIFIERS_ARE_EXPERIMENTAL_WARNING!>expect<!> interface StringDemoInterface
 
 interface KotlinXStringDemoInterface {
     val value: String
@@ -32,7 +32,7 @@ interface KotlinXStringDemoInterface {
 // TARGET_PLATFORM: JS
 
 // FILE: StringDemoInterface.kt
-actual typealias StringDemoInterface = KotlinXStringDemoInterface
+<!EXPECT_ACTUAL_CLASSIFIERS_ARE_EXPERIMENTAL_WARNING!>actual<!> typealias StringDemoInterface = KotlinXStringDemoInterface
 
 actual fun StringDemoIn<!INCOMPATIBLE_MATCHING!>terface.<!ACTUAL_WITHOUT_EXPECT("actual fun StringDemoInterface.plusK(): <ERROR TYPE REF: Unresolved name: value>; The following declaration is incompatible:    expect fun StringDemoInterface.plusK(): String")!>plusK<!>() = <!EXPECT_CLASS_AS_FUNCTION!>StringValue<!>(value).plus("K")<!>.<!UNRESOLVED_REFERENCE!>value<!>
 

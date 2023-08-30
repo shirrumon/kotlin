@@ -4,7 +4,7 @@
 // TARGET_PLATFORM: Common
 
 // FILE: StringValue.kt
-expect class <!NO_ACTUAL_FOR_EXPECT{JS}!>StringValue<!>
+<!EXPECT_ACTUAL_CLASSIFIERS_ARE_EXPERIMENTAL_WARNING, EXPECT_ACTUAL_CLASSIFIERS_ARE_EXPERIMENTAL_WARNING{JS}, EXPECT_ACTUAL_CLASSIFIERS_ARE_EXPERIMENTAL_WARNING{COMMON}, EXPECT_ACTUAL_CLASSIFIERS_ARE_EXPERIMENTAL_WARNING{JS}!>expect<!> class <!NO_ACTUAL_FOR_EXPECT{JS}!>StringValue<!>
 
 expect fun StringValue.<!NO_ACTUAL_FOR_EXPECT{JS}!>plus<!>(other: String): StringValue
 
@@ -12,7 +12,7 @@ expect fun StringValue.<!NO_ACTUAL_FOR_EXPECT{JS}!>plus<!>(other: String): Strin
 // TARGET_PLATFORM: JS
 
 // FILE: StringValue.kt
-actual class StringValue(val value: String)
+<!EXPECT_ACTUAL_CLASSIFIERS_ARE_EXPERIMENTAL_WARNING!>actual<!> class StringValue(val value: String)
 
 actual fun StringValue.plus(other: String) = StringValue(this.value + other)
 
@@ -20,7 +20,7 @@ actual fun StringValue.plus(other: String) = StringValue(this.value + other)
 // TARGET_PLATFORM: Common
 
 // FILE: StringDemoInterface.kt
-expect interface StringDemoInterface
+<!EXPECT_ACTUAL_CLASSIFIERS_ARE_EXPERIMENTAL_WARNING, EXPECT_ACTUAL_CLASSIFIERS_ARE_EXPERIMENTAL_WARNING{JS}!>expect<!> interface StringDemoInterface
 
 interface KotlinXStringDemoInterface {
     val value: String
@@ -32,7 +32,7 @@ expect fun StringDemoInterface.plusK(): <!NO_ACTUAL_FOR_EXPECT{JS}!>String<!>
 // TARGET_PLATFORM: JS
 
 // FILE: StringDemoInterface.kt
-actual typealias <!ACTUAL_CLASSIFIER_MUST_HAVE_THE_SAME_MEMBERS_AS_NON_FINAL_EXPECT_CLASSIFIER!>StringDemoInterface<!> = KotlinXStringDemoInterface
+<!EXPECT_ACTUAL_CLASSIFIERS_ARE_EXPERIMENTAL_WARNING!>actual<!> typealias <!ACTUAL_CLASSIFIER_MUST_HAVE_THE_SAME_MEMBERS_AS_NON_FINAL_EXPECT_CLASSIFIER!>StringDemoInterface<!> = KotlinXStringDemoInterface
 
 actual fun StringDemoInterface.<!ACTUAL_WITHOUT_EXPECT("Actual function 'plusK'; The following declaration is incompatible because return type is different:    public expect fun StringDemoInterface /* = KotlinXStringDemoInterface */.plusK(): String")!>plusK<!>() = <!RESOLUTION_TO_CLASSIFIER!>StringValue<!>(value).<!DEBUG_INFO_MISSING_UNRESOLVED!>plus<!>("K").<!DEBUG_INFO_MISSING_UNRESOLVED!>value<!>
 

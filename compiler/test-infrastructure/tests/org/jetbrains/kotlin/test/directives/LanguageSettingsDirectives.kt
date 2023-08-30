@@ -64,6 +64,10 @@ object LanguageSettingsDirectives : SimpleDirectivesContainer() {
         description = "Allow compiling code in package 'kotlin' and allow not requiring kotlin.stdlib in module-info (AnalysisFlags.allowKotlinPackage)"
     )
 
+    val MUTE_EXPECT_ACTUAL_CLASSES_WARNING by stringDirective(
+        description = "The same as -Xexpect-actual-classes"
+    )
+
     // --------------------- Jvm Analysis Flags ---------------------
 
     val JVM_DEFAULT_MODE by enumDirective(
