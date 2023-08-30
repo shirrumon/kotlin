@@ -1,3 +1,4 @@
+// MUTE_EXPECT_ACTUAL_CLASSES_WARNING
 // FIR_IDENTICAL
 // MODULE: m1-common
 expect open class A

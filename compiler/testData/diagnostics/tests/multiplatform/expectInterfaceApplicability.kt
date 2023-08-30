@@ -1,3 +1,4 @@
+// MUTE_EXPECT_ACTUAL_CLASSES_WARNING
 // MODULE: m1-common
 // FILE: common.kt
 // TODO: .fir.kt version is just a stub.

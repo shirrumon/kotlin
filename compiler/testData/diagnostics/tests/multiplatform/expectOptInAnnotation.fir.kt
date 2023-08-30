@@ -1,3 +1,4 @@
+// MUTE_EXPECT_ACTUAL_CLASSES_WARNING
 // WITH_STDLIB
 // MODULE: m1-common
 // FILE: common.kt

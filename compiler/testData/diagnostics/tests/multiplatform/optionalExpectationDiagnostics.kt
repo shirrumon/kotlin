@@ -1,3 +1,4 @@
+// MUTE_EXPECT_ACTUAL_CLASSES_WARNING
 // WITH_STDLIB
 // !OPT_IN: kotlin.ExperimentalMultiplatform
 

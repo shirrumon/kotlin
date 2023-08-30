@@ -1,3 +1,4 @@
+// MUTE_EXPECT_ACTUAL_CLASSES_WARNING
 // MODULE: m1-common
 // FILE: common.kt
 <!INCOMPATIBLE_MATCHING{JVM}!>expect class SomeClass<T> {
