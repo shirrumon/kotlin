@@ -34,6 +34,7 @@ RepoArtifacts.javadocJar(project)
 compileKotlin {
     kotlinOptions.freeCompilerArgs = [
         "-Xallow-kotlin-package",
+        "-Xexpect-actual-classes",
         "-opt-in=kotlin.contracts.ExperimentalContracts",
         "-opt-in=kotlin.RequiresOptIn",
     ]
