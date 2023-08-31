@@ -257,6 +257,7 @@ kotlin {
             all {
                 kotlinOptions {
                     freeCompilerArgs += "-Xallow-kotlin-package"
+                    freeCompilerArgs += "-Xexpect-actual-classes"
                 }
             }
             val main by getting
