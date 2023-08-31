@@ -39,7 +39,11 @@ compileTestKotlin2Js {
     kotlinOptions {
         metaInfo = false
         moduleKind = "umd"
-        freeCompilerArgs = ["-Xallow-kotlin-package", "-Xforce-deprecated-legacy-compiler-usage"]
+        freeCompilerArgs = [
+                "-Xallow-kotlin-package",
+                "-Xexpect-actual-classes",
+                "-Xforce-deprecated-legacy-compiler-usage"
+        ]
     }
 }
 
