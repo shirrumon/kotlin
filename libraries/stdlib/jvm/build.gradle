@@ -173,6 +173,7 @@ compileMainJdk7Kotlin {
     kotlinOptions.jvmTarget = "1.8"
     kotlinOptions.freeCompilerArgs = [
             "-Xallow-kotlin-package",
+            "-Xexpect-actual-classes",
             "-Xmultifile-parts-inherit",
             "-Xno-new-java-annotation-targets",
             "-opt-in=kotlin.RequiresOptIn",
