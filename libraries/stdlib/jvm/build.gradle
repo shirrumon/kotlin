@@ -206,7 +206,6 @@ compileTestKotlin {
                 "-opt-in=kotlin.io.path.ExperimentalPathApi",
                 "-opt-in=kotlin.io.encoding.ExperimentalEncodingApi",
                 "-Xallow-kotlin-package", // TODO: maybe rename test packages
-                "-Xexpect-actual-classes",
         ]
         if (project.kotlinBuildProperties.useFir) {
             freeCompilerArgs += "-Xuse-k2"
