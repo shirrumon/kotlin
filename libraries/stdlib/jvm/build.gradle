@@ -196,6 +196,7 @@ compileCompileOnlyDeclarationsKotlin {
     kotlinOptions {
         freeCompilerArgs = [
                 "-Xallow-kotlin-package",
+                "-Xexpect-actual-classes",
         ]
     }
 }
