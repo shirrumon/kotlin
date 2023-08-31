@@ -154,7 +154,6 @@ kotlin {
 tasks.withType<KotlinCompile<*>> {
     kotlinOptions.freeCompilerArgs += listOf(
         "-Xallow-kotlin-package",
-        "-Xexpect-actual-classes",
         "-opt-in=kotlin.ExperimentalMultiplatform",
         "-opt-in=kotlin.contracts.ExperimentalContracts",
         "-opt-in=kotlin.RequiresOptIn",
