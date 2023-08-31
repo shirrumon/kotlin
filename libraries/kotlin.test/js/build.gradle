@@ -21,7 +21,6 @@ dependencies {
 compileKotlin2Js {
     kotlinOptions.freeCompilerArgs = [
             "-Xallow-kotlin-package",
-            "-Xexpect-actual-classes",
             "-opt-in=kotlin.contracts.ExperimentalContracts",
             "-opt-in=kotlin.RequiresOptIn",
             "-Xforce-deprecated-legacy-compiler-usage"
