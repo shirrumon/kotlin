@@ -151,6 +151,7 @@ kotlin {
                         moduleName = "kotlin-stdlib-jdk8"
                         freeCompilerArgs = listOf(
                             "-Xallow-kotlin-package",
+                            "-Xexpect-actual-classes",
                             "-Xmultifile-parts-inherit",
                             "-Xno-new-java-annotation-targets"
                         )
