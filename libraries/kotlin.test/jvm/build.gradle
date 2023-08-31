@@ -44,6 +44,7 @@ compileKotlin {
 compileTestKotlin {
     kotlinOptions.freeCompilerArgs = [
         "-Xallow-kotlin-package",
+        "-Xexpect-actual-classes",
         "-opt-in=kotlin.RequiresOptIn",
     ]
 }
