@@ -199,7 +199,6 @@ kotlin {
                     moduleKind = "commonjs"
                     freeCompilerArgs += listOf(
                         "-Xallow-kotlin-package",
-                        "-Xexpect-actual-classes",
                         "-Xforce-deprecated-legacy-compiler-usage",
                     )
                 }
