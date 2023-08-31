@@ -264,6 +264,7 @@ kotlin {
             main.apply {
                 kotlinOptions {
                     freeCompilerArgs += "-Xir-module-name=kotlin"
+                    freeCompilerArgs += "-Xexpect-actual-classes"
 
                     if (!kotlinBuildProperties.disableWerror) {
                         allWarningsAsErrors = true
