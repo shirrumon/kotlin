@@ -97,7 +97,7 @@ kotlin {
             val compileOnlyDeclarations by creating {
                 compileTaskProvider.configure {
                     kotlinOptions {
-                        freeCompilerArgs = listOf("-Xallow-kotlin-package")
+                        freeCompilerArgs = listOf("-Xallow-kotlin-package", "-Xexpect-actual-classes")
                     }
                 }
             }
