@@ -112,6 +112,7 @@ kotlin {
                         // providing exhaustive list of args here
                         freeCompilerArgs = listOf(
                             "-Xallow-kotlin-package",
+                            "-Xexpect-actual-classes",
                             "-Xmultifile-parts-inherit",
                             "-Xuse-14-inline-classes-mangling-scheme",
                             "-Xbuiltins-from-sources",
