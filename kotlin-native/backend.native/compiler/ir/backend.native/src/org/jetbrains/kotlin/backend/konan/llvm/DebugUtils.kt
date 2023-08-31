@@ -66,6 +66,7 @@ internal class DebugInfo(override val generationState: NativeGenerationState) : 
     val uint64DebugType: DIBasicTypeRef
     val char16DebugType: DIBasicTypeRef
 //    val stringPointerType: DITypeOpaqueRef
+    val stringPointerType: DIDerivedTypeRef
 
     init {
         val path = generationState.outputFile.toFileAndFolder(config)
@@ -136,6 +137,7 @@ internal class DebugInfo(override val generationState: NativeGenerationState) : 
 
         uint64DebugType = DICreateBasicType(builder, "uint64", 64, -1, DwarfTypeKind.DW_ATE_unsigned.value.toInt())!!
         char16DebugType = DICreateBasicType(builder, "char16", 16, -1, DwarfTypeKind.DW_ATE_UTF.value.toInt())!!
+        stringPointerType = DICreatePointerType(builder, char16DebugType.reinterpret())!!
 
 //        stringPointerType = DICreateStringPointerType(builder)!!.reinterpret()
 

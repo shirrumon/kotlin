@@ -1412,22 +1412,22 @@ internal abstract class FunctionGenerationContext(
                         val dereferenceString = longArrayOf(
                             DwarfOp.DW_OP_plus_uconst.value,
                             runtime.pointerSize * slot.toLong(),
-                            DwarfOp.DW_OP_deref.value,
+//                            DwarfOp.DW_OP_deref.value,
                         )
-                        val calculateStringCount = longArrayOf(
-                            *dereferenceString,
-                            DwarfOp.DW_OP_plus_uconst.value,
-                            runtime.pointerSize * 1L
-                        ).toCValues()
-                        DIInsertDeclaration(
-                            builder       = generationState.debugInfo.builder,
-                            value         = slots,
-                            localVariable = variable.stringLengthVariable,
-                            location      = variable.location,
-                            bb            = prologueBb,
-                            expr          = calculateStringCount,
-                            exprCount     = 5
-                        )
+//                        val calculateStringCount = longArrayOf(
+//                            *dereferenceString,
+//                            DwarfOp.DW_OP_plus_uconst.value,
+//                            runtime.pointerSize * 1L
+//                        ).toCValues()
+//                        DIInsertDeclaration(
+//                            builder       = generationState.debugInfo.builder,
+//                            value         = slots,
+//                            localVariable = variable.stringLengthVariable,
+//                            location      = variable.location,
+//                            bb            = prologueBb,
+//                            expr          = calculateStringCount,
+//                            exprCount     = 5
+//                        )
 
                         val dereferenceStringStart = longArrayOf(
                             *dereferenceString,
@@ -1441,7 +1441,7 @@ internal abstract class FunctionGenerationContext(
                             location      = variable.location,
                             bb            = prologueBb,
                             expr          = dereferenceStringStart,
-                            exprCount     = 5)
+                            exprCount     = 4)
                     } else {
                         val expr = longArrayOf(DwarfOp.DW_OP_plus_uconst.value,
                                                runtime.pointerSize * slot.toLong()).toCValues()

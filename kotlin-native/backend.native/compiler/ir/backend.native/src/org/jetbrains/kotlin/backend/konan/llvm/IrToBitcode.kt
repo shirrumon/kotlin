@@ -1411,7 +1411,7 @@ internal class CodeGeneratorVisitor(
             return if (shouldGenerateDebugInfo(element)) debugInfoLocalVariableLocation(
                 builder       = debugInfo.builder,
                 functionScope = locationInfo.scope,
-                diType        = diType,
+                diType        = debugInfo.stringPointerType.reinterpret(),
                 name          = element.debugNameConversion(),
                 file          = file,
                 line          = locationInfo.line,
