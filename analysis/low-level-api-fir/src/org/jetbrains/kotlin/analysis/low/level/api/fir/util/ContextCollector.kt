@@ -213,6 +213,9 @@ private class ContextCollectorVisitor(
         val implicitReceiverStack = context.towerDataContext.implicitReceiverStack
 
         val smartCasts = mutableMapOf<RealVariable, Set<ConeKotlinType>>()
+
+        // Receiver types cannot be updated in an immutable snapshot.
+        // So here we modify the types inside the 'context', then make a snapshot, and restore the types back.
         val oldReceiverTypes = mutableListOf<Pair<Int, ConeKotlinType>>()
 
         val cfgNode = getControlFlowNode(fir)
@@ -228,6 +231,9 @@ private class ContextCollectorVisitor(
 
                 smartCasts[typeStatement.variable] = typeStatement.exactType
 
+                // The compiler pushes smart-cast types for implicit receivers to ease later lookups.
+                // Here we emulate such behavior. Unlike the compiler, though, modified types are only reflected in the created snapshot.
+                // See other usages of 'replaceReceiverType()' for more information.
                 if (realVariable.isThisReference) {
                     val identifier = typeStatement.variable.identifier
                     val receiverIndex = implicitReceiverStack.getReceiverIndex(identifier.symbol)
@@ -244,8 +250,6 @@ private class ContextCollectorVisitor(
 
         val towerDataContextSnapshot = context.towerDataContext.createSnapshot()
 
-        // Receiver types cannot be updated in an immutable snapshot.
-        // So here the types are modified and then restored back.
         for ((index, oldType) in oldReceiverTypes) {
             implicitReceiverStack.replaceReceiverType(index, oldType)
         }
