@@ -101,6 +101,12 @@ public class ContextCollectorTestGenerated extends AbstractContextCollectorTest 
     @TestDataPath("$PROJECT_ROOT")
     public class SmartCasts {
         @Test
+        @TestMetadata("afterIf.kt")
+        public void testAfterIf() throws Exception {
+            runTest("analysis/low-level-api-fir/testdata/contextCollector/smartCasts/afterIf.kt");
+        }
+
+        @Test
         @TestMetadata("afterLoop.kt")
         public void testAfterLoop() throws Exception {
             runTest("analysis/low-level-api-fir/testdata/contextCollector/smartCasts/afterLoop.kt");
@@ -127,6 +133,12 @@ public class ContextCollectorTestGenerated extends AbstractContextCollectorTest 
         @TestMetadata("argumentAsReceiver.kt")
         public void testArgumentAsReceiver() throws Exception {
             runTest("analysis/low-level-api-fir/testdata/contextCollector/smartCasts/argumentAsReceiver.kt");
+        }
+
+        @Test
+        @TestMetadata("beforeIf.kt")
+        public void testBeforeIf() throws Exception {
+            runTest("analysis/low-level-api-fir/testdata/contextCollector/smartCasts/beforeIf.kt");
         }
 
         @Test
