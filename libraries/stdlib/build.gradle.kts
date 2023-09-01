@@ -169,6 +169,7 @@ kotlin {
                     kotlinOptions {
                         freeCompilerArgs += listOf(
                             "-Xallow-kotlin-package", // TODO: maybe rename test packages
+                            "-Xexpect-actual-classes",
                         )
                         if (kotlinBuildProperties.useFir) {
                             freeCompilerArgs += "-Xuse-k2"
