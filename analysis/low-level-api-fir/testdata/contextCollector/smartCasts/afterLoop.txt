@@ -25,17 +25,19 @@ Smart Casts:
     FirValueParameterSymbol initial: R|Node?|
     Types:
         kotlin/Any
-        kotlin/Nothing?
 
 FILE: [ResolvedTo(IMPORTS)] afterLoop.kt
     public abstract [ResolvedTo(STATUS)] interface Node : R|kotlin/Any| {
+        public abstract [ResolvedTo(CONTRACTS)] val shouldProcess: R|kotlin/Boolean|
+            public [ResolvedTo(CONTRACTS)] get(): R|kotlin/Boolean|
+
         public abstract [ResolvedTo(CONTRACTS)] val parent: R|Node?|
             public [ResolvedTo(CONTRACTS)] get(): R|Node?|
 
     }
     public final [ResolvedTo(BODY_RESOLVE)] fun test([ResolvedTo(BODY_RESOLVE)] initial: R|Node?|): R|kotlin/Unit| {
         [ResolvedTo(BODY_RESOLVE)] lvar current: R|Node?| = R|<local>/initial|
-        while(!=(R|<local>/initial|!!, Null(null))) {
+        while(R|<local>/initial|!!.R|/Node.shouldProcess|) {
             R|/consume<Inapplicable(INAPPLICABLE): /consume>#|(R|<local>/current|)
             R|<local>/current| = R|<local>/current|.R|/Node.parent<Inapplicable(UNSAFE_CALL): /Node.parent>#|
         }

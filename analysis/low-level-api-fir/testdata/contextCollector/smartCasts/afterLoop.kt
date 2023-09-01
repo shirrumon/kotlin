@@ -1,11 +1,12 @@
 interface Node {
+    val shouldProcess: Boolean
     val parent: Node?
 }
 
 fun test(initial: Node?) {
     var current = initial
 
-    while (initial!! != null) {
+    while (initial!!.shouldProcess) {
         consume(current)
         current = current.parent
     }
