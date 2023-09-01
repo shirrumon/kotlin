@@ -35,6 +35,10 @@ object CommonDeclarationCheckers : DeclarationCheckers() {
             FirOptInMarkedDeclarationChecker,
             FirExpectConsistencyChecker,
             FirOptionalExpectationDeclarationChecker,
+        )
+
+    override val classLikeCheckers: Set<FirClassLikeChecker>
+        get() = setOf(
             FirExpectActualClassifiersAreExperimentalChecker,
         )
 
