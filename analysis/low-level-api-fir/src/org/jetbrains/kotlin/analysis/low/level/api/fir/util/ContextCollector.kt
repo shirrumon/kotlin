@@ -265,8 +265,6 @@ private class ContextCollectorVisitor(
 
             val node = cfg.nodes.lastOrNull { isAcceptedControlFlowNode(it) && it.fir === fir }
             if (node != null) {
-                @Suppress("SENSELESS_COMPARISON")
-                require(node.flow != null)
                 return node
             } else if (!cfg.isSubGraph) {
                 return null
