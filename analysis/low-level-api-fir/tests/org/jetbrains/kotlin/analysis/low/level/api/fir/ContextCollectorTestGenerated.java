@@ -73,6 +73,12 @@ public class ContextCollectorTestGenerated extends AbstractContextCollectorTest 
     }
 
     @Test
+    @TestMetadata("localClass.kt")
+    public void testLocalClass() throws Exception {
+        runTest("analysis/low-level-api-fir/testdata/contextCollector/localClass.kt");
+    }
+
+    @Test
     @TestMetadata("nestedClasses.kt")
     public void testNestedClasses() throws Exception {
         runTest("analysis/low-level-api-fir/testdata/contextCollector/nestedClasses.kt");
@@ -139,12 +145,6 @@ public class ContextCollectorTestGenerated extends AbstractContextCollectorTest 
         @TestMetadata("insideLoop.kt")
         public void testInsideLoop() throws Exception {
             runTest("analysis/low-level-api-fir/testdata/contextCollector/smartCasts/insideLoop.kt");
-        }
-
-        @Test
-        @TestMetadata("localClass.kt")
-        public void testLocalClass() throws Exception {
-            runTest("analysis/low-level-api-fir/testdata/contextCollector/smartCasts/localClass.kt");
         }
 
         @Test
