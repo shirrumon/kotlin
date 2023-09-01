@@ -112,6 +112,12 @@ public class ContextCollectorTestGenerated extends AbstractContextCollectorTest 
         }
 
         @Test
+        @TestMetadata("andRight.kt")
+        public void testAndRight() throws Exception {
+            runTest("analysis/low-level-api-fir/testdata/contextCollector/smartCasts/andRight.kt");
+        }
+
+        @Test
         @TestMetadata("argument.kt")
         public void testArgument() throws Exception {
             runTest("analysis/low-level-api-fir/testdata/contextCollector/smartCasts/argument.kt");
@@ -145,6 +151,12 @@ public class ContextCollectorTestGenerated extends AbstractContextCollectorTest 
         @TestMetadata("insideLoop.kt")
         public void testInsideLoop() throws Exception {
             runTest("analysis/low-level-api-fir/testdata/contextCollector/smartCasts/insideLoop.kt");
+        }
+
+        @Test
+        @TestMetadata("orRight.kt")
+        public void testOrRight() throws Exception {
+            runTest("analysis/low-level-api-fir/testdata/contextCollector/smartCasts/orRight.kt");
         }
 
         @Test
