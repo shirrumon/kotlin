@@ -273,10 +273,7 @@ private class ContextCollectorVisitor(
     }
 
     private fun isAcceptedControlFlowNode(node: CFGNode<*>): Boolean {
-        return when (node) {
-            is ClassExitNode -> false
-            else -> true
-        }
+        return node !is ClassExitNode
     }
 
     override fun visitFile(file: FirFile) {
