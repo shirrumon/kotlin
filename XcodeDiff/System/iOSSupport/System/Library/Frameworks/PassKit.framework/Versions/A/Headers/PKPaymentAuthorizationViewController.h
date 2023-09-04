@@ -1,6 +1,7 @@
+#if (!__has_include(<PassKitUI/PKPaymentAuthorizationViewController.h>) && !__has_include(<PassKitMacHelperTemp/PKPaymentAuthorizationViewController.h>)) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKPaymentAuthorizationViewController.h
-//  PassKit
+//    PassKit
 //
 //  Copyright (c) 2014 Apple, Inc. All rights reserved.
 //
@@ -14,9 +15,6 @@
 
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
-#if !TARGET_OS_MACCATALYST
-#import <AddressBook/ABRecord.h>
-#endif
 #else
 #import <AppKit/AppKit.h>
 #endif
@@ -40,6 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class PKPaymentRequestPaymentMethodUpdate;
 @class PKPaymentRequestShippingMethodUpdate;
 @class PKPaymentRequestShippingContactUpdate;
+
+@class PKDisbursementRequest;
 
 // PKPaymentAuthorizationViewController prompts the user to authorize a PKPaymentRequest, funding the
 // payment amount with a valid payment card.
@@ -78,9 +78,31 @@ NS_CLASS_AVAILABLE_MAC(11_0)
 // appropriate means for the given device idiom.
 - (nullable instancetype)initWithPaymentRequest:(PKPaymentRequest *)request NS_DESIGNATED_INITIALIZER;
 
+// Determine whether this device can process disbursement requests.
++ (BOOL)supportsDisbursements API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(macos, watchos, tvos);
+
+// Determine whether this device can process disbursement requests using specific payment network brands.
++ (BOOL)supportsDisbursementsUsingNetworks:(NSArray<PKPaymentNetwork> *)supportedNetworks NS_SWIFT_NAME(supportsDisbursements(using:)) API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(macos, watchos, tvos);
+
+// Determine whether this device can process disbursements to cards using the specified networks and capabilities bitmask.
++ (BOOL)supportsDisbursementsUsingNetworks:(NSArray<PKPaymentNetwork> *)supportedNetworks
+                              capabilities:(PKMerchantCapability)capabilities NS_SWIFT_NAME(supportsDisbursements(using:capabilities:)) API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(macos, watchos, tvos);
+
+// Initialize the controller with a request to send money to a user.
+- (instancetype)initWithDisbursementRequest:(PKDisbursementRequest *)request API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(macos, watchos, tvos);
+
 @end
 
 NS_ASSUME_NONNULL_END
 
+#endif
+#endif
+
+#else
+#import <TargetConditionals.h>
+#if TARGET_OS_OSX 
+#import <PassKitMacHelperTemp/PKPaymentAuthorizationViewController.h> 
+#else 
+#import <PassKitUI/PKPaymentAuthorizationViewController.h> 
 #endif
 #endif

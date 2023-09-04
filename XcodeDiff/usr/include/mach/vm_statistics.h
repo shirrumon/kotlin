@@ -68,10 +68,10 @@
 
 #include <sys/cdefs.h>
 
-__BEGIN_DECLS
-
 #include <mach/machine/vm_types.h>
 #include <mach/machine/kern_return.h>
+
+__BEGIN_DECLS
 
 /*
  * vm_statistics
@@ -284,10 +284,12 @@ typedef struct vm_purgeable_info        *vm_purgeable_info_t;
 #define VM_FLAGS_RETURN_4K_DATA_ADDR    0x00800000 /* Return 4K aligned address of target data */
 #define VM_FLAGS_ALIAS_MASK             0xFF000000
 #define VM_GET_FLAGS_ALIAS(flags, alias)                        \
-	        (alias) = ((flags) & VM_FLAGS_ALIAS_MASK) >> 24
+	        (alias) = (((flags) >> 24) & 0xff)
 #define VM_SET_FLAGS_ALIAS(flags, alias)                        \
 	        (flags) = (((flags) & ~VM_FLAGS_ALIAS_MASK) |   \
 	        (((alias) & ~VM_FLAGS_ALIAS_MASK) << 24))
+
+#define VM_FLAGS_HW     (VM_FLAGS_TPRO)
 
 /* These are the flags that we accept from user-space */
 #define VM_FLAGS_USER_ALLOCATE  (VM_FLAGS_FIXED |               \
@@ -299,11 +301,13 @@ typedef struct vm_purgeable_info        *vm_purgeable_info_t;
 	                         VM_FLAGS_PERMANENT |           \
 	                         VM_FLAGS_OVERWRITE |           \
 	                         VM_FLAGS_SUPERPAGE_MASK |      \
-	                         VM_FLAGS_TPRO |                \
+	                         VM_FLAGS_HW |                  \
 	                         VM_FLAGS_ALIAS_MASK)
+
 #define VM_FLAGS_USER_MAP       (VM_FLAGS_USER_ALLOCATE |       \
 	                         VM_FLAGS_RETURN_4K_DATA_ADDR | \
 	                         VM_FLAGS_RETURN_DATA_ADDR)
+
 #define VM_FLAGS_USER_REMAP     (VM_FLAGS_FIXED |               \
 	                         VM_FLAGS_ANYWHERE |            \
 	                         VM_FLAGS_RANDOM_ADDR |         \
@@ -367,7 +371,6 @@ enum virtual_memory_guard_exception_codes {
 
 #define VM_MEMORY_MALLOC_NANO 11
 #define VM_MEMORY_MALLOC_MEDIUM 12
-#define VM_MEMORY_MALLOC_PGUARD 13  // Will be removed
 #define VM_MEMORY_MALLOC_PROB_GUARD 13
 
 #define VM_MEMORY_MACH_MSG 20
@@ -540,6 +543,9 @@ enum virtual_memory_guard_exception_codes {
 
 /* backtrace info for simulated crashes */
 #define VM_MEMORY_BTINFO 105
+
+/* memory allocated by CoreMedia */
+#define VM_MEMORY_CM_HLS 106
 
 /* Reserve 230-239 for Rosetta */
 #define VM_MEMORY_ROSETTA 230

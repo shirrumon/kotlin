@@ -1,7 +1,7 @@
 #if !__has_include(<PassKitCore/PKAddShareablePassConfiguration.h>) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKAddShareablePassConfiguration.h
-//  PassKit
+//    PassKit
 //
 //  Copyright © 2020 Apple, Inc. All rights reserved.
 //
@@ -16,8 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_NAME(PKShareablePassMetadata.Preview)
 @interface PKShareablePassMetadataPreview : NSObject
 
-- (instancetype)init NS_UNAVAILABLE;
-+ (instancetype)new NS_UNAVAILABLE;
+- (null_unspecified instancetype)init NS_UNAVAILABLE;
++ (null_unspecified instancetype)new NS_UNAVAILABLE;
 
 - (instancetype)initWithPassThumbnail:(CGImageRef)passThumbnail localizedDescription:(NSString *)description;
 - (instancetype)initWithTemplateIdentifier:(NSString *)templateIdentifier;
@@ -136,5 +136,6 @@ API_UNAVAILABLE(watchos, tvos);
 NS_ASSUME_NONNULL_END
 
 #else
+#import <TargetConditionals.h>
 #import <PassKitCore/PKAddShareablePassConfiguration.h>
 #endif
