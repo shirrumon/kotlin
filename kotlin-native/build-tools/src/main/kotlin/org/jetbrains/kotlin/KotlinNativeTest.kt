@@ -20,7 +20,6 @@ import org.jetbrains.kotlin.konan.target.Family
 import org.jetbrains.kotlin.konan.target.LinkerOutputKind
 import java.io.ByteArrayOutputStream
 import java.io.File
-import java.util.regex.Pattern
 
 abstract class KonanTest : DefaultTask(), KonanTestExecutable {
     enum class Logger {
@@ -256,9 +255,9 @@ open class KonanLocalTest : KonanTest() {
             val args = arguments + (multiArguments?.get(i - 1) ?: emptyList())
             val testData = this.testData
             output += if (testData != null)
-                runProcessWithInput({ project.executor.execute(it) }, executable, args, testData)
+                runProcessWithInput({ project.executorService.execute(it) }, executable, args, testData)
             else
-                runProcess({ project.executor.execute(it) }, executable, args)
+                runProcess({ project.executorService.execute(it) }, executable, args)
         }
         if (compilerMessages) {
             // TODO: as for now it captures output only in the driver task.

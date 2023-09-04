@@ -192,7 +192,7 @@ open class FrameworkTest : DefaultTask(), KonanTestExecutable {
         if (project.compileOnlyTests) {
             return
         }
-        runTest(executorService = project.executor, testExecutable = Paths.get(executable))
+        runTest(executorService = project.executorService, testExecutable = Paths.get(executable))
     }
 
     /**

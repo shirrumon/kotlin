@@ -79,7 +79,7 @@ open class CoverageTest : DefaultTask() {
     fun run() {
         val suffix = target.family.exeSuffix
         val pathToBinary = "$outputDir/$binaryName/$target/$binaryName.$suffix"
-        runProcess({ project.executor.execute(it) }, pathToBinary)
+        runProcess({ project.executorService.execute(it) }, pathToBinary)
                 .ensureSuccessful(pathToBinary)
         exec("llvm-profdata", "merge", profrawFile, "-o", profdataFile)
         val llvmCovResult = exec("llvm-cov", "export", pathToBinary, "-instr-profile", profdataFile)

@@ -22,17 +22,11 @@ import org.gradle.api.Action
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.*
 import org.gradle.process.*
-import org.gradle.process.internal.DefaultExecSpec
-import org.gradle.process.internal.ExecException
-import org.jetbrains.kotlin.konan.target.*
-import org.jetbrains.kotlin.native.executors.*
+import org.jetbrains.kotlin.executors.Executor
 
 import java.io.*
 
 import java.nio.file.Path
-
-import kotlin.time.DurationUnit
-import kotlin.time.toDuration
 
 /**
  * A replacement of the standard `exec {}`
@@ -44,70 +38,15 @@ interface ExecutorService {
     fun execute(action: Action<in ExecSpec>): ExecResult?
 }
 
-private fun Executor.service(project: Project) = object: ExecutorService {
-    override val project
-        get() = project
-
-    override fun execute(action: Action<in ExecSpec>): ExecResult? {
-        val execSpec = project.objects.newInstance<DefaultExecSpec>().apply {
-            action.execute(this)
-        }
-        val request = ExecuteRequest(
-                executableAbsolutePath = execSpec.executable,
-                args = execSpec.args,
-                timeout = 15.toDuration(DurationUnit.MINUTES),
-        ).apply {
-            execSpec.standardInput?.let {
-                stdin = it
-            }
-            execSpec.standardOutput?.let {
-                stdout = it
-            }
-            execSpec.errorOutput?.let {
-                stderr = it
-            }
-            environment.putAll(execSpec.environment.mapValues { it.toString() })
-        }
-        val response = this@service.execute(request)
-        return object : ExecResult {
-            override fun getExitValue() = response.exitCode ?: -1
-
-            override fun assertNormalExitValue(): ExecResult {
-                if (exitValue != 0) {
-                    throw ExecException("Failed with exit code $exitValue")
-                }
-                return this
-            }
-
-            override fun rethrowFailure(): ExecResult {
-                return this
-            }
-        }
-    }
-}
-
 /**
  * Creates an ExecutorService depending on a test target -Ptest_target
  */
-fun create(project: Project): ExecutorService {
-    val testTarget = project.testTarget
-    val configurables = project.testTargetConfigurables
+fun create(project: Project) = object : ExecutorService {
+    override val project: Project
+        get() = project
 
-    val executor = when {
-        project.compileOnlyTests -> NoOpExecutor(explanation = "compile-only tests")
-        testTarget == HostManager.host -> HostExecutor()
-        configurables is ConfigurablesWithEmulator && testTarget != HostManager.host -> EmulatorExecutor(configurables)
-        configurables is AppleConfigurables && configurables.targetTriple.isSimulator -> XcodeSimulatorExecutor(configurables).apply {
-            // Property can specify device identifier to be run on. For example, `com.apple.CoreSimulator.SimDeviceType.iPhone-11`
-            project.findProperty("iosDevice")?.toString()?.let {
-                deviceId = it
-            }
-        }
-        configurables is AppleConfigurables && RosettaExecutor.availableFor(configurables) -> RosettaExecutor(configurables)
-        else -> error("Cannot run for target $testTarget")
-    }
-
-    return executor.service(project)
+    override fun execute(action: Action<in ExecSpec>) =
+            project.extensions.getByType<Executor>().exec(project.objects, action)
 }
 
 data class ProcessOutput(var stdOut: String, var stdErr: String, var exitCode: Int)
@@ -178,8 +117,8 @@ fun runProcessWithInput(executor: (Action<in ExecSpec>) -> ExecResult?,
  * The [ExecutorService] being set in the given project.
  * @throws IllegalStateException if there are no executor in the project.
  */
-val Project.executor: ExecutorService
-    get() = this.extensions.findByName("executor") as? ExecutorService
+val Project.executorService: ExecutorService
+    get() = this.extensions.findByName("executorService") as? ExecutorService
             ?: throw IllegalStateException("Executor wasn't found")
 
 /**
@@ -202,7 +141,7 @@ fun ExecutorService.add(actionParameter: Action<in ExecSpec>) = object : Executo
  */
 fun Project.executeAndCheck(executable: Path, arguments: List<String> = emptyList()) {
     val (stdOut, stdErr, exitCode) = runProcess(
-            executor = executor::execute,
+            executor = executorService::execute,
             executable = executable.toString(),
             args = arguments
     )

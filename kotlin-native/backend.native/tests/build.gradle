@@ -10,6 +10,7 @@ import org.jetbrains.kotlin.konan.target.Family
 import org.jetbrains.kotlin.konan.target.HostManager
 import org.jetbrains.kotlin.konan.target.KonanTarget
 
+import java.time.Duration
 import java.util.regex.Pattern
 
 buildscript {
@@ -25,6 +26,7 @@ buildscript {
 apply plugin: 'konan'
 apply plugin: 'kotlin'
 apply plugin: 'kotlin.native.build-tools-conventions'
+apply plugin: 'executor'
 
 configurations {
     cli_bc
@@ -43,11 +45,18 @@ ext.testOutputRoot = rootProject.file("test.output").absolutePath
 ext.platformManager = project.project(":kotlin-native").platformManager
 ext.target = platformManager.targetManager(project.testTarget).target
 
+executor {
+    defaultTarget = project.target
+    defaultDryRun = project.hasProperty("test_compile_only") ? "compile-only tests" : null
+    defaultJavaTimeout = Duration.ofMinutes(15)
+    defaultDeviceId = project.findProperty("iosDevice")
+}
+
 ext.testLibraryDir = "${ext.testOutputRoot}/klib/platform/${project.target.name}"
 
 // Add executor to run tests depending on a target
 // NOTE: If this persists in a gradle daemon, environment update (e.g. an Xcode update) may lead to execution failures.
-project.extensions.executor = ExecutorServiceKt.create(project)
+project.extensions.executorService = ExecutorServiceKt.create(project)
 
 ext.useCustomDist = UtilsKt.getUseCustomDist(project)
 ext.kotlinNativeDist = UtilsKt.getKotlinNativeDist(project)
