@@ -103,4 +103,47 @@ class StringNativeTest {
         // Non-ASCII
         assertEquals("\u00DE\u03A9\u0403\uA779", "\u00FE\u03A9\u0453\uA77A".uppercase())
     }
+
+    @Test fun indexOf() {
+        var str = "Kotlin/Native"
+        var ch = 'a'
+
+        assertEquals(-1, str.indexOf("/", str.length + 1))
+        assertEquals(-1, str.indexOf("/", Int.MAX_VALUE))
+        assertEquals(str.length, str.indexOf("", Int.MAX_VALUE))
+        assertEquals(1, str.indexOf("", 1))
+
+        assertEquals(8, str.indexOf('a', 1))
+        assertEquals(-1, str.indexOf('a', str.length - 1))
+    }
+
+    @Test fun indexOfEmptyString() {
+        assertEquals(-1, "".indexOf("a", -3))
+        assertEquals(0, "".indexOf("", 0))
+
+        assertEquals(-1, "".indexOf('a', -3))
+        assertEquals(-1, "".indexOf('a', 10))
+
+        assertEquals(-1, "".indexOf('\u0000', -3))
+        assertEquals(-1, "".indexOf('\u0000', 10))
+    }
+
+    @Test fun i18n() {
+        assertTrue("Привет".equals("прИВет", true))
+        assertEquals("ПРИВЕТ", "Привет".toUpperCase())
+        assertEquals("привет", "Привет".toLowerCase())
+        assertEquals("Пока", "пока".capitalize())
+    }
+
+    @Test fun trim() {
+        assertEquals(expected = "String", actual = "  String".trim(), message = "Trim leading spaces")
+        assertEquals(expected = "String  ", actual = "    String  ".trimStart(), message = "Trim start")
+        assertEquals(expected = "  String", actual = "  String \t ".trimEnd(), message = "Trim end")
+
+        assertEquals(expected = "String", actual = "\u0020 \u202FString\u2028\u2029".trim(),
+                message = "Trim special whitespaces")
+        assertEquals(expected = "\u1FFFString", actual = "\u00A0  \u1FFFString".trim(),
+                message = "Trim special whitespace but should left a unicode symbol")
+        assertEquals(expected = "String\tSTR", actual = " \nString\tSTR  ".trim(), message = "Trim newline")
+    }
 }

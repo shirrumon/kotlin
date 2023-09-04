@@ -7,6 +7,11 @@ class CharNativeTest {
 
     @Test
     fun lowercaseChar() {
+        // sanity
+        assertEquals('a', 'A'.lowercaseChar())
+        assertEquals('a', 'a'.lowercaseChar())
+        assertEquals('1', '1'.lowercaseChar())
+
         // large mapping
         assertEquals('\u0239', '\u0239'.lowercaseChar())
         assertEquals('\u2C65', '\u023A'.lowercaseChar())
@@ -25,6 +30,11 @@ class CharNativeTest {
 
     @Test
     fun uppercaseChar() {
+        // sanity
+        assertEquals('A', 'A'.uppercaseChar())
+        assertEquals('A', 'a'.uppercaseChar())
+        assertEquals('1', '1'.uppercaseChar())
+
         // large mapping
         assertEquals('\u029C', '\u029C'.uppercaseChar())
         assertEquals('\uA7B2', '\u029D'.uppercaseChar())
@@ -63,10 +73,55 @@ class CharNativeTest {
         assertEquals("\u0069\u0307", '\u0130'.lowercase())
     }
 
-    fun titlecase() {
+    @Test fun titlecase() {
         // titlecase = titlecaseChar = char != uppercaseChar
         assertEquals('\u10F0'.titlecaseChar().toString(), '\u10F0'.titlecase())
         assertEquals('\u10F0', '\u10F0'.titlecaseChar())
         assertNotEquals('\u10F0', '\u10F0'.uppercaseChar())
+    }
+
+    @Test fun isSupplementaryCodePoint() {
+        assertFalse(Char.isSupplementaryCodePoint(-1))
+        for (c in 0..0xFFFF) {
+            assertFalse(Char.isSupplementaryCodePoint(c.toInt()))
+        }
+        for (c in 0xFFFF + 1..0x10FFFF) {
+            assertTrue(Char.isSupplementaryCodePoint(c))
+        }
+        assertFalse(Char.isSupplementaryCodePoint(0x10FFFF + 1))
+    }
+
+    @Test fun isSurrogatePair() {
+        assertFalse(Char.isSurrogatePair('\u0000', '\u0000'))
+        assertFalse(Char.isSurrogatePair('\u0000', '\uDC00'))
+        assertTrue( Char.isSurrogatePair('\uD800', '\uDC00'))
+        assertTrue( Char.isSurrogatePair('\uD800', '\uDFFF'))
+        assertTrue( Char.isSurrogatePair('\uDBFF', '\uDFFF'))
+        assertFalse(Char.isSurrogatePair('\uDBFF', '\uF000'))
+    }
+
+    @Test fun toChars() {
+        assertTrue(charArrayOf('\uD800', '\uDC00').contentEquals(Char.toChars(0x010000)))
+        assertTrue(charArrayOf('\uD800', '\uDC01').contentEquals(Char.toChars(0x010001)))
+        assertTrue(charArrayOf('\uD801', '\uDC01').contentEquals(Char.toChars(0x010401)))
+        assertTrue(charArrayOf('\uDBFF', '\uDFFF').contentEquals(Char.toChars(0x10FFFF)))
+
+        assertFailsWith<IllegalArgumentException> {
+            Char.toChars(Int.MAX_VALUE)
+        }
+    }
+
+    @Test fun toCodePoint() {
+        assertEquals(0x010000, Char.toCodePoint('\uD800', '\uDC00'))
+        assertEquals(0x010001, Char.toCodePoint('\uD800', '\uDC01'))
+        assertEquals(0x010401, Char.toCodePoint('\uD801', '\uDC01'))
+        assertEquals(0x10FFFF, Char.toCodePoint('\uDBFF', '\uDFFF'))
+    }
+
+    @Test fun category() {
+        assertTrue('<'      in CharCategory.MATH_SYMBOL)
+        assertTrue(';'      in CharCategory.OTHER_PUNCTUATION)
+        assertTrue('_'      in CharCategory.CONNECTOR_PUNCTUATION)
+        assertTrue('$'      in CharCategory.CURRENCY_SYMBOL)
     }
 }
