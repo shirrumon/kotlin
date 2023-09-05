@@ -23051,6 +23051,12 @@ public class DiagnosticTestGenerated extends AbstractDiagnosticTest {
             }
 
             @Test
+            @TestMetadata("expectExternal_oldLanguageVersion.kt")
+            public void testExpectExternal_oldLanguageVersion() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/multiplatform/expectExternal_oldLanguageVersion.kt");
+            }
+
+            @Test
             @TestMetadata("expectInterfaceApplicability.kt")
             public void testExpectInterfaceApplicability() throws Exception {
                 runTest("compiler/testData/diagnostics/tests/multiplatform/expectInterfaceApplicability.kt");
@@ -23078,6 +23084,12 @@ public class DiagnosticTestGenerated extends AbstractDiagnosticTest {
             @TestMetadata("expectTailrec.kt")
             public void testExpectTailrec() throws Exception {
                 runTest("compiler/testData/diagnostics/tests/multiplatform/expectTailrec.kt");
+            }
+
+            @Test
+            @TestMetadata("expectTailrec_oldLanguageVersion.kt")
+            public void testExpectTailrec_oldLanguageVersion() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/multiplatform/expectTailrec_oldLanguageVersion.kt");
             }
 
             @Test
