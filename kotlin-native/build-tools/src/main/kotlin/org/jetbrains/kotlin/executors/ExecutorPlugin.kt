@@ -13,6 +13,7 @@ import org.jetbrains.kotlin.konan.target.PlatformManager
 class ExecutorPlugin : Plugin<Project> {
     override fun apply(project: Project) {
         val platformManager = project.extensions.getByType<PlatformManager>()
+        // NOTE: If this persists in a gradle daemon, environment update (e.g. an Xcode update) may lead to execution failures.
         project.extensions.create<Executor>("executor", platformManager)
     }
 }

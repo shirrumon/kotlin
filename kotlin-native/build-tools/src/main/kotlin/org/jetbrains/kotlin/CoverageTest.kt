@@ -11,6 +11,8 @@ import org.gradle.api.Task
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.Internal
+import org.gradle.kotlin.dsl.getByType
+import org.jetbrains.kotlin.executors.Executor
 import org.jetbrains.kotlin.konan.target.AppleConfigurables
 
 /**
@@ -79,7 +81,7 @@ open class CoverageTest : DefaultTask() {
     fun run() {
         val suffix = target.family.exeSuffix
         val pathToBinary = "$outputDir/$binaryName/$target/$binaryName.$suffix"
-        runProcess({ project.executorService.execute(it) }, pathToBinary)
+        runProcess(project.executor, pathToBinary)
                 .ensureSuccessful(pathToBinary)
         exec("llvm-profdata", "merge", profrawFile, "-o", profdataFile)
         val llvmCovResult = exec("llvm-cov", "export", pathToBinary, "-instr-profile", profdataFile)
@@ -100,7 +102,7 @@ open class CoverageTest : DefaultTask() {
 
     private fun exec(llvmTool: String, vararg args: String): ProcessOutput {
         val executable = "$llvmToolsDir/$llvmTool"
-        val result = runProcess(localExecutor(project), executable, args.toList())
+        val result = runProcess(project.hostExecutor, executable, args.toList())
         result.ensureSuccessful(llvmTool)
         return result
     }

@@ -9,7 +9,11 @@ import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.TaskAction
+import org.gradle.kotlin.dsl.getByType
 import org.gradle.language.base.plugins.LifecycleBasePlugin
+import org.gradle.process.ExecResult
+import org.gradle.process.ExecSpec
+import org.jetbrains.kotlin.executors.Executor
 
 import org.jetbrains.kotlin.konan.target.*
 import org.jetbrains.kotlin.native.executors.*
@@ -192,7 +196,7 @@ open class FrameworkTest : DefaultTask(), KonanTestExecutable {
         if (project.compileOnlyTests) {
             return
         }
-        runTest(executorService = project.executorService, testExecutable = Paths.get(executable))
+        runTest(executor = project.executor, testExecutable = Paths.get(executable))
     }
 
     /**
@@ -228,12 +232,15 @@ open class FrameworkTest : DefaultTask(), KonanTestExecutable {
         )
     }
 
-    private fun runTest(executorService: ExecutorService, testExecutable: Path, args: List<String> = emptyList()) {
+    private fun runTest(executor: (Action<in ExecSpec>) -> ExecResult?, testExecutable: Path, args: List<String> = emptyList()) {
         val (stdOut, stdErr, exitCode) = runProcess(
-                executor = { executorService.add(Action {
-                    environment = buildEnvironment()
-                    workingDir = Paths.get(testOutput).toFile()
-                }).execute(it) },
+                executor = { action ->
+                    executor {
+                        action.execute(this)
+                        environment = buildEnvironment()
+                        workingDir = Paths.get(testOutput).toFile()
+                    }
+                },
                 executable = testExecutable.toString(),
                 args = args)
 
@@ -267,7 +274,7 @@ open class FrameworkTest : DefaultTask(), KonanTestExecutable {
                 .map { Paths.get(it) }.firstOrNull { Files.exists(it) }
                 ?: error("Can't find python3")
 
-        runTest(executorService = localExecutorService(project), testExecutable = python3,
+        runTest(executor = project.hostExecutor, testExecutable = python3,
                 args = listOf("-B", bitcodeBuildTool, "--sdk", sdk, "-v", "-t", toolPath, frameworkBinary))
     }
 

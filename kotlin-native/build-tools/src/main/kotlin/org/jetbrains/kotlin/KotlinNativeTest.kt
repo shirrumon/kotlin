@@ -14,6 +14,7 @@ import org.gradle.api.tasks.*
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.language.base.plugins.LifecycleBasePlugin
 import org.gradle.process.ExecSpec
+import org.jetbrains.kotlin.executors.Executor
 import org.jetbrains.kotlin.konan.exec.Command
 import org.jetbrains.kotlin.konan.target.HostManager
 import org.jetbrains.kotlin.konan.target.Family
@@ -107,7 +108,19 @@ abstract class KonanTest : DefaultTask(), KonanTestExecutable {
     }
 
     @TaskAction
-    open fun run() = project.executeAndCheck(project.file(executable).toPath(), arguments)
+    open fun run() {
+        val (stdOut, stdErr, exitCode) = runProcess(
+                executor = project.executor,
+                executable = project.file(executable).absolutePath,
+                args = arguments
+        )
+
+        println("""
+            |stdout: $stdOut
+            |stderr: $stdErr
+            """.trimMargin())
+        check(exitCode == 0) { "Execution failed with exit code: $exitCode" }
+    }
 
     // Converts to runner's pattern
     private fun String.convertToPattern() = this.removeSuffix(".kt").replace("/", ".") + ".*"
@@ -254,10 +267,7 @@ open class KonanLocalTest : KonanTest() {
         for (i in 1..times) {
             val args = arguments + (multiArguments?.get(i - 1) ?: emptyList())
             val testData = this.testData
-            output += if (testData != null)
-                runProcessWithInput({ project.executorService.execute(it) }, executable, args, testData)
-            else
-                runProcess({ project.executorService.execute(it) }, executable, args)
+            output += runProcess(project.executor, executable, args, input = testData)
         }
         if (compilerMessages) {
             // TODO: as for now it captures output only in the driver task.
@@ -397,7 +407,7 @@ open class KonanDriverTest : KonanStandaloneTest() {
         }
 
         // run konanc compiler locally
-        runProcess(localExecutor(project), konanc, args).let {
+        runProcess(project.hostExecutor, konanc, args).let {
             it.print("Konanc compiler execution:")
             project.file("$executable.compilation.log").run {
                 writeText(it.stdOut)

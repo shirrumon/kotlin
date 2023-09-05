@@ -135,7 +135,7 @@ fun projectOrFiles(proj: Project, notation: String): Any? {
 fun codesign(project: Project, path: String) {
     check(HostManager.hostIsMac) { "Apple specific code signing" }
     val (stdOut, stdErr, exitCode) = runProcess(
-        executor = localExecutor(project), executable = "/usr/bin/codesign",
+        executor = project.hostExecutor, executable = "/usr/bin/codesign",
         args = listOf("--verbose", "-s", "-", path)
     )
     check(exitCode == 0) {
@@ -301,7 +301,7 @@ fun compileSwift(
             options + "-o" + output.toString() + sources +
             if (fullBitcode) listOf("-embed-bitcode", "-Xlinker", "-bitcode_verify") else listOf("-embed-bitcode-marker")
 
-    val (stdOut, stdErr, exitCode) = runProcess(executor = localExecutor(project), executable = compiler, args = args)
+    val (stdOut, stdErr, exitCode) = runProcess(executor = project.hostExecutor, executable = compiler, args = args)
 
     println(
         """

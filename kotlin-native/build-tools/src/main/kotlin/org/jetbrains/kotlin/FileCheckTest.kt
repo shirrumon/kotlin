@@ -102,7 +102,7 @@ open class FileCheckTest : DefaultTask() {
         val configurables = platform.configurables
         val llvmBin = "${configurables.absoluteLlvmHome}/bin"
         val fileCheck = "$llvmBin/FileCheck"
-        return runProcess(localExecutor(project), fileCheck, *args.toTypedArray())
+        return runProcess(project.hostExecutor, fileCheck, args)
                 .ensureSuccessful(fileCheck, *args.toTypedArray())
     }
 
