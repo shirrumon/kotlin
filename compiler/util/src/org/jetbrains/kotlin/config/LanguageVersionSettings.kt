@@ -282,6 +282,7 @@ enum class LanguageFeature(
     // At least there won't be false positives for 1.8 users
     ProhibitDifferentMembersScopesForNonFinalExpect(KOTLIN_1_9, kind = BUG_FIX), // KT-22841
     ProhibitImplicitJavaActualization(KOTLIN_1_9, kind = BUG_FIX), // KT-58545
+    ProhibitDifferentAnnotationsOnExpectAndActual(KOTLIN_1_9, kind = BUG_FIX), // KT-58551
 
     // End of 1.* language features --------------------------------------------------
 

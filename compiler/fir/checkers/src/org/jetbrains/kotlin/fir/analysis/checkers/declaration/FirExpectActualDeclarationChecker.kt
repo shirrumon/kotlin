@@ -257,6 +257,7 @@ object FirExpectActualDeclarationChecker : FirBasicDeclarationChecker() {
         context: CheckerContext,
         reporter: DiagnosticReporter
     ) {
+        if (!context.languageVersionSettings.supportsFeature(LanguageFeature.ProhibitDifferentAnnotationsOnExpectAndActual)) return
         val matchingContext = context.session.expectActualMatchingContextFactory.create(context.session, context.scopeSession)
         val incompatibility =
             AbstractExpectActualAnnotationMatchChecker.areAnnotationsCompatible(expectSymbol, actualSymbol, matchingContext) ?: return
