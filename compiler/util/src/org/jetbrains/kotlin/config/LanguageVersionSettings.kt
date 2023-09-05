@@ -286,6 +286,7 @@ enum class LanguageFeature(
     ProhibitActualTypealiasIfExpectHasDefaultParams(KOTLIN_1_9, kind = BUG_FIX), // KT-57614
     ProhibitActualTypealiasToNothingAndNullable(KOTLIN_1_9, kind = BUG_FIX), // KT-60650
     ProhibitExpectActualOptInAnnotations(KOTLIN_1_9, kind = BUG_FIX), // KT-58554
+    ProhibitActualTypealiasToSpecialAnnotations(KOTLIN_1_9, kind = BUG_FIX), // KT-58554
     ProhibitExpectActualTailrecOrExternal(KOTLIN_1_9, kind = BUG_FIX), // KT-58536
 
     // End of 1.* language features --------------------------------------------------
