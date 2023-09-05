@@ -281,6 +281,7 @@ enum class LanguageFeature(
     // 1.9.20 KMP stabilization. Unfortunately, we don't have 1.9.20 LV. So LV=1.9 is the best we can do.
     // At least there won't be false positives for 1.8 users
     ProhibitDifferentMembersScopesForNonFinalExpect(KOTLIN_1_9, kind = BUG_FIX), // KT-22841
+    ProhibitImplicitJavaActualization(KOTLIN_1_9, kind = BUG_FIX), // KT-58545
 
     // End of 1.* language features --------------------------------------------------
 

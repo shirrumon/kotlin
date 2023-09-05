@@ -124,6 +124,7 @@ class ExpectedActualDeclarationChecker(
         module: ModuleDescriptor,
         context: DeclarationCheckerContext
     ) {
+        if (!context.languageVersionSettings.supportsFeature(LanguageFeature.ProhibitImplicitJavaActualization)) return
         val actualMembers = actuals
             .filter { (compatibility, _) -> compatibility.isCompatibleOrWeakCompatible() }
             .flatMap { (_, members) -> members }
