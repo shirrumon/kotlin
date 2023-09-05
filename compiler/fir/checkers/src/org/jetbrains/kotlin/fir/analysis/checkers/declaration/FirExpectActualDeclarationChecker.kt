@@ -75,7 +75,9 @@ object FirExpectActualDeclarationChecker : FirBasicDeclarationChecker() {
         if (declaration is FirProperty) {
             checkExpectPropertyAccessorsModifiers(declaration, context, reporter)
         }
-        if (declaration is FirFunction && declaration.isTailRec) {
+        if (context.languageVersionSettings.supportsFeature(LanguageFeature.ProhibitExpectActualTailrecOrExternal) &&
+            declaration is FirFunction && declaration.isTailRec
+        ) {
             reporter.reportOn(declaration.source, FirErrors.EXPECTED_TAILREC_FUNCTION, context)
         }
     }
@@ -107,7 +109,9 @@ object FirExpectActualDeclarationChecker : FirBasicDeclarationChecker() {
         context: CheckerContext,
         reporter: DiagnosticReporter,
     ) {
-        if (declaration.isExternal) {
+        if (context.languageVersionSettings.supportsFeature(LanguageFeature.ProhibitExpectActualTailrecOrExternal) &&
+            declaration.isExternal
+        ) {
             reporter.reportOn(declaration.source, FirErrors.EXPECTED_EXTERNAL_DECLARATION, context)
         }
     }
