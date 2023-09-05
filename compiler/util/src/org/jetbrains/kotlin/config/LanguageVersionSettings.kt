@@ -284,6 +284,7 @@ enum class LanguageFeature(
     ProhibitImplicitJavaActualization(KOTLIN_1_9, kind = BUG_FIX), // KT-58545
     ProhibitDifferentAnnotationsOnExpectAndActual(KOTLIN_1_9, kind = BUG_FIX), // KT-58551
     ProhibitActualTypealiasIfExpectHasDefaultParams(KOTLIN_1_9, kind = BUG_FIX), // KT-57614
+    ProhibitActualTypealiasToNothingAndNullable(KOTLIN_1_9, kind = BUG_FIX), // KT-60650
 
     // End of 1.* language features --------------------------------------------------
 
