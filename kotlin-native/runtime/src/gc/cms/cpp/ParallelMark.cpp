@@ -22,19 +22,19 @@ void spinWait(Cond&& until) {
 } // namespace
 
 bool gc::mark::MarkPacer::is(gc::mark::MarkPacer::Phase phase) const {
-    return phase_.load(std::memory_order_relaxed) == phase;
+    return phase_.load(std::memory_order_acquire) == phase;
 }
 
 void gc::mark::MarkPacer::begin(gc::mark::MarkPacer::Phase phase) {
     {
         std::unique_lock lock(mutex_);
-        phase_.store(phase, std::memory_order_relaxed);
+        phase_.store(phase, std::memory_order_release);
     }
     cond_.notify_all();
 }
 
 void gc::mark::MarkPacer::wait(gc::mark::MarkPacer::Phase phase) {
-    if (phase_.load(std::memory_order_relaxed) >= phase) return;
+    if (phase_.load(std::memory_order_acquire) >= phase) return;
     std::unique_lock lock(mutex_);
     cond_.wait(lock, [=]() { return phase_ >= phase; });
 }
