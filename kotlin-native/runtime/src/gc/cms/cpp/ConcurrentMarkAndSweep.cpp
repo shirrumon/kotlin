@@ -8,7 +8,6 @@
 #include <cinttypes>
 #include <optional>
 
-#include "AllocatorImpl.hpp"
 #include "CallsChecker.hpp"
 #include "CompilerConstants.hpp"
 #include "GlobalData.hpp"
@@ -37,9 +36,9 @@ ScopedThread createGCThread(const char* name, Body&& body) {
 }
 
 // TODO move to common
-[[maybe_unused]] inline void checkMarkCorrectness(alloc::Allocator::Impl& allocator, uint64_t epoch) {
+[[maybe_unused]] inline void checkMarkCorrectness(alloc::MarkedHeap& markedHeap) {
     if (compiler::runtimeAssertsMode() == compiler::RuntimeAssertsMode::kIgnore) return;
-    alloc::internal::traverseObjects(allocator, epoch, [](ObjHeader* obj) noexcept {
+    markedHeap.traverseObjects([](ObjHeader* obj) noexcept {
         auto& objData = alloc::objectDataForObject(obj);
         if (objData.marked()) {
             traverseReferredObjects(obj, [obj](ObjHeader* field) {
@@ -160,27 +159,26 @@ void gc::ConcurrentMarkAndSweep::PerformFullGC(int64_t epoch) noexcept {
     for (auto& thread : kotlin::mm::ThreadRegistry::Instance().LockForIter()) {
         thread.allocator().prepareForGC();
     }
-    allocator_.prepareForGC();
 
     // Taking the locks before the pause is completed. So that any destroying thread
     // would not publish into the global state at an unexpected time.
-    allocator_.impl().sweepPipeline().emplace(allocator_.impl(), epoch);
+    auto markedHeap = allocator_.prepareForGC(epoch);
 
-    checkMarkCorrectness(allocator_.impl(), epoch);
+    checkMarkCorrectness(markedHeap);
 
     resumeTheWorld(gcHandle);
 
-    auto finalizersCount = alloc::internal::sweep(allocator_.impl(), epoch);
+    auto pendingFinalizers = std::move(markedHeap).sweep();
 
     scheduler.onGCFinish(epoch, alloc::allocatedBytes());
     state_.finish(epoch);
-    gcHandle.finalizersScheduled(finalizersCount);
+    gcHandle.finalizersScheduled(pendingFinalizers.finalizersCount());
     gcHandle.finished();
 
     // This may start a new thread. On some pthreads implementations, this may block waiting for concurrent thread
     // destructors running. So, it must ensured that no locks are held by this point.
     // TODO: Consider having an always on sleeping finalizer thread.
-    alloc::internal::pendingFinalizersDispatch(allocator_.impl(), epoch);
+    std::move(pendingFinalizers).dispatch();
 }
 
 void gc::ConcurrentMarkAndSweep::reconfigure(std::size_t maxParallelism, bool mutatorsCooperate, std::size_t auxGCThreads) noexcept {
