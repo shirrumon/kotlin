@@ -8,14 +8,13 @@
 
 #include <cstddef>
 
-#include "AllocatorImpl.hpp"
-#include "FinalizerProcessor.hpp"
 #include "GC.hpp"
 #include "GCScheduler.hpp"
 #include "GCState.hpp"
 #include "GlobalData.hpp"
 #include "IntrusiveList.hpp"
 #include "ObjectData.hpp"
+#include "ScopedThread.hpp"
 #include "Types.h"
 #include "Utils.hpp"
 
@@ -44,10 +43,6 @@ public:
 
     ~SameThreadMarkAndSweep();
 
-    void StartFinalizerThreadIfNeeded() noexcept;
-    void StopFinalizerThreadIfRunning() noexcept;
-    bool FinalizersThreadIsRunning() noexcept;
-
     GCStateHolder& state() noexcept { return state_; }
 
 private:
@@ -58,7 +53,6 @@ private:
 
     GCStateHolder state_;
     ScopedThread gcThread_;
-    FinalizerProcessor<alloc::FinalizerQueue, alloc::FinalizerQueueTraits> finalizerProcessor_;
 
     MarkQueue markQueue_;
 };

@@ -48,6 +48,10 @@ public:
 
     void prepareForGC() noexcept;
 
+    void startFinalizerThreadIfNeeded() noexcept;
+    void stopFinalizerThreadIfRunning() noexcept;
+    bool finalizersThreadIsRunning() noexcept;
+
     // TODO: Move into AllocatorTestSupport.hpp
     void clearForTests() noexcept;
 

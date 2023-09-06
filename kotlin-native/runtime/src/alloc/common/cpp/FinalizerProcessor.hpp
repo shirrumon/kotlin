@@ -24,7 +24,7 @@
 #include <CoreFoundation/CFRunLoop.h>
 #endif
 
-namespace kotlin::gc {
+namespace kotlin::alloc {
 
 template <typename FinalizerQueue, typename FinalizerQueueTraits>
 class FinalizerProcessor : private Pinned {
@@ -113,18 +113,16 @@ private:
     class ProcessingLoop {
     public:
         explicit ProcessingLoop(FinalizerProcessor& owner) :
-                owner_(owner),
-                sourceContext_{
-                        0, this, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
-                        [](void* info) {
-                            auto& self = *reinterpret_cast<ProcessingLoop*>(info);
-                            self.handleNewFinalizers();
-                        }},
-                runLoopSource_(CFRunLoopSourceCreate(nullptr, 0, &sourceContext_)) {}
+            owner_(owner),
+            sourceContext_{
+                    0, this, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
+                    [](void* info) {
+                        auto& self = *reinterpret_cast<ProcessingLoop*>(info);
+                        self.handleNewFinalizers();
+                    }},
+            runLoopSource_(CFRunLoopSourceCreate(nullptr, 0, &sourceContext_)) {}
 
-        ~ProcessingLoop() {
-            CFRelease(runLoopSource_);
-        }
+        ~ProcessingLoop() { CFRelease(runLoopSource_); }
 
         void notify() {
             // wait until runLoop_ ptr is published
@@ -136,9 +134,7 @@ private:
             CFRunLoopWakeUp(runLoop_);
         }
 
-        void initThreadData() {
-            runLoop_.store(CFRunLoopGetCurrent(), std::memory_order_release);
-        }
+        void initThreadData() { runLoop_.store(CFRunLoopGetCurrent(), std::memory_order_release); }
 
         void body() {
             konan::AutoreleasePool autoreleasePool;
@@ -150,6 +146,7 @@ private:
             CFRunLoopRemoveSource(CFRunLoopGetCurrent(), runLoopSource_, mode);
             runLoop_.store(nullptr, std::memory_order_release);
         }
+
     private:
         void handleNewFinalizers() {
             std::unique_lock lock(owner_.finalizerQueueMutex_);
@@ -177,9 +174,7 @@ private:
     public:
         explicit ProcessingLoop(FinalizerProcessor& owner) : owner_(owner) {}
 
-        void notify() {
-            owner_.finalizerQueueCondVar_.notify_all();
-        }
+        void notify() { owner_.finalizerQueueCondVar_.notify_all(); }
 
         void initThreadData() { /* noop */ }
 
@@ -187,9 +182,8 @@ private:
             int64_t finishedEpoch = 0;
             while (true) {
                 std::unique_lock lock(owner_.finalizerQueueMutex_);
-                owner_.finalizerQueueCondVar_.wait(lock, [this, &finishedEpoch] {
-                    return owner_.hasNewTasks(finishedEpoch) || owner_.shutdownFlag_;
-                });
+                owner_.finalizerQueueCondVar_.wait(
+                        lock, [this, &finishedEpoch] { return owner_.hasNewTasks(finishedEpoch) || owner_.shutdownFlag_; });
                 if (!owner_.hasNewTasks(finishedEpoch)) {
                     RuntimeAssert(owner_.shutdownFlag_, "Nothing to do, but no shutdownFlag_ is set on wakeup");
                     owner_.newTasksAllowed_ = false;
@@ -202,6 +196,7 @@ private:
                 finishedEpoch = currentEpoch;
             }
         }
+
     private:
         FinalizerProcessor& owner_;
     };
@@ -223,7 +218,6 @@ private:
     bool initialized_ = false;
 
     std::mutex threadCreatingMutex_;
-
 };
 
-} // namespace kotlin::gc
+} // namespace kotlin::alloc

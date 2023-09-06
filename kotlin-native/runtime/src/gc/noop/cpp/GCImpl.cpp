@@ -33,14 +33,6 @@ void gc::GC::ClearForTests() noexcept {
     GCHandle::ClearForTests();
 }
 
-void gc::GC::StartFinalizerThreadIfNeeded() noexcept {}
-
-void gc::GC::StopFinalizerThreadIfRunning() noexcept {}
-
-bool gc::GC::FinalizersThreadIsRunning() noexcept {
-    return false;
-}
-
 // static
 ALWAYS_INLINE void gc::GC::processObjectInMark(void* state, ObjHeader* object) noexcept {}
 
@@ -57,6 +49,8 @@ int64_t gc::GC::Schedule() noexcept {
 void gc::GC::WaitFinished(int64_t epoch) noexcept {}
 
 void gc::GC::WaitFinalizers(int64_t epoch) noexcept {}
+
+void gc::GC::onFinalized(int64_t epoch) noexcept {}
 
 bool gc::isMarked(ObjHeader* object) noexcept {
     RuntimeAssert(false, "Should not reach here");

@@ -46,7 +46,23 @@ void alloc::Allocator::prepareForGC() noexcept {
     impl_->heap().PrepareForGC();
 }
 
+void alloc::Allocator::startFinalizerThreadIfNeeded() noexcept {
+    NativeOrUnregisteredThreadGuard guard(true);
+    impl_->finalizerProcessor().StartFinalizerThreadIfNone();
+    impl_->finalizerProcessor().WaitFinalizerThreadInitialized();
+}
+
+void alloc::Allocator::stopFinalizerThreadIfRunning() noexcept {
+    NativeOrUnregisteredThreadGuard guard(true);
+    impl_->finalizerProcessor().StopFinalizerThread();
+}
+
+bool alloc::Allocator::finalizersThreadIsRunning() noexcept {
+    return impl_->finalizerProcessor().IsRunning();
+}
+
 void alloc::Allocator::clearForTests() noexcept {
+    impl_->finalizerProcessor().StopFinalizerThread();
     impl_->heap().ClearForTests();
 }
 

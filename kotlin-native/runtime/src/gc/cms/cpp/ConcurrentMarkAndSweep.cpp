@@ -94,10 +94,6 @@ gc::ConcurrentMarkAndSweep::ConcurrentMarkAndSweep(
         alloc::Allocator& allocator, gcScheduler::GCScheduler& gcScheduler, bool mutatorsCooperate, std::size_t auxGCThreads) noexcept :
     allocator_(allocator),
     gcScheduler_(gcScheduler),
-    finalizerProcessor_([this](int64_t epoch) {
-        GCHandle::getByEpoch(epoch).finalizersDone();
-        state_.finalized(epoch);
-    }),
     markDispatcher_(mutatorsCooperate),
     mainThread_(createGCThread("Main GC thread", [this] { mainGCThreadBody(); })) {
     for (std::size_t i = 0; i < auxGCThreads; ++i) {
@@ -108,21 +104,6 @@ gc::ConcurrentMarkAndSweep::ConcurrentMarkAndSweep(
 
 gc::ConcurrentMarkAndSweep::~ConcurrentMarkAndSweep() {
     state_.shutdown();
-}
-
-void gc::ConcurrentMarkAndSweep::StartFinalizerThreadIfNeeded() noexcept {
-    NativeOrUnregisteredThreadGuard guard(true);
-    finalizerProcessor_.StartFinalizerThreadIfNone();
-    finalizerProcessor_.WaitFinalizerThreadInitialized();
-}
-
-void gc::ConcurrentMarkAndSweep::StopFinalizerThreadIfRunning() noexcept {
-    NativeOrUnregisteredThreadGuard guard(true);
-    finalizerProcessor_.StopFinalizerThread();
-}
-
-bool gc::ConcurrentMarkAndSweep::FinalizersThreadIsRunning() noexcept {
-    return finalizerProcessor_.IsRunning();
 }
 
 void gc::ConcurrentMarkAndSweep::mainGCThreadBody() {
@@ -217,7 +198,7 @@ void gc::ConcurrentMarkAndSweep::PerformFullGC(int64_t epoch) noexcept {
     // This may start a new thread. On some pthreads implementations, this may block waiting for concurrent thread
     // destructors running. So, it must ensured that no locks are held by this point.
     // TODO: Consider having an always on sleeping finalizer thread.
-    finalizerProcessor_.ScheduleTasks(std::move(finalizerQueue), epoch);
+    allocator_.impl().finalizerProcessor().ScheduleTasks(std::move(finalizerQueue), epoch);
 }
 
 void gc::ConcurrentMarkAndSweep::reconfigure(std::size_t maxParallelism, bool mutatorsCooperate, std::size_t auxGCThreads) noexcept {

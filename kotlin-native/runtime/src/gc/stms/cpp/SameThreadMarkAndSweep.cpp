@@ -7,6 +7,7 @@
 
 #include <cinttypes>
 
+#include "AllocatorImpl.hpp"
 #include "CompilerConstants.hpp"
 #include "GlobalData.hpp"
 #include "GCImpl.hpp"
@@ -24,10 +25,7 @@ using namespace kotlin;
 
 gc::SameThreadMarkAndSweep::SameThreadMarkAndSweep(alloc::Allocator& allocator, gcScheduler::GCScheduler& gcScheduler) noexcept :
 
-    allocator_(allocator), gcScheduler_(gcScheduler), finalizerProcessor_([this](int64_t epoch) noexcept {
-        GCHandle::getByEpoch(epoch).finalizersDone();
-        state_.finalized(epoch);
-    }) {
+    allocator_(allocator), gcScheduler_(gcScheduler) {
     gcThread_ = ScopedThread(ScopedThread::attributes().name("GC thread"), [this] {
         while (true) {
             auto epoch = state_.waitScheduled();
@@ -43,21 +41,6 @@ gc::SameThreadMarkAndSweep::SameThreadMarkAndSweep(alloc::Allocator& allocator, 
 
 gc::SameThreadMarkAndSweep::~SameThreadMarkAndSweep() {
     state_.shutdown();
-}
-
-void gc::SameThreadMarkAndSweep::StartFinalizerThreadIfNeeded() noexcept {
-    NativeOrUnregisteredThreadGuard guard(true);
-    finalizerProcessor_.StartFinalizerThreadIfNone();
-    finalizerProcessor_.WaitFinalizerThreadInitialized();
-}
-
-void gc::SameThreadMarkAndSweep::StopFinalizerThreadIfRunning() noexcept {
-    NativeOrUnregisteredThreadGuard guard(true);
-    finalizerProcessor_.StopFinalizerThread();
-}
-
-bool gc::SameThreadMarkAndSweep::FinalizersThreadIsRunning() noexcept {
-    return finalizerProcessor_.IsRunning();
 }
 
 void gc::SameThreadMarkAndSweep::PerformFullGC(int64_t epoch) noexcept {
@@ -109,5 +92,5 @@ void gc::SameThreadMarkAndSweep::PerformFullGC(int64_t epoch) noexcept {
     state_.finish(epoch);
     gcHandle.finalizersScheduled(finalizerQueue.size());
     gcHandle.finished();
-    finalizerProcessor_.ScheduleTasks(std::move(finalizerQueue), epoch);
+    allocator_.impl().finalizerProcessor().ScheduleTasks(std::move(finalizerQueue), epoch);
 }

@@ -155,6 +155,7 @@ bitcode {
             headersDirs.from(files("src/gcScheduler/common/cpp", "src/gc/common/cpp", "src/mm/cpp", "src/main/cpp"))
             sourceSets {
                 main {}
+                test {}
             }
         }
 
@@ -412,6 +413,11 @@ bitcode {
         testsGroup("adaptive_gcScheduler_runtime_tests") {
             testedModules.addAll("adaptive_gcScheduler")
             testSupportModules.addAll("main", "mm", "common_alloc", "common_gc", "common_gcScheduler", "noop_gc", "std_alloc", "legacy_alloc", "objc")
+        }
+
+        testsGroup("common_alloc_runtime_tests") {
+            testedModules.addAll("common_alloc")
+            testSupportModules.addAll("main", "mm", "common_gc", "common_gcScheduler", "noop_gc", "std_alloc", "legacy_alloc", "objc")
         }
     }
 }

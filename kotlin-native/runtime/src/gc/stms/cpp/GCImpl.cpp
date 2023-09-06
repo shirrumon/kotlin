@@ -33,20 +33,7 @@ gc::GC::GC(alloc::Allocator& allocator, gcScheduler::GCScheduler& gcScheduler) n
 gc::GC::~GC() = default;
 
 void gc::GC::ClearForTests() noexcept {
-    impl_->gc().StopFinalizerThreadIfRunning();
     GCHandle::ClearForTests();
-}
-
-void gc::GC::StartFinalizerThreadIfNeeded() noexcept {
-    impl_->gc().StartFinalizerThreadIfNeeded();
-}
-
-void gc::GC::StopFinalizerThreadIfRunning() noexcept {
-    impl_->gc().StopFinalizerThreadIfRunning();
-}
-
-bool gc::GC::FinalizersThreadIsRunning() noexcept {
-    return impl_->gc().FinalizersThreadIsRunning();
 }
 
 // static
@@ -74,6 +61,11 @@ void gc::GC::WaitFinished(int64_t epoch) noexcept {
 
 void gc::GC::WaitFinalizers(int64_t epoch) noexcept {
     impl_->gc().state().waitEpochFinalized(epoch);
+}
+
+void gc::GC::onFinalized(int64_t epoch) noexcept {
+    GCHandle::getByEpoch(epoch).finalizersDone();
+    impl_->gc().state().finalized(epoch);
 }
 
 bool gc::isMarked(ObjHeader* object) noexcept {

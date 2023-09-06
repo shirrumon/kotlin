@@ -8,6 +8,7 @@
 #include "Allocator.hpp"
 
 #include "ExtraObjectDataFactory.hpp"
+#include "FinalizerProcessor.hpp"
 #include "GC.hpp"
 #include "GlobalData.hpp"
 #include "Logging.hpp"
@@ -32,16 +33,21 @@ struct ObjectFactoryTraits {
 
 using ObjectFactoryImpl = ObjectFactory<ObjectFactoryTraits>;
 
+using FinalizerQueue = ObjectFactoryImpl::FinalizerQueue;
+using FinalizerQueueTraits = ObjectFactoryImpl::FinalizerQueueTraits;
+
 class Allocator::Impl : private Pinned {
 public:
-    Impl() noexcept = default;
+    Impl() noexcept : finalizerProcessor_([](int64_t epoch) noexcept { mm::GlobalData::Instance().gc().onFinalized(epoch); }) {}
 
     ObjectFactoryImpl& objectFactory() noexcept { return objectFactory_; }
     ExtraObjectDataFactory& extraObjectDataFactory() noexcept { return extraObjectDataFactory_; }
+    FinalizerProcessor<FinalizerQueue, FinalizerQueueTraits>& finalizerProcessor() noexcept { return finalizerProcessor_; }
 
 private:
     ObjectFactoryImpl objectFactory_;
     ExtraObjectDataFactory extraObjectDataFactory_;
+    FinalizerProcessor<FinalizerQueue, FinalizerQueueTraits> finalizerProcessor_;
 };
 
 class Allocator::ThreadData::Impl : private Pinned {
@@ -58,8 +64,5 @@ private:
     ObjectFactoryImpl::ThreadQueue objectFactoryThreadQueue_;
     ExtraObjectDataFactory::ThreadQueue extraObjectDataFactoryThreadQueue_;
 };
-
-using FinalizerQueue = ObjectFactoryImpl::FinalizerQueue;
-using FinalizerQueueTraits = ObjectFactoryImpl::FinalizerQueueTraits;
 
 } // namespace kotlin::alloc

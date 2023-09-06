@@ -66,10 +66,6 @@ public:
 
     void ClearForTests() noexcept;
 
-    void StartFinalizerThreadIfNeeded() noexcept;
-    void StopFinalizerThreadIfRunning() noexcept;
-    bool FinalizersThreadIsRunning() noexcept;
-
     static void processObjectInMark(void* state, ObjHeader* object) noexcept;
     static void processArrayInMark(void* state, ArrayHeader* array) noexcept;
     static void processFieldInMark(void* state, ObjHeader* field) noexcept;
@@ -78,6 +74,8 @@ public:
     int64_t Schedule() noexcept;
     void WaitFinished(int64_t epoch) noexcept;
     void WaitFinalizers(int64_t epoch) noexcept;
+
+    void onFinalized(int64_t epoch) noexcept;
 
 private:
     std_support::unique_ptr<Impl> impl_;
