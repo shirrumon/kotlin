@@ -326,6 +326,8 @@ class ResultTypeResolver(
         if (upperConstraints.isNotEmpty()) {
             val upperType = computeUpperType(upperConstraints)
 
+            if (isK2) return upperType
+
             return typeApproximator.approximateToSubType(
                 upperType,
                 TypeApproximatorConfiguration.InternalTypesApproximation
