@@ -6,8 +6,54 @@
 #include "AllocatorImpl.hpp"
 
 #include "GCApi.hpp"
+#include "ThreadData.hpp"
 
 using namespace kotlin;
+
+alloc::SweepPipeline::SweepPipeline(Allocator::Impl& allocator, uint64_t epoch) noexcept : epoch_(epoch) {}
+
+size_t alloc::internal::sweep(Allocator::Impl& impl, uint64_t epoch) noexcept {
+    RuntimeAssert(impl.sweepPipeline().has_value(), "Sweep must be going on for epoch %" PRIu64, epoch);
+    RuntimeAssert(
+            impl.sweepPipeline()->epoch_ == epoch, "Sweep is going for epoch %" PRIu64 " but we're expecting epoch %" PRIu64,
+            impl.sweepPipeline()->epoch_, epoch);
+    RuntimeAssert(
+            !impl.sweepPipeline()->finalizerQueue_.has_value(), "Sweep is going for epoch %" PRIu64 " but it already has finalizer queue",
+            epoch);
+
+    auto gcHandle = gc::GCHandle::getByEpoch(epoch);
+    // also sweeps extraObjects
+    auto finalizerQueue = impl.heap().Sweep(gcHandle);
+    for (auto& thread : kotlin::mm::ThreadRegistry::Instance().LockForIter()) {
+        finalizerQueue.TransferAllFrom(thread.allocator().impl().alloc().ExtractFinalizerQueue());
+    }
+    finalizerQueue.TransferAllFrom(impl.heap().ExtractFinalizerQueue());
+    auto finalizersCount = finalizerQueue.size();
+    impl.sweepPipeline()->finalizerQueue_ = std::move(finalizerQueue);
+    return finalizersCount;
+}
+
+void alloc::internal::pendingFinalizersDispatch(Allocator::Impl& impl, uint64_t epoch) noexcept {
+    RuntimeAssert(impl.sweepPipeline().has_value(), "Sweep must be going on for epoch %" PRIu64, epoch);
+    RuntimeAssert(
+            impl.sweepPipeline()->epoch_ == epoch, "Sweep is going for epoch %" PRIu64 " but we're expecting epoch %" PRIu64,
+            impl.sweepPipeline()->epoch_, epoch);
+    RuntimeAssert(
+            impl.sweepPipeline()->finalizerQueue_.has_value(), "Sweep is going for epoch %" PRIu64 " but it does not have finalizer queue",
+            epoch);
+
+    impl.finalizerProcessor().ScheduleTasks(std::move(*impl.sweepPipeline()->finalizerQueue_), epoch);
+    impl.sweepPipeline() = std::nullopt;
+}
+
+void alloc::internal::traverseObjects(Allocator::Impl& impl, uint64_t epoch, std::function<void(ObjHeader*)> f) noexcept {
+    RuntimeAssert(impl.sweepPipeline().has_value(), "Sweep must be going on for epoch %" PRIu64, epoch);
+    RuntimeAssert(
+            impl.sweepPipeline()->epoch_ == epoch, "Sweep is going for epoch %" PRIu64 " but we're expecting epoch %" PRIu64,
+            impl.sweepPipeline()->epoch_, epoch);
+
+    impl.heap().TraverseObjects(std::move(f));
+}
 
 alloc::Allocator::ThreadData::ThreadData(Allocator& allocator) noexcept : impl_(std::make_unique<Impl>(allocator.impl())) {}
 

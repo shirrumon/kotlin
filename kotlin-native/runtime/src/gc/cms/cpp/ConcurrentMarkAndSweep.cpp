@@ -36,24 +36,21 @@ ScopedThread createGCThread(const char* name, Body&& body) {
     });
 }
 
-#ifndef CUSTOM_ALLOCATOR
 // TODO move to common
-[[maybe_unused]] inline void checkMarkCorrectness(alloc::ObjectFactoryImpl::Iterable& heap) {
+[[maybe_unused]] inline void checkMarkCorrectness(alloc::Allocator::Impl& allocator, uint64_t epoch) {
     if (compiler::runtimeAssertsMode() == compiler::RuntimeAssertsMode::kIgnore) return;
-    for (auto objRef: heap) {
-        auto obj = objRef.GetObjHeader();
-        auto& objData = objRef.ObjectData();
+    alloc::internal::traverseObjects(allocator, epoch, [](ObjHeader* obj) noexcept {
+        auto& objData = alloc::objectDataForObject(obj);
         if (objData.marked()) {
             traverseReferredObjects(obj, [obj](ObjHeader* field) {
                 if (field->heap()) {
-                    auto& fieldObjData = alloc::ObjectFactoryImpl::NodeRef::From(field).ObjectData();
+                    auto& fieldObjData = alloc::objectDataForObject(field);
                     RuntimeAssert(fieldObjData.marked(), "Field %p of an alive obj %p must be alive", field, obj);
                 }
             });
         }
-    }
+    });
 }
-#endif
 
 } // namespace
 
@@ -165,40 +162,25 @@ void gc::ConcurrentMarkAndSweep::PerformFullGC(int64_t epoch) noexcept {
     }
     allocator_.prepareForGC();
 
-#ifndef CUSTOM_ALLOCATOR
     // Taking the locks before the pause is completed. So that any destroying thread
     // would not publish into the global state at an unexpected time.
-    std::optional objectFactoryIterable = allocator_.impl().objectFactory().LockForIter();
-    std::optional extraObjectFactoryIterable = allocator_.impl().extraObjectDataFactory().LockForIter();
+    allocator_.impl().sweepPipeline().emplace(allocator_.impl(), epoch);
 
-    checkMarkCorrectness(*objectFactoryIterable);
-#endif
+    checkMarkCorrectness(allocator_.impl(), epoch);
 
     resumeTheWorld(gcHandle);
 
-#ifndef CUSTOM_ALLOCATOR
-    alloc::SweepExtraObjects<alloc::DefaultSweepTraits<alloc::ObjectFactoryImpl>>(gcHandle, *extraObjectFactoryIterable);
-    extraObjectFactoryIterable = std::nullopt;
-    auto finalizerQueue = alloc::Sweep<alloc::DefaultSweepTraits<alloc::ObjectFactoryImpl>>(gcHandle, *objectFactoryIterable);
-    objectFactoryIterable = std::nullopt;
-    alloc::compactObjectPoolInMainThread();
-#else
-    // also sweeps extraObjects
-    auto finalizerQueue = allocator_.impl().heap().Sweep(gcHandle);
-    for (auto& thread : kotlin::mm::ThreadRegistry::Instance().LockForIter()) {
-        finalizerQueue.TransferAllFrom(thread.allocator().impl().alloc().ExtractFinalizerQueue());
-    }
-    finalizerQueue.TransferAllFrom(allocator_.impl().heap().ExtractFinalizerQueue());
-#endif
+    auto finalizersCount = alloc::internal::sweep(allocator_.impl(), epoch);
+
     scheduler.onGCFinish(epoch, alloc::allocatedBytes());
     state_.finish(epoch);
-    gcHandle.finalizersScheduled(finalizerQueue.size());
+    gcHandle.finalizersScheduled(finalizersCount);
     gcHandle.finished();
 
     // This may start a new thread. On some pthreads implementations, this may block waiting for concurrent thread
     // destructors running. So, it must ensured that no locks are held by this point.
     // TODO: Consider having an always on sleeping finalizer thread.
-    allocator_.impl().finalizerProcessor().ScheduleTasks(std::move(finalizerQueue), epoch);
+    alloc::internal::pendingFinalizersDispatch(allocator_.impl(), epoch);
 }
 
 void gc::ConcurrentMarkAndSweep::reconfigure(std::size_t maxParallelism, bool mutatorsCooperate, std::size_t auxGCThreads) noexcept {

@@ -36,6 +36,16 @@ using ObjectFactoryImpl = ObjectFactory<ObjectFactoryTraits>;
 using FinalizerQueue = ObjectFactoryImpl::FinalizerQueue;
 using FinalizerQueueTraits = ObjectFactoryImpl::FinalizerQueueTraits;
 
+class SweepPipeline : private Pinned {
+public:
+    SweepPipeline(Allocator::Impl& allocator, uint64_t epoch) noexcept;
+
+    uint64_t epoch_;
+    std::optional<ExtraObjectDataFactory::Iterable> extraObjectFactoryIterable_;
+    std::optional<ObjectFactoryImpl::Iterable> objectFactoryIterable_;
+    std::optional<FinalizerQueue> finalizerQueue_;
+};
+
 class Allocator::Impl : private Pinned {
 public:
     Impl() noexcept : finalizerProcessor_([](int64_t epoch) noexcept { mm::GlobalData::Instance().gc().onFinalized(epoch); }) {}
@@ -44,10 +54,13 @@ public:
     ExtraObjectDataFactory& extraObjectDataFactory() noexcept { return extraObjectDataFactory_; }
     FinalizerProcessor<FinalizerQueue, FinalizerQueueTraits>& finalizerProcessor() noexcept { return finalizerProcessor_; }
 
+    std::optional<SweepPipeline>& sweepPipeline() noexcept { return sweepPipeline_; }
+
 private:
     ObjectFactoryImpl objectFactory_;
     ExtraObjectDataFactory extraObjectDataFactory_;
     FinalizerProcessor<FinalizerQueue, FinalizerQueueTraits> finalizerProcessor_;
+    std::optional<SweepPipeline> sweepPipeline_;
 };
 
 class Allocator::ThreadData::Impl : private Pinned {

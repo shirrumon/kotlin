@@ -65,32 +65,22 @@ void gc::SameThreadMarkAndSweep::PerformFullGC(int64_t epoch) noexcept {
     }
     allocator_.prepareForGC();
 
-#ifndef CUSTOM_ALLOCATOR
     // Taking the locks before the pause is completed. So that any destroying thread
     // would not publish into the global state at an unexpected time.
-    std::optional extraObjectFactoryIterable = allocator_.impl().extraObjectDataFactory().LockForIter();
-    std::optional objectFactoryIterable = allocator_.impl().objectFactory().LockForIter();
+    allocator_.impl().sweepPipeline().emplace(allocator_.impl(), epoch);
 
-    alloc::SweepExtraObjects<alloc::DefaultSweepTraits<alloc::ObjectFactoryImpl>>(gcHandle, *extraObjectFactoryIterable);
-    extraObjectFactoryIterable = std::nullopt;
-    auto finalizerQueue = alloc::Sweep<alloc::DefaultSweepTraits<alloc::ObjectFactoryImpl>>(gcHandle, *objectFactoryIterable);
-    objectFactoryIterable = std::nullopt;
-    alloc::compactObjectPoolInMainThread();
-#else
-    // also sweeps extraObjects
-    auto finalizerQueue = allocator_.impl().heap().Sweep(gcHandle);
-    for (auto& thread : kotlin::mm::ThreadRegistry::Instance().LockForIter()) {
-        finalizerQueue.TransferAllFrom(thread.allocator().impl().alloc().ExtractFinalizerQueue());
-    }
-    finalizerQueue.TransferAllFrom(allocator_.impl().heap().ExtractFinalizerQueue());
-#endif
+    auto finalizersCount = alloc::internal::sweep(allocator_.impl(), epoch);
 
     scheduler.onGCFinish(epoch, alloc::allocatedBytes());
 
     resumeTheWorld(gcHandle);
 
     state_.finish(epoch);
-    gcHandle.finalizersScheduled(finalizerQueue.size());
+    gcHandle.finalizersScheduled(finalizersCount);
     gcHandle.finished();
-    allocator_.impl().finalizerProcessor().ScheduleTasks(std::move(finalizerQueue), epoch);
+
+    // This may start a new thread. On some pthreads implementations, this may block waiting for concurrent thread
+    // destructors running. So, it must ensured that no locks are held by this point.
+    // TODO: Consider having an always on sleeping finalizer thread.
+    alloc::internal::pendingFinalizersDispatch(allocator_.impl(), epoch);
 }

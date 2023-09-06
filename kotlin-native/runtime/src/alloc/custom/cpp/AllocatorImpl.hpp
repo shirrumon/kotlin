@@ -16,6 +16,14 @@
 
 namespace kotlin::alloc {
 
+class SweepPipeline : private Pinned {
+public:
+    explicit SweepPipeline(Allocator::Impl& allocator, uint64_t epoch) noexcept;
+
+    uint64_t epoch_;
+    std::optional<FinalizerQueue> finalizerQueue_;
+};
+
 class Allocator::Impl : private Pinned {
 public:
     Impl() noexcept : finalizerProcessor_([](int64_t epoch) noexcept { mm::GlobalData::Instance().gc().onFinalized(epoch); }) {}
@@ -24,9 +32,12 @@ public:
 
     FinalizerProcessor<FinalizerQueue, FinalizerQueueTraits>& finalizerProcessor() noexcept { return finalizerProcessor_; }
 
+    std::optional<SweepPipeline>& sweepPipeline() noexcept { return sweepPipeline_; }
+
 private:
     Heap heap_;
     FinalizerProcessor<FinalizerQueue, FinalizerQueueTraits> finalizerProcessor_;
+    std::optional<SweepPipeline> sweepPipeline_;
 };
 
 class Allocator::ThreadData::Impl : private Pinned {

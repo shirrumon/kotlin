@@ -59,6 +59,15 @@ private:
     std::unique_ptr<Impl> impl_;
 };
 
+namespace internal {
+
+// Returns finalizer queue size.
+size_t sweep(Allocator::Impl& impl, uint64_t epoch) noexcept;
+void pendingFinalizersDispatch(Allocator::Impl& impl, uint64_t epoch) noexcept;
+void traverseObjects(Allocator::Impl& impl, uint64_t epoch, std::function<void(ObjHeader*)> f) noexcept;
+
+} // namespace internal
+
 void initObjectPool() noexcept;
 // Instruct the allocator to free unused resources.
 void compactObjectPoolInCurrentThread() noexcept;

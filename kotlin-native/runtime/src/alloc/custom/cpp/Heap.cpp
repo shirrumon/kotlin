@@ -88,32 +88,43 @@ FinalizerQueue Heap::ExtractFinalizerQueue() noexcept {
     return std::move(pendingFinalizerQueue_);
 }
 
-std::vector<ObjHeader*> Heap::GetAllocatedObjects() noexcept {
-    std::vector<ObjHeader*> allocated;
+void Heap::TraverseObjects(std::function<void(ObjHeader*)> f) noexcept {
+    auto blockToObjectOrNull = [](uint8_t* block) noexcept -> ObjHeader* {
+        auto* obj = reinterpret_cast<HeapObjHeader*>(block)->object();
+        if (!obj->has_meta_object() || !mm::ExtraObjectData::Get(obj)->getFlag(mm::ExtraObjectData::FLAGS_FINALIZED)) {
+            return obj;
+        }
+        return nullptr;
+    };
     for (int blockSize = 0; blockSize <= FIXED_BLOCK_PAGE_MAX_BLOCK_SIZE; ++blockSize) {
         for (auto* page : fixedBlockPages_[blockSize].GetPages()) {
             for (auto* block : page->GetAllocatedBlocks()) {
-                allocated.push_back(reinterpret_cast<HeapObjHeader*>(block)->object());
+                if (auto* obj = blockToObjectOrNull(block)) {
+                    f(obj);
+                }
             }
         }
     }
     for (auto* page : nextFitPages_.GetPages()) {
         for (auto* block : page->GetAllocatedBlocks()) {
-            allocated.push_back(reinterpret_cast<HeapObjHeader*>(block)->object());
+            if (auto* obj = blockToObjectOrNull(block)) {
+                f(obj);
+            }
         }
     }
     for (auto* page : singleObjectPages_.GetPages()) {
         for (auto* block : page->GetAllocatedBlocks()) {
-            allocated.push_back(reinterpret_cast<HeapObjHeader*>(block)->object());
+            if (auto* obj = blockToObjectOrNull(block)) {
+                f(obj);
+            }
         }
     }
-    std::vector<ObjHeader*> unfinalized;
-    for (auto* block: allocated) {
-        if (!block->has_meta_object() || !mm::ExtraObjectData::Get(block)->getFlag(mm::ExtraObjectData::FLAGS_FINALIZED)) {
-            unfinalized.push_back(block);
-        }
-    }
-    return unfinalized;
+}
+
+std::vector<ObjHeader*> Heap::GetAllocatedObjects() noexcept {
+    std::vector<ObjHeader*> allocated;
+    TraverseObjects([&](ObjHeader* obj) noexcept { allocated.push_back(obj); });
+    return allocated;
 }
 
 void Heap::ClearForTests() noexcept {

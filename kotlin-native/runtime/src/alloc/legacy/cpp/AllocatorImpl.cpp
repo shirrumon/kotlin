@@ -9,6 +9,70 @@
 
 using namespace kotlin;
 
+alloc::SweepPipeline::SweepPipeline(Allocator::Impl& allocator, uint64_t epoch) noexcept :
+    epoch_(epoch),
+    extraObjectFactoryIterable_(allocator.extraObjectDataFactory().LockForIter()),
+    objectFactoryIterable_(allocator.objectFactory().LockForIter()) {}
+
+size_t alloc::internal::sweep(Allocator::Impl& impl, uint64_t epoch) noexcept {
+    RuntimeAssert(impl.sweepPipeline().has_value(), "Sweep must be going on for epoch %" PRIu64, epoch);
+    RuntimeAssert(
+            impl.sweepPipeline()->epoch_ == epoch, "Sweep is going for epoch %" PRIu64 " but we're expecting epoch %" PRIu64,
+            impl.sweepPipeline()->epoch_, epoch);
+    RuntimeAssert(
+            impl.sweepPipeline()->objectFactoryIterable_.has_value(), "Sweep is going for epoch %" PRIu64 " but the heap is not locked",
+            epoch);
+    RuntimeAssert(
+            impl.sweepPipeline()->extraObjectFactoryIterable_.has_value(),
+            "Sweep is going for epoch %" PRIu64 " but the extra objects heap is not locked", epoch);
+    RuntimeAssert(
+            !impl.sweepPipeline()->finalizerQueue_.has_value(), "Sweep is going for epoch %" PRIu64 " but it already has finalizer queue",
+            epoch);
+
+    auto gcHandle = gc::GCHandle::getByEpoch(epoch);
+    SweepExtraObjects<DefaultSweepTraits<ObjectFactoryImpl>>(gcHandle, *impl.sweepPipeline()->extraObjectFactoryIterable_);
+    impl.sweepPipeline()->extraObjectFactoryIterable_ = std::nullopt;
+    auto finalizerQueue = Sweep<DefaultSweepTraits<ObjectFactoryImpl>>(gcHandle, *impl.sweepPipeline()->objectFactoryIterable_);
+    impl.sweepPipeline()->objectFactoryIterable_ = std::nullopt;
+    compactObjectPoolInMainThread();
+    auto finalizersCount = finalizerQueue.size();
+    impl.sweepPipeline()->finalizerQueue_ = std::move(finalizerQueue);
+    return finalizersCount;
+}
+
+void alloc::internal::pendingFinalizersDispatch(Allocator::Impl& impl, uint64_t epoch) noexcept {
+    RuntimeAssert(impl.sweepPipeline().has_value(), "Sweep must be going on for epoch %" PRIu64, epoch);
+    RuntimeAssert(
+            impl.sweepPipeline()->epoch_ == epoch, "Sweep is going for epoch %" PRIu64 " but we're expecting epoch %" PRIu64,
+            impl.sweepPipeline()->epoch_, epoch);
+    RuntimeAssert(
+            !impl.sweepPipeline()->objectFactoryIterable_.has_value(),
+            "Sweep is going for epoch %" PRIu64 " but the heap was not processed", epoch);
+    RuntimeAssert(
+            !impl.sweepPipeline()->extraObjectFactoryIterable_.has_value(),
+            "Sweep is going for epoch %" PRIu64 " but the extra objects heap was not processed", epoch);
+    RuntimeAssert(
+            impl.sweepPipeline()->finalizerQueue_.has_value(), "Sweep is going for epoch %" PRIu64 " but it does not have finalizer queue",
+            epoch);
+
+    impl.finalizerProcessor().ScheduleTasks(std::move(*impl.sweepPipeline()->finalizerQueue_), epoch);
+    impl.sweepPipeline() = std::nullopt;
+}
+
+void alloc::internal::traverseObjects(Allocator::Impl& impl, uint64_t epoch, std::function<void(ObjHeader*)> f) noexcept {
+    RuntimeAssert(impl.sweepPipeline().has_value(), "Sweep must be going on for epoch %" PRIu64, epoch);
+    RuntimeAssert(
+            impl.sweepPipeline()->epoch_ == epoch, "Sweep is going for epoch %" PRIu64 " but we're expecting epoch %" PRIu64,
+            impl.sweepPipeline()->epoch_, epoch);
+    RuntimeAssert(
+            impl.sweepPipeline()->objectFactoryIterable_.has_value(), "Sweep is going for epoch %" PRIu64 " but the heap is not locked",
+            epoch);
+
+    for (auto objRef : *impl.sweepPipeline()->objectFactoryIterable_) {
+        f(objRef.GetObjHeader());
+    }
+}
+
 alloc::Allocator::ThreadData::ThreadData(Allocator& allocator) noexcept : impl_(std::make_unique<Impl>(allocator.impl())) {}
 
 alloc::Allocator::ThreadData::~ThreadData() = default;

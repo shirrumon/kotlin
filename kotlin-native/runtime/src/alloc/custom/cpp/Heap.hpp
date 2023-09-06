@@ -7,8 +7,9 @@
 #define CUSTOM_ALLOC_CPP_HEAP_HPP_
 
 #include <atomic>
-#include <mutex>
 #include <cstring>
+#include <functional>
+#include <mutex>
 
 #include "AtomicStack.hpp"
 #include "CustomAllocConstants.hpp"
@@ -39,6 +40,8 @@ public:
 
     void AddToFinalizerQueue(FinalizerQueue queue) noexcept;
     FinalizerQueue ExtractFinalizerQueue() noexcept;
+
+    void TraverseObjects(std::function<void(ObjHeader*)> f) noexcept;
 
     // Test method
     std::vector<ObjHeader*> GetAllocatedObjects() noexcept;
