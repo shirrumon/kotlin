@@ -13,5 +13,7 @@ open class Base {
 // FILE: jvm.kt
 
 actual open class Foo : Base() {
+    // Return type mismatch isn't reported in K2 because K2 doesn't compare return types on frontend.
+    // It reports INCOMPATIBLE_MATCHING on backend instead KT-60961.
     override fun foo(): String = ""
 }

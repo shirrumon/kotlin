@@ -27,5 +27,6 @@ actual open class Foo : Transitive() {
     actual fun existingMethod() {}
     actual val existingParam: Int = 904
 
+    // TODO create YT ticket that K2 jumps from common to platform module
     override fun injected(param: String): String = "" // covariant override
 }
