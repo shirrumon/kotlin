@@ -103,6 +103,7 @@ public:
     void dispatch() && noexcept {
         auto tmp = std::move(*this);
         internal::pendingFinalizersDispatch(*tmp.allocator_, tmp.epoch_);
+        tmp.allocator_ = nullptr;
     }
 
 private:
@@ -148,7 +149,9 @@ public:
     [[nodiscard]] PendingFinalizers sweep() && noexcept {
         auto tmp = std::move(*this);
         auto finalizersCount = internal::sweep(*tmp.allocator_, tmp.epoch_);
-        return PendingFinalizers(*tmp.allocator_, tmp.epoch_, finalizersCount);
+        auto result = PendingFinalizers(*tmp.allocator_, tmp.epoch_, finalizersCount);
+        tmp.allocator_ = nullptr;
+        return result;
     }
 
 private:
