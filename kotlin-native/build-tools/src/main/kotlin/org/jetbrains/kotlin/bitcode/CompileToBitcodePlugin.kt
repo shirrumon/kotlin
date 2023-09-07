@@ -25,6 +25,7 @@ import org.gradle.kotlin.dsl.*
 import org.gradle.language.base.plugins.LifecycleBasePlugin
 import org.jetbrains.kotlin.ExecClang
 import org.jetbrains.kotlin.cpp.*
+import org.jetbrains.kotlin.executors.ExecutorsPlugin
 import org.jetbrains.kotlin.konan.target.KonanTarget
 import org.jetbrains.kotlin.konan.target.SanitizerKind
 import org.jetbrains.kotlin.konan.target.TargetDomainObjectContainer
@@ -608,10 +609,6 @@ open class CompileToBitcodeExtension @Inject constructor(val project: Project) :
                 filter.set(project.findProperty("gtest_filter") as? String)
                 tsanSuppressionsFile.set(project.layout.projectDirectory.file("tsan_suppressions.txt"))
                 this.target.set(target)
-                this.executionTimeout.set(
-                    (project.findProperty("gtest_timeout") as? String)?.let {
-                        Duration.parse("PT${it}")
-                    } ?: Duration.ofMinutes(30)) // The tests binaries are big.
 
                 usesService(runGTestSemaphore)
             }
@@ -662,6 +659,7 @@ open class CompileToBitcodePlugin : Plugin<Project> {
         project.apply<CppConsumerPlugin>()
         project.apply<CompilationDatabasePlugin>()
         project.apply<GitClangFormatPlugin>()
+        project.apply<ExecutorsPlugin>()
         project.extensions.create<CompileToBitcodeExtension>("bitcode", project)
     }
 }

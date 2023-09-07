@@ -122,5 +122,9 @@ gradlePlugin {
             id = "native"
             implementationClass = "org.jetbrains.kotlin.tools.NativePlugin"
         }
+        create("executors") {
+            id = "executors"
+            implementationClass = "org.jetbrains.kotlin.executors.ExecutorsPlugin"
+        }
     }
 }

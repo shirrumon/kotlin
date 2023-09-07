@@ -10,6 +10,7 @@ import org.jetbrains.kotlin.konan.properties.loadProperties
 import org.jetbrains.kotlin.konan.properties.saveProperties
 import org.jetbrains.kotlin.konan.target.*
 import org.jetbrains.kotlin.library.KLIB_PROPERTY_NATIVE_TARGETS
+import java.time.Duration
 import org.jetbrains.kotlin.konan.file.File as KFile
 import org.jetbrains.kotlin.konan.target.Architecture as TargetArchitecture
 
@@ -22,6 +23,12 @@ plugins {
     id("compile-to-bitcode")
     id("runtime-testing")
     id("konan")
+}
+
+executors {
+    defaultTimeout = (project.findProperty("gtest_timeout") as? String)?.let {
+        Duration.parse("PT${it}")
+    } ?: Duration.ofMinutes(30)// The tests binaries are big.
 }
 
 if (HostManager.host == KonanTarget.MACOS_ARM64) {
