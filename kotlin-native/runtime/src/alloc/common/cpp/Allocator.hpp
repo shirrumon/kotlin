@@ -48,7 +48,7 @@ public:
 
     Impl& impl() noexcept { return *impl_; }
 
-    [[nodiscard]] MarkedHeap prepareForGC(int64_t epoch) noexcept;
+    [[nodiscard]] MarkedHeap prepareForGC(uint64_t epoch) noexcept;
 
     void startFinalizerThreadIfNeeded() noexcept;
     void stopFinalizerThreadIfRunning() noexcept;
