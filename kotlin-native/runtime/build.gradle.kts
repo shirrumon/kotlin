@@ -383,7 +383,7 @@ bitcode {
 
         testsGroup("common_alloc_runtime_tests") {
             testedModules.addAll("common_alloc")
-            testSupportModules.addAll("main", "mm", "common_gc", "common_gcScheduler", "noop_gc", "std_alloc", "legacy_alloc", "objc")
+            testSupportModules.addAll("main", "mm", "common_gc", "common_gcScheduler", "noop_gc", "manual_gcScheduler", "std_alloc", "legacy_alloc", "objc")
         }
     }
 }
