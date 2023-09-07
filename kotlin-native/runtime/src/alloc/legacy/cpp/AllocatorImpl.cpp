@@ -109,6 +109,7 @@ alloc::Allocator::Allocator() noexcept : impl_(std::make_unique<Impl>()) {}
 alloc::Allocator::~Allocator() = default;
 
 alloc::MarkedHeap alloc::Allocator::prepareForGC(uint64_t epoch) noexcept {
+    impl_->sweepPipeline().emplace(*impl_, epoch);
     return MarkedHeap(impl(), epoch);
 }
 

@@ -90,6 +90,7 @@ alloc::Allocator::~Allocator() = default;
 
 alloc::MarkedHeap alloc::Allocator::prepareForGC(uint64_t epoch) noexcept {
     impl_->heap().PrepareForGC();
+    impl_->sweepPipeline().emplace(*impl_, epoch);
     return MarkedHeap(impl(), epoch);
 }
 
