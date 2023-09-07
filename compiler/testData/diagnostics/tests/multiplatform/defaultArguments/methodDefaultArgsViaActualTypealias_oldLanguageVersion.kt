@@ -11,7 +11,7 @@ expect class A {
 // FILE: jvm.kt
 
 class AImpl {
-    fun foo(p: String = "impl") {}
+    fun foo(p: String) {}
 }
 
-actual typealias <!NO_ACTUAL_CLASS_MEMBER_FOR_EXPECTED_CLASS!>A<!> = AImpl
+actual typealias A = AImpl
