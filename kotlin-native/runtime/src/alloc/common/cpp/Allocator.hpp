@@ -72,14 +72,16 @@ void traverseObjects(Allocator::Impl& impl, uint64_t epoch, std::function<void(O
 
 class PendingFinalizers : private MoveOnly {
 public:
-    PendingFinalizers(PendingFinalizers&& rhs) noexcept : allocator_(std::move(rhs.allocator_)), epoch_(rhs.epoch_) {
+    PendingFinalizers(PendingFinalizers&& rhs) noexcept : allocator_(std::move(rhs.allocator_)), epoch_(rhs.epoch_) , finalizersCount_(rhs.finalizersCount_) {
         rhs.epoch_ = 0;
+        rhs.finalizersCount_ = 0;
     }
 
     friend void swap(PendingFinalizers& lhs, PendingFinalizers& rhs) noexcept {
         using std::swap;
         swap(lhs.allocator_, rhs.allocator_);
         swap(lhs.epoch_, rhs.epoch_);
+        swap(lhs.finalizersCount_, rhs.finalizersCount_);
     }
 
     PendingFinalizers& operator=(PendingFinalizers&& rhs) noexcept {
