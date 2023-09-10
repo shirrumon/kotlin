@@ -7,8 +7,11 @@ package org.jetbrains.kotlin.executors
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.artifacts.Configuration
+import org.gradle.api.attributes.LibraryElements
+import org.gradle.api.attributes.Usage
 import org.gradle.kotlin.dsl.*
-import org.jetbrains.kotlin.konan.target.PlatformManager
+import org.jetbrains.kotlin.konan.util.DependencyDirectories
 
 /**
  * Creates an extension [Executors] named `executors`.
@@ -17,8 +20,22 @@ import org.jetbrains.kotlin.konan.target.PlatformManager
  */
 class ExecutorsPlugin : Plugin<Project> {
     override fun apply(project: Project) {
+        val executorsClasspath: Configuration by project.configurations.creating {
+            isCanBeConsumed = false
+            isCanBeResolved = true
+            attributes {
+                attribute(Usage.USAGE_ATTRIBUTE, project.objects.named(Usage.JAVA_RUNTIME))
+                // TODO: Why classes?
+                attribute(LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE, project.objects.named(LibraryElements.CLASSES))
+                defaultDependencies {
+                    add(project.dependencies.project(":native:executors"))
+                }
+            }
+        }
         project.extensions.add("executors", Executors(
-                platformManager = project.extensions.getByType<PlatformManager>()
+                distributionDir = project.project(":kotlin-native").projectDir.absolutePath,
+                dataDir = DependencyDirectories.localKonanDir.absolutePath,
+                executorsClasspath = executorsClasspath,
         ))
     }
 }

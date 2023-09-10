@@ -5,6 +5,8 @@
 
 package org.jetbrains.kotlin.executors
 
+import org.gradle.api.file.FileCollection
+import org.jetbrains.kotlin.konan.target.HostManager
 import org.jetbrains.kotlin.konan.target.PlatformManager
 import java.io.Serializable
 import java.time.Duration
@@ -21,12 +23,14 @@ import java.time.Duration
 //       them to be serializable to pass `this` into gradle workers). And implementing
 //       custom instances of `Provider` requires a ton of code. So, let's just do this.
 class Executors(
-        val platformManager: PlatformManager,
+        val executorsClasspath: FileCollection,
+        val distributionDir: String,
+        val dataDir: String,
 ) : Serializable {
     /**
      * Target for which to execute.
      */
-    var defaultTargetName: String = platformManager.hostPlatform.target.name
+    var defaultTargetName: String = HostManager.host.name
 
     /**
      * Maximum allowed duration for execution.
