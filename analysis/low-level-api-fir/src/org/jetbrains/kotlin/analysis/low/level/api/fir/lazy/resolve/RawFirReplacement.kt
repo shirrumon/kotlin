@@ -6,21 +6,30 @@
 package org.jetbrains.kotlin.analysis.low.level.api.fir.lazy.resolve
 
 import org.jetbrains.kotlin.psi.*
+import org.jetbrains.kotlin.psi.psiUtil.getParentOfTypes
 
 internal data class RawFirReplacement(val from: KtElement, val to: KtElement) {
     companion object {
         fun isApplicableForReplacement(element: KtElement) = when (element) {
-            is KtFile, is KtScript, is KtClassInitializer, is KtPropertyAccessor, is KtConstructor<*>, is KtClassOrObject, is KtObjectLiteralExpression, is KtTypeAlias,
+            is KtFile, is KtScript, is KtClassInitializer, is KtPropertyAccessor, is KtConstructor<*>,
+            is KtClassOrObject, is KtObjectLiteralExpression, is KtTypeAlias,
             is KtNamedFunction, is KtLambdaExpression, is KtAnonymousInitializer, is KtProperty, is KtTypeReference,
             is KtAnnotationEntry, is KtTypeParameter, is KtTypeProjection, is KtParameter, is KtBlockExpression,
-            is KtSimpleNameExpression, is KtConstantExpression, is KtStringTemplateExpression, is KtReturnExpression,
+            is KtConstantExpression, is KtStringTemplateExpression, is KtReturnExpression,
             is KtTryExpression, is KtIfExpression, is KtWhenExpression, is KtDoWhileExpression, is KtWhileExpression,
             is KtForExpression, is KtBreakExpression, is KtContinueExpression, is KtBinaryExpression, is KtBinaryExpressionWithTypeRHS,
-            is KtIsExpression, is KtUnaryExpression, is KtCallExpression, is KtArrayAccessExpression, is KtQualifiedExpression,
+            is KtIsExpression, is KtUnaryExpression, is KtCallExpression, is KtArrayAccessExpression,
             is KtThisExpression, is KtSuperExpression, is KtParenthesizedExpression, is KtLabeledExpression, is KtAnnotatedExpression,
             is KtThrowExpression, is KtDestructuringDeclaration, is KtClassLiteralExpression, is KtCallableReferenceExpression,
             is KtCollectionLiteralExpression,
             -> true
+
+            is KtSimpleNameExpression, is KtQualifiedExpression -> element.getParentOfTypes(
+                strict = true,
+                KtImportDirective::class.java,
+                KtPackageDirective::class.java,
+            ) == null
+
             else -> false
         }
     }

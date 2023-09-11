@@ -27,7 +27,6 @@ import org.jetbrains.kotlin.analysis.low.level.api.fir.util.errorWithFirSpecific
 import org.jetbrains.kotlin.analysis.low.level.api.fir.util.isScriptStatement
 import org.jetbrains.kotlin.analysis.low.level.api.fir.util.originalDeclaration
 import org.jetbrains.kotlin.analysis.low.level.api.fir.util.originalKtFile
-import org.jetbrains.kotlin.utils.exceptions.errorWithAttachment
 import org.jetbrains.kotlin.analysis.utils.printer.parentOfType
 import org.jetbrains.kotlin.analysis.utils.printer.parentsOfType
 import org.jetbrains.kotlin.fir.FirElement
@@ -42,10 +41,12 @@ import org.jetbrains.kotlin.fir.scopes.createImportingScopes
 import org.jetbrains.kotlin.fir.scopes.kotlinScopeProvider
 import org.jetbrains.kotlin.fir.utils.exceptions.withFirEntry
 import org.jetbrains.kotlin.fir.visitors.FirVisitorVoid
+import org.jetbrains.kotlin.kdoc.psi.impl.KDocName
 import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.psi.psiUtil.anyDescendantOfType
 import org.jetbrains.kotlin.psi.psiUtil.isAncestor
 import org.jetbrains.kotlin.psi.psiUtil.parentsWithSelf
+import org.jetbrains.kotlin.utils.exceptions.errorWithAttachment
 import org.jetbrains.kotlin.utils.exceptions.withPsiEntry
 
 object LowLevelFirApiFacadeForResolveOnAir {
@@ -148,13 +149,13 @@ object LowLevelFirApiFacadeForResolveOnAir {
     ): FirTowerContextProvider {
         require(firResolveSession is LLFirResolvableResolveSession)
 
-        return if (place is KtFile) {
-            FileTowerProvider(place, onAirGetTowerContextForFile(firResolveSession, place))
-        } else {
-            val validPlace = PsiTreeUtil.findFirstParent(place, false) {
-                it is KtElement && RawFirReplacement.isApplicableForReplacement(it)
-            } as KtElement
+        val validPlace = PsiTreeUtil.findFirstParent(place, false) {
+            it is KtElement && RawFirReplacement.isApplicableForReplacement(it)
+        } as KtElement
 
+        return if (validPlace is KtFile) {
+            getFileTowerProviderOrEmpty(firResolveSession, place)
+        } else {
             FirTowerDataContextAllElementsCollector().also {
                 runBodyResolveOnAir(
                     firResolveSession = firResolveSession,
@@ -163,6 +164,24 @@ object LowLevelFirApiFacadeForResolveOnAir {
                     replacementElement = validPlace,
                 )
             }
+        }
+    }
+
+    /**
+     * If [place] is [KtFile] or a location in the file where file's tower elements should be available, returns [FileTowerProvider].
+     * Otherwise, returns [FirTowerContextProvider.Empty].
+     */
+    private fun getFileTowerProviderOrEmpty(
+        firResolveSession: LLFirResolvableResolveSession,
+        place: KtElement,
+    ): FirTowerContextProvider {
+        val file = place.containingKtFile
+
+        return when (place) {
+            is KtFile, is KDocName -> FileTowerProvider(file, onAirGetTowerContextForFile(firResolveSession, file))
+            is KtImportDirective, is KtPackageDirective -> FirTowerContextProvider.Empty
+
+            else -> getFileTowerProviderOrEmpty(firResolveSession, place.parent as KtElement)
         }
     }
 
@@ -210,8 +229,7 @@ object LowLevelFirApiFacadeForResolveOnAir {
 
         val copiedNonLocalDeclaration = minimalCopiedDeclaration?.onAirGetNonLocalContainingOrThisDeclaration()
         if (copiedNonLocalDeclaration == null) {
-            val towerDataContext = onAirGetTowerContextForFile(originalFirResolveSession, originalKtFile)
-            val fileTowerProvider = FileTowerProvider(elementToAnalyze.containingKtFile, towerDataContext)
+            val fileTowerProvider = getFileTowerProviderOrEmpty(originalFirResolveSession, elementToAnalyze)
             return LLFirResolveSessionDepended(originalFirResolveSession, fileTowerProvider, ktToFirMapping = null)
         }
 

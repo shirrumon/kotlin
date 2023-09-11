@@ -22,6 +22,10 @@ import org.jetbrains.kotlin.utils.addIfNotNull
 
 interface FirTowerContextProvider {
     fun getClosestAvailableParentContext(ktElement: KtElement): FirTowerDataContext?
+
+    object Empty : FirTowerContextProvider {
+        override fun getClosestAvailableParentContext(ktElement: KtElement): FirTowerDataContext = FirTowerDataContext()
+    }
 }
 
 internal class FileTowerProvider(
