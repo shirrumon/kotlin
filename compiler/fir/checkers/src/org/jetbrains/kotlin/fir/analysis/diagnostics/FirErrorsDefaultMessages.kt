@@ -1900,7 +1900,7 @@ object FirErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
         map.put(ACTUAL_MISSING, "Declaration must be marked with 'actual'")
         map.put(
             EXPECT_ACTUAL_CLASSIFIERS_ARE_IN_BETA_WARNING,
-            "The expect/actual classes (including interfaces, objects, annotations, enums, actual typealiases) are in Beta. " +
+            "'expect'/'actual' classes (including interfaces, objects, annotations, enums, and 'actual' typealiases) are in Beta. " +
                     "You can use -Xexpect-actual-classes flag to suppress this warning. " +
                     "Also see: https://youtrack.jetbrains.com/issue/KT-61573"
         )
