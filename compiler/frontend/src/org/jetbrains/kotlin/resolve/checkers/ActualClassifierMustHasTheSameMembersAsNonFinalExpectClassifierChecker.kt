@@ -73,7 +73,7 @@ private fun checkExpectActualScopeDiff(
                 declaration,
                 descriptor,
                 scopeDiff,
-                scopeDiff.first().expectClass, // All expect classes in scopeDiff are the same
+                expect,
             )
         )
     }
