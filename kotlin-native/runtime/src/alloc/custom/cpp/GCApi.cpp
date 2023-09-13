@@ -16,6 +16,7 @@
 #endif
 
 #include "CompilerConstants.hpp"
+#include "CustomAllocator.hpp"
 #include "CustomLogging.hpp"
 #include "ExtraObjectData.hpp"
 #include "ExtraObjectPage.hpp"
@@ -63,12 +64,18 @@ bool SweepObject(uint8_t* object, FinalizerQueue& finalizerQueue, gc::GCHandle::
     }
     CustomAllocDebug("SweepObject(%p): can be reclaimed", heapObjHeader);
     gcHandle.addSweptObject();
+    if (!compiler::gcMemoryBigChunks()) {
+        RecordDeallocation(CustomAllocator::GetAllocatedHeapSize(heapObjHeader->object()));
+    }
     return false;
 }
 
 bool SweepExtraObject(mm::ExtraObjectData* extraObject, gc::GCHandle::GCSweepExtraObjectsScope& gcHandle) noexcept {
     if (extraObject->getFlag(mm::ExtraObjectData::FLAGS_SWEEPABLE)) {
         CustomAllocDebug("SweepExtraObject(%p): can be reclaimed", extraObject);
+        if (!compiler::gcMemoryBigChunks()) {
+            RecordDeallocation(sizeof(mm::ExtraObjectData));
+        }
         return false;
     }
     CustomAllocDebug("SweepExtraObject(%p): is still needed", extraObject);
@@ -100,8 +107,9 @@ void* SafeAlloc(uint64_t size) noexcept {
         konan::consoleErrorf("Out of memory trying to allocate %" PRIu64 "bytes: %s. Aborting.\n", size, strerror(errno));
         std::abort();
     }
-    auto previousSize = allocatedBytesCounter.fetch_add(static_cast<size_t>(size), std::memory_order_relaxed);
-    OnMemoryAllocation(previousSize + static_cast<size_t>(size));
+    if (compiler::gcMemoryBigChunks()) {
+        RecordAllocation(static_cast<size_t>(size));
+    }
     CustomAllocDebug("SafeAlloc(%zu) = %p", static_cast<size_t>(size), memory);
     return memory;
 }
@@ -118,7 +126,18 @@ void Free(void* ptr, size_t size) noexcept {
         RuntimeAssert(result == 0, "Failed to munmap: %s", strerror(errno));
 #endif
     }
-    allocatedBytesCounter.fetch_sub(static_cast<size_t>(size), std::memory_order_relaxed);
+    if (compiler::gcMemoryBigChunks()) {
+        RecordDeallocation(static_cast<size_t>(size));
+    }
+}
+
+void RecordAllocation(size_t size) noexcept {
+    auto previousSize = allocatedBytesCounter.fetch_add(size, std::memory_order_relaxed);
+    OnMemoryAllocation(previousSize + size);
+}
+
+void RecordDeallocation(size_t size) noexcept {
+    allocatedBytesCounter.fetch_sub(size, std::memory_order_relaxed);
 }
 
 size_t GetAllocatedBytes() noexcept {
