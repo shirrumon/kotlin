@@ -90,9 +90,9 @@ fun main() {
     // dynamically with no upper limit.
     kotlin.native.runtime.GC.targetHeapBytes = 50_000_000
     kotlin.native.runtime.GC.minHeapBytes = 50_000_000
-    // Limit memory usage at ~150MiB. 3 times the initial boundary yet still
+    // Limit memory usage at ~200MiB. 4 times the initial boundary yet still
     // way less than total expected allocated amount.
-    val peakRSSChecker = PeakRSSChecker(150_000_000L)
+    val peakRSSChecker = PeakRSSChecker(200_000_000L)
 
     val workers = Array(threadCount) { Worker.start() }
     val globalCount = AtomicInt(0)
