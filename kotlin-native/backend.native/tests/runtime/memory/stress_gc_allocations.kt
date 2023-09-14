@@ -2,7 +2,7 @@
  * Copyright 2010-2021 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license
  * that can be found in the LICENSE file.
  */
-@file:OptIn(kotlin.experimental.ExperimentalNativeApi::class, kotlin.native.runtime.NativeRuntimeApi::class)
+@file:OptIn(kotlin.experimental.ExperimentalNativeApi::class, kotlin.native.runtime.NativeRuntimeApi::class, kotlin.native.concurrent.ObsoleteWorkersApi::class)
 
 import kotlin.concurrent.AtomicInt
 import kotlin.concurrent.Volatile
@@ -30,22 +30,8 @@ object Blackhole {
     }
 }
 
-class SmallObject {
-    val data = LongArray(4) // Equivalent of 5 pointers (extra 1 is from array length)
-    init {
-        Blackhole.consume(data)
-    }
-}
-
-class SmallObjectWithFinalizer {
-    val impl = SmallObject()
-    val cleaner = createCleaner(impl) {
-        Blackhole.consume(it)
-    }
-}
-
-class BigObject {
-    val data = ByteArray(1_000_000) // ~1MiB
+class ArrayOfBytes(bytes: Int) {
+    val data = ByteArray(bytes)
     init {
         // Write into every OS page.
         for (i in 0 until data.size step 4096) {
@@ -55,8 +41,8 @@ class BigObject {
     }
 }
 
-class BigObjectWithFinalizer {
-    val impl = BigObject()
+class ArrayOfBytesWithFinalizer(bytes: Int) {
+    val impl = ArrayOfBytes(bytes)
     val cleaner = createCleaner(impl) {
         Blackhole.consume(it)
     }
@@ -68,13 +54,13 @@ fun allocateGarbage() {
     // - 9 big objects
     // - 9990 small objects with finalizers
     // - 90000 small objects without finalizers
-    // And total size is ~15MiB
+    // And total size is ~50MiB
     for (i in 0..100_000) {
-        val obj = when {
-            i == 50_000 -> BigObjectWithFinalizer()
-            i % 10_000 == 0 -> BigObject()
-            i % 10 == 0 -> SmallObjectWithFinalizer()
-            else -> SmallObject()
+        val obj: Any = when {
+            i == 50_000 -> ArrayOfBytesWithFinalizer(1_000_000) // ~1MiB
+            i % 10_000 == 0 -> ArrayOfBytes(1_000_000) // ~1MiB
+            i % 10 == 0 -> ArrayOfBytesWithFinalizer(((i / 100) % 10) * 80) // ~1-100 pointers
+            else -> ArrayOfBytes(((i / 100) % 10) * 80) // ~1-100 pointers
         }
         Blackhole.consume(obj)
     }
@@ -95,18 +81,18 @@ class PeakRSSChecker(private val rssDiffLimitBytes: Long) {
 }
 
 fun main() {
-    // allocateGarbage allocates ~15MiB. Make total amount per mutator ~150GiB.
-    val count = 10_000
-    // Total amount overall is ~600GiB
+    // allocateGarbage allocates ~50MiB. Make total amount per mutator ~5GiB.
+    val count = 100
+    // Total amount overall is ~20GiB
     val threadCount = 4
     val progressReportsCount = 10
-    // Setting the initial boundary to ~10MiB. The scheduler will adapt this value
+    // Setting the initial boundary to ~50MiB. The scheduler will adapt this value
     // dynamically with no upper limit.
-    kotlin.native.runtime.GC.targetHeapBytes = 10_000_000
-    kotlin.native.runtime.GC.minHeapBytes = 10_000_000
-    // Limit memory usage at ~30MiB. 3 times the initial boundary yet still
+    kotlin.native.runtime.GC.targetHeapBytes = 50_000_000
+    kotlin.native.runtime.GC.minHeapBytes = 50_000_000
+    // Limit memory usage at ~150MiB. 3 times the initial boundary yet still
     // way less than total expected allocated amount.
-    val peakRSSChecker = PeakRSSChecker(30_000_000L)
+    val peakRSSChecker = PeakRSSChecker(150_000_000L)
 
     val workers = Array(threadCount) { Worker.start() }
     val globalCount = AtomicInt(0)
