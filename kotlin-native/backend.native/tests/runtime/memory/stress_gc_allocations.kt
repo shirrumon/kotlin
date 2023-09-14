@@ -9,6 +9,7 @@ import kotlin.concurrent.Volatile
 import kotlin.native.concurrent.*
 import kotlin.native.identityHashCode
 import kotlin.native.internal.MemoryUsageInfo
+import kotlin.native.ref.createCleaner
 import kotlin.random.Random
 
 // Copying what's done in kotlinx.benchmark
@@ -29,17 +30,53 @@ object Blackhole {
     }
 }
 
-// Keep a class to ensure we allocate in heap.
-// TODO: Explicitly protect it from escape analysis.
-// TODO: Allocate a variety of differently sized objects instead.
-class MemoryHog(val size: Int, val value: Byte, val stride: Int) {
-    val data = ByteArray(size)
-
+class SmallObject {
+    val data = LongArray(4) // Equivalent of 5 pointers (extra 1 is from array length)
     init {
-        for (i in 0 until size step stride) {
-            data[i] = value
+        Blackhole.consume(data)
+    }
+}
+
+class SmallObjectWithFinalizer {
+    val impl = SmallObject()
+    val cleaner = createCleaner(impl) {
+        Blackhole.consume(it)
+    }
+}
+
+class BigObject {
+    val data = ByteArray(1_000_000) // ~1MiB
+    init {
+        // Write into every OS page.
+        for (i in 0 until data.size step 4096) {
+            data[i] = 42
         }
         Blackhole.consume(data)
+    }
+}
+
+class BigObjectWithFinalizer {
+    val impl = BigObject()
+    val cleaner = createCleaner(impl) {
+        Blackhole.consume(it)
+    }
+}
+
+fun allocateGarbage() {
+    // Total amount of objects here:
+    // - 1 big object with finalizer
+    // - 9 big objects
+    // - 9990 small objects with finalizers
+    // - 90000 small objects without finalizers
+    // And total size is ~15MiB
+    for (i in 0..100_000) {
+        val obj = when {
+            i == 50_000 -> BigObjectWithFinalizer()
+            i % 10_000 == 0 -> BigObject()
+            i % 10 == 0 -> SmallObjectWithFinalizer()
+            else -> SmallObject()
+        }
+        Blackhole.consume(obj)
     }
 }
 
@@ -58,21 +95,18 @@ class PeakRSSChecker(private val rssDiffLimitBytes: Long) {
 }
 
 fun main() {
-    // One item is ~10MiB.
-    val size = 10_000_000
-    // Total amount per mutator is ~1TiB.
-    val count = 100_000
-    // Total amount overall is ~4TiB
+    // allocateGarbage allocates ~15MiB. Make total amount per mutator ~150GiB.
+    val count = 10_000
+    // Total amount overall is ~600GiB
     val threadCount = 4
-    val value: Byte = 42
-    // Try to make sure each page is written
-    val stride = 4096
     val progressReportsCount = 10
-    // Testing GC scheduler with dynamic boundary. Setting the initial boundary to ~100MiB
-    kotlin.native.runtime.GC.targetHeapBytes = 100_000_000
-    // Limit memory usage at ~300MiB. 3 times the initial boundary yet still
+    // Setting the initial boundary to ~10MiB. The scheduler will adapt this value
+    // dynamically with no upper limit.
+    kotlin.native.runtime.GC.targetHeapBytes = 10_000_000
+    kotlin.native.runtime.GC.minHeapBytes = 10_000_000
+    // Limit memory usage at ~30MiB. 3 times the initial boundary yet still
     // way less than total expected allocated amount.
-    val peakRSSChecker = PeakRSSChecker(300_000_000L)
+    val peakRSSChecker = PeakRSSChecker(30_000_000L)
 
     val workers = Array(threadCount) { Worker.start() }
     val globalCount = AtomicInt(0)
@@ -80,7 +114,7 @@ fun main() {
     workers.forEach {
         it.executeAfter(0L) {
             for (i in 0 until count) {
-                MemoryHog(size, value, stride)
+                allocateGarbage()
                 peakRSSChecker.check()
                 globalCount.getAndAdd(1)
             }
