@@ -36,9 +36,10 @@ namespace kotlin::alloc {
 
 bool SweepObject(uint8_t* object, FinalizerQueue& finalizerQueue, gc::GCHandle::GCSweepScope& gcHandle) noexcept {
     auto* heapObjHeader = reinterpret_cast<HeapObjHeader*>(object);
+    auto size = CustomAllocator::GetAllocatedHeapSize(heapObjHeader->object());
     if (gc::tryResetMark(heapObjHeader->objectData())) {
         CustomAllocDebug("SweepObject(%p): still alive", heapObjHeader);
-        gcHandle.addKeptObject();
+        gcHandle.addKeptObject(size);
         return true;
     }
     auto* extraObject = mm::ExtraObjectData::Get(heapObjHeader->object());
@@ -50,13 +51,13 @@ bool SweepObject(uint8_t* object, FinalizerQueue& finalizerQueue, gc::GCHandle::
             CustomAllocDebug("SweepObject: fromExtraObject(%p) = %p", extraObject, ExtraObjectCell::fromExtraObject(extraObject));
             finalizerQueue.Push(ExtraObjectCell::fromExtraObject(extraObject));
             gcHandle.addMarkedObject();
-            gcHandle.addKeptObject();
+            gcHandle.addKeptObject(size);
             return true;
         }
         if (!extraObject->getFlag(mm::ExtraObjectData::FLAGS_FINALIZED)) {
             CustomAllocDebug("SweepObject(%p): already waiting to be finalized", heapObjHeader);
             gcHandle.addMarkedObject();
-            gcHandle.addKeptObject();
+            gcHandle.addKeptObject(size);
             return true;
         }
         extraObject->UnlinkFromBaseObject();
@@ -65,7 +66,7 @@ bool SweepObject(uint8_t* object, FinalizerQueue& finalizerQueue, gc::GCHandle::
     CustomAllocDebug("SweepObject(%p): can be reclaimed", heapObjHeader);
     gcHandle.addSweptObject();
     if (!compiler::gcMemoryBigChunks()) {
-        RecordDeallocation(CustomAllocator::GetAllocatedHeapSize(heapObjHeader->object()));
+        RecordDeallocation(size);
     }
     return false;
 }
@@ -73,12 +74,14 @@ bool SweepObject(uint8_t* object, FinalizerQueue& finalizerQueue, gc::GCHandle::
 bool SweepExtraObject(mm::ExtraObjectData* extraObject, gc::GCHandle::GCSweepExtraObjectsScope& gcHandle) noexcept {
     if (extraObject->getFlag(mm::ExtraObjectData::FLAGS_SWEEPABLE)) {
         CustomAllocDebug("SweepExtraObject(%p): can be reclaimed", extraObject);
+        gcHandle.addSweptObject();
         if (!compiler::gcMemoryBigChunks()) {
             RecordDeallocation(sizeof(mm::ExtraObjectData));
         }
         return false;
     }
     CustomAllocDebug("SweepExtraObject(%p): is still needed", extraObject);
+    gcHandle.addKeptObject(sizeof(mm::ExtraObjectData));
     return true;
 }
 
