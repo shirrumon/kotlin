@@ -176,6 +176,11 @@ public class CliTestGenerated extends AbstractCliTest {
         public void testSuccessfulCompilation2() throws Exception {
             runTest("compiler/testData/cli/jvm/hmpp/successfulCompilation2.args");
         }
+
+        @TestMetadata("unrelatedFragments.args")
+        public void testUnrelatedFragments() throws Exception {
+            runTest("compiler/testData/cli/jvm/hmpp/unrelatedFragments.args");
+        }
     }
 
     @TestMetadata("compiler/testData/cli/jvm")
