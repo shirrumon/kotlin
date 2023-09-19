@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.classId
 import org.jetbrains.kotlin.resolve.descriptorUtil.module
 import org.jetbrains.kotlin.resolve.multiplatform.ExpectActualCompatibility.Compatible
 import org.jetbrains.kotlin.resolve.scopes.DescriptorKindFilter
-import org.jetbrains.kotlin.utils.addToStdlib.runIf
+import org.jetbrains.kotlin.utils.zipIfSizesAreEqual
 
 object ExpectedActualResolver {
     fun findActualForExpected(
@@ -137,10 +137,8 @@ object ExpectedActualResolver {
                         actualClass = container
                         expectedClass = declaration.containingDeclaration as ClassDescriptor
                         // TODO: this might not work for members of inner generic classes
-                        if (expectedClass.declaredTypeParameters.size != container.declaredTypeParameters.size) return emptyMap()
                         context.createExpectActualTypeParameterSubstitutor(
-                            expectedClass.declaredTypeParameters,
-                            container.declaredTypeParameters,
+                            (expectedClass.declaredTypeParameters zipIfSizesAreEqual container.declaredTypeParameters) ?: return emptyMap(),
                             parentSubstitutor = null
                         )
                     }
