@@ -137,13 +137,12 @@ object ExpectedActualResolver {
                         actualClass = container
                         expectedClass = declaration.containingDeclaration as ClassDescriptor
                         // TODO: this might not work for members of inner generic classes
-                        runIf(expectedClass.declaredTypeParameters.size == container.declaredTypeParameters.size) {
-                            context.createExpectActualTypeParameterSubstitutor(
-                                expectedClass.declaredTypeParameters,
-                                container.declaredTypeParameters,
-                                parentSubstitutor = null
-                            )
-                        }
+                        if (expectedClass.declaredTypeParameters.size != container.declaredTypeParameters.size) return emptyMap()
+                        context.createExpectActualTypeParameterSubstitutor(
+                            expectedClass.declaredTypeParameters,
+                            container.declaredTypeParameters,
+                            parentSubstitutor = null
+                        )
                     }
                     else -> null
                 }
