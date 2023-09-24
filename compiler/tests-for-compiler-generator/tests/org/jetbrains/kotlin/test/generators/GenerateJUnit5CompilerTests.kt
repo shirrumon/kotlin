@@ -207,10 +207,6 @@ fun generateJUnit5CompilerTests(args: Array<String>, mainClassName: String?) {
 
             // ------------- Inline scopes tests duplication -------------
 
-            testClass<AbstractBlackBoxCodegenTestWithInlineScopes> {
-                model("codegen/box")
-            }
-
             testClass<AbstractIrBlackBoxCodegenTestWithInlineScopes> {
                 model("codegen/box")
             }
@@ -231,20 +227,12 @@ fun generateJUnit5CompilerTests(args: Array<String>, mainClassName: String?) {
                 model("debug/stepping")
             }
 
-            testClass<AbstractLocalVariableTestWithInlineScopes> {
-                model("debug/localVariables")
-            }
-
             testClass<AbstractIrLocalVariableBytecodeInlinerTestWithInlineScopes> {
                 model("debug/localVariables")
             }
 
             testClass<AbstractIrLocalVariableIrInlinerTestWithInlineScopes> {
                 model("debug/localVariables")
-            }
-
-            testClass<AbstractBlackBoxCodegenTestWithInlineScopes>("BlackBoxModernJdkCodegenTestGeneratedWithInlineScopes") {
-                model("codegen/boxModernJdk")
             }
 
             testClass<AbstractIrBlackBoxCodegenTestWithInlineScopes>("IrBlackBoxModernJdkCodegenTestGeneratedWithInlineScopes") {
@@ -259,16 +247,8 @@ fun generateJUnit5CompilerTests(args: Array<String>, mainClassName: String?) {
                 model("codegen/box/compileKotlinAgainstKotlin")
             }
 
-            testClass<AbstractBytecodeTextTestWithInlineScopes> {
-                model("codegen/bytecodeText")
-            }
-
             testClass<AbstractIrBytecodeTextTestWithInlineScopes> {
                 model("codegen/bytecodeText")
-            }
-
-            testClass<AbstractBlackBoxInlineCodegenTestWithInlineScopes> {
-                model("codegen/boxInline")
             }
 
             testClass<AbstractIrBlackBoxInlineCodegenWithBytecodeInlinerTestWithInlineScopes> {
