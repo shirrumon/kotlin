@@ -5,6 +5,7 @@
 
 package org.jetbrains.kotlin.fir.analysis.checkers.expression
 
+import org.jetbrains.kotlin.config.LanguageFeature
 import org.jetbrains.kotlin.diagnostics.DiagnosticReporter
 import org.jetbrains.kotlin.diagnostics.reportOn
 import org.jetbrains.kotlin.fir.analysis.checkers.context.CheckerContext
@@ -36,10 +37,10 @@ object FirCatchParameterChecker : FirTryExpressionChecker() {
             if (coneType is ConeTypeParameterType) {
                 val isReified = coneType.lookupTag.typeParameterSymbol.isReified
 
-                if (isReified) {
-                    reporter.reportOn(source, FirErrors.REIFIED_TYPE_IN_CATCH_CLAUSE, context)
-                } else {
+                if (!isReified) {
                     reporter.reportOn(source, FirErrors.TYPE_PARAMETER_IN_CATCH_CLAUSE, context)
+                } else if (!context.languageVersionSettings.supportsFeature(LanguageFeature.AllowReifiedTypeInCatchClause)) {
+                    reporter.reportOn(source, FirErrors.REIFIED_TYPE_IN_CATCH_CLAUSE, context)
                 }
             }
 
