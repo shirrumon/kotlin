@@ -34,6 +34,7 @@ abstract class FirExtensionRegistrar : FirExtensionRegistrarAdapter() {
             FirScriptConfiguratorExtension::class,
             Fir2IrScriptConfiguratorExtension::class,
             FirFunctionTypeKindExtension::class,
+            FirFunctionCallRefinementExtension::class,
         )
 
         internal val ALLOWED_EXTENSIONS_FOR_LIBRARY_SESSION = listOf(
@@ -107,6 +108,10 @@ abstract class FirExtensionRegistrar : FirExtensionRegistrarAdapter() {
             registerExtension(FirFunctionTypeKindExtension::class, this)
         }
 
+        @JvmName("plusFunctionCallRefinementExtension")
+        operator fun (FirFunctionCallRefinementExtension.Factory).unaryPlus() {
+            registerExtension(FirFunctionCallRefinementExtension::class, this)
+        }
         // ------------------ reference methods ------------------
 
         @JvmName("plusStatusTransformerExtension")
@@ -169,6 +174,10 @@ abstract class FirExtensionRegistrar : FirExtensionRegistrarAdapter() {
             FirFunctionTypeKindExtension.Factory { this.invoke(it) }.unaryPlus()
         }
 
+        @JvmName("plusFunctionCallRefinementExtension")
+        operator fun ((FirSession) -> FirFunctionCallRefinementExtension).unaryPlus() {
+            FirFunctionCallRefinementExtension.Factory { this.invoke(it) }.unaryPlus()
+        }
         // ------------------ utilities ------------------
 
         @JvmName("bindLeft")
