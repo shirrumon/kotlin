@@ -128,6 +128,9 @@ abstract class BenchmarkingPlugin: Plugin<Project> {
                 implementation(files("${project.findProperty("kotlin_dist")}/kotlinc/lib/kotlin-stdlib.jar"))
             }
 
+            commonMain.languageSettings.languageVersion = "1.9"
+            nativeMain.languageSettings.languageVersion = "1.9"
+
             repositories.flatDir {
                 dir("${project.findProperty("kotlin_dist")}/kotlinc/lib")
             }
