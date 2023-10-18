@@ -8,7 +8,7 @@ package kotlin.reflect
 /**
  * Represents a function with introspection capabilities.
  */
-@AllowDifferentMembersInActual // KFunction for JVM adds a lot of new members compared to the expect declaration
+@Suppress("ACTUAL_CLASSIFIER_MUST_HAVE_THE_SAME_MEMBERS_AS_NON_FINAL_EXPECT_CLASSIFIER_WARNING") // Can be dropped after bootstrap update
 public actual interface KFunction<out R> : KCallable<R>, Function<R> {
     /**
      * `true` if this function is `inline`.
