@@ -481,17 +481,28 @@ class Fir2IrConverter(
                 }
             }
             is FirSimpleFunction -> {
-                declarationStorage.getOrCreateIrFunction(declaration, parent, isLocal = isInLocalClass)
+                @OptIn(LeakedDeclarationCaches::class)
+                declarationStorage.createAndCacheIrFunction(declaration, parent, isLocal = isInLocalClass)
             }
             is FirProperty -> {
                 if (
                     containingClass == null ||
+                    // Note: we have to do it, because backend without the feature
+                    // cannot process Enum.entries properly
                     !declaration.isEnumEntries(containingClass) ||
                     session.languageVersionSettings.supportsFeature(LanguageFeature.EnumEntries)
                 ) {
-                    // Note: we have to do it, because backend without the feature
-                    // cannot process Enum.entries properly
-                    declarationStorage.getOrCreateIrProperty(declaration, parent, isLocal = isInLocalClass)
+                    /*
+                     * If some member property is used for inheritance by delegation, then it may be created
+                     *   during processing corresponding field in `callablesGenerator.createIrFieldAndDelegatedMembers`
+                     * So it's incorrect to forcefully recreate it
+                     */
+                    if (containingClass != null) {
+                        declarationStorage.getOrCreateIrProperty(declaration, parent, isLocal = isInLocalClass)
+                    } else {
+                        @OptIn(LeakedDeclarationCaches::class)
+                        declarationStorage.createAndCacheIrProperty(declaration, parent, isLocal = isInLocalClass)
+                    }
                 }
             }
             is FirField -> {

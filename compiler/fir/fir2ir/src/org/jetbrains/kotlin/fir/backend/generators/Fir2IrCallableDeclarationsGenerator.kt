@@ -6,6 +6,7 @@
 package org.jetbrains.kotlin.fir.backend.generators
 
 import com.intellij.openapi.progress.ProcessCanceledException
+import org.jetbrains.kotlin.config.LanguageFeature
 import org.jetbrains.kotlin.descriptors.*
 import org.jetbrains.kotlin.fir.*
 import org.jetbrains.kotlin.fir.backend.*
@@ -59,6 +60,8 @@ import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
 
 class Fir2IrCallableDeclarationsGenerator(val components: Fir2IrComponents) : Fir2IrComponents by components {
+    private val isMppCompilation: Boolean = configuration.languageVersionSettings.supportsFeature(LanguageFeature.MultiPlatformProjects)
+
     // ------------------------------------ package fragments ------------------------------------
 
     internal fun createExternalPackageFragment(fqName: FqName, moduleDescriptor: FirModuleDescriptor): IrExternalPackageFragment {
@@ -79,6 +82,19 @@ class Fir2IrCallableDeclarationsGenerator(val components: Fir2IrComponents) : Fi
         return if (signature == null) {
             factory(IrSimpleFunctionSymbolImpl())
         } else {
+            /*
+             * In MPP compilation, we can have clash between binary declaration from dependency (referenced in common module)
+             *   and source declaration from platform module. So we need to delete existing symbol from symbol table if it present
+             *   to avoid "symbol already bound" exception.
+             * For details see KT-62713
+             */
+            if (isMppCompilation) {
+                val existingSymbol = symbolTable.referenceSimpleFunctionIfAny(signature)
+                if (existingSymbol != null) {
+                    @OptIn(DelicateSymbolTableApi::class)
+                    symbolTable.removeSimpleFunction(existingSymbol)
+                }
+            }
             symbolTable.declareSimpleFunction(signature, { IrSimpleFunctionPublicSymbolImpl(signature) }, factory)
         }
     }
@@ -267,10 +283,19 @@ class Fir2IrCallableDeclarationsGenerator(val components: Fir2IrComponents) : Fi
         signature: IdSignature?,
         factory: (IrPropertySymbol) -> IrProperty
     ): IrProperty {
-        return if (signature == null)
+        return if (signature == null) {
             factory(IrPropertySymbolImpl())
-        else
+        } else {
+            // See the comment in [declareIrSimpleFunction] function
+            if (isMppCompilation) {
+                val existingSymbol = symbolTable.referencePropertyIfAny(signature)
+                if (existingSymbol != null) {
+                    @OptIn(DelicateSymbolTableApi::class)
+                    symbolTable.removeProperty(existingSymbol)
+                }
+            }
             symbolTable.declareProperty(signature, { IrPropertyPublicSymbolImpl(signature) }, factory)
+        }
     }
 
     fun createIrProperty(

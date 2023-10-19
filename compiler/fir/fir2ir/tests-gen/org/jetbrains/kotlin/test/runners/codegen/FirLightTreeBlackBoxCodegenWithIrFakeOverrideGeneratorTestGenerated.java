@@ -34105,6 +34105,18 @@ public class FirLightTreeBlackBoxCodegenWithIrFakeOverrideGeneratorTestGenerated
             }
 
             @Test
+            @TestMetadata("clashBetweenDependencyAndSource_jvm.kt")
+            public void testClashBetweenDependencyAndSource_jvm() throws Exception {
+                runTest("compiler/testData/codegen/box/multiplatform/k2/clashBetweenDependencyAndSource_jvm.kt");
+            }
+
+            @Test
+            @TestMetadata("clashBetweenDependencyAndSource_nonJvm.kt")
+            public void testClashBetweenDependencyAndSource_nonJvm() throws Exception {
+                runTest("compiler/testData/codegen/box/multiplatform/k2/clashBetweenDependencyAndSource_nonJvm.kt");
+            }
+
+            @Test
             @TestMetadata("dataClassInCommonAndPlatform.kt")
             public void testDataClassInCommonAndPlatform() throws Exception {
                 runTest("compiler/testData/codegen/box/multiplatform/k2/dataClassInCommonAndPlatform.kt");
