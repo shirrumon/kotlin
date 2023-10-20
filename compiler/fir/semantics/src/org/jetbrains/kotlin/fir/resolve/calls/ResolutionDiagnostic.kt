@@ -159,3 +159,5 @@ object TypeParameterAsExpression : ResolutionDiagnostic(INAPPLICABLE)
 class StubBuilderInferenceReceiver(
     val typeParameterSymbol: FirTypeParameterSymbol
 ) : ResolutionDiagnostic(RESOLVED_WITH_ERROR)
+
+class AmbiguousInterceptedSymbol(val pluginNames: List<String>) : ResolutionDiagnostic(INAPPLICABLE)
