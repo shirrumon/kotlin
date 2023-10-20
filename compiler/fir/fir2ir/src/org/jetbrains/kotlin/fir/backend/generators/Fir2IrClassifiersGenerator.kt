@@ -146,8 +146,8 @@ class Fir2IrClassifiersGenerator(val components: Fir2IrComponents) : Fir2IrCompo
             }
         }
         /*
-         * `regularClass.isLocal` indicates that either class itsef is local or it is a nested class in some other class
-         * Check for parentClassId allows to distinguish between those cases
+         * `regularClass.isLocal` indicates that either class itself is local or it is a nested class in some other class
+         * Check for parentClassId allows distinguishing between those cases
          */
         irClass.setParent(parent)
         if (!(regularClass.isLocal && regularClass.classId.parentClassId == null)) {
@@ -178,7 +178,12 @@ class Fir2IrClassifiersGenerator(val components: Fir2IrComponents) : Fir2IrCompo
     private fun IrClass.setThisReceiver(typeParameters: List<FirTypeParameterRef>) {
         symbolTable.enterScope(this)
         val typeArguments = typeParameters.map {
-            IrSimpleTypeImpl(classifierStorage.getIrTypeParameterSymbol(it.symbol, ConversionTypeOrigin.DEFAULT), false, emptyList(), emptyList())
+            IrSimpleTypeImpl(
+                classifierStorage.getIrTypeParameterSymbol(it.symbol, ConversionTypeOrigin.DEFAULT),
+                hasQuestionMark = false,
+                emptyList(),
+                emptyList()
+            )
         }
         thisReceiver = declareThisReceiverParameter(
             thisType = IrSimpleTypeImpl(symbol, false, typeArguments, emptyList()),
@@ -246,7 +251,7 @@ class Fir2IrClassifiersGenerator(val components: Fir2IrComponents) : Fir2IrCompo
     )
 
     // This function is called when we refer local class earlier than we reach its declaration
-    // This can happen e.g. when implicit return type has a local class constructor
+    // This can happen, e.g., when an implicit return type has a local class constructor
     fun createLocalIrClassOnTheFly(klass: FirClass, processMembersOfClassesOnTheFlyImmediately: Boolean): LocalIrClassInfo {
         // finding the parent class that actually contains the [klass] in the tree - it is the root one that should be created on the fly
         val classOrLocalParent = generateSequence(klass) { c ->
@@ -257,8 +262,8 @@ class Fir2IrClassifiersGenerator(val components: Fir2IrComponents) : Fir2IrCompo
             }
         }.last()
         val result = converter.processLocalClassAndNestedClassesOnTheFly(classOrLocalParent, temporaryParent)
-        // Note: usually member creation and f/o binding is delayed till non-local classes are processed in Fir2IrConverter
-        // If non-local classes are already created (this means we are in body translation) we do everything immediately
+        // Note: usually member creation and f/o binding are delayed till non-local classes are processed in Fir2IrConverter
+        // If non-local classes are already created (this means we are in body translation), we do everything immediately
         // The last variant is possible for local variables like 'val a = object : Any() { ... }'
         if (processMembersOfClassesOnTheFlyImmediately) {
             converter.processClassMembers(classOrLocalParent, result)
@@ -432,7 +437,7 @@ class Fir2IrClassifiersGenerator(val components: Fir2IrComponents) : Fir2IrCompo
                     if (isEnumEntryWhichRequiresSubclass(enumEntry)) {
                         // An enum entry with its own members requires an anonymous object generated.
                         // Otherwise, this is a default-ish enum entry whose initializer would be a delegating constructor call,
-                        // which will be translated via visitor later.
+                        // which will be translated with a visitor later.
                         val klass = classifierStorage.getIrAnonymousObjectForEnumEntry(
                             (enumEntry.initializer as FirAnonymousObjectExpression).anonymousObject, enumEntry.name, irParent
                         )

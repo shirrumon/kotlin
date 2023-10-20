@@ -235,7 +235,9 @@ class Fir2IrCallableDeclarationsGenerator(val components: Fir2IrComponents) : Fi
         }
 
         if (irParent is Fir2IrLazyClass && signature != null) {
-            val lazyConstructor = lazyDeclarationsGenerator.createIrLazyConstructor(constructor, signature, origin, irParent) as Fir2IrLazyConstructor
+            val lazyConstructor =lazyDeclarationsGenerator.createIrLazyConstructor(
+                constructor, signature, origin, irParent
+            ) as Fir2IrLazyConstructor
             // Add to cache before generating parameters to prevent an infinite loop when an annotation value parameter is annotated
             // with the annotation itself.
             @OptIn(LeakedDeclarationCaches::class)

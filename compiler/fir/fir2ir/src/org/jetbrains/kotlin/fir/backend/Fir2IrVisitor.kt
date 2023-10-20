@@ -189,7 +189,7 @@ class Fir2IrVisitor(
     override fun visitRegularClass(regularClass: FirRegularClass, data: Any?): IrElement = whileAnalysing(session, regularClass) {
         if (regularClass.visibility == Visibilities.Local) {
             val irParent = conversionScope.parentFromStack()
-            // NB: for implicit types it is possible that local class is already cached
+            // NB: for implicit types, it is possible that the local class is already cached
             val irClass = classifierStorage.getCachedIrClass(regularClass)?.apply { this.parent = irParent }
             if (irClass != null) {
                 conversionScope.withParent(irClass) {
@@ -259,7 +259,7 @@ class Fir2IrVisitor(
                             statement is FirProperty && statement.origin == FirDeclarationOrigin.ScriptCustomization.ResultProperty -> {
                                 // Generating the result property only for expressions with a meaningful result type
                                 // otherwise skip the property and convert the expression into the statement
-                                if (statement.returnTypeRef.let { (it.isUnit || it.isNothing || it.isNullableNothing) } == true) {
+                                if (statement.returnTypeRef.let { (it.isUnit || it.isNothing || it.isNullableNothing) }) {
                                     statement.initializer!!.toIrStatement()
                                 } else {
                                     (statement.accept(this@Fir2IrVisitor, null) as? IrDeclaration)?.also {
@@ -272,13 +272,13 @@ class Fir2IrVisitor(
                                     IrCompositeImpl(
                                         startOffset, endOffset,
                                         irBuiltIns.unitType, IrStatementOrigin.DESTRUCTURING_DECLARATION
-                                    ).also {
-                                        it.statements.add(
+                                    ).also { composite ->
+                                        composite.statements.add(
                                             declarationStorage.createAndCacheIrVariable(statement, conversionScope.parentFromStack()).also {
                                                 it.initializer = statement.initializer?.toIrStatement() as? IrExpression
                                             }
                                         )
-                                        destructComposites[(statement).symbol] = it
+                                        destructComposites[(statement).symbol] = composite
                                     }
                                 }
                             }
@@ -344,7 +344,7 @@ class Fir2IrVisitor(
         session, anonymousObject
     ) {
         val irParent = conversionScope.parentFromStack()
-        // NB: for implicit types it is possible that anonymous object is already cached
+        // NB: for implicit types, it is possible that an anonymous object is already cached
         val irAnonymousObject = classifierStorage.getCachedIrClass(anonymousObject)?.apply { this.parent = irParent }
             ?: converter.processLocalClassAndNestedClasses(anonymousObject, irParent)
 
@@ -383,7 +383,9 @@ class Fir2IrVisitor(
         anonymousInitializer: FirAnonymousInitializer,
         data: Any?
     ): IrElement = whileAnalysing(session, anonymousInitializer) {
-        val irAnonymousInitializer = declarationStorage.getOrCreateIrAnonymousInitializer(anonymousInitializer, conversionScope.lastClass()!!)
+        val irAnonymousInitializer = declarationStorage.getOrCreateIrAnonymousInitializer(
+            anonymousInitializer, conversionScope.lastClass()!!
+        )
         declarationStorage.enterScope(irAnonymousInitializer.symbol)
         irAnonymousInitializer.body = convertToIrBlockBody(anonymousInitializer.body!!)
         declarationStorage.leaveScope(irAnonymousInitializer.symbol)
@@ -656,7 +658,7 @@ class Fir2IrVisitor(
         val scopeOwner = conversionScope.parent()
         // For anonymous initializers
         if ((scopeOwner as? IrDeclaration)?.symbol == irClassSymbol) return false
-        // Members of object
+        // Members of the object
         return when (scopeOwner) {
             is IrFunction, is IrProperty, is IrField -> {
                 val parent = (scopeOwner as IrDeclaration).parent as? IrDeclaration
@@ -685,11 +687,7 @@ class Fir2IrVisitor(
             else -> null
         }
 
-        if (convertedExpression != null) {
-            convertedExpression
-        } else {
-            visitQualifiedAccessExpression(thisReceiverExpression, data)
-        }
+        convertedExpression ?: visitQualifiedAccessExpression(thisReceiverExpression, data)
     }
 
     private fun generateThisReceiverAccessForClass(
@@ -706,7 +704,7 @@ class Fir2IrVisitor(
             classifierStorage.getCachedIrClass(firClass)!!.symbol
         } else {
             /*
-             * The only case when we can refer to non-source this is resolution to companion object of parent
+             * The only case when we can refer to non-source this is resolution to the companion object of parent
              *   class in some constructor scope:
              *
              * // MODULE: lib
@@ -1415,7 +1413,7 @@ class Fir2IrVisitor(
 
     override fun visitTryExpression(tryExpression: FirTryExpression, data: Any?): IrElement {
         // Always generate a block for try, catch and finally blocks. When leaving the finally block in the debugger
-        // for both Java and Kotlin there is a step on the end brace. For that to happen we need the block with
+        // for both Java and Kotlin, there is a step on the end brace. For that to happen, we need the block with
         // that line number for the finally block.
         return tryExpression.convertWithOffsets { startOffset, endOffset ->
             IrTryImpl(
@@ -1602,7 +1600,7 @@ class Fir2IrVisitor(
     }
 
     override fun visitErrorResolvedQualifier(errorResolvedQualifier: FirErrorResolvedQualifier, data: Any?): IrElement {
-        // Support for error suppression case
+        // Support for an error suppression case
         return visitResolvedQualifier(errorResolvedQualifier, data)
     }
 

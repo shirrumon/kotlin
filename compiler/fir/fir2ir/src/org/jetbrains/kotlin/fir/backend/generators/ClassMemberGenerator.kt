@@ -209,10 +209,12 @@ internal class ClassMemberGenerator(
                         when {
                             DataClassResolver.isComponentLike(irFunction.name) ->
                                 firFunction?.body?.let { irFunction.body = visitor.convertToIrBlockBody(it) }
-                                    ?: DataClassMembersGenerator(components).generateDataClassComponentBody(irFunction, containingClass as FirRegularClass)
+                                    ?: DataClassMembersGenerator(components)
+                                        .generateDataClassComponentBody(irFunction, containingClass as FirRegularClass)
                             DataClassResolver.isCopy(irFunction.name) ->
                                 firFunction?.body?.let { irFunction.body = visitor.convertToIrBlockBody(it) }
-                                    ?: DataClassMembersGenerator(components).generateDataClassCopyBody(irFunction, containingClass as FirRegularClass)
+                                    ?: DataClassMembersGenerator(components)
+                                        .generateDataClassCopyBody(irFunction, containingClass as FirRegularClass)
                             else ->
                                 irFunction.body = firFunction?.body?.let { visitor.convertToIrBlockBody(it) }
                         }
@@ -377,7 +379,7 @@ internal class ClassMemberGenerator(
                 )
             }
 
-        // Unwrap substitution overrides from both derived class and a super class
+        // Unwrap substitution overrides from both derived class and a superclass
         val constructorSymbol = referencedSymbol
             .unwrapCallRepresentative(referencedSymbol.containingClassLookupTag())
             .unwrapCallRepresentative((referencedSymbol.resolvedReturnType as? ConeClassLikeType)?.lookupTag)
@@ -390,9 +392,9 @@ internal class ClassMemberGenerator(
             val typeArguments = constructedTypeRef.coneType.fullyExpandedType(session).typeArguments
             val constructor = constructorSymbol.fir
             /*
-             * We should generate enum constructor call only if it is used to create new enum entry (so it's super constructor call)
+             * We should generate enum constructor call only if it is used to create a new enum entry (so it's super constructor call)
              * If it is this constructor call that we are facing secondary constructor of enum, and should generate
-             *   regular delegating constructor call
+             *    a regular delegating constructor call
              *
              * enum class Some(val x: Int) {
              *   A(); // <---- super call, IrEnumConstructorCall
