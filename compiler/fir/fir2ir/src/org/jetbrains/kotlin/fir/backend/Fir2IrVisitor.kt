@@ -45,7 +45,6 @@ import org.jetbrains.kotlin.ir.symbols.impl.IrValueParameterSymbolImpl
 import org.jetbrains.kotlin.ir.types.*
 import org.jetbrains.kotlin.ir.types.impl.IrErrorClassImpl
 import org.jetbrains.kotlin.ir.types.impl.IrErrorTypeImpl
-import org.jetbrains.kotlin.ir.util.coerceToUnit
 import org.jetbrains.kotlin.ir.util.constructors
 import org.jetbrains.kotlin.ir.util.defaultConstructor
 import org.jetbrains.kotlin.lexer.KtTokens
@@ -449,6 +448,7 @@ class Fir2IrVisitor(
                     memberGenerator.convertFunctionContent(it, variable.setter, null)
                 }
             }
+            annotationGenerator.generate(irProperty, variable)
             return irProperty
         }
         val initializer = variable.initializer

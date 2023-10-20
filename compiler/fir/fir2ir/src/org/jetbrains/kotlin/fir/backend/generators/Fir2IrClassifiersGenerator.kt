@@ -91,7 +91,6 @@ class Fir2IrClassifiersGenerator(val components: Fir2IrComponents) : Fir2IrCompo
                 )
             }
         }
-        annotationGenerator.generate(irTypeParameter, typeParameter)
         return irTypeParameter
     }
 

@@ -156,6 +156,12 @@ public class BlackBoxCodegenTestGenerated extends AbstractBlackBoxCodegenTest {
         }
 
         @Test
+        @TestMetadata("forwardReferenceOfConstVal.kt")
+        public void testForwardReferenceOfConstVal() throws Exception {
+            runTest("compiler/testData/codegen/box/annotations/forwardReferenceOfConstVal.kt");
+        }
+
+        @Test
         @TestMetadata("genericAnnotations.kt")
         public void testGenericAnnotations() throws Exception {
             runTest("compiler/testData/codegen/box/annotations/genericAnnotations.kt");

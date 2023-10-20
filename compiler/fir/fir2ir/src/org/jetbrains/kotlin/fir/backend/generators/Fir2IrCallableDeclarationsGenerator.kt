@@ -192,7 +192,6 @@ class Fir2IrCallableDeclarationsGenerator(val components: Fir2IrComponents) : Fi
                             isStatic = simpleFunction?.isStatic == true,
                             forSetter = false,
                         )
-                        convertAnnotationsForNonDeclaredMembers(function, origin)
                     }
                 }
             }
@@ -262,7 +261,6 @@ class Fir2IrCallableDeclarationsGenerator(val components: Fir2IrComponents) : Fi
                     isExternal = false,
                 ).apply {
                     metadata = FirMetadataSource.Function(constructor)
-                    annotationGenerator.generate(this, constructor)
                     // Add to cache before generating parameters to prevent an infinite loop when an annotation value parameter is annotated
                     // with the annotation itself.
                     @OptIn(LeakedDeclarationCaches::class)
@@ -352,7 +350,6 @@ class Fir2IrCallableDeclarationsGenerator(val components: Fir2IrComponents) : Fi
                     isExpect = property.isExpect,
                 ).apply {
                     metadata = FirMetadataSource.Property(property)
-                    convertAnnotationsForNonDeclaredMembers(property, origin)
                     declarationStorage.withScope(symbol) {
                         // IrProperty is never created for local variables
                         setParent(irParent)
@@ -418,7 +415,6 @@ class Fir2IrCallableDeclarationsGenerator(val components: Fir2IrComponents) : Fi
                                 },
                                 startOffset, endOffset,
                                 dontUseSignature = signature == null, fakeOverrideOwnerLookupTag,
-                                property.unwrapFakeOverrides().getter,
                             )
                         }
                         if (property.isVar) {
@@ -434,7 +430,6 @@ class Fir2IrCallableDeclarationsGenerator(val components: Fir2IrComponents) : Fi
                                     },
                                     startOffset, endOffset,
                                     dontUseSignature = signature == null, fakeOverrideOwnerLookupTag,
-                                    property.unwrapFakeOverrides().setter,
                                 )
                             }
                         }
@@ -507,7 +502,6 @@ class Fir2IrCallableDeclarationsGenerator(val components: Fir2IrComponents) : Fi
         endOffset: Int,
         dontUseSignature: Boolean = false,
         fakeOverrideOwnerLookupTag: ConeClassLikeLookupTag? = null,
-        propertyAccessorForAnnotations: FirPropertyAccessor? = propertyAccessor,
     ): IrSimpleFunction = convertCatching(propertyAccessor ?: property) {
         val prefix = if (isSetter) "set" else "get"
         val signature =
@@ -542,11 +536,6 @@ class Fir2IrCallableDeclarationsGenerator(val components: Fir2IrComponents) : Fi
                 if (propertyAccessor != null) {
                     metadata = FirMetadataSource.Function(propertyAccessor)
                     // Note that deserialized annotations are stored in the accessor, not the property.
-                    convertAnnotationsForNonDeclaredMembers(propertyAccessor, origin)
-                }
-
-                if (propertyAccessorForAnnotations != null) {
-                    convertAnnotationsForNonDeclaredMembers(propertyAccessorForAnnotations, origin)
                 }
                 classifiersGenerator.setTypeParameters(
                     this, property, if (isSetter) ConversionTypeOrigin.SETTER else ConversionTypeOrigin.DEFAULT
@@ -557,8 +546,7 @@ class Fir2IrCallableDeclarationsGenerator(val components: Fir2IrComponents) : Fi
                 declarationStorage.withScope(symbol) {
                     if (propertyAccessor == null && isSetter) {
                         declareDefaultSetterParameter(
-                            property.returnTypeRef.toIrType(ConversionTypeOrigin.SETTER),
-                            firValueParameter = null
+                            property.returnTypeRef.toIrType(ConversionTypeOrigin.SETTER)
                         )
                     }
                     // property accessors does not belong to declarations of class/file, but are referenced via property,
@@ -608,7 +596,6 @@ class Fir2IrCallableDeclarationsGenerator(val components: Fir2IrComponents) : Fi
                 it.correspondingPropertySymbol = irProperty.symbol
             }.apply {
                 metadata = FirMetadataSource.Property(firProperty)
-                convertAnnotationsForNonDeclaredMembers(firProperty, origin)
             }
         }
     }
@@ -700,9 +687,9 @@ class Fir2IrCallableDeclarationsGenerator(val components: Fir2IrComponents) : Fi
 
     // ------------------------------------ parameters ------------------------------------
 
-    private fun <T : IrFunction> T.declareDefaultSetterParameter(type: IrType, firValueParameter: FirValueParameter?): T {
+    private fun <T : IrFunction> T.declareDefaultSetterParameter(type: IrType): T {
         valueParameters = listOf(
-            createDefaultSetterParameter(startOffset, endOffset, type, parent = this, firValueParameter)
+            createDefaultSetterParameter(startOffset, endOffset, type, parent = this)
         )
         return this
     }
@@ -712,7 +699,6 @@ class Fir2IrCallableDeclarationsGenerator(val components: Fir2IrComponents) : Fi
         endOffset: Int,
         type: IrType,
         parent: IrFunction,
-        firValueParameter: FirValueParameter?,
         name: Name? = null,
         isCrossinline: Boolean = false,
         isNoinline: Boolean = false,
@@ -732,9 +718,6 @@ class Fir2IrCallableDeclarationsGenerator(val components: Fir2IrComponents) : Fi
             isHidden = false,
         ).apply {
             this.parent = parent
-            if (firValueParameter != null) {
-                annotationGenerator.generate(this, firValueParameter)
-            }
         }
     }
 
@@ -795,7 +778,7 @@ class Fir2IrCallableDeclarationsGenerator(val components: Fir2IrComponents) : Fi
         if (function is FirDefaultPropertySetter) {
             val valueParameter = function.valueParameters.first()
             val type = valueParameter.returnTypeRef.toIrType(ConversionTypeOrigin.SETTER)
-            declareDefaultSetterParameter(type, valueParameter)
+            declareDefaultSetterParameter(type)
         } else if (function != null) {
             val contextReceivers = function.contextReceiversForFunctionOrContainingProperty()
 
@@ -903,7 +886,6 @@ class Fir2IrCallableDeclarationsGenerator(val components: Fir2IrComponents) : Fi
                         else -> null
                     }
                 }
-                annotationGenerator.generate(this, valueParameter)
             }
         }
         return irParameter
@@ -948,7 +930,6 @@ class Fir2IrCallableDeclarationsGenerator(val components: Fir2IrComponents) : Fi
                         IrDeclarationOrigin.DELEGATED_PROPERTY_ACCESSOR, startOffset, endOffset, dontUseSignature = true
                     )
                 }
-                annotationGenerator.generate(this, property)
             }
         }
         return irProperty
@@ -1091,16 +1072,6 @@ class Fir2IrCallableDeclarationsGenerator(val components: Fir2IrComponents) : Fi
             } else {
                 null
             }
-        }
-    }
-
-    private fun IrMutableAnnotationContainer.convertAnnotationsForNonDeclaredMembers(
-        firAnnotationContainer: FirAnnotationContainer, origin: IrDeclarationOrigin,
-    ) {
-        if ((firAnnotationContainer as? FirDeclaration)?.let { it.isFromLibrary || it.isPrecompiled } == true
-            || origin == IrDeclarationOrigin.FAKE_OVERRIDE
-        ) {
-            annotationGenerator.generate(this, firAnnotationContainer)
         }
     }
 

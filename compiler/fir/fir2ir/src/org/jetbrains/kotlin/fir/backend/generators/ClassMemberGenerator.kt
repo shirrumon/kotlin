@@ -98,7 +98,26 @@ internal class ClassMemberGenerator(
                     dataClassMembersGenerator.generateBodiesForMultiFieldValueClassMembers(klass, irClass)
                 }
                 if (irClass.isData) {
-                     dataClassMembersGenerator.generateBodiesForDataClassMembers(klass, irClass)
+                    dataClassMembersGenerator.generateBodiesForDataClassMembers(klass, irClass)
+                }
+            }
+
+            for (irDeclaration in irClass.declarations) {
+                if (irDeclaration.origin == IrDeclarationOrigin.FAKE_OVERRIDE) {
+                    val firDeclaration = fakeOverrideGenerator.getBaseSymbolsForFakeOverride(irDeclaration).firstOrNull()?.fir ?: continue
+                    when {
+                        irDeclaration is IrFunction && firDeclaration is FirFunction -> {
+                            annotationGenerator.generate(irDeclaration, firDeclaration)
+                        }
+                        irDeclaration is IrProperty && firDeclaration is FirProperty -> {
+                            annotationGenerator.generate(irDeclaration, firDeclaration)
+                        }
+                        irDeclaration is IrField -> when (firDeclaration) {
+                            is FirField -> annotationGenerator.generate(irDeclaration, firDeclaration)
+                            is FirBackingField -> annotationGenerator.generate(irDeclaration, firDeclaration)
+                            else -> {}
+                        }
+                    }
                 }
             }
 

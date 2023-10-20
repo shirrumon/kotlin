@@ -183,6 +183,15 @@ class FakeOverrideGenerator(
         }
     }
 
+    internal fun getBaseSymbolsForFakeOverride(fakeOverride: IrDeclaration): List<FirCallableSymbol<*>> {
+        return when (fakeOverride) {
+            is IrFunction -> baseFunctionSymbols[fakeOverride]
+            is IrProperty -> basePropertySymbols[fakeOverride]
+            is IrField -> baseStaticFieldSymbols[fakeOverride]
+            else -> null
+        }.orEmpty()
+    }
+
     internal fun calcBaseSymbolsForFakeOverrideFunction(
         klass: FirClass,
         fakeOverride: IrSimpleFunction,

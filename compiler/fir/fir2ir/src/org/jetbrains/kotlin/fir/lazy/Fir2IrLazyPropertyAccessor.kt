@@ -6,7 +6,6 @@
 package org.jetbrains.kotlin.fir.lazy
 
 import org.jetbrains.kotlin.fir.backend.*
-import org.jetbrains.kotlin.fir.backend.generators.generateOverriddenAccessorSymbols
 import org.jetbrains.kotlin.fir.declarations.FirCallableDeclaration
 import org.jetbrains.kotlin.fir.declarations.FirProperty
 import org.jetbrains.kotlin.fir.declarations.FirPropertyAccessor
@@ -99,7 +98,6 @@ class Fir2IrLazyPropertyAccessor(
                                 typeConverter, conversionTypeContext
                             ),
                             parent = this@Fir2IrLazyPropertyAccessor,
-                            firValueParameter = valueParameter,
                             name = valueParameter?.name,
                             isCrossinline = valueParameter?.isCrossinline == true,
                             isNoinline = valueParameter?.isNoinline == true

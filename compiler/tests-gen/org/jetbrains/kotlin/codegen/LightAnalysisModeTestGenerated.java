@@ -168,6 +168,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
             runTest("compiler/testData/codegen/box/annotations/fileClassWithFileAnnotation.kt");
         }
 
+        @TestMetadata("forwardReferenceOfConstVal.kt")
+        public void testForwardReferenceOfConstVal() throws Exception {
+            runTest("compiler/testData/codegen/box/annotations/forwardReferenceOfConstVal.kt");
+        }
+
         @TestMetadata("genericAnnotations.kt")
         public void testGenericAnnotations() throws Exception {
             runTest("compiler/testData/codegen/box/annotations/genericAnnotations.kt");

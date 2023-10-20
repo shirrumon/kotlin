@@ -7,9 +7,7 @@ package org.jetbrains.kotlin.fir.backend.generators
 
 import org.jetbrains.kotlin.fir.FirAnnotationContainer
 import org.jetbrains.kotlin.fir.backend.Fir2IrComponents
-import org.jetbrains.kotlin.fir.declarations.FirBackingField
-import org.jetbrains.kotlin.fir.declarations.FirProperty
-import org.jetbrains.kotlin.fir.declarations.FirValueParameter
+import org.jetbrains.kotlin.fir.declarations.*
 import org.jetbrains.kotlin.fir.expressions.FirAnnotation
 import org.jetbrains.kotlin.ir.declarations.*
 import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
@@ -32,19 +30,86 @@ class AnnotationGenerator(private val components: Fir2IrComponents) : Fir2IrComp
             callGenerator.convertToIrConstructorCall(it) as? IrConstructorCall
         }
 
-    fun generate(irContainer: IrMutableAnnotationContainer, firContainer: FirAnnotationContainer) {
+    fun generate(irClass: IrClass, firClass: FirClass) {
+        generateBase(irClass, firClass)
+        generateAnnotationsForTypeParameters(irClass, firClass)
+    }
+
+    fun generate(irTypeAlias: IrTypeAlias, firTypeAlias: FirTypeAlias) {
+        generateBase(irTypeAlias, firTypeAlias)
+        generateAnnotationsForTypeParameters(irTypeAlias, firTypeAlias)
+    }
+
+    fun generate(irEnumEntry: IrEnumEntry, firEnumEntry: FirEnumEntry) {
+        generateBase(irEnumEntry, firEnumEntry)
+    }
+
+    fun generate(irProperty: IrProperty, firProperty: FirProperty) {
+        generateBase(irProperty, firProperty)
+        firProperty.getter?.let { firGetter ->
+            irProperty.getter?.let { irGetter ->
+                generate(irGetter, firGetter)
+            }
+        }
+        firProperty.setter?.let { firSetter ->
+            irProperty.setter?.let { irSetter ->
+                generate(irSetter, firSetter)
+            }
+        }
+        firProperty.backingField?.let { firBackingField ->
+            irProperty.backingField?.let { generateBase(it, firBackingField) }
+        }
+    }
+
+    fun generate(irProperty: IrLocalDelegatedProperty, firProperty: FirProperty) {
+        generateBase(irProperty, firProperty)
+    }
+
+    fun generate(irFunction: IrFunction, firFunction: FirFunction) {
+        generateBase(irFunction, firFunction)
+        generateAnnotationsForValueParameters(irFunction, firFunction)
+        generateAnnotationsForTypeParameters(irFunction, firFunction)
+    }
+
+    fun generate(irField: IrField, firField: FirField) {
+        generateBase(irField, firField)
+    }
+
+    fun generate(irField: IrField, firField: FirBackingField) {
+        generateBase(irField, firField)
+    }
+
+    fun generate(irParameter: IrValueParameter, firParameter: FirReceiverParameter) {
+        generateBase(irParameter, firParameter)
+    }
+
+    fun generate(irParameter: IrValueParameter, firParameter: FirValueParameter) {
+        generateBase(irParameter, firParameter)
+    }
+
+    fun generate(irFile: IrFile, firFile: FirFile) {
+        generateBase(irFile, firFile)
+    }
+
+    fun generate(irVariable: IrVariable, firProperty: FirProperty) {
+        generateBase(irVariable, firProperty)
+    }
+
+    private fun generateBase(irContainer: IrMutableAnnotationContainer, firContainer: FirAnnotationContainer) {
         irContainer.annotations = firContainer.annotations.toIrAnnotations()
     }
 
-    fun generate(irValueParameter: IrValueParameter, firValueParameter: FirValueParameter) {
-        irValueParameter.annotations += firValueParameter.annotations.toIrAnnotations()
+    private fun generateAnnotationsForValueParameters(irFunction: IrFunction, firFunction: FirFunction) {
+        for ((irParameter, firParameter) in irFunction.valueParameters.zip(firFunction.valueParameters)) {
+            generate(irParameter, firParameter)
+        }
+        generateAnnotationsForTypeParameters(irFunction, firFunction)
     }
 
-    fun generate(irProperty: IrProperty, property: FirProperty) {
-        irProperty.annotations += property.annotations.toIrAnnotations()
-    }
-
-    fun generate(irField: IrField, backingField: FirBackingField) {
-        irField.annotations += backingField.annotations.toIrAnnotations()
+    private fun generateAnnotationsForTypeParameters(irDeclaration: IrTypeParametersContainer, firDeclaration: FirTypeParameterRefsOwner) {
+        for ((irParameter, firParameter) in irDeclaration.typeParameters.zip(firDeclaration.typeParameters)) {
+            if (firParameter !is FirTypeParameter) continue
+            generateBase(irParameter, firParameter)
+        }
     }
 }
