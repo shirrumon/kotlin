@@ -232,7 +232,7 @@ private class ExpectActualLinkCollector : IrElementVisitor<Unit, ExpectActualLin
         if (matched != null) {
             AbstractExpectActualChecker.checkSingleExpectTopLevelDeclarationAgainstPotentialActuals(
                 expectSymbol,
-                listOf(matched),
+                matched,
                 context,
             )
         }
