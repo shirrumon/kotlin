@@ -78,6 +78,7 @@ fun KGPBaseTest.project(
         enableGradleDebug = enableGradleDebug,
         environmentVariables = environmentVariables
     )
+    testProject.configureJvmMemory(memorySizeMb = 2048, metaspaceSizeMb = 512)
     addHeapDumpOptions.ifTrue { testProject.addHeapDumpOptions() }
     localRepoDir?.let { testProject.configureLocalRepository(localRepoDir) }
     if (buildJdk != null) testProject.setupNonDefaultJdk(buildJdk)
