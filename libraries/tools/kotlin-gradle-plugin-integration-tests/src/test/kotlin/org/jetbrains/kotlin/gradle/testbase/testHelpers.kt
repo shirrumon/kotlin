@@ -91,13 +91,16 @@ private fun TestProject.formatEnvironmentForScript(envCommand: String): String {
 /**
  *
  * Configures the JVM memory settings for the Gradle project.
- * @param memorySizeInGb The amount of memory to allocate to the JVM, in gigabytes.
+ * @param memorySizeMb The amount of memory to allocate to the JVM, in gigabytes.
  *                     Defaults to 1 gigabyte.
  */
-fun GradleProject.configureJvmMemory(memorySizeInGb: Number = 1) {
+fun GradleProject.configureJvmMemory(memorySizeMb: Number = 1024, metaspaceSizeMb: Number = 512) {
     addPropertyToGradleProperties(
         propertyName = "org.gradle.jvmargs",
-        mapOf("-Xmx" to "-Xmx${memorySizeInGb}g")
+        mapOf(
+            "-Xmx" to "-Xmx${memorySizeMb}m",
+            "-XX:MaxMetaspaceSize" to "-XX:MaxMetaspaceSize=${metaspaceSizeMb}m"
+        )
     )
 }
 
