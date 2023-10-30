@@ -82,12 +82,19 @@ internal class ExtTestCaseGroupProvider : TestCaseGroupProvider, TestDisposable(
                     timeouts = settings.get(),
                 )
 
-                if (extTestDataFile.isRelevant)
-                    testCases += extTestDataFile.createTestCase(
+                if (extTestDataFile.isRelevant) {
+                    val testCase = extTestDataFile.createTestCase(
                         settings = settings,
                         sharedModules = sharedModules
                     )
-                else
+
+                    val allModules = testCase.modules.flatMapTo(testCase.modules.toMutableSet()) { it.allDependencies }
+                    if (allModules.size == 1) {
+                        disabledTestCaseIds += TestCaseId.TestDataFile(testDataFile)
+                    } else {
+                        testCases += testCase
+                    }
+                } else
                     disabledTestCaseIds += TestCaseId.TestDataFile(testDataFile)
             }
 
@@ -196,7 +203,7 @@ private class ExtTestDataFile(
     fun createTestCase(settings: Settings, sharedModules: ThreadSafeCache<String, TestModule.Shared?>): TestCase {
         assertTrue(isRelevant)
 
-        val definitelyStandaloneTest = settings.get<ForcedStandaloneTestKind>().value
+        val definitelyStandaloneTest = true //settings.get<ForcedStandaloneTestKind>().value
         val isStandaloneTest = definitelyStandaloneTest || determineIfStandaloneTest()
         patchPackageNames(isStandaloneTest)
         patchFileLevelAnnotations()
