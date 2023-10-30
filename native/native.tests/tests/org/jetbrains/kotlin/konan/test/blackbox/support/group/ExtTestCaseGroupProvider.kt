@@ -88,11 +88,27 @@ internal class ExtTestCaseGroupProvider : TestCaseGroupProvider, TestDisposable(
                         sharedModules = sharedModules
                     )
 
-                    val allModules = testCase.modules.flatMapTo(testCase.modules.toMutableSet()) { it.allDependencies }
-                    if (allModules.size == 1) {
+                    val rootModules = testCase.rootModules
+                    if (rootModules.size != 1) {
+                        // strange test case w/o dependencies between modules
+                        // there are few such test cases, they test serialization of annotations in KLIBs -> can be skipped
                         disabledTestCaseIds += TestCaseId.TestDataFile(testDataFile)
                     } else {
-                        testCases += testCase
+                        val singleRootModule = rootModules.single()
+
+                        val allModules = buildSet {
+                            add(singleRootModule)
+                            addAll(singleRootModule.allDependencies)
+                            addAll(singleRootModule.allFriends)
+                            addAll(singleRootModule.allDependsOn)
+                        }
+
+                        if (allModules.size == 1) {
+                            // not interesting -> skip it
+                            disabledTestCaseIds += TestCaseId.TestDataFile(testDataFile)
+                        } else {
+                            testCases += testCase
+                        }
                     }
                 } else
                     disabledTestCaseIds += TestCaseId.TestDataFile(testDataFile)
