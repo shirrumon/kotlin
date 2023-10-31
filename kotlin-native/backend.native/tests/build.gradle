@@ -4111,6 +4111,10 @@ if (PlatformInfo.isAppleTarget(project)) {
         it.headers "$projectDir/interop/objc/overridabilityCondition/lib.h"
         it.extraOpts "-Xcompile-source", "$projectDir/interop/objc/overridabilityCondition/lib.m"
     }
+    createInterop("kt62920") {
+        it.defFile 'interop/objc/kt62920/objclib.def'
+        it.headers "$projectDir/interop/objc/kt62920/objclib.h"
+    }
 }
 
 createInterop("withSpaces") {
@@ -4957,6 +4961,12 @@ if (PlatformInfo.isAppleTarget(project)) {
         enabled = target.family != Family.WATCHOS
         source = 'interop/kt59167/main.kt'
         interop = 'kt59167'
+    }
+
+    // Works best with the aggressive scheduler.
+    interopTest("interop_kt62920") {
+        source = 'interop/objc/kt62920/main.kt'
+        interop = 'kt62920'
     }
 }
 
