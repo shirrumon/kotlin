@@ -1,6 +1,6 @@
 // ISSUE: KT-59355
 
-// MODULE: common
+// MODULE: m1-common
 internal expect open class Some {
     protected class ProtectedNested
     internal class InternalNested
@@ -15,7 +15,7 @@ internal expect open class Other {
     internal class InternalNested
 }
 
-// MODULE: platform-jvm()()(common)
+// MODULE: m2-jvm()()(m1-common)
 public actual open class Some { // should be allowed
     public class ProtectedNested  // should be allowed
     public class InternalNested // should be allowed
