@@ -211,6 +211,104 @@ internal class LibraryCompilation(
     dependencies = CategorizedDependencies(dependencies),
     expectedArtifact = expectedArtifact
 ) {
+//    init {
+//        check(this.dependencies.includedLibraries.isEmpty())
+//
+//        val allDependencies = buildSet {
+//            addAll(this@LibraryCompilation.dependencies.libraries)
+//            addAll(this@LibraryCompilation.dependencies.friends)
+//        }
+//        val allDependencyNames = allDependencies.map { it.klibFile.name }.sorted().joinToString("  |  ")
+//        val allDependenciesCount = allDependencies.size
+//
+//        val uniqueDependencies: Set<CompiledDependency<KLIB>> = run {
+//            val libraries = dependencies.mapNotNullTo(hashSetOf()) { dependency ->
+//                val compiledDependency = dependency as CompiledDependency
+//                @Suppress("UNCHECKED_CAST")
+//                compiledDependency.takeIf { compiledDependency.type is Library } as? CompiledDependency<KLIB>
+//            }
+//
+//            val friends: HashSet<CompiledDependency<KLIB>> = dependencies.mapNotNullTo(hashSetOf()) { dependency ->
+//                val compiledDependency = dependency as CompiledDependency
+//                @Suppress("UNCHECKED_CAST")
+//                compiledDependency.takeIf { compiledDependency.type is FriendLibrary } as? CompiledDependency<KLIB>
+//            }
+//
+//            friends.removeIf { friend ->
+//                libraries.any { library -> library.artifact == friend.artifact }
+//            }
+//            check(friends.isEmpty())
+//
+//            val all = libraries + friends
+//            all
+//        }
+//
+//        check(allDependenciesCount == uniqueDependencies.count()) {
+//            val message = "$allDependenciesCount != ${uniqueDependencies.count()}"
+//            message
+//        }
+//
+//        fun areDependenciesSelfInterdependent(first: CompiledDependency<KLIB>, second: CompiledDependency<KLIB>): Boolean {
+//            check(first != second)
+//
+//            val firstCompilation: LibraryCompilation = first.compilation as LibraryCompilation
+//            val firstArtifact: KLIB = first.artifact
+//            val secondCompilation: LibraryCompilation = second.compilation as LibraryCompilation
+//            val secondArtifact: KLIB = second.artifact
+//
+//            val areDependenciesSelfInterdependent = secondArtifact in firstCompilation.dependencies.libraries
+//                    || secondArtifact in firstCompilation.dependencies.friends
+//                    || firstArtifact in secondCompilation.dependencies.libraries
+//                    || firstArtifact in secondCompilation.dependencies.friends
+//
+//            return areDependenciesSelfInterdependent
+//        }
+//
+//        val areDependenciesSelfInterdependent = @Suppress("IntroduceWhenSubject") when {
+//            allDependenciesCount == 2 -> {
+//                val (first: CompiledDependency<KLIB>, second: CompiledDependency<KLIB>) = uniqueDependencies.toList()
+//
+//                val areDependenciesSelfInterdependent = areDependenciesSelfInterdependent(first, second)
+//
+//                areDependenciesSelfInterdependent
+//            }
+//            allDependenciesCount == 3 -> {
+//                val (first: CompiledDependency<KLIB>, second: CompiledDependency<KLIB>, third: CompiledDependency<KLIB>) = uniqueDependencies.toList()
+//
+//                val areDependenciesSelfInterdependent = areDependenciesSelfInterdependent(first, second)
+//                        || areDependenciesSelfInterdependent(first, third)
+//                        || areDependenciesSelfInterdependent(second, third)
+//
+//                areDependenciesSelfInterdependent
+//            }
+//            else -> false
+//        }
+//
+//        when {
+//            allDependenciesCount == 0 -> {
+//                print("")
+//            }
+//            allDependenciesCount == 1 -> {
+//                print("")
+//            }
+//            allDependenciesCount == 2 -> {
+//                if (areDependenciesSelfInterdependent) {
+//                    val message = "interdependent=$areDependenciesSelfInterdependent $allDependencyNames"
+//                    println(message)
+//                }
+//            }
+//            allDependenciesCount == 3 -> {
+//                if (areDependenciesSelfInterdependent) {
+//                    val message = "interdependent=$areDependenciesSelfInterdependent $allDependencyNames"
+//                    println(message)
+//                }
+//            }
+//            else -> {
+//                print("")
+//            }
+//        }
+//    }
+
     override val binaryOptions get() = BinaryOptions.RuntimeAssertionsMode.defaultForTesting
 
     override fun applySpecificArgs(argsBuilder: ArgsBuilder) = with(argsBuilder) {
