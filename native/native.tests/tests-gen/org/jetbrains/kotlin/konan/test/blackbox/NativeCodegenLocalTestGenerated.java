@@ -299,6 +299,30 @@ public class NativeCodegenLocalTestGenerated extends AbstractNativeCodegenBoxTes
         }
 
         @Test
+        @TestMetadata("unchecked_cast5.kt")
+        public void testUnchecked_cast5() throws Exception {
+            runTest("native/native.tests/testData/codegen/basics/unchecked_cast5.kt");
+        }
+
+        @Test
+        @TestMetadata("unchecked_cast6.kt")
+        public void testUnchecked_cast6() throws Exception {
+            runTest("native/native.tests/testData/codegen/basics/unchecked_cast6.kt");
+        }
+
+        @Test
+        @TestMetadata("unchecked_cast7.kt")
+        public void testUnchecked_cast7() throws Exception {
+            runTest("native/native.tests/testData/codegen/basics/unchecked_cast7.kt");
+        }
+
+        @Test
+        @TestMetadata("unchecked_cast8.kt")
+        public void testUnchecked_cast8() throws Exception {
+            runTest("native/native.tests/testData/codegen/basics/unchecked_cast8.kt");
+        }
+
+        @Test
         @TestMetadata("unit1.kt")
         public void testUnit1() throws Exception {
             runTest("native/native.tests/testData/codegen/basics/unit1.kt");
