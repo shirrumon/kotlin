@@ -274,6 +274,9 @@ kotlin {
         }
         all {
             kotlin.setSrcDirs(emptyList<File>())
+            languageSettings {
+                languageVersion = "2.0"
+            }
         }
         commonMain {
             val prepareCommonSources by tasks.registering {
@@ -568,6 +571,8 @@ kotlin {
                 if (this@sourceSet.name.endsWith("Test")) {
                     commonTestOptIns.forEach { optIn(it) }
                 }
+
+                languageVersion = "2.0"
             }
         }
     }
