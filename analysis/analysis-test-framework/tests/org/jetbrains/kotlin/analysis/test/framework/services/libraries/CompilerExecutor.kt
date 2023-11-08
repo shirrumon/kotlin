@@ -52,7 +52,6 @@ internal object CompilerExecutor {
             }
             CompilerKind.JS -> {
                 val commands = buildList {
-                    add(K2JSCompilerArguments::metaInfo.cliArgument)
                     add(K2JSCompilerArguments::moduleName.cliArgument); add("library")
                     add(K2JSCompilerArguments::outputDir.cliArgument); add(library.parent.absolutePathString())
                     add(K2JSCompilerArguments::irProduceKlibFile.cliArgument)
