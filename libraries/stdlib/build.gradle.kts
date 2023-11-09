@@ -11,9 +11,7 @@ import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.targets.js.dsl.KotlinTargetWithNodeJsDsl
 import org.jetbrains.kotlin.gradle.targets.js.dsl.KotlinWasmTargetDsl
 import org.jetbrains.kotlin.gradle.targets.js.ir.KotlinJsIrLink
-import org.jetbrains.kotlin.gradle.tasks.AbstractKotlinCompile
-import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
-import org.jetbrains.kotlin.gradle.tasks.UsesKotlinJavaToolchain
+import org.jetbrains.kotlin.gradle.tasks.*
 import plugins.configureDefaultPublishing
 import plugins.configureKotlinPomAttributes
 import kotlin.io.path.copyTo
@@ -786,9 +784,21 @@ tasks {
     }
 
     // Fail issues: KT-63341, KT-61184
-    withType<KotlinJvmCompile>().configureEach {
-        compilerOptions.languageVersion.set(KotlinVersion.KOTLIN_2_0)
-    }
+//    withType<KotlinJvmCompile>().configureEach {
+//        compilerOptions.languageVersion.set(KotlinVersion.KOTLIN_2_0)
+//    }
+
+    // Fail issues: KT-60508
+//    withType<Kotlin2JsCompile>().configureEach {
+//        compilerOptions.languageVersion.set(KotlinVersion.KOTLIN_2_0)
+//    }
+
+    // :kotlin-stdlib:compileKotlinWasmJs
+    // :kotlin-stdlib:compileKotlinWasmWasi
+    // Fail issues: KT-60508
+//    withType<KotlinCompilationTask<*>>().configureEach {
+//        compilerOptions.languageVersion.set(KotlinVersion.KOTLIN_2_0)
+//    }
 
 }
 
