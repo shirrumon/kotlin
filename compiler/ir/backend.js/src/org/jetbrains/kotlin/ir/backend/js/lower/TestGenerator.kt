@@ -14,6 +14,7 @@ import org.jetbrains.kotlin.ir.UNDEFINED_OFFSET
 import org.jetbrains.kotlin.ir.backend.js.JsCommonBackendContext
 import org.jetbrains.kotlin.ir.backend.js.JsIrBackendContext
 import org.jetbrains.kotlin.ir.backend.js.ir.JsIrBuilder
+import org.jetbrains.kotlin.ir.backend.js.utils.getSingleConstStringArgument
 import org.jetbrains.kotlin.ir.builders.declarations.buildFun
 import org.jetbrains.kotlin.ir.builders.irCall
 import org.jetbrains.kotlin.ir.builders.irString
@@ -23,9 +24,12 @@ import org.jetbrains.kotlin.ir.expressions.IrExpression
 import org.jetbrains.kotlin.ir.expressions.impl.IrConstructorCallImpl
 import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
 import org.jetbrains.kotlin.ir.types.IrSimpleType
+import org.jetbrains.kotlin.ir.types.classOrNull
 import org.jetbrains.kotlin.ir.types.impl.IrSimpleTypeImpl
+import org.jetbrains.kotlin.ir.types.isStrictSubtypeOfClass
 import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.name.FqName
+import org.jetbrains.kotlin.name.JsStandardClassIds
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.utils.filterIsInstanceAnd
 import org.jetbrains.kotlin.utils.findIsInstanceAnd
@@ -176,7 +180,7 @@ class TestGenerator(val context: JsCommonBackendContext, val groupByPackage: Boo
             return
         }
 
-        if (context is JsIrBackendContext && (testFun.returnType as? IrSimpleType)?.classifier == context.intrinsics.promiseClassSymbol) {
+        if (context is JsIrBackendContext && (testFun.returnType as? IrSimpleType)?.isJsPromiseOrJsPromiseLike() == true) {
             val finally = context.intrinsics.promiseClassSymbol.owner.declarations
                 .findIsInstanceAnd<IrSimpleFunction> { it.name.asString() == "finally" }!!
 
@@ -258,4 +262,24 @@ class TestGenerator(val context: JsCommonBackendContext, val groupByPackage: Boo
 
     private fun IrAnnotationContainer.hasAnnotation(fqName: String) =
         annotations.any { it.symbol.owner.fqNameWhenAvailable?.parent()?.asString() == fqName }
+
+    // JS promise-like == external @JsName(Promise) or inherited from Promise
+    private fun IrSimpleType.isJsPromiseOrJsPromiseLike(): Boolean {
+        if (context !is JsIrBackendContext) return false
+
+        if (classifier == context.intrinsics.promiseClassSymbol) return true
+        if (classifier.isStrictSubtypeOfClass(context.intrinsics.promiseClassSymbol)) return true
+
+        val clazz = classOrNull?.owner ?: return false
+
+        if (clazz.isExternal) {
+            val jsNameAnno = clazz.annotations.singleOrNull { it.isAnnotationWithEqualFqName(jsNameAnnoFqName) } ?: return false
+
+            return "Promise" == jsNameAnno.getSingleConstStringArgument()
+        }
+
+        return false
+    }
+
+    private val jsNameAnnoFqName: FqName = JsStandardClassIds.Annotations.JsName.asSingleFqName()
 }
