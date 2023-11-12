@@ -46644,6 +46644,12 @@ public class LLFirReversedBlackBoxCodegenBasedTestGenerated extends AbstractLLFi
             }
 
             @Test
+            @TestMetadata("brokenDefaultParametersFromDifferentFunctions.kt")
+            public void testBrokenDefaultParametersFromDifferentFunctions() throws Exception {
+                runTest("compiler/testData/codegen/box/reflection/callBy/brokenDefaultParametersFromDifferentFunctions.kt");
+            }
+
+            @Test
             @TestMetadata("companionObject.kt")
             public void testCompanionObject() throws Exception {
                 runTest("compiler/testData/codegen/box/reflection/callBy/companionObject.kt");
