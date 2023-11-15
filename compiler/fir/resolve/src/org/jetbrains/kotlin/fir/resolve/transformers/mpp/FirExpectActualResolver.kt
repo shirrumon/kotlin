@@ -59,7 +59,7 @@ object FirExpectActualResolver {
                         }
                     }
                     candidates.filter { expectSymbol ->
-                        actualSymbol != expectSymbol && expectSymbol.isExpect
+                        actualSymbol != expectSymbol
                     }.groupBy { expectDeclaration ->
                         AbstractExpectActualMatcher.getCallablesMatchingCompatibility(
                             expectDeclaration,
