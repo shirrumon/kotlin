@@ -40,7 +40,7 @@ import org.jetbrains.kotlin.utils.zipIfSizesAreEqual
 
 class FirExpectActualMatchingContextImpl private constructor(
     private val actualSession: FirSession,
-    private val actualScopeSession: ScopeSession,
+    private val actualScopeSession: ScopeSession, // todo review usages
     private val allowedWritingMemberExpectForActualMapping: Boolean,
 ) : FirExpectActualMatchingContext, TypeSystemContext by actualSession.typeContext {
     override val shouldCheckDefaultParams: Boolean
