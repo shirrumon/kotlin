@@ -42,7 +42,7 @@ class CachedLibraries(
         autoCacheDirectory: File,
         autoCacheableFrom: List<File>
 ) {
-    enum class Kind { DYNAMIC, STATIC }
+    enum class Kind { DYNAMIC, STATIC, HEADER }
 
     sealed class Cache(protected val target: KonanTarget, val kind: Kind, val path: String, val rootDirectory: String) {
         val bitcodeDependencies by lazy { computeBitcodeDependencies() }
@@ -60,6 +60,7 @@ class CachedLibraries(
         protected fun Kind.toCompilerOutputKind(): CompilerOutputKind = when (this) {
             Kind.DYNAMIC -> CompilerOutputKind.DYNAMIC_CACHE
             Kind.STATIC -> CompilerOutputKind.STATIC_CACHE
+            Kind.HEADER -> CompilerOutputKind.HEADER_CACHE
         }
 
         class Monolithic(target: KonanTarget, kind: Kind, path: String)
@@ -161,6 +162,7 @@ class CachedLibraries(
         val baseName = getCachedLibraryName(library)
         val dynamicFile = cacheBinaryPartDir.child(getArtifactName(target, baseName, CompilerOutputKind.DYNAMIC_CACHE))
         val staticFile = cacheBinaryPartDir.child(getArtifactName(target, baseName, CompilerOutputKind.STATIC_CACHE))
+        val headerFile = cacheBinaryPartDir.child(getArtifactName(target, baseName, CompilerOutputKind.HEADER_CACHE))
 
         if (dynamicFile.absolutePath in cacheBinaryPartDirContents && staticFile.absolutePath in cacheBinaryPartDirContents)
             error("Both dynamic and static caches files cannot be in the same directory." +
@@ -168,6 +170,7 @@ class CachedLibraries(
         return when {
             dynamicFile.absolutePath in cacheBinaryPartDirContents -> Cache.Monolithic(target, Kind.DYNAMIC, dynamicFile.absolutePath)
             staticFile.absolutePath in cacheBinaryPartDirContents -> Cache.Monolithic(target, Kind.STATIC, staticFile.absolutePath)
+            headerFile.absolutePath in cacheBinaryPartDirContents -> Cache.Monolithic(target, Kind.HEADER, headerFile.absolutePath)
             else -> {
                 val libraryFileDirs = librariesFileDirs.getOrPut(library) {
                     library.getFilesWithFqNames().map { cacheDir.child(CacheSupport.cacheFileId(it.fqName, it.filePath)) }
@@ -213,14 +216,14 @@ class CachedLibraries(
     val hasStaticCaches = allCaches.values.any {
         when (it.kind) {
             Kind.STATIC -> true
-            Kind.DYNAMIC -> false
+            else -> false
         }
     }
 
     val hasDynamicCaches = allCaches.values.any {
         when (it.kind) {
-            Kind.STATIC -> false
             Kind.DYNAMIC -> true
+            else -> false
         }
     }
 
