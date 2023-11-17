@@ -84,7 +84,7 @@ FILE: [ResolvedTo(RAW_FIR)] KotlinAnnotation.kt
 
 EXPECT_ACTUAL_MATCHING:
 FILE: [ResolvedTo(IMPORTS)] main.kt
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun resolveMe([ResolvedTo(EXPECT_ACTUAL_MATCHING)] i: R|JavaInterface|): <implicit> { LAZY_BLOCK }
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun resolveMe([ResolvedTo(EXPECT_ACTUAL_MATCHING)] i: R|JavaInterface|): <implicit> { LAZY_BLOCK }
 
 FILE: [ResolvedTo(RAW_FIR)] KotlinAnnotation.kt
     @Target[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] annotation class KotlinAnnotation : R|kotlin/Annotation| {
@@ -96,7 +96,7 @@ FILE: [ResolvedTo(RAW_FIR)] KotlinAnnotation.kt
 
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] main.kt
-    public final [ResolvedTo(CONTRACTS)] fun resolveMe([ResolvedTo(CONTRACTS)] i: R|JavaInterface|): <implicit> { LAZY_BLOCK }
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun resolveMe([ResolvedTo(CONTRACTS)] i: R|JavaInterface|): <implicit> { LAZY_BLOCK }
 
 FILE: [ResolvedTo(RAW_FIR)] KotlinAnnotation.kt
     @Target[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] annotation class KotlinAnnotation : R|kotlin/Annotation| {
@@ -108,7 +108,7 @@ FILE: [ResolvedTo(RAW_FIR)] KotlinAnnotation.kt
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] main.kt
-    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun resolveMe([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] i: R|JavaInterface|): R|@R|KotlinAnnotation|()  kotlin/Int| {
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] i: R|JavaInterface|): R|@R|KotlinAnnotation|()  kotlin/Int| {
         ^resolveMe R|<local>/i|.R|/JavaInterface.id|
     }
 
@@ -122,7 +122,7 @@ FILE: [ResolvedTo(RAW_FIR)] KotlinAnnotation.kt
 
 ANNOTATION_ARGUMENTS:
 FILE: [ResolvedTo(IMPORTS)] main.kt
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] fun resolveMe([ResolvedTo(ANNOTATION_ARGUMENTS)] i: R|JavaInterface|): R|@R|KotlinAnnotation|()  kotlin/Int| {
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun resolveMe([ResolvedTo(ANNOTATION_ARGUMENTS)] i: R|JavaInterface|): R|@R|KotlinAnnotation|()  kotlin/Int| {
         ^resolveMe R|<local>/i|.R|/JavaInterface.id|
     }
 
@@ -136,7 +136,7 @@ FILE: [ResolvedTo(RAW_FIR)] KotlinAnnotation.kt
 
 BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] main.kt
-    public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe([ResolvedTo(BODY_RESOLVE)] i: R|JavaInterface|): R|@R|KotlinAnnotation|()  kotlin/Int| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe([ResolvedTo(BODY_RESOLVE)] i: R|JavaInterface|): R|@R|KotlinAnnotation|()  kotlin/Int| {
         ^resolveMe R|<local>/i|.R|/JavaInterface.id|
     }
 
@@ -150,6 +150,6 @@ FILE: [ResolvedTo(RAW_FIR)] KotlinAnnotation.kt
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] main.kt
-    public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe([ResolvedTo(BODY_RESOLVE)] i: R|JavaInterface|): R|@R|KotlinAnnotation|()  kotlin/Int| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe([ResolvedTo(BODY_RESOLVE)] i: R|JavaInterface|): R|@R|KotlinAnnotation|()  kotlin/Int| {
         ^resolveMe R|<local>/i|.R|/JavaInterface.id|
     }

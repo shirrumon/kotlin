@@ -67,7 +67,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithWhere.kt
     }
     public? final? [ResolvedTo(RAW_FIR)] interface Two : R|kotlin/Any| {
     }
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] val <[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T : R|One|, R|Two|> R|T|.foo: <implicit>
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] val <[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T : R|One|, R|Two|> R|T|.foo: <implicit>
         public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] get(): <implicit> { LAZY_BLOCK }
 
 CONTRACTS:
@@ -76,7 +76,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithWhere.kt
     }
     public? final? [ResolvedTo(RAW_FIR)] interface Two : R|kotlin/Any| {
     }
-    public final [ResolvedTo(CONTRACTS)] val <[ResolvedTo(CONTRACTS)] T : R|One|, R|Two|> R|T|.foo: <implicit>
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] val <[ResolvedTo(CONTRACTS)] T : R|One|, R|Two|> R|T|.foo: <implicit>
         public [ResolvedTo(CONTRACTS)] get(): <implicit> {
             ^ this#
         }
@@ -87,7 +87,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithWhere.kt
     }
     public abstract [ResolvedTo(STATUS)] interface Two : R|kotlin/Any| {
     }
-    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val <[ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] T : R|One|, R|Two|> R|T|.foo: R|T|
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val <[ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] T : R|One|, R|Two|> R|T|.foo: R|T|
         public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|T| {
             ^ this@R|/foo|
         }
@@ -98,7 +98,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithWhere.kt
     }
     public abstract [ResolvedTo(STATUS)] interface Two : R|kotlin/Any| {
     }
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] val <[ResolvedTo(ANNOTATION_ARGUMENTS)] T : R|One|, R|Two|> R|T|.foo: R|T|
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] val <[ResolvedTo(ANNOTATION_ARGUMENTS)] T : R|One|, R|Two|> R|T|.foo: R|T|
         public [ResolvedTo(ANNOTATION_ARGUMENTS)] get(): R|T| {
             ^ this@R|/foo|
         }
@@ -109,18 +109,18 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithWhere.kt
     }
     public abstract [ResolvedTo(STATUS)] interface Two : R|kotlin/Any| {
     }
-    public final [ResolvedTo(BODY_RESOLVE)] val <[ResolvedTo(BODY_RESOLVE)] T : R|One|, R|Two|> R|T|.foo: R|T|
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val <[ResolvedTo(BODY_RESOLVE)] T : R|One|, R|Two|> R|T|.foo: R|T|
         public [ResolvedTo(BODY_RESOLVE)] get(): R|T| {
             ^ this@R|/foo|
         }
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] propertyWithWhere.kt
-    public abstract [ResolvedTo(BODY_RESOLVE)] interface One : R|kotlin/Any| {
+    public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface One : R|kotlin/Any| {
     }
-    public abstract [ResolvedTo(BODY_RESOLVE)] interface Two : R|kotlin/Any| {
+    public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface Two : R|kotlin/Any| {
     }
-    public final [ResolvedTo(BODY_RESOLVE)] val <[ResolvedTo(BODY_RESOLVE)] T : R|One|, R|Two|> R|T|.foo: R|T|
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val <[ResolvedTo(BODY_RESOLVE)] T : R|One|, R|Two|> R|T|.foo: R|T|
         public [ResolvedTo(BODY_RESOLVE)] get(): R|T| {
             ^ this@R|/foo|
         }

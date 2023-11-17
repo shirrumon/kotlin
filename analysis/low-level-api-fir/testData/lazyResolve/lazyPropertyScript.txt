@@ -272,7 +272,7 @@ FILE: [ResolvedTo(IMPORTS)] lazyPropertyScript.kts
                 LAZY_super<R|kotlin/Any|>
             }
 
-            public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] val resolveMe: R|kotlin/String|by LAZY_EXPRESSION
+            public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] val resolveMe: R|kotlin/String|by LAZY_EXPRESSION
                 public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=Test] get(): R|kotlin/String| { LAZY_BLOCK }
 
         }
@@ -307,7 +307,7 @@ FILE: [ResolvedTo(IMPORTS)] lazyPropertyScript.kts
                 LAZY_super<R|kotlin/Any|>
             }
 
-            public final [ResolvedTo(CONTRACTS)] val resolveMe: R|kotlin/String|by LAZY_EXPRESSION
+            public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] val resolveMe: R|kotlin/String|by LAZY_EXPRESSION
                 public [ResolvedTo(CONTRACTS)] [ContainingClassKey=Test] get(): R|kotlin/String| { LAZY_BLOCK }
 
         }
@@ -342,7 +342,7 @@ FILE: [ResolvedTo(IMPORTS)] lazyPropertyScript.kts
                 LAZY_super<R|kotlin/Any|>
             }
 
-            public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val resolveMe: R|kotlin/String|by LAZY_EXPRESSION
+            public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val resolveMe: R|kotlin/String|by LAZY_EXPRESSION
                 public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=Test] get(): R|kotlin/String| { LAZY_BLOCK }
 
         }
@@ -377,7 +377,7 @@ FILE: [ResolvedTo(IMPORTS)] lazyPropertyScript.kts
                 LAZY_super<R|kotlin/Any|>
             }
 
-            public final [ResolvedTo(ANNOTATION_ARGUMENTS)] val resolveMe: R|kotlin/String|by LAZY_EXPRESSION
+            public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] val resolveMe: R|kotlin/String|by LAZY_EXPRESSION
                 public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=Test] get(): R|kotlin/String| { LAZY_BLOCK }
 
         }
@@ -397,19 +397,19 @@ FILE: [ResolvedTo(IMPORTS)] lazyPropertyScript.kts
             public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] val value: R|T| = R|<local>/value|
                 public [ResolvedTo(STATUS)] [ContainingClassKey=LazyDelegate] get(): R|T|
 
-            public final operator [ResolvedTo(CONTRACTS)] fun getValue([ResolvedTo(CONTRACTS)] thisRef: R|kotlin/Any?|, [ResolvedTo(CONTRACTS)] property: R|kotlin/reflect/KProperty<*>|): R|T| {
+            public final operator [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun getValue([ResolvedTo(CONTRACTS)] thisRef: R|kotlin/Any?|, [ResolvedTo(CONTRACTS)] property: R|kotlin/reflect/KProperty<*>|): R|T| {
                 ^getValue value#
             }
 
         }
 
-        public final [ResolvedTo(CONTRACTS)] fun <[ResolvedTo(CONTRACTS)] T> lazy([ResolvedTo(CONTRACTS)] block: R|() -> T|): R|LazyDelegate<T>| {
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(CONTRACTS)] T> lazy([ResolvedTo(CONTRACTS)] block: R|() -> T|): R|LazyDelegate<T>| {
             ^lazy LazyDelegate#(block#())
         }
 
         public? final? [ResolvedTo(RAW_FIR)] fun getAny(): Any? { LAZY_BLOCK }
 
-        public final [ResolvedTo(CONTRACTS)] fun <[ResolvedTo(CONTRACTS)] Q> materialize(): R|Q| {
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(CONTRACTS)] Q> materialize(): R|Q| {
             ^materialize Null(null)!!
         }
 
@@ -418,7 +418,7 @@ FILE: [ResolvedTo(IMPORTS)] lazyPropertyScript.kts
                 LAZY_super<R|kotlin/Any|>
             }
 
-            public final [ResolvedTo(BODY_RESOLVE)] val resolveMe: R|kotlin/String|by R|/lazy|<R|kotlin/String|>(<L> = [ResolvedTo(BODY_RESOLVE)] [MatchingParameterFunctionTypeKey=kotlin/Function0<T>] lazy@fun <anonymous>(): R|kotlin/String| <inline=NoInline>  {
+            public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val resolveMe: R|kotlin/String|by R|/lazy|<R|kotlin/String|>(<L> = [ResolvedTo(BODY_RESOLVE)] [MatchingParameterFunctionTypeKey=kotlin/Function0<T>] lazy@fun <anonymous>(): R|kotlin/String| <inline=NoInline>  {
                 ^ R|/materialize|<R|kotlin/String|>()
             }
             )
@@ -435,38 +435,38 @@ FILE: [ResolvedTo(BODY_RESOLVE)] lazyPropertyScript.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-lazyPropertyScript.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] class LazyDelegate<[ResolvedTo(BODY_RESOLVE)] T> : R|kotlin/Any| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=LazyDelegate] constructor<[ResolvedTo(BODY_RESOLVE)] T>([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/LazyDelegate.value] value: R|T|): R|LazyDelegate<T>| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class LazyDelegate<[ResolvedTo(BODY_RESOLVE)] T> : R|kotlin/Any| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=LazyDelegate, ExpectForActualAttributeKey={}] constructor<[ResolvedTo(BODY_RESOLVE)] T>([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/LazyDelegate.value] value: R|T|): R|LazyDelegate<T>| {
                 super<R|kotlin/Any|>()
             }
 
-            public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val value: R|T| = R|<local>/value|
+            public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val value: R|T| = R|<local>/value|
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=LazyDelegate] get(): R|T|
 
-            public final operator [ResolvedTo(BODY_RESOLVE)] fun getValue([ResolvedTo(BODY_RESOLVE)] thisRef: R|kotlin/Any?|, [ResolvedTo(BODY_RESOLVE)] property: R|kotlin/reflect/KProperty<*>|): R|T| {
+            public final operator [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun getValue([ResolvedTo(BODY_RESOLVE)] thisRef: R|kotlin/Any?|, [ResolvedTo(BODY_RESOLVE)] property: R|kotlin/reflect/KProperty<*>|): R|T| {
                 ^getValue this@R|/LazyDelegate|.R|/LazyDelegate.value|
             }
 
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun <[ResolvedTo(BODY_RESOLVE)] T> lazy([ResolvedTo(BODY_RESOLVE)] block: R|() -> T|): R|LazyDelegate<T>| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(BODY_RESOLVE)] T> lazy([ResolvedTo(BODY_RESOLVE)] block: R|() -> T|): R|LazyDelegate<T>| {
             ^lazy R|SubstitutionOverride</LazyDelegate.LazyDelegate>|<R|T|>(R|<local>/block|.R|SubstitutionOverride<kotlin/Function0.invoke: R|T|>|())
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun getAny(): R|kotlin/Any?| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun getAny(): R|kotlin/Any?| {
             ^getAny Null(null)
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun <[ResolvedTo(BODY_RESOLVE)] Q> materialize(): R|Q| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(BODY_RESOLVE)] Q> materialize(): R|Q| {
             ^materialize Null(null)!!
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] class Test : R|kotlin/Any| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Test] constructor(): R|Test| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class Test : R|kotlin/Any| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Test, ExpectForActualAttributeKey={}] constructor(): R|Test| {
                 super<R|kotlin/Any|>()
             }
 
-            public final [ResolvedTo(BODY_RESOLVE)] val resolveMe: R|kotlin/String|by R|/lazy|<R|kotlin/String|>(<L> = [ResolvedTo(BODY_RESOLVE)] [MatchingParameterFunctionTypeKey=kotlin/Function0<T>] lazy@fun <anonymous>(): R|kotlin/String| <inline=NoInline>  {
+            public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val resolveMe: R|kotlin/String|by R|/lazy|<R|kotlin/String|>(<L> = [ResolvedTo(BODY_RESOLVE)] [MatchingParameterFunctionTypeKey=kotlin/Function0<T>] lazy@fun <anonymous>(): R|kotlin/String| <inline=NoInline>  {
                 ^ R|/materialize|<R|kotlin/String|>()
             }
             )
@@ -475,4 +475,3 @@ FILE: [ResolvedTo(BODY_RESOLVE)] lazyPropertyScript.kts
                 }
 
         }
-

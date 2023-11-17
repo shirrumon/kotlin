@@ -249,7 +249,7 @@ FILE: [ResolvedTo(IMPORTS)] superTypesLoopScript.kts
     SCRIPT: [ResolvedTo(RAW_FIR)] <script-superTypesLoopScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public open [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class resolveMe : R|C| {
+        public open [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class resolveMe : R|C| {
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=resolveMe] constructor(): R|resolveMe| {
                 LAZY_super<C>
             }
@@ -284,7 +284,7 @@ FILE: [ResolvedTo(IMPORTS)] superTypesLoopScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-superTypesLoopScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public open [ResolvedTo(CONTRACTS)] class resolveMe : R|C| {
+        public open [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] class resolveMe : R|C| {
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=resolveMe] constructor(): R|resolveMe| {
                 LAZY_super<C>
             }
@@ -319,7 +319,7 @@ FILE: [ResolvedTo(IMPORTS)] superTypesLoopScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-superTypesLoopScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public open [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] class resolveMe : R|C| {
+        public open [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class resolveMe : R|C| {
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=resolveMe] constructor(): R|resolveMe| {
                 LAZY_super<C>
             }
@@ -354,7 +354,7 @@ FILE: [ResolvedTo(IMPORTS)] superTypesLoopScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-superTypesLoopScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public open [ResolvedTo(ANNOTATION_ARGUMENTS)] class resolveMe : R|C| {
+        public open [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] class resolveMe : R|C| {
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=resolveMe] constructor(): R|resolveMe| {
                 LAZY_super<C>
             }
@@ -389,8 +389,8 @@ FILE: [ResolvedTo(IMPORTS)] superTypesLoopScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-superTypesLoopScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public open [ResolvedTo(BODY_RESOLVE)] class resolveMe : R|C| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=resolveMe] constructor(): R|resolveMe| {
+        public open [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class resolveMe : R|C| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=resolveMe, ExpectForActualAttributeKey={}] constructor(): R|resolveMe| {
                 super<R|C|>()
             }
 
@@ -424,29 +424,29 @@ FILE: [ResolvedTo(BODY_RESOLVE)] superTypesLoopScript.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-superTypesLoopScript.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public open [ResolvedTo(BODY_RESOLVE)] class resolveMe : R|C| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=resolveMe] constructor(): R|resolveMe| {
+        public open [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class resolveMe : R|C| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=resolveMe, ExpectForActualAttributeKey={}] constructor(): R|resolveMe| {
                 super<R|C|>()
             }
 
         }
 
-        public open [ResolvedTo(BODY_RESOLVE)] class A : <ERROR TYPE REF: Loop in supertype: /A -> /B> {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=A] constructor(): R|A| {
+        public open [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class A : <ERROR TYPE REF: Loop in supertype: /A -> /B> {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=A, ExpectForActualAttributeKey={}] constructor(): R|A| {
                 super<R|B|>()
             }
 
         }
 
-        public open [ResolvedTo(BODY_RESOLVE)] class B : <ERROR TYPE REF: Loop in supertype: /B -> /C> {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=B] constructor(): R|B| {
+        public open [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class B : <ERROR TYPE REF: Loop in supertype: /B -> /C> {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=B, ExpectForActualAttributeKey={}] constructor(): R|B| {
                 super<R|C|>()
             }
 
         }
 
-        public open [ResolvedTo(BODY_RESOLVE)] class C : <ERROR TYPE REF: Loop in supertype: /C -> /A> {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=C] constructor(): R|C| {
+        public open [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class C : <ERROR TYPE REF: Loop in supertype: /C -> /A> {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=C, ExpectForActualAttributeKey={}] constructor(): R|C| {
                 super<R|A|>()
             }
 

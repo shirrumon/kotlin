@@ -224,7 +224,7 @@ FILE: [ResolvedTo(IMPORTS)] simpleLoopInOverrideScript.kts
         public abstract [ResolvedTo(STATUS)] interface Foo1 : <ERROR TYPE REF: Loop in supertype: /Foo1 -> /Foo2> {
             public abstract override [ResolvedTo(STATUS)] fun foo(): R|kotlin/Unit|
 
-            public abstract override [ResolvedTo(EXPECT_ACTUAL_MATCHING)] val str: R|kotlin/String|
+            public abstract override [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] val str: R|kotlin/String|
                 public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=Foo1] get(): R|kotlin/String|
 
         }
@@ -255,7 +255,7 @@ FILE: [ResolvedTo(IMPORTS)] simpleLoopInOverrideScript.kts
         public abstract [ResolvedTo(STATUS)] interface Foo1 : <ERROR TYPE REF: Loop in supertype: /Foo1 -> /Foo2> {
             public abstract override [ResolvedTo(STATUS)] fun foo(): R|kotlin/Unit|
 
-            public abstract override [ResolvedTo(CONTRACTS)] val str: R|kotlin/String|
+            public abstract override [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] val str: R|kotlin/String|
                 public [ResolvedTo(CONTRACTS)] [ContainingClassKey=Foo1] get(): R|kotlin/String|
 
         }
@@ -286,7 +286,7 @@ FILE: [ResolvedTo(IMPORTS)] simpleLoopInOverrideScript.kts
         public abstract [ResolvedTo(STATUS)] interface Foo1 : <ERROR TYPE REF: Loop in supertype: /Foo1 -> /Foo2> {
             public abstract override [ResolvedTo(STATUS)] fun foo(): R|kotlin/Unit|
 
-            public abstract override [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val str: R|kotlin/String|
+            public abstract override [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val str: R|kotlin/String|
                 public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=Foo1] get(): R|kotlin/String|
 
         }
@@ -317,7 +317,7 @@ FILE: [ResolvedTo(IMPORTS)] simpleLoopInOverrideScript.kts
         public abstract [ResolvedTo(STATUS)] interface Foo1 : <ERROR TYPE REF: Loop in supertype: /Foo1 -> /Foo2> {
             public abstract override [ResolvedTo(STATUS)] fun foo(): R|kotlin/Unit|
 
-            public abstract override [ResolvedTo(ANNOTATION_ARGUMENTS)] val str: R|kotlin/String|
+            public abstract override [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] val str: R|kotlin/String|
                 public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=Foo1] get(): R|kotlin/String|
 
         }
@@ -348,7 +348,7 @@ FILE: [ResolvedTo(IMPORTS)] simpleLoopInOverrideScript.kts
         public abstract [ResolvedTo(STATUS)] interface Foo1 : <ERROR TYPE REF: Loop in supertype: /Foo1 -> /Foo2> {
             public abstract override [ResolvedTo(STATUS)] fun foo(): R|kotlin/Unit|
 
-            public abstract override [ResolvedTo(BODY_RESOLVE)] val str: R|kotlin/String|
+            public abstract override [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val str: R|kotlin/String|
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Foo1] get(): R|kotlin/String|
 
         }
@@ -376,26 +376,26 @@ FILE: [ResolvedTo(BODY_RESOLVE)] simpleLoopInOverrideScript.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-simpleLoopInOverrideScript.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] interface Foo1 : <ERROR TYPE REF: Loop in supertype: /Foo1 -> /Foo2> {
-            public abstract override [ResolvedTo(BODY_RESOLVE)] fun foo(): R|kotlin/Unit|
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface Foo1 : <ERROR TYPE REF: Loop in supertype: /Foo1 -> /Foo2> {
+            public abstract override [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo(): R|kotlin/Unit|
 
-            public abstract override [ResolvedTo(BODY_RESOLVE)] val str: R|kotlin/String|
+            public abstract override [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val str: R|kotlin/String|
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Foo1] get(): R|kotlin/String|
 
         }
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] interface Foo2 : <ERROR TYPE REF: Loop in supertype: /Foo2 -> /Foo3> {
-            public abstract override [ResolvedTo(BODY_RESOLVE)] fun foo(): R|kotlin/Unit|
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface Foo2 : <ERROR TYPE REF: Loop in supertype: /Foo2 -> /Foo3> {
+            public abstract override [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo(): R|kotlin/Unit|
 
-            public abstract override [ResolvedTo(BODY_RESOLVE)] val str: R|kotlin/String|
+            public abstract override [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val str: R|kotlin/String|
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Foo2] get(): R|kotlin/String|
 
         }
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] interface Foo3 : <ERROR TYPE REF: Loop in supertype: /Foo3 -> /Foo1> {
-            public abstract override [ResolvedTo(BODY_RESOLVE)] fun foo(): R|kotlin/Unit|
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface Foo3 : <ERROR TYPE REF: Loop in supertype: /Foo3 -> /Foo1> {
+            public abstract override [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo(): R|kotlin/Unit|
 
-            public abstract override [ResolvedTo(BODY_RESOLVE)] val str: R|kotlin/String|
+            public abstract override [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val str: R|kotlin/String|
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Foo3] get(): R|kotlin/String|
 
         }

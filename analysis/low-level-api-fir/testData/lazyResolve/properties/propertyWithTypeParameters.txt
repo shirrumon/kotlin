@@ -35,40 +35,40 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithTypeParameters.kt
 
 EXPECT_ACTUAL_MATCHING:
 FILE: [ResolvedTo(IMPORTS)] propertyWithTypeParameters.kt
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] val <[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T : R|kotlin/Int|, [ResolvedTo(EXPECT_ACTUAL_MATCHING)] K> R|T|.resolveMe: R|K|
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] val <[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T : R|kotlin/Int|, [ResolvedTo(EXPECT_ACTUAL_MATCHING)] K> R|T|.resolveMe: R|K|
         public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] get(): R|K| { LAZY_BLOCK }
 
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] propertyWithTypeParameters.kt
-    public final [ResolvedTo(CONTRACTS)] val <[ResolvedTo(CONTRACTS)] T : R|kotlin/Int|, [ResolvedTo(CONTRACTS)] K> R|T|.resolveMe: R|K|
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] val <[ResolvedTo(CONTRACTS)] T : R|kotlin/Int|, [ResolvedTo(CONTRACTS)] K> R|T|.resolveMe: R|K|
         public [ResolvedTo(CONTRACTS)] get(): R|K| {
             ^ TODO#()
         }
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] propertyWithTypeParameters.kt
-    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val <[ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] T : R|kotlin/Int|, [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] K> R|T|.resolveMe: R|K|
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val <[ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] T : R|kotlin/Int|, [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] K> R|T|.resolveMe: R|K|
         public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|K| {
             ^ TODO#()
         }
 
 ANNOTATION_ARGUMENTS:
 FILE: [ResolvedTo(IMPORTS)] propertyWithTypeParameters.kt
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] val <[ResolvedTo(ANNOTATION_ARGUMENTS)] T : R|kotlin/Int|, [ResolvedTo(ANNOTATION_ARGUMENTS)] K> R|T|.resolveMe: R|K|
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] val <[ResolvedTo(ANNOTATION_ARGUMENTS)] T : R|kotlin/Int|, [ResolvedTo(ANNOTATION_ARGUMENTS)] K> R|T|.resolveMe: R|K|
         public [ResolvedTo(ANNOTATION_ARGUMENTS)] get(): R|K| {
             ^ TODO#()
         }
 
 BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] propertyWithTypeParameters.kt
-    public final [ResolvedTo(BODY_RESOLVE)] val <[ResolvedTo(BODY_RESOLVE)] T : R|kotlin/Int|, [ResolvedTo(BODY_RESOLVE)] K> R|T|.resolveMe: R|K|
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val <[ResolvedTo(BODY_RESOLVE)] T : R|kotlin/Int|, [ResolvedTo(BODY_RESOLVE)] K> R|T|.resolveMe: R|K|
         public [ResolvedTo(BODY_RESOLVE)] get(): R|K| {
             ^ R|kotlin/TODO|()
         }
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] propertyWithTypeParameters.kt
-    public final [ResolvedTo(BODY_RESOLVE)] val <[ResolvedTo(BODY_RESOLVE)] T : R|kotlin/Int|, [ResolvedTo(BODY_RESOLVE)] K> R|T|.resolveMe: R|K|
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val <[ResolvedTo(BODY_RESOLVE)] T : R|kotlin/Int|, [ResolvedTo(BODY_RESOLVE)] K> R|T|.resolveMe: R|K|
         public [ResolvedTo(BODY_RESOLVE)] get(): R|K| {
             ^ R|kotlin/TODO|()
         }

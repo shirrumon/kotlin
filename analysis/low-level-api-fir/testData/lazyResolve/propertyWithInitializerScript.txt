@@ -88,7 +88,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithInitializerScript.kts
     SCRIPT: [ResolvedTo(RAW_FIR)] <script-propertyWithInitializerScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun resolveMe(): R|kotlin/Unit| { LAZY_BLOCK }
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| { LAZY_BLOCK }
 
         public? final? [ResolvedTo(RAW_FIR)] val property: Int = LAZY_EXPRESSION
             public? [ResolvedTo(RAW_FIR)] get(): Int
@@ -100,7 +100,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithInitializerScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-propertyWithInitializerScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(CONTRACTS)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             receive#(property#)
         }
 
@@ -114,7 +114,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithInitializerScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-propertyWithInitializerScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             receive#(property#)
         }
 
@@ -128,7 +128,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithInitializerScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-propertyWithInitializerScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             receive#(property#)
         }
 
@@ -142,11 +142,11 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithInitializerScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-propertyWithInitializerScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             <Unresolved name: receive>#(R|/property|)
         }
 
-        public final [ResolvedTo(CONTRACTS)] val property: R|kotlin/Int| = IntegerLiteral(10)
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] val property: R|kotlin/Int| = IntegerLiteral(10)
             public [ResolvedTo(CONTRACTS)] get(): R|kotlin/Int|
 
 
@@ -156,9 +156,9 @@ FILE: [ResolvedTo(BODY_RESOLVE)] propertyWithInitializerScript.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-propertyWithInitializerScript.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             <Unresolved name: receive>#(R|/property|)
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] val property: R|kotlin/Int| = Int(10)
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val property: R|kotlin/Int| = Int(10)
             public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/Int|

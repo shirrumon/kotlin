@@ -116,7 +116,7 @@ FILE: [ResolvedTo(IMPORTS)] secondaryConstructorScript.kts
     SCRIPT: [ResolvedTo(RAW_FIR)] <script-secondaryConstructorScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun resolveMe(): R|kotlin/Unit| { LAZY_BLOCK }
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| { LAZY_BLOCK }
 
         public? final? [ResolvedTo(RAW_FIR)] fun receive([ResolvedTo(RAW_FIR)] value: A): R|kotlin/Unit| { LAZY_BLOCK }
 
@@ -132,7 +132,7 @@ FILE: [ResolvedTo(IMPORTS)] secondaryConstructorScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-secondaryConstructorScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(CONTRACTS)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             receive#(A#(IntegerLiteral(42)))
         }
 
@@ -150,7 +150,7 @@ FILE: [ResolvedTo(IMPORTS)] secondaryConstructorScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-secondaryConstructorScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             receive#(A#(IntegerLiteral(42)))
         }
 
@@ -168,7 +168,7 @@ FILE: [ResolvedTo(IMPORTS)] secondaryConstructorScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-secondaryConstructorScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             receive#(A#(IntegerLiteral(42)))
         }
 
@@ -186,11 +186,11 @@ FILE: [ResolvedTo(IMPORTS)] secondaryConstructorScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-secondaryConstructorScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             R|/receive|(R|/A.A|(Int(42)))
         }
 
-        public final [ResolvedTo(CONTRACTS)] fun receive([ResolvedTo(CONTRACTS)] value: R|A|): R|kotlin/Unit| {
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun receive([ResolvedTo(CONTRACTS)] value: R|A|): R|kotlin/Unit| {
         }
 
         public final [ResolvedTo(STATUS)] class A : R|kotlin/Any| {
@@ -205,15 +205,15 @@ FILE: [ResolvedTo(BODY_RESOLVE)] secondaryConstructorScript.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-secondaryConstructorScript.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             R|/receive|(R|/A.A|(Int(42)))
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun receive([ResolvedTo(BODY_RESOLVE)] value: R|A|): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun receive([ResolvedTo(BODY_RESOLVE)] value: R|A|): R|kotlin/Unit| {
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] class A : R|kotlin/Any| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=A] constructor([ResolvedTo(BODY_RESOLVE)] x: R|kotlin/Int|): R|A| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class A : R|kotlin/Any| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=A, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] x: R|kotlin/Int|): R|A| {
                 super<R|kotlin/Any|>()
                 [ResolvedTo(BODY_RESOLVE)] lval a: R|kotlin/Int| = R|<local>/x|
             }

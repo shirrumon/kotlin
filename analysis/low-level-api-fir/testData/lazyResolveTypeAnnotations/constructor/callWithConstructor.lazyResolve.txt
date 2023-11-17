@@ -199,8 +199,8 @@ FILE: [ResolvedTo(IMPORTS)] callWithConstructor.kt
         }
 
     }
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class MyClass : R|@R|util/Anno|(<strcat>(String(super type call ), prop#))  util/AbstractClass<@R|util/Anno|(<strcat>(String(nested super type ref ), prop#))  kotlin/collections/List<@R|util/Anno|(<strcat>(String(nested nested super type ref ), prop#))  kotlin/Int>>| {
-        public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=MyClass] constructor(): R|util/MyClass| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class MyClass : R|@R|util/Anno|(<strcat>(String(super type call ), prop#))  util/AbstractClass<@R|util/Anno|(<strcat>(String(nested super type ref ), prop#))  kotlin/collections/List<@R|util/Anno|(<strcat>(String(nested nested super type ref ), prop#))  kotlin/Int>>| {
+        public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=MyClass, ExpectForActualAttributeKey={}] constructor(): R|util/MyClass| {
             LAZY_super<R|@R|util/Anno|(<strcat>(String(super type call ), prop#))  util/AbstractClass<@R|util/Anno|(<strcat>(String(nested super type ref ), prop#))  kotlin/collections/List<@R|util/Anno|(<strcat>(String(nested nested super type ref ), prop#))  kotlin/Int>>|>
         }
 
@@ -225,8 +225,8 @@ FILE: [ResolvedTo(IMPORTS)] callWithConstructor.kt
         }
 
     }
-    public final [ResolvedTo(CONTRACTS)] class MyClass : R|@R|util/Anno|(<strcat>(String(super type call ), prop#))  util/AbstractClass<@R|util/Anno|(<strcat>(String(nested super type ref ), prop#))  kotlin/collections/List<@R|util/Anno|(<strcat>(String(nested nested super type ref ), prop#))  kotlin/Int>>| {
-        public [ResolvedTo(CONTRACTS)] [ContainingClassKey=MyClass] constructor(): R|util/MyClass| {
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] class MyClass : R|@R|util/Anno|(<strcat>(String(super type call ), prop#))  util/AbstractClass<@R|util/Anno|(<strcat>(String(nested super type ref ), prop#))  kotlin/collections/List<@R|util/Anno|(<strcat>(String(nested nested super type ref ), prop#))  kotlin/Int>>| {
+        public [ResolvedTo(CONTRACTS)] [ContainingClassKey=MyClass, ExpectForActualAttributeKey={}] constructor(): R|util/MyClass| {
             LAZY_super<R|@R|util/Anno|(<strcat>(String(super type call ), prop#))  util/AbstractClass<@R|util/Anno|(<strcat>(String(nested super type ref ), prop#))  kotlin/collections/List<@R|util/Anno|(<strcat>(String(nested nested super type ref ), prop#))  kotlin/Int>>|>
         }
 
@@ -251,8 +251,8 @@ FILE: [ResolvedTo(IMPORTS)] callWithConstructor.kt
         }
 
     }
-    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] class MyClass : R|@R|util/Anno|(<strcat>(String(super type call ), prop#))  util/AbstractClass<@R|util/Anno|(<strcat>(String(nested super type ref ), prop#))  kotlin/collections/List<@R|util/Anno|(<strcat>(String(nested nested super type ref ), prop#))  kotlin/Int>>| {
-        public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=MyClass] constructor(): R|util/MyClass| {
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class MyClass : R|@R|util/Anno|(<strcat>(String(super type call ), prop#))  util/AbstractClass<@R|util/Anno|(<strcat>(String(nested super type ref ), prop#))  kotlin/collections/List<@R|util/Anno|(<strcat>(String(nested nested super type ref ), prop#))  kotlin/Int>>| {
+        public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=MyClass, ExpectForActualAttributeKey={}] constructor(): R|util/MyClass| {
             LAZY_super<R|@R|util/Anno|(<strcat>(String(super type call ), prop#))  util/AbstractClass<@R|util/Anno|(<strcat>(String(nested super type ref ), prop#))  kotlin/collections/List<@R|util/Anno|(<strcat>(String(nested nested super type ref ), prop#))  kotlin/Int>>|>
         }
 
@@ -269,7 +269,7 @@ FILE: [ResolvedTo(IMPORTS)] callWithConstructor.kt
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
-    public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val prop: R|kotlin/String| = String(str)
+    public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val prop: R|kotlin/String| = String(str)
         public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/String|
     public abstract [ResolvedTo(STATUS)] class AbstractClass<[ResolvedTo(STATUS)] T> : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(STATUS)] T>(): R|util/AbstractClass<T>| {
@@ -277,8 +277,8 @@ FILE: [ResolvedTo(IMPORTS)] callWithConstructor.kt
         }
 
     }
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] class MyClass : R|@R|util/Anno|(position = <strcat>(String(super type call ), R|util/prop|))  util/AbstractClass<@R|util/Anno|(position = <strcat>(String(nested super type ref ), R|util/prop|))  kotlin/collections/List<@R|util/Anno|(position = <strcat>(String(nested nested super type ref ), R|util/prop|))  kotlin/Int>>| {
-        public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=MyClass] constructor(): R|util/MyClass| {
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] class MyClass : R|@R|util/Anno|(position = <strcat>(String(super type call ), R|util/prop|))  util/AbstractClass<@R|util/Anno|(position = <strcat>(String(nested super type ref ), R|util/prop|))  kotlin/collections/List<@R|util/Anno|(position = <strcat>(String(nested nested super type ref ), R|util/prop|))  kotlin/Int>>| {
+        public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=MyClass, ExpectForActualAttributeKey={}] constructor(): R|util/MyClass| {
             LAZY_super<R|@R|util/Anno|(position = <strcat>(String(super type call ), R|util/prop|))  util/AbstractClass<@R|util/Anno|(position = <strcat>(String(nested super type ref ), R|util/prop|))  kotlin/collections/List<@R|util/Anno|(position = <strcat>(String(nested nested super type ref ), R|util/prop|))  kotlin/Int>>|>
         }
 
@@ -295,7 +295,7 @@ FILE: [ResolvedTo(IMPORTS)] callWithConstructor.kt
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
-    public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val prop: R|kotlin/String| = String(str)
+    public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val prop: R|kotlin/String| = String(str)
         public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/String|
     public abstract [ResolvedTo(STATUS)] class AbstractClass<[ResolvedTo(STATUS)] T> : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(STATUS)] T>(): R|util/AbstractClass<T>| {
@@ -303,8 +303,8 @@ FILE: [ResolvedTo(IMPORTS)] callWithConstructor.kt
         }
 
     }
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] class MyClass : R|@R|util/Anno|(position = <strcat>(String(super type call ), R|util/prop|))  util/AbstractClass<@R|util/Anno|(position = <strcat>(String(nested super type ref ), R|util/prop|))  kotlin/collections/List<@R|util/Anno|(position = <strcat>(String(nested nested super type ref ), R|util/prop|))  kotlin/Int>>| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyClass] constructor(): R|util/MyClass| {
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] class MyClass : R|@R|util/Anno|(position = <strcat>(String(super type call ), R|util/prop|))  util/AbstractClass<@R|util/Anno|(position = <strcat>(String(nested super type ref ), R|util/prop|))  kotlin/collections/List<@R|util/Anno|(position = <strcat>(String(nested nested super type ref ), R|util/prop|))  kotlin/Int>>| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyClass, ExpectForActualAttributeKey={}] constructor(): R|util/MyClass| {
             super<R|@R|util/Anno|(position = <strcat>(String(super type call ), R|util/prop|))  util/AbstractClass<@R|util/Anno|(position = <strcat>(String(nested super type ref ), R|util/prop|))  kotlin/collections/List<@R|util/Anno|(position = <strcat>(String(nested nested super type ref ), R|util/prop|))  kotlin/Int>>|>()
         }
 
@@ -312,25 +312,25 @@ FILE: [ResolvedTo(IMPORTS)] callWithConstructor.kt
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] callWithConstructor.kt
-    @R|kotlin/annotation/Target|[Types](allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|)) public final [ResolvedTo(BODY_RESOLVE)] annotation class Anno : R|kotlin/Annotation| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=util/Anno.position] position: R|kotlin/String|): R|util/Anno| {
+    @R|kotlin/annotation/Target|[Types](allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|)) public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] annotation class Anno : R|kotlin/Annotation| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=util/Anno.position] position: R|kotlin/String|): R|util/Anno| {
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val position: R|kotlin/String| = R|<local>/position|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val position: R|kotlin/String| = R|<local>/position|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
-    public final const [ResolvedTo(BODY_RESOLVE)] val prop: R|kotlin/String| = String(str)
+    public final const [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val prop: R|kotlin/String| = String(str)
         public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/String|
-    public abstract [ResolvedTo(BODY_RESOLVE)] class AbstractClass<[ResolvedTo(BODY_RESOLVE)] T> : R|kotlin/Any| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(BODY_RESOLVE)] T>(): R|util/AbstractClass<T>| {
+    public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class AbstractClass<[ResolvedTo(BODY_RESOLVE)] T> : R|kotlin/Any| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=AbstractClass, ExpectForActualAttributeKey={}] constructor<[ResolvedTo(BODY_RESOLVE)] T>(): R|util/AbstractClass<T>| {
             super<R|kotlin/Any|>()
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] class MyClass : R|@R|util/Anno|(position = <strcat>(String(super type call ), R|util/prop|))  util/AbstractClass<@R|util/Anno|(position = <strcat>(String(nested super type ref ), R|util/prop|))  kotlin/collections/List<@R|util/Anno|(position = <strcat>(String(nested nested super type ref ), R|util/prop|))  kotlin/Int>>| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyClass] constructor(): R|util/MyClass| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class MyClass : R|@R|util/Anno|(position = <strcat>(String(super type call ), R|util/prop|))  util/AbstractClass<@R|util/Anno|(position = <strcat>(String(nested super type ref ), R|util/prop|))  kotlin/collections/List<@R|util/Anno|(position = <strcat>(String(nested nested super type ref ), R|util/prop|))  kotlin/Int>>| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyClass, ExpectForActualAttributeKey={}] constructor(): R|util/MyClass| {
             super<R|@R|util/Anno|(position = <strcat>(String(super type call ), R|util/prop|))  util/AbstractClass<@R|util/Anno|(position = <strcat>(String(nested super type ref ), R|util/prop|))  kotlin/collections/List<@R|util/Anno|(position = <strcat>(String(nested nested super type ref ), R|util/prop|))  kotlin/Int>>|>()
         }
 

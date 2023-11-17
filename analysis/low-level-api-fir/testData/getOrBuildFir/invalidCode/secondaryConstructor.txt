@@ -7,8 +7,8 @@ FIR element rendered:
 
 FIR FILE:
 FILE: [ResolvedTo(IMPORTS)] secondaryConstructor.kt
-    public final [ResolvedTo(BODY_RESOLVE)] annotation class JsQualifier : R|kotlin/Annotation|, R|kotlin/Annotation| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=JsQualifier] constructor(): R|JsQualifier| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] annotation class JsQualifier : R|kotlin/Annotation|, R|kotlin/Annotation| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=JsQualifier, ExpectForActualAttributeKey={}] constructor(): R|JsQualifier| {
             super<R|kotlin/Any|>()
         }
 

@@ -123,7 +123,7 @@ FILE: [ResolvedTo(IMPORTS)] anonymousFunctionWithAnnotatedParameterOnImplicitTyp
     }
     public? final? [ResolvedTo(RAW_FIR)] val nullablePropertyWithAnnotatedType: @Anno[Unresolved](LAZY_EXPRESSION) String?
         public? [ResolvedTo(RAW_FIR)] get(): @Anno[Unresolved](LAZY_EXPRESSION) String? { LAZY_BLOCK }
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] val propertyToResolve: <implicit>
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] val propertyToResolve: <implicit>
         public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] get(): <implicit> { LAZY_BLOCK }
 
 CONTRACTS:
@@ -139,7 +139,7 @@ FILE: [ResolvedTo(IMPORTS)] anonymousFunctionWithAnnotatedParameterOnImplicitTyp
     }
     public? final? [ResolvedTo(RAW_FIR)] val nullablePropertyWithAnnotatedType: @Anno[Unresolved](LAZY_EXPRESSION) String?
         public? [ResolvedTo(RAW_FIR)] get(): @Anno[Unresolved](LAZY_EXPRESSION) String? { LAZY_BLOCK }
-    public final [ResolvedTo(CONTRACTS)] val propertyToResolve: <implicit>
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] val propertyToResolve: <implicit>
         public [ResolvedTo(CONTRACTS)] get(): <implicit> {
             ^ nullablePropertyWithAnnotatedType#?.{ $subj$.let#(<L> = [ResolvedTo(RAW_FIR)] let@fun <implicit>.<anonymous>(): <implicit> <inline=Unknown>  {
                 <strcat>(String( (), it#, String()))
@@ -158,11 +158,11 @@ FILE: [ResolvedTo(IMPORTS)] anonymousFunctionWithAnnotatedParameterOnImplicitTyp
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
-    public final [ResolvedTo(CONTRACTS)] val nullablePropertyWithAnnotatedType: R|@R|Anno|(String(str))  kotlin/String?|
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] val nullablePropertyWithAnnotatedType: R|@R|Anno|(String(str))  kotlin/String?|
         public [ResolvedTo(CONTRACTS)] get(): R|@R|Anno|(String(str))  kotlin/String?| {
             ^ Null(null)
         }
-    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val propertyToResolve: R|kotlin/String|
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val propertyToResolve: R|kotlin/String|
         public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/String| {
             ^ R|/nullablePropertyWithAnnotatedType|?.{ $subj$.R|kotlin/let|<R|@R|Anno|(message = String(str))  kotlin/String|, R|kotlin/String|>(<L> = [ResolvedTo(RAW_FIR)] [MatchingParameterFunctionTypeKey=kotlin/Function1<T, R>] let@fun <anonymous>([ResolvedTo(BODY_RESOLVE)] it: R|@R|Anno|(message = String(str))  kotlin/String|): R|kotlin/String| <inline=Inline, kind=EXACTLY_ONCE>  {
                 ^ <strcat>(String( (), R|<local>/it|, String()))
@@ -181,11 +181,11 @@ FILE: [ResolvedTo(IMPORTS)] anonymousFunctionWithAnnotatedParameterOnImplicitTyp
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
-    public final [ResolvedTo(CONTRACTS)] val nullablePropertyWithAnnotatedType: R|@R|Anno|(String(str))  kotlin/String?|
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] val nullablePropertyWithAnnotatedType: R|@R|Anno|(String(str))  kotlin/String?|
         public [ResolvedTo(CONTRACTS)] get(): R|@R|Anno|(String(str))  kotlin/String?| {
             ^ Null(null)
         }
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] val propertyToResolve: R|kotlin/String|
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] val propertyToResolve: R|kotlin/String|
         public [ResolvedTo(ANNOTATION_ARGUMENTS)] get(): R|kotlin/String| {
             ^ R|/nullablePropertyWithAnnotatedType|?.{ $subj$.R|kotlin/let|<R|@R|Anno|(message = String(str))  kotlin/String|, R|kotlin/String|>(<L> = [ResolvedTo(RAW_FIR)] [MatchingParameterFunctionTypeKey=kotlin/Function1<T, R>] let@fun <anonymous>([ResolvedTo(BODY_RESOLVE)] it: R|@R|Anno|(message = String(str))  kotlin/String|): R|kotlin/String| <inline=Inline, kind=EXACTLY_ONCE>  {
                 ^ <strcat>(String( (), R|<local>/it|, String()))
@@ -204,11 +204,11 @@ FILE: [ResolvedTo(IMPORTS)] anonymousFunctionWithAnnotatedParameterOnImplicitTyp
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
-    public final [ResolvedTo(CONTRACTS)] val nullablePropertyWithAnnotatedType: R|@R|Anno|(String(str))  kotlin/String?|
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] val nullablePropertyWithAnnotatedType: R|@R|Anno|(String(str))  kotlin/String?|
         public [ResolvedTo(CONTRACTS)] get(): R|@R|Anno|(String(str))  kotlin/String?| {
             ^ Null(null)
         }
-    public final [ResolvedTo(BODY_RESOLVE)] val propertyToResolve: R|kotlin/String|
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val propertyToResolve: R|kotlin/String|
         public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/String| {
             ^ R|/nullablePropertyWithAnnotatedType|?.{ $subj$.R|kotlin/let|<R|@R|Anno|(message = String(str))  kotlin/String|, R|kotlin/String|>(<L> = [ResolvedTo(BODY_RESOLVE)] [MatchingParameterFunctionTypeKey=kotlin/Function1<T, R>] let@fun <anonymous>([ResolvedTo(BODY_RESOLVE)] it: R|@R|Anno|(message = String(str))  kotlin/String|): R|kotlin/String| <inline=Inline, kind=EXACTLY_ONCE>  {
                 ^ <strcat>(String( (), R|<local>/it|, String()))
@@ -218,20 +218,20 @@ FILE: [ResolvedTo(IMPORTS)] anonymousFunctionWithAnnotatedParameterOnImplicitTyp
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] anonymousFunctionWithAnnotatedParameterOnImplicitTypePhase.kt
-    @R|kotlin/annotation/Target|[Types](allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|)) public final [ResolvedTo(BODY_RESOLVE)] annotation class Anno : R|kotlin/Annotation| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/Anno.message] message: R|kotlin/String|): R|Anno| {
+    @R|kotlin/annotation/Target|[Types](allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|)) public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] annotation class Anno : R|kotlin/Annotation| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/Anno.message] message: R|kotlin/String|): R|Anno| {
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val message: R|kotlin/String| = R|<local>/message|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val message: R|kotlin/String| = R|<local>/message|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] val nullablePropertyWithAnnotatedType: R|@R|Anno|(message = String(str))  kotlin/String?|
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val nullablePropertyWithAnnotatedType: R|@R|Anno|(message = String(str))  kotlin/String?|
         public [ResolvedTo(BODY_RESOLVE)] get(): R|@R|Anno|(message = String(str))  kotlin/String?| {
             ^ Null(null)
         }
-    public final [ResolvedTo(BODY_RESOLVE)] val propertyToResolve: R|kotlin/String|
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val propertyToResolve: R|kotlin/String|
         public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/String| {
             ^ R|/nullablePropertyWithAnnotatedType|?.{ $subj$.R|kotlin/let|<R|@R|Anno|(message = String(str))  kotlin/String|, R|kotlin/String|>(<L> = [ResolvedTo(BODY_RESOLVE)] [MatchingParameterFunctionTypeKey=kotlin/Function1<T, R>] let@fun <anonymous>([ResolvedTo(BODY_RESOLVE)] it: R|@R|Anno|(message = String(str))  kotlin/String|): R|kotlin/String| <inline=Inline, kind=EXACTLY_ONCE>  {
                 ^ <strcat>(String( (), R|<local>/it|, String()))

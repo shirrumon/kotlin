@@ -268,7 +268,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassScript.kts
                 LAZY_super<AnotherTopLevelClass>
             }
 
-            public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class NestedClass : R|kotlin/Any| {
+            public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class NestedClass : R|kotlin/Any| {
                 public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=NestedClass] constructor(): R|OuterClass.NestedClass| {
                     LAZY_super<R|kotlin/Any|>
                 }
@@ -303,7 +303,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassScript.kts
                 LAZY_super<R|AnotherTopLevelClass|>
             }
 
-            public final [ResolvedTo(CONTRACTS)] class NestedClass : R|kotlin/Any| {
+            public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] class NestedClass : R|kotlin/Any| {
                 public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=NestedClass] constructor(): R|OuterClass.NestedClass| {
                     LAZY_super<R|kotlin/Any|>
                 }
@@ -338,7 +338,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassScript.kts
                 LAZY_super<R|AnotherTopLevelClass|>
             }
 
-            public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] class NestedClass : R|kotlin/Any| {
+            public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class NestedClass : R|kotlin/Any| {
                 public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=NestedClass] constructor(): R|OuterClass.NestedClass| {
                     LAZY_super<R|kotlin/Any|>
                 }
@@ -373,7 +373,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassScript.kts
                 LAZY_super<R|AnotherTopLevelClass|>
             }
 
-            public final [ResolvedTo(ANNOTATION_ARGUMENTS)] class NestedClass : R|kotlin/Any| {
+            public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] class NestedClass : R|kotlin/Any| {
                 public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=NestedClass] constructor(): R|OuterClass.NestedClass| {
                     LAZY_super<R|kotlin/Any|>
                 }
@@ -408,8 +408,8 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassScript.kts
                 LAZY_super<R|AnotherTopLevelClass|>
             }
 
-            public final [ResolvedTo(BODY_RESOLVE)] class NestedClass : R|kotlin/Any| {
-                public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=NestedClass] constructor(): R|OuterClass.NestedClass| {
+            public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class NestedClass : R|kotlin/Any| {
+                public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=NestedClass, ExpectForActualAttributeKey={}] constructor(): R|OuterClass.NestedClass| {
                     super<R|kotlin/Any|>()
                 }
 
@@ -424,27 +424,27 @@ FILE: [ResolvedTo(BODY_RESOLVE)] nestedClassScript.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-nestedClassScript.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public open [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|kotlin/Any| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|TopLevelClass| {
+        public open [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|kotlin/Any| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|TopLevelClass| {
                 super<R|kotlin/Any|>()
             }
 
         }
 
-        public open [ResolvedTo(BODY_RESOLVE)] class AnotherTopLevelClass : R|TopLevelClass| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=AnotherTopLevelClass] constructor(): R|AnotherTopLevelClass| {
+        public open [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class AnotherTopLevelClass : R|TopLevelClass| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=AnotherTopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|AnotherTopLevelClass| {
                 super<R|TopLevelClass|>()
             }
 
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] class OuterClass : R|AnotherTopLevelClass| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=OuterClass] constructor(): R|OuterClass| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class OuterClass : R|AnotherTopLevelClass| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=OuterClass, ExpectForActualAttributeKey={}] constructor(): R|OuterClass| {
                 super<R|AnotherTopLevelClass|>()
             }
 
-            public final [ResolvedTo(BODY_RESOLVE)] class NestedClass : R|kotlin/Any| {
-                public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=NestedClass] constructor(): R|OuterClass.NestedClass| {
+            public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class NestedClass : R|kotlin/Any| {
+                public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=NestedClass, ExpectForActualAttributeKey={}] constructor(): R|OuterClass.NestedClass| {
                     super<R|kotlin/Any|>()
                 }
 

@@ -290,7 +290,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithImplicitTypeUnavailable.kt
         public? open? override [ResolvedTo(RAW_FIR)] fun setValue([ResolvedTo(RAW_FIR)] thisRef: Any?, [ResolvedTo(RAW_FIR)] property: KProperty<*>, [ResolvedTo(RAW_FIR)] value: @Anno[Unresolved](LAZY_EXPRESSION) List<@Anno[Unresolved](LAZY_EXPRESSION) List<@Anno[Unresolved](LAZY_EXPRESSION) Int>>): R|kotlin/Unit| { LAZY_BLOCK }
 
     }
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] var propertyToResolve: <implicit>by LAZY_EXPRESSION
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] var propertyToResolve: <implicit>by LAZY_EXPRESSION
         public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] get(): <implicit> { LAZY_BLOCK }
         public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] set([ResolvedTo(EXPECT_ACTUAL_MATCHING)] <set-?>: <implicit>): R|kotlin/Unit| { LAZY_BLOCK }
 
@@ -327,7 +327,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithImplicitTypeUnavailable.kt
         public? open? override [ResolvedTo(RAW_FIR)] fun setValue([ResolvedTo(RAW_FIR)] thisRef: Any?, [ResolvedTo(RAW_FIR)] property: KProperty<*>, [ResolvedTo(RAW_FIR)] value: @Anno[Unresolved](LAZY_EXPRESSION) List<@Anno[Unresolved](LAZY_EXPRESSION) List<@Anno[Unresolved](LAZY_EXPRESSION) Int>>): R|kotlin/Unit| { LAZY_BLOCK }
 
     }
-    public final [ResolvedTo(CONTRACTS)] var propertyToResolve: <implicit>by LAZY_EXPRESSION
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] var propertyToResolve: <implicit>by LAZY_EXPRESSION
         public [ResolvedTo(CONTRACTS)] get(): <implicit> { LAZY_BLOCK }
         public [ResolvedTo(CONTRACTS)] set([ResolvedTo(CONTRACTS)] <set-?>: <implicit>): R|kotlin/Unit| { LAZY_BLOCK }
 
@@ -352,7 +352,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithImplicitTypeUnavailable.kt
                 LAZY_super<R|kotlin/Any|>
             }
 
-            public final [ResolvedTo(CONTRACTS)] fun explicitType(): R|@R|Anno|(<strcat>(String(explicitType return type ), prop#))  kotlin/collections/List<@R|Anno|(<strcat>(String(explicitType nested return type ), prop#))  kotlin/collections/List<@R|Anno|(<strcat>(String(explicitType nested nested return type ), prop#))  kotlin/Int>>| {
+            public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun explicitType(): R|@R|Anno|(<strcat>(String(explicitType return type ), prop#))  kotlin/collections/List<@R|Anno|(<strcat>(String(explicitType nested return type ), prop#))  kotlin/collections/List<@R|Anno|(<strcat>(String(explicitType nested nested return type ), prop#))  kotlin/Int>>| {
                 ^explicitType IntegerLiteral(1)
             }
 
@@ -361,15 +361,15 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithImplicitTypeUnavailable.kt
 
         }
 
-        public open override operator [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun getValue([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] thisRef: R|kotlin/Any?|, [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] property: R|kotlin/reflect/KProperty<*>|): R|@R|Anno|(<strcat>(String(explicitType return type ), prop#))  kotlin/collections/List<@R|Anno|(<strcat>(String(explicitType nested return type ), prop#))  kotlin/collections/List<@R|Anno|(<strcat>(String(explicitType nested nested return type ), prop#))  kotlin/Int>>| {
+        public open override operator [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun getValue([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] thisRef: R|kotlin/Any?|, [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] property: R|kotlin/reflect/KProperty<*>|): R|@R|Anno|(<strcat>(String(explicitType return type ), prop#))  kotlin/collections/List<@R|Anno|(<strcat>(String(explicitType nested return type ), prop#))  kotlin/collections/List<@R|Anno|(<strcat>(String(explicitType nested nested return type ), prop#))  kotlin/Int>>| {
             ^getValue this@R|/Delegate.Companion|.R|/Delegate.Companion.explicitType|()
         }
 
-        public open override operator [ResolvedTo(CONTRACTS)] fun setValue([ResolvedTo(CONTRACTS)] thisRef: R|kotlin/Any?|, [ResolvedTo(CONTRACTS)] property: R|kotlin/reflect/KProperty<*>|, [ResolvedTo(CONTRACTS)] value: R|@R|Anno|(<strcat>(String(setValue type ref ), prop#))  kotlin/collections/List<@R|Anno|(<strcat>(String(setValue nested type ref ), prop#))  kotlin/collections/List<@R|Anno|(<strcat>(String(setValue nested nested type ref ), prop#))  kotlin/Int>>|): R|kotlin/Unit| {
+        public open override operator [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun setValue([ResolvedTo(CONTRACTS)] thisRef: R|kotlin/Any?|, [ResolvedTo(CONTRACTS)] property: R|kotlin/reflect/KProperty<*>|, [ResolvedTo(CONTRACTS)] value: R|@R|Anno|(<strcat>(String(setValue type ref ), prop#))  kotlin/collections/List<@R|Anno|(<strcat>(String(setValue nested type ref ), prop#))  kotlin/collections/List<@R|Anno|(<strcat>(String(setValue nested nested type ref ), prop#))  kotlin/Int>>|): R|kotlin/Unit| {
         }
 
     }
-    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] var propertyToResolve: R|@R|Anno|(<strcat>(String(explicitType return type ), prop#))  kotlin/collections/List<@R|Anno|(<strcat>(String(explicitType nested return type ), prop#))  kotlin/collections/List<@R|Anno|(<strcat>(String(explicitType nested nested return type ), prop#))  kotlin/Int>>|by R|/Delegate.Delegate|()
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] var propertyToResolve: R|@R|Anno|(<strcat>(String(explicitType return type ), prop#))  kotlin/collections/List<@R|Anno|(<strcat>(String(explicitType nested return type ), prop#))  kotlin/collections/List<@R|Anno|(<strcat>(String(explicitType nested nested return type ), prop#))  kotlin/Int>>|by R|/Delegate.Delegate|()
         public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|@R|Anno|(<strcat>(String(explicitType return type ), prop#))  kotlin/collections/List<@R|Anno|(<strcat>(String(explicitType nested return type ), prop#))  kotlin/collections/List<@R|Anno|(<strcat>(String(explicitType nested nested return type ), prop#))  kotlin/Int>>| {
             ^ D|/propertyToResolve|.R|/Delegate.getValue|(Null(null), ::R|/propertyToResolve|)
         }
@@ -398,7 +398,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithImplicitTypeUnavailable.kt
                 LAZY_super<R|kotlin/Any|>
             }
 
-            public final [ResolvedTo(CONTRACTS)] fun explicitType(): R|@R|Anno|(position = <strcat>(String(explicitType return type ), <Unresolved name: prop>#))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested return type ), <Unresolved name: prop>#))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested nested return type ), <Unresolved name: prop>#))  kotlin/Int>>| {
+            public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun explicitType(): R|@R|Anno|(position = <strcat>(String(explicitType return type ), <Unresolved name: prop>#))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested return type ), <Unresolved name: prop>#))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested nested return type ), <Unresolved name: prop>#))  kotlin/Int>>| {
                 ^explicitType IntegerLiteral(1)
             }
 
@@ -407,15 +407,15 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithImplicitTypeUnavailable.kt
 
         }
 
-        public open override operator [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun getValue([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] thisRef: R|kotlin/Any?|, [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] property: R|kotlin/reflect/KProperty<*>|): R|@R|Anno|(position = <strcat>(String(explicitType return type ), <Unresolved name: prop>#))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested return type ), <Unresolved name: prop>#))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested nested return type ), <Unresolved name: prop>#))  kotlin/Int>>| {
+        public open override operator [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun getValue([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] thisRef: R|kotlin/Any?|, [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] property: R|kotlin/reflect/KProperty<*>|): R|@R|Anno|(position = <strcat>(String(explicitType return type ), <Unresolved name: prop>#))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested return type ), <Unresolved name: prop>#))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested nested return type ), <Unresolved name: prop>#))  kotlin/Int>>| {
             ^getValue this@R|/Delegate.Companion|.R|/Delegate.Companion.explicitType|()
         }
 
-        public open override operator [ResolvedTo(CONTRACTS)] fun setValue([ResolvedTo(CONTRACTS)] thisRef: R|kotlin/Any?|, [ResolvedTo(CONTRACTS)] property: R|kotlin/reflect/KProperty<*>|, [ResolvedTo(CONTRACTS)] value: R|@R|Anno|(<strcat>(String(setValue type ref ), prop#))  kotlin/collections/List<@R|Anno|(<strcat>(String(setValue nested type ref ), prop#))  kotlin/collections/List<@R|Anno|(<strcat>(String(setValue nested nested type ref ), prop#))  kotlin/Int>>|): R|kotlin/Unit| {
+        public open override operator [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun setValue([ResolvedTo(CONTRACTS)] thisRef: R|kotlin/Any?|, [ResolvedTo(CONTRACTS)] property: R|kotlin/reflect/KProperty<*>|, [ResolvedTo(CONTRACTS)] value: R|@R|Anno|(<strcat>(String(setValue type ref ), prop#))  kotlin/collections/List<@R|Anno|(<strcat>(String(setValue nested type ref ), prop#))  kotlin/collections/List<@R|Anno|(<strcat>(String(setValue nested nested type ref ), prop#))  kotlin/Int>>|): R|kotlin/Unit| {
         }
 
     }
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] var propertyToResolve: R|@R|Anno|(position = <strcat>(String(explicitType return type ), <Unresolved name: prop>#))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested return type ), <Unresolved name: prop>#))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested nested return type ), <Unresolved name: prop>#))  kotlin/Int>>|by R|/Delegate.Delegate|()
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] var propertyToResolve: R|@R|Anno|(position = <strcat>(String(explicitType return type ), <Unresolved name: prop>#))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested return type ), <Unresolved name: prop>#))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested nested return type ), <Unresolved name: prop>#))  kotlin/Int>>|by R|/Delegate.Delegate|()
         public [ResolvedTo(ANNOTATION_ARGUMENTS)] get(): R|@R|Anno|(position = <strcat>(String(explicitType return type ), <Unresolved name: prop>#))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested return type ), <Unresolved name: prop>#))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested nested return type ), <Unresolved name: prop>#))  kotlin/Int>>| {
             ^ D|/propertyToResolve|.R|/Delegate.getValue|(Null(null), ::R|/propertyToResolve|)
         }
@@ -444,7 +444,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithImplicitTypeUnavailable.kt
                 LAZY_super<R|kotlin/Any|>
             }
 
-            public final [ResolvedTo(CONTRACTS)] fun explicitType(): R|@R|Anno|(position = <strcat>(String(explicitType return type ), <Unresolved name: prop>#))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested return type ), <Unresolved name: prop>#))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested nested return type ), <Unresolved name: prop>#))  kotlin/Int>>| {
+            public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun explicitType(): R|@R|Anno|(position = <strcat>(String(explicitType return type ), <Unresolved name: prop>#))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested return type ), <Unresolved name: prop>#))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested nested return type ), <Unresolved name: prop>#))  kotlin/Int>>| {
                 ^explicitType IntegerLiteral(1)
             }
 
@@ -453,15 +453,15 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithImplicitTypeUnavailable.kt
 
         }
 
-        public open override operator [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun getValue([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] thisRef: R|kotlin/Any?|, [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] property: R|kotlin/reflect/KProperty<*>|): R|@R|Anno|(position = <strcat>(String(explicitType return type ), <Unresolved name: prop>#))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested return type ), <Unresolved name: prop>#))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested nested return type ), <Unresolved name: prop>#))  kotlin/Int>>| {
+        public open override operator [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun getValue([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] thisRef: R|kotlin/Any?|, [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] property: R|kotlin/reflect/KProperty<*>|): R|@R|Anno|(position = <strcat>(String(explicitType return type ), <Unresolved name: prop>#))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested return type ), <Unresolved name: prop>#))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested nested return type ), <Unresolved name: prop>#))  kotlin/Int>>| {
             ^getValue this@R|/Delegate.Companion|.R|/Delegate.Companion.explicitType|()
         }
 
-        public open override operator [ResolvedTo(CONTRACTS)] fun setValue([ResolvedTo(CONTRACTS)] thisRef: R|kotlin/Any?|, [ResolvedTo(CONTRACTS)] property: R|kotlin/reflect/KProperty<*>|, [ResolvedTo(CONTRACTS)] value: R|@R|Anno|(<strcat>(String(setValue type ref ), prop#))  kotlin/collections/List<@R|Anno|(<strcat>(String(setValue nested type ref ), prop#))  kotlin/collections/List<@R|Anno|(<strcat>(String(setValue nested nested type ref ), prop#))  kotlin/Int>>|): R|kotlin/Unit| {
+        public open override operator [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun setValue([ResolvedTo(CONTRACTS)] thisRef: R|kotlin/Any?|, [ResolvedTo(CONTRACTS)] property: R|kotlin/reflect/KProperty<*>|, [ResolvedTo(CONTRACTS)] value: R|@R|Anno|(<strcat>(String(setValue type ref ), prop#))  kotlin/collections/List<@R|Anno|(<strcat>(String(setValue nested type ref ), prop#))  kotlin/collections/List<@R|Anno|(<strcat>(String(setValue nested nested type ref ), prop#))  kotlin/Int>>|): R|kotlin/Unit| {
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] var propertyToResolve: R|@R|Anno|(position = <strcat>(String(explicitType return type ), <Unresolved name: prop>#))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested return type ), <Unresolved name: prop>#))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested nested return type ), <Unresolved name: prop>#))  kotlin/Int>>|by R|/Delegate.Delegate|()
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] var propertyToResolve: R|@R|Anno|(position = <strcat>(String(explicitType return type ), <Unresolved name: prop>#))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested return type ), <Unresolved name: prop>#))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested nested return type ), <Unresolved name: prop>#))  kotlin/Int>>|by R|/Delegate.Delegate|()
         public [ResolvedTo(BODY_RESOLVE)] get(): R|@R|Anno|(position = <strcat>(String(explicitType return type ), <Unresolved name: prop>#))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested return type ), <Unresolved name: prop>#))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested nested return type ), <Unresolved name: prop>#))  kotlin/Int>>| {
             ^ D|/propertyToResolve|.R|/Delegate.getValue|(Null(null), ::R|/propertyToResolve|)
         }
@@ -471,43 +471,43 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithImplicitTypeUnavailable.kt
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] propertyWithImplicitTypeUnavailable.kt
-    @R|kotlin/annotation/Target|[Types](allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|, Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.PROPERTY|, Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.PROPERTY_GETTER|, Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.PROPERTY_SETTER|, Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.VALUE_PARAMETER|, Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.FIELD|, Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE_PARAMETER|)) public final [ResolvedTo(BODY_RESOLVE)] annotation class Anno : R|kotlin/Annotation| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/Anno.position] position: R|kotlin/String|): R|Anno| {
+    @R|kotlin/annotation/Target|[Types](allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|, Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.PROPERTY|, Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.PROPERTY_GETTER|, Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.PROPERTY_SETTER|, Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.VALUE_PARAMETER|, Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.FIELD|, Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE_PARAMETER|)) public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] annotation class Anno : R|kotlin/Annotation| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/Anno.position] position: R|kotlin/String|): R|Anno| {
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val position: R|kotlin/String| = R|<local>/position|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val position: R|kotlin/String| = R|<local>/position|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] class Delegate : R|kotlin/properties/ReadWriteProperty<kotlin/Any?, kotlin/collections/List<kotlin/collections/List<kotlin/Int>>>| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Delegate] constructor(): R|Delegate| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class Delegate : R|kotlin/properties/ReadWriteProperty<kotlin/Any?, kotlin/collections/List<kotlin/collections/List<kotlin/Int>>>| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Delegate, ExpectForActualAttributeKey={}] constructor(): R|Delegate| {
             super<R|kotlin/Any|>()
         }
 
-        private final companion [ResolvedTo(BODY_RESOLVE)] object Companion : R|kotlin/Any| {
-            private [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Companion] constructor(): R|Delegate.Companion| {
+        private final companion [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] object Companion : R|kotlin/Any| {
+            private [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Companion, ExpectForActualAttributeKey={}] constructor(): R|Delegate.Companion| {
                 super<R|kotlin/Any|>()
             }
 
-            public final [ResolvedTo(BODY_RESOLVE)] fun explicitType(): R|@R|Anno|(position = <strcat>(String(explicitType return type ), this@R|/Delegate.Companion|.R|/Delegate.Companion.prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested return type ), this@R|/Delegate.Companion|.R|/Delegate.Companion.prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested nested return type ), this@R|/Delegate.Companion|.R|/Delegate.Companion.prop|))  kotlin/Int>>| {
+            public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun explicitType(): R|@R|Anno|(position = <strcat>(String(explicitType return type ), this@R|/Delegate.Companion|.R|/Delegate.Companion.prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested return type ), this@R|/Delegate.Companion|.R|/Delegate.Companion.prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested nested return type ), this@R|/Delegate.Companion|.R|/Delegate.Companion.prop|))  kotlin/Int>>| {
                 ^explicitType Int(1)
             }
 
-            public final const [ResolvedTo(BODY_RESOLVE)] val prop: R|kotlin/Int| = Int(0)
+            public final const [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val prop: R|kotlin/Int| = Int(0)
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Companion] get(): R|kotlin/Int|
 
         }
 
-        public open override operator [ResolvedTo(BODY_RESOLVE)] fun getValue([ResolvedTo(BODY_RESOLVE)] thisRef: R|kotlin/Any?|, [ResolvedTo(BODY_RESOLVE)] property: R|kotlin/reflect/KProperty<*>|): R|@R|Anno|(position = <strcat>(String(explicitType return type ), this@R|/Delegate.Companion|.R|/Delegate.Companion.prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested return type ), this@R|/Delegate.Companion|.R|/Delegate.Companion.prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested nested return type ), this@R|/Delegate.Companion|.R|/Delegate.Companion.prop|))  kotlin/Int>>| {
+        public open override operator [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun getValue([ResolvedTo(BODY_RESOLVE)] thisRef: R|kotlin/Any?|, [ResolvedTo(BODY_RESOLVE)] property: R|kotlin/reflect/KProperty<*>|): R|@R|Anno|(position = <strcat>(String(explicitType return type ), this@R|/Delegate.Companion|.R|/Delegate.Companion.prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested return type ), this@R|/Delegate.Companion|.R|/Delegate.Companion.prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested nested return type ), this@R|/Delegate.Companion|.R|/Delegate.Companion.prop|))  kotlin/Int>>| {
             ^getValue this@R|/Delegate.Companion|.R|/Delegate.Companion.explicitType|()
         }
 
-        public open override operator [ResolvedTo(BODY_RESOLVE)] fun setValue([ResolvedTo(BODY_RESOLVE)] thisRef: R|kotlin/Any?|, [ResolvedTo(BODY_RESOLVE)] property: R|kotlin/reflect/KProperty<*>|, [ResolvedTo(BODY_RESOLVE)] value: R|@R|Anno|(position = <strcat>(String(setValue type ref ), this@R|/Delegate.Companion|.R|/Delegate.Companion.prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(setValue nested type ref ), this@R|/Delegate.Companion|.R|/Delegate.Companion.prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(setValue nested nested type ref ), this@R|/Delegate.Companion|.R|/Delegate.Companion.prop|))  kotlin/Int>>|): R|kotlin/Unit| {
+        public open override operator [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun setValue([ResolvedTo(BODY_RESOLVE)] thisRef: R|kotlin/Any?|, [ResolvedTo(BODY_RESOLVE)] property: R|kotlin/reflect/KProperty<*>|, [ResolvedTo(BODY_RESOLVE)] value: R|@R|Anno|(position = <strcat>(String(setValue type ref ), this@R|/Delegate.Companion|.R|/Delegate.Companion.prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(setValue nested type ref ), this@R|/Delegate.Companion|.R|/Delegate.Companion.prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(setValue nested nested type ref ), this@R|/Delegate.Companion|.R|/Delegate.Companion.prop|))  kotlin/Int>>|): R|kotlin/Unit| {
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] var propertyToResolve: R|@R|Anno|(position = <strcat>(String(explicitType return type ), this@R|/Delegate.Companion|.R|/Delegate.Companion.prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested return type ), this@R|/Delegate.Companion|.R|/Delegate.Companion.prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested nested return type ), this@R|/Delegate.Companion|.R|/Delegate.Companion.prop|))  kotlin/Int>>|by R|/Delegate.Delegate|()
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] var propertyToResolve: R|@R|Anno|(position = <strcat>(String(explicitType return type ), this@R|/Delegate.Companion|.R|/Delegate.Companion.prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested return type ), this@R|/Delegate.Companion|.R|/Delegate.Companion.prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested nested return type ), this@R|/Delegate.Companion|.R|/Delegate.Companion.prop|))  kotlin/Int>>|by R|/Delegate.Delegate|()
         public [ResolvedTo(BODY_RESOLVE)] get(): R|@R|Anno|(position = <strcat>(String(explicitType return type ), this@R|/Delegate.Companion|.R|/Delegate.Companion.prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested return type ), this@R|/Delegate.Companion|.R|/Delegate.Companion.prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested nested return type ), this@R|/Delegate.Companion|.R|/Delegate.Companion.prop|))  kotlin/Int>>| {
             ^ D|/propertyToResolve|.R|/Delegate.getValue|(Null(null), ::R|/propertyToResolve|)
         }

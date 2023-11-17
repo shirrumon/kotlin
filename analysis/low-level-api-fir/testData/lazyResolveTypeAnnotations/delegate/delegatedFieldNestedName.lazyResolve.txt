@@ -383,7 +383,7 @@ FILE: [ResolvedTo(IMPORTS)] delegatedFieldNestedName.kt
         public? [ResolvedTo(RAW_FIR)] get(): <implicit>
     public? final? const [ResolvedTo(RAW_FIR)] val inner: <implicit> = LAZY_EXPRESSION
         public? [ResolvedTo(RAW_FIR)] get(): <implicit>
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [DelegateFieldsMapKey={0=FirFieldSymbol second/MyClass.$$delegate_0, 1=FirFieldSymbol second/MyClass.$$delegate_1}] class MyClass : R|@R|second/Anno|(IntegerLiteral(0).plus#(outer#))  second/Base<@R|second/Anno|(IntegerLiteral(1).plus#(outer#))  second/Base<@R|second/Anno|(IntegerLiteral(2).plus#(outer#))  kotlin/Int>>|, R|@R|second/Anno|(IntegerLiteral(4).plus#(outer#))  second/Second<@R|second/Anno|(IntegerLiteral(5).plus#(outer#))  kotlin/String>| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [DelegateFieldsMapKey={0=FirFieldSymbol second/MyClass.$$delegate_0, 1=FirFieldSymbol second/MyClass.$$delegate_1}, ExpectForActualAttributeKey={}] class MyClass : R|@R|second/Anno|(IntegerLiteral(0).plus#(outer#))  second/Base<@R|second/Anno|(IntegerLiteral(1).plus#(outer#))  second/Base<@R|second/Anno|(IntegerLiteral(2).plus#(outer#))  kotlin/Int>>|, R|@R|second/Anno|(IntegerLiteral(4).plus#(outer#))  second/Second<@R|second/Anno|(IntegerLiteral(5).plus#(outer#))  kotlin/String>| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=MyClass] constructor(): R|second/MyClass| {
             LAZY_super<<implicit>>
         }
@@ -435,7 +435,7 @@ FILE: [ResolvedTo(IMPORTS)] delegatedFieldNestedName.kt
         public? [ResolvedTo(RAW_FIR)] get(): <implicit>
     public? final? const [ResolvedTo(RAW_FIR)] val inner: <implicit> = LAZY_EXPRESSION
         public? [ResolvedTo(RAW_FIR)] get(): <implicit>
-    public final [ResolvedTo(CONTRACTS)] [DelegateFieldsMapKey={0=FirFieldSymbol second/MyClass.$$delegate_0, 1=FirFieldSymbol second/MyClass.$$delegate_1}] class MyClass : R|@R|second/Anno|(IntegerLiteral(0).plus#(outer#))  second/Base<@R|second/Anno|(IntegerLiteral(1).plus#(outer#))  second/Base<@R|second/Anno|(IntegerLiteral(2).plus#(outer#))  kotlin/Int>>|, R|@R|second/Anno|(IntegerLiteral(4).plus#(outer#))  second/Second<@R|second/Anno|(IntegerLiteral(5).plus#(outer#))  kotlin/String>| {
+    public final [ResolvedTo(CONTRACTS)] [DelegateFieldsMapKey={0=FirFieldSymbol second/MyClass.$$delegate_0, 1=FirFieldSymbol second/MyClass.$$delegate_1}, ExpectForActualAttributeKey={}] class MyClass : R|@R|second/Anno|(IntegerLiteral(0).plus#(outer#))  second/Base<@R|second/Anno|(IntegerLiteral(1).plus#(outer#))  second/Base<@R|second/Anno|(IntegerLiteral(2).plus#(outer#))  kotlin/Int>>|, R|@R|second/Anno|(IntegerLiteral(4).plus#(outer#))  second/Second<@R|second/Anno|(IntegerLiteral(5).plus#(outer#))  kotlin/String>| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=MyClass] constructor(): R|second/MyClass| {
             LAZY_super<<implicit>>
         }
@@ -487,7 +487,7 @@ FILE: [ResolvedTo(IMPORTS)] delegatedFieldNestedName.kt
         public? [ResolvedTo(RAW_FIR)] get(): <implicit>
     public? final? const [ResolvedTo(RAW_FIR)] val inner: <implicit> = LAZY_EXPRESSION
         public? [ResolvedTo(RAW_FIR)] get(): <implicit>
-    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [DelegateFieldsMapKey={0=FirFieldSymbol second/MyClass.$$delegate_0, 1=FirFieldSymbol second/MyClass.$$delegate_1}] class MyClass : R|@R|second/Anno|(IntegerLiteral(0).plus#(outer#))  second/Base<@R|second/Anno|(IntegerLiteral(1).plus#(outer#))  second/Base<@R|second/Anno|(IntegerLiteral(2).plus#(outer#))  kotlin/Int>>|, R|@R|second/Anno|(IntegerLiteral(4).plus#(outer#))  second/Second<@R|second/Anno|(IntegerLiteral(5).plus#(outer#))  kotlin/String>| {
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [DelegateFieldsMapKey={0=FirFieldSymbol second/MyClass.$$delegate_0, 1=FirFieldSymbol second/MyClass.$$delegate_1}, ExpectForActualAttributeKey={}] class MyClass : R|@R|second/Anno|(IntegerLiteral(0).plus#(outer#))  second/Base<@R|second/Anno|(IntegerLiteral(1).plus#(outer#))  second/Base<@R|second/Anno|(IntegerLiteral(2).plus#(outer#))  kotlin/Int>>|, R|@R|second/Anno|(IntegerLiteral(4).plus#(outer#))  second/Second<@R|second/Anno|(IntegerLiteral(5).plus#(outer#))  kotlin/String>| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=MyClass] constructor(): R|second/MyClass| {
             LAZY_super<<implicit>>
         }
@@ -535,11 +535,11 @@ FILE: [ResolvedTo(IMPORTS)] delegatedFieldNestedName.kt
     }
     public abstract [ResolvedTo(STATUS)] interface Second<[ResolvedTo(STATUS)] T> : R|kotlin/Any| {
     }
-    public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val outer: R|kotlin/Int| = Int(0)
+    public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val outer: R|kotlin/Int| = Int(0)
         public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/Int|
     public? final? const [ResolvedTo(RAW_FIR)] val inner: <implicit> = LAZY_EXPRESSION
         public? [ResolvedTo(RAW_FIR)] get(): <implicit>
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [DelegateFieldsMapKey={0=FirFieldSymbol second/MyClass.$$delegate_0, 1=FirFieldSymbol second/MyClass.$$delegate_1}] class MyClass : R|@R|second/Anno|(i = Int(0).R|kotlin/Int.plus|(R|second/outer|))  second/Base<@R|second/Anno|(i = Int(1).R|kotlin/Int.plus|(R|second/outer|))  second/Base<@R|second/Anno|(i = Int(2).R|kotlin/Int.plus|(R|second/outer|))  kotlin/Int>>|, R|@R|second/Anno|(i = Int(4).R|kotlin/Int.plus|(R|second/outer|))  second/Second<@R|second/Anno|(i = Int(5).R|kotlin/Int.plus|(R|second/outer|))  kotlin/String>| {
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [DelegateFieldsMapKey={0=FirFieldSymbol second/MyClass.$$delegate_0, 1=FirFieldSymbol second/MyClass.$$delegate_1}, ExpectForActualAttributeKey={}] class MyClass : R|@R|second/Anno|(i = Int(0).R|kotlin/Int.plus|(R|second/outer|))  second/Base<@R|second/Anno|(i = Int(1).R|kotlin/Int.plus|(R|second/outer|))  second/Base<@R|second/Anno|(i = Int(2).R|kotlin/Int.plus|(R|second/outer|))  kotlin/Int>>|, R|@R|second/Anno|(i = Int(4).R|kotlin/Int.plus|(R|second/outer|))  second/Second<@R|second/Anno|(i = Int(5).R|kotlin/Int.plus|(R|second/outer|))  kotlin/String>| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=MyClass] constructor(): R|second/MyClass| {
             LAZY_super<<implicit>>
         }
@@ -587,11 +587,11 @@ FILE: [ResolvedTo(IMPORTS)] delegatedFieldNestedName.kt
     }
     public abstract [ResolvedTo(STATUS)] interface Second<[ResolvedTo(STATUS)] T> : R|kotlin/Any| {
     }
-    public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val outer: R|kotlin/Int| = Int(0)
+    public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val outer: R|kotlin/Int| = Int(0)
         public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/Int|
     public? final? const [ResolvedTo(RAW_FIR)] val inner: <implicit> = LAZY_EXPRESSION
         public? [ResolvedTo(RAW_FIR)] get(): <implicit>
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [DelegateFieldsMapKey={0=FirFieldSymbol second/MyClass.$$delegate_0, 1=FirFieldSymbol second/MyClass.$$delegate_1}] class MyClass : R|@R|second/Anno|(i = Int(0).R|kotlin/Int.plus|(R|second/outer|))  second/Base<@R|second/Anno|(i = Int(1).R|kotlin/Int.plus|(R|second/outer|))  second/Base<@R|second/Anno|(i = Int(2).R|kotlin/Int.plus|(R|second/outer|))  kotlin/Int>>|, R|@R|second/Anno|(i = Int(4).R|kotlin/Int.plus|(R|second/outer|))  second/Second<@R|second/Anno|(i = Int(5).R|kotlin/Int.plus|(R|second/outer|))  kotlin/String>| {
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [DelegateFieldsMapKey={0=FirFieldSymbol second/MyClass.$$delegate_0, 1=FirFieldSymbol second/MyClass.$$delegate_1}, ExpectForActualAttributeKey={}] class MyClass : R|@R|second/Anno|(i = Int(0).R|kotlin/Int.plus|(R|second/outer|))  second/Base<@R|second/Anno|(i = Int(1).R|kotlin/Int.plus|(R|second/outer|))  second/Base<@R|second/Anno|(i = Int(2).R|kotlin/Int.plus|(R|second/outer|))  kotlin/Int>>|, R|@R|second/Anno|(i = Int(4).R|kotlin/Int.plus|(R|second/outer|))  second/Second<@R|second/Anno|(i = Int(5).R|kotlin/Int.plus|(R|second/outer|))  kotlin/String>| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=MyClass] constructor(): R|second/MyClass| {
             LAZY_super<<implicit>>
         }
@@ -624,28 +624,28 @@ FILE: [ResolvedTo(IMPORTS)] delegatedFieldNestedName.kt
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] delegatedFieldNestedName.kt
-    @R|kotlin/annotation/Target|[Types](allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|)) public final [ResolvedTo(BODY_RESOLVE)] annotation class Anno : R|kotlin/Annotation| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=second/Anno.i] i: R|kotlin/Int|): R|second/Anno| {
+    @R|kotlin/annotation/Target|[Types](allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|)) public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] annotation class Anno : R|kotlin/Annotation| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=second/Anno.i] i: R|kotlin/Int|): R|second/Anno| {
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val i: R|kotlin/Int| = R|<local>/i|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val i: R|kotlin/Int| = R|<local>/i|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] get(): R|kotlin/Int|
 
     }
-    public abstract [ResolvedTo(BODY_RESOLVE)] interface Base<[ResolvedTo(BODY_RESOLVE)] A> : R|kotlin/Any| {
-        public open [ResolvedTo(BODY_RESOLVE)] fun foo(): R|kotlin/Unit| {
+    public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface Base<[ResolvedTo(BODY_RESOLVE)] A> : R|kotlin/Any| {
+        public open [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo(): R|kotlin/Unit| {
         }
 
     }
-    public abstract [ResolvedTo(BODY_RESOLVE)] interface Second<[ResolvedTo(BODY_RESOLVE)] T> : R|kotlin/Any| {
+    public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface Second<[ResolvedTo(BODY_RESOLVE)] T> : R|kotlin/Any| {
     }
-    public final const [ResolvedTo(BODY_RESOLVE)] val outer: R|kotlin/Int| = Int(0)
+    public final const [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val outer: R|kotlin/Int| = Int(0)
         public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/Int|
-    public final const [ResolvedTo(BODY_RESOLVE)] val inner: R|kotlin/String| = String()
+    public final const [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val inner: R|kotlin/String| = String()
         public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/String|
-    public final [ResolvedTo(BODY_RESOLVE)] [DelegateFieldsMapKey={0=FirFieldSymbol second/MyClass.$$delegate_0, 1=FirFieldSymbol second/MyClass.$$delegate_1}] class MyClass : R|@R|second/Anno|(i = Int(0).R|kotlin/Int.plus|(R|second/outer|))  second/Base<@R|second/Anno|(i = Int(1).R|kotlin/Int.plus|(R|second/outer|))  second/Base<@R|second/Anno|(i = Int(2).R|kotlin/Int.plus|(R|second/outer|))  kotlin/Int>>|, R|@R|second/Anno|(i = Int(4).R|kotlin/Int.plus|(R|second/outer|))  second/Second<@R|second/Anno|(i = Int(5).R|kotlin/Int.plus|(R|second/outer|))  kotlin/String>| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyClass] constructor(): R|second/MyClass| {
+    public final [ResolvedTo(BODY_RESOLVE)] [DelegateFieldsMapKey={0=FirFieldSymbol second/MyClass.$$delegate_0, 1=FirFieldSymbol second/MyClass.$$delegate_1}, ExpectForActualAttributeKey={}] class MyClass : R|@R|second/Anno|(i = Int(0).R|kotlin/Int.plus|(R|second/outer|))  second/Base<@R|second/Anno|(i = Int(1).R|kotlin/Int.plus|(R|second/outer|))  second/Base<@R|second/Anno|(i = Int(2).R|kotlin/Int.plus|(R|second/outer|))  kotlin/Int>>|, R|@R|second/Anno|(i = Int(4).R|kotlin/Int.plus|(R|second/outer|))  second/Second<@R|second/Anno|(i = Int(5).R|kotlin/Int.plus|(R|second/outer|))  kotlin/String>| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyClass, ExpectForActualAttributeKey={}] constructor(): R|second/MyClass| {
             super<R|kotlin/Any|>()
         }
 
@@ -653,21 +653,21 @@ FILE: [ResolvedTo(BODY_RESOLVE)] delegatedFieldNestedName.kt
 
         private final [ResolvedTo(BODY_RESOLVE)] field $$delegate_1: R|@R|second/Anno|(i = Int(4).R|kotlin/Int.plus|(R|second/outer|))  second/Second<@R|second/Anno|(i = Int(5).R|kotlin/Int.plus|(R|second/outer|))  kotlin/String>| = Q|second/MyClass.NestedObject|
 
-        public final companion [ResolvedTo(BODY_RESOLVE)] object Companion : R|@R|second/Anno|(i = Int(6).R|kotlin/Int.plus|(this@R|second/MyClass.Companion|.R|second/MyClass.Companion.inner|))  second/Base<@R|second/Anno|(i = Int(7).R|kotlin/Int.plus|(this@R|second/MyClass.Companion|.R|second/MyClass.Companion.inner|))  second/Base<@R|second/Anno|(i = Int(8).R|kotlin/Int.plus|(this@R|second/MyClass.Companion|.R|second/MyClass.Companion.inner|))  kotlin/Int>>| {
-            private [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Companion] constructor(): R|second/MyClass.Companion| {
+        public final companion [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] object Companion : R|@R|second/Anno|(i = Int(6).R|kotlin/Int.plus|(this@R|second/MyClass.Companion|.R|second/MyClass.Companion.inner|))  second/Base<@R|second/Anno|(i = Int(7).R|kotlin/Int.plus|(this@R|second/MyClass.Companion|.R|second/MyClass.Companion.inner|))  second/Base<@R|second/Anno|(i = Int(8).R|kotlin/Int.plus|(this@R|second/MyClass.Companion|.R|second/MyClass.Companion.inner|))  kotlin/Int>>| {
+            private [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Companion, ExpectForActualAttributeKey={}] constructor(): R|second/MyClass.Companion| {
                 super<R|kotlin/Any|>()
             }
 
-            public final const [ResolvedTo(BODY_RESOLVE)] val outer: R|kotlin/String| = String()
+            public final const [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val outer: R|kotlin/String| = String()
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Companion] get(): R|kotlin/String|
 
-            public final const [ResolvedTo(BODY_RESOLVE)] val inner: R|kotlin/Int| = Int(0)
+            public final const [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val inner: R|kotlin/Int| = Int(0)
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Companion] get(): R|kotlin/Int|
 
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] object NestedObject : R|@R|second/Anno|(i = Int(9).R|kotlin/Int.plus|(this@R|second/MyClass.Companion|.R|second/MyClass.Companion.inner|))  second/Second<@R|second/Anno|(i = Int(10).R|kotlin/Int.plus|(this@R|second/MyClass.Companion|.R|second/MyClass.Companion.inner|))  kotlin/String>| {
-            private [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=NestedObject] constructor(): R|second/MyClass.NestedObject| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] object NestedObject : R|@R|second/Anno|(i = Int(9).R|kotlin/Int.plus|(this@R|second/MyClass.Companion|.R|second/MyClass.Companion.inner|))  second/Second<@R|second/Anno|(i = Int(10).R|kotlin/Int.plus|(this@R|second/MyClass.Companion|.R|second/MyClass.Companion.inner|))  kotlin/String>| {
+            private [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=NestedObject, ExpectForActualAttributeKey={}] constructor(): R|second/MyClass.NestedObject| {
                 super<R|kotlin/Any|>()
             }
 

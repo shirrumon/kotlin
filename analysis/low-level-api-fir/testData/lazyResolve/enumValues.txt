@@ -139,7 +139,7 @@ FILE: [ResolvedTo(IMPORTS)] enumValues.kt
         }
 
         public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] enum entry ENTRY: R|one/MyEnum|
-        public final static [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=MyEnum] fun values(): R|kotlin/Array<one/MyEnum>| {
+        public final static [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=MyEnum, ExpectForActualAttributeKey={}] fun values(): R|kotlin/Array<one/MyEnum>| {
         }
 
         public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] fun valueOf([ResolvedTo(STATUS)] value: R|kotlin/String|): R|one/MyEnum| {
@@ -158,7 +158,7 @@ FILE: [ResolvedTo(IMPORTS)] enumValues.kt
         }
 
         public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] enum entry ENTRY: R|one/MyEnum|
-        public final static [ResolvedTo(CONTRACTS)] [ContainingClassKey=MyEnum] fun values(): R|kotlin/Array<one/MyEnum>| {
+        public final static [ResolvedTo(CONTRACTS)] [ContainingClassKey=MyEnum, ExpectForActualAttributeKey={}] fun values(): R|kotlin/Array<one/MyEnum>| {
         }
 
         public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] fun valueOf([ResolvedTo(STATUS)] value: R|kotlin/String|): R|one/MyEnum| {
@@ -177,7 +177,7 @@ FILE: [ResolvedTo(IMPORTS)] enumValues.kt
         }
 
         public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] enum entry ENTRY: R|one/MyEnum|
-        public final static [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=MyEnum] fun values(): R|kotlin/Array<one/MyEnum>| {
+        public final static [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=MyEnum, ExpectForActualAttributeKey={}] fun values(): R|kotlin/Array<one/MyEnum>| {
         }
 
         public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] fun valueOf([ResolvedTo(STATUS)] value: R|kotlin/String|): R|one/MyEnum| {
@@ -196,7 +196,7 @@ FILE: [ResolvedTo(IMPORTS)] enumValues.kt
         }
 
         public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] enum entry ENTRY: R|one/MyEnum|
-        public final static [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=MyEnum] fun values(): R|kotlin/Array<one/MyEnum>| {
+        public final static [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=MyEnum, ExpectForActualAttributeKey={}] fun values(): R|kotlin/Array<one/MyEnum>| {
         }
 
         public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] fun valueOf([ResolvedTo(STATUS)] value: R|kotlin/String|): R|one/MyEnum| {
@@ -215,7 +215,7 @@ FILE: [ResolvedTo(IMPORTS)] enumValues.kt
         }
 
         public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] enum entry ENTRY: R|one/MyEnum|
-        public final static [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyEnum] fun values(): R|kotlin/Array<one/MyEnum>| {
+        public final static [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyEnum, ExpectForActualAttributeKey={}] fun values(): R|kotlin/Array<one/MyEnum>| {
         }
 
         public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] fun valueOf([ResolvedTo(STATUS)] value: R|kotlin/String|): R|one/MyEnum| {
@@ -228,19 +228,19 @@ FILE: [ResolvedTo(IMPORTS)] enumValues.kt
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] enumValues.kt
-    public final [ResolvedTo(BODY_RESOLVE)] enum class MyEnum : R|kotlin/Enum<one/MyEnum>| {
-        private [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyEnum] constructor(): R|one/MyEnum| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] enum class MyEnum : R|kotlin/Enum<one/MyEnum>| {
+        private [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyEnum, ExpectForActualAttributeKey={}] constructor(): R|one/MyEnum| {
             super<R|kotlin/Enum<one/MyEnum>|>()
         }
 
-        public final static [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyEnum] enum entry ENTRY: R|one/MyEnum|
-        public final static [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyEnum] fun values(): R|kotlin/Array<one/MyEnum>| {
+        public final static [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyEnum, ExpectForActualAttributeKey={}] enum entry ENTRY: R|one/MyEnum|
+        public final static [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyEnum, ExpectForActualAttributeKey={}] fun values(): R|kotlin/Array<one/MyEnum>| {
         }
 
-        public final static [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyEnum] fun valueOf([ResolvedTo(BODY_RESOLVE)] value: R|kotlin/String|): R|one/MyEnum| {
+        public final static [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyEnum, ExpectForActualAttributeKey={}] fun valueOf([ResolvedTo(BODY_RESOLVE)] value: R|kotlin/String|): R|one/MyEnum| {
         }
 
-        public final static [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyEnum] val entries: R|kotlin/enums/EnumEntries<one/MyEnum>|
+        public final static [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyEnum, ExpectForActualAttributeKey={}] val entries: R|kotlin/enums/EnumEntries<one/MyEnum>|
             public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/enums/EnumEntries<one/MyEnum>|
 
     }

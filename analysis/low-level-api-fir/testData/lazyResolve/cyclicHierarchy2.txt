@@ -105,7 +105,7 @@ FILE: [ResolvedTo(IMPORTS)] cyclicHierarchy2.kt
 
 EXPECT_ACTUAL_MATCHING:
 FILE: [ResolvedTo(IMPORTS)] cyclicHierarchy2.kt
-    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface ResolveMe : <ERROR TYPE REF: Symbol not found for A>, <ERROR TYPE REF: Loop in supertype: /ResolveMe -> /E> {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] interface ResolveMe : <ERROR TYPE REF: Symbol not found for A>, <ERROR TYPE REF: Loop in supertype: /ResolveMe -> /E> {
     }
     public? final? [ResolvedTo(SUPER_TYPES)] interface C : <ERROR TYPE REF: Loop in supertype: /C -> /ResolveMe> {
     }
@@ -120,7 +120,7 @@ FILE: [ResolvedTo(IMPORTS)] cyclicHierarchy2.kt
 
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] cyclicHierarchy2.kt
-    public abstract [ResolvedTo(CONTRACTS)] interface ResolveMe : <ERROR TYPE REF: Symbol not found for A>, <ERROR TYPE REF: Loop in supertype: /ResolveMe -> /E> {
+    public abstract [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] interface ResolveMe : <ERROR TYPE REF: Symbol not found for A>, <ERROR TYPE REF: Loop in supertype: /ResolveMe -> /E> {
     }
     public? final? [ResolvedTo(SUPER_TYPES)] interface C : <ERROR TYPE REF: Loop in supertype: /C -> /ResolveMe> {
     }
@@ -135,7 +135,7 @@ FILE: [ResolvedTo(IMPORTS)] cyclicHierarchy2.kt
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] cyclicHierarchy2.kt
-    public abstract [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] interface ResolveMe : <ERROR TYPE REF: Symbol not found for A>, <ERROR TYPE REF: Loop in supertype: /ResolveMe -> /E> {
+    public abstract [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface ResolveMe : <ERROR TYPE REF: Symbol not found for A>, <ERROR TYPE REF: Loop in supertype: /ResolveMe -> /E> {
     }
     public? final? [ResolvedTo(SUPER_TYPES)] interface C : <ERROR TYPE REF: Loop in supertype: /C -> /ResolveMe> {
     }
@@ -150,7 +150,7 @@ FILE: [ResolvedTo(IMPORTS)] cyclicHierarchy2.kt
 
 ANNOTATION_ARGUMENTS:
 FILE: [ResolvedTo(IMPORTS)] cyclicHierarchy2.kt
-    public abstract [ResolvedTo(ANNOTATION_ARGUMENTS)] interface ResolveMe : <ERROR TYPE REF: Symbol not found for A>, <ERROR TYPE REF: Loop in supertype: /ResolveMe -> /E> {
+    public abstract [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] interface ResolveMe : <ERROR TYPE REF: Symbol not found for A>, <ERROR TYPE REF: Loop in supertype: /ResolveMe -> /E> {
     }
     public? final? [ResolvedTo(SUPER_TYPES)] interface C : <ERROR TYPE REF: Loop in supertype: /C -> /ResolveMe> {
     }
@@ -165,7 +165,7 @@ FILE: [ResolvedTo(IMPORTS)] cyclicHierarchy2.kt
 
 BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] cyclicHierarchy2.kt
-    public abstract [ResolvedTo(BODY_RESOLVE)] interface ResolveMe : <ERROR TYPE REF: Symbol not found for A>, <ERROR TYPE REF: Loop in supertype: /ResolveMe -> /E> {
+    public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface ResolveMe : <ERROR TYPE REF: Symbol not found for A>, <ERROR TYPE REF: Loop in supertype: /ResolveMe -> /E> {
     }
     public? final? [ResolvedTo(SUPER_TYPES)] interface C : <ERROR TYPE REF: Loop in supertype: /C -> /ResolveMe> {
     }
@@ -180,15 +180,15 @@ FILE: [ResolvedTo(IMPORTS)] cyclicHierarchy2.kt
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] cyclicHierarchy2.kt
-    public abstract [ResolvedTo(BODY_RESOLVE)] interface ResolveMe : <ERROR TYPE REF: Symbol not found for A>, <ERROR TYPE REF: Loop in supertype: /ResolveMe -> /E> {
+    public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface ResolveMe : <ERROR TYPE REF: Symbol not found for A>, <ERROR TYPE REF: Loop in supertype: /ResolveMe -> /E> {
     }
-    public abstract [ResolvedTo(BODY_RESOLVE)] interface C : <ERROR TYPE REF: Loop in supertype: /C -> /ResolveMe> {
+    public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface C : <ERROR TYPE REF: Loop in supertype: /C -> /ResolveMe> {
     }
-    public abstract [ResolvedTo(BODY_RESOLVE)] interface D : <ERROR TYPE REF: Loop in supertype: /D -> /ResolveMe> {
+    public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface D : <ERROR TYPE REF: Loop in supertype: /D -> /ResolveMe> {
     }
-    public abstract [ResolvedTo(BODY_RESOLVE)] interface E : <ERROR TYPE REF: Loop in supertype: /E -> /F> {
+    public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface E : <ERROR TYPE REF: Loop in supertype: /E -> /F> {
     }
-    public abstract [ResolvedTo(BODY_RESOLVE)] interface F : <ERROR TYPE REF: Loop in supertype: /F -> /D>, <ERROR TYPE REF: Loop in supertype: /F -> /C> {
+    public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface F : <ERROR TYPE REF: Loop in supertype: /F -> /D>, <ERROR TYPE REF: Loop in supertype: /F -> /C> {
     }
-    public abstract [ResolvedTo(BODY_RESOLVE)] interface NonLoopedInterface : R|C| {
+    public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface NonLoopedInterface : R|C| {
     }

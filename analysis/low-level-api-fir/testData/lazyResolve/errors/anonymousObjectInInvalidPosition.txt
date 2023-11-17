@@ -63,7 +63,7 @@ FILE: [ResolvedTo(IMPORTS)] anonymousObjectInInvalidPosition.kt
 
 EXPECT_ACTUAL_MATCHING:
 FILE: [ResolvedTo(IMPORTS)] anonymousObjectInInvalidPosition.kt
-    private final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] val resolveMe: <ERROR TYPE REF: Wrong number of type arguments> = LAZY_EXPRESSION
+    private final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] val resolveMe: <ERROR TYPE REF: Wrong number of type arguments> = LAZY_EXPRESSION
         private [ResolvedTo(EXPECT_ACTUAL_MATCHING)] get(): <ERROR TYPE REF: Wrong number of type arguments>
     public? final? [ResolvedTo(RAW_FIR)] interface A<[ResolvedTo(RAW_FIR)] T> : R|kotlin/Any| {
         public? final? [ResolvedTo(RAW_FIR)] fun x(): R|kotlin/Unit|
@@ -72,7 +72,7 @@ FILE: [ResolvedTo(IMPORTS)] anonymousObjectInInvalidPosition.kt
 
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] anonymousObjectInInvalidPosition.kt
-    private final [ResolvedTo(CONTRACTS)] val resolveMe: <ERROR TYPE REF: Wrong number of type arguments> = ERROR_EXPR(Should have initializer)Null(null) = object : A<Int> {
+    private final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] val resolveMe: <ERROR TYPE REF: Wrong number of type arguments> = ERROR_EXPR(Should have initializer)Null(null) = object : A<Int> {
         private [ResolvedTo(RAW_FIR)] [ContainingClassKey=<anonymous>] constructor(): R|<anonymous>| {
             super<<implicit>>()
         }
@@ -90,7 +90,7 @@ FILE: [ResolvedTo(IMPORTS)] anonymousObjectInInvalidPosition.kt
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] anonymousObjectInInvalidPosition.kt
-    private final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val resolveMe: <ERROR TYPE REF: Wrong number of type arguments> = ERROR_EXPR(Should have initializer)Null(null) = object : A<Int> {
+    private final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val resolveMe: <ERROR TYPE REF: Wrong number of type arguments> = ERROR_EXPR(Should have initializer)Null(null) = object : A<Int> {
         private [ResolvedTo(RAW_FIR)] [ContainingClassKey=<anonymous>] constructor(): R|<anonymous>| {
             super<<implicit>>()
         }
@@ -108,7 +108,7 @@ FILE: [ResolvedTo(IMPORTS)] anonymousObjectInInvalidPosition.kt
 
 ANNOTATION_ARGUMENTS:
 FILE: [ResolvedTo(IMPORTS)] anonymousObjectInInvalidPosition.kt
-    private final [ResolvedTo(ANNOTATION_ARGUMENTS)] val resolveMe: <ERROR TYPE REF: Wrong number of type arguments> = ERROR_EXPR(Should have initializer)Null(null) = object : A<Int> {
+    private final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] val resolveMe: <ERROR TYPE REF: Wrong number of type arguments> = ERROR_EXPR(Should have initializer)Null(null) = object : A<Int> {
         private [ResolvedTo(RAW_FIR)] [ContainingClassKey=<anonymous>] constructor(): R|<anonymous>| {
             super<<implicit>>()
         }
@@ -126,7 +126,7 @@ FILE: [ResolvedTo(IMPORTS)] anonymousObjectInInvalidPosition.kt
 
 BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] anonymousObjectInInvalidPosition.kt
-    private final [ResolvedTo(BODY_RESOLVE)] val resolveMe: <ERROR TYPE REF: Wrong number of type arguments> = ERROR_EXPR(Should have initializer)Null(null) = object : R|A<kotlin/Int>| {
+    private final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val resolveMe: <ERROR TYPE REF: Wrong number of type arguments> = ERROR_EXPR(Should have initializer)Null(null) = object : R|A<kotlin/Int>| {
         private [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=<anonymous>] constructor(): R|<anonymous>| {
             super<R|kotlin/Any|>()
         }
@@ -144,7 +144,7 @@ FILE: [ResolvedTo(IMPORTS)] anonymousObjectInInvalidPosition.kt
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] anonymousObjectInInvalidPosition.kt
-    private final [ResolvedTo(BODY_RESOLVE)] val resolveMe: <ERROR TYPE REF: Wrong number of type arguments> = ERROR_EXPR(Should have initializer)Null(null) = object : R|A<kotlin/Int>| {
+    private final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val resolveMe: <ERROR TYPE REF: Wrong number of type arguments> = ERROR_EXPR(Should have initializer)Null(null) = object : R|A<kotlin/Int>| {
         private [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=<anonymous>] constructor(): R|<anonymous>| {
             super<R|kotlin/Any|>()
         }
@@ -155,7 +155,7 @@ FILE: [ResolvedTo(BODY_RESOLVE)] anonymousObjectInInvalidPosition.kt
     }
 
         private [ResolvedTo(BODY_RESOLVE)] get(): <ERROR TYPE REF: Wrong number of type arguments>
-    public abstract [ResolvedTo(BODY_RESOLVE)] interface A<[ResolvedTo(BODY_RESOLVE)] T> : R|kotlin/Any| {
-        public abstract [ResolvedTo(BODY_RESOLVE)] fun x(): R|kotlin/Unit|
+    public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface A<[ResolvedTo(BODY_RESOLVE)] T> : R|kotlin/Any| {
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun x(): R|kotlin/Unit|
 
     }

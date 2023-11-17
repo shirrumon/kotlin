@@ -81,7 +81,7 @@ FILE: [ResolvedTo(IMPORTS)] parameterOfTopSetterScript.kts
     SCRIPT: [ResolvedTo(RAW_FIR)] <script-parameterOfTopSetterScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] var x: R|kotlin/Int| = LAZY_EXPRESSION
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] var x: R|kotlin/Int| = LAZY_EXPRESSION
             public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] get(): R|kotlin/Int|
             public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] set([ResolvedTo(EXPECT_ACTUAL_MATCHING)] resolveMe: R|kotlin/Int|): R|kotlin/Unit| { LAZY_BLOCK }
 
@@ -92,7 +92,7 @@ FILE: [ResolvedTo(IMPORTS)] parameterOfTopSetterScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-parameterOfTopSetterScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(CONTRACTS)] var x: R|kotlin/Int| = IntegerLiteral(2)
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] var x: R|kotlin/Int| = IntegerLiteral(2)
             public [ResolvedTo(CONTRACTS)] get(): R|kotlin/Int|
             public [ResolvedTo(CONTRACTS)] set([ResolvedTo(CONTRACTS)] resolveMe: R|kotlin/Int|): R|kotlin/Unit| {
                 ^ Unit#
@@ -105,7 +105,7 @@ FILE: [ResolvedTo(IMPORTS)] parameterOfTopSetterScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-parameterOfTopSetterScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] var x: R|kotlin/Int| = IntegerLiteral(2)
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] var x: R|kotlin/Int| = IntegerLiteral(2)
             public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/Int|
             public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] set([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] resolveMe: R|kotlin/Int|): R|kotlin/Unit| {
                 ^ Unit#
@@ -118,7 +118,7 @@ FILE: [ResolvedTo(IMPORTS)] parameterOfTopSetterScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-parameterOfTopSetterScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] var x: R|kotlin/Int| = IntegerLiteral(2)
+        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] var x: R|kotlin/Int| = IntegerLiteral(2)
             public [ResolvedTo(ANNOTATION_ARGUMENTS)] get(): R|kotlin/Int|
             public [ResolvedTo(ANNOTATION_ARGUMENTS)] set([ResolvedTo(ANNOTATION_ARGUMENTS)] resolveMe: R|kotlin/Int|): R|kotlin/Unit| {
                 ^ Unit#
@@ -131,7 +131,7 @@ FILE: [ResolvedTo(IMPORTS)] parameterOfTopSetterScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-parameterOfTopSetterScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] var x: R|kotlin/Int| = Int(2)
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] var x: R|kotlin/Int| = Int(2)
             public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/Int|
             public [ResolvedTo(BODY_RESOLVE)] set([ResolvedTo(BODY_RESOLVE)] resolveMe: R|kotlin/Int|): R|kotlin/Unit| {
                 ^ Q|kotlin/Unit|
@@ -144,7 +144,7 @@ FILE: [ResolvedTo(BODY_RESOLVE)] parameterOfTopSetterScript.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-parameterOfTopSetterScript.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] var x: R|kotlin/Int| = Int(2)
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] var x: R|kotlin/Int| = Int(2)
             public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/Int|
             public [ResolvedTo(BODY_RESOLVE)] set([ResolvedTo(BODY_RESOLVE)] resolveMe: R|kotlin/Int|): R|kotlin/Unit| {
                 ^ Q|kotlin/Unit|

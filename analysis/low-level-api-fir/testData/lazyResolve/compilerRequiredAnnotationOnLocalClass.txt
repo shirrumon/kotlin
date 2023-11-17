@@ -28,11 +28,11 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationOnLocalClass.kt
 
 EXPECT_ACTUAL_MATCHING:
 FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationOnLocalClass.kt
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun resolveMe(): R|kotlin/Unit| { LAZY_BLOCK }
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| { LAZY_BLOCK }
 
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationOnLocalClass.kt
-    public final [ResolvedTo(CONTRACTS)] fun resolveMe(): R|kotlin/Unit| {
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
         @Deprecated[Unresolved](message = String(), replaceWith = ReplaceWith#(expression = String(abc)), level = DeprecationLevel#.ERROR#) local final? [ResolvedTo(RAW_FIR)] class LocalClass : R|kotlin/Any| {
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=LocalClass] constructor(): R|<local>/LocalClass| {
                 super<R|kotlin/Any|>()
@@ -51,7 +51,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationOnLocalClass.kt
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationOnLocalClass.kt
-    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
         @Deprecated[Unresolved](message = String(), replaceWith = ReplaceWith#(expression = String(abc)), level = DeprecationLevel#.ERROR#) local final? [ResolvedTo(RAW_FIR)] class LocalClass : R|kotlin/Any| {
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=LocalClass] constructor(): R|<local>/LocalClass| {
                 super<R|kotlin/Any|>()
@@ -70,7 +70,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationOnLocalClass.kt
 
 ANNOTATION_ARGUMENTS:
 FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationOnLocalClass.kt
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] fun resolveMe(): R|kotlin/Unit| {
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
         @Deprecated[Unresolved](message = String(), replaceWith = ReplaceWith#(expression = String(abc)), level = DeprecationLevel#.ERROR#) local final? [ResolvedTo(RAW_FIR)] class LocalClass : R|kotlin/Any| {
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=LocalClass] constructor(): R|<local>/LocalClass| {
                 super<R|kotlin/Any|>()
@@ -89,7 +89,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationOnLocalClass.kt
 
 BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationOnLocalClass.kt
-    public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
         @R|kotlin/Deprecated|[Types](message = String(), replaceWith = R|kotlin/ReplaceWith.ReplaceWith|(expression = String(abc)), level = Q|kotlin/DeprecationLevel|.R|kotlin/DeprecationLevel.ERROR|) local final [ResolvedTo(BODY_RESOLVE)] class LocalClass : R|kotlin/Any| {
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=LocalClass] constructor(): R|<local>/LocalClass| {
                 super<R|kotlin/Any|>()
@@ -108,7 +108,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationOnLocalClass.kt
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] compilerRequiredAnnotationOnLocalClass.kt
-    public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
         @R|kotlin/Deprecated|[Types](message = String(), replaceWith = R|kotlin/ReplaceWith.ReplaceWith|(expression = String(abc)), level = Q|kotlin/DeprecationLevel|.R|kotlin/DeprecationLevel.ERROR|) local final [ResolvedTo(BODY_RESOLVE)] class LocalClass : R|kotlin/Any| {
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=LocalClass] constructor(): R|<local>/LocalClass| {
                 super<R|kotlin/Any|>()

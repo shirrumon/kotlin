@@ -187,7 +187,7 @@ FILE: [ResolvedTo(IMPORTS)] insideFunctionScript.kts
 
         public? final [ResolvedTo(RAW_FIR)] typealias MyTypeAlias = @TypeAnnWithArg[Unresolved](LAZY_EXPRESSION) List<@TypeAnnWithArg[Unresolved](LAZY_EXPRESSION) List<@TypeAnnWithArg[Unresolved](LAZY_EXPRESSION) Int>>
 
-        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun resolveMe([ResolvedTo(EXPECT_ACTUAL_MATCHING)] param: R|MyTypeAlias|): R|kotlin/Unit| { LAZY_BLOCK }
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun resolveMe([ResolvedTo(EXPECT_ACTUAL_MATCHING)] param: R|MyTypeAlias|): R|kotlin/Unit| { LAZY_BLOCK }
 
 
 CONTRACTS:
@@ -211,7 +211,7 @@ FILE: [ResolvedTo(IMPORTS)] insideFunctionScript.kts
 
         public? final [ResolvedTo(RAW_FIR)] typealias MyTypeAlias = @TypeAnnWithArg[Unresolved](LAZY_EXPRESSION) List<@TypeAnnWithArg[Unresolved](LAZY_EXPRESSION) List<@TypeAnnWithArg[Unresolved](LAZY_EXPRESSION) Int>>
 
-        public final [ResolvedTo(CONTRACTS)] fun resolveMe([ResolvedTo(CONTRACTS)] param: R|MyTypeAlias|): R|kotlin/Unit| {
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun resolveMe([ResolvedTo(CONTRACTS)] param: R|MyTypeAlias|): R|kotlin/Unit| {
         }
 
 
@@ -236,7 +236,7 @@ FILE: [ResolvedTo(IMPORTS)] insideFunctionScript.kts
 
         public? final [ResolvedTo(RAW_FIR)] typealias MyTypeAlias = @TypeAnnWithArg[Unresolved](LAZY_EXPRESSION) List<@TypeAnnWithArg[Unresolved](LAZY_EXPRESSION) List<@TypeAnnWithArg[Unresolved](LAZY_EXPRESSION) Int>>
 
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun resolveMe([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] param: R|MyTypeAlias|): R|kotlin/Unit| {
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] param: R|MyTypeAlias|): R|kotlin/Unit| {
         }
 
 
@@ -261,7 +261,7 @@ FILE: [ResolvedTo(IMPORTS)] insideFunctionScript.kts
 
         public? final [ResolvedTo(RAW_FIR)] typealias MyTypeAlias = @TypeAnnWithArg[Unresolved](LAZY_EXPRESSION) List<@TypeAnnWithArg[Unresolved](LAZY_EXPRESSION) List<@TypeAnnWithArg[Unresolved](LAZY_EXPRESSION) Int>>
 
-        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] fun resolveMe([ResolvedTo(ANNOTATION_ARGUMENTS)] param: R|MyTypeAlias|): R|kotlin/Unit| {
+        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun resolveMe([ResolvedTo(ANNOTATION_ARGUMENTS)] param: R|MyTypeAlias|): R|kotlin/Unit| {
         }
 
 
@@ -286,7 +286,7 @@ FILE: [ResolvedTo(IMPORTS)] insideFunctionScript.kts
 
         public? final [ResolvedTo(RAW_FIR)] typealias MyTypeAlias = @TypeAnnWithArg[Unresolved](LAZY_EXPRESSION) List<@TypeAnnWithArg[Unresolved](LAZY_EXPRESSION) List<@TypeAnnWithArg[Unresolved](LAZY_EXPRESSION) Int>>
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe([ResolvedTo(BODY_RESOLVE)] param: R|MyTypeAlias|): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe([ResolvedTo(BODY_RESOLVE)] param: R|MyTypeAlias|): R|kotlin/Unit| {
         }
 
 
@@ -296,20 +296,20 @@ FILE: [ResolvedTo(BODY_RESOLVE)] insideFunctionScript.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-insideFunctionScript.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        @R|kotlin/annotation/Target|[Types](allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|)) public final [ResolvedTo(BODY_RESOLVE)] annotation class TypeAnnWithArg : R|kotlin/Annotation| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TypeAnnWithArg] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/TypeAnnWithArg.arg] arg: R|kotlin/String|): R|TypeAnnWithArg| {
+        @R|kotlin/annotation/Target|[Types](allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|)) public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] annotation class TypeAnnWithArg : R|kotlin/Annotation| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TypeAnnWithArg, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/TypeAnnWithArg.arg] arg: R|kotlin/String|): R|TypeAnnWithArg| {
                 super<R|kotlin/Any|>()
             }
 
-            public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val arg: R|kotlin/String| = R|<local>/arg|
+            public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val arg: R|kotlin/String| = R|<local>/arg|
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TypeAnnWithArg] get(): R|kotlin/String|
 
         }
 
-        public final const [ResolvedTo(BODY_RESOLVE)] val constant: R|kotlin/Int| = Int(0)
+        public final const [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val constant: R|kotlin/Int| = Int(0)
             public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/Int|
 
-        public final [ResolvedTo(BODY_RESOLVE)] typealias MyTypeAlias = R|@R|TypeAnnWithArg|(arg = <strcat>(String(type: ), R|/constant|))  kotlin/collections/List<@R|TypeAnnWithArg|(arg = <strcat>(String(nested type: ), R|/constant|))  kotlin/collections/List<@R|TypeAnnWithArg|(arg = <strcat>(String(nested nested type: ), R|/constant|))  kotlin/Int>>|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] typealias MyTypeAlias = R|@R|TypeAnnWithArg|(arg = <strcat>(String(type: ), R|/constant|))  kotlin/collections/List<@R|TypeAnnWithArg|(arg = <strcat>(String(nested type: ), R|/constant|))  kotlin/collections/List<@R|TypeAnnWithArg|(arg = <strcat>(String(nested nested type: ), R|/constant|))  kotlin/Int>>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe([ResolvedTo(BODY_RESOLVE)] param: R|MyTypeAlias|): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe([ResolvedTo(BODY_RESOLVE)] param: R|MyTypeAlias|): R|kotlin/Unit| {
         }

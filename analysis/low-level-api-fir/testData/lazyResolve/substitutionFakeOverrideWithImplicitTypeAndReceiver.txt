@@ -22,7 +22,7 @@ FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideWithImplicitTypeAndReceiver.
     }
 
 EXPECT_ACTUAL_MATCHING:
-TARGET: public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [CallableCopySubstitutionKey=CallableCopySubstitution(substitutor={T -> kotlin/Int}, baseSymbol=FirPropertySymbol /AbstractClass.property), SubstitutedOverrideOriginalKey=/AbstractClass.property] val R|kotlin/Int|.property: <implicit>
+TARGET: public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [CallableCopySubstitutionKey=CallableCopySubstitution(substitutor={T -> kotlin/Int}, baseSymbol=FirPropertySymbol /AbstractClass.property), ExpectForActualAttributeKey={}, SubstitutedOverrideOriginalKey=/AbstractClass.property] val R|kotlin/Int|.property: <implicit>
 
 
 FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideWithImplicitTypeAndReceiver.kt
@@ -37,7 +37,7 @@ FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideWithImplicitTypeAndReceiver.
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] val R|T|.property: <implicit> = LAZY_EXPRESSION
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] val R|T|.property: <implicit> = LAZY_EXPRESSION
             public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=AbstractClass] get(): <implicit>
 
         public abstract [ResolvedTo(STATUS)] fun foo(): R|T|
@@ -45,7 +45,7 @@ FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideWithImplicitTypeAndReceiver.
     }
 
 CONTRACTS:
-TARGET: public final [ResolvedTo(CONTRACTS)] [CallableCopySubstitutionKey=CallableCopySubstitution(substitutor={T -> kotlin/Int}, baseSymbol=FirPropertySymbol /AbstractClass.property), SubstitutedOverrideOriginalKey=/AbstractClass.property] val R|kotlin/Int|.property: <implicit>
+TARGET: public final [ResolvedTo(CONTRACTS)] [CallableCopySubstitutionKey=CallableCopySubstitution(substitutor={T -> kotlin/Int}, baseSymbol=FirPropertySymbol /AbstractClass.property), ExpectForActualAttributeKey={}, SubstitutedOverrideOriginalKey=/AbstractClass.property] val R|kotlin/Int|.property: <implicit>
 
 
 FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideWithImplicitTypeAndReceiver.kt
@@ -60,7 +60,7 @@ FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideWithImplicitTypeAndReceiver.
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(CONTRACTS)] val R|T|.property: <implicit> = foo#()
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] val R|T|.property: <implicit> = foo#()
             public [ResolvedTo(CONTRACTS)] [ContainingClassKey=AbstractClass] get(): <implicit>
 
         public abstract [ResolvedTo(STATUS)] fun foo(): R|T|
@@ -68,7 +68,7 @@ FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideWithImplicitTypeAndReceiver.
     }
 
 IMPLICIT_TYPES_BODY_RESOLVE:
-TARGET: public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [SubstitutedOverrideOriginalKey=/AbstractClass.property] val R|kotlin/Int|.property: R|kotlin/Int|
+TARGET: public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}, SubstitutedOverrideOriginalKey=/AbstractClass.property] val R|kotlin/Int|.property: R|kotlin/Int|
 
 
 FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideWithImplicitTypeAndReceiver.kt
@@ -83,15 +83,15 @@ FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideWithImplicitTypeAndReceiver.
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val R|T|.property: R|T| = this@R|/AbstractClass|.R|/AbstractClass.foo|()
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val R|T|.property: R|T| = this@R|/AbstractClass|.R|/AbstractClass.foo|()
             public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=AbstractClass] get(): R|T|
 
-        public abstract [ResolvedTo(CONTRACTS)] fun foo(): R|T|
+        public abstract [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun foo(): R|T|
 
     }
 
 ANNOTATION_ARGUMENTS:
-TARGET: public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [SubstitutedOverrideOriginalKey=/AbstractClass.property] val R|kotlin/Int|.property: R|kotlin/Int|
+TARGET: public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}, SubstitutedOverrideOriginalKey=/AbstractClass.property] val R|kotlin/Int|.property: R|kotlin/Int|
 
 
 FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideWithImplicitTypeAndReceiver.kt
@@ -106,15 +106,15 @@ FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideWithImplicitTypeAndReceiver.
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] val R|T|.property: R|T| = this@R|/AbstractClass|.R|/AbstractClass.foo|()
+        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] val R|T|.property: R|T| = this@R|/AbstractClass|.R|/AbstractClass.foo|()
             public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=AbstractClass] get(): R|T|
 
-        public abstract [ResolvedTo(CONTRACTS)] fun foo(): R|T|
+        public abstract [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun foo(): R|T|
 
     }
 
 BODY_RESOLVE:
-TARGET: public final [ResolvedTo(BODY_RESOLVE)] [SubstitutedOverrideOriginalKey=/AbstractClass.property] val R|kotlin/Int|.property: R|kotlin/Int|
+TARGET: public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, SubstitutedOverrideOriginalKey=/AbstractClass.property] val R|kotlin/Int|.property: R|kotlin/Int|
 
 
 FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideWithImplicitTypeAndReceiver.kt
@@ -129,29 +129,29 @@ FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideWithImplicitTypeAndReceiver.
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] val R|T|.property: R|T| = this@R|/AbstractClass|.R|/AbstractClass.foo|()
+        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] val R|T|.property: R|T| = this@R|/AbstractClass|.R|/AbstractClass.foo|()
             public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=AbstractClass] get(): R|T|
 
-        public abstract [ResolvedTo(CONTRACTS)] fun foo(): R|T|
+        public abstract [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun foo(): R|T|
 
     }
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] substitutionFakeOverrideWithImplicitTypeAndReceiver.kt
-    public abstract [ResolvedTo(BODY_RESOLVE)] class SubClass : R|AbstractClass<kotlin/Int>| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=SubClass] constructor(): R|SubClass| {
+    public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class SubClass : R|AbstractClass<kotlin/Int>| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=SubClass, ExpectForActualAttributeKey={}] constructor(): R|SubClass| {
             super<R|AbstractClass<kotlin/Int>|>()
         }
 
     }
-    public abstract [ResolvedTo(BODY_RESOLVE)] class AbstractClass<[ResolvedTo(BODY_RESOLVE)] T> : R|kotlin/Any| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(BODY_RESOLVE)] T>(): R|AbstractClass<T>| {
+    public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class AbstractClass<[ResolvedTo(BODY_RESOLVE)] T> : R|kotlin/Any| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=AbstractClass, ExpectForActualAttributeKey={}] constructor<[ResolvedTo(BODY_RESOLVE)] T>(): R|AbstractClass<T>| {
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] val R|T|.property: R|T| = this@R|/AbstractClass|.R|/AbstractClass.foo|()
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val R|T|.property: R|T| = this@R|/AbstractClass|.R|/AbstractClass.foo|()
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=AbstractClass] get(): R|T|
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] fun foo(): R|T|
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo(): R|T|
 
     }

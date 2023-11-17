@@ -226,7 +226,7 @@ FILE: [ResolvedTo(IMPORTS)] constructorCallSite.kt
 
         }
 
-        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun <[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T2> createP2(): R|@R|Anno|(String(return type))  P1.P2<@R|Anno|(String(nested return type))  T2, T1>| { LAZY_BLOCK }
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T2> createP2(): R|@R|Anno|(String(return type))  P1.P2<@R|Anno|(String(nested return type))  T2, T1>| { LAZY_BLOCK }
 
     }
 
@@ -255,7 +255,7 @@ FILE: [ResolvedTo(IMPORTS)] constructorCallSite.kt
 
         }
 
-        public final [ResolvedTo(CONTRACTS)] fun <[ResolvedTo(CONTRACTS)] T2> createP2(): R|@R|Anno|(String(return type))  P1.P2<@R|Anno|(String(nested return type))  T2, T1>| {
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(CONTRACTS)] T2> createP2(): R|@R|Anno|(String(return type))  P1.P2<@R|Anno|(String(nested return type))  T2, T1>| {
             ^createP2 P2#()
         }
 
@@ -286,7 +286,7 @@ FILE: [ResolvedTo(IMPORTS)] constructorCallSite.kt
 
         }
 
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun <[ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] T2> createP2(): R|@R|Anno|(String(return type))  P1.P2<@R|Anno|(String(nested return type))  T2, T1>| {
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] T2> createP2(): R|@R|Anno|(String(return type))  P1.P2<@R|Anno|(String(nested return type))  T2, T1>| {
             ^createP2 P2#()
         }
 
@@ -317,7 +317,7 @@ FILE: [ResolvedTo(IMPORTS)] constructorCallSite.kt
 
         }
 
-        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] fun <[ResolvedTo(ANNOTATION_ARGUMENTS)] T2> createP2(): R|@R|Anno|(str = String(return type))  P1.P2<@R|Anno|(str = String(nested return type))  T2, T1>| {
+        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(ANNOTATION_ARGUMENTS)] T2> createP2(): R|@R|Anno|(str = String(return type))  P1.P2<@R|Anno|(str = String(nested return type))  T2, T1>| {
             ^createP2 P2#()
         }
 
@@ -339,8 +339,8 @@ FILE: [ResolvedTo(IMPORTS)] constructorCallSite.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final inner [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class P2<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T2, [ResolvedTo(STATUS)] Outer(T1)> : R|@R|Anno|(String(P1 super type))  P1<@R|Anno|(String(nested P1 super type))  T1>| {
-            public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=P2] P1<T1>.constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T2>([ResolvedTo(EXPECT_ACTUAL_MATCHING)] i: R|kotlin/String|): R|P1.P2<T2, T1>| {
+        public final inner [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class P2<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T2, [ResolvedTo(STATUS)] Outer(T1)> : R|@R|Anno|(String(P1 super type))  P1<@R|Anno|(String(nested P1 super type))  T1>| {
+            public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=P2, ExpectForActualAttributeKey={}] P1<T1>.constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T2>([ResolvedTo(EXPECT_ACTUAL_MATCHING)] i: R|kotlin/String|): R|P1.P2<T2, T1>| {
                 LAZY_super<R|@R|Anno|(String(P1 super type))  P1<@R|Anno|(String(nested P1 super type))  T1>|>
             }
 
@@ -348,7 +348,7 @@ FILE: [ResolvedTo(IMPORTS)] constructorCallSite.kt
 
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun <[ResolvedTo(BODY_RESOLVE)] T2> createP2(): R|@R|Anno|(str = String(return type))  P1.P2<@R|Anno|(str = String(nested return type))  T2, T1>| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(BODY_RESOLVE)] T2> createP2(): R|@R|Anno|(str = String(return type))  P1.P2<@R|Anno|(str = String(nested return type))  T2, T1>| {
             ^createP2 this@R|/P1|.R|SubstitutionOverride</P1.P2.P2>|<R|@R|Anno|(str = String(nested return type))  T2|>()
         }
 
@@ -356,32 +356,32 @@ FILE: [ResolvedTo(IMPORTS)] constructorCallSite.kt
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] constructorCallSite.kt
-    @R|kotlin/annotation/Target|[Types](allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|)) public final [ResolvedTo(BODY_RESOLVE)] annotation class Anno : R|kotlin/Annotation| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/Anno.str] str: R|kotlin/String|): R|Anno| {
+    @R|kotlin/annotation/Target|[Types](allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|)) public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] annotation class Anno : R|kotlin/Annotation| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/Anno.str] str: R|kotlin/String|): R|Anno| {
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val str: R|kotlin/String| = R|<local>/str|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val str: R|kotlin/String| = R|<local>/str|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
-    public open [ResolvedTo(BODY_RESOLVE)] class P1<[ResolvedTo(BODY_RESOLVE)] T1> : R|kotlin/Any| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=P1] constructor<[ResolvedTo(BODY_RESOLVE)] T1>(): R|P1<T1>| {
+    public open [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class P1<[ResolvedTo(BODY_RESOLVE)] T1> : R|kotlin/Any| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=P1, ExpectForActualAttributeKey={}] constructor<[ResolvedTo(BODY_RESOLVE)] T1>(): R|P1<T1>| {
             super<R|kotlin/Any|>()
         }
 
-        public final inner [ResolvedTo(BODY_RESOLVE)] class P2<[ResolvedTo(BODY_RESOLVE)] T2, [ResolvedTo(BODY_RESOLVE)] Outer(T1)> : R|@R|Anno|(str = String(P1 super type))  P1<@R|Anno|(str = String(nested P1 super type))  T1>| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=P2] P1<T1>.constructor<[ResolvedTo(BODY_RESOLVE)] T2>([ResolvedTo(BODY_RESOLVE)] i: R|kotlin/String|): R|P1.P2<T2, T1>| {
+        public final inner [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class P2<[ResolvedTo(BODY_RESOLVE)] T2, [ResolvedTo(BODY_RESOLVE)] Outer(T1)> : R|@R|Anno|(str = String(P1 super type))  P1<@R|Anno|(str = String(nested P1 super type))  T1>| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=P2, ExpectForActualAttributeKey={}] P1<T1>.constructor<[ResolvedTo(BODY_RESOLVE)] T2>([ResolvedTo(BODY_RESOLVE)] i: R|kotlin/String|): R|P1.P2<T2, T1>| {
                 super<R|@R|Anno|(str = String(P1 super type))  P1<@R|Anno|(str = String(nested P1 super type))  T1>|>()
             }
 
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=P2] P1<T1>.constructor<[ResolvedTo(BODY_RESOLVE)] T2>(): R|P1.P2<T2, T1>| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=P2, ExpectForActualAttributeKey={}] P1<T1>.constructor<[ResolvedTo(BODY_RESOLVE)] T2>(): R|P1.P2<T2, T1>| {
                 this@R|/P1|.this<R|P1.P2<T2, T1>|>(String(OK))
             }
 
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun <[ResolvedTo(BODY_RESOLVE)] T2> createP2(): R|@R|Anno|(str = String(return type))  P1.P2<@R|Anno|(str = String(nested return type))  T2, T1>| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(BODY_RESOLVE)] T2> createP2(): R|@R|Anno|(str = String(return type))  P1.P2<@R|Anno|(str = String(nested return type))  T2, T1>| {
             ^createP2 this@R|/P1|.R|SubstitutionOverride</P1.P2.P2>|<R|@R|Anno|(str = String(nested return type))  T2|>()
         }
 

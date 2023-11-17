@@ -28,11 +28,11 @@ FILE: [ResolvedTo(IMPORTS)] contract.kt
 
 EXPECT_ACTUAL_MATCHING:
 FILE: [ResolvedTo(IMPORTS)] contract.kt
-    public final inline [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun foo([ResolvedTo(EXPECT_ACTUAL_MATCHING)] block: R|() -> kotlin/Unit|): R|kotlin/Unit| { LAZY_BLOCK }
+    public final inline [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun foo([ResolvedTo(EXPECT_ACTUAL_MATCHING)] block: R|() -> kotlin/Unit|): R|kotlin/Unit| { LAZY_BLOCK }
 
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] contract.kt
-    public final inline [ResolvedTo(CONTRACTS)] fun foo([ResolvedTo(CONTRACTS)] block: R|() -> kotlin/Unit|): R|kotlin/Unit|
+    public final inline [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun foo([ResolvedTo(CONTRACTS)] block: R|() -> kotlin/Unit|): R|kotlin/Unit|
         [R|Contract description]
          <
             CallsInPlace(block, EXACTLY_ONCE)
@@ -50,7 +50,7 @@ FILE: [ResolvedTo(IMPORTS)] contract.kt
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] contract.kt
-    public final inline [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun foo([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] block: R|() -> kotlin/Unit|): R|kotlin/Unit|
+    public final inline [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] block: R|() -> kotlin/Unit|): R|kotlin/Unit|
         [R|Contract description]
          <
             CallsInPlace(block, EXACTLY_ONCE)
@@ -68,7 +68,7 @@ FILE: [ResolvedTo(IMPORTS)] contract.kt
 
 ANNOTATION_ARGUMENTS:
 FILE: [ResolvedTo(IMPORTS)] contract.kt
-    public final inline [ResolvedTo(ANNOTATION_ARGUMENTS)] fun foo([ResolvedTo(ANNOTATION_ARGUMENTS)] block: R|() -> kotlin/Unit|): R|kotlin/Unit|
+    public final inline [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun foo([ResolvedTo(ANNOTATION_ARGUMENTS)] block: R|() -> kotlin/Unit|): R|kotlin/Unit|
         [R|Contract description]
          <
             CallsInPlace(block, EXACTLY_ONCE)
@@ -86,7 +86,7 @@ FILE: [ResolvedTo(IMPORTS)] contract.kt
 
 BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] contract.kt
-    public final inline [ResolvedTo(BODY_RESOLVE)] fun foo([ResolvedTo(BODY_RESOLVE)] block: R|() -> kotlin/Unit|): R|kotlin/Unit|
+    public final inline [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo([ResolvedTo(BODY_RESOLVE)] block: R|() -> kotlin/Unit|): R|kotlin/Unit|
         [R|Contract description]
          <
             CallsInPlace(block, EXACTLY_ONCE)
@@ -104,7 +104,7 @@ FILE: [ResolvedTo(IMPORTS)] contract.kt
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] contract.kt
-    public final inline [ResolvedTo(BODY_RESOLVE)] fun foo([ResolvedTo(BODY_RESOLVE)] block: R|() -> kotlin/Unit|): R|kotlin/Unit|
+    public final inline [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo([ResolvedTo(BODY_RESOLVE)] block: R|() -> kotlin/Unit|): R|kotlin/Unit|
         [R|Contract description]
          <
             CallsInPlace(block, EXACTLY_ONCE)

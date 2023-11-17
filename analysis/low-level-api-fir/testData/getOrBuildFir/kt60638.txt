@@ -21,10 +21,10 @@ FILE: [ResolvedTo(IMPORTS)] kt60638.kt
         }
 
     }
-    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val R|usage/MyClass|.isInterface: R|kotlin/Int|
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val R|usage/MyClass|.isInterface: R|kotlin/Int|
         public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/Int| {
             ^ Int(4)
         }
-    public final [ResolvedTo(BODY_RESOLVE)] fun usage([ResolvedTo(BODY_RESOLVE)] type: R|usage/MyType|): R|kotlin/Unit| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun usage([ResolvedTo(BODY_RESOLVE)] type: R|usage/MyType|): R|kotlin/Unit| {
         R|<local>/type|.<Expression 'isInterface' of type 'kotlin/Int' cannot be invoked as a function>#()
     }

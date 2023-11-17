@@ -11,6 +11,6 @@ FILE: [ResolvedTo(IMPORTS)] arrayAccessExpressionScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-arrayAccessExpressionScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun foo([ResolvedTo(BODY_RESOLVE)] x: R|kotlin/collections/List<kotlin/Int>|): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo([ResolvedTo(BODY_RESOLVE)] x: R|kotlin/collections/List<kotlin/Int>|): R|kotlin/Unit| {
             [ResolvedTo(BODY_RESOLVE)] lval a: R|kotlin/Int| = R|<local>/x|.R|SubstitutionOverride<kotlin/collections/List.get: R|kotlin/Int|>|(Int(1))
         }

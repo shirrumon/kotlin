@@ -67,7 +67,7 @@ FILE: [ResolvedTo(IMPORTS)] contractScript.kts
     SCRIPT: [ResolvedTo(RAW_FIR)] <script-contractScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final inline [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun foo([ResolvedTo(EXPECT_ACTUAL_MATCHING)] block: R|() -> kotlin/Unit|): R|kotlin/Unit| { LAZY_BLOCK }
+        public final inline [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun foo([ResolvedTo(EXPECT_ACTUAL_MATCHING)] block: R|() -> kotlin/Unit|): R|kotlin/Unit| { LAZY_BLOCK }
 
 
 CONTRACTS:
@@ -76,7 +76,7 @@ FILE: [ResolvedTo(IMPORTS)] contractScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-contractScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final inline [ResolvedTo(CONTRACTS)] fun foo([ResolvedTo(CONTRACTS)] block: R|() -> kotlin/Unit|): R|kotlin/Unit|
+        public final inline [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun foo([ResolvedTo(CONTRACTS)] block: R|() -> kotlin/Unit|): R|kotlin/Unit|
             [R|Contract description]
              <
                 CallsInPlace(block, EXACTLY_ONCE)
@@ -99,7 +99,7 @@ FILE: [ResolvedTo(IMPORTS)] contractScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-contractScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final inline [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun foo([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] block: R|() -> kotlin/Unit|): R|kotlin/Unit|
+        public final inline [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] block: R|() -> kotlin/Unit|): R|kotlin/Unit|
             [R|Contract description]
              <
                 CallsInPlace(block, EXACTLY_ONCE)
@@ -122,7 +122,7 @@ FILE: [ResolvedTo(IMPORTS)] contractScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-contractScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final inline [ResolvedTo(ANNOTATION_ARGUMENTS)] fun foo([ResolvedTo(ANNOTATION_ARGUMENTS)] block: R|() -> kotlin/Unit|): R|kotlin/Unit|
+        public final inline [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun foo([ResolvedTo(ANNOTATION_ARGUMENTS)] block: R|() -> kotlin/Unit|): R|kotlin/Unit|
             [R|Contract description]
              <
                 CallsInPlace(block, EXACTLY_ONCE)
@@ -145,7 +145,7 @@ FILE: [ResolvedTo(IMPORTS)] contractScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-contractScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final inline [ResolvedTo(BODY_RESOLVE)] fun foo([ResolvedTo(BODY_RESOLVE)] block: R|() -> kotlin/Unit|): R|kotlin/Unit|
+        public final inline [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo([ResolvedTo(BODY_RESOLVE)] block: R|() -> kotlin/Unit|): R|kotlin/Unit|
             [R|Contract description]
              <
                 CallsInPlace(block, EXACTLY_ONCE)
@@ -168,7 +168,7 @@ FILE: [ResolvedTo(BODY_RESOLVE)] contractScript.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-contractScript.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final inline [ResolvedTo(BODY_RESOLVE)] fun foo([ResolvedTo(BODY_RESOLVE)] block: R|() -> kotlin/Unit|): R|kotlin/Unit|
+        public final inline [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo([ResolvedTo(BODY_RESOLVE)] block: R|() -> kotlin/Unit|): R|kotlin/Unit|
             [R|Contract description]
              <
                 CallsInPlace(block, EXACTLY_ONCE)

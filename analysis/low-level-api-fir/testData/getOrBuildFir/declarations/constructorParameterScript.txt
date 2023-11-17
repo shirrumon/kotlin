@@ -11,8 +11,8 @@ FILE: [ResolvedTo(IMPORTS)] constructorParameterScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-constructorParameterScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] class X : R|kotlin/Any| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=X] constructor([ResolvedTo(BODY_RESOLVE)] resolveMe: R|kotlin/Int| = Int(5)): R|X| {
+        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] class X : R|kotlin/Any| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=X, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] resolveMe: R|kotlin/Int| = Int(5)): R|X| {
                 super<R|kotlin/Any|>()
             }
 

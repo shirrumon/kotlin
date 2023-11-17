@@ -63,7 +63,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationWithNamedFunctionArgument.kt
 
 EXPECT_ACTUAL_MATCHING:
 FILE: [ResolvedTo(IMPORTS)] annotationWithNamedFunctionArgument.kt
-    @<ERROR TYPE REF: Symbol not found for Anno>[Types](LAZY_EXPRESSION) public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class TopLevelClass : R|kotlin/Any| {
+    @<ERROR TYPE REF: Symbol not found for Anno>[Types](LAZY_EXPRESSION) public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|kotlin/Any| {
         public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=TopLevelClass] constructor(): R|TopLevelClass| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -72,7 +72,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationWithNamedFunctionArgument.kt
 
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] annotationWithNamedFunctionArgument.kt
-    @<ERROR TYPE REF: Symbol not found for Anno>[Types](LAZY_EXPRESSION) public final [ResolvedTo(CONTRACTS)] class TopLevelClass : R|kotlin/Any| {
+    @<ERROR TYPE REF: Symbol not found for Anno>[Types](LAZY_EXPRESSION) public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|kotlin/Any| {
         public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=TopLevelClass] constructor(): R|TopLevelClass| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -81,7 +81,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationWithNamedFunctionArgument.kt
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] annotationWithNamedFunctionArgument.kt
-    @<ERROR TYPE REF: Symbol not found for Anno>[Types](LAZY_EXPRESSION) public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] class TopLevelClass : R|kotlin/Any| {
+    @<ERROR TYPE REF: Symbol not found for Anno>[Types](LAZY_EXPRESSION) public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|kotlin/Any| {
         public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=TopLevelClass] constructor(): R|TopLevelClass| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -90,7 +90,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationWithNamedFunctionArgument.kt
 
 ANNOTATION_ARGUMENTS:
 FILE: [ResolvedTo(IMPORTS)] annotationWithNamedFunctionArgument.kt
-    @<ERROR TYPE REF: Symbol not found for Anno>[Types]() public final [ResolvedTo(ANNOTATION_ARGUMENTS)] class TopLevelClass : R|kotlin/Any| {
+    @<ERROR TYPE REF: Symbol not found for Anno>[Types]() public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|kotlin/Any| {
         public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=TopLevelClass] constructor(): R|TopLevelClass| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -99,8 +99,8 @@ FILE: [ResolvedTo(IMPORTS)] annotationWithNamedFunctionArgument.kt
 
 BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] annotationWithNamedFunctionArgument.kt
-    @<ERROR TYPE REF: Symbol not found for Anno>[Types]() public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|kotlin/Any| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|TopLevelClass| {
+    @<ERROR TYPE REF: Symbol not found for Anno>[Types]() public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|kotlin/Any| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|TopLevelClass| {
             super<R|kotlin/Any|>()
         }
 
@@ -108,8 +108,8 @@ FILE: [ResolvedTo(IMPORTS)] annotationWithNamedFunctionArgument.kt
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] annotationWithNamedFunctionArgument.kt
-    @<ERROR TYPE REF: Symbol not found for Anno>[Types]() public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|kotlin/Any| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|TopLevelClass| {
+    @<ERROR TYPE REF: Symbol not found for Anno>[Types]() public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|kotlin/Any| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|TopLevelClass| {
             super<R|kotlin/Any|>()
         }
 

@@ -3,8 +3,8 @@ FIR element: FirRegularClassImpl
 FIR source kind: KtRealSourceElementKind
 
 FIR element rendered:
-public final [ResolvedTo(BODY_RESOLVE)] class X : R|kotlin/Any| {
-    public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=X] constructor(): R|X| {
+public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class X : R|kotlin/Any| {
+    public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=X, ExpectForActualAttributeKey={}] constructor(): R|X| {
         super<R|kotlin/Any|>()
     }
 
@@ -14,8 +14,8 @@ public final [ResolvedTo(BODY_RESOLVE)] class X : R|kotlin/Any| {
 
 FIR FILE:
 FILE: [ResolvedTo(IMPORTS)] topLevelClass.kt
-    public final [ResolvedTo(BODY_RESOLVE)] class X : R|kotlin/Any| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=X] constructor(): R|X| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class X : R|kotlin/Any| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=X, ExpectForActualAttributeKey={}] constructor(): R|X| {
             super<R|kotlin/Any|>()
         }
 

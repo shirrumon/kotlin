@@ -18,8 +18,8 @@ FILE: [ResolvedTo(IMPORTS)] constructorDelegationSuperCallScript.kts
 
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] class A : R|B| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=A] constructor(): R|A| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class A : R|B| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=A, ExpectForActualAttributeKey={}] constructor(): R|A| {
                 super<R|B|>(Int(1))
             }
 

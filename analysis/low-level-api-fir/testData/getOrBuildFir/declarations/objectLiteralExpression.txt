@@ -12,7 +12,7 @@ object : R|kotlin/Any| {
 
 FIR FILE:
 FILE: [ResolvedTo(IMPORTS)] objectLiteralExpression.kt
-    public final [ResolvedTo(BODY_RESOLVE)] fun test(): R|kotlin/Unit| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun test(): R|kotlin/Unit| {
         object : R|kotlin/Any| {
             private [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=<anonymous>] constructor(): R|<anonymous>| {
                 super<R|kotlin/Any|>()

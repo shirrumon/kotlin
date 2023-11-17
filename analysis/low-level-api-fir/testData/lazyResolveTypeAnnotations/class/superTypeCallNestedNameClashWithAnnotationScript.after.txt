@@ -48,13 +48,13 @@ FILE: [ResolvedTo(IMPORTS)] superTypeCallNestedNameClashWithAnnotationScript.kts
 
         }
 
-        public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val outer: R|kotlin/Int| = Int(0)
+        public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val outer: R|kotlin/Int| = Int(0)
             public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/Int|
 
         public? final? const [ResolvedTo(RAW_FIR)] val inner: <implicit> = LAZY_EXPRESSION
             public? [ResolvedTo(RAW_FIR)] get(): <implicit>
 
-        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] class MyClass : R|@R|second/Anno|(i = Int(1).R|kotlin/Int.plus|(R|second/outer|))  second/Base<@R|second/Anno|(i = Int(2).R|kotlin/Int.plus|(R|second/outer|))  second/Base<@R|second/Anno|(i = Int(3).R|kotlin/Int.plus|(R|second/outer|))  kotlin/Int>>| {
+        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] class MyClass : R|@R|second/Anno|(i = Int(1).R|kotlin/Int.plus|(R|second/outer|))  second/Base<@R|second/Anno|(i = Int(2).R|kotlin/Int.plus|(R|second/outer|))  second/Base<@R|second/Anno|(i = Int(3).R|kotlin/Int.plus|(R|second/outer|))  kotlin/Int>>| {
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyClass] constructor(): R|second/MyClass| {
                 LAZY_super<@R|second/Anno|[Types](i = Int(1).R|kotlin/Int.plus|(R|second/outer|)) Base<R|@R|second/Anno|(i = Int(2).R|kotlin/Int.plus|(R|second/outer|))  second/Base<@R|second/Anno|(i = Int(3).R|kotlin/Int.plus|(R|second/outer|))  kotlin/Int>|>>
             }
