@@ -11,7 +11,6 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.name.StandardClassIds
 import org.jetbrains.kotlin.resolve.checkers.OptInNames
-import org.jetbrains.kotlin.resolve.multiplatform.ExpectActualCompatibility
 import org.jetbrains.kotlin.utils.zipIfSizesAreEqual
 import org.jetbrains.kotlin.resolve.multiplatform.ExpectActualMatchingCompatibility
 import org.jetbrains.kotlin.resolve.multiplatform.ExpectActualAnnotationsIncompatibilityType as IncompatibilityType
@@ -53,19 +52,21 @@ object AbstractExpectActualAnnotationMatchChecker {
     fun areAnnotationsCompatible(
         expectSymbol: DeclarationSymbolMarker,
         actualSymbol: DeclarationSymbolMarker,
+        containingExpectClass: RegularClassSymbolMarker?, // Only necessary for the frontend. IR doesn't use it
         context: ExpectActualMatchingContext<*>,
     ): Incompatibility? = with(context) {
-        areAnnotationsCompatible(expectSymbol, actualSymbol)
+        areAnnotationsCompatible(expectSymbol, actualSymbol, containingExpectClass)
     }
 
     context (ExpectActualMatchingContext<*>)
     private fun areAnnotationsCompatible(
         expectSymbol: DeclarationSymbolMarker,
         actualSymbol: DeclarationSymbolMarker,
+        containingExpectClass: RegularClassSymbolMarker?,
     ): Incompatibility? {
         return when (expectSymbol) {
             is CallableSymbolMarker -> {
-                areCallableAnnotationsCompatible(expectSymbol, actualSymbol as CallableSymbolMarker)
+                areCallableAnnotationsCompatible(expectSymbol, actualSymbol as CallableSymbolMarker, containingExpectClass)
             }
             is RegularClassSymbolMarker -> {
                 areClassAnnotationsCompatible(expectSymbol, actualSymbol as ClassLikeSymbolMarker)
@@ -78,7 +79,18 @@ object AbstractExpectActualAnnotationMatchChecker {
     private fun areCallableAnnotationsCompatible(
         expectSymbol: CallableSymbolMarker,
         actualSymbol: CallableSymbolMarker,
+        containingExpectClass: RegularClassSymbolMarker?,
     ): Incompatibility? {
+        // Annotations mismatch isn't reported if the expect declaration is fake override
+        // If the expect declaration is fake-override then it means that it was overridden on actual.
+        // - If the unwrapped fake-override is an expect declaration then we will have its actualization, and it's overridden.
+        //   Regular rules for annotations on overridden declarations would be applied in the platform module
+        // - If the unwrapped fake-override is not an expect declaration (but just a regular class in common module) then this regular
+        //   class is common supertype of our expect and actual class. Again, regular rules for annotations on overridden declarations
+        //   apply
+        // In the end, it's always an annotation in super class vs override in inherited class. Regular rules for annotations on
+        // overridden declarations apply
+        if (expectSymbol.isFakeOverride(containingExpectClass)) return null
         commonForClassAndCallableChecks(expectSymbol, actualSymbol)?.let { return it }
         areAnnotationsOnValueParametersCompatible(expectSymbol, actualSymbol)?.let { return it }
 
@@ -316,7 +328,7 @@ object AbstractExpectActualAnnotationMatchChecker {
             // Check also incompatible members if only one is found
                 ?: expectToCompatibilityMap.keys.singleOrNull()
                 ?: continue
-            areAnnotationsCompatible(expectMember, actualMember)?.let { return it }
+            areAnnotationsCompatible(expectMember, actualMember, expectClass)?.let { return it }
         }
         return null
     }

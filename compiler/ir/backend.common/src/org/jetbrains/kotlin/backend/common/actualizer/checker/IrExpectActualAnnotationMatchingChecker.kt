@@ -25,20 +25,8 @@ internal object IrExpectActualAnnotationMatchingChecker : IrExpectActualChecker 
             if (expectSymbol is IrTypeParameterSymbol) {
                 continue
             }
-            // Annotations mismatch isn't reported if the expect declaration is fake override
-            // If the expect declaration is fake-override then it means that it was overridden on actual.
-            // - If the unwrapped fake-override is an expect declaration then we will have its actualization, and it's overridden.
-            //   Regular rules for annotations on overridden declarations would be applied in the platform module
-            // - If the unwrapped fake-override is not an expect declaration (but just a regular class in common module) then this regular
-            //   class is common supertype of our expect and actual class. Again, regular rules for annotations on overridden declarations
-            //   apply
-            // In the end, it's always an annotation in super class vs override in inherited class. Regular rules for annotations on
-            // overridden declarations apply
-            if (expectSymbol.isFakeOverride) {
-                continue
-            }
-            val incompatibility =
-                AbstractExpectActualAnnotationMatchChecker.areAnnotationsCompatible(expectSymbol, actualSymbol, matchingContext) ?: continue
+            val incompatibility = AbstractExpectActualAnnotationMatchChecker
+                .areAnnotationsCompatible(expectSymbol, actualSymbol, containingExpectClass = null, matchingContext) ?: continue
 
             val reportOn = getTypealiasSymbolIfActualizedViaTypealias(expectSymbol.owner as IrDeclaration, classActualizationInfo)
                 ?: getContainingActualClassIfFakeOverride(actualSymbol)
