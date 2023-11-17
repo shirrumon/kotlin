@@ -125,13 +125,13 @@ object FirExpectActualDeclarationChecker : FirBasicDeclarationChecker() {
         val matchingCompatibilityToMembersMap = symbol.expectForActual ?: return
         val expectedSingleCandidate =
             matchingCompatibilityToMembersMap[ExpectActualMatchingCompatibility.MatchedSuccessfully]?.singleOrNull()
+        val expectActualMatchingContext = context.session.expectActualMatchingContextFactory.create(
+            context.session, context.scopeSession,
+            allowedWritingMemberExpectForActualMapping = true,
+        )
+        val actualContainingClass = context.containingDeclarations.lastOrNull()?.symbol as? FirRegularClassSymbol
+        val expectContainingClass = actualContainingClass?.getSingleMatchedExpectForActualOrNull() as? FirRegularClassSymbol
         val checkingCompatibility = if (expectedSingleCandidate != null) {
-            val expectActualMatchingContext = context.session.expectActualMatchingContextFactory.create(
-                context.session, context.scopeSession,
-                allowedWritingMemberExpectForActualMapping = true,
-            )
-            val actualContainingClass = context.containingDeclarations.lastOrNull()?.symbol as? FirRegularClassSymbol
-            val expectContainingClass = actualContainingClass?.getSingleMatchedExpectForActualOrNull() as? FirRegularClassSymbol
             getCheckingCompatibility(
                 symbol,
                 expectedSingleCandidate,
@@ -213,7 +213,7 @@ object FirExpectActualDeclarationChecker : FirBasicDeclarationChecker() {
         }
         if (expectedSingleCandidate != null) {
             checkOptInAnnotation(declaration, expectedSingleCandidate, context, reporter)
-            checkAnnotationsMatch(expectedSingleCandidate, symbol, context, reporter)
+            checkAnnotationsMatch(expectedSingleCandidate, symbol, expectContainingClass, context, reporter)
         }
     }
 
@@ -276,13 +276,14 @@ object FirExpectActualDeclarationChecker : FirBasicDeclarationChecker() {
     private fun checkAnnotationsMatch(
         expectSymbol: FirBasedSymbol<*>,
         actualSymbol: FirBasedSymbol<*>,
+        expectContainingClass: FirRegularClassSymbol?,
         context: CheckerContext,
         reporter: DiagnosticReporter
     ) {
         if (!context.languageVersionSettings.supportsFeature(LanguageFeature.MultiplatformRestrictions)) return
         val matchingContext = context.session.expectActualMatchingContextFactory.create(context.session, context.scopeSession)
-        val incompatibility =
-            AbstractExpectActualAnnotationMatchChecker.areAnnotationsCompatible(expectSymbol, actualSymbol, matchingContext) ?: return
+        val incompatibility = AbstractExpectActualAnnotationMatchChecker
+            .areAnnotationsCompatible(expectSymbol, actualSymbol, expectContainingClass, matchingContext) ?: return
         val actualAnnotationTargetSourceElement = (incompatibility.actualAnnotationTargetElement as FirSourceElement).element
 
         reporter.report(
