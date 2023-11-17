@@ -63,7 +63,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationClassWithJavaTarget.kt
 
 EXPECT_ACTUAL_MATCHING:
 FILE: [ResolvedTo(IMPORTS)] annotationClassWithJavaTarget.kt
-    @R|java/lang/annotation/Target|[Types](ElementType#.TYPE_USE#) public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] annotation class ResolveMe : R|kotlin/Annotation| {
+    @R|java/lang/annotation/Target|[Types](ElementType#.TYPE_USE#) public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] annotation class ResolveMe : R|kotlin/Annotation| {
         public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=ResolveMe] constructor(): R|ResolveMe| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -72,7 +72,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationClassWithJavaTarget.kt
 
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] annotationClassWithJavaTarget.kt
-    @R|java/lang/annotation/Target|[Types](ElementType#.TYPE_USE#) public final [ResolvedTo(CONTRACTS)] annotation class ResolveMe : R|kotlin/Annotation| {
+    @R|java/lang/annotation/Target|[Types](ElementType#.TYPE_USE#) public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] annotation class ResolveMe : R|kotlin/Annotation| {
         public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=ResolveMe] constructor(): R|ResolveMe| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -81,7 +81,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationClassWithJavaTarget.kt
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] annotationClassWithJavaTarget.kt
-    @R|java/lang/annotation/Target|[Types](ElementType#.TYPE_USE#) public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] annotation class ResolveMe : R|kotlin/Annotation| {
+    @R|java/lang/annotation/Target|[Types](ElementType#.TYPE_USE#) public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] annotation class ResolveMe : R|kotlin/Annotation| {
         public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=ResolveMe] constructor(): R|ResolveMe| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -90,7 +90,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationClassWithJavaTarget.kt
 
 ANNOTATION_ARGUMENTS:
 FILE: [ResolvedTo(IMPORTS)] annotationClassWithJavaTarget.kt
-    @R|java/lang/annotation/Target|[Types](value = vararg(Q|java/lang/annotation/ElementType|.<Unresolved name: TYPE_USE>#)) public final [ResolvedTo(ANNOTATION_ARGUMENTS)] annotation class ResolveMe : R|kotlin/Annotation| {
+    @R|java/lang/annotation/Target|[Types](value = vararg(Q|java/lang/annotation/ElementType|.<Unresolved name: TYPE_USE>#)) public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] annotation class ResolveMe : R|kotlin/Annotation| {
         public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=ResolveMe] constructor(): R|ResolveMe| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -99,8 +99,8 @@ FILE: [ResolvedTo(IMPORTS)] annotationClassWithJavaTarget.kt
 
 BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] annotationClassWithJavaTarget.kt
-    @R|java/lang/annotation/Target|[Types](value = vararg(Q|java/lang/annotation/ElementType|.<Unresolved name: TYPE_USE>#)) public final [ResolvedTo(BODY_RESOLVE)] annotation class ResolveMe : R|kotlin/Annotation| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=ResolveMe] constructor(): R|ResolveMe| {
+    @R|java/lang/annotation/Target|[Types](value = vararg(Q|java/lang/annotation/ElementType|.<Unresolved name: TYPE_USE>#)) public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] annotation class ResolveMe : R|kotlin/Annotation| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=ResolveMe, ExpectForActualAttributeKey={}] constructor(): R|ResolveMe| {
             super<R|kotlin/Any|>()
         }
 
@@ -108,8 +108,8 @@ FILE: [ResolvedTo(IMPORTS)] annotationClassWithJavaTarget.kt
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] annotationClassWithJavaTarget.kt
-    @R|java/lang/annotation/Target|[Types](value = vararg(Q|java/lang/annotation/ElementType|.<Unresolved name: TYPE_USE>#)) public final [ResolvedTo(BODY_RESOLVE)] annotation class ResolveMe : R|kotlin/Annotation| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=ResolveMe] constructor(): R|ResolveMe| {
+    @R|java/lang/annotation/Target|[Types](value = vararg(Q|java/lang/annotation/ElementType|.<Unresolved name: TYPE_USE>#)) public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] annotation class ResolveMe : R|kotlin/Annotation| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=ResolveMe, ExpectForActualAttributeKey={}] constructor(): R|ResolveMe| {
             super<R|kotlin/Any|>()
         }
 

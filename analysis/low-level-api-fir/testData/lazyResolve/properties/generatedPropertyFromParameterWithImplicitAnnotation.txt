@@ -182,7 +182,7 @@ FILE: [ResolvedTo(IMPORTS)] generatedPropertyFromParameterWithImplicitAnnotation
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [IsFromPrimaryConstructor=true] var prop: R|kotlin/Int| = R|<local>/prop|
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] var prop: R|kotlin/Int| = R|<local>/prop|
             public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=Sub] get(): R|kotlin/Int|
             public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=Sub] set([ResolvedTo(EXPECT_ACTUAL_MATCHING)] value: R|kotlin/Int|): R|kotlin/Unit|
 
@@ -206,7 +206,7 @@ FILE: [ResolvedTo(IMPORTS)] generatedPropertyFromParameterWithImplicitAnnotation
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(CONTRACTS)] [IsFromPrimaryConstructor=true] var prop: R|kotlin/Int| = R|<local>/prop|
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] var prop: R|kotlin/Int| = R|<local>/prop|
             public [ResolvedTo(CONTRACTS)] [ContainingClassKey=Sub] get(): R|kotlin/Int|
             public [ResolvedTo(CONTRACTS)] [ContainingClassKey=Sub] set([ResolvedTo(CONTRACTS)] value: R|kotlin/Int|): R|kotlin/Unit|
 
@@ -230,7 +230,7 @@ FILE: [ResolvedTo(IMPORTS)] generatedPropertyFromParameterWithImplicitAnnotation
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [IsFromPrimaryConstructor=true] var prop: R|kotlin/Int| = R|<local>/prop|
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] var prop: R|kotlin/Int| = R|<local>/prop|
             public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=Sub] get(): R|kotlin/Int|
             public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=Sub] set([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] value: R|kotlin/Int|): R|kotlin/Unit|
 
@@ -254,7 +254,7 @@ FILE: [ResolvedTo(IMPORTS)] generatedPropertyFromParameterWithImplicitAnnotation
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [IsFromPrimaryConstructor=true] var prop: R|kotlin/Int| = R|<local>/prop|
+        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] var prop: R|kotlin/Int| = R|<local>/prop|
             public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=Sub] get(): R|kotlin/Int|
             public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=Sub] set([ResolvedTo(ANNOTATION_ARGUMENTS)] value: R|kotlin/Int|): R|kotlin/Unit|
 
@@ -278,7 +278,7 @@ FILE: [ResolvedTo(IMPORTS)] generatedPropertyFromParameterWithImplicitAnnotation
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] var prop: R|kotlin/Int| = R|<local>/prop|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] var prop: R|kotlin/Int| = R|<local>/prop|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Sub] get(): R|kotlin/Int|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Sub] set([ResolvedTo(BODY_RESOLVE)] value: R|kotlin/Int|): R|kotlin/Unit|
 
@@ -288,24 +288,24 @@ FILE: [ResolvedTo(IMPORTS)] generatedPropertyFromParameterWithImplicitAnnotation
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] generatedPropertyFromParameterWithImplicitAnnotation.kt
-    @R|kotlin/annotation/Target|[Types](allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.VALUE_PARAMETER|)) public final [ResolvedTo(BODY_RESOLVE)] annotation class ParameterAnnotation : R|kotlin/Annotation| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=ParameterAnnotation] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/ParameterAnnotation.i] i: R|kotlin/Int|): R|ParameterAnnotation| {
+    @R|kotlin/annotation/Target|[Types](allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.VALUE_PARAMETER|)) public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] annotation class ParameterAnnotation : R|kotlin/Annotation| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=ParameterAnnotation, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/ParameterAnnotation.i] i: R|kotlin/Int|): R|ParameterAnnotation| {
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val i: R|kotlin/Int| = R|<local>/i|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val i: R|kotlin/Int| = R|<local>/i|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=ParameterAnnotation] get(): R|kotlin/Int|
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] class Sub : R|kotlin/Any| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Sub] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/Sub.prop] @R|ParameterAnnotation|[Types](i = R|/konstant|) prop: R|kotlin/Int|): R|Sub| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class Sub : R|kotlin/Any| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Sub, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/Sub.prop] @R|ParameterAnnotation|[Types](i = R|/konstant|) prop: R|kotlin/Int|): R|Sub| {
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] var prop: R|kotlin/Int| = R|<local>/prop|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] var prop: R|kotlin/Int| = R|<local>/prop|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Sub] get(): R|kotlin/Int|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Sub] set([ResolvedTo(BODY_RESOLVE)] value: R|kotlin/Int|): R|kotlin/Unit|
 
     }
-    public final const [ResolvedTo(BODY_RESOLVE)] val konstant: R|kotlin/Int| = Int(0)
+    public final const [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val konstant: R|kotlin/Int| = Int(0)
         public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/Int|

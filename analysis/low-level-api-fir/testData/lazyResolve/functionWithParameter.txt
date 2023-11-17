@@ -44,19 +44,19 @@ EXPECT_ACTUAL_MATCHING:
 FILE: [ResolvedTo(IMPORTS)] functionWithParameter.kt
     public? final? [ResolvedTo(RAW_FIR)] interface I : R|kotlin/Any| {
     }
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun resolveMe([ResolvedTo(EXPECT_ACTUAL_MATCHING)] param: R|I|): <implicit> { LAZY_BLOCK }
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun resolveMe([ResolvedTo(EXPECT_ACTUAL_MATCHING)] param: R|I|): <implicit> { LAZY_BLOCK }
 
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] functionWithParameter.kt
     public? final? [ResolvedTo(RAW_FIR)] interface I : R|kotlin/Any| {
     }
-    public final [ResolvedTo(CONTRACTS)] fun resolveMe([ResolvedTo(CONTRACTS)] param: R|I|): <implicit> { LAZY_BLOCK }
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun resolveMe([ResolvedTo(CONTRACTS)] param: R|I|): <implicit> { LAZY_BLOCK }
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] functionWithParameter.kt
     public? final? [ResolvedTo(RAW_FIR)] interface I : R|kotlin/Any| {
     }
-    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun resolveMe([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] param: R|I|): R|kotlin/Unit| {
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] param: R|I|): R|kotlin/Unit| {
         ^resolveMe Q|kotlin/Unit|
     }
 
@@ -64,7 +64,7 @@ ANNOTATION_ARGUMENTS:
 FILE: [ResolvedTo(IMPORTS)] functionWithParameter.kt
     public? final? [ResolvedTo(RAW_FIR)] interface I : R|kotlin/Any| {
     }
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] fun resolveMe([ResolvedTo(ANNOTATION_ARGUMENTS)] param: R|I|): R|kotlin/Unit| {
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun resolveMe([ResolvedTo(ANNOTATION_ARGUMENTS)] param: R|I|): R|kotlin/Unit| {
         ^resolveMe Q|kotlin/Unit|
     }
 
@@ -72,14 +72,14 @@ BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] functionWithParameter.kt
     public? final? [ResolvedTo(RAW_FIR)] interface I : R|kotlin/Any| {
     }
-    public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe([ResolvedTo(BODY_RESOLVE)] param: R|I|): R|kotlin/Unit| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe([ResolvedTo(BODY_RESOLVE)] param: R|I|): R|kotlin/Unit| {
         ^resolveMe Q|kotlin/Unit|
     }
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] functionWithParameter.kt
-    public abstract [ResolvedTo(BODY_RESOLVE)] interface I : R|kotlin/Any| {
+    public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface I : R|kotlin/Any| {
     }
-    public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe([ResolvedTo(BODY_RESOLVE)] param: R|I|): R|kotlin/Unit| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe([ResolvedTo(BODY_RESOLVE)] param: R|I|): R|kotlin/Unit| {
         ^resolveMe Q|kotlin/Unit|
     }

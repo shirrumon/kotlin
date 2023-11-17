@@ -12,11 +12,11 @@ SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-scriptInitializer.kts>
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(CONTRACTS)] var version: R|kotlin/String| = String()
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] var version: R|kotlin/String| = String()
             public [ResolvedTo(CONTRACTS)] [ContainingClassKey=Builder] get(): R|kotlin/String|
             public [ResolvedTo(CONTRACTS)] [ContainingClassKey=Builder] set([ResolvedTo(CONTRACTS)] value: R|kotlin/String|): R|kotlin/Unit|
 
-        public final [ResolvedTo(CONTRACTS)] fun execute(): R|kotlin/Unit| {
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun execute(): R|kotlin/Unit| {
             println#(version#)
         }
 
@@ -29,7 +29,7 @@ SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-scriptInitializer.kts>
 
     }
 
-    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun build([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] action: R|Builder.() -> kotlin/Unit|): R|Builder| {
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun build([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] action: R|Builder.() -> kotlin/Unit|): R|Builder| {
         ^build R|/Builder.Builder|().R|kotlin/apply|<R|Builder|>(R|<local>/action|)
     }
 
@@ -48,7 +48,7 @@ SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-scriptInitializer.kts>
         this@R|special/anonymous|.R|/Builder.execute|()
     }
     )
-    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val builder: R|Builder| = R|/build|(<L> = [ResolvedTo(RAW_FIR)] [MatchingParameterFunctionTypeKey=@ExtensionFunctionType kotlin/Function1<Builder, kotlin/Unit>] build@fun R|Builder|.<anonymous>(): R|kotlin/Unit| <inline=NoInline>  {
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val builder: R|Builder| = R|/build|(<L> = [ResolvedTo(RAW_FIR)] [MatchingParameterFunctionTypeKey=@ExtensionFunctionType kotlin/Function1<Builder, kotlin/Unit>] build@fun R|Builder|.<anonymous>(): R|kotlin/Unit| <inline=NoInline>  {
         this@R|special/anonymous|.R|/Builder.version| = String(321)
     }
     )
@@ -68,11 +68,11 @@ FILE: [ResolvedTo(IMPORTS)] scriptInitializer.kts
                 LAZY_super<R|kotlin/Any|>
             }
 
-            public final [ResolvedTo(CONTRACTS)] var version: R|kotlin/String| = String()
+            public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] var version: R|kotlin/String| = String()
                 public [ResolvedTo(CONTRACTS)] [ContainingClassKey=Builder] get(): R|kotlin/String|
                 public [ResolvedTo(CONTRACTS)] [ContainingClassKey=Builder] set([ResolvedTo(CONTRACTS)] value: R|kotlin/String|): R|kotlin/Unit|
 
-            public final [ResolvedTo(CONTRACTS)] fun execute(): R|kotlin/Unit| {
+            public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun execute(): R|kotlin/Unit| {
                 println#(version#)
             }
 
@@ -85,7 +85,7 @@ FILE: [ResolvedTo(IMPORTS)] scriptInitializer.kts
 
         }
 
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun build([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] action: R|Builder.() -> kotlin/Unit|): R|Builder| {
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun build([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] action: R|Builder.() -> kotlin/Unit|): R|Builder| {
             ^build R|/Builder.Builder|().R|kotlin/apply|<R|Builder|>(R|<local>/action|)
         }
 
@@ -104,7 +104,7 @@ FILE: [ResolvedTo(IMPORTS)] scriptInitializer.kts
             this@R|special/anonymous|.R|/Builder.execute|()
         }
         )
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val builder: R|Builder| = R|/build|(<L> = [ResolvedTo(RAW_FIR)] [MatchingParameterFunctionTypeKey=@ExtensionFunctionType kotlin/Function1<Builder, kotlin/Unit>] build@fun R|Builder|.<anonymous>(): R|kotlin/Unit| <inline=NoInline>  {
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val builder: R|Builder| = R|/build|(<L> = [ResolvedTo(RAW_FIR)] [MatchingParameterFunctionTypeKey=@ExtensionFunctionType kotlin/Function1<Builder, kotlin/Unit>] build@fun R|Builder|.<anonymous>(): R|kotlin/Unit| <inline=NoInline>  {
             this@R|special/anonymous|.R|/Builder.version| = String(321)
         }
         )

@@ -200,7 +200,7 @@ FILE: [ResolvedTo(IMPORTS)] delegatesScript.kts
     SCRIPT: [ResolvedTo(RAW_FIR)] <script-delegatesScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun resolveMe(): R|kotlin/Unit| { LAZY_BLOCK }
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| { LAZY_BLOCK }
 
         public? final? [ResolvedTo(RAW_FIR)] fun receive([ResolvedTo(RAW_FIR)] value: Int): R|kotlin/Unit| { LAZY_BLOCK }
 
@@ -228,7 +228,7 @@ FILE: [ResolvedTo(IMPORTS)] delegatesScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-delegatesScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(CONTRACTS)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             receive#(valueWithExplicitType#)
             receive#(valueWithImplicitType#)
             variableWithExplicitType# = IntegerLiteral(10)
@@ -261,7 +261,7 @@ FILE: [ResolvedTo(IMPORTS)] delegatesScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-delegatesScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             receive#(valueWithExplicitType#)
             receive#(valueWithImplicitType#)
             variableWithExplicitType# = IntegerLiteral(10)
@@ -294,7 +294,7 @@ FILE: [ResolvedTo(IMPORTS)] delegatesScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-delegatesScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             receive#(valueWithExplicitType#)
             receive#(valueWithImplicitType#)
             variableWithExplicitType# = IntegerLiteral(10)
@@ -327,17 +327,17 @@ FILE: [ResolvedTo(IMPORTS)] delegatesScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-delegatesScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             R|/receive|(R|/valueWithExplicitType|)
             R|/receive|(R|/valueWithImplicitType|)
             R|/variableWithExplicitType| = Int(10)
             R|/variableWithImplicitType| = Int(10)
         }
 
-        public final [ResolvedTo(CONTRACTS)] fun receive([ResolvedTo(CONTRACTS)] value: R|kotlin/Int|): R|kotlin/Unit| {
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun receive([ResolvedTo(CONTRACTS)] value: R|kotlin/Int|): R|kotlin/Unit| {
         }
 
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val delegate: R|kotlin/properties/ReadWriteProperty<kotlin/Any?, kotlin/Int>| = object : R|kotlin/properties/ReadWriteProperty<kotlin/Any?, kotlin/Int>| {
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val delegate: R|kotlin/properties/ReadWriteProperty<kotlin/Any?, kotlin/Int>| = object : R|kotlin/properties/ReadWriteProperty<kotlin/Any?, kotlin/Int>| {
             private [ResolvedTo(RAW_FIR)] [ContainingClassKey=<anonymous>] constructor(): R|<anonymous>| {
                 super<R|kotlin/Any|>()
             }
@@ -353,19 +353,19 @@ FILE: [ResolvedTo(IMPORTS)] delegatesScript.kts
 
             public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/properties/ReadWriteProperty<kotlin/Any?, kotlin/Int>|
 
-        public final [ResolvedTo(CONTRACTS)] val valueWithExplicitType: R|kotlin/Int|by LAZY_EXPRESSION
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] val valueWithExplicitType: R|kotlin/Int|by LAZY_EXPRESSION
             public [ResolvedTo(CONTRACTS)] get(): R|kotlin/Int| { LAZY_BLOCK }
 
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val valueWithImplicitType: R|kotlin/Int|by R|/delegate|
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val valueWithImplicitType: R|kotlin/Int|by R|/delegate|
             public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/Int| {
                 ^ D|/valueWithImplicitType|.R|SubstitutionOverride<kotlin/properties/ReadWriteProperty.getValue: R|kotlin/Int|>|(Null(null), ::R|/valueWithImplicitType|)
             }
 
-        public final [ResolvedTo(CONTRACTS)] var variableWithExplicitType: R|kotlin/Int|by LAZY_EXPRESSION
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] var variableWithExplicitType: R|kotlin/Int|by LAZY_EXPRESSION
             public [ResolvedTo(CONTRACTS)] get(): R|kotlin/Int| { LAZY_BLOCK }
             public [ResolvedTo(CONTRACTS)] set([ResolvedTo(CONTRACTS)] <set-?>: R|kotlin/Int|): R|kotlin/Unit| { LAZY_BLOCK }
 
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] var variableWithImplicitType: R|kotlin/Int|by R|/delegate|
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] var variableWithImplicitType: R|kotlin/Int|by R|/delegate|
             public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/Int| {
                 ^ D|/variableWithImplicitType|.R|SubstitutionOverride<kotlin/properties/ReadWriteProperty.getValue: R|kotlin/Int|>|(Null(null), ::R|/variableWithImplicitType|)
             }
@@ -380,17 +380,17 @@ FILE: [ResolvedTo(BODY_RESOLVE)] delegatesScript.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-delegatesScript.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             R|/receive|(R|/valueWithExplicitType|)
             R|/receive|(R|/valueWithImplicitType|)
             R|/variableWithExplicitType| = Int(10)
             R|/variableWithImplicitType| = Int(10)
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun receive([ResolvedTo(BODY_RESOLVE)] value: R|kotlin/Int|): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun receive([ResolvedTo(BODY_RESOLVE)] value: R|kotlin/Int|): R|kotlin/Unit| {
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] val delegate: R|kotlin/properties/ReadWriteProperty<kotlin/Any?, kotlin/Int>| = object : R|kotlin/properties/ReadWriteProperty<kotlin/Any?, kotlin/Int>| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val delegate: R|kotlin/properties/ReadWriteProperty<kotlin/Any?, kotlin/Int>| = object : R|kotlin/properties/ReadWriteProperty<kotlin/Any?, kotlin/Int>| {
             private [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=<anonymous>] constructor(): R|<anonymous>| {
                 super<R|kotlin/Any|>()
             }
@@ -406,17 +406,17 @@ FILE: [ResolvedTo(BODY_RESOLVE)] delegatesScript.kts
 
             public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/properties/ReadWriteProperty<kotlin/Any?, kotlin/Int>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] val valueWithExplicitType: R|kotlin/Int|by R|/delegate|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val valueWithExplicitType: R|kotlin/Int|by R|/delegate|
             public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/Int| {
                 ^ D|/valueWithExplicitType|.R|SubstitutionOverride<kotlin/properties/ReadWriteProperty.getValue: R|kotlin/Int|>|(Null(null), ::R|/valueWithExplicitType|)
             }
 
-        public final [ResolvedTo(BODY_RESOLVE)] val valueWithImplicitType: R|kotlin/Int|by R|/delegate|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val valueWithImplicitType: R|kotlin/Int|by R|/delegate|
             public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/Int| {
                 ^ D|/valueWithImplicitType|.R|SubstitutionOverride<kotlin/properties/ReadWriteProperty.getValue: R|kotlin/Int|>|(Null(null), ::R|/valueWithImplicitType|)
             }
 
-        public final [ResolvedTo(BODY_RESOLVE)] var variableWithExplicitType: R|kotlin/Int|by R|/delegate|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] var variableWithExplicitType: R|kotlin/Int|by R|/delegate|
             public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/Int| {
                 ^ D|/variableWithExplicitType|.R|SubstitutionOverride<kotlin/properties/ReadWriteProperty.getValue: R|kotlin/Int|>|(Null(null), ::R|/variableWithExplicitType|)
             }
@@ -424,11 +424,10 @@ FILE: [ResolvedTo(BODY_RESOLVE)] delegatesScript.kts
                 ^ D|/variableWithExplicitType|.R|SubstitutionOverride<kotlin/properties/ReadWriteProperty.setValue: R|kotlin/Unit|>|(Null(null), ::R|/variableWithExplicitType|, R|<local>/variableWithExplicitType|)
             }
 
-        public final [ResolvedTo(BODY_RESOLVE)] var variableWithImplicitType: R|kotlin/Int|by R|/delegate|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] var variableWithImplicitType: R|kotlin/Int|by R|/delegate|
             public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/Int| {
                 ^ D|/variableWithImplicitType|.R|SubstitutionOverride<kotlin/properties/ReadWriteProperty.getValue: R|kotlin/Int|>|(Null(null), ::R|/variableWithImplicitType|)
             }
             public [ResolvedTo(BODY_RESOLVE)] set([ResolvedTo(BODY_RESOLVE)] <set-?>: R|kotlin/Int|): R|kotlin/Unit| {
                 ^ D|/variableWithImplicitType|.R|SubstitutionOverride<kotlin/properties/ReadWriteProperty.setValue: R|kotlin/Unit|>|(Null(null), ::R|/variableWithImplicitType|, R|<local>/variableWithImplicitType|)
             }
-

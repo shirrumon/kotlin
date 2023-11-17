@@ -3,7 +3,7 @@ FIR element: FirTypeAliasImpl
 FIR source kind: KtRealSourceElementKind
 
 FIR element rendered:
-public final [ResolvedTo(BODY_RESOLVE)] typealias Str = R|kotlin/String|
+public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] typealias Str = R|kotlin/String|
 
 FIR FILE:
 FILE: [ResolvedTo(IMPORTS)] memberTypeAlias.kt
@@ -12,6 +12,6 @@ FILE: [ResolvedTo(IMPORTS)] memberTypeAlias.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] typealias Str = R|kotlin/String|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] typealias Str = R|kotlin/String|
 
     }

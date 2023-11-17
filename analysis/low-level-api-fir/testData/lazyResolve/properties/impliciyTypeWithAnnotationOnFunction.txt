@@ -124,7 +124,7 @@ FILE: [ResolvedTo(IMPORTS)] impliciyTypeWithAnnotationOnFunction.kt
     public? final? const [ResolvedTo(RAW_FIR)] val value: <implicit> = LAZY_EXPRESSION
         public? [ResolvedTo(RAW_FIR)] get(): <implicit>
     public? final? [ResolvedTo(RAW_FIR)] fun typeWithAnnotation(): @Anno[Unresolved](LAZY_EXPRESSION) String { LAZY_BLOCK }
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun resolveMe(): <implicit> { LAZY_BLOCK }
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun resolveMe(): <implicit> { LAZY_BLOCK }
 
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] impliciyTypeWithAnnotationOnFunction.kt
@@ -140,7 +140,7 @@ FILE: [ResolvedTo(IMPORTS)] impliciyTypeWithAnnotationOnFunction.kt
     public? final? const [ResolvedTo(RAW_FIR)] val value: <implicit> = LAZY_EXPRESSION
         public? [ResolvedTo(RAW_FIR)] get(): <implicit>
     public? final? [ResolvedTo(RAW_FIR)] fun typeWithAnnotation(): @Anno[Unresolved](LAZY_EXPRESSION) String { LAZY_BLOCK }
-    public final [ResolvedTo(CONTRACTS)] fun resolveMe(): <implicit> { LAZY_BLOCK }
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun resolveMe(): <implicit> { LAZY_BLOCK }
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] impliciyTypeWithAnnotationOnFunction.kt
@@ -155,10 +155,10 @@ FILE: [ResolvedTo(IMPORTS)] impliciyTypeWithAnnotationOnFunction.kt
     }
     public? final? const [ResolvedTo(RAW_FIR)] val value: <implicit> = LAZY_EXPRESSION
         public? [ResolvedTo(RAW_FIR)] get(): <implicit>
-    public final [ResolvedTo(CONTRACTS)] fun typeWithAnnotation(): R|@R|Anno|(value#)  kotlin/String| {
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun typeWithAnnotation(): R|@R|Anno|(value#)  kotlin/String| {
         ^typeWithAnnotation String()
     }
-    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun resolveMe(): R|@R|Anno|(value#)  kotlin/String| {
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|@R|Anno|(value#)  kotlin/String| {
         ^resolveMe R|/typeWithAnnotation|()
     }
 
@@ -173,12 +173,12 @@ FILE: [ResolvedTo(IMPORTS)] impliciyTypeWithAnnotationOnFunction.kt
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): R|kotlin/Int|
 
     }
-    public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val value: R|kotlin/Int| = Int(0)
+    public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val value: R|kotlin/Int| = Int(0)
         public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/Int|
-    public final [ResolvedTo(CONTRACTS)] fun typeWithAnnotation(): R|@R|Anno|(number = R|/value|)  kotlin/String| {
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun typeWithAnnotation(): R|@R|Anno|(number = R|/value|)  kotlin/String| {
         ^typeWithAnnotation String()
     }
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] fun resolveMe(): R|@R|Anno|(number = R|/value|)  kotlin/String| {
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|@R|Anno|(number = R|/value|)  kotlin/String| {
         ^resolveMe R|/typeWithAnnotation|()
     }
 
@@ -193,31 +193,31 @@ FILE: [ResolvedTo(IMPORTS)] impliciyTypeWithAnnotationOnFunction.kt
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): R|kotlin/Int|
 
     }
-    public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val value: R|kotlin/Int| = Int(0)
+    public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val value: R|kotlin/Int| = Int(0)
         public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/Int|
-    public final [ResolvedTo(CONTRACTS)] fun typeWithAnnotation(): R|@R|Anno|(number = R|/value|)  kotlin/String| {
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun typeWithAnnotation(): R|@R|Anno|(number = R|/value|)  kotlin/String| {
         ^typeWithAnnotation String()
     }
-    public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|@R|Anno|(number = R|/value|)  kotlin/String| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|@R|Anno|(number = R|/value|)  kotlin/String| {
         ^resolveMe R|/typeWithAnnotation|()
     }
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] impliciyTypeWithAnnotationOnFunction.kt
-    @R|kotlin/annotation/Target|[Types](allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|)) public final [ResolvedTo(BODY_RESOLVE)] annotation class Anno : R|kotlin/Annotation| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/Anno.number] number: R|kotlin/Int|): R|Anno| {
+    @R|kotlin/annotation/Target|[Types](allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|)) public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] annotation class Anno : R|kotlin/Annotation| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/Anno.number] number: R|kotlin/Int|): R|Anno| {
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val number: R|kotlin/Int| = R|<local>/number|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val number: R|kotlin/Int| = R|<local>/number|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] get(): R|kotlin/Int|
 
     }
-    public final const [ResolvedTo(BODY_RESOLVE)] val value: R|kotlin/Int| = Int(0)
+    public final const [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val value: R|kotlin/Int| = Int(0)
         public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/Int|
-    public final [ResolvedTo(BODY_RESOLVE)] fun typeWithAnnotation(): R|@R|Anno|(number = R|/value|)  kotlin/String| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun typeWithAnnotation(): R|@R|Anno|(number = R|/value|)  kotlin/String| {
         ^typeWithAnnotation String()
     }
-    public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|@R|Anno|(number = R|/value|)  kotlin/String| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|@R|Anno|(number = R|/value|)  kotlin/String| {
         ^resolveMe R|/typeWithAnnotation|()
     }

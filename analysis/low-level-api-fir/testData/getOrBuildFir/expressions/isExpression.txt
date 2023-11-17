@@ -7,6 +7,6 @@ FIR element rendered:
 
 FIR FILE:
 FILE: [ResolvedTo(IMPORTS)] isExpression.kt
-    public final [ResolvedTo(BODY_RESOLVE)] fun foo([ResolvedTo(BODY_RESOLVE)] x: R|kotlin/Any|): R|kotlin/Boolean| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo([ResolvedTo(BODY_RESOLVE)] x: R|kotlin/Any|): R|kotlin/Boolean| {
         ^foo (R|<local>/x| is R|kotlin/String|)
     }

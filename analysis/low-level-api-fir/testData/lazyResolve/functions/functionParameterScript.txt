@@ -67,7 +67,7 @@ FILE: [ResolvedTo(IMPORTS)] functionParameterScript.kts
     SCRIPT: [ResolvedTo(RAW_FIR)] <script-functionParameterScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun foo([ResolvedTo(EXPECT_ACTUAL_MATCHING)] param: R|kotlin/Int|): <implicit> { LAZY_BLOCK }
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun foo([ResolvedTo(EXPECT_ACTUAL_MATCHING)] param: R|kotlin/Int|): <implicit> { LAZY_BLOCK }
 
 
 CONTRACTS:
@@ -76,7 +76,7 @@ FILE: [ResolvedTo(IMPORTS)] functionParameterScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-functionParameterScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(CONTRACTS)] fun foo([ResolvedTo(CONTRACTS)] param: R|kotlin/Int|): <implicit> { LAZY_BLOCK }
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun foo([ResolvedTo(CONTRACTS)] param: R|kotlin/Int|): <implicit> { LAZY_BLOCK }
 
 
 IMPLICIT_TYPES_BODY_RESOLVE:
@@ -85,7 +85,7 @@ FILE: [ResolvedTo(IMPORTS)] functionParameterScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-functionParameterScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun foo([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] param: R|kotlin/Int|): R|kotlin/String| {
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] param: R|kotlin/Int|): R|kotlin/String| {
             ^foo String(boo)
         }
 
@@ -96,7 +96,7 @@ FILE: [ResolvedTo(IMPORTS)] functionParameterScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-functionParameterScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] fun foo([ResolvedTo(ANNOTATION_ARGUMENTS)] param: R|kotlin/Int|): R|kotlin/String| {
+        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun foo([ResolvedTo(ANNOTATION_ARGUMENTS)] param: R|kotlin/Int|): R|kotlin/String| {
             ^foo String(boo)
         }
 
@@ -107,7 +107,7 @@ FILE: [ResolvedTo(IMPORTS)] functionParameterScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-functionParameterScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun foo([ResolvedTo(BODY_RESOLVE)] param: R|kotlin/Int|): R|kotlin/String| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo([ResolvedTo(BODY_RESOLVE)] param: R|kotlin/Int|): R|kotlin/String| {
             ^foo String(boo)
         }
 
@@ -118,6 +118,6 @@ FILE: [ResolvedTo(BODY_RESOLVE)] functionParameterScript.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-functionParameterScript.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun foo([ResolvedTo(BODY_RESOLVE)] param: R|kotlin/Int|): R|kotlin/String| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo([ResolvedTo(BODY_RESOLVE)] param: R|kotlin/Int|): R|kotlin/String| {
             ^foo String(boo)
         }

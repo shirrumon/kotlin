@@ -187,7 +187,7 @@ FILE: [ResolvedTo(RAW_FIR)] declaration.kt
         public? [ResolvedTo(RAW_FIR)] get(): @Anno[Unresolved](LAZY_EXPRESSION) List<@Anno[Unresolved](LAZY_EXPRESSION) List<@Anno[Unresolved](LAZY_EXPRESSION) Int>>? { LAZY_BLOCK }
 
 FILE: [ResolvedTo(IMPORTS)] usafe.kt
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] val propertyToResolve: R|kotlin/String|
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] val propertyToResolve: R|kotlin/String|
         public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] get(): R|kotlin/String| { LAZY_BLOCK }
 
 CONTRACTS:
@@ -211,7 +211,7 @@ FILE: [ResolvedTo(RAW_FIR)] declaration.kt
         public? [ResolvedTo(RAW_FIR)] get(): @Anno[Unresolved](LAZY_EXPRESSION) List<@Anno[Unresolved](LAZY_EXPRESSION) List<@Anno[Unresolved](LAZY_EXPRESSION) Int>>? { LAZY_BLOCK }
 
 FILE: [ResolvedTo(IMPORTS)] usafe.kt
-    public final [ResolvedTo(CONTRACTS)] val propertyToResolve: R|kotlin/String|
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] val propertyToResolve: R|kotlin/String|
         public [ResolvedTo(CONTRACTS)] get(): R|kotlin/String| {
             ^ nullablePropertyWithAnnotatedType#?.{ $subj$.let#(<L> = [ResolvedTo(RAW_FIR)] let@fun <implicit>.<anonymous>(): <implicit> <inline=Unknown>  {
                 <strcat>(String( (), it#, String()))
@@ -240,7 +240,7 @@ FILE: [ResolvedTo(RAW_FIR)] declaration.kt
         public? [ResolvedTo(RAW_FIR)] get(): @Anno[Unresolved](LAZY_EXPRESSION) List<@Anno[Unresolved](LAZY_EXPRESSION) List<@Anno[Unresolved](LAZY_EXPRESSION) Int>>? { LAZY_BLOCK }
 
 FILE: [ResolvedTo(IMPORTS)] usafe.kt
-    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val propertyToResolve: R|kotlin/String|
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val propertyToResolve: R|kotlin/String|
         public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/String| {
             ^ nullablePropertyWithAnnotatedType#?.{ $subj$.let#(<L> = [ResolvedTo(RAW_FIR)] let@fun <implicit>.<anonymous>(): <implicit> <inline=Unknown>  {
                 <strcat>(String( (), it#, String()))
@@ -269,7 +269,7 @@ FILE: [ResolvedTo(RAW_FIR)] declaration.kt
         public? [ResolvedTo(RAW_FIR)] get(): @Anno[Unresolved](LAZY_EXPRESSION) List<@Anno[Unresolved](LAZY_EXPRESSION) List<@Anno[Unresolved](LAZY_EXPRESSION) Int>>? { LAZY_BLOCK }
 
 FILE: [ResolvedTo(IMPORTS)] usafe.kt
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] val propertyToResolve: R|kotlin/String|
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] val propertyToResolve: R|kotlin/String|
         public [ResolvedTo(ANNOTATION_ARGUMENTS)] get(): R|kotlin/String| {
             ^ nullablePropertyWithAnnotatedType#?.{ $subj$.let#(<L> = [ResolvedTo(RAW_FIR)] let@fun <implicit>.<anonymous>(): <implicit> <inline=Unknown>  {
                 <strcat>(String( (), it#, String()))
@@ -279,11 +279,11 @@ FILE: [ResolvedTo(IMPORTS)] usafe.kt
 
 BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] declaration.kt
-    private final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val privateConstant: R|kotlin/String| = String(0)
+    private final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val privateConstant: R|kotlin/String| = String(0)
         private [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/String|
-    internal final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val internalConstant: R|kotlin/String| = String(1)
+    internal final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val internalConstant: R|kotlin/String| = String(1)
         internal [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/String|
-    public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val regularConstant: R|kotlin/String| = String(2)
+    public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val regularConstant: R|kotlin/String| = String(2)
         public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/String|
     @R|kotlin/annotation/Target|[Types](Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|) public final [ResolvedTo(STATUS)] annotation class Anno : R|kotlin/Annotation| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] constructor([ResolvedTo(STATUS)] [CorrespondingProperty=/Anno.message] message: R|kotlin/String|): R|Anno| {
@@ -294,13 +294,13 @@ FILE: [ResolvedTo(IMPORTS)] declaration.kt
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
-    public final [ResolvedTo(CONTRACTS)] val nullablePropertyWithAnnotatedType: R|@R|Anno|(R|/privateConstant<HIDDEN: /privateConstant is invisible>#|)  kotlin/collections/List<@R|Anno|(R|/internalConstant<HIDDEN: /internalConstant is invisible>#|)  kotlin/collections/List<@R|Anno|(R|/regularConstant|)  kotlin/Int>>?|
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] val nullablePropertyWithAnnotatedType: R|@R|Anno|(R|/privateConstant<HIDDEN: /privateConstant is invisible>#|)  kotlin/collections/List<@R|Anno|(R|/internalConstant<HIDDEN: /internalConstant is invisible>#|)  kotlin/collections/List<@R|Anno|(R|/regularConstant|)  kotlin/Int>>?|
         public [ResolvedTo(CONTRACTS)] get(): R|@R|Anno|(R|/privateConstant<HIDDEN: /privateConstant is invisible>#|)  kotlin/collections/List<@R|Anno|(R|/internalConstant<HIDDEN: /internalConstant is invisible>#|)  kotlin/collections/List<@R|Anno|(R|/regularConstant|)  kotlin/Int>>?| {
             ^ Null(null)
         }
 
 FILE: [ResolvedTo(IMPORTS)] usafe.kt
-    public final [ResolvedTo(BODY_RESOLVE)] val propertyToResolve: R|kotlin/String|
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val propertyToResolve: R|kotlin/String|
         public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/String| {
             ^ R|/nullablePropertyWithAnnotatedType|?.{ $subj$.R|kotlin/let|<R|@R|Anno|(message = R|/privateConstant<HIDDEN: /privateConstant is invisible>#|)  kotlin/collections/List<@R|Anno|(message = R|/internalConstant<HIDDEN: /internalConstant is invisible>#|)  kotlin/collections/List<@R|Anno|(message = R|/regularConstant|)  kotlin/Int>>|, R|kotlin/String|>(<L> = [ResolvedTo(BODY_RESOLVE)] [MatchingParameterFunctionTypeKey=kotlin/Function1<T, R>] let@fun <anonymous>([ResolvedTo(BODY_RESOLVE)] it: R|@R|Anno|(message = R|/privateConstant<HIDDEN: /privateConstant is invisible>#|)  kotlin/collections/List<@R|Anno|(message = R|/internalConstant<HIDDEN: /internalConstant is invisible>#|)  kotlin/collections/List<@R|Anno|(message = R|/regularConstant|)  kotlin/Int>>|): R|kotlin/String| <inline=Inline, kind=EXACTLY_ONCE>  {
                 ^ <strcat>(String( (), R|<local>/it|, String()))
@@ -310,7 +310,7 @@ FILE: [ResolvedTo(IMPORTS)] usafe.kt
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] usafe.kt
-    public final [ResolvedTo(BODY_RESOLVE)] val propertyToResolve: R|kotlin/String|
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val propertyToResolve: R|kotlin/String|
         public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/String| {
             ^ R|/nullablePropertyWithAnnotatedType|?.{ $subj$.R|kotlin/let|<R|@R|Anno|(message = R|/privateConstant<HIDDEN: /privateConstant is invisible>#|)  kotlin/collections/List<@R|Anno|(message = R|/internalConstant<HIDDEN: /internalConstant is invisible>#|)  kotlin/collections/List<@R|Anno|(message = R|/regularConstant|)  kotlin/Int>>|, R|kotlin/String|>(<L> = [ResolvedTo(BODY_RESOLVE)] [MatchingParameterFunctionTypeKey=kotlin/Function1<T, R>] let@fun <anonymous>([ResolvedTo(BODY_RESOLVE)] it: R|@R|Anno|(message = R|/privateConstant<HIDDEN: /privateConstant is invisible>#|)  kotlin/collections/List<@R|Anno|(message = R|/internalConstant<HIDDEN: /internalConstant is invisible>#|)  kotlin/collections/List<@R|Anno|(message = R|/regularConstant|)  kotlin/Int>>|): R|kotlin/String| <inline=Inline, kind=EXACTLY_ONCE>  {
                 ^ <strcat>(String( (), R|<local>/it|, String()))

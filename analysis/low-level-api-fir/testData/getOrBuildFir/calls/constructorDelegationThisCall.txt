@@ -12,7 +12,7 @@ FILE: [ResolvedTo(IMPORTS)] constructorDelegationThisCall.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=A] constructor([ResolvedTo(BODY_RESOLVE)] y: R|kotlin/String|): R|A| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=A, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] y: R|kotlin/String|): R|A| {
             this<R|A|>(Int(1))
         }
 

@@ -11,6 +11,6 @@ FILE: [ResolvedTo(IMPORTS)] throwExpressionScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-throwExpressionScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun x(): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun x(): R|kotlin/Unit| {
             throw R|java/lang/IllegalStateException.IllegalStateException|()
         }

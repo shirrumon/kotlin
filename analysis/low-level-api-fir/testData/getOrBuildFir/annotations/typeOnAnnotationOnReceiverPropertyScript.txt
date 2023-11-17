@@ -11,7 +11,7 @@ FILE: [ResolvedTo(IMPORTS)] typeOnAnnotationOnReceiverPropertyScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-typeOnAnnotationOnReceiverPropertyScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] val R|@R|Anno|(s = String(a))  kotlin/Int|.i: R|kotlin/String|
+        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] val R|@R|Anno|(s = String(a))  kotlin/Int|.i: R|kotlin/String|
             public [ResolvedTo(ANNOTATION_ARGUMENTS)] get(): R|kotlin/String| {
                 ^ String()
             }

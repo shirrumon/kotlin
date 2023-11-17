@@ -7,6 +7,6 @@ FIR element rendered:
 
 FIR FILE:
 FILE: [ResolvedTo(IMPORTS)] localProperty.kt
-    public final [ResolvedTo(BODY_RESOLVE)] fun y(): R|kotlin/Unit| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun y(): R|kotlin/Unit| {
         [ResolvedTo(BODY_RESOLVE)] lval x: R|kotlin/String| = String()
     }

@@ -112,7 +112,7 @@ FILE: [ResolvedTo(IMPORTS)] redeclaration.kt
 
     }
     public final [ResolvedTo(STATUS)] class A : R|kotlin/Any| {
-        public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=A] constructor(): R|A| {
+        public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=A, ExpectForActualAttributeKey={}] constructor(): R|A| {
             LAZY_super<R|kotlin/Any|>
         }
 
@@ -127,7 +127,7 @@ FILE: [ResolvedTo(IMPORTS)] redeclaration.kt
 
     }
     public final [ResolvedTo(STATUS)] class A : R|kotlin/Any| {
-        public [ResolvedTo(CONTRACTS)] [ContainingClassKey=A] constructor(): R|A| {
+        public [ResolvedTo(CONTRACTS)] [ContainingClassKey=A, ExpectForActualAttributeKey={}] constructor(): R|A| {
             LAZY_super<R|kotlin/Any|>
         }
 
@@ -142,7 +142,7 @@ FILE: [ResolvedTo(IMPORTS)] redeclaration.kt
 
     }
     public final [ResolvedTo(STATUS)] class A : R|kotlin/Any| {
-        public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=A] constructor(): R|A| {
+        public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=A, ExpectForActualAttributeKey={}] constructor(): R|A| {
             LAZY_super<R|kotlin/Any|>
         }
 
@@ -157,7 +157,7 @@ FILE: [ResolvedTo(IMPORTS)] redeclaration.kt
 
     }
     public final [ResolvedTo(STATUS)] class A : R|kotlin/Any| {
-        public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=A] constructor(): R|A| {
+        public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=A, ExpectForActualAttributeKey={}] constructor(): R|A| {
             LAZY_super<R|kotlin/Any|>
         }
 
@@ -172,7 +172,7 @@ FILE: [ResolvedTo(IMPORTS)] redeclaration.kt
 
     }
     public final [ResolvedTo(STATUS)] class A : R|kotlin/Any| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=A] constructor(): R|A| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=A, ExpectForActualAttributeKey={}] constructor(): R|A| {
             super<R|kotlin/Any|>()
         }
 
@@ -180,14 +180,14 @@ FILE: [ResolvedTo(IMPORTS)] redeclaration.kt
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] redeclaration.kt
-    public final [ResolvedTo(BODY_RESOLVE)] class A : R|kotlin/Any| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=A] constructor(): R|A| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class A : R|kotlin/Any| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=A, ExpectForActualAttributeKey={}] constructor(): R|A| {
             super<R|kotlin/Any|>()
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] class A : R|kotlin/Any| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=A] constructor(): R|A| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class A : R|kotlin/Any| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=A, ExpectForActualAttributeKey={}] constructor(): R|A| {
             super<R|kotlin/Any|>()
         }
 

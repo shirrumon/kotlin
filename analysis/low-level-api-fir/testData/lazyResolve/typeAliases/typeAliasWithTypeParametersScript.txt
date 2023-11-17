@@ -67,7 +67,7 @@ FILE: [ResolvedTo(IMPORTS)] typeAliasWithTypeParametersScript.kts
     SCRIPT: [ResolvedTo(RAW_FIR)] <script-typeAliasWithTypeParametersScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] typealias ResolveMe<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T : R|kotlin/Int|, [ResolvedTo(EXPECT_ACTUAL_MATCHING)] K> = R|kotlin/collections/Map<T, K>|
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] typealias ResolveMe<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T : R|kotlin/Int|, [ResolvedTo(EXPECT_ACTUAL_MATCHING)] K> = R|kotlin/collections/Map<T, K>|
 
 
 CONTRACTS:
@@ -76,7 +76,7 @@ FILE: [ResolvedTo(IMPORTS)] typeAliasWithTypeParametersScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-typeAliasWithTypeParametersScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(CONTRACTS)] typealias ResolveMe<[ResolvedTo(CONTRACTS)] T : R|kotlin/Int|, [ResolvedTo(CONTRACTS)] K> = R|kotlin/collections/Map<T, K>|
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] typealias ResolveMe<[ResolvedTo(CONTRACTS)] T : R|kotlin/Int|, [ResolvedTo(CONTRACTS)] K> = R|kotlin/collections/Map<T, K>|
 
 
 IMPLICIT_TYPES_BODY_RESOLVE:
@@ -85,7 +85,7 @@ FILE: [ResolvedTo(IMPORTS)] typeAliasWithTypeParametersScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-typeAliasWithTypeParametersScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] typealias ResolveMe<[ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] T : R|kotlin/Int|, [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] K> = R|kotlin/collections/Map<T, K>|
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] typealias ResolveMe<[ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] T : R|kotlin/Int|, [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] K> = R|kotlin/collections/Map<T, K>|
 
 
 ANNOTATION_ARGUMENTS:
@@ -94,7 +94,7 @@ FILE: [ResolvedTo(IMPORTS)] typeAliasWithTypeParametersScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-typeAliasWithTypeParametersScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] typealias ResolveMe<[ResolvedTo(ANNOTATION_ARGUMENTS)] T : R|kotlin/Int|, [ResolvedTo(ANNOTATION_ARGUMENTS)] K> = R|kotlin/collections/Map<T, K>|
+        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] typealias ResolveMe<[ResolvedTo(ANNOTATION_ARGUMENTS)] T : R|kotlin/Int|, [ResolvedTo(ANNOTATION_ARGUMENTS)] K> = R|kotlin/collections/Map<T, K>|
 
 
 BODY_RESOLVE:
@@ -103,7 +103,7 @@ FILE: [ResolvedTo(IMPORTS)] typeAliasWithTypeParametersScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-typeAliasWithTypeParametersScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] typealias ResolveMe<[ResolvedTo(BODY_RESOLVE)] T : R|kotlin/Int|, [ResolvedTo(BODY_RESOLVE)] K> = R|kotlin/collections/Map<T, K>|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] typealias ResolveMe<[ResolvedTo(BODY_RESOLVE)] T : R|kotlin/Int|, [ResolvedTo(BODY_RESOLVE)] K> = R|kotlin/collections/Map<T, K>|
 
 
 FILE RAW TO BODY:
@@ -112,4 +112,4 @@ FILE: [ResolvedTo(BODY_RESOLVE)] typeAliasWithTypeParametersScript.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-typeAliasWithTypeParametersScript.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] typealias ResolveMe<[ResolvedTo(BODY_RESOLVE)] T : R|kotlin/Int|, [ResolvedTo(BODY_RESOLVE)] K> = R|kotlin/collections/Map<T, K>|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] typealias ResolveMe<[ResolvedTo(BODY_RESOLVE)] T : R|kotlin/Int|, [ResolvedTo(BODY_RESOLVE)] K> = R|kotlin/collections/Map<T, K>|

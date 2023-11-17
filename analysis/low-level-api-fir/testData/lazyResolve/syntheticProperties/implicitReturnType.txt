@@ -14,7 +14,7 @@ FILE: [ResolvedTo(IMPORTS)] Derived.kt
 
 EXPECT_ACTUAL_MATCHING:
 TARGET: public open override [<synthetic> EXPECT_ACTUAL_MATCHING] val something: <implicit>
-    public [<synthetic> ResolvedTo(EXPECT_ACTUAL_MATCHING)] get(): <implicit> { LAZY_BLOCK }
+    public [<synthetic> ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] get(): <implicit> { LAZY_BLOCK }
 
 FILE: [ResolvedTo(IMPORTS)] Derived.kt
     public final [ResolvedTo(STATUS)] class Derived : R|Base| {
@@ -22,13 +22,13 @@ FILE: [ResolvedTo(IMPORTS)] Derived.kt
             LAZY_super<R|Base|>
         }
 
-        public open override [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun getSomething(): <implicit> { LAZY_BLOCK }
+        public open override [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun getSomething(): <implicit> { LAZY_BLOCK }
 
     }
 
 CONTRACTS:
 TARGET: public open override [<synthetic> CONTRACTS] val something: <implicit>
-    public [<synthetic> ResolvedTo(CONTRACTS)] get(): <implicit> { LAZY_BLOCK }
+    public [<synthetic> ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] get(): <implicit> { LAZY_BLOCK }
 
 FILE: [ResolvedTo(IMPORTS)] Derived.kt
     public final [ResolvedTo(STATUS)] class Derived : R|Base| {
@@ -36,13 +36,13 @@ FILE: [ResolvedTo(IMPORTS)] Derived.kt
             LAZY_super<R|Base|>
         }
 
-        public open override [ResolvedTo(CONTRACTS)] fun getSomething(): <implicit> { LAZY_BLOCK }
+        public open override [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun getSomething(): <implicit> { LAZY_BLOCK }
 
     }
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 TARGET: public open override [<synthetic> IMPLICIT_TYPES_BODY_RESOLVE] val something: R|kotlin/String|
-    public [<synthetic> ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/String| {
+    public [<synthetic> ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] get(): R|kotlin/String| {
         ^getSomething String(42)
     }
 
@@ -52,7 +52,7 @@ FILE: [ResolvedTo(IMPORTS)] Derived.kt
             LAZY_super<R|Base|>
         }
 
-        public open override [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun getSomething(): R|kotlin/String| {
+        public open override [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun getSomething(): R|kotlin/String| {
             ^getSomething String(42)
         }
 
@@ -60,7 +60,7 @@ FILE: [ResolvedTo(IMPORTS)] Derived.kt
 
 ANNOTATION_ARGUMENTS:
 TARGET: public open override [<synthetic> ANNOTATION_ARGUMENTS] val something: R|kotlin/String|
-    public [<synthetic> ResolvedTo(ANNOTATION_ARGUMENTS)] get(): R|kotlin/String| {
+    public [<synthetic> ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] get(): R|kotlin/String| {
         ^getSomething String(42)
     }
 
@@ -70,7 +70,7 @@ FILE: [ResolvedTo(IMPORTS)] Derived.kt
             LAZY_super<R|Base|>
         }
 
-        public open override [ResolvedTo(ANNOTATION_ARGUMENTS)] fun getSomething(): R|kotlin/String| {
+        public open override [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun getSomething(): R|kotlin/String| {
             ^getSomething String(42)
         }
 
@@ -78,7 +78,7 @@ FILE: [ResolvedTo(IMPORTS)] Derived.kt
 
 BODY_RESOLVE:
 TARGET: public open override [<synthetic> BODY_RESOLVE] val something: R|kotlin/String|
-    public [<synthetic> ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/String| {
+    public [<synthetic> ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] get(): R|kotlin/String| {
         ^getSomething String(42)
     }
 
@@ -88,7 +88,7 @@ FILE: [ResolvedTo(IMPORTS)] Derived.kt
             LAZY_super<R|Base|>
         }
 
-        public open override [ResolvedTo(BODY_RESOLVE)] fun getSomething(): R|kotlin/String| {
+        public open override [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun getSomething(): R|kotlin/String| {
             ^getSomething String(42)
         }
 
@@ -96,12 +96,12 @@ FILE: [ResolvedTo(IMPORTS)] Derived.kt
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] Derived.kt
-    public final [ResolvedTo(BODY_RESOLVE)] class Derived : R|Base| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Derived] constructor(): R|Derived| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class Derived : R|Base| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Derived, ExpectForActualAttributeKey={}] constructor(): R|Derived| {
             super<R|Base|>()
         }
 
-        public open override [ResolvedTo(BODY_RESOLVE)] fun getSomething(): R|kotlin/String| {
+        public open override [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun getSomething(): R|kotlin/String| {
             ^getSomething String(42)
         }
 

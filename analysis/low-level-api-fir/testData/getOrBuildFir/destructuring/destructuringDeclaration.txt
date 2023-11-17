@@ -18,14 +18,14 @@ FILE: [ResolvedTo(IMPORTS)] destructuringDeclaration.kt
         public final [ResolvedTo(STATUS)] [ComponentFunctionSymbolKey=/X.component2, IsFromPrimaryConstructor=true] val b: R|kotlin/Int| = R|<local>/b|
             public [ResolvedTo(STATUS)] [ContainingClassKey=X] get(): R|kotlin/Int|
 
-        public final operator [ResolvedTo(CONTRACTS)] fun component1(): R|kotlin/Int|
+        public final operator [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun component1(): R|kotlin/Int|
 
-        public final operator [ResolvedTo(CONTRACTS)] fun component2(): R|kotlin/Int|
+        public final operator [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun component2(): R|kotlin/Int|
 
         public final [ResolvedTo(STATUS)] fun copy([ResolvedTo(STATUS)] a: R|kotlin/Int| = this@R|/X|.R|/X.a|, [ResolvedTo(STATUS)] b: R|kotlin/Int| = this@R|/X|.R|/X.b|): R|X|
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] fun main([ResolvedTo(BODY_RESOLVE)] x: R|X|): R|kotlin/Unit| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun main([ResolvedTo(BODY_RESOLVE)] x: R|X|): R|kotlin/Unit| {
         [ResolvedTo(BODY_RESOLVE)] lval <destruct>: R|X| = R|<local>/x|
         [ResolvedTo(BODY_RESOLVE)] lval a: R|kotlin/Int| = R|<local>/<destruct>|.R|/X.component1|()
         [ResolvedTo(BODY_RESOLVE)] lval b: R|kotlin/Int| = R|<local>/<destruct>|.R|/X.component2|()

@@ -147,7 +147,7 @@ FILE: [ResolvedTo(IMPORTS)] statementTransformation.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-statementTransformation.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(CONTRACTS)] val myProp: R|() -> kotlin/Unit| = [ResolvedTo(RAW_FIR)] fun <implicit>.<anonymous>(): <implicit> <inline=Unknown>  {
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] val myProp: R|() -> kotlin/Unit| = [ResolvedTo(RAW_FIR)] fun <implicit>.<anonymous>(): <implicit> <inline=Unknown>  {
             ^ Unit
         }
 
@@ -166,7 +166,7 @@ FILE: [ResolvedTo(BODY_RESOLVE)] statementTransformation.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-statementTransformation.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] val myProp: R|() -> kotlin/Unit| = [ResolvedTo(BODY_RESOLVE)] fun <anonymous>(): R|kotlin/Unit| <inline=Unknown>  {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val myProp: R|() -> kotlin/Unit| = [ResolvedTo(BODY_RESOLVE)] fun <anonymous>(): R|kotlin/Unit| <inline=Unknown>  {
             ^ Unit
         }
 
@@ -176,5 +176,5 @@ FILE: [ResolvedTo(BODY_RESOLVE)] statementTransformation.kts
             ^ Int(123)
         }
         )
-        public final [ResolvedTo(BODY_RESOLVE)] fun foo(): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo(): R|kotlin/Unit| {
         }

@@ -199,7 +199,7 @@ FILE: [ResolvedTo(IMPORTS)] dataComponent2Script.kts
 
             public final operator [ResolvedTo(STATUS)] fun component1(): R|kotlin/Int|
 
-            public final operator [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun component2(): R|kotlin/Boolean|
+            public final operator [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun component2(): R|kotlin/Boolean|
 
             public final [ResolvedTo(STATUS)] fun copy([ResolvedTo(STATUS)] i: R|kotlin/Int| = this@R|one/DataClass|.R|one/DataClass.i|, [ResolvedTo(STATUS)] b: R|kotlin/Boolean| = this@R|one/DataClass|.R|one/DataClass.b|): R|one/DataClass|
 
@@ -225,7 +225,7 @@ FILE: [ResolvedTo(IMPORTS)] dataComponent2Script.kts
 
             public final operator [ResolvedTo(STATUS)] fun component1(): R|kotlin/Int|
 
-            public final operator [ResolvedTo(CONTRACTS)] fun component2(): R|kotlin/Boolean|
+            public final operator [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun component2(): R|kotlin/Boolean|
 
             public final [ResolvedTo(STATUS)] fun copy([ResolvedTo(STATUS)] i: R|kotlin/Int| = this@R|one/DataClass|.R|one/DataClass.i|, [ResolvedTo(STATUS)] b: R|kotlin/Boolean| = this@R|one/DataClass|.R|one/DataClass.b|): R|one/DataClass|
 
@@ -251,7 +251,7 @@ FILE: [ResolvedTo(IMPORTS)] dataComponent2Script.kts
 
             public final operator [ResolvedTo(STATUS)] fun component1(): R|kotlin/Int|
 
-            public final operator [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun component2(): R|kotlin/Boolean|
+            public final operator [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun component2(): R|kotlin/Boolean|
 
             public final [ResolvedTo(STATUS)] fun copy([ResolvedTo(STATUS)] i: R|kotlin/Int| = this@R|one/DataClass|.R|one/DataClass.i|, [ResolvedTo(STATUS)] b: R|kotlin/Boolean| = this@R|one/DataClass|.R|one/DataClass.b|): R|one/DataClass|
 
@@ -277,7 +277,7 @@ FILE: [ResolvedTo(IMPORTS)] dataComponent2Script.kts
 
             public final operator [ResolvedTo(STATUS)] fun component1(): R|kotlin/Int|
 
-            public final operator [ResolvedTo(ANNOTATION_ARGUMENTS)] fun component2(): R|kotlin/Boolean|
+            public final operator [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun component2(): R|kotlin/Boolean|
 
             public final [ResolvedTo(STATUS)] fun copy([ResolvedTo(STATUS)] i: R|kotlin/Int| = this@R|one/DataClass|.R|one/DataClass.i|, [ResolvedTo(STATUS)] b: R|kotlin/Boolean| = this@R|one/DataClass|.R|one/DataClass.b|): R|one/DataClass|
 
@@ -303,7 +303,7 @@ FILE: [ResolvedTo(IMPORTS)] dataComponent2Script.kts
 
             public final operator [ResolvedTo(STATUS)] fun component1(): R|kotlin/Int|
 
-            public final operator [ResolvedTo(BODY_RESOLVE)] fun component2(): R|kotlin/Boolean|
+            public final operator [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun component2(): R|kotlin/Boolean|
 
             public final [ResolvedTo(STATUS)] fun copy([ResolvedTo(STATUS)] i: R|kotlin/Int| = this@R|one/DataClass|.R|one/DataClass.i|, [ResolvedTo(STATUS)] b: R|kotlin/Boolean| = this@R|one/DataClass|.R|one/DataClass.b|): R|one/DataClass|
 
@@ -316,21 +316,21 @@ FILE: [ResolvedTo(BODY_RESOLVE)] dataComponent2Script.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-dataComponent2Script.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final data [ResolvedTo(BODY_RESOLVE)] class DataClass : R|kotlin/Any| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=DataClass] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=one/DataClass.i] i: R|kotlin/Int|, [ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=one/DataClass.b] b: R|kotlin/Boolean|): R|one/DataClass| {
+        public final data [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class DataClass : R|kotlin/Any| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=DataClass, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=one/DataClass.i] i: R|kotlin/Int|, [ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=one/DataClass.b] b: R|kotlin/Boolean|): R|one/DataClass| {
                 super<R|kotlin/Any|>()
             }
 
-            public final [ResolvedTo(BODY_RESOLVE)] [ComponentFunctionSymbolKey=one/DataClass.component1, IsFromPrimaryConstructor=true] val i: R|kotlin/Int| = R|<local>/i|
+            public final [ResolvedTo(BODY_RESOLVE)] [ComponentFunctionSymbolKey=one/DataClass.component1, ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val i: R|kotlin/Int| = R|<local>/i|
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=DataClass] get(): R|kotlin/Int|
 
-            public final [ResolvedTo(BODY_RESOLVE)] [ComponentFunctionSymbolKey=one/DataClass.component2, IsFromPrimaryConstructor=true] val b: R|kotlin/Boolean| = R|<local>/b|
+            public final [ResolvedTo(BODY_RESOLVE)] [ComponentFunctionSymbolKey=one/DataClass.component2, ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val b: R|kotlin/Boolean| = R|<local>/b|
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=DataClass] get(): R|kotlin/Boolean|
 
-            public final operator [ResolvedTo(BODY_RESOLVE)] fun component1(): R|kotlin/Int|
+            public final operator [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun component1(): R|kotlin/Int|
 
-            public final operator [ResolvedTo(BODY_RESOLVE)] fun component2(): R|kotlin/Boolean|
+            public final operator [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun component2(): R|kotlin/Boolean|
 
-            public final [ResolvedTo(BODY_RESOLVE)] fun copy([ResolvedTo(BODY_RESOLVE)] i: R|kotlin/Int| = this@R|one/DataClass|.R|one/DataClass.i|, [ResolvedTo(BODY_RESOLVE)] b: R|kotlin/Boolean| = this@R|one/DataClass|.R|one/DataClass.b|): R|one/DataClass|
+            public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun copy([ResolvedTo(BODY_RESOLVE)] i: R|kotlin/Int| = this@R|one/DataClass|.R|one/DataClass.i|, [ResolvedTo(BODY_RESOLVE)] b: R|kotlin/Boolean| = this@R|one/DataClass|.R|one/DataClass.b|): R|one/DataClass|
 
         }

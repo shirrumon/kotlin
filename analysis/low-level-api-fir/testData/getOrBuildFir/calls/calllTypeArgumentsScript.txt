@@ -11,9 +11,9 @@ FILE: [ResolvedTo(IMPORTS)] calllTypeArgumentsScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-calllTypeArgumentsScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(CONTRACTS)] fun <[ResolvedTo(CONTRACTS)] T> y(): R|kotlin/Unit| {
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(CONTRACTS)] T> y(): R|kotlin/Unit| {
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun x(): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun x(): R|kotlin/Unit| {
             R|/y|<R|kotlin/Int|>()
         }

@@ -100,7 +100,7 @@ FILE: [ResolvedTo(IMPORTS)] typeAliasWithAnnotationOnType.kt
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=TypeAnnWithArg] get(): String
 
     }
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] typealias BadArgsInTypeAlias = R|kotlin/collections/List<@R|TypeAnnWithArg|()  kotlin/Int>|
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] typealias BadArgsInTypeAlias = R|kotlin/collections/List<@R|TypeAnnWithArg|()  kotlin/Int>|
 
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] typeAliasWithAnnotationOnType.kt
@@ -113,7 +113,7 @@ FILE: [ResolvedTo(IMPORTS)] typeAliasWithAnnotationOnType.kt
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=TypeAnnWithArg] get(): String
 
     }
-    public final [ResolvedTo(CONTRACTS)] typealias BadArgsInTypeAlias = R|kotlin/collections/List<@R|TypeAnnWithArg|()  kotlin/Int>|
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] typealias BadArgsInTypeAlias = R|kotlin/collections/List<@R|TypeAnnWithArg|()  kotlin/Int>|
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] typeAliasWithAnnotationOnType.kt
@@ -126,12 +126,12 @@ FILE: [ResolvedTo(IMPORTS)] typeAliasWithAnnotationOnType.kt
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=TypeAnnWithArg] get(): String
 
     }
-    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] typealias BadArgsInTypeAlias = R|kotlin/collections/List<@R|TypeAnnWithArg|()  kotlin/Int>|
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] typealias BadArgsInTypeAlias = R|kotlin/collections/List<@R|TypeAnnWithArg|()  kotlin/Int>|
 
 ANNOTATION_ARGUMENTS:
 FILE: [ResolvedTo(IMPORTS)] typeAliasWithAnnotationOnType.kt
     @R|kotlin/annotation/Target|[Types](Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|) public final [ResolvedTo(STATUS)] annotation class TypeAnnWithArg : R|kotlin/Annotation| {
-        public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=TypeAnnWithArg] constructor([ResolvedTo(EXPECT_ACTUAL_MATCHING)] [CorrespondingProperty=/TypeAnnWithArg.arg] arg: R|kotlin/String|): R|TypeAnnWithArg| {
+        public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=TypeAnnWithArg, ExpectForActualAttributeKey={}] constructor([ResolvedTo(EXPECT_ACTUAL_MATCHING)] [CorrespondingProperty=/TypeAnnWithArg.arg] arg: R|kotlin/String|): R|TypeAnnWithArg| {
             LAZY_super<R|kotlin/Any|>
         }
 
@@ -139,12 +139,12 @@ FILE: [ResolvedTo(IMPORTS)] typeAliasWithAnnotationOnType.kt
             public [ResolvedTo(STATUS)] [ContainingClassKey=TypeAnnWithArg] get(): R|kotlin/String|
 
     }
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] typealias BadArgsInTypeAlias = R|kotlin/collections/List<@R|TypeAnnWithArg|()  kotlin/Int>|
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] typealias BadArgsInTypeAlias = R|kotlin/collections/List<@R|TypeAnnWithArg|()  kotlin/Int>|
 
 BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] typeAliasWithAnnotationOnType.kt
     @R|kotlin/annotation/Target|[Types](Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|) public final [ResolvedTo(STATUS)] annotation class TypeAnnWithArg : R|kotlin/Annotation| {
-        public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=TypeAnnWithArg] constructor([ResolvedTo(EXPECT_ACTUAL_MATCHING)] [CorrespondingProperty=/TypeAnnWithArg.arg] arg: R|kotlin/String|): R|TypeAnnWithArg| {
+        public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=TypeAnnWithArg, ExpectForActualAttributeKey={}] constructor([ResolvedTo(EXPECT_ACTUAL_MATCHING)] [CorrespondingProperty=/TypeAnnWithArg.arg] arg: R|kotlin/String|): R|TypeAnnWithArg| {
             LAZY_super<R|kotlin/Any|>
         }
 
@@ -152,17 +152,17 @@ FILE: [ResolvedTo(IMPORTS)] typeAliasWithAnnotationOnType.kt
             public [ResolvedTo(STATUS)] [ContainingClassKey=TypeAnnWithArg] get(): R|kotlin/String|
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] typealias BadArgsInTypeAlias = R|kotlin/collections/List<@R|TypeAnnWithArg|()  kotlin/Int>|
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] typealias BadArgsInTypeAlias = R|kotlin/collections/List<@R|TypeAnnWithArg|()  kotlin/Int>|
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] typeAliasWithAnnotationOnType.kt
-    @R|kotlin/annotation/Target|[Types](allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|)) public final [ResolvedTo(BODY_RESOLVE)] annotation class TypeAnnWithArg : R|kotlin/Annotation| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TypeAnnWithArg] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/TypeAnnWithArg.arg] arg: R|kotlin/String|): R|TypeAnnWithArg| {
+    @R|kotlin/annotation/Target|[Types](allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|)) public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] annotation class TypeAnnWithArg : R|kotlin/Annotation| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TypeAnnWithArg, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/TypeAnnWithArg.arg] arg: R|kotlin/String|): R|TypeAnnWithArg| {
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val arg: R|kotlin/String| = R|<local>/arg|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val arg: R|kotlin/String| = R|<local>/arg|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TypeAnnWithArg] get(): R|kotlin/String|
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] typealias BadArgsInTypeAlias = R|kotlin/collections/List<@R|TypeAnnWithArg|()  kotlin/Int>|
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] typealias BadArgsInTypeAlias = R|kotlin/collections/List<@R|TypeAnnWithArg|()  kotlin/Int>|

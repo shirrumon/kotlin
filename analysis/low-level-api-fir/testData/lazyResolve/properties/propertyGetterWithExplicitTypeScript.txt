@@ -74,7 +74,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyGetterWithExplicitTypeScript.kts
     SCRIPT: [ResolvedTo(RAW_FIR)] <script-propertyGetterWithExplicitTypeScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] val prop: R|kotlin/Int|
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] val prop: R|kotlin/Int|
             public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] get(): R|kotlin/Int| { LAZY_BLOCK }
 
 
@@ -84,7 +84,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyGetterWithExplicitTypeScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-propertyGetterWithExplicitTypeScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(CONTRACTS)] val prop: R|kotlin/Int|
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] val prop: R|kotlin/Int|
             public [ResolvedTo(CONTRACTS)] get(): R|kotlin/Int| {
                 ^ IntegerLiteral(42)
             }
@@ -96,7 +96,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyGetterWithExplicitTypeScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-propertyGetterWithExplicitTypeScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val prop: R|kotlin/Int|
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val prop: R|kotlin/Int|
             public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/Int| {
                 ^ IntegerLiteral(42)
             }
@@ -108,7 +108,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyGetterWithExplicitTypeScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-propertyGetterWithExplicitTypeScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] val prop: R|kotlin/Int|
+        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] val prop: R|kotlin/Int|
             public [ResolvedTo(ANNOTATION_ARGUMENTS)] get(): R|kotlin/Int| {
                 ^ IntegerLiteral(42)
             }
@@ -120,7 +120,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyGetterWithExplicitTypeScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-propertyGetterWithExplicitTypeScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] val prop: R|kotlin/Int|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val prop: R|kotlin/Int|
             public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/Int| {
                 ^ Int(42)
             }
@@ -132,7 +132,7 @@ FILE: [ResolvedTo(BODY_RESOLVE)] propertyGetterWithExplicitTypeScript.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-propertyGetterWithExplicitTypeScript.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] val prop: R|kotlin/Int|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val prop: R|kotlin/Int|
             public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/Int| {
                 ^ Int(42)
             }

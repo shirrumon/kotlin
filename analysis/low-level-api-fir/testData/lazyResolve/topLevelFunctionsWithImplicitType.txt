@@ -42,13 +42,13 @@ FILE: [ResolvedTo(IMPORTS)] topLevelFunctionsWithImplicitType.kt
 
 EXPECT_ACTUAL_MATCHING:
 FILE: [ResolvedTo(IMPORTS)] topLevelFunctionsWithImplicitType.kt
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun resolveMe(): R|kotlin/Unit| { LAZY_BLOCK }
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| { LAZY_BLOCK }
     public? final? [ResolvedTo(RAW_FIR)] fun receive([ResolvedTo(RAW_FIR)] value: String): R|kotlin/Unit| { LAZY_BLOCK }
     public? final? [ResolvedTo(RAW_FIR)] fun functionWithLazyBody(): <implicit> { LAZY_BLOCK }
 
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] topLevelFunctionsWithImplicitType.kt
-    public final [ResolvedTo(CONTRACTS)] fun resolveMe(): R|kotlin/Unit| {
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
         receive#(functionWithLazyBody#())
     }
     public? final? [ResolvedTo(RAW_FIR)] fun receive([ResolvedTo(RAW_FIR)] value: String): R|kotlin/Unit| { LAZY_BLOCK }
@@ -56,7 +56,7 @@ FILE: [ResolvedTo(IMPORTS)] topLevelFunctionsWithImplicitType.kt
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] topLevelFunctionsWithImplicitType.kt
-    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
         receive#(functionWithLazyBody#())
     }
     public? final? [ResolvedTo(RAW_FIR)] fun receive([ResolvedTo(RAW_FIR)] value: String): R|kotlin/Unit| { LAZY_BLOCK }
@@ -64,7 +64,7 @@ FILE: [ResolvedTo(IMPORTS)] topLevelFunctionsWithImplicitType.kt
 
 ANNOTATION_ARGUMENTS:
 FILE: [ResolvedTo(IMPORTS)] topLevelFunctionsWithImplicitType.kt
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] fun resolveMe(): R|kotlin/Unit| {
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
         receive#(functionWithLazyBody#())
     }
     public? final? [ResolvedTo(RAW_FIR)] fun receive([ResolvedTo(RAW_FIR)] value: String): R|kotlin/Unit| { LAZY_BLOCK }
@@ -72,22 +72,22 @@ FILE: [ResolvedTo(IMPORTS)] topLevelFunctionsWithImplicitType.kt
 
 BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] topLevelFunctionsWithImplicitType.kt
-    public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
         R|/receive|(R|/functionWithLazyBody|())
     }
-    public final [ResolvedTo(CONTRACTS)] fun receive([ResolvedTo(CONTRACTS)] value: R|kotlin/String|): R|kotlin/Unit| {
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun receive([ResolvedTo(CONTRACTS)] value: R|kotlin/String|): R|kotlin/Unit| {
     }
-    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun functionWithLazyBody(): R|kotlin/String| {
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun functionWithLazyBody(): R|kotlin/String| {
         ^functionWithLazyBody String(42)
     }
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] topLevelFunctionsWithImplicitType.kt
-    public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
         R|/receive|(R|/functionWithLazyBody|())
     }
-    public final [ResolvedTo(BODY_RESOLVE)] fun receive([ResolvedTo(BODY_RESOLVE)] value: R|kotlin/String|): R|kotlin/Unit| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun receive([ResolvedTo(BODY_RESOLVE)] value: R|kotlin/String|): R|kotlin/Unit| {
     }
-    public final [ResolvedTo(BODY_RESOLVE)] fun functionWithLazyBody(): R|kotlin/String| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun functionWithLazyBody(): R|kotlin/String| {
         ^functionWithLazyBody String(42)
     }

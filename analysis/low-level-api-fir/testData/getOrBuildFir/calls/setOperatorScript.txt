@@ -21,18 +21,18 @@ FILE: [ResolvedTo(IMPORTS)] setOperatorScript.kts
             public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] val n: R|kotlin/Int| = R|<local>/n|
                 public [ResolvedTo(STATUS)] [ContainingClassKey=B] get(): R|kotlin/Int|
 
-            public final operator [ResolvedTo(CONTRACTS)] fun set([ResolvedTo(CONTRACTS)] i: R|kotlin/Int|, [ResolvedTo(CONTRACTS)] a: R|test/B|): R|kotlin/Unit| {
+            public final operator [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun set([ResolvedTo(CONTRACTS)] i: R|kotlin/Int|, [ResolvedTo(CONTRACTS)] a: R|test/B|): R|kotlin/Unit| {
             }
 
-            public final operator [ResolvedTo(CONTRACTS)] fun get([ResolvedTo(CONTRACTS)] i: R|kotlin/Int|): R|test/B| {
+            public final operator [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun get([ResolvedTo(CONTRACTS)] i: R|kotlin/Int|): R|test/B| {
             }
 
-            public final operator [ResolvedTo(CONTRACTS)] fun inc(): R|test/B| {
+            public final operator [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun inc(): R|test/B| {
             }
 
         }
 
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] var a: R|test/B| = R|test/B.B|(Int(1))
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] var a: R|test/B| = R|test/B.B|(Int(1))
             public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|test/B|
             public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] set([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] value: R|test/B|): R|kotlin/Unit|
 

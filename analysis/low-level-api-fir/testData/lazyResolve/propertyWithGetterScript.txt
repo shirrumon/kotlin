@@ -102,7 +102,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithGetterScript.kts
     SCRIPT: [ResolvedTo(RAW_FIR)] <script-propertyWithGetterScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun resolveMe(): R|kotlin/Unit| { LAZY_BLOCK }
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| { LAZY_BLOCK }
 
         public? final? [ResolvedTo(RAW_FIR)] fun receive([ResolvedTo(RAW_FIR)] value: Int): R|kotlin/Unit| { LAZY_BLOCK }
 
@@ -116,7 +116,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithGetterScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-propertyWithGetterScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(CONTRACTS)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             receive#(withGetter#)
         }
 
@@ -132,7 +132,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithGetterScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-propertyWithGetterScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             receive#(withGetter#)
         }
 
@@ -148,7 +148,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithGetterScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-propertyWithGetterScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             receive#(withGetter#)
         }
 
@@ -164,14 +164,14 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithGetterScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-propertyWithGetterScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             R|/receive|(R|/withGetter|)
         }
 
-        public final [ResolvedTo(CONTRACTS)] fun receive([ResolvedTo(CONTRACTS)] value: R|kotlin/Int|): R|kotlin/Unit| {
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun receive([ResolvedTo(CONTRACTS)] value: R|kotlin/Int|): R|kotlin/Unit| {
         }
 
-        public final [ResolvedTo(CONTRACTS)] val withGetter: R|kotlin/Int|
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] val withGetter: R|kotlin/Int|
             public [ResolvedTo(CONTRACTS)] get(): R|kotlin/Int| {
                 ^ IntegerLiteral(42)
             }
@@ -183,14 +183,14 @@ FILE: [ResolvedTo(BODY_RESOLVE)] propertyWithGetterScript.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-propertyWithGetterScript.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             R|/receive|(R|/withGetter|)
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun receive([ResolvedTo(BODY_RESOLVE)] value: R|kotlin/Int|): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun receive([ResolvedTo(BODY_RESOLVE)] value: R|kotlin/Int|): R|kotlin/Unit| {
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] val withGetter: R|kotlin/Int|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val withGetter: R|kotlin/Int|
             public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/Int| {
                 ^ Int(42)
             }

@@ -78,7 +78,7 @@ FILE: [ResolvedTo(IMPORTS)] fakePrimaryConstructor.kt
 EXPECT_ACTUAL_MATCHING:
 FILE: [ResolvedTo(IMPORTS)] fakePrimaryConstructor.kt
     public final [ResolvedTo(STATUS)] class Problem : R|kotlin/Any| {
-        public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=Problem] constructor(): R|Problem| {
+        public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=Problem, ExpectForActualAttributeKey={}] constructor(): R|Problem| {
             LAZY_super<R|kotlin/Any|>
         }
 
@@ -89,7 +89,7 @@ FILE: [ResolvedTo(IMPORTS)] fakePrimaryConstructor.kt
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] fakePrimaryConstructor.kt
     public final [ResolvedTo(STATUS)] class Problem : R|kotlin/Any| {
-        public [ResolvedTo(CONTRACTS)] [ContainingClassKey=Problem] constructor(): R|Problem| {
+        public [ResolvedTo(CONTRACTS)] [ContainingClassKey=Problem, ExpectForActualAttributeKey={}] constructor(): R|Problem| {
             LAZY_super<R|kotlin/Any|>
         }
 
@@ -100,7 +100,7 @@ FILE: [ResolvedTo(IMPORTS)] fakePrimaryConstructor.kt
 IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] fakePrimaryConstructor.kt
     public final [ResolvedTo(STATUS)] class Problem : R|kotlin/Any| {
-        public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=Problem] constructor(): R|Problem| {
+        public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=Problem, ExpectForActualAttributeKey={}] constructor(): R|Problem| {
             LAZY_super<R|kotlin/Any|>
         }
 
@@ -111,7 +111,7 @@ FILE: [ResolvedTo(IMPORTS)] fakePrimaryConstructor.kt
 ANNOTATION_ARGUMENTS:
 FILE: [ResolvedTo(IMPORTS)] fakePrimaryConstructor.kt
     public final [ResolvedTo(STATUS)] class Problem : R|kotlin/Any| {
-        public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=Problem] constructor(): R|Problem| {
+        public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=Problem, ExpectForActualAttributeKey={}] constructor(): R|Problem| {
             LAZY_super<R|kotlin/Any|>
         }
 
@@ -122,7 +122,7 @@ FILE: [ResolvedTo(IMPORTS)] fakePrimaryConstructor.kt
 BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] fakePrimaryConstructor.kt
     public final [ResolvedTo(STATUS)] class Problem : R|kotlin/Any| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Problem] constructor(): R|Problem| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Problem, ExpectForActualAttributeKey={}] constructor(): R|Problem| {
             super<R|kotlin/Any|>()
         }
 
@@ -132,12 +132,12 @@ FILE: [ResolvedTo(IMPORTS)] fakePrimaryConstructor.kt
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] fakePrimaryConstructor.kt
-    public final [ResolvedTo(BODY_RESOLVE)] class Problem : R|kotlin/Any| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Problem] constructor(): R|Problem| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class Problem : R|kotlin/Any| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Problem, ExpectForActualAttributeKey={}] constructor(): R|Problem| {
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun foo([ResolvedTo(BODY_RESOLVE)] i: R|kotlin/Int|): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo([ResolvedTo(BODY_RESOLVE)] i: R|kotlin/Int|): R|kotlin/Unit| {
         }
 
     }

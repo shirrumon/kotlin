@@ -22,7 +22,7 @@ FILE: [ResolvedTo(IMPORTS)] firstPartOfQualifiedCallWithNestedClasses.kt
                     LAZY_super<R|kotlin/Any|>
                 }
 
-                public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val x: R|kotlin/Int| = Int(10)
+                public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val x: R|kotlin/Int| = Int(10)
                     public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=C] get(): R|kotlin/Int|
 
             }
@@ -30,6 +30,6 @@ FILE: [ResolvedTo(IMPORTS)] firstPartOfQualifiedCallWithNestedClasses.kt
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] fun x(): R|kotlin/Unit| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun x(): R|kotlin/Unit| {
         Q|A.B|.R|/A.B.C.C|().R|/A.B.C.x|
     }

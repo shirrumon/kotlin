@@ -21,7 +21,7 @@ FILE: [ResolvedTo(IMPORTS)] duplicatedClassesFunctionParameter.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun foo([ResolvedTo(BODY_RESOLVE)] p: R|kotlin/Int|): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo([ResolvedTo(BODY_RESOLVE)] p: R|kotlin/Int|): R|kotlin/Unit| {
         }
 
     }

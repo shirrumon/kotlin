@@ -8,11 +8,11 @@ FIR element rendered:
 FIR FILE:
 FILE: [ResolvedTo(IMPORTS)] constructorProperty.kt
     public final [ResolvedTo(STATUS)] class Abc : R|kotlin/Any| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Abc] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/Abc.i] i: R|kotlin/Int| = Int(4)): R|Abc| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Abc, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/Abc.i] i: R|kotlin/Int| = Int(4)): R|Abc| {
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val i: R|kotlin/Int| = R|<local>/i|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val i: R|kotlin/Int| = R|<local>/i|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Abc] get(): R|kotlin/Int|
 
     }

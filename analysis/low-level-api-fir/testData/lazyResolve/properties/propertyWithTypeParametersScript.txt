@@ -74,7 +74,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithTypeParametersScript.kts
     SCRIPT: [ResolvedTo(RAW_FIR)] <script-propertyWithTypeParametersScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] val <[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T : R|kotlin/Int|, [ResolvedTo(EXPECT_ACTUAL_MATCHING)] K> R|T|.resolveMe: R|K|
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] val <[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T : R|kotlin/Int|, [ResolvedTo(EXPECT_ACTUAL_MATCHING)] K> R|T|.resolveMe: R|K|
             public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] get(): R|K| { LAZY_BLOCK }
 
 
@@ -84,7 +84,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithTypeParametersScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-propertyWithTypeParametersScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(CONTRACTS)] val <[ResolvedTo(CONTRACTS)] T : R|kotlin/Int|, [ResolvedTo(CONTRACTS)] K> R|T|.resolveMe: R|K|
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] val <[ResolvedTo(CONTRACTS)] T : R|kotlin/Int|, [ResolvedTo(CONTRACTS)] K> R|T|.resolveMe: R|K|
             public [ResolvedTo(CONTRACTS)] get(): R|K| {
                 ^ TODO#()
             }
@@ -96,7 +96,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithTypeParametersScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-propertyWithTypeParametersScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val <[ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] T : R|kotlin/Int|, [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] K> R|T|.resolveMe: R|K|
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val <[ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] T : R|kotlin/Int|, [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] K> R|T|.resolveMe: R|K|
             public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|K| {
                 ^ TODO#()
             }
@@ -108,7 +108,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithTypeParametersScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-propertyWithTypeParametersScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] val <[ResolvedTo(ANNOTATION_ARGUMENTS)] T : R|kotlin/Int|, [ResolvedTo(ANNOTATION_ARGUMENTS)] K> R|T|.resolveMe: R|K|
+        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] val <[ResolvedTo(ANNOTATION_ARGUMENTS)] T : R|kotlin/Int|, [ResolvedTo(ANNOTATION_ARGUMENTS)] K> R|T|.resolveMe: R|K|
             public [ResolvedTo(ANNOTATION_ARGUMENTS)] get(): R|K| {
                 ^ TODO#()
             }
@@ -120,7 +120,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithTypeParametersScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-propertyWithTypeParametersScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] val <[ResolvedTo(BODY_RESOLVE)] T : R|kotlin/Int|, [ResolvedTo(BODY_RESOLVE)] K> R|T|.resolveMe: R|K|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val <[ResolvedTo(BODY_RESOLVE)] T : R|kotlin/Int|, [ResolvedTo(BODY_RESOLVE)] K> R|T|.resolveMe: R|K|
             public [ResolvedTo(BODY_RESOLVE)] get(): R|K| {
                 ^ R|kotlin/TODO|()
             }
@@ -132,7 +132,7 @@ FILE: [ResolvedTo(BODY_RESOLVE)] propertyWithTypeParametersScript.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-propertyWithTypeParametersScript.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] val <[ResolvedTo(BODY_RESOLVE)] T : R|kotlin/Int|, [ResolvedTo(BODY_RESOLVE)] K> R|T|.resolveMe: R|K|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val <[ResolvedTo(BODY_RESOLVE)] T : R|kotlin/Int|, [ResolvedTo(BODY_RESOLVE)] K> R|T|.resolveMe: R|K|
             public [ResolvedTo(BODY_RESOLVE)] get(): R|K| {
                 ^ R|kotlin/TODO|()
             }

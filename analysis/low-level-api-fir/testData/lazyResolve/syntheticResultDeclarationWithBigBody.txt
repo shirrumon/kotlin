@@ -112,7 +112,7 @@ FILE: [ResolvedTo(IMPORTS)] syntheticResultDeclarationWithBigBody.kts
     SCRIPT: [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] <script-syntheticResultDeclarationWithBigBody.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(CONTRACTS)] fun <[ResolvedTo(CONTRACTS)] T> foo([ResolvedTo(CONTRACTS)] action: R|() -> T|): R|T| {
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(CONTRACTS)] T> foo([ResolvedTo(CONTRACTS)] action: R|() -> T|): R|T| {
             ^foo action#()
         }
 
@@ -134,7 +134,7 @@ FILE: [ResolvedTo(IMPORTS)] syntheticResultDeclarationWithBigBody.kts
     SCRIPT: [ResolvedTo(ANNOTATION_ARGUMENTS)] <script-syntheticResultDeclarationWithBigBody.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(CONTRACTS)] fun <[ResolvedTo(CONTRACTS)] T> foo([ResolvedTo(CONTRACTS)] action: R|() -> T|): R|T| {
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(CONTRACTS)] T> foo([ResolvedTo(CONTRACTS)] action: R|() -> T|): R|T| {
             ^foo action#()
         }
 
@@ -156,7 +156,7 @@ FILE: [ResolvedTo(IMPORTS)] syntheticResultDeclarationWithBigBody.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-syntheticResultDeclarationWithBigBody.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(CONTRACTS)] fun <[ResolvedTo(CONTRACTS)] T> foo([ResolvedTo(CONTRACTS)] action: R|() -> T|): R|T| {
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(CONTRACTS)] T> foo([ResolvedTo(CONTRACTS)] action: R|() -> T|): R|T| {
             ^foo action#()
         }
 
@@ -178,7 +178,7 @@ FILE: [ResolvedTo(BODY_RESOLVE)] syntheticResultDeclarationWithBigBody.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-syntheticResultDeclarationWithBigBody.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun <[ResolvedTo(BODY_RESOLVE)] T> foo([ResolvedTo(BODY_RESOLVE)] action: R|() -> T|): R|T| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(BODY_RESOLVE)] T> foo([ResolvedTo(BODY_RESOLVE)] action: R|() -> T|): R|T| {
             ^foo R|<local>/action|.R|SubstitutionOverride<kotlin/Function0.invoke: R|T|>|()
         }
 

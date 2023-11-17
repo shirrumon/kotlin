@@ -91,7 +91,7 @@ FILE: [ResolvedTo(IMPORTS)] complexLocalHierarchyScript.kts
         public? final? [ResolvedTo(RAW_FIR)] interface NonLocalInterface : R|kotlin/Any| {
         }
 
-        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun resolveMe(): R|kotlin/Unit| { LAZY_BLOCK }
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| { LAZY_BLOCK }
 
 
 CONTRACTS:
@@ -103,7 +103,7 @@ FILE: [ResolvedTo(IMPORTS)] complexLocalHierarchyScript.kts
         public? final? [ResolvedTo(RAW_FIR)] interface NonLocalInterface : R|kotlin/Any| {
         }
 
-        public final [ResolvedTo(CONTRACTS)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             local open [ResolvedTo(RAW_FIR)] class A : B {
                 public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=A] constructor(): R|<local>/A| {
                     super<B>()
@@ -137,7 +137,7 @@ FILE: [ResolvedTo(IMPORTS)] complexLocalHierarchyScript.kts
         public? final? [ResolvedTo(RAW_FIR)] interface NonLocalInterface : R|kotlin/Any| {
         }
 
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             local open [ResolvedTo(RAW_FIR)] class A : B {
                 public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=A] constructor(): R|<local>/A| {
                     super<B>()
@@ -171,7 +171,7 @@ FILE: [ResolvedTo(IMPORTS)] complexLocalHierarchyScript.kts
         public? final? [ResolvedTo(RAW_FIR)] interface NonLocalInterface : R|kotlin/Any| {
         }
 
-        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             local open [ResolvedTo(RAW_FIR)] class A : B {
                 public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=A] constructor(): R|<local>/A| {
                     super<B>()
@@ -205,7 +205,7 @@ FILE: [ResolvedTo(IMPORTS)] complexLocalHierarchyScript.kts
         public abstract [ResolvedTo(STATUS)] interface NonLocalInterface : R|kotlin/Any| {
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             local open [ResolvedTo(BODY_RESOLVE)] class A : <ERROR TYPE REF: Symbol not found for B> {
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=A] constructor(): R|<local>/A| {
                     super<<ERROR TYPE REF: Symbol not found for B>>()
@@ -236,10 +236,10 @@ FILE: [ResolvedTo(BODY_RESOLVE)] complexLocalHierarchyScript.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-complexLocalHierarchyScript.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] interface NonLocalInterface : R|kotlin/Any| {
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface NonLocalInterface : R|kotlin/Any| {
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             local open [ResolvedTo(BODY_RESOLVE)] class A : <ERROR TYPE REF: Symbol not found for B> {
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=A] constructor(): R|<local>/A| {
                     super<<ERROR TYPE REF: Symbol not found for B>>()

@@ -152,7 +152,7 @@ FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideConstructorScript.kts
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
         public abstract [ResolvedTo(STATUS)] class SubClass : R|second/AbstractClass<kotlin/Int>| {
-            public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=SubClass] constructor(): R|second/SubClass| {
+            public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=SubClass, ExpectForActualAttributeKey={}] constructor(): R|second/SubClass| {
                 LAZY_super<R|second/AbstractClass<kotlin/Int>|>
             }
 
@@ -173,7 +173,7 @@ FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideConstructorScript.kts
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
         public abstract [ResolvedTo(STATUS)] class SubClass : R|second/AbstractClass<kotlin/Int>| {
-            public [ResolvedTo(CONTRACTS)] [ContainingClassKey=SubClass] constructor(): R|second/SubClass| {
+            public [ResolvedTo(CONTRACTS)] [ContainingClassKey=SubClass, ExpectForActualAttributeKey={}] constructor(): R|second/SubClass| {
                 LAZY_super<R|second/AbstractClass<kotlin/Int>|>
             }
 
@@ -194,7 +194,7 @@ FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideConstructorScript.kts
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
         public abstract [ResolvedTo(STATUS)] class SubClass : R|second/AbstractClass<kotlin/Int>| {
-            public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=SubClass] constructor(): R|second/SubClass| {
+            public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=SubClass, ExpectForActualAttributeKey={}] constructor(): R|second/SubClass| {
                 LAZY_super<R|second/AbstractClass<kotlin/Int>|>
             }
 
@@ -215,7 +215,7 @@ FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideConstructorScript.kts
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
         public abstract [ResolvedTo(STATUS)] class SubClass : R|second/AbstractClass<kotlin/Int>| {
-            public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=SubClass] constructor(): R|second/SubClass| {
+            public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=SubClass, ExpectForActualAttributeKey={}] constructor(): R|second/SubClass| {
                 LAZY_super<R|second/AbstractClass<kotlin/Int>|>
             }
 
@@ -236,7 +236,7 @@ FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideConstructorScript.kts
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
         public abstract [ResolvedTo(STATUS)] class SubClass : R|second/AbstractClass<kotlin/Int>| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=SubClass] constructor(): R|second/SubClass| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=SubClass, ExpectForActualAttributeKey={}] constructor(): R|second/SubClass| {
                 super<R|second/AbstractClass<kotlin/Int>|>(Int(0))
             }
 
@@ -256,15 +256,15 @@ FILE: [ResolvedTo(BODY_RESOLVE)] substitutionFakeOverrideConstructorScript.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-substitutionFakeOverrideConstructorScript.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] class SubClass : R|second/AbstractClass<kotlin/Int>| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=SubClass] constructor(): R|second/SubClass| {
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class SubClass : R|second/AbstractClass<kotlin/Int>| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=SubClass, ExpectForActualAttributeKey={}] constructor(): R|second/SubClass| {
                 super<R|second/AbstractClass<kotlin/Int>|>(Int(0))
             }
 
         }
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] class AbstractClass<[ResolvedTo(BODY_RESOLVE)] T> : R|kotlin/Any| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(BODY_RESOLVE)] T>([ResolvedTo(BODY_RESOLVE)] t: R|T|): R|second/AbstractClass<T>| {
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class AbstractClass<[ResolvedTo(BODY_RESOLVE)] T> : R|kotlin/Any| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=AbstractClass, ExpectForActualAttributeKey={}] constructor<[ResolvedTo(BODY_RESOLVE)] T>([ResolvedTo(BODY_RESOLVE)] t: R|T|): R|second/AbstractClass<T>| {
                 super<R|kotlin/Any|>()
             }
 

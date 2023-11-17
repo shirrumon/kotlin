@@ -12,7 +12,7 @@ FILE: [ResolvedTo(IMPORTS)] secondaryConstructorValueParameter.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=X] constructor([ResolvedTo(BODY_RESOLVE)] y: R|kotlin/String|): R|X| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=X, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] y: R|kotlin/String|): R|X| {
             this<R|X|>(Int(1))
         }
 

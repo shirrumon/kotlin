@@ -42,41 +42,41 @@ FILE: [ResolvedTo(IMPORTS)] propertySetter.kt
 
 EXPECT_ACTUAL_MATCHING:
 FILE: [ResolvedTo(IMPORTS)] propertySetter.kt
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] var prop: <implicit> = LAZY_EXPRESSION
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] var prop: <implicit> = LAZY_EXPRESSION
         public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] get(): <implicit>
         public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] set([ResolvedTo(EXPECT_ACTUAL_MATCHING)] value: <implicit>): R|kotlin/Unit| { LAZY_BLOCK }
 
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] propertySetter.kt
-    public final [ResolvedTo(CONTRACTS)] var prop: <implicit> = IntegerLiteral(42)
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] var prop: <implicit> = IntegerLiteral(42)
         public [ResolvedTo(CONTRACTS)] get(): <implicit>
         public [ResolvedTo(CONTRACTS)] set([ResolvedTo(CONTRACTS)] value: <implicit>): R|kotlin/Unit| {
         }
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] propertySetter.kt
-    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] var prop: R|kotlin/Int| = Int(42)
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] var prop: R|kotlin/Int| = Int(42)
         public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/Int|
         public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] set([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] value: R|kotlin/Int|): R|kotlin/Unit| {
         }
 
 ANNOTATION_ARGUMENTS:
 FILE: [ResolvedTo(IMPORTS)] propertySetter.kt
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] var prop: R|kotlin/Int| = Int(42)
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] var prop: R|kotlin/Int| = Int(42)
         public [ResolvedTo(ANNOTATION_ARGUMENTS)] get(): R|kotlin/Int|
         public [ResolvedTo(ANNOTATION_ARGUMENTS)] set([ResolvedTo(ANNOTATION_ARGUMENTS)] value: R|kotlin/Int|): R|kotlin/Unit| {
         }
 
 BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] propertySetter.kt
-    public final [ResolvedTo(BODY_RESOLVE)] var prop: R|kotlin/Int| = Int(42)
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] var prop: R|kotlin/Int| = Int(42)
         public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/Int|
         public [ResolvedTo(BODY_RESOLVE)] set([ResolvedTo(BODY_RESOLVE)] value: R|kotlin/Int|): R|kotlin/Unit| {
         }
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] propertySetter.kt
-    public final [ResolvedTo(BODY_RESOLVE)] var prop: R|kotlin/Int| = Int(42)
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] var prop: R|kotlin/Int| = Int(42)
         public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/Int|
         public [ResolvedTo(BODY_RESOLVE)] set([ResolvedTo(BODY_RESOLVE)] value: R|kotlin/Int|): R|kotlin/Unit| {
         }

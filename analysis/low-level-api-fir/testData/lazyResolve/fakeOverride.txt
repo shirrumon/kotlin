@@ -266,7 +266,7 @@ FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
 
 EXPECT_ACTUAL_MATCHING:
 FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun expression([ResolvedTo(EXPECT_ACTUAL_MATCHING)] expression: R|IrConst<*>|): R|kotlin/Unit| { LAZY_BLOCK }
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun expression([ResolvedTo(EXPECT_ACTUAL_MATCHING)] expression: R|IrConst<*>|): R|kotlin/Unit| { LAZY_BLOCK }
     public? sealed [ResolvedTo(RAW_FIR)] class Kind<[ResolvedTo(RAW_FIR)] T> : R|kotlin/Any| {
         protected [ResolvedTo(RAW_FIR)] [ContainingClassKey=Kind] constructor<[ResolvedTo(RAW_FIR)] T>([ResolvedTo(RAW_FIR)] [CorrespondingProperty=/Kind.asString] asString: String): R|Kind<T>| {
             LAZY_super<R|kotlin/Any|>
@@ -304,7 +304,7 @@ FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
 
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
-    public final [ResolvedTo(CONTRACTS)] fun expression([ResolvedTo(CONTRACTS)] expression: R|IrConst<*>|): R|kotlin/Unit| {
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun expression([ResolvedTo(CONTRACTS)] expression: R|IrConst<*>|): R|kotlin/Unit| {
         when ([ResolvedTo(RAW_FIR)] lval kind: <implicit> = expression#.kind#) {
             ($subj$ is Kind.Null) ->  {
                 kind#.valueOf#(expression#)
@@ -351,7 +351,7 @@ FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
-    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun expression([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] expression: R|IrConst<*>|): R|kotlin/Unit| {
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun expression([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] expression: R|IrConst<*>|): R|kotlin/Unit| {
         when ([ResolvedTo(RAW_FIR)] lval kind: <implicit> = expression#.kind#) {
             ($subj$ is Kind.Null) ->  {
                 kind#.valueOf#(expression#)
@@ -398,7 +398,7 @@ FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
 
 ANNOTATION_ARGUMENTS:
 FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] fun expression([ResolvedTo(ANNOTATION_ARGUMENTS)] expression: R|IrConst<*>|): R|kotlin/Unit| {
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun expression([ResolvedTo(ANNOTATION_ARGUMENTS)] expression: R|IrConst<*>|): R|kotlin/Unit| {
         when ([ResolvedTo(RAW_FIR)] lval kind: <implicit> = expression#.kind#) {
             ($subj$ is Kind.Null) ->  {
                 kind#.valueOf#(expression#)
@@ -445,7 +445,7 @@ FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
 
 BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
-    public final [ResolvedTo(BODY_RESOLVE)] fun expression([ResolvedTo(BODY_RESOLVE)] expression: R|IrConst<*>|): R|kotlin/Unit| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun expression([ResolvedTo(BODY_RESOLVE)] expression: R|IrConst<*>|): R|kotlin/Unit| {
         when ([ResolvedTo(BODY_RESOLVE)] lval kind: R|Kind<out kotlin/Any?>| = R|<local>/expression|.R|SubstitutionOverride</IrConst.kind: R|Kind<CapturedType(*)>|>|) {
             ($subj$ is R|Kind.Null|) ->  {
                 R|<local>/kind|.R|SubstitutionOverride</Kind.Null.valueOf: R|kotlin/Nothing?|>|(R|<local>/expression|)
@@ -463,7 +463,7 @@ FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
         public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] val asString: R|kotlin/String| = R|<local>/asString|
             public [ResolvedTo(STATUS)] [ContainingClassKey=Kind] get(): R|kotlin/String|
 
-        @R|kotlin/Suppress|[Types](LAZY_EXPRESSION) public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun valueOf([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] aConst: R|IrConst<*>|): R|T| {
+        @R|kotlin/Suppress|[Types](LAZY_EXPRESSION) public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun valueOf([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] aConst: R|IrConst<*>|): R|T| {
             ^valueOf (R|<local>/aConst| as R|IrConst<T>|).R|SubstitutionOverride</IrConst.value: R|T|>|
         }
 
@@ -494,7 +494,7 @@ FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] fakeOverride.kt
-    public final [ResolvedTo(BODY_RESOLVE)] fun expression([ResolvedTo(BODY_RESOLVE)] expression: R|IrConst<*>|): R|kotlin/Unit| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun expression([ResolvedTo(BODY_RESOLVE)] expression: R|IrConst<*>|): R|kotlin/Unit| {
         when ([ResolvedTo(BODY_RESOLVE)] lval kind: R|Kind<out kotlin/Any?>| = R|<local>/expression|.R|SubstitutionOverride</IrConst.kind: R|Kind<CapturedType(*)>|>|) {
             ($subj$ is R|Kind.Null|) ->  {
                 R|<local>/kind|.R|SubstitutionOverride</Kind.Null.valueOf: R|kotlin/Nothing?|>|(R|<local>/expression|)
@@ -504,40 +504,40 @@ FILE: [ResolvedTo(BODY_RESOLVE)] fakeOverride.kt
         }
 
     }
-    public sealed [ResolvedTo(BODY_RESOLVE)] class Kind<[ResolvedTo(BODY_RESOLVE)] T> : R|kotlin/Any| {
-        protected [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Kind] constructor<[ResolvedTo(BODY_RESOLVE)] T>([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/Kind.asString] asString: R|kotlin/String|): R|Kind<T>| {
+    public sealed [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class Kind<[ResolvedTo(BODY_RESOLVE)] T> : R|kotlin/Any| {
+        protected [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Kind, ExpectForActualAttributeKey={}] constructor<[ResolvedTo(BODY_RESOLVE)] T>([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/Kind.asString] asString: R|kotlin/String|): R|Kind<T>| {
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val asString: R|kotlin/String| = R|<local>/asString|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val asString: R|kotlin/String| = R|<local>/asString|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Kind] get(): R|kotlin/String|
 
-        @R|kotlin/Suppress|[Types](names = vararg(String(UNCHECKED_CAST))) public final [ResolvedTo(BODY_RESOLVE)] fun valueOf([ResolvedTo(BODY_RESOLVE)] aConst: R|IrConst<*>|): R|T| {
+        @R|kotlin/Suppress|[Types](names = vararg(String(UNCHECKED_CAST))) public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun valueOf([ResolvedTo(BODY_RESOLVE)] aConst: R|IrConst<*>|): R|T| {
             ^valueOf (R|<local>/aConst| as R|IrConst<T>|).R|SubstitutionOverride</IrConst.value: R|T|>|
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] object Null : R|Kind<kotlin/Nothing?>| {
-            private [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Null] constructor(): R|Kind.Null| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] object Null : R|Kind<kotlin/Nothing?>| {
+            private [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Null, ExpectForActualAttributeKey={}] constructor(): R|Kind.Null| {
                 super<R|Kind<kotlin/Nothing?>|>(String(Null))
             }
 
         }
 
-        public open override [ResolvedTo(BODY_RESOLVE)] fun toString(): R|kotlin/String| {
+        public open override [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun toString(): R|kotlin/String| {
             ^toString this@R|/Kind|.R|/Kind.asString|
         }
 
     }
-    public abstract [ResolvedTo(BODY_RESOLVE)] class IrConst<[ResolvedTo(BODY_RESOLVE)] T> : R|kotlin/Any| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=IrConst] constructor<[ResolvedTo(BODY_RESOLVE)] T>(): R|IrConst<T>| {
+    public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class IrConst<[ResolvedTo(BODY_RESOLVE)] T> : R|kotlin/Any| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=IrConst, ExpectForActualAttributeKey={}] constructor<[ResolvedTo(BODY_RESOLVE)] T>(): R|IrConst<T>| {
             super<R|kotlin/Any|>()
         }
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] var kind: R|Kind<T>|
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] var kind: R|Kind<T>|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=IrConst] get(): R|Kind<T>|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=IrConst] set([ResolvedTo(BODY_RESOLVE)] value: R|Kind<T>|): R|kotlin/Unit|
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] var value: R|T|
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] var value: R|T|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=IrConst] get(): R|T|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=IrConst] set([ResolvedTo(BODY_RESOLVE)] value: R|T|): R|kotlin/Unit|
 

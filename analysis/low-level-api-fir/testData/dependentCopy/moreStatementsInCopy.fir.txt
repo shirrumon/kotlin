@@ -7,17 +7,17 @@ context(<script>@R|kotlin/script/templates/standard/ScriptTemplateWithArgs|)
 SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-moreStatementsInCopy.kts>
     [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun scriptFunction(): R|kotlin/Int| {
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun scriptFunction(): R|kotlin/Int| {
         ^scriptFunction Int(42)
     }
 
     R|/scriptFunction|()
-    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun unusedScriptFunction([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] p: R|kotlin/String|): R|kotlin/Int| {
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun unusedScriptFunction([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] p: R|kotlin/String|): R|kotlin/Int| {
         ^unusedScriptFunction Int(22)
     }
 
     R|/scriptFunction|()
-    public final [ResolvedTo(CONTRACTS)] fun foo([ResolvedTo(CONTRACTS)] i: R|kotlin/Int|, [ResolvedTo(CONTRACTS)] action: R|(kotlin/Int) -> kotlin/Unit|): R|kotlin/Unit| {
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun foo([ResolvedTo(CONTRACTS)] i: R|kotlin/Int|, [ResolvedTo(CONTRACTS)] action: R|(kotlin/Int) -> kotlin/Unit|): R|kotlin/Unit| {
         action#(i#)
     }
 

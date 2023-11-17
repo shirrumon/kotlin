@@ -26,7 +26,7 @@ FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideScript.kts
 
 
 EXPECT_ACTUAL_MATCHING:
-TARGET: public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [SubstitutedOverrideOriginalKey=/AbstractClass.property] val R|kotlin/Int|.property: R|kotlin/Int|
+TARGET: public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}, SubstitutedOverrideOriginalKey=/AbstractClass.property] val R|kotlin/Int|.property: R|kotlin/Int|
 
 
 FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideScript.kts
@@ -53,7 +53,7 @@ FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideScript.kts
 
 
 CONTRACTS:
-TARGET: public abstract [ResolvedTo(CONTRACTS)] [SubstitutedOverrideOriginalKey=/AbstractClass.property] val R|kotlin/Int|.property: R|kotlin/Int|
+TARGET: public abstract [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}, SubstitutedOverrideOriginalKey=/AbstractClass.property] val R|kotlin/Int|.property: R|kotlin/Int|
 
 
 FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideScript.kts
@@ -80,7 +80,7 @@ FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideScript.kts
 
 
 IMPLICIT_TYPES_BODY_RESOLVE:
-TARGET: public abstract [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [SubstitutedOverrideOriginalKey=/AbstractClass.property] val R|kotlin/Int|.property: R|kotlin/Int|
+TARGET: public abstract [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}, SubstitutedOverrideOriginalKey=/AbstractClass.property] val R|kotlin/Int|.property: R|kotlin/Int|
 
 
 FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideScript.kts
@@ -107,7 +107,7 @@ FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideScript.kts
 
 
 ANNOTATION_ARGUMENTS:
-TARGET: public abstract [ResolvedTo(ANNOTATION_ARGUMENTS)] [SubstitutedOverrideOriginalKey=/AbstractClass.property] val R|kotlin/Int|.property: R|kotlin/Int|
+TARGET: public abstract [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}, SubstitutedOverrideOriginalKey=/AbstractClass.property] val R|kotlin/Int|.property: R|kotlin/Int|
 
 
 FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideScript.kts
@@ -134,7 +134,7 @@ FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideScript.kts
 
 
 BODY_RESOLVE:
-TARGET: public abstract [ResolvedTo(BODY_RESOLVE)] [SubstitutedOverrideOriginalKey=/AbstractClass.property] val R|kotlin/Int|.property: R|kotlin/Int|
+TARGET: public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, SubstitutedOverrideOriginalKey=/AbstractClass.property] val R|kotlin/Int|.property: R|kotlin/Int|
 
 
 FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideScript.kts
@@ -166,20 +166,19 @@ FILE: [ResolvedTo(BODY_RESOLVE)] substitutionFakeOverrideScript.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-substitutionFakeOverrideScript.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] class SubClass : R|AbstractClass<kotlin/Int>| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=SubClass] constructor(): R|SubClass| {
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class SubClass : R|AbstractClass<kotlin/Int>| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=SubClass, ExpectForActualAttributeKey={}] constructor(): R|SubClass| {
                 super<R|AbstractClass<kotlin/Int>|>()
             }
 
         }
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] class AbstractClass<[ResolvedTo(BODY_RESOLVE)] T> : R|kotlin/Any| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(BODY_RESOLVE)] T>(): R|AbstractClass<T>| {
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class AbstractClass<[ResolvedTo(BODY_RESOLVE)] T> : R|kotlin/Any| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=AbstractClass, ExpectForActualAttributeKey={}] constructor<[ResolvedTo(BODY_RESOLVE)] T>(): R|AbstractClass<T>| {
                 super<R|kotlin/Any|>()
             }
 
-            public abstract [ResolvedTo(BODY_RESOLVE)] val R|T|.property: R|T|
+            public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val R|T|.property: R|T|
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=AbstractClass] get(): R|T|
 
         }
-

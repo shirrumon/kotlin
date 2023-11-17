@@ -156,7 +156,7 @@ FILE: [ResolvedTo(RAW_FIR)] declaration.kt
     public? final? [ResolvedTo(RAW_FIR)] fun withType(): @Anno[Unresolved](LAZY_EXPRESSION) List<@Anno[Unresolved](LAZY_EXPRESSION) Int> { LAZY_BLOCK }
 
 FILE: [ResolvedTo(IMPORTS)] usafe.kt
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun implicitType(): <implicit> { LAZY_BLOCK }
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun implicitType(): <implicit> { LAZY_BLOCK }
 
 CONTRACTS:
 FILE: [ResolvedTo(RAW_FIR)] declaration.kt
@@ -176,7 +176,7 @@ FILE: [ResolvedTo(RAW_FIR)] declaration.kt
     public? final? [ResolvedTo(RAW_FIR)] fun withType(): @Anno[Unresolved](LAZY_EXPRESSION) List<@Anno[Unresolved](LAZY_EXPRESSION) Int> { LAZY_BLOCK }
 
 FILE: [ResolvedTo(IMPORTS)] usafe.kt
-    public final [ResolvedTo(CONTRACTS)] fun implicitType(): <implicit> { LAZY_BLOCK }
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun implicitType(): <implicit> { LAZY_BLOCK }
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] declaration.kt
@@ -193,11 +193,11 @@ FILE: [ResolvedTo(IMPORTS)] declaration.kt
         private [ResolvedTo(RAW_FIR)] get(): <implicit>
     internal final? const [ResolvedTo(RAW_FIR)] val internalConstant: <implicit> = LAZY_EXPRESSION
         internal [ResolvedTo(RAW_FIR)] get(): <implicit>
-    public final [ResolvedTo(CONTRACTS)] fun withType(): R|@R|Anno|(internalConstant#)  kotlin/collections/List<@R|Anno|(privateConstant#)  kotlin/Int>| {
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun withType(): R|@R|Anno|(internalConstant#)  kotlin/collections/List<@R|Anno|(privateConstant#)  kotlin/Int>| {
     }
 
 FILE: [ResolvedTo(IMPORTS)] usafe.kt
-    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun implicitType(): R|@R|Anno|(internalConstant#)  kotlin/collections/List<@R|Anno|(privateConstant#)  kotlin/Int>| {
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun implicitType(): R|@R|Anno|(internalConstant#)  kotlin/collections/List<@R|Anno|(privateConstant#)  kotlin/Int>| {
         ^implicitType R|/withType|()
     }
 
@@ -212,15 +212,15 @@ FILE: [ResolvedTo(IMPORTS)] declaration.kt
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): R|kotlin/Int|
 
     }
-    private final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val privateConstant: R|kotlin/Int| = Int(0)
+    private final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val privateConstant: R|kotlin/Int| = Int(0)
         private [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/Int|
-    internal final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val internalConstant: R|kotlin/Int| = Int(1)
+    internal final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val internalConstant: R|kotlin/Int| = Int(1)
         internal [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/Int|
-    public final [ResolvedTo(CONTRACTS)] fun withType(): R|@R|Anno|(number = R|/internalConstant<HIDDEN: /internalConstant is invisible>#|)  kotlin/collections/List<@R|Anno|(number = R|/privateConstant<HIDDEN: /privateConstant is invisible>#|)  kotlin/Int>| {
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun withType(): R|@R|Anno|(number = R|/internalConstant<HIDDEN: /internalConstant is invisible>#|)  kotlin/collections/List<@R|Anno|(number = R|/privateConstant<HIDDEN: /privateConstant is invisible>#|)  kotlin/Int>| {
     }
 
 FILE: [ResolvedTo(IMPORTS)] usafe.kt
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] fun implicitType(): R|@R|Anno|(number = R|/internalConstant<HIDDEN: /internalConstant is invisible>#|)  kotlin/collections/List<@R|Anno|(number = R|/privateConstant<HIDDEN: /privateConstant is invisible>#|)  kotlin/Int>| {
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun implicitType(): R|@R|Anno|(number = R|/internalConstant<HIDDEN: /internalConstant is invisible>#|)  kotlin/collections/List<@R|Anno|(number = R|/privateConstant<HIDDEN: /privateConstant is invisible>#|)  kotlin/Int>| {
         ^implicitType R|/withType|()
     }
 
@@ -235,20 +235,20 @@ FILE: [ResolvedTo(IMPORTS)] declaration.kt
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): R|kotlin/Int|
 
     }
-    private final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val privateConstant: R|kotlin/Int| = Int(0)
+    private final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val privateConstant: R|kotlin/Int| = Int(0)
         private [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/Int|
-    internal final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val internalConstant: R|kotlin/Int| = Int(1)
+    internal final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val internalConstant: R|kotlin/Int| = Int(1)
         internal [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/Int|
-    public final [ResolvedTo(CONTRACTS)] fun withType(): R|@R|Anno|(number = R|/internalConstant<HIDDEN: /internalConstant is invisible>#|)  kotlin/collections/List<@R|Anno|(number = R|/privateConstant<HIDDEN: /privateConstant is invisible>#|)  kotlin/Int>| {
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun withType(): R|@R|Anno|(number = R|/internalConstant<HIDDEN: /internalConstant is invisible>#|)  kotlin/collections/List<@R|Anno|(number = R|/privateConstant<HIDDEN: /privateConstant is invisible>#|)  kotlin/Int>| {
     }
 
 FILE: [ResolvedTo(IMPORTS)] usafe.kt
-    public final [ResolvedTo(BODY_RESOLVE)] fun implicitType(): R|@R|Anno|(number = R|/internalConstant<HIDDEN: /internalConstant is invisible>#|)  kotlin/collections/List<@R|Anno|(number = R|/privateConstant<HIDDEN: /privateConstant is invisible>#|)  kotlin/Int>| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun implicitType(): R|@R|Anno|(number = R|/internalConstant<HIDDEN: /internalConstant is invisible>#|)  kotlin/collections/List<@R|Anno|(number = R|/privateConstant<HIDDEN: /privateConstant is invisible>#|)  kotlin/Int>| {
         ^implicitType R|/withType|()
     }
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] usafe.kt
-    public final [ResolvedTo(BODY_RESOLVE)] fun implicitType(): R|@R|Anno|(number = R|/internalConstant<HIDDEN: /internalConstant is invisible>#|)  kotlin/collections/List<@R|Anno|(number = R|/privateConstant<HIDDEN: /privateConstant is invisible>#|)  kotlin/Int>| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun implicitType(): R|@R|Anno|(number = R|/internalConstant<HIDDEN: /internalConstant is invisible>#|)  kotlin/collections/List<@R|Anno|(number = R|/privateConstant<HIDDEN: /privateConstant is invisible>#|)  kotlin/Int>| {
         ^implicitType R|/withType|()
     }

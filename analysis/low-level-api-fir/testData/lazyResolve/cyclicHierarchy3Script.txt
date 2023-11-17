@@ -236,7 +236,7 @@ FILE: [ResolvedTo(IMPORTS)] cyclicHierarchy3Script.kts
         public? final? [ResolvedTo(SUPER_TYPES)] interface D2 : <ERROR TYPE REF: Loop in supertype: /D2 -> /D1> {
         }
 
-        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface ResolveMe : <ERROR TYPE REF: Loop in supertype: /ResolveMe -> /F> {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] interface ResolveMe : <ERROR TYPE REF: Loop in supertype: /ResolveMe -> /F> {
         }
 
         public? final? [ResolvedTo(SUPER_TYPES)] interface F : <ERROR TYPE REF: Loop in supertype: /F -> /D2>, <ERROR TYPE REF: Loop in supertype: /F -> /C2> {
@@ -267,7 +267,7 @@ FILE: [ResolvedTo(IMPORTS)] cyclicHierarchy3Script.kts
         public? final? [ResolvedTo(SUPER_TYPES)] interface D2 : <ERROR TYPE REF: Loop in supertype: /D2 -> /D1> {
         }
 
-        public abstract [ResolvedTo(CONTRACTS)] interface ResolveMe : <ERROR TYPE REF: Loop in supertype: /ResolveMe -> /F> {
+        public abstract [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] interface ResolveMe : <ERROR TYPE REF: Loop in supertype: /ResolveMe -> /F> {
         }
 
         public? final? [ResolvedTo(SUPER_TYPES)] interface F : <ERROR TYPE REF: Loop in supertype: /F -> /D2>, <ERROR TYPE REF: Loop in supertype: /F -> /C2> {
@@ -298,7 +298,7 @@ FILE: [ResolvedTo(IMPORTS)] cyclicHierarchy3Script.kts
         public? final? [ResolvedTo(SUPER_TYPES)] interface D2 : <ERROR TYPE REF: Loop in supertype: /D2 -> /D1> {
         }
 
-        public abstract [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] interface ResolveMe : <ERROR TYPE REF: Loop in supertype: /ResolveMe -> /F> {
+        public abstract [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface ResolveMe : <ERROR TYPE REF: Loop in supertype: /ResolveMe -> /F> {
         }
 
         public? final? [ResolvedTo(SUPER_TYPES)] interface F : <ERROR TYPE REF: Loop in supertype: /F -> /D2>, <ERROR TYPE REF: Loop in supertype: /F -> /C2> {
@@ -329,7 +329,7 @@ FILE: [ResolvedTo(IMPORTS)] cyclicHierarchy3Script.kts
         public? final? [ResolvedTo(SUPER_TYPES)] interface D2 : <ERROR TYPE REF: Loop in supertype: /D2 -> /D1> {
         }
 
-        public abstract [ResolvedTo(ANNOTATION_ARGUMENTS)] interface ResolveMe : <ERROR TYPE REF: Loop in supertype: /ResolveMe -> /F> {
+        public abstract [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] interface ResolveMe : <ERROR TYPE REF: Loop in supertype: /ResolveMe -> /F> {
         }
 
         public? final? [ResolvedTo(SUPER_TYPES)] interface F : <ERROR TYPE REF: Loop in supertype: /F -> /D2>, <ERROR TYPE REF: Loop in supertype: /F -> /C2> {
@@ -360,7 +360,7 @@ FILE: [ResolvedTo(IMPORTS)] cyclicHierarchy3Script.kts
         public? final? [ResolvedTo(SUPER_TYPES)] interface D2 : <ERROR TYPE REF: Loop in supertype: /D2 -> /D1> {
         }
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] interface ResolveMe : <ERROR TYPE REF: Loop in supertype: /ResolveMe -> /F> {
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface ResolveMe : <ERROR TYPE REF: Loop in supertype: /ResolveMe -> /F> {
         }
 
         public? final? [ResolvedTo(SUPER_TYPES)] interface F : <ERROR TYPE REF: Loop in supertype: /F -> /D2>, <ERROR TYPE REF: Loop in supertype: /F -> /C2> {
@@ -376,26 +376,26 @@ FILE: [ResolvedTo(BODY_RESOLVE)] cyclicHierarchy3Script.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-cyclicHierarchy3Script.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] interface B : <ERROR TYPE REF: Symbol not found for A>, <ERROR TYPE REF: Loop in supertype: /B -> /ResolveMe> {
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface B : <ERROR TYPE REF: Symbol not found for A>, <ERROR TYPE REF: Loop in supertype: /B -> /ResolveMe> {
         }
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] interface C1 : <ERROR TYPE REF: Loop in supertype: /C1 -> /B> {
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface C1 : <ERROR TYPE REF: Loop in supertype: /C1 -> /B> {
         }
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] interface C2 : <ERROR TYPE REF: Loop in supertype: /C2 -> /C1> {
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface C2 : <ERROR TYPE REF: Loop in supertype: /C2 -> /C1> {
         }
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] interface D1 : <ERROR TYPE REF: Loop in supertype: /D1 -> /B> {
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface D1 : <ERROR TYPE REF: Loop in supertype: /D1 -> /B> {
         }
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] interface D2 : <ERROR TYPE REF: Loop in supertype: /D2 -> /D1> {
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface D2 : <ERROR TYPE REF: Loop in supertype: /D2 -> /D1> {
         }
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] interface ResolveMe : <ERROR TYPE REF: Loop in supertype: /ResolveMe -> /F> {
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface ResolveMe : <ERROR TYPE REF: Loop in supertype: /ResolveMe -> /F> {
         }
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] interface F : <ERROR TYPE REF: Loop in supertype: /F -> /D2>, <ERROR TYPE REF: Loop in supertype: /F -> /C2> {
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface F : <ERROR TYPE REF: Loop in supertype: /F -> /D2>, <ERROR TYPE REF: Loop in supertype: /F -> /C2> {
         }
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] interface NonLoopedInterface : R|C2| {
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface NonLoopedInterface : R|C2| {
         }

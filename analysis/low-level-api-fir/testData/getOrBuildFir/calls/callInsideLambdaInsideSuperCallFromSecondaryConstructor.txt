@@ -18,7 +18,7 @@ FILE: [ResolvedTo(IMPORTS)] callInsideLambdaInsideSuperCallFromSecondaryConstruc
             LAZY_super<<implicit>>
         }
 
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=B] constructor([ResolvedTo(BODY_RESOLVE)] l: R|kotlin/Long|): R|B| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=B, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] l: R|kotlin/Long|): R|B| {
             super<R|A|>([ResolvedTo(RAW_FIR)] fun <anonymous>(): R|kotlin/Unit| <inline=Unknown>  {
                 R|/foo|(R|<local>/l|)
             }
@@ -26,5 +26,5 @@ FILE: [ResolvedTo(IMPORTS)] callInsideLambdaInsideSuperCallFromSecondaryConstruc
         }
 
     }
-    public final [ResolvedTo(CONTRACTS)] fun foo([ResolvedTo(CONTRACTS)] any: R|kotlin/Any|): R|kotlin/Unit| {
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun foo([ResolvedTo(CONTRACTS)] any: R|kotlin/Any|): R|kotlin/Unit| {
     }

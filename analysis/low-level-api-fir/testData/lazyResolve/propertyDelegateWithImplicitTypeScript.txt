@@ -41,7 +41,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyDelegateWithImplicitTypeScript.kts
 
 
 EXPECT_ACTUAL_MATCHING:
-TARGET: @PROPERTY:R|second/Anno|[Types](LAZY_EXPRESSION) public open [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [CallableCopySubstitutionKey=CallableCopySubstitution(substitutor=Empty, baseSymbol=FirPropertySymbol second/Interface.resolveMe), DelegatedWrapperDataKey=[wrapped=FirPropertySymbol second/Interface.resolveMe, containingClass=Aaa, delegateField=FirFieldSymbol second/Aaa.$$delegate_0] var resolveMe: <implicit>
+TARGET: @PROPERTY:R|second/Anno|[Types](LAZY_EXPRESSION) public open [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [CallableCopySubstitutionKey=CallableCopySubstitution(substitutor=Empty, baseSymbol=FirPropertySymbol second/Interface.resolveMe), DelegatedWrapperDataKey=[wrapped=FirPropertySymbol second/Interface.resolveMe, containingClass=Aaa, delegateField=FirFieldSymbol second/Aaa.$$delegate_0, ExpectForActualAttributeKey={}] var resolveMe: <implicit>
     @PROPERTY_GETTER:R|second/Anno|[Types](LAZY_EXPRESSION) public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=Aaa] get(): <implicit>
     @PROPERTY_SETTER:R|second/Anno|[Types](LAZY_EXPRESSION) public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=Aaa] set([ResolvedTo(EXPECT_ACTUAL_MATCHING)] value: <implicit>): R|kotlin/Unit|
 
@@ -83,7 +83,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyDelegateWithImplicitTypeScript.kts
 
 
 CONTRACTS:
-TARGET: @PROPERTY:R|second/Anno|[Types](LAZY_EXPRESSION) public open [ResolvedTo(CONTRACTS)] [CallableCopySubstitutionKey=CallableCopySubstitution(substitutor=Empty, baseSymbol=FirPropertySymbol second/Interface.resolveMe), DelegatedWrapperDataKey=[wrapped=FirPropertySymbol second/Interface.resolveMe, containingClass=Aaa, delegateField=FirFieldSymbol second/Aaa.$$delegate_0] var resolveMe: <implicit>
+TARGET: @PROPERTY:R|second/Anno|[Types](LAZY_EXPRESSION) public open [ResolvedTo(CONTRACTS)] [CallableCopySubstitutionKey=CallableCopySubstitution(substitutor=Empty, baseSymbol=FirPropertySymbol second/Interface.resolveMe), DelegatedWrapperDataKey=[wrapped=FirPropertySymbol second/Interface.resolveMe, containingClass=Aaa, delegateField=FirFieldSymbol second/Aaa.$$delegate_0, ExpectForActualAttributeKey={}] var resolveMe: <implicit>
     @PROPERTY_GETTER:R|second/Anno|[Types](LAZY_EXPRESSION) public [ResolvedTo(CONTRACTS)] [ContainingClassKey=Aaa] get(): <implicit>
     @PROPERTY_SETTER:R|second/Anno|[Types](LAZY_EXPRESSION) public [ResolvedTo(CONTRACTS)] [ContainingClassKey=Aaa] set([ResolvedTo(CONTRACTS)] value: <implicit>): R|kotlin/Unit|
 
@@ -125,7 +125,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyDelegateWithImplicitTypeScript.kts
 
 
 IMPLICIT_TYPES_BODY_RESOLVE:
-TARGET: @PROPERTY:R|second/Anno|[Types](LAZY_EXPRESSION) public open [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [DelegatedWrapperDataKey=[wrapped=FirPropertySymbol second/Interface.resolveMe, containingClass=Aaa, delegateField=FirFieldSymbol second/Aaa.$$delegate_0] var resolveMe: R|kotlin/String?|
+TARGET: @PROPERTY:R|second/Anno|[Types](LAZY_EXPRESSION) public open [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [DelegatedWrapperDataKey=[wrapped=FirPropertySymbol second/Interface.resolveMe, containingClass=Aaa, delegateField=FirFieldSymbol second/Aaa.$$delegate_0, ExpectForActualAttributeKey={}] var resolveMe: R|kotlin/String?|
     @PROPERTY_GETTER:R|second/Anno|[Types](LAZY_EXPRESSION) public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=Aaa] get(): R|kotlin/String?|
     @PROPERTY_SETTER:R|second/Anno|[Types](LAZY_EXPRESSION) public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=Aaa] set([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] value: R|kotlin/String?|): R|kotlin/Unit|
 
@@ -157,11 +157,11 @@ FILE: [ResolvedTo(IMPORTS)] propertyDelegateWithImplicitTypeScript.kts
         }
 
         public abstract [ResolvedTo(STATUS)] interface Interface : R|kotlin/Any| {
-            public open [ResolvedTo(CONTRACTS)] fun explicitType(): R|kotlin/String?| {
+            public open [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun explicitType(): R|kotlin/String?| {
                 ^explicitType Null(null)
             }
 
-            @PROPERTY:R|second/Anno|[Types](LAZY_EXPRESSION) field:@FIELD:R|second/Anno|[Types](LAZY_EXPRESSION) public open [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] var resolveMe: R|kotlin/String?| = this@R|second/Interface|.R|second/Interface.explicitType|()
+            @PROPERTY:R|second/Anno|[Types](LAZY_EXPRESSION) field:@FIELD:R|second/Anno|[Types](LAZY_EXPRESSION) public open [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] var resolveMe: R|kotlin/String?| = this@R|second/Interface|.R|second/Interface.explicitType|()
                 @PROPERTY_GETTER:R|second/Anno|[Types](LAZY_EXPRESSION) public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=Interface] get(): R|kotlin/String?|
                 @PROPERTY_SETTER:R|second/Anno|[Types](LAZY_EXPRESSION) public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=Interface] set([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] @SETTER_PARAMETER:R|second/Anno|[Types](LAZY_EXPRESSION) value: R|kotlin/String?|): R|kotlin/Unit|
 
@@ -169,7 +169,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyDelegateWithImplicitTypeScript.kts
 
 
 ANNOTATION_ARGUMENTS:
-TARGET: @PROPERTY:R|second/Anno|[Types](position = <strcat>(String(property ), R|second/constant|)) public open [ResolvedTo(ANNOTATION_ARGUMENTS)] [DelegatedWrapperDataKey=[wrapped=FirPropertySymbol second/Interface.resolveMe, containingClass=Aaa, delegateField=FirFieldSymbol second/Aaa.$$delegate_0] var resolveMe: R|kotlin/String?|
+TARGET: @PROPERTY:R|second/Anno|[Types](position = <strcat>(String(property ), R|second/constant|)) public open [ResolvedTo(ANNOTATION_ARGUMENTS)] [DelegatedWrapperDataKey=[wrapped=FirPropertySymbol second/Interface.resolveMe, containingClass=Aaa, delegateField=FirFieldSymbol second/Aaa.$$delegate_0, ExpectForActualAttributeKey={}] var resolveMe: R|kotlin/String?|
     @PROPERTY_GETTER:R|second/Anno|[Types](position = <strcat>(String(get ), R|second/constant|)) public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=Aaa] get(): R|kotlin/String?|
     @PROPERTY_SETTER:R|second/Anno|[Types](position = <strcat>(String(set ), R|second/constant|)) public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=Aaa] set([ResolvedTo(ANNOTATION_ARGUMENTS)] value: R|kotlin/String?|): R|kotlin/Unit|
 
@@ -188,7 +188,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyDelegateWithImplicitTypeScript.kts
 
         }
 
-        public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val constant: R|kotlin/String| = String(str)
+        public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val constant: R|kotlin/String| = String(str)
             public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/String|
 
         public final [ResolvedTo(STATUS)] [DelegateFieldsMapKey={0=FirFieldSymbol second/Aaa.$$delegate_0}] class Aaa : R|second/Interface| {
@@ -201,11 +201,11 @@ FILE: [ResolvedTo(IMPORTS)] propertyDelegateWithImplicitTypeScript.kts
         }
 
         public abstract [ResolvedTo(STATUS)] interface Interface : R|kotlin/Any| {
-            public open [ResolvedTo(CONTRACTS)] fun explicitType(): R|kotlin/String?| {
+            public open [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun explicitType(): R|kotlin/String?| {
                 ^explicitType Null(null)
             }
 
-            @PROPERTY:R|second/Anno|[Types](position = <strcat>(String(property ), R|second/constant|)) field:@FIELD:R|second/Anno|[Types](LAZY_EXPRESSION) public open [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] var resolveMe: R|kotlin/String?| = this@R|second/Interface|.R|second/Interface.explicitType|()
+            @PROPERTY:R|second/Anno|[Types](position = <strcat>(String(property ), R|second/constant|)) field:@FIELD:R|second/Anno|[Types](LAZY_EXPRESSION) public open [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] var resolveMe: R|kotlin/String?| = this@R|second/Interface|.R|second/Interface.explicitType|()
                 @PROPERTY_GETTER:R|second/Anno|[Types](position = <strcat>(String(get ), R|second/constant|)) public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=Interface] get(): R|kotlin/String?|
                 @PROPERTY_SETTER:R|second/Anno|[Types](position = <strcat>(String(set ), R|second/constant|)) public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=Interface] set([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] @SETTER_PARAMETER:R|second/Anno|[Types](LAZY_EXPRESSION) value: R|kotlin/String?|): R|kotlin/Unit|
 
@@ -213,7 +213,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyDelegateWithImplicitTypeScript.kts
 
 
 BODY_RESOLVE:
-TARGET: @PROPERTY:R|second/Anno|[Types](position = <strcat>(String(property ), R|second/constant|)) public open [ResolvedTo(BODY_RESOLVE)] [DelegatedWrapperDataKey=[wrapped=FirPropertySymbol second/Interface.resolveMe, containingClass=Aaa, delegateField=FirFieldSymbol second/Aaa.$$delegate_0] var resolveMe: R|kotlin/String?|
+TARGET: @PROPERTY:R|second/Anno|[Types](position = <strcat>(String(property ), R|second/constant|)) public open [ResolvedTo(BODY_RESOLVE)] [DelegatedWrapperDataKey=[wrapped=FirPropertySymbol second/Interface.resolveMe, containingClass=Aaa, delegateField=FirFieldSymbol second/Aaa.$$delegate_0, ExpectForActualAttributeKey={}] var resolveMe: R|kotlin/String?|
     @PROPERTY_GETTER:R|second/Anno|[Types](position = <strcat>(String(get ), R|second/constant|)) public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Aaa] get(): R|kotlin/String?|
     @PROPERTY_SETTER:R|second/Anno|[Types](position = <strcat>(String(set ), R|second/constant|)) public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Aaa] set([ResolvedTo(BODY_RESOLVE)] value: R|kotlin/String?|): R|kotlin/Unit|
 
@@ -232,7 +232,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyDelegateWithImplicitTypeScript.kts
 
         }
 
-        public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val constant: R|kotlin/String| = String(str)
+        public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val constant: R|kotlin/String| = String(str)
             public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/String|
 
         public final [ResolvedTo(STATUS)] [DelegateFieldsMapKey={0=FirFieldSymbol second/Aaa.$$delegate_0}] class Aaa : R|second/Interface| {
@@ -245,11 +245,11 @@ FILE: [ResolvedTo(IMPORTS)] propertyDelegateWithImplicitTypeScript.kts
         }
 
         public abstract [ResolvedTo(STATUS)] interface Interface : R|kotlin/Any| {
-            public open [ResolvedTo(CONTRACTS)] fun explicitType(): R|kotlin/String?| {
+            public open [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun explicitType(): R|kotlin/String?| {
                 ^explicitType Null(null)
             }
 
-            @PROPERTY:R|second/Anno|[Types](position = <strcat>(String(property ), R|second/constant|)) field:@FIELD:R|second/Anno|[Types](LAZY_EXPRESSION) public open [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] var resolveMe: R|kotlin/String?| = this@R|second/Interface|.R|second/Interface.explicitType|()
+            @PROPERTY:R|second/Anno|[Types](position = <strcat>(String(property ), R|second/constant|)) field:@FIELD:R|second/Anno|[Types](LAZY_EXPRESSION) public open [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] var resolveMe: R|kotlin/String?| = this@R|second/Interface|.R|second/Interface.explicitType|()
                 @PROPERTY_GETTER:R|second/Anno|[Types](position = <strcat>(String(get ), R|second/constant|)) public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=Interface] get(): R|kotlin/String?|
                 @PROPERTY_SETTER:R|second/Anno|[Types](position = <strcat>(String(set ), R|second/constant|)) public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=Interface] set([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] @SETTER_PARAMETER:R|second/Anno|[Types](LAZY_EXPRESSION) value: R|kotlin/String?|): R|kotlin/Unit|
 
@@ -262,21 +262,21 @@ FILE: [ResolvedTo(BODY_RESOLVE)] propertyDelegateWithImplicitTypeScript.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-propertyDelegateWithImplicitTypeScript.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        @R|kotlin/annotation/Target|[Types](allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.PROPERTY|, Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.VALUE_PARAMETER|, Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.FIELD|, Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.PROPERTY_SETTER|, Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.PROPERTY_GETTER|)) public final [ResolvedTo(BODY_RESOLVE)] annotation class Anno : R|kotlin/Annotation| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=second/Anno.position] position: R|kotlin/String|): R|second/Anno| {
+        @R|kotlin/annotation/Target|[Types](allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.PROPERTY|, Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.VALUE_PARAMETER|, Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.FIELD|, Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.PROPERTY_SETTER|, Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.PROPERTY_GETTER|)) public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] annotation class Anno : R|kotlin/Annotation| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=second/Anno.position] position: R|kotlin/String|): R|second/Anno| {
                 super<R|kotlin/Any|>()
             }
 
-            public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val position: R|kotlin/String| = R|<local>/position|
+            public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val position: R|kotlin/String| = R|<local>/position|
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
         }
 
-        public final const [ResolvedTo(BODY_RESOLVE)] val constant: R|kotlin/String| = String(str)
+        public final const [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val constant: R|kotlin/String| = String(str)
             public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/String|
 
-        public final [ResolvedTo(BODY_RESOLVE)] [DelegateFieldsMapKey={0=FirFieldSymbol second/Aaa.$$delegate_0}] class Aaa : R|second/Interface| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Aaa] constructor([ResolvedTo(BODY_RESOLVE)] i: R|second/Interface|): R|second/Aaa| {
+        public final [ResolvedTo(BODY_RESOLVE)] [DelegateFieldsMapKey={0=FirFieldSymbol second/Aaa.$$delegate_0}, ExpectForActualAttributeKey={}] class Aaa : R|second/Interface| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Aaa, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] i: R|second/Interface|): R|second/Aaa| {
                 super<R|kotlin/Any|>()
             }
 
@@ -284,14 +284,13 @@ FILE: [ResolvedTo(BODY_RESOLVE)] propertyDelegateWithImplicitTypeScript.kts
 
         }
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] interface Interface : R|kotlin/Any| {
-            public open [ResolvedTo(BODY_RESOLVE)] fun explicitType(): R|kotlin/String?| {
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface Interface : R|kotlin/Any| {
+            public open [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun explicitType(): R|kotlin/String?| {
                 ^explicitType Null(null)
             }
 
-            @PROPERTY:R|second/Anno|[Types](position = <strcat>(String(property ), R|second/constant|)) field:@FIELD:R|second/Anno|[Types](position = <strcat>(String(field ), R|second/constant|)) public open [ResolvedTo(BODY_RESOLVE)] var resolveMe: R|kotlin/String?| = this@R|second/Interface|.R|second/Interface.explicitType|()
+            @PROPERTY:R|second/Anno|[Types](position = <strcat>(String(property ), R|second/constant|)) field:@FIELD:R|second/Anno|[Types](position = <strcat>(String(field ), R|second/constant|)) public open [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] var resolveMe: R|kotlin/String?| = this@R|second/Interface|.R|second/Interface.explicitType|()
                 @PROPERTY_GETTER:R|second/Anno|[Types](position = <strcat>(String(get ), R|second/constant|)) public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Interface] get(): R|kotlin/String?|
                 @PROPERTY_SETTER:R|second/Anno|[Types](position = <strcat>(String(set ), R|second/constant|)) public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Interface] set([ResolvedTo(BODY_RESOLVE)] @SETTER_PARAMETER:R|second/Anno|[Types](position = <strcat>(String(set ), R|second/constant|)) value: R|kotlin/String?|): R|kotlin/Unit|
 
         }
-

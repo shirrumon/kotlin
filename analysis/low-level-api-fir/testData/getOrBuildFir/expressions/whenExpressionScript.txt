@@ -18,7 +18,7 @@ FILE: [ResolvedTo(IMPORTS)] whenExpressionScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-whenExpressionScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun foo([ResolvedTo(BODY_RESOLVE)] x: R|kotlin/Any|): R|kotlin/String| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo([ResolvedTo(BODY_RESOLVE)] x: R|kotlin/Any|): R|kotlin/String| {
             ^foo when (R|<local>/x|) {
                 ($subj$ is R|kotlin/String|) ->  {
                     String(1)
