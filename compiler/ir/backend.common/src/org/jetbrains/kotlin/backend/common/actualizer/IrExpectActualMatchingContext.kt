@@ -299,8 +299,16 @@ internal abstract class IrExpectActualMatchingContext(
             onEnumEntry = { emptyList() }
         )
 
-    override fun FunctionSymbolMarker.allOverriddenDeclarationsRecursive(): Sequence<CallableSymbolMarker> =
-        throw NotImplementedError("Not implemented because it's unused")
+    override fun FunctionSymbolMarker.allRecursivelyOverriddenDeclarationsIncludingSelf(): Sequence<CallableSymbolMarker> =
+        when (val node = asIr()) {
+            is IrConstructor -> sequenceOf(this)
+            is IrSimpleFunction -> (sequenceOf(this) + node.overriddenSymbols)
+                // Tests work even if you don't filter out fake-overrides. Filtering fake-overrides is needed because
+                // the returned descriptors are compared by `equals`. And `equals` for fake-overrides is weird.
+                // I didn't manage to invent a test that would check this condition
+                .filter { !it.asIr().isFakeOverride }
+            else -> error("Unknown IR node: $node")
+        }
 
     override val FunctionSymbolMarker.valueParameters: List<ValueParameterSymbolMarker>
         get() = asIr().valueParameters.map { it.symbol }
@@ -313,6 +321,9 @@ internal abstract class IrExpectActualMatchingContext(
         get() = asIr().isCrossinline
     override val ValueParameterSymbolMarker.hasDefaultValue: Boolean
         get() = asIr().hasDefaultValue()
+
+    override val ValueParameterSymbolMarker.hasDefaultValueNonRecursive: Boolean
+        get() = asIr().defaultValue != null
 
     override fun CallableSymbolMarker.isAnnotationConstructor(): Boolean {
         val irConstructor = safeAsIr<IrConstructor>() ?: return false
@@ -457,6 +468,9 @@ internal abstract class IrExpectActualMatchingContext(
 
     override fun CallableSymbolMarker.isFakeOverride(containingExpectClass: RegularClassSymbolMarker?): Boolean =
         asIr().isFakeOverride
+
+    override val CallableSymbolMarker.isDelegatedMember: Boolean
+        get() = asIr().origin == IrDeclarationOrigin.DELEGATED_MEMBER
 
     override val CallableSymbolMarker.hasStableParameterNames: Boolean
         get() {

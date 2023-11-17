@@ -1,10 +1,10 @@
 // MODULE: m1-common
 // FILE: common.kt
-expect class Foo {
-    class Bar() {
-        fun foo(p: Int = 1)
-    }
-}
+<!EXPECT_ACTUAL_INCOMPATIBILITY{JVM}!>expect class Foo {
+    <!EXPECT_ACTUAL_INCOMPATIBILITY{JVM}!>class Bar() {
+        <!EXPECT_ACTUAL_INCOMPATIBILITY{JVM}!>fun foo(p: Int = 1)<!>
+    }<!>
+}<!>
 
 // MODULE: m2-jvm()()(m1-common)
 // FILE: jvm.kt

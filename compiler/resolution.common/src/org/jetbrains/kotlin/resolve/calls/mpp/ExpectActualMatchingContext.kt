@@ -119,9 +119,9 @@ interface ExpectActualMatchingContext<T : DeclarationSymbolMarker> : TypeSystemC
     val FunctionSymbolMarker.valueParameters: List<ValueParameterSymbolMarker>
 
     /**
-     * Returns all symbols that are overridden by [this] symbol
+     * Returns all symbols that are overridden by [this] symbol, including self
      */
-    fun FunctionSymbolMarker.allOverriddenDeclarationsRecursive(): Sequence<CallableSymbolMarker>
+    fun FunctionSymbolMarker.allRecursivelyOverriddenDeclarationsIncludingSelf(): Sequence<CallableSymbolMarker>
 
     val CallableSymbolMarker.valueParameters: List<ValueParameterSymbolMarker>
         get() = (this as? FunctionSymbolMarker)?.valueParameters ?: emptyList()
@@ -130,6 +130,7 @@ interface ExpectActualMatchingContext<T : DeclarationSymbolMarker> : TypeSystemC
     val ValueParameterSymbolMarker.isNoinline: Boolean
     val ValueParameterSymbolMarker.isCrossinline: Boolean
     val ValueParameterSymbolMarker.hasDefaultValue: Boolean
+    val ValueParameterSymbolMarker.hasDefaultValueNonRecursive: Boolean
 
     fun CallableSymbolMarker.isAnnotationConstructor(): Boolean
 
@@ -153,6 +154,8 @@ interface ExpectActualMatchingContext<T : DeclarationSymbolMarker> : TypeSystemC
     fun RegularClassSymbolMarker.isNotSamInterface(): Boolean
 
     fun CallableSymbolMarker.isFakeOverride(containingExpectClass: RegularClassSymbolMarker?): Boolean
+
+    val CallableSymbolMarker.isDelegatedMember: Boolean
 
     val CallableSymbolMarker.hasStableParameterNames: Boolean
 
