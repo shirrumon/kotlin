@@ -6,6 +6,7 @@
 package org.jetbrains.kotlin.fir.analysis.checkers.declaration
 
 import org.jetbrains.kotlin.KtFakeSourceElementKind
+import org.jetbrains.kotlin.KtSourceElement
 import org.jetbrains.kotlin.config.LanguageFeature
 import org.jetbrains.kotlin.descriptors.ClassKind
 import org.jetbrains.kotlin.diagnostics.*
@@ -21,10 +22,7 @@ import org.jetbrains.kotlin.fir.declarations.utils.isTailRec
 import org.jetbrains.kotlin.fir.expressions.FirAnnotation
 import org.jetbrains.kotlin.fir.symbols.FirBasedSymbol
 import org.jetbrains.kotlin.fir.symbols.SymbolInternals
-import org.jetbrains.kotlin.fir.symbols.impl.FirCallableSymbol
-import org.jetbrains.kotlin.fir.symbols.impl.FirClassLikeSymbol
-import org.jetbrains.kotlin.fir.symbols.impl.FirRegularClassSymbol
-import org.jetbrains.kotlin.fir.symbols.impl.FirTypeAliasSymbol
+import org.jetbrains.kotlin.fir.symbols.impl.*
 import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.mpp.RegularClassSymbolMarker
 import org.jetbrains.kotlin.name.StandardClassIds
@@ -154,7 +152,7 @@ object FirExpectActualDeclarationChecker : FirBasicDeclarationChecker() {
 
         when {
             checkingCompatibility is ExpectActualCheckingCompatibility.ClassScopes -> {
-                require(symbol is FirRegularClassSymbol || symbol is FirTypeAliasSymbol) {
+                require((symbol is FirRegularClassSymbol || symbol is FirTypeAliasSymbol) && expectedSingleCandidate is FirRegularClassSymbol) {
                     "Incompatible.ClassScopes is only possible for a class or a typealias: $declaration"
                 }
 
@@ -175,10 +173,35 @@ object FirExpectActualDeclarationChecker : FirBasicDeclarationChecker() {
                 val nonTrivialIncompatibleMembers = checkingCompatibility.incompatibleMembers.filterNot(::hasSingleActualSuspect)
 
                 if (nonTrivialIncompatibleMembers.isNotEmpty()) {
-                    reporter.reportOn(source, FirErrors.NO_ACTUAL_CLASS_MEMBER_FOR_EXPECTED_CLASS, symbol, nonTrivialIncompatibleMembers, context)
+                    val (defaultArgsIncompatibleMembers, otherIncompatibleMembers) =
+                        nonTrivialIncompatibleMembers.partition { it.second.contains(ExpectActualCheckingCompatibility.DefaultArgumentsInExpectActualizedByFakeOverride) }
+
+                    if (defaultArgsIncompatibleMembers.isNotEmpty()) { // report a nicer diagnostic for DefaultArgumentsInExpectActualizedByFakeOverride
+                        val problematicExpectMembers = defaultArgsIncompatibleMembers
+                            .map {
+                                it.first as? FirNamedFunctionSymbol
+                                    ?: error("${ExpectActualCheckingCompatibility.DefaultArgumentsInExpectActualizedByFakeOverride} can be reported only for ${FirNamedFunctionSymbol::class}")
+                            }
+                        reporter.reportOn(
+                            source,
+                            FirErrors.DEFAULT_ARGUMENTS_IN_EXPECT_ACTUALIZED_BY_FAKE_OVERRIDE,
+                            expectedSingleCandidate,
+                            problematicExpectMembers,
+                            context
+                        )
+                    }
+                    if (otherIncompatibleMembers.isNotEmpty()) {
+                        reporter.reportOn(source, FirErrors.NO_ACTUAL_CLASS_MEMBER_FOR_EXPECTED_CLASS, symbol, otherIncompatibleMembers, context)
+                    }
                 }
                 if (checkingCompatibility.mismatchedMembers.isNotEmpty()) {
-                    reporter.reportOn(source, FirErrors.NO_ACTUAL_CLASS_MEMBER_FOR_EXPECTED_CLASS, symbol, checkingCompatibility.mismatchedMembers, context)
+                    reporter.reportOn(
+                        source,
+                        FirErrors.NO_ACTUAL_CLASS_MEMBER_FOR_EXPECTED_CLASS,
+                        symbol,
+                        checkingCompatibility.mismatchedMembers,
+                        context
+                    )
                 }
             }
 
