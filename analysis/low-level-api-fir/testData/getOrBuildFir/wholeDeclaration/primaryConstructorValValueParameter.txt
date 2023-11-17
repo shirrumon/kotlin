@@ -7,12 +7,12 @@ FIR element rendered:
 
 FIR FILE:
 FILE: [ResolvedTo(IMPORTS)] primaryConstructorValValueParameter.kt
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] class X : R|kotlin/Any| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=X] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/X.x] x: R|kotlin/Int|): R|X| {
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] class X : R|kotlin/Any| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=X, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/X.x] x: R|kotlin/Int|): R|X| {
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val x: R|kotlin/Int| = R|<local>/x|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val x: R|kotlin/Int| = R|<local>/x|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=X] get(): R|kotlin/Int|
 
     }

@@ -148,7 +148,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationOnLocalClass.kt
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=KotlinAnnotation] get(): AnotherAnnotation
 
     }
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun resolveMe(): R|kotlin/Unit| { LAZY_BLOCK }
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| { LAZY_BLOCK }
 
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] annotationOnLocalClass.kt
@@ -167,7 +167,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationOnLocalClass.kt
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=KotlinAnnotation] get(): AnotherAnnotation
 
     }
-    public final [ResolvedTo(CONTRACTS)] fun resolveMe(): R|kotlin/Unit| {
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
         @KotlinAnnotation[Unresolved](AnotherAnnotation#()) local final? [ResolvedTo(RAW_FIR)] class LocalClass : R|kotlin/Any| {
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=LocalClass] constructor(): R|<local>/LocalClass| {
                 super<R|kotlin/Any|>()
@@ -194,7 +194,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationOnLocalClass.kt
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=KotlinAnnotation] get(): AnotherAnnotation
 
     }
-    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
         @KotlinAnnotation[Unresolved](AnotherAnnotation#()) local final? [ResolvedTo(RAW_FIR)] class LocalClass : R|kotlin/Any| {
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=LocalClass] constructor(): R|<local>/LocalClass| {
                 super<R|kotlin/Any|>()
@@ -221,7 +221,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationOnLocalClass.kt
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=KotlinAnnotation] get(): AnotherAnnotation
 
     }
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] fun resolveMe(): R|kotlin/Unit| {
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
         @KotlinAnnotation[Unresolved](AnotherAnnotation#()) local final? [ResolvedTo(RAW_FIR)] class LocalClass : R|kotlin/Any| {
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=LocalClass] constructor(): R|<local>/LocalClass| {
                 super<R|kotlin/Any|>()
@@ -248,7 +248,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationOnLocalClass.kt
             public [ResolvedTo(STATUS)] [ContainingClassKey=KotlinAnnotation] get(): R|one/two/AnotherAnnotation|
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
         @R|one/two/KotlinAnnotation|[Types](s = R|one/two/AnotherAnnotation.AnotherAnnotation|()) local final [ResolvedTo(BODY_RESOLVE)] class LocalClass : R|kotlin/Any| {
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=LocalClass] constructor(): R|<local>/LocalClass| {
                 super<R|kotlin/Any|>()
@@ -260,22 +260,22 @@ FILE: [ResolvedTo(IMPORTS)] annotationOnLocalClass.kt
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] annotationOnLocalClass.kt
-    public final [ResolvedTo(BODY_RESOLVE)] annotation class AnotherAnnotation : R|kotlin/Annotation| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=AnotherAnnotation] constructor(): R|one/two/AnotherAnnotation| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] annotation class AnotherAnnotation : R|kotlin/Annotation| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=AnotherAnnotation, ExpectForActualAttributeKey={}] constructor(): R|one/two/AnotherAnnotation| {
             super<R|kotlin/Any|>()
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] annotation class KotlinAnnotation : R|kotlin/Annotation| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=KotlinAnnotation] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=one/two/KotlinAnnotation.s] s: R|one/two/AnotherAnnotation|): R|one/two/KotlinAnnotation| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] annotation class KotlinAnnotation : R|kotlin/Annotation| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=KotlinAnnotation, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=one/two/KotlinAnnotation.s] s: R|one/two/AnotherAnnotation|): R|one/two/KotlinAnnotation| {
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val s: R|one/two/AnotherAnnotation| = R|<local>/s|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val s: R|one/two/AnotherAnnotation| = R|<local>/s|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=KotlinAnnotation] get(): R|one/two/AnotherAnnotation|
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
         @R|one/two/KotlinAnnotation|[Types](s = R|one/two/AnotherAnnotation.AnotherAnnotation|()) local final [ResolvedTo(BODY_RESOLVE)] class LocalClass : R|kotlin/Any| {
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=LocalClass] constructor(): R|<local>/LocalClass| {
                 super<R|kotlin/Any|>()

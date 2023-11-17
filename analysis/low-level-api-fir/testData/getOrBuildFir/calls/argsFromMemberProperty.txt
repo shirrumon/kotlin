@@ -16,7 +16,7 @@ FILE: [ResolvedTo(IMPORTS)] argsFromMemberProperty.kts
                 LAZY_super<R|kotlin/Any|>
             }
 
-            public final [ResolvedTo(BODY_RESOLVE)] val i: R|kotlin/Int|
+            public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val i: R|kotlin/Int|
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=A] get(): R|kotlin/Int| {
                     ^ R|<local>/args|.R|SubstitutionOverride<kotlin/Array.size: R|kotlin/Int|>|
                 }

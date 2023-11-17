@@ -44,39 +44,39 @@ EXPECT_ACTUAL_MATCHING:
 FILE: [ResolvedTo(IMPORTS)] annotations.kt
     @FILE:R|kotlin/Suppress|[Types](LAZY_EXPRESSION)
     [ResolvedTo(EXPECT_ACTUAL_MATCHING)] annotations container
-    @R|kotlin/Suppress|[Types](LAZY_EXPRESSION) public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun resolveMe(): R|kotlin/Unit| { LAZY_BLOCK }
+    @R|kotlin/Suppress|[Types](LAZY_EXPRESSION) public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| { LAZY_BLOCK }
 
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] annotations.kt
     @FILE:R|kotlin/Suppress|[Types](LAZY_EXPRESSION)
     [ResolvedTo(CONTRACTS)] annotations container
-    @R|kotlin/Suppress|[Types](LAZY_EXPRESSION) public final [ResolvedTo(CONTRACTS)] fun resolveMe(): R|kotlin/Unit| {
+    @R|kotlin/Suppress|[Types](LAZY_EXPRESSION) public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
     }
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] annotations.kt
     @FILE:R|kotlin/Suppress|[Types](LAZY_EXPRESSION)
     [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] annotations container
-    @R|kotlin/Suppress|[Types](LAZY_EXPRESSION) public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+    @R|kotlin/Suppress|[Types](LAZY_EXPRESSION) public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
     }
 
 ANNOTATION_ARGUMENTS:
 FILE: [ResolvedTo(IMPORTS)] annotations.kt
     @FILE:R|kotlin/Suppress|[Types](names = vararg(String(1)))
     [ResolvedTo(ANNOTATION_ARGUMENTS)] annotations container
-    @R|kotlin/Suppress|[Types](names = vararg(String(2))) public final [ResolvedTo(ANNOTATION_ARGUMENTS)] fun resolveMe(): R|kotlin/Unit| {
+    @R|kotlin/Suppress|[Types](names = vararg(String(2))) public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
     }
 
 BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] annotations.kt
     @FILE:R|kotlin/Suppress|[Types](names = vararg(String(1)))
     [ResolvedTo(ANNOTATION_ARGUMENTS)] annotations container
-    @R|kotlin/Suppress|[Types](names = vararg(String(2))) public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+    @R|kotlin/Suppress|[Types](names = vararg(String(2))) public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
     }
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] annotations.kt
     @FILE:R|kotlin/Suppress|[Types](names = vararg(String(1)))
     [ResolvedTo(BODY_RESOLVE)] annotations container
-    @R|kotlin/Suppress|[Types](names = vararg(String(2))) public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+    @R|kotlin/Suppress|[Types](names = vararg(String(2))) public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
     }

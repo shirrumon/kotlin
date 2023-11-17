@@ -154,7 +154,7 @@ FILE: [ResolvedTo(IMPORTS)] cyclicNestedHierarchy.kt
 
 EXPECT_ACTUAL_MATCHING:
 FILE: [ResolvedTo(IMPORTS)] cyclicNestedHierarchy.kt
-    public open [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class C : <ERROR TYPE REF: Loop in supertype: /C -> /D> {
+    public open [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class C : <ERROR TYPE REF: Loop in supertype: /C -> /D> {
         public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=C] constructor(): R|C| {
             LAZY_super<D>
         }
@@ -176,7 +176,7 @@ FILE: [ResolvedTo(IMPORTS)] cyclicNestedHierarchy.kt
 
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] cyclicNestedHierarchy.kt
-    public open [ResolvedTo(CONTRACTS)] class C : <ERROR TYPE REF: Loop in supertype: /C -> /D> {
+    public open [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] class C : <ERROR TYPE REF: Loop in supertype: /C -> /D> {
         public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=C] constructor(): R|C| {
             LAZY_super<D>
         }
@@ -198,7 +198,7 @@ FILE: [ResolvedTo(IMPORTS)] cyclicNestedHierarchy.kt
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] cyclicNestedHierarchy.kt
-    public open [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] class C : <ERROR TYPE REF: Loop in supertype: /C -> /D> {
+    public open [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class C : <ERROR TYPE REF: Loop in supertype: /C -> /D> {
         public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=C] constructor(): R|C| {
             LAZY_super<D>
         }
@@ -220,7 +220,7 @@ FILE: [ResolvedTo(IMPORTS)] cyclicNestedHierarchy.kt
 
 ANNOTATION_ARGUMENTS:
 FILE: [ResolvedTo(IMPORTS)] cyclicNestedHierarchy.kt
-    public open [ResolvedTo(ANNOTATION_ARGUMENTS)] class C : <ERROR TYPE REF: Loop in supertype: /C -> /D> {
+    public open [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] class C : <ERROR TYPE REF: Loop in supertype: /C -> /D> {
         public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=C] constructor(): R|C| {
             LAZY_super<D>
         }
@@ -242,8 +242,8 @@ FILE: [ResolvedTo(IMPORTS)] cyclicNestedHierarchy.kt
 
 BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] cyclicNestedHierarchy.kt
-    public open [ResolvedTo(BODY_RESOLVE)] class C : <ERROR TYPE REF: Loop in supertype: /C -> /D> {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=C] constructor(): R|C| {
+    public open [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class C : <ERROR TYPE REF: Loop in supertype: /C -> /D> {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=C, ExpectForActualAttributeKey={}] constructor(): R|C| {
             super<R|D|>()
         }
 
@@ -264,21 +264,21 @@ FILE: [ResolvedTo(IMPORTS)] cyclicNestedHierarchy.kt
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] cyclicNestedHierarchy.kt
-    public open [ResolvedTo(BODY_RESOLVE)] class C : <ERROR TYPE REF: Loop in supertype: /C -> /D> {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=C] constructor(): R|C| {
+    public open [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class C : <ERROR TYPE REF: Loop in supertype: /C -> /D> {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=C, ExpectForActualAttributeKey={}] constructor(): R|C| {
             super<R|D|>()
         }
 
-        public open [ResolvedTo(BODY_RESOLVE)] class CC : <ERROR TYPE REF: Loop in supertype: /C.CC -> kotlin/Any> {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=CC] constructor(): R|C.CC| {
+        public open [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class CC : <ERROR TYPE REF: Loop in supertype: /C.CC -> kotlin/Any> {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=CC, ExpectForActualAttributeKey={}] constructor(): R|C.CC| {
                 super<R|kotlin/Any|>()
             }
 
         }
 
     }
-    public open [ResolvedTo(BODY_RESOLVE)] class D : <ERROR TYPE REF: Loop in supertype: /D -> /C.CC> {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=D] constructor(): R|D| {
+    public open [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class D : <ERROR TYPE REF: Loop in supertype: /D -> /C.CC> {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=D, ExpectForActualAttributeKey={}] constructor(): R|D| {
             super<R|C.CC|>()
         }
 

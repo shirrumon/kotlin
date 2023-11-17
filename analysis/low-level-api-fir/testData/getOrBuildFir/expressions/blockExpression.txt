@@ -8,5 +8,5 @@ FIR element rendered:
 
 FIR FILE:
 FILE: [ResolvedTo(IMPORTS)] blockExpression.kt
-    public final [ResolvedTo(BODY_RESOLVE)] fun x(): R|kotlin/Unit| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun x(): R|kotlin/Unit| {
     }

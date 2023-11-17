@@ -11,5 +11,5 @@ FILE: [ResolvedTo(IMPORTS)] binaryExpressionOperatorScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-binaryExpressionOperatorScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] val x: R|kotlin/Int| = Int(1).R|kotlin/Int.plus|(Int(1))
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val x: R|kotlin/Int| = Int(1).R|kotlin/Int.plus|(Int(1))
             public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/Int|

@@ -7,8 +7,8 @@ FIR element rendered:
 
 FIR FILE:
 FILE: [ResolvedTo(IMPORTS)] qualifiedCallInsidePropertyInsideConstructor.kt
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] class A : R|kotlin/Any| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=A] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/A.i] i: R|() -> kotlin/Unit| = [ResolvedTo(RAW_FIR)] fun <anonymous>(): R|kotlin/Unit| <inline=Unknown>  {
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] class A : R|kotlin/Any| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=A, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/A.i] i: R|() -> kotlin/Unit| = [ResolvedTo(RAW_FIR)] fun <anonymous>(): R|kotlin/Unit| <inline=Unknown>  {
             local final [ResolvedTo(RAW_FIR)] fun foo(): R|kotlin/String| {
                 ^foo <Unresolved name: B>#.<Unresolved name: prop>#.R|kotlin/toString|()
             }
@@ -18,7 +18,7 @@ FILE: [ResolvedTo(IMPORTS)] qualifiedCallInsidePropertyInsideConstructor.kt
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val i: R|() -> kotlin/Unit| = R|<local>/i|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val i: R|() -> kotlin/Unit| = R|<local>/i|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=A] get(): R|() -> kotlin/Unit|
 
     }

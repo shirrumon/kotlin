@@ -112,7 +112,7 @@ FILE: [ResolvedTo(IMPORTS)] syntheticResultDeclaration.kts
     SCRIPT: [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] <script-syntheticResultDeclaration.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun foo(): R|kotlin/Int| {
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo(): R|kotlin/Int| {
             ^foo Int(24)
         }
 
@@ -126,7 +126,7 @@ FILE: [ResolvedTo(IMPORTS)] syntheticResultDeclaration.kts
     SCRIPT: [ResolvedTo(ANNOTATION_ARGUMENTS)] <script-syntheticResultDeclaration.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun foo(): R|kotlin/Int| {
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo(): R|kotlin/Int| {
             ^foo Int(24)
         }
 
@@ -140,7 +140,7 @@ FILE: [ResolvedTo(IMPORTS)] syntheticResultDeclaration.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-syntheticResultDeclaration.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun foo(): R|kotlin/Int| {
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo(): R|kotlin/Int| {
             ^foo Int(24)
         }
 
@@ -154,7 +154,7 @@ FILE: [ResolvedTo(BODY_RESOLVE)] syntheticResultDeclaration.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-syntheticResultDeclaration.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun foo(): R|kotlin/Int| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo(): R|kotlin/Int| {
             ^foo Int(24)
         }
 

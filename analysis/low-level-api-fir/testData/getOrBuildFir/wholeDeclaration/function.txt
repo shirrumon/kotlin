@@ -3,7 +3,7 @@ FIR element: FirSimpleFunctionImpl
 FIR source kind: KtRealSourceElementKind
 
 FIR element rendered:
-public final [ResolvedTo(BODY_RESOLVE)] fun build([ResolvedTo(BODY_RESOLVE)] action: R|Builder.() -> kotlin/Unit|): R|Builder| {
+public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun build([ResolvedTo(BODY_RESOLVE)] action: R|Builder.() -> kotlin/Unit|): R|Builder| {
     ^build R|/Builder.Builder|().R|kotlin/apply|<R|Builder|>(R|<local>/action|)
 }
 
@@ -33,7 +33,7 @@ FILE: [ResolvedTo(IMPORTS)] function.kts
 
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun build([ResolvedTo(BODY_RESOLVE)] action: R|Builder.() -> kotlin/Unit|): R|Builder| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun build([ResolvedTo(BODY_RESOLVE)] action: R|Builder.() -> kotlin/Unit|): R|Builder| {
             ^build R|/Builder.Builder|().R|kotlin/apply|<R|Builder|>(R|<local>/action|)
         }
 

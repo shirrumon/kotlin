@@ -12,7 +12,7 @@ FILE: [ResolvedTo(IMPORTS)] whileExpressionScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-whileExpressionScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun foo(): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo(): R|kotlin/Unit| {
             while(Boolean(true)) {
             }
 

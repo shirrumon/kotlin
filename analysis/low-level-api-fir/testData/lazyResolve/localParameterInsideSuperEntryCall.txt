@@ -10,8 +10,8 @@ FILE: [ResolvedTo(IMPORTS)] localParameterInsideSuperEntryCall.kt
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
             super<R|one/ClassWithParameter|>(object : R|one/Interface| {
                 private [ResolvedTo(RAW_FIR)] [ContainingClassKey=<anonymous>] constructor(): R|one/<anonymous>| {
                     super<R|kotlin/Any|>()
@@ -38,8 +38,8 @@ FILE: [ResolvedTo(IMPORTS)] localParameterInsideSuperEntryCall.kt
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
             super<R|one/ClassWithParameter|>(object : R|one/Interface| {
                 private [ResolvedTo(RAW_FIR)] [ContainingClassKey=<anonymous>] constructor(): R|one/<anonymous>| {
                     super<R|kotlin/Any|>()
@@ -66,8 +66,8 @@ FILE: [ResolvedTo(IMPORTS)] localParameterInsideSuperEntryCall.kt
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
             super<R|one/ClassWithParameter|>(object : R|one/Interface| {
                 private [ResolvedTo(RAW_FIR)] [ContainingClassKey=<anonymous>] constructor(): R|one/<anonymous>| {
                     super<R|kotlin/Any|>()
@@ -94,8 +94,8 @@ FILE: [ResolvedTo(IMPORTS)] localParameterInsideSuperEntryCall.kt
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
             super<R|one/ClassWithParameter|>(object : R|one/Interface| {
                 private [ResolvedTo(RAW_FIR)] [ContainingClassKey=<anonymous>] constructor(): R|one/<anonymous>| {
                     super<R|kotlin/Any|>()
@@ -122,8 +122,8 @@ FILE: [ResolvedTo(IMPORTS)] localParameterInsideSuperEntryCall.kt
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
             super<R|one/ClassWithParameter|>(object : R|one/Interface| {
                 private [ResolvedTo(RAW_FIR)] [ContainingClassKey=<anonymous>] constructor(): R|one/<anonymous>| {
                     super<R|kotlin/Any|>()
@@ -150,8 +150,8 @@ FILE: [ResolvedTo(IMPORTS)] localParameterInsideSuperEntryCall.kt
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
             super<R|one/ClassWithParameter|>(object : R|one/Interface| {
                 private [ResolvedTo(RAW_FIR)] [ContainingClassKey=<anonymous>] constructor(): R|one/<anonymous>| {
                     super<R|kotlin/Any|>()
@@ -178,8 +178,8 @@ FILE: [ResolvedTo(IMPORTS)] localParameterInsideSuperEntryCall.kt
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
             super<R|one/ClassWithParameter|>(object : R|one/Interface| {
                 private [ResolvedTo(RAW_FIR)] [ContainingClassKey=<anonymous>] constructor(): R|one/<anonymous>| {
                     super<R|kotlin/Any|>()
@@ -206,8 +206,8 @@ FILE: [ResolvedTo(IMPORTS)] localParameterInsideSuperEntryCall.kt
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
             super<R|one/ClassWithParameter|>(object : R|one/Interface| {
                 private [ResolvedTo(RAW_FIR)] [ContainingClassKey=<anonymous>] constructor(): R|one/<anonymous>| {
                     super<R|kotlin/Any|>()
@@ -234,8 +234,8 @@ FILE: [ResolvedTo(IMPORTS)] localParameterInsideSuperEntryCall.kt
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
             super<R|one/ClassWithParameter|>(object : R|one/Interface| {
                 private [ResolvedTo(RAW_FIR)] [ContainingClassKey=<anonymous>] constructor(): R|one/<anonymous>| {
                     super<R|kotlin/Any|>()
@@ -262,8 +262,8 @@ FILE: [ResolvedTo(IMPORTS)] localParameterInsideSuperEntryCall.kt
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
             super<R|one/ClassWithParameter|>(object : R|one/Interface| {
                 private [ResolvedTo(RAW_FIR)] [ContainingClassKey=<anonymous>] constructor(): R|one/<anonymous>| {
                     super<R|kotlin/Any|>()
@@ -290,8 +290,8 @@ FILE: [ResolvedTo(IMPORTS)] localParameterInsideSuperEntryCall.kt
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
             super<R|one/ClassWithParameter|>(object : R|one/Interface| {
                 private [ResolvedTo(RAW_FIR)] [ContainingClassKey=<anonymous>] constructor(): R|one/<anonymous>| {
                     super<R|kotlin/Any|>()
@@ -318,8 +318,8 @@ FILE: [ResolvedTo(IMPORTS)] localParameterInsideSuperEntryCall.kt
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
             super<R|one/ClassWithParameter|>(object : R|one/Interface| {
                 private [ResolvedTo(RAW_FIR)] [ContainingClassKey=<anonymous>] constructor(): R|one/<anonymous>| {
                     super<R|kotlin/Any|>()
@@ -336,18 +336,18 @@ FILE: [ResolvedTo(IMPORTS)] localParameterInsideSuperEntryCall.kt
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] localParameterInsideSuperEntryCall.kt
-    public abstract [ResolvedTo(BODY_RESOLVE)] interface Interface : R|kotlin/Any| {
-        public abstract [ResolvedTo(BODY_RESOLVE)] fun foo([ResolvedTo(BODY_RESOLVE)] param: R|kotlin/String|): R|kotlin/Unit|
+    public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface Interface : R|kotlin/Any| {
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo([ResolvedTo(BODY_RESOLVE)] param: R|kotlin/String|): R|kotlin/Unit|
 
     }
-    public open [ResolvedTo(BODY_RESOLVE)] class ClassWithParameter : R|kotlin/Any| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=ClassWithParameter] constructor([ResolvedTo(BODY_RESOLVE)] i: R|one/Interface|): R|one/ClassWithParameter| {
+    public open [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class ClassWithParameter : R|kotlin/Any| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=ClassWithParameter, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] i: R|one/Interface|): R|one/ClassWithParameter| {
             super<R|kotlin/Any|>()
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
             super<R|one/ClassWithParameter|>(object : R|one/Interface| {
                 private [ResolvedTo(RAW_FIR)] [ContainingClassKey=<anonymous>] constructor(): R|one/<anonymous>| {
                     super<R|kotlin/Any|>()

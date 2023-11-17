@@ -249,7 +249,7 @@ FILE: [ResolvedTo(IMPORTS)] initWithAnnotation.kt
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
-    public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val constant: R|kotlin/Int| = Int(0)
+    public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val constant: R|kotlin/Int| = Int(0)
         public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/Int|
     public final [ResolvedTo(STATUS)] class MyClass : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=MyClass] constructor(): R|low/MyClass| {
@@ -273,7 +273,7 @@ FILE: [ResolvedTo(IMPORTS)] initWithAnnotation.kt
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
-    public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val constant: R|kotlin/Int| = Int(0)
+    public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val constant: R|kotlin/Int| = Int(0)
         public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/Int|
     public final [ResolvedTo(STATUS)] class MyClass : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=MyClass] constructor(): R|low/MyClass| {
@@ -285,28 +285,28 @@ FILE: [ResolvedTo(IMPORTS)] initWithAnnotation.kt
         }
 
     }
-    public final [ResolvedTo(CONTRACTS)] fun anotherFun(): R|kotlin/String| {
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun anotherFun(): R|kotlin/String| {
         ^anotherFun String(str)
     }
-    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun funInsideInit(): R|kotlin/String| {
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun funInsideInit(): R|kotlin/String| {
         ^funInsideInit R|low/anotherFun|()
     }
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] initWithAnnotation.kt
-    @R|kotlin/annotation/Target|[Types](allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.EXPRESSION|)) @R|kotlin/annotation/Retention|[Types](value = Q|kotlin/annotation/AnnotationRetention|.R|kotlin/annotation/AnnotationRetention.SOURCE|) public final [ResolvedTo(BODY_RESOLVE)] annotation class Anno : R|kotlin/Annotation| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=low/Anno.position] position: R|kotlin/String|): R|low/Anno| {
+    @R|kotlin/annotation/Target|[Types](allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.EXPRESSION|)) @R|kotlin/annotation/Retention|[Types](value = Q|kotlin/annotation/AnnotationRetention|.R|kotlin/annotation/AnnotationRetention.SOURCE|) public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] annotation class Anno : R|kotlin/Annotation| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=low/Anno.position] position: R|kotlin/String|): R|low/Anno| {
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val position: R|kotlin/String| = R|<local>/position|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val position: R|kotlin/String| = R|<local>/position|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
-    public final const [ResolvedTo(BODY_RESOLVE)] val constant: R|kotlin/Int| = Int(0)
+    public final const [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val constant: R|kotlin/Int| = Int(0)
         public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/Int|
-    public final [ResolvedTo(BODY_RESOLVE)] class MyClass : R|kotlin/Any| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyClass] constructor(): R|low/MyClass| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class MyClass : R|kotlin/Any| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyClass, ExpectForActualAttributeKey={}] constructor(): R|low/MyClass| {
             super<R|kotlin/Any|>()
         }
 
@@ -315,9 +315,9 @@ FILE: [ResolvedTo(BODY_RESOLVE)] initWithAnnotation.kt
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] fun anotherFun(): R|kotlin/String| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun anotherFun(): R|kotlin/String| {
         ^anotherFun String(str)
     }
-    public final [ResolvedTo(BODY_RESOLVE)] fun funInsideInit(): R|kotlin/String| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun funInsideInit(): R|kotlin/String| {
         ^funInsideInit R|low/anotherFun|()
     }

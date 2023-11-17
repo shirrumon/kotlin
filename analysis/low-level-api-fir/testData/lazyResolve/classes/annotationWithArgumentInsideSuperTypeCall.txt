@@ -127,7 +127,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationWithArgumentInsideSuperTypeCall.kt
     }
     public? final? [ResolvedTo(SUPER_TYPES)] interface Foo : R|kotlin/Any| {
     }
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class MyClass : R|@R|Anno|(LAZY_EXPRESSION)  Foo| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class MyClass : R|@R|Anno|(LAZY_EXPRESSION)  Foo| {
         public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyClass] constructor(): R|MyClass| {
             LAZY_super<<implicit>>
         }
@@ -144,7 +144,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationWithArgumentInsideSuperTypeCall.kt
     }
     public? final? [ResolvedTo(SUPER_TYPES)] interface Foo : R|kotlin/Any| {
     }
-    public final [ResolvedTo(CONTRACTS)] class MyClass : R|@R|Anno|(LAZY_EXPRESSION)  Foo| {
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] class MyClass : R|@R|Anno|(LAZY_EXPRESSION)  Foo| {
         public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyClass] constructor(): R|MyClass| {
             LAZY_super<<implicit>>
         }
@@ -161,7 +161,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationWithArgumentInsideSuperTypeCall.kt
     }
     public? final? [ResolvedTo(SUPER_TYPES)] interface Foo : R|kotlin/Any| {
     }
-    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] class MyClass : R|@R|Anno|(LAZY_EXPRESSION)  Foo| {
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class MyClass : R|@R|Anno|(LAZY_EXPRESSION)  Foo| {
         public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyClass] constructor(): R|MyClass| {
             LAZY_super<<implicit>>
         }
@@ -178,7 +178,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationWithArgumentInsideSuperTypeCall.kt
     }
     public abstract [ResolvedTo(STATUS)] interface Foo : R|kotlin/Any| {
     }
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] class MyClass : R|@R|Anno|()  Foo| {
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] class MyClass : R|@R|Anno|()  Foo| {
         public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyClass] constructor(): R|MyClass| {
             LAZY_super<<implicit>>
         }
@@ -195,8 +195,8 @@ FILE: [ResolvedTo(IMPORTS)] annotationWithArgumentInsideSuperTypeCall.kt
     }
     public abstract [ResolvedTo(STATUS)] interface Foo : R|kotlin/Any| {
     }
-    public final [ResolvedTo(BODY_RESOLVE)] class MyClass : R|@R|Anno|()  Foo| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyClass] constructor(): R|MyClass| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class MyClass : R|@R|Anno|()  Foo| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyClass, ExpectForActualAttributeKey={}] constructor(): R|MyClass| {
             super<R|kotlin/Any|>()
         }
 
@@ -204,16 +204,16 @@ FILE: [ResolvedTo(IMPORTS)] annotationWithArgumentInsideSuperTypeCall.kt
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] annotationWithArgumentInsideSuperTypeCall.kt
-    public final [ResolvedTo(BODY_RESOLVE)] annotation class Anno : R|kotlin/Annotation| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] constructor(): R|Anno| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] annotation class Anno : R|kotlin/Annotation| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno, ExpectForActualAttributeKey={}] constructor(): R|Anno| {
             super<R|kotlin/Any|>()
         }
 
     }
-    public abstract [ResolvedTo(BODY_RESOLVE)] interface Foo : R|kotlin/Any| {
+    public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface Foo : R|kotlin/Any| {
     }
-    public final [ResolvedTo(BODY_RESOLVE)] class MyClass : R|@R|Anno|()  Foo| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyClass] constructor(): R|MyClass| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class MyClass : R|@R|Anno|()  Foo| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyClass, ExpectForActualAttributeKey={}] constructor(): R|MyClass| {
             super<R|kotlin/Any|>()
         }
 

@@ -14,7 +14,7 @@ local final [ResolvedTo(BODY_RESOLVE)] class X : R|kotlin/Any| {
 
 FIR FILE:
 FILE: [ResolvedTo(IMPORTS)] localClass.kt
-    public final [ResolvedTo(BODY_RESOLVE)] fun y(): R|kotlin/Unit| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun y(): R|kotlin/Unit| {
         local final [ResolvedTo(BODY_RESOLVE)] class X : R|kotlin/Any| {
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=X] constructor(): R|<local>/X| {
                 super<R|kotlin/Any|>()

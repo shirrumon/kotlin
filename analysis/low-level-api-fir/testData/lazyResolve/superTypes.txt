@@ -159,7 +159,7 @@ FILE: [ResolvedTo(IMPORTS)] superTypes.kt
         }
 
     }
-    public open [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class resolveMe : R|A| {
+    public open [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class resolveMe : R|A| {
         public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=resolveMe] constructor(): R|resolveMe| {
             LAZY_super<A>
         }
@@ -180,7 +180,7 @@ FILE: [ResolvedTo(IMPORTS)] superTypes.kt
         }
 
     }
-    public open [ResolvedTo(CONTRACTS)] class resolveMe : R|A| {
+    public open [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] class resolveMe : R|A| {
         public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=resolveMe] constructor(): R|resolveMe| {
             LAZY_super<A>
         }
@@ -201,7 +201,7 @@ FILE: [ResolvedTo(IMPORTS)] superTypes.kt
         }
 
     }
-    public open [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] class resolveMe : R|A| {
+    public open [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class resolveMe : R|A| {
         public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=resolveMe] constructor(): R|resolveMe| {
             LAZY_super<A>
         }
@@ -222,7 +222,7 @@ FILE: [ResolvedTo(IMPORTS)] superTypes.kt
         }
 
     }
-    public open [ResolvedTo(ANNOTATION_ARGUMENTS)] class resolveMe : R|A| {
+    public open [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] class resolveMe : R|A| {
         public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=resolveMe] constructor(): R|resolveMe| {
             LAZY_super<A>
         }
@@ -243,8 +243,8 @@ FILE: [ResolvedTo(IMPORTS)] superTypes.kt
         }
 
     }
-    public open [ResolvedTo(BODY_RESOLVE)] class resolveMe : R|A| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=resolveMe] constructor(): R|resolveMe| {
+    public open [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class resolveMe : R|A| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=resolveMe, ExpectForActualAttributeKey={}] constructor(): R|resolveMe| {
             super<R|A|>()
         }
 
@@ -252,20 +252,20 @@ FILE: [ResolvedTo(IMPORTS)] superTypes.kt
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] superTypes.kt
-    public open [ResolvedTo(BODY_RESOLVE)] class A : R|kotlin/Any| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=A] constructor(): R|A| {
+    public open [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class A : R|kotlin/Any| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=A, ExpectForActualAttributeKey={}] constructor(): R|A| {
             super<R|kotlin/Any|>()
         }
 
     }
-    public open [ResolvedTo(BODY_RESOLVE)] class B : R|A| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=B] constructor(): R|B| {
+    public open [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class B : R|A| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=B, ExpectForActualAttributeKey={}] constructor(): R|B| {
             super<R|A|>()
         }
 
     }
-    public open [ResolvedTo(BODY_RESOLVE)] class resolveMe : R|A| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=resolveMe] constructor(): R|resolveMe| {
+    public open [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class resolveMe : R|A| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=resolveMe, ExpectForActualAttributeKey={}] constructor(): R|resolveMe| {
             super<R|A|>()
         }
 

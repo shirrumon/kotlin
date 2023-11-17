@@ -82,7 +82,7 @@ FILE: [ResolvedTo(IMPORTS)] typeParameterOfNonLocalFunction.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun <[ResolvedTo(EXPECT_ACTUAL_MATCHING)] resolveMe> ddd(): R|kotlin/Unit| { LAZY_BLOCK }
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(EXPECT_ACTUAL_MATCHING)] resolveMe> ddd(): R|kotlin/Unit| { LAZY_BLOCK }
 
     }
 
@@ -93,7 +93,7 @@ FILE: [ResolvedTo(IMPORTS)] typeParameterOfNonLocalFunction.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(CONTRACTS)] fun <[ResolvedTo(CONTRACTS)] resolveMe> ddd(): R|kotlin/Unit| {
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(CONTRACTS)] resolveMe> ddd(): R|kotlin/Unit| {
         }
 
     }
@@ -105,7 +105,7 @@ FILE: [ResolvedTo(IMPORTS)] typeParameterOfNonLocalFunction.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun <[ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] resolveMe> ddd(): R|kotlin/Unit| {
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] resolveMe> ddd(): R|kotlin/Unit| {
         }
 
     }
@@ -117,7 +117,7 @@ FILE: [ResolvedTo(IMPORTS)] typeParameterOfNonLocalFunction.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] fun <[ResolvedTo(ANNOTATION_ARGUMENTS)] resolveMe> ddd(): R|kotlin/Unit| {
+        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(ANNOTATION_ARGUMENTS)] resolveMe> ddd(): R|kotlin/Unit| {
         }
 
     }
@@ -129,19 +129,19 @@ FILE: [ResolvedTo(IMPORTS)] typeParameterOfNonLocalFunction.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun <[ResolvedTo(BODY_RESOLVE)] resolveMe> ddd(): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(BODY_RESOLVE)] resolveMe> ddd(): R|kotlin/Unit| {
         }
 
     }
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] typeParameterOfNonLocalFunction.kt
-    public final [ResolvedTo(BODY_RESOLVE)] class X : R|kotlin/Any| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=X] constructor(): R|X| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class X : R|kotlin/Any| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=X, ExpectForActualAttributeKey={}] constructor(): R|X| {
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun <[ResolvedTo(BODY_RESOLVE)] resolveMe> ddd(): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(BODY_RESOLVE)] resolveMe> ddd(): R|kotlin/Unit| {
         }
 
     }

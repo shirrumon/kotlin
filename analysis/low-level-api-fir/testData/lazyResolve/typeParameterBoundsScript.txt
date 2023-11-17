@@ -123,7 +123,7 @@ FILE: [ResolvedTo(IMPORTS)] typeParameterBoundsScript.kts
     SCRIPT: [ResolvedTo(RAW_FIR)] <script-typeParameterBoundsScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun resolveMe([ResolvedTo(EXPECT_ACTUAL_MATCHING)] foo: R|Foo|): R|kotlin/Unit| { LAZY_BLOCK }
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun resolveMe([ResolvedTo(EXPECT_ACTUAL_MATCHING)] foo: R|Foo|): R|kotlin/Unit| { LAZY_BLOCK }
 
         public? final? [ResolvedTo(RAW_FIR)] interface Foo : R|kotlin/Any| {
         }
@@ -140,7 +140,7 @@ FILE: [ResolvedTo(IMPORTS)] typeParameterBoundsScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-typeParameterBoundsScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(CONTRACTS)] fun resolveMe([ResolvedTo(CONTRACTS)] foo: R|Foo|): R|kotlin/Unit| {
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun resolveMe([ResolvedTo(CONTRACTS)] foo: R|Foo|): R|kotlin/Unit| {
             foo#.util#()
         }
 
@@ -159,7 +159,7 @@ FILE: [ResolvedTo(IMPORTS)] typeParameterBoundsScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-typeParameterBoundsScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun resolveMe([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] foo: R|Foo|): R|kotlin/Unit| {
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] foo: R|Foo|): R|kotlin/Unit| {
             foo#.util#()
         }
 
@@ -178,7 +178,7 @@ FILE: [ResolvedTo(IMPORTS)] typeParameterBoundsScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-typeParameterBoundsScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] fun resolveMe([ResolvedTo(ANNOTATION_ARGUMENTS)] foo: R|Foo|): R|kotlin/Unit| {
+        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun resolveMe([ResolvedTo(ANNOTATION_ARGUMENTS)] foo: R|Foo|): R|kotlin/Unit| {
             foo#.util#()
         }
 
@@ -197,7 +197,7 @@ FILE: [ResolvedTo(IMPORTS)] typeParameterBoundsScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-typeParameterBoundsScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe([ResolvedTo(BODY_RESOLVE)] foo: R|Foo|): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe([ResolvedTo(BODY_RESOLVE)] foo: R|Foo|): R|kotlin/Unit| {
             R|<local>/foo|.R|/util|<R|Foo|, R|Bar<Foo>|>()
         }
 
@@ -207,7 +207,7 @@ FILE: [ResolvedTo(IMPORTS)] typeParameterBoundsScript.kts
         public? final? [ResolvedTo(TYPES)] interface Bar<[ResolvedTo(TYPES)] T : R|Foo|> : R|kotlin/Any| {
         }
 
-        public final [ResolvedTo(CONTRACTS)] fun <[ResolvedTo(CONTRACTS)] F : R|Foo|, [ResolvedTo(CONTRACTS)] B : R|Bar<F>|> R|F|.util(): R|B| {
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(CONTRACTS)] F : R|Foo|, [ResolvedTo(CONTRACTS)] B : R|Bar<F>|> R|F|.util(): R|B| {
             ^util Null(null)!!
         }
 
@@ -218,16 +218,16 @@ FILE: [ResolvedTo(BODY_RESOLVE)] typeParameterBoundsScript.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-typeParameterBoundsScript.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe([ResolvedTo(BODY_RESOLVE)] foo: R|Foo|): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe([ResolvedTo(BODY_RESOLVE)] foo: R|Foo|): R|kotlin/Unit| {
             R|<local>/foo|.R|/util|<R|Foo|, R|Bar<Foo>|>()
         }
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] interface Foo : R|kotlin/Any| {
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface Foo : R|kotlin/Any| {
         }
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] interface Bar<[ResolvedTo(BODY_RESOLVE)] T : R|Foo|> : R|kotlin/Any| {
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface Bar<[ResolvedTo(BODY_RESOLVE)] T : R|Foo|> : R|kotlin/Any| {
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun <[ResolvedTo(BODY_RESOLVE)] F : R|Foo|, [ResolvedTo(BODY_RESOLVE)] B : R|Bar<F>|> R|F|.util(): R|B| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(BODY_RESOLVE)] F : R|Foo|, [ResolvedTo(BODY_RESOLVE)] B : R|Bar<F>|> R|F|.util(): R|B| {
             ^util Null(null)!!
         }

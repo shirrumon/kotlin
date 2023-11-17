@@ -12,7 +12,7 @@ FILE: [ResolvedTo(IMPORTS)] qualifiedPartOfQualifiedCallUnresolved.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun handleLeftBracketInFragment(): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun handleLeftBracketInFragment(): R|kotlin/Unit| {
              {
                 [ResolvedTo(BODY_RESOLVE)] lval <receiver>: R|ERROR CLASS: Unresolved name: peek| = <Unresolved name: peek>#()
                 [ResolvedTo(BODY_RESOLVE)] lval <unary>: <ERROR TYPE REF: Unresolved name: braceBalance> = R|<local>/<receiver>|.<Unresolved name: braceBalance>#

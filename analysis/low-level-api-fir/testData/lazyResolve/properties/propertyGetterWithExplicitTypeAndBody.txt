@@ -35,40 +35,40 @@ FILE: [ResolvedTo(IMPORTS)] propertyGetterWithExplicitTypeAndBody.kt
 
 EXPECT_ACTUAL_MATCHING:
 FILE: [ResolvedTo(IMPORTS)] propertyGetterWithExplicitTypeAndBody.kt
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] val prop: R|kotlin/Int|
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] val prop: R|kotlin/Int|
         public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] get(): R|kotlin/Int| { LAZY_BLOCK }
 
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] propertyGetterWithExplicitTypeAndBody.kt
-    public final [ResolvedTo(CONTRACTS)] val prop: R|kotlin/Int|
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] val prop: R|kotlin/Int|
         public [ResolvedTo(CONTRACTS)] get(): R|kotlin/Int| {
             ^ IntegerLiteral(42)
         }
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] propertyGetterWithExplicitTypeAndBody.kt
-    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val prop: R|kotlin/Int|
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val prop: R|kotlin/Int|
         public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/Int| {
             ^ IntegerLiteral(42)
         }
 
 ANNOTATION_ARGUMENTS:
 FILE: [ResolvedTo(IMPORTS)] propertyGetterWithExplicitTypeAndBody.kt
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] val prop: R|kotlin/Int|
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] val prop: R|kotlin/Int|
         public [ResolvedTo(ANNOTATION_ARGUMENTS)] get(): R|kotlin/Int| {
             ^ IntegerLiteral(42)
         }
 
 BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] propertyGetterWithExplicitTypeAndBody.kt
-    public final [ResolvedTo(BODY_RESOLVE)] val prop: R|kotlin/Int|
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val prop: R|kotlin/Int|
         public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/Int| {
             ^ Int(42)
         }
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] propertyGetterWithExplicitTypeAndBody.kt
-    public final [ResolvedTo(BODY_RESOLVE)] val prop: R|kotlin/Int|
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val prop: R|kotlin/Int|
         public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/Int| {
             ^ Int(42)
         }

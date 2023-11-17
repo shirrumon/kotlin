@@ -132,7 +132,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationInsideWhereFunction.kt
     }
     public? final? [ResolvedTo(RAW_FIR)] interface Two : R|kotlin/Any| {
     }
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun <[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T : R|One|, R|@R|Anno|(String(str))  Two|> foo([ResolvedTo(EXPECT_ACTUAL_MATCHING)] t: R|T|): <implicit> { LAZY_BLOCK }
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T : R|One|, R|@R|Anno|(String(str))  Two|> foo([ResolvedTo(EXPECT_ACTUAL_MATCHING)] t: R|T|): <implicit> { LAZY_BLOCK }
 
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] annotationInsideWhereFunction.kt
@@ -149,7 +149,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationInsideWhereFunction.kt
     }
     public? final? [ResolvedTo(RAW_FIR)] interface Two : R|kotlin/Any| {
     }
-    public final [ResolvedTo(CONTRACTS)] fun <[ResolvedTo(CONTRACTS)] T : R|One|, R|@R|Anno|(String(str))  Two|> foo([ResolvedTo(CONTRACTS)] t: R|T|): <implicit> { LAZY_BLOCK }
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(CONTRACTS)] T : R|One|, R|@R|Anno|(String(str))  Two|> foo([ResolvedTo(CONTRACTS)] t: R|T|): <implicit> { LAZY_BLOCK }
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] annotationInsideWhereFunction.kt
@@ -166,7 +166,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationInsideWhereFunction.kt
     }
     public? final? [ResolvedTo(RAW_FIR)] interface Two : R|kotlin/Any| {
     }
-    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun <[ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] T : R|One|, R|@R|Anno|(String(str))  Two|> foo([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] t: R|T|): R|T| {
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] T : R|One|, R|@R|Anno|(String(str))  Two|> foo([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] t: R|T|): R|T| {
         ^foo R|<local>/t|
     }
 
@@ -185,7 +185,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationInsideWhereFunction.kt
     }
     public? final? [ResolvedTo(RAW_FIR)] interface Two : R|kotlin/Any| {
     }
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] fun <[ResolvedTo(ANNOTATION_ARGUMENTS)] T : R|One|, R|@R|Anno|(s = String(str))  Two|> foo([ResolvedTo(ANNOTATION_ARGUMENTS)] t: R|T|): R|T| {
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(ANNOTATION_ARGUMENTS)] T : R|One|, R|@R|Anno|(s = String(str))  Two|> foo([ResolvedTo(ANNOTATION_ARGUMENTS)] t: R|T|): R|T| {
         ^foo R|<local>/t|
     }
 
@@ -204,25 +204,25 @@ FILE: [ResolvedTo(IMPORTS)] annotationInsideWhereFunction.kt
     }
     public? final? [ResolvedTo(RAW_FIR)] interface Two : R|kotlin/Any| {
     }
-    public final [ResolvedTo(BODY_RESOLVE)] fun <[ResolvedTo(BODY_RESOLVE)] T : R|One|, R|@R|Anno|(s = String(str))  Two|> foo([ResolvedTo(BODY_RESOLVE)] t: R|T|): R|T| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(BODY_RESOLVE)] T : R|One|, R|@R|Anno|(s = String(str))  Two|> foo([ResolvedTo(BODY_RESOLVE)] t: R|T|): R|T| {
         ^foo R|<local>/t|
     }
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] annotationInsideWhereFunction.kt
-    @R|kotlin/annotation/Target|[Types](allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|)) public final [ResolvedTo(BODY_RESOLVE)] annotation class Anno : R|kotlin/Annotation| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/Anno.s] s: R|kotlin/String|): R|Anno| {
+    @R|kotlin/annotation/Target|[Types](allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|)) public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] annotation class Anno : R|kotlin/Annotation| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/Anno.s] s: R|kotlin/String|): R|Anno| {
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val s: R|kotlin/String| = R|<local>/s|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val s: R|kotlin/String| = R|<local>/s|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
-    public abstract [ResolvedTo(BODY_RESOLVE)] interface One : R|kotlin/Any| {
+    public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface One : R|kotlin/Any| {
     }
-    public abstract [ResolvedTo(BODY_RESOLVE)] interface Two : R|kotlin/Any| {
+    public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface Two : R|kotlin/Any| {
     }
-    public final [ResolvedTo(BODY_RESOLVE)] fun <[ResolvedTo(BODY_RESOLVE)] T : R|One|, R|@R|Anno|(s = String(str))  Two|> foo([ResolvedTo(BODY_RESOLVE)] t: R|T|): R|T| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(BODY_RESOLVE)] T : R|One|, R|@R|Anno|(s = String(str))  Two|> foo([ResolvedTo(BODY_RESOLVE)] t: R|T|): R|T| {
         ^foo R|<local>/t|
     }

@@ -11,8 +11,8 @@ FILE: [ResolvedTo(IMPORTS)] callOnePropertyFromAnother.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-callOnePropertyFromAnother.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val foo: R|kotlin/String| = String(foo)
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val foo: R|kotlin/String| = String(foo)
             public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/String|
 
-        public final [ResolvedTo(BODY_RESOLVE)] val bar: R|kotlin/String| = R|/foo|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val bar: R|kotlin/String| = R|/foo|
             public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/String|

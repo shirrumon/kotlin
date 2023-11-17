@@ -98,8 +98,8 @@ FILE: [ResolvedTo(IMPORTS)] primaryConstructorProperty.kt
 
 EXPECT_ACTUAL_MATCHING:
 FILE: [ResolvedTo(IMPORTS)] primaryConstructorProperty.kt
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class A : R|kotlin/Any| {
-        public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=A] constructor([ResolvedTo(EXPECT_ACTUAL_MATCHING)] a: R|kotlin/Boolean|, [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [CorrespondingProperty=/A.prop] prop: R|kotlin/Int| = LAZY_EXPRESSION): R|A| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class A : R|kotlin/Any| {
+        public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=A, ExpectForActualAttributeKey={}] constructor([ResolvedTo(EXPECT_ACTUAL_MATCHING)] a: R|kotlin/Boolean|, [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [CorrespondingProperty=/A.prop] prop: R|kotlin/Int| = LAZY_EXPRESSION): R|A| {
             LAZY_super<R|kotlin/Any|>
         }
 
@@ -112,8 +112,8 @@ FILE: [ResolvedTo(IMPORTS)] primaryConstructorProperty.kt
 
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] primaryConstructorProperty.kt
-    public final [ResolvedTo(CONTRACTS)] class A : R|kotlin/Any| {
-        public [ResolvedTo(CONTRACTS)] [ContainingClassKey=A] constructor([ResolvedTo(CONTRACTS)] a: R|kotlin/Boolean|, [ResolvedTo(CONTRACTS)] [CorrespondingProperty=/A.prop] prop: R|kotlin/Int| = LAZY_EXPRESSION): R|A| {
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] class A : R|kotlin/Any| {
+        public [ResolvedTo(CONTRACTS)] [ContainingClassKey=A, ExpectForActualAttributeKey={}] constructor([ResolvedTo(CONTRACTS)] a: R|kotlin/Boolean|, [ResolvedTo(CONTRACTS)] [CorrespondingProperty=/A.prop] prop: R|kotlin/Int| = LAZY_EXPRESSION): R|A| {
             LAZY_super<R|kotlin/Any|>
         }
 
@@ -126,8 +126,8 @@ FILE: [ResolvedTo(IMPORTS)] primaryConstructorProperty.kt
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] primaryConstructorProperty.kt
-    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] class A : R|kotlin/Any| {
-        public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=A] constructor([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] a: R|kotlin/Boolean|, [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [CorrespondingProperty=/A.prop] prop: R|kotlin/Int| = LAZY_EXPRESSION): R|A| {
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class A : R|kotlin/Any| {
+        public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=A, ExpectForActualAttributeKey={}] constructor([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] a: R|kotlin/Boolean|, [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [CorrespondingProperty=/A.prop] prop: R|kotlin/Int| = LAZY_EXPRESSION): R|A| {
             LAZY_super<R|kotlin/Any|>
         }
 
@@ -140,8 +140,8 @@ FILE: [ResolvedTo(IMPORTS)] primaryConstructorProperty.kt
 
 ANNOTATION_ARGUMENTS:
 FILE: [ResolvedTo(IMPORTS)] primaryConstructorProperty.kt
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] class A : R|kotlin/Any| {
-        public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=A] constructor([ResolvedTo(ANNOTATION_ARGUMENTS)] a: R|kotlin/Boolean|, [ResolvedTo(ANNOTATION_ARGUMENTS)] [CorrespondingProperty=/A.prop] prop: R|kotlin/Int| = LAZY_EXPRESSION): R|A| {
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] class A : R|kotlin/Any| {
+        public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=A, ExpectForActualAttributeKey={}] constructor([ResolvedTo(ANNOTATION_ARGUMENTS)] a: R|kotlin/Boolean|, [ResolvedTo(ANNOTATION_ARGUMENTS)] [CorrespondingProperty=/A.prop] prop: R|kotlin/Int| = LAZY_EXPRESSION): R|A| {
             LAZY_super<R|kotlin/Any|>
         }
 
@@ -154,8 +154,8 @@ FILE: [ResolvedTo(IMPORTS)] primaryConstructorProperty.kt
 
 BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] primaryConstructorProperty.kt
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] class A : R|kotlin/Any| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=A] constructor([ResolvedTo(BODY_RESOLVE)] a: R|kotlin/Boolean|, [ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/A.prop] prop: R|kotlin/Int| = Int(42)): R|A| {
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] class A : R|kotlin/Any| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=A, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] a: R|kotlin/Boolean|, [ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/A.prop] prop: R|kotlin/Int| = Int(42)): R|A| {
             super<R|kotlin/Any|>()
         }
 
@@ -168,15 +168,15 @@ FILE: [ResolvedTo(IMPORTS)] primaryConstructorProperty.kt
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] primaryConstructorProperty.kt
-    public final [ResolvedTo(BODY_RESOLVE)] class A : R|kotlin/Any| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=A] constructor([ResolvedTo(BODY_RESOLVE)] a: R|kotlin/Boolean|, [ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/A.prop] prop: R|kotlin/Int| = Int(42)): R|A| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class A : R|kotlin/Any| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=A, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] a: R|kotlin/Boolean|, [ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/A.prop] prop: R|kotlin/Int| = Int(42)): R|A| {
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val prop: R|kotlin/Int| = R|<local>/prop|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val prop: R|kotlin/Int| = R|<local>/prop|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=A] get(): R|kotlin/Int|
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun foo(): R|kotlin/String| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo(): R|kotlin/String| {
             ^foo String(str)
         }
 

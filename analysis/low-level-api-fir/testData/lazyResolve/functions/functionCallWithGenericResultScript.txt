@@ -139,7 +139,7 @@ FILE: [ResolvedTo(IMPORTS)] functionCallWithGenericResultScript.kts
 
         public? final? [ResolvedTo(RAW_FIR)] fun bar(): Foo<String>? { LAZY_BLOCK }
 
-        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun resolveMe(): R|kotlin/Unit| { LAZY_BLOCK }
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| { LAZY_BLOCK }
 
 
 CONTRACTS:
@@ -157,7 +157,7 @@ FILE: [ResolvedTo(IMPORTS)] functionCallWithGenericResultScript.kts
 
         public? final? [ResolvedTo(RAW_FIR)] fun bar(): Foo<String>? { LAZY_BLOCK }
 
-        public final [ResolvedTo(CONTRACTS)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             [ResolvedTo(RAW_FIR)] lval x: <implicit> = bar#()
         }
 
@@ -177,7 +177,7 @@ FILE: [ResolvedTo(IMPORTS)] functionCallWithGenericResultScript.kts
 
         public? final? [ResolvedTo(RAW_FIR)] fun bar(): Foo<String>? { LAZY_BLOCK }
 
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             [ResolvedTo(RAW_FIR)] lval x: <implicit> = bar#()
         }
 
@@ -197,7 +197,7 @@ FILE: [ResolvedTo(IMPORTS)] functionCallWithGenericResultScript.kts
 
         public? final? [ResolvedTo(RAW_FIR)] fun bar(): Foo<String>? { LAZY_BLOCK }
 
-        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             [ResolvedTo(RAW_FIR)] lval x: <implicit> = bar#()
         }
 
@@ -215,11 +215,11 @@ FILE: [ResolvedTo(IMPORTS)] functionCallWithGenericResultScript.kts
 
         }
 
-        public final [ResolvedTo(CONTRACTS)] fun bar(): R|Foo<kotlin/String>?| {
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun bar(): R|Foo<kotlin/String>?| {
             ^bar Null(null)
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             [ResolvedTo(BODY_RESOLVE)] lval x: R|Foo<kotlin/String>?| = R|/bar|()
         }
 
@@ -230,17 +230,17 @@ FILE: [ResolvedTo(BODY_RESOLVE)] functionCallWithGenericResultScript.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-functionCallWithGenericResultScript.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public open [ResolvedTo(BODY_RESOLVE)] class Foo<[ResolvedTo(BODY_RESOLVE)] T : R|kotlin/CharSequence|> : R|kotlin/Any| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Foo] constructor<[ResolvedTo(BODY_RESOLVE)] T : R|kotlin/CharSequence|>(): R|Foo<T>| {
+        public open [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class Foo<[ResolvedTo(BODY_RESOLVE)] T : R|kotlin/CharSequence|> : R|kotlin/Any| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Foo, ExpectForActualAttributeKey={}] constructor<[ResolvedTo(BODY_RESOLVE)] T : R|kotlin/CharSequence|>(): R|Foo<T>| {
                 super<R|kotlin/Any|>()
             }
 
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun bar(): R|Foo<kotlin/String>?| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun bar(): R|Foo<kotlin/String>?| {
             ^bar Null(null)
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             [ResolvedTo(BODY_RESOLVE)] lval x: R|Foo<kotlin/String>?| = R|/bar|()
         }

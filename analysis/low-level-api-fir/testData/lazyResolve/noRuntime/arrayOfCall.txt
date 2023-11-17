@@ -84,7 +84,7 @@ FILE: [ResolvedTo(IMPORTS)] arrayOfCall.kt
 
 EXPECT_ACTUAL_MATCHING:
 FILE: [ResolvedTo(IMPORTS)] arrayOfCall.kt
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] annotation class Ann : R|kotlin/Annotation| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] annotation class Ann : R|kotlin/Annotation| {
         public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Ann] constructor([ResolvedTo(RAW_FIR)] [CorrespondingProperty=/Ann.a] vararg a: String = LAZY_EXPRESSION): R|Ann| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -96,7 +96,7 @@ FILE: [ResolvedTo(IMPORTS)] arrayOfCall.kt
 
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] arrayOfCall.kt
-    public final [ResolvedTo(CONTRACTS)] annotation class Ann : R|kotlin/Annotation| {
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] annotation class Ann : R|kotlin/Annotation| {
         public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Ann] constructor([ResolvedTo(RAW_FIR)] [CorrespondingProperty=/Ann.a] vararg a: String = LAZY_EXPRESSION): R|Ann| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -108,7 +108,7 @@ FILE: [ResolvedTo(IMPORTS)] arrayOfCall.kt
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] arrayOfCall.kt
-    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] annotation class Ann : R|kotlin/Annotation| {
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] annotation class Ann : R|kotlin/Annotation| {
         public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Ann] constructor([ResolvedTo(RAW_FIR)] [CorrespondingProperty=/Ann.a] vararg a: String = LAZY_EXPRESSION): R|Ann| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -120,7 +120,7 @@ FILE: [ResolvedTo(IMPORTS)] arrayOfCall.kt
 
 ANNOTATION_ARGUMENTS:
 FILE: [ResolvedTo(IMPORTS)] arrayOfCall.kt
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] annotation class Ann : R|kotlin/Annotation| {
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] annotation class Ann : R|kotlin/Annotation| {
         public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Ann] constructor([ResolvedTo(RAW_FIR)] [CorrespondingProperty=/Ann.a] vararg a: String = LAZY_EXPRESSION): R|Ann| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -132,24 +132,24 @@ FILE: [ResolvedTo(IMPORTS)] arrayOfCall.kt
 
 BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] arrayOfCall.kt
-    public final [ResolvedTo(BODY_RESOLVE)] annotation class Ann : R|kotlin/Annotation| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Ann] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/Ann.a] vararg a: R|kotlin/Array<out java/lang/String>| = <Unresolved name: arrayOf>#(ERROR_EXPR(Missing stdlib class: kotlin/String))): R|Ann| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] annotation class Ann : R|kotlin/Annotation| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Ann, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/Ann.a] vararg a: R|kotlin/Array<out java/lang/String>| = <Unresolved name: arrayOf>#(ERROR_EXPR(Missing stdlib class: kotlin/String))): R|Ann| {
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true, IsFromVarargKey=true] val a: R|kotlin/Array<out java/lang/String>| = R|<local>/a|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true, IsFromVarargKey=true] val a: R|kotlin/Array<out java/lang/String>| = R|<local>/a|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Ann] get(): R|kotlin/Array<out java/lang/String>|
 
     }
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] arrayOfCall.kt
-    public final [ResolvedTo(BODY_RESOLVE)] annotation class Ann : R|kotlin/Annotation| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Ann] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/Ann.a] vararg a: R|kotlin/Array<out java/lang/String>| = <Unresolved name: arrayOf>#(ERROR_EXPR(Missing stdlib class: kotlin/String))): R|Ann| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] annotation class Ann : R|kotlin/Annotation| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Ann, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/Ann.a] vararg a: R|kotlin/Array<out java/lang/String>| = <Unresolved name: arrayOf>#(ERROR_EXPR(Missing stdlib class: kotlin/String))): R|Ann| {
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true, IsFromVarargKey=true] val a: R|kotlin/Array<out java/lang/String>| = R|<local>/a|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true, IsFromVarargKey=true] val a: R|kotlin/Array<out java/lang/String>| = R|<local>/a|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Ann] get(): R|kotlin/Array<out java/lang/String>|
 
     }

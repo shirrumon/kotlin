@@ -200,7 +200,7 @@ FILE: [ResolvedTo(IMPORTS)] cyclicNestedHierarchyScript.kts
     SCRIPT: [ResolvedTo(RAW_FIR)] <script-cyclicNestedHierarchyScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public open [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class C : <ERROR TYPE REF: Loop in supertype: /C -> /D> {
+        public open [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class C : <ERROR TYPE REF: Loop in supertype: /C -> /D> {
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=C] constructor(): R|C| {
                 LAZY_super<D>
             }
@@ -228,7 +228,7 @@ FILE: [ResolvedTo(IMPORTS)] cyclicNestedHierarchyScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-cyclicNestedHierarchyScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public open [ResolvedTo(CONTRACTS)] class C : <ERROR TYPE REF: Loop in supertype: /C -> /D> {
+        public open [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] class C : <ERROR TYPE REF: Loop in supertype: /C -> /D> {
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=C] constructor(): R|C| {
                 LAZY_super<D>
             }
@@ -256,7 +256,7 @@ FILE: [ResolvedTo(IMPORTS)] cyclicNestedHierarchyScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-cyclicNestedHierarchyScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public open [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] class C : <ERROR TYPE REF: Loop in supertype: /C -> /D> {
+        public open [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class C : <ERROR TYPE REF: Loop in supertype: /C -> /D> {
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=C] constructor(): R|C| {
                 LAZY_super<D>
             }
@@ -284,7 +284,7 @@ FILE: [ResolvedTo(IMPORTS)] cyclicNestedHierarchyScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-cyclicNestedHierarchyScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public open [ResolvedTo(ANNOTATION_ARGUMENTS)] class C : <ERROR TYPE REF: Loop in supertype: /C -> /D> {
+        public open [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] class C : <ERROR TYPE REF: Loop in supertype: /C -> /D> {
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=C] constructor(): R|C| {
                 LAZY_super<D>
             }
@@ -312,8 +312,8 @@ FILE: [ResolvedTo(IMPORTS)] cyclicNestedHierarchyScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-cyclicNestedHierarchyScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public open [ResolvedTo(BODY_RESOLVE)] class C : <ERROR TYPE REF: Loop in supertype: /C -> /D> {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=C] constructor(): R|C| {
+        public open [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class C : <ERROR TYPE REF: Loop in supertype: /C -> /D> {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=C, ExpectForActualAttributeKey={}] constructor(): R|C| {
                 super<R|D|>()
             }
 
@@ -340,13 +340,13 @@ FILE: [ResolvedTo(BODY_RESOLVE)] cyclicNestedHierarchyScript.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-cyclicNestedHierarchyScript.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public open [ResolvedTo(BODY_RESOLVE)] class C : <ERROR TYPE REF: Loop in supertype: /C -> /D> {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=C] constructor(): R|C| {
+        public open [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class C : <ERROR TYPE REF: Loop in supertype: /C -> /D> {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=C, ExpectForActualAttributeKey={}] constructor(): R|C| {
                 super<R|D|>()
             }
 
-            public open [ResolvedTo(BODY_RESOLVE)] class CC : <ERROR TYPE REF: Loop in supertype: /C.CC -> kotlin/Any> {
-                public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=CC] constructor(): R|C.CC| {
+            public open [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class CC : <ERROR TYPE REF: Loop in supertype: /C.CC -> kotlin/Any> {
+                public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=CC, ExpectForActualAttributeKey={}] constructor(): R|C.CC| {
                     super<R|kotlin/Any|>()
                 }
 
@@ -354,8 +354,8 @@ FILE: [ResolvedTo(BODY_RESOLVE)] cyclicNestedHierarchyScript.kts
 
         }
 
-        public open [ResolvedTo(BODY_RESOLVE)] class D : <ERROR TYPE REF: Loop in supertype: /D -> /C.CC> {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=D] constructor(): R|D| {
+        public open [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class D : <ERROR TYPE REF: Loop in supertype: /D -> /C.CC> {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=D, ExpectForActualAttributeKey={}] constructor(): R|D| {
                 super<R|C.CC|>()
             }
 

@@ -11,8 +11,8 @@ FILE: [ResolvedTo(IMPORTS)] localFunctionInsideStringTemplateScript.kts
 
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
                 super<R|one/ClassWithParameter|>(<strcat>([ResolvedTo(RAW_FIR)] fun <anonymous>(): R|kotlin/String| <inline=Unknown>  {
                     ^ String()
                 }
@@ -35,8 +35,8 @@ FILE: [ResolvedTo(IMPORTS)] localFunctionInsideStringTemplateScript.kts
 
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
                 super<R|one/ClassWithParameter|>(<strcat>([ResolvedTo(RAW_FIR)] fun <anonymous>(): R|kotlin/String| <inline=Unknown>  {
                     ^ String()
                 }
@@ -59,8 +59,8 @@ FILE: [ResolvedTo(IMPORTS)] localFunctionInsideStringTemplateScript.kts
 
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
                 super<R|one/ClassWithParameter|>(<strcat>([ResolvedTo(RAW_FIR)] fun <anonymous>(): R|kotlin/String| <inline=Unknown>  {
                     ^ String()
                 }
@@ -83,8 +83,8 @@ FILE: [ResolvedTo(IMPORTS)] localFunctionInsideStringTemplateScript.kts
 
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
                 super<R|one/ClassWithParameter|>(<strcat>([ResolvedTo(RAW_FIR)] fun <anonymous>(): R|kotlin/String| <inline=Unknown>  {
                     ^ String()
                 }
@@ -107,8 +107,8 @@ FILE: [ResolvedTo(IMPORTS)] localFunctionInsideStringTemplateScript.kts
 
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
                 super<R|one/ClassWithParameter|>(<strcat>([ResolvedTo(RAW_FIR)] fun <anonymous>(): R|kotlin/String| <inline=Unknown>  {
                     ^ String()
                 }
@@ -131,8 +131,8 @@ FILE: [ResolvedTo(IMPORTS)] localFunctionInsideStringTemplateScript.kts
 
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
                 super<R|one/ClassWithParameter|>(<strcat>([ResolvedTo(RAW_FIR)] fun <anonymous>(): R|kotlin/String| <inline=Unknown>  {
                     ^ String()
                 }
@@ -155,8 +155,8 @@ FILE: [ResolvedTo(IMPORTS)] localFunctionInsideStringTemplateScript.kts
 
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
                 super<R|one/ClassWithParameter|>(<strcat>([ResolvedTo(RAW_FIR)] fun <anonymous>(): R|kotlin/String| <inline=Unknown>  {
                     ^ String()
                 }
@@ -179,8 +179,8 @@ FILE: [ResolvedTo(IMPORTS)] localFunctionInsideStringTemplateScript.kts
 
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
                 super<R|one/ClassWithParameter|>(<strcat>([ResolvedTo(RAW_FIR)] fun <anonymous>(): R|kotlin/String| <inline=Unknown>  {
                     ^ String()
                 }
@@ -203,8 +203,8 @@ FILE: [ResolvedTo(IMPORTS)] localFunctionInsideStringTemplateScript.kts
 
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
                 super<R|one/ClassWithParameter|>(<strcat>([ResolvedTo(RAW_FIR)] fun <anonymous>(): R|kotlin/String| <inline=Unknown>  {
                     ^ String()
                 }
@@ -227,8 +227,8 @@ FILE: [ResolvedTo(IMPORTS)] localFunctionInsideStringTemplateScript.kts
 
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
                 super<R|one/ClassWithParameter|>(<strcat>([ResolvedTo(RAW_FIR)] fun <anonymous>(): R|kotlin/String| <inline=Unknown>  {
                     ^ String()
                 }
@@ -251,8 +251,8 @@ FILE: [ResolvedTo(IMPORTS)] localFunctionInsideStringTemplateScript.kts
 
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
                 super<R|one/ClassWithParameter|>(<strcat>([ResolvedTo(RAW_FIR)] fun <anonymous>(): R|kotlin/String| <inline=Unknown>  {
                     ^ String()
                 }
@@ -275,8 +275,8 @@ FILE: [ResolvedTo(IMPORTS)] localFunctionInsideStringTemplateScript.kts
 
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
                 super<R|one/ClassWithParameter|>(<strcat>([ResolvedTo(RAW_FIR)] fun <anonymous>(): R|kotlin/String| <inline=Unknown>  {
                     ^ String()
                 }
@@ -292,15 +292,15 @@ FILE: [ResolvedTo(BODY_RESOLVE)] localFunctionInsideStringTemplateScript.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-localFunctionInsideStringTemplateScript.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public open [ResolvedTo(BODY_RESOLVE)] class ClassWithParameter : R|kotlin/Any| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=ClassWithParameter] constructor([ResolvedTo(BODY_RESOLVE)] s: R|kotlin/String|): R|one/ClassWithParameter| {
+        public open [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class ClassWithParameter : R|kotlin/Any| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=ClassWithParameter, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] s: R|kotlin/String|): R|one/ClassWithParameter| {
                 super<R|kotlin/Any|>()
             }
 
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
                 super<R|one/ClassWithParameter|>(<strcat>([ResolvedTo(RAW_FIR)] fun <anonymous>(): R|kotlin/String| <inline=Unknown>  {
                     ^ String()
                 }

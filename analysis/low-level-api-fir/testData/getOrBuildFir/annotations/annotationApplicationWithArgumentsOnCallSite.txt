@@ -7,6 +7,6 @@ FIR element rendered:
 
 FIR FILE:
 FILE: [ResolvedTo(IMPORTS)] annotationApplicationWithArgumentsOnCallSite.kt
-    public final [ResolvedTo(BODY_RESOLVE)] fun x(): R|kotlin/Unit| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun x(): R|kotlin/Unit| {
         [ResolvedTo(BODY_RESOLVE)] lval y: R|kotlin/String| = @R|kotlin/Suppress|[Types](names = vararg(String())) String()
     }

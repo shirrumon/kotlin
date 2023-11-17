@@ -123,7 +123,7 @@ FILE: [ResolvedTo(IMPORTS)] typeParameterOfTypeAliasScript.kts
 
         }
 
-        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] typealias Alias<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] TypeParam> = R|X<TypeParam>|
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] typealias Alias<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] TypeParam> = R|X<TypeParam>|
 
 
 CONTRACTS:
@@ -139,7 +139,7 @@ FILE: [ResolvedTo(IMPORTS)] typeParameterOfTypeAliasScript.kts
 
         }
 
-        public final [ResolvedTo(CONTRACTS)] typealias Alias<[ResolvedTo(CONTRACTS)] TypeParam> = R|X<TypeParam>|
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] typealias Alias<[ResolvedTo(CONTRACTS)] TypeParam> = R|X<TypeParam>|
 
 
 IMPLICIT_TYPES_BODY_RESOLVE:
@@ -155,7 +155,7 @@ FILE: [ResolvedTo(IMPORTS)] typeParameterOfTypeAliasScript.kts
 
         }
 
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] typealias Alias<[ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] TypeParam> = R|X<TypeParam>|
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] typealias Alias<[ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] TypeParam> = R|X<TypeParam>|
 
 
 ANNOTATION_ARGUMENTS:
@@ -171,7 +171,7 @@ FILE: [ResolvedTo(IMPORTS)] typeParameterOfTypeAliasScript.kts
 
         }
 
-        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] typealias Alias<[ResolvedTo(ANNOTATION_ARGUMENTS)] TypeParam> = R|X<TypeParam>|
+        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] typealias Alias<[ResolvedTo(ANNOTATION_ARGUMENTS)] TypeParam> = R|X<TypeParam>|
 
 
 BODY_RESOLVE:
@@ -187,7 +187,7 @@ FILE: [ResolvedTo(IMPORTS)] typeParameterOfTypeAliasScript.kts
 
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] typealias Alias<[ResolvedTo(BODY_RESOLVE)] TypeParam> = R|X<TypeParam>|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] typealias Alias<[ResolvedTo(BODY_RESOLVE)] TypeParam> = R|X<TypeParam>|
 
 
 FILE RAW TO BODY:
@@ -196,11 +196,11 @@ FILE: [ResolvedTo(BODY_RESOLVE)] typeParameterOfTypeAliasScript.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-typeParameterOfTypeAliasScript.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] class X<[ResolvedTo(BODY_RESOLVE)] T> : R|kotlin/Any| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=X] constructor<[ResolvedTo(BODY_RESOLVE)] T>(): R|X<T>| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class X<[ResolvedTo(BODY_RESOLVE)] T> : R|kotlin/Any| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=X, ExpectForActualAttributeKey={}] constructor<[ResolvedTo(BODY_RESOLVE)] T>(): R|X<T>| {
                 super<R|kotlin/Any|>()
             }
 
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] typealias Alias<[ResolvedTo(BODY_RESOLVE)] TypeParam> = R|X<TypeParam>|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] typealias Alias<[ResolvedTo(BODY_RESOLVE)] TypeParam> = R|X<TypeParam>|

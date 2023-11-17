@@ -396,9 +396,9 @@ FILE: [ResolvedTo(IMPORTS)] delegateFieldWithAnnotationClash.kt
     }
     public abstract [ResolvedTo(STATUS)] interface Base : R|kotlin/Any| {
     }
-    public final [ResolvedTo(CONTRACTS)] fun bar(): R|second/Base| {
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun bar(): R|second/Base| {
     }
-    public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val constant: R|kotlin/Int| = Int(0)
+    public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val constant: R|kotlin/Int| = Int(0)
         public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/Int|
     public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [DelegateFieldsMapKey={0=FirFieldSymbol second/MyClass.$$delegate_0}] class MyClass : R|@R|second/Anno|(int = R|second/constant|)  second/Base| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=MyClass] constructor(): R|second/MyClass| {
@@ -421,34 +421,34 @@ FILE: [ResolvedTo(IMPORTS)] delegateFieldWithAnnotationClash.kt
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] delegateFieldWithAnnotationClash.kt
-    @R|kotlin/annotation/Target|[Types](allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|)) public final [ResolvedTo(BODY_RESOLVE)] annotation class Anno : R|kotlin/Annotation| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=second/Anno.int] int: R|kotlin/Int|): R|second/Anno| {
+    @R|kotlin/annotation/Target|[Types](allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|)) public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] annotation class Anno : R|kotlin/Annotation| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=second/Anno.int] int: R|kotlin/Int|): R|second/Anno| {
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val int: R|kotlin/Int| = R|<local>/int|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val int: R|kotlin/Int| = R|<local>/int|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] get(): R|kotlin/Int|
 
     }
-    public abstract [ResolvedTo(BODY_RESOLVE)] interface Base : R|kotlin/Any| {
+    public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface Base : R|kotlin/Any| {
     }
-    public final [ResolvedTo(BODY_RESOLVE)] fun bar(): R|second/Base| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun bar(): R|second/Base| {
     }
-    public final const [ResolvedTo(BODY_RESOLVE)] val constant: R|kotlin/Int| = Int(0)
+    public final const [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val constant: R|kotlin/Int| = Int(0)
         public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/Int|
-    public final [ResolvedTo(BODY_RESOLVE)] [DelegateFieldsMapKey={0=FirFieldSymbol second/MyClass.$$delegate_0}] class MyClass : R|@R|second/Anno|(int = R|second/constant|)  second/Base| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyClass] constructor(): R|second/MyClass| {
+    public final [ResolvedTo(BODY_RESOLVE)] [DelegateFieldsMapKey={0=FirFieldSymbol second/MyClass.$$delegate_0}, ExpectForActualAttributeKey={}] class MyClass : R|@R|second/Anno|(int = R|second/constant|)  second/Base| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyClass, ExpectForActualAttributeKey={}] constructor(): R|second/MyClass| {
             super<R|kotlin/Any|>()
         }
 
         private final [ResolvedTo(BODY_RESOLVE)] field $$delegate_0: R|@R|second/Anno|(int = R|second/constant|)  second/Base| = R|second/bar|()
 
-        @R|kotlin/annotation/Target|[Types](allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|)) public final [ResolvedTo(BODY_RESOLVE)] annotation class Anno : R|kotlin/Annotation| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=second/MyClass.Anno.string] string: R|kotlin/String|): R|second/MyClass.Anno| {
+        @R|kotlin/annotation/Target|[Types](allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|)) public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] annotation class Anno : R|kotlin/Annotation| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=second/MyClass.Anno.string] string: R|kotlin/String|): R|second/MyClass.Anno| {
                 super<R|kotlin/Any|>()
             }
 
-            public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val string: R|kotlin/String| = R|<local>/string|
+            public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val string: R|kotlin/String| = R|<local>/string|
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
         }

@@ -28,24 +28,24 @@ FILE: [ResolvedTo(IMPORTS)] typeAliasWithTypeParameters.kt
 
 EXPECT_ACTUAL_MATCHING:
 FILE: [ResolvedTo(IMPORTS)] typeAliasWithTypeParameters.kt
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] typealias ResolveMe<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T : R|kotlin/Int|, [ResolvedTo(EXPECT_ACTUAL_MATCHING)] K> = R|kotlin/collections/Map<T, K>|
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] typealias ResolveMe<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T : R|kotlin/Int|, [ResolvedTo(EXPECT_ACTUAL_MATCHING)] K> = R|kotlin/collections/Map<T, K>|
 
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] typeAliasWithTypeParameters.kt
-    public final [ResolvedTo(CONTRACTS)] typealias ResolveMe<[ResolvedTo(CONTRACTS)] T : R|kotlin/Int|, [ResolvedTo(CONTRACTS)] K> = R|kotlin/collections/Map<T, K>|
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] typealias ResolveMe<[ResolvedTo(CONTRACTS)] T : R|kotlin/Int|, [ResolvedTo(CONTRACTS)] K> = R|kotlin/collections/Map<T, K>|
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] typeAliasWithTypeParameters.kt
-    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] typealias ResolveMe<[ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] T : R|kotlin/Int|, [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] K> = R|kotlin/collections/Map<T, K>|
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] typealias ResolveMe<[ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] T : R|kotlin/Int|, [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] K> = R|kotlin/collections/Map<T, K>|
 
 ANNOTATION_ARGUMENTS:
 FILE: [ResolvedTo(IMPORTS)] typeAliasWithTypeParameters.kt
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] typealias ResolveMe<[ResolvedTo(ANNOTATION_ARGUMENTS)] T : R|kotlin/Int|, [ResolvedTo(ANNOTATION_ARGUMENTS)] K> = R|kotlin/collections/Map<T, K>|
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] typealias ResolveMe<[ResolvedTo(ANNOTATION_ARGUMENTS)] T : R|kotlin/Int|, [ResolvedTo(ANNOTATION_ARGUMENTS)] K> = R|kotlin/collections/Map<T, K>|
 
 BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] typeAliasWithTypeParameters.kt
-    public final [ResolvedTo(BODY_RESOLVE)] typealias ResolveMe<[ResolvedTo(BODY_RESOLVE)] T : R|kotlin/Int|, [ResolvedTo(BODY_RESOLVE)] K> = R|kotlin/collections/Map<T, K>|
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] typealias ResolveMe<[ResolvedTo(BODY_RESOLVE)] T : R|kotlin/Int|, [ResolvedTo(BODY_RESOLVE)] K> = R|kotlin/collections/Map<T, K>|
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] typeAliasWithTypeParameters.kt
-    public final [ResolvedTo(BODY_RESOLVE)] typealias ResolveMe<[ResolvedTo(BODY_RESOLVE)] T : R|kotlin/Int|, [ResolvedTo(BODY_RESOLVE)] K> = R|kotlin/collections/Map<T, K>|
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] typealias ResolveMe<[ResolvedTo(BODY_RESOLVE)] T : R|kotlin/Int|, [ResolvedTo(BODY_RESOLVE)] K> = R|kotlin/collections/Map<T, K>|

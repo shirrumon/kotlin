@@ -7,5 +7,5 @@ Int(1)
 
 FIR FILE:
 FILE: [ResolvedTo(IMPORTS)] intLiteral_minusOne_justOne.kt
-    public final [ResolvedTo(BODY_RESOLVE)] val x: R|kotlin/Int| = Int(-1)
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val x: R|kotlin/Int| = Int(-1)
         public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/Int|

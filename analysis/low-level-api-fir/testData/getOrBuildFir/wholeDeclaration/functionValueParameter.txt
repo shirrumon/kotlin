@@ -7,5 +7,5 @@ FIR element rendered:
 
 FIR FILE:
 FILE: [ResolvedTo(IMPORTS)] functionValueParameter.kt
-    public final [ResolvedTo(BODY_RESOLVE)] fun foo([ResolvedTo(BODY_RESOLVE)] x: R|kotlin/Int|): R|kotlin/Unit| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo([ResolvedTo(BODY_RESOLVE)] x: R|kotlin/Int|): R|kotlin/Unit| {
     }

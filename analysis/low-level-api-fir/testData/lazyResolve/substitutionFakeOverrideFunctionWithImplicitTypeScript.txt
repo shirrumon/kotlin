@@ -26,7 +26,7 @@ FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideFunctionWithImplicitTypeScri
 
 
 EXPECT_ACTUAL_MATCHING:
-TARGET: public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [CallableCopySubstitutionKey=CallableCopySubstitution(substitutor={T -> kotlin/String}, baseSymbol=FirNamedFunctionSymbol second/AbstractClass.resolveMe), SubstitutedOverrideOriginalKey=second/AbstractClass.resolveMe] fun R|kotlin/String|.resolveMe(): <implicit>
+TARGET: public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [CallableCopySubstitutionKey=CallableCopySubstitution(substitutor={T -> kotlin/String}, baseSymbol=FirNamedFunctionSymbol second/AbstractClass.resolveMe), ExpectForActualAttributeKey={}, SubstitutedOverrideOriginalKey=second/AbstractClass.resolveMe] fun R|kotlin/String|.resolveMe(): <implicit>
 
 FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideFunctionWithImplicitTypeScript.kts
     context(<script>@kotlin.script.templates.standard.ScriptTemplateWithArgs)
@@ -47,13 +47,13 @@ FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideFunctionWithImplicitTypeScri
 
             public final [ResolvedTo(STATUS)] fun explicitType(): R|T?| { LAZY_BLOCK }
 
-            public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun R|T|.resolveMe(): <implicit> { LAZY_BLOCK }
+            public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun R|T|.resolveMe(): <implicit> { LAZY_BLOCK }
 
         }
 
 
 CONTRACTS:
-TARGET: public final [ResolvedTo(CONTRACTS)] [CallableCopySubstitutionKey=CallableCopySubstitution(substitutor={T -> kotlin/String}, baseSymbol=FirNamedFunctionSymbol second/AbstractClass.resolveMe), SubstitutedOverrideOriginalKey=second/AbstractClass.resolveMe] fun R|kotlin/String|.resolveMe(): <implicit>
+TARGET: public final [ResolvedTo(CONTRACTS)] [CallableCopySubstitutionKey=CallableCopySubstitution(substitutor={T -> kotlin/String}, baseSymbol=FirNamedFunctionSymbol second/AbstractClass.resolveMe), ExpectForActualAttributeKey={}, SubstitutedOverrideOriginalKey=second/AbstractClass.resolveMe] fun R|kotlin/String|.resolveMe(): <implicit>
 
 FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideFunctionWithImplicitTypeScript.kts
     context(<script>@R|kotlin/script/templates/standard/ScriptTemplateWithArgs|)
@@ -74,13 +74,13 @@ FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideFunctionWithImplicitTypeScri
 
             public final [ResolvedTo(STATUS)] fun explicitType(): R|T?| { LAZY_BLOCK }
 
-            public final [ResolvedTo(CONTRACTS)] fun R|T|.resolveMe(): <implicit> { LAZY_BLOCK }
+            public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun R|T|.resolveMe(): <implicit> { LAZY_BLOCK }
 
         }
 
 
 IMPLICIT_TYPES_BODY_RESOLVE:
-TARGET: public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [SubstitutedOverrideOriginalKey=second/AbstractClass.resolveMe] fun R|kotlin/String|.resolveMe(): R|kotlin/String?|
+TARGET: public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}, SubstitutedOverrideOriginalKey=second/AbstractClass.resolveMe] fun R|kotlin/String|.resolveMe(): R|kotlin/String?|
 
 FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideFunctionWithImplicitTypeScript.kts
     context(<script>@R|kotlin/script/templates/standard/ScriptTemplateWithArgs|)
@@ -99,11 +99,11 @@ FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideFunctionWithImplicitTypeScri
                 LAZY_super<R|kotlin/Any|>
             }
 
-            public final [ResolvedTo(CONTRACTS)] fun explicitType(): R|T?| {
+            public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun explicitType(): R|T?| {
                 ^explicitType Null(null)
             }
 
-            public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun R|T|.resolveMe(): R|T?| {
+            public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun R|T|.resolveMe(): R|T?| {
                 ^resolveMe this@R|second/AbstractClass|.R|second/AbstractClass.explicitType|()
             }
 
@@ -111,7 +111,7 @@ FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideFunctionWithImplicitTypeScri
 
 
 ANNOTATION_ARGUMENTS:
-TARGET: public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [SubstitutedOverrideOriginalKey=second/AbstractClass.resolveMe] fun R|kotlin/String|.resolveMe(): R|kotlin/String?|
+TARGET: public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}, SubstitutedOverrideOriginalKey=second/AbstractClass.resolveMe] fun R|kotlin/String|.resolveMe(): R|kotlin/String?|
 
 FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideFunctionWithImplicitTypeScript.kts
     context(<script>@R|kotlin/script/templates/standard/ScriptTemplateWithArgs|)
@@ -130,11 +130,11 @@ FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideFunctionWithImplicitTypeScri
                 LAZY_super<R|kotlin/Any|>
             }
 
-            public final [ResolvedTo(CONTRACTS)] fun explicitType(): R|T?| {
+            public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun explicitType(): R|T?| {
                 ^explicitType Null(null)
             }
 
-            public final [ResolvedTo(ANNOTATION_ARGUMENTS)] fun R|T|.resolveMe(): R|T?| {
+            public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun R|T|.resolveMe(): R|T?| {
                 ^resolveMe this@R|second/AbstractClass|.R|second/AbstractClass.explicitType|()
             }
 
@@ -142,7 +142,7 @@ FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideFunctionWithImplicitTypeScri
 
 
 BODY_RESOLVE:
-TARGET: public final [ResolvedTo(BODY_RESOLVE)] [SubstitutedOverrideOriginalKey=second/AbstractClass.resolveMe] fun R|kotlin/String|.resolveMe(): R|kotlin/String?|
+TARGET: public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, SubstitutedOverrideOriginalKey=second/AbstractClass.resolveMe] fun R|kotlin/String|.resolveMe(): R|kotlin/String?|
 
 FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideFunctionWithImplicitTypeScript.kts
     context(<script>@R|kotlin/script/templates/standard/ScriptTemplateWithArgs|)
@@ -161,11 +161,11 @@ FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideFunctionWithImplicitTypeScri
                 LAZY_super<R|kotlin/Any|>
             }
 
-            public final [ResolvedTo(CONTRACTS)] fun explicitType(): R|T?| {
+            public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun explicitType(): R|T?| {
                 ^explicitType Null(null)
             }
 
-            public final [ResolvedTo(ANNOTATION_ARGUMENTS)] fun R|T|.resolveMe(): R|T?| {
+            public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun R|T|.resolveMe(): R|T?| {
                 ^resolveMe this@R|second/AbstractClass|.R|second/AbstractClass.explicitType|()
             }
 
@@ -178,25 +178,24 @@ FILE: [ResolvedTo(BODY_RESOLVE)] substitutionFakeOverrideFunctionWithImplicitTyp
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-substitutionFakeOverrideFunctionWithImplicitTypeScript.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] class SubClass : R|second/AbstractClass<kotlin/String>| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=SubClass] constructor(): R|second/SubClass| {
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class SubClass : R|second/AbstractClass<kotlin/String>| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=SubClass, ExpectForActualAttributeKey={}] constructor(): R|second/SubClass| {
                 super<R|second/AbstractClass<kotlin/String>|>()
             }
 
         }
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] class AbstractClass<[ResolvedTo(BODY_RESOLVE)] T> : R|kotlin/Any| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(BODY_RESOLVE)] T>(): R|second/AbstractClass<T>| {
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class AbstractClass<[ResolvedTo(BODY_RESOLVE)] T> : R|kotlin/Any| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=AbstractClass, ExpectForActualAttributeKey={}] constructor<[ResolvedTo(BODY_RESOLVE)] T>(): R|second/AbstractClass<T>| {
                 super<R|kotlin/Any|>()
             }
 
-            public final [ResolvedTo(BODY_RESOLVE)] fun explicitType(): R|T?| {
+            public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun explicitType(): R|T?| {
                 ^explicitType Null(null)
             }
 
-            public final [ResolvedTo(BODY_RESOLVE)] fun R|T|.resolveMe(): R|T?| {
+            public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun R|T|.resolveMe(): R|T?| {
                 ^resolveMe this@R|second/AbstractClass|.R|second/AbstractClass.explicitType|()
             }
 
         }
-

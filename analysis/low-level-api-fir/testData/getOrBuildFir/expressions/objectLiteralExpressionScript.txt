@@ -16,7 +16,7 @@ FILE: [ResolvedTo(IMPORTS)] objectLiteralExpressionScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-objectLiteralExpressionScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] val x: R|kotlin/Any| = object : R|kotlin/Any| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val x: R|kotlin/Any| = object : R|kotlin/Any| {
             private [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=<anonymous>] constructor(): R|<anonymous>| {
                 super<R|kotlin/Any|>()
             }

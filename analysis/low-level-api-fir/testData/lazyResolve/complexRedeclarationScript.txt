@@ -826,8 +826,8 @@ FILE: [ResolvedTo(IMPORTS)] complexRedeclarationScript.kts
                 LAZY_super<R|kotlin/Any|>
             }
 
-            public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class I : R|P| {
-                public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=I] constructor(): R|B.I| {
+            public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class I : R|P| {
+                public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=I, ExpectForActualAttributeKey={}] constructor(): R|B.I| {
                     LAZY_super<R|P|>
                 }
 
@@ -931,8 +931,8 @@ FILE: [ResolvedTo(IMPORTS)] complexRedeclarationScript.kts
                 LAZY_super<R|kotlin/Any|>
             }
 
-            public final [ResolvedTo(CONTRACTS)] class I : R|P| {
-                public [ResolvedTo(CONTRACTS)] [ContainingClassKey=I] constructor(): R|B.I| {
+            public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] class I : R|P| {
+                public [ResolvedTo(CONTRACTS)] [ContainingClassKey=I, ExpectForActualAttributeKey={}] constructor(): R|B.I| {
                     LAZY_super<R|P|>
                 }
 
@@ -1036,8 +1036,8 @@ FILE: [ResolvedTo(IMPORTS)] complexRedeclarationScript.kts
                 LAZY_super<R|kotlin/Any|>
             }
 
-            public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] class I : R|P| {
-                public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=I] constructor(): R|B.I| {
+            public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class I : R|P| {
+                public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=I, ExpectForActualAttributeKey={}] constructor(): R|B.I| {
                     LAZY_super<R|P|>
                 }
 
@@ -1141,8 +1141,8 @@ FILE: [ResolvedTo(IMPORTS)] complexRedeclarationScript.kts
                 LAZY_super<R|kotlin/Any|>
             }
 
-            public final [ResolvedTo(ANNOTATION_ARGUMENTS)] class I : R|P| {
-                public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=I] constructor(): R|B.I| {
+            public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] class I : R|P| {
+                public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=I, ExpectForActualAttributeKey={}] constructor(): R|B.I| {
                     LAZY_super<R|P|>
                 }
 
@@ -1246,8 +1246,8 @@ FILE: [ResolvedTo(IMPORTS)] complexRedeclarationScript.kts
                 LAZY_super<R|kotlin/Any|>
             }
 
-            public final [ResolvedTo(ANNOTATION_ARGUMENTS)] class I : R|P| {
-                public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=I] constructor(): R|B.I| {
+            public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] class I : R|P| {
+                public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=I, ExpectForActualAttributeKey={}] constructor(): R|B.I| {
                     super<R|P|>()
                 }
 
@@ -1264,66 +1264,66 @@ FILE: [ResolvedTo(BODY_RESOLVE)] complexRedeclarationScript.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-complexRedeclarationScript.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public sealed [ResolvedTo(BODY_RESOLVE)] class A : R|kotlin/Any| {
-            protected [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=A] constructor(): R|A| {
+        public sealed [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class A : R|kotlin/Any| {
+            protected [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=A, ExpectForActualAttributeKey={}] constructor(): R|A| {
                 super<R|kotlin/Any|>()
             }
 
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] class B : R|A| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=B] constructor(): R|B| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class B : R|A| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=B, ExpectForActualAttributeKey={}] constructor(): R|B| {
                 super<R|A|>()
             }
 
         }
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] interface C : R|A| {
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface C : R|A| {
         }
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] interface D : R|C|, R|A| {
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface D : R|C|, R|A| {
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] class E : R|B|, R|A| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=E] constructor(): R|E| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class E : R|B|, R|A| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=E, ExpectForActualAttributeKey={}] constructor(): R|E| {
                 super<R|A|>()
             }
 
         }
 
-        public sealed [ResolvedTo(BODY_RESOLVE)] class P : R|kotlin/Any| {
-            protected [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=P] constructor(): R|P| {
+        public sealed [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class P : R|kotlin/Any| {
+            protected [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=P, ExpectForActualAttributeKey={}] constructor(): R|P| {
                 super<R|kotlin/Any|>()
             }
 
-            public final [ResolvedTo(BODY_RESOLVE)] object H : R|P| {
-                private [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=H] constructor(): R|P.H| {
+            public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] object H : R|P| {
+                private [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=H, ExpectForActualAttributeKey={}] constructor(): R|P.H| {
                     super<R|P|>()
                 }
 
             }
 
-            public final [ResolvedTo(BODY_RESOLVE)] class J : R|P| {
-                public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=J] constructor(): R|P.J| {
+            public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class J : R|P| {
+                public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=J, ExpectForActualAttributeKey={}] constructor(): R|P.J| {
                     super<R|P|>()
                 }
 
             }
 
-            public final [ResolvedTo(BODY_RESOLVE)] object T : R|kotlin/Any| {
-                private [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=T] constructor(): R|P.T| {
+            public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] object T : R|kotlin/Any| {
+                private [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=T, ExpectForActualAttributeKey={}] constructor(): R|P.T| {
                     super<R|kotlin/Any|>()
                 }
 
-                public final [ResolvedTo(BODY_RESOLVE)] object V : R|P| {
-                    private [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=V] constructor(): R|P.T.V| {
+                public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] object V : R|P| {
+                    private [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=V, ExpectForActualAttributeKey={}] constructor(): R|P.T.V| {
                         super<R|P|>()
                     }
 
                 }
 
-                public final [ResolvedTo(BODY_RESOLVE)] class M : R|P| {
-                    public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=M] constructor(): R|P.T.M| {
+                public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class M : R|P| {
+                    public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=M, ExpectForActualAttributeKey={}] constructor(): R|P.T.M| {
                         super<R|P|>()
                     }
 
@@ -1331,7 +1331,7 @@ FILE: [ResolvedTo(BODY_RESOLVE)] complexRedeclarationScript.kts
 
             }
 
-            public final [ResolvedTo(BODY_RESOLVE)] val p: R|P| = object : R|P| {
+            public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val p: R|P| = object : R|P| {
                 private [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=<anonymous>] constructor(): R|<anonymous>| {
                     super<R|P|>()
                 }
@@ -1340,7 +1340,7 @@ FILE: [ResolvedTo(BODY_RESOLVE)] complexRedeclarationScript.kts
 
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=P] get(): R|P|
 
-            public final [ResolvedTo(BODY_RESOLVE)] val r: R|P| = object : R|P| {
+            public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val r: R|P| = object : R|P| {
                 private [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=<anonymous>] constructor(): R|<anonymous>| {
                     super<R|P|>()
                 }
@@ -1351,20 +1351,20 @@ FILE: [ResolvedTo(BODY_RESOLVE)] complexRedeclarationScript.kts
 
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] class K : R|P| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=K] constructor(): R|K| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class K : R|P| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=K, ExpectForActualAttributeKey={}] constructor(): R|K| {
                 super<R|P|>()
             }
 
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] object B : R|kotlin/Any| {
-            private [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=B] constructor(): R|B| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] object B : R|kotlin/Any| {
+            private [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=B, ExpectForActualAttributeKey={}] constructor(): R|B| {
                 super<R|kotlin/Any|>()
             }
 
-            public final [ResolvedTo(BODY_RESOLVE)] class I : R|P| {
-                public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=I] constructor(): R|B.I| {
+            public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class I : R|P| {
+                public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=I, ExpectForActualAttributeKey={}] constructor(): R|B.I| {
                     super<R|P|>()
                 }
 
@@ -1372,7 +1372,7 @@ FILE: [ResolvedTo(BODY_RESOLVE)] complexRedeclarationScript.kts
 
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun test(): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun test(): R|kotlin/Unit| {
             local final [ResolvedTo(BODY_RESOLVE)] class L : R|P| {
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=L] constructor(): R|<local>/L| {
                     super<R|P|>()
@@ -1388,4 +1388,3 @@ FILE: [ResolvedTo(BODY_RESOLVE)] complexRedeclarationScript.kts
             }
 
         }
-

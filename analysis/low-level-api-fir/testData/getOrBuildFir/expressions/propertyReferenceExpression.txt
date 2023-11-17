@@ -12,11 +12,11 @@ FILE: [ResolvedTo(IMPORTS)] propertyReferenceExpression.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(CONTRACTS)] fun foo(): R|kotlin/Unit| {
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun foo(): R|kotlin/Unit| {
         }
 
     }
     public? final? [ResolvedTo(RAW_FIR)] val y: A = LAZY_EXPRESSION
         public? [ResolvedTo(RAW_FIR)] get(): A
-    public final [ResolvedTo(BODY_RESOLVE)] val x: R|kotlin/reflect/KFunction1<A, kotlin/Unit>| = Q|A|::R|/A.foo|
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val x: R|kotlin/reflect/KFunction1<A, kotlin/Unit>| = Q|A|::R|/A.foo|
         public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/reflect/KFunction1<A, kotlin/Unit>|

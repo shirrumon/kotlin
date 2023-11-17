@@ -11,7 +11,7 @@ FILE: [ResolvedTo(IMPORTS)] typeOnAnnotationOnReturnPropertyScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-typeOnAnnotationOnReturnPropertyScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] val i: R|@R|Anno|(s = String(ab))  kotlin/Int| = IntegerLiteral(1)
+        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] val i: R|@R|Anno|(s = String(ab))  kotlin/Int| = IntegerLiteral(1)
             public [ResolvedTo(ANNOTATION_ARGUMENTS)] get(): R|@R|Anno|(s = String(ab))  kotlin/Int|
 
         @R|kotlin/annotation/Target|[Types](Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|) public final [ResolvedTo(STATUS)] annotation class Anno : R|kotlin/Annotation| {
