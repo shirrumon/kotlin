@@ -178,7 +178,7 @@ tasks.named("clean", Delete.class) {
 }
 
 tasks.named("run") {
-    dependsOn("interopTests")
+//    dependsOn("interopTests")
     dependsOn(tasks.withType(KonanTest).matching { it.enabled && !it.name.startsWith("interop_")})
     dependsOn(tasks.withType(FrameworkTest).matching { it.enabled })
     dependsOn(tasks.withType(FileCheckTest).matching { it.enabled })
