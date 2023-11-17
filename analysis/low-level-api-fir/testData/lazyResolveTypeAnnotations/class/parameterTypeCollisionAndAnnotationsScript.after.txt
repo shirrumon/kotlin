@@ -35,8 +35,8 @@ FILE: [ResolvedTo(IMPORTS)] parameterTypeCollisionAndAnnotationsScript.kts
 
         }
 
-        public final data [ResolvedTo(ANNOTATION_ARGUMENTS)] class MyDataClass : R|kotlin/Any| {
-            public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=MyDataClass] constructor([ResolvedTo(ANNOTATION_ARGUMENTS)] [CorrespondingProperty=one/two/MyDataClass.prop] prop: R|@R|one/two/Anno|(i = Int(0).R|kotlin/Int.plus|(this@R|one/two/MyDataClass.Companion|.R|one/two/MyDataClass.Companion.constant|))  one/two/MyDataClass.MyClass<@R|one/two/Anno|(i = Int(1).R|kotlin/Int.plus|(this@R|one/two/MyDataClass.Companion|.R|one/two/MyDataClass.Companion.constant|))  one/two/MyDataClass.MyClass<@R|one/two/Anno|(i = Int(2).R|kotlin/Int.plus|(this@R|one/two/MyDataClass.Companion|.R|one/two/MyDataClass.Companion.constant|))  kotlin/Int>>|): R|one/two/MyDataClass| {
+        public final data [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] class MyDataClass : R|kotlin/Any| {
+            public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=MyDataClass, ExpectForActualAttributeKey={}] constructor([ResolvedTo(ANNOTATION_ARGUMENTS)] [CorrespondingProperty=one/two/MyDataClass.prop] prop: R|@R|one/two/Anno|(i = Int(0).R|kotlin/Int.plus|(this@R|one/two/MyDataClass.Companion|.R|one/two/MyDataClass.Companion.constant|))  one/two/MyDataClass.MyClass<@R|one/two/Anno|(i = Int(1).R|kotlin/Int.plus|(this@R|one/two/MyDataClass.Companion|.R|one/two/MyDataClass.Companion.constant|))  one/two/MyDataClass.MyClass<@R|one/two/Anno|(i = Int(2).R|kotlin/Int.plus|(this@R|one/two/MyDataClass.Companion|.R|one/two/MyDataClass.Companion.constant|))  kotlin/Int>>|): R|one/two/MyDataClass| {
                 LAZY_super<R|kotlin/Any|>
             }
 
@@ -50,12 +50,12 @@ FILE: [ResolvedTo(IMPORTS)] parameterTypeCollisionAndAnnotationsScript.kts
 
             }
 
-            public final companion [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Companion : R|kotlin/Any| {
+            public final companion [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] object Companion : R|kotlin/Any| {
                 private [ResolvedTo(STATUS)] [ContainingClassKey=Companion] constructor(): R|one/two/MyDataClass.Companion| {
                     LAZY_super<R|kotlin/Any|>
                 }
 
-                public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val constant: R|kotlin/Int| = Int(0)
+                public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val constant: R|kotlin/Int| = Int(0)
                     public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=Companion] get(): R|kotlin/Int|
 
             }

@@ -16,8 +16,8 @@ FILE: [ResolvedTo(IMPORTS)] callInsideLambdaInsideSuperCallInsideImplicitConstru
             public [ResolvedTo(STATUS)] [ContainingClassKey=IJProject] get(): R|() -> kotlin/Unit|
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] class KotlinIDE : R|IJProject| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=KotlinIDE] constructor(): R|KotlinIDE| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class KotlinIDE : R|IJProject| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=KotlinIDE, ExpectForActualAttributeKey={}] constructor(): R|KotlinIDE| {
             super<R|IJProject|>(init = [ResolvedTo(RAW_FIR)] fun <anonymous>(): R|kotlin/Unit| <inline=Unknown>  {
                 local final [ResolvedTo(RAW_FIR)] fun foo(): R|kotlin/Unit| {
                     <Unresolved name: anySymbols>#

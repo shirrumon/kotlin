@@ -85,38 +85,38 @@ FILE: [ResolvedTo(IMPORTS)] localConstructor.kt
 EXPECT_ACTUAL_MATCHING:
 FILE: [ResolvedTo(IMPORTS)] localConstructor.kt
     public? final? [ResolvedTo(RAW_FIR)] fun <[ResolvedTo(RAW_FIR)] T> magic(): T { LAZY_BLOCK }
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Q : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class Q : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Q] constructor(): R|Q| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun <[ResolvedTo(EXPECT_ACTUAL_MATCHING)] E, [ResolvedTo(EXPECT_ACTUAL_MATCHING)] F> foo(): <implicit> { LAZY_BLOCK }
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(EXPECT_ACTUAL_MATCHING)] E, [ResolvedTo(EXPECT_ACTUAL_MATCHING)] F> foo(): <implicit> { LAZY_BLOCK }
 
     }
 
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] localConstructor.kt
     public? final? [ResolvedTo(RAW_FIR)] fun <[ResolvedTo(RAW_FIR)] T> magic(): T { LAZY_BLOCK }
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Q : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class Q : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Q] constructor(): R|Q| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(CONTRACTS)] fun <[ResolvedTo(CONTRACTS)] E, [ResolvedTo(CONTRACTS)] F> foo(): <implicit> { LAZY_BLOCK }
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(CONTRACTS)] E, [ResolvedTo(CONTRACTS)] F> foo(): <implicit> { LAZY_BLOCK }
 
     }
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] localConstructor.kt
-    public final [ResolvedTo(CONTRACTS)] fun <[ResolvedTo(CONTRACTS)] T> magic(): R|T| {
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(CONTRACTS)] T> magic(): R|T| {
         ^magic Null(null)!!
     }
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Q : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class Q : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Q] constructor(): R|Q| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun <[ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] E, [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] F> foo(): R|() -> <local>/C<F, E, F>| {
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] E, [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] F> foo(): R|() -> <local>/C<F, E, F>| {
             ^foo [ResolvedTo(RAW_FIR)] fun <anonymous>(): R|<local>/C<F, E, F>| <inline=Unknown>  {
                 local final [ResolvedTo(RAW_FIR)] class C<[ResolvedTo(RAW_FIR)] G, [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] Outer(E), [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] Outer(F)> : R|kotlin/Any| {
                     public [ResolvedTo(RAW_FIR)] [ContainingClassKey=C] constructor<[ResolvedTo(RAW_FIR)] G>(): R|<local>/C<G, E, F>| {
@@ -143,15 +143,15 @@ FILE: [ResolvedTo(IMPORTS)] localConstructor.kt
 
 ANNOTATION_ARGUMENTS:
 FILE: [ResolvedTo(IMPORTS)] localConstructor.kt
-    public final [ResolvedTo(CONTRACTS)] fun <[ResolvedTo(CONTRACTS)] T> magic(): R|T| {
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(CONTRACTS)] T> magic(): R|T| {
         ^magic Null(null)!!
     }
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Q : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class Q : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Q] constructor(): R|Q| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] fun <[ResolvedTo(ANNOTATION_ARGUMENTS)] E, [ResolvedTo(ANNOTATION_ARGUMENTS)] F> foo(): R|() -> <local>/C<F, E, F>| {
+        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(ANNOTATION_ARGUMENTS)] E, [ResolvedTo(ANNOTATION_ARGUMENTS)] F> foo(): R|() -> <local>/C<F, E, F>| {
             ^foo [ResolvedTo(RAW_FIR)] fun <anonymous>(): R|<local>/C<F, E, F>| <inline=Unknown>  {
                 local final [ResolvedTo(RAW_FIR)] class C<[ResolvedTo(RAW_FIR)] G, [ResolvedTo(ANNOTATION_ARGUMENTS)] Outer(E), [ResolvedTo(ANNOTATION_ARGUMENTS)] Outer(F)> : R|kotlin/Any| {
                     public [ResolvedTo(RAW_FIR)] [ContainingClassKey=C] constructor<[ResolvedTo(RAW_FIR)] G>(): R|<local>/C<G, E, F>| {
@@ -178,15 +178,15 @@ FILE: [ResolvedTo(IMPORTS)] localConstructor.kt
 
 BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] localConstructor.kt
-    public final [ResolvedTo(CONTRACTS)] fun <[ResolvedTo(CONTRACTS)] T> magic(): R|T| {
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(CONTRACTS)] T> magic(): R|T| {
         ^magic Null(null)!!
     }
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Q : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class Q : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Q] constructor(): R|Q| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun <[ResolvedTo(BODY_RESOLVE)] E, [ResolvedTo(BODY_RESOLVE)] F> foo(): R|() -> <local>/C<F, E, F>| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(BODY_RESOLVE)] E, [ResolvedTo(BODY_RESOLVE)] F> foo(): R|() -> <local>/C<F, E, F>| {
             ^foo [ResolvedTo(BODY_RESOLVE)] fun <anonymous>(): R|<local>/C<F, E, F>| <inline=Unknown>  {
                 local final [ResolvedTo(BODY_RESOLVE)] class C<[ResolvedTo(BODY_RESOLVE)] G, [ResolvedTo(BODY_RESOLVE)] Outer(E), [ResolvedTo(BODY_RESOLVE)] Outer(F)> : R|kotlin/Any| {
                     public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=C] constructor<[ResolvedTo(BODY_RESOLVE)] G>(): R|<local>/C<G, E, F>| {
@@ -213,15 +213,15 @@ FILE: [ResolvedTo(IMPORTS)] localConstructor.kt
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] localConstructor.kt
-    public final [ResolvedTo(BODY_RESOLVE)] fun <[ResolvedTo(BODY_RESOLVE)] T> magic(): R|T| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(BODY_RESOLVE)] T> magic(): R|T| {
         ^magic Null(null)!!
     }
-    public final [ResolvedTo(BODY_RESOLVE)] class Q : R|kotlin/Any| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Q] constructor(): R|Q| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class Q : R|kotlin/Any| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Q, ExpectForActualAttributeKey={}] constructor(): R|Q| {
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun <[ResolvedTo(BODY_RESOLVE)] E, [ResolvedTo(BODY_RESOLVE)] F> foo(): R|() -> <local>/C<F, E, F>| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(BODY_RESOLVE)] E, [ResolvedTo(BODY_RESOLVE)] F> foo(): R|() -> <local>/C<F, E, F>| {
             ^foo [ResolvedTo(BODY_RESOLVE)] fun <anonymous>(): R|<local>/C<F, E, F>| <inline=Unknown>  {
                 local final [ResolvedTo(BODY_RESOLVE)] class C<[ResolvedTo(BODY_RESOLVE)] G, [ResolvedTo(BODY_RESOLVE)] Outer(E), [ResolvedTo(BODY_RESOLVE)] Outer(F)> : R|kotlin/Any| {
                     public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=C] constructor<[ResolvedTo(BODY_RESOLVE)] G>(): R|<local>/C<G, E, F>| {

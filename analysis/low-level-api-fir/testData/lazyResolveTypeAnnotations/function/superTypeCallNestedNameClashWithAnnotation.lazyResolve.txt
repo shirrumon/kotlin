@@ -355,8 +355,8 @@ FILE: [ResolvedTo(IMPORTS)] superTypeCallNestedNameClashWithAnnotation.kt
         public? [ResolvedTo(RAW_FIR)] get(): <implicit>
     public? final? const [ResolvedTo(RAW_FIR)] val inner: <implicit> = LAZY_EXPRESSION
         public? [ResolvedTo(RAW_FIR)] get(): <implicit>
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class MyClass : R|@R|second/Anno|(IntegerLiteral(1).plus#(outer#))  second/Base<@R|second/Anno|(IntegerLiteral(2).plus#(outer#))  second/Base<@R|second/Anno|(IntegerLiteral(3).plus#(outer#))  kotlin/Int>>| {
-        public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=MyClass] constructor(): R|second/MyClass| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class MyClass : R|@R|second/Anno|(IntegerLiteral(1).plus#(outer#))  second/Base<@R|second/Anno|(IntegerLiteral(2).plus#(outer#))  second/Base<@R|second/Anno|(IntegerLiteral(3).plus#(outer#))  kotlin/Int>>| {
+        public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=MyClass, ExpectForActualAttributeKey={}] constructor(): R|second/MyClass| {
             LAZY_super<R|@R|second/Anno|(IntegerLiteral(1).plus#(outer#))  second/Base<@R|second/Anno|(IntegerLiteral(2).plus#(outer#))  second/Base<@R|second/Anno|(IntegerLiteral(3).plus#(outer#))  kotlin/Int>>|>
         }
 
@@ -403,8 +403,8 @@ FILE: [ResolvedTo(IMPORTS)] superTypeCallNestedNameClashWithAnnotation.kt
         public? [ResolvedTo(RAW_FIR)] get(): <implicit>
     public? final? const [ResolvedTo(RAW_FIR)] val inner: <implicit> = LAZY_EXPRESSION
         public? [ResolvedTo(RAW_FIR)] get(): <implicit>
-    public final [ResolvedTo(CONTRACTS)] class MyClass : R|@R|second/Anno|(IntegerLiteral(1).plus#(outer#))  second/Base<@R|second/Anno|(IntegerLiteral(2).plus#(outer#))  second/Base<@R|second/Anno|(IntegerLiteral(3).plus#(outer#))  kotlin/Int>>| {
-        public [ResolvedTo(CONTRACTS)] [ContainingClassKey=MyClass] constructor(): R|second/MyClass| {
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] class MyClass : R|@R|second/Anno|(IntegerLiteral(1).plus#(outer#))  second/Base<@R|second/Anno|(IntegerLiteral(2).plus#(outer#))  second/Base<@R|second/Anno|(IntegerLiteral(3).plus#(outer#))  kotlin/Int>>| {
+        public [ResolvedTo(CONTRACTS)] [ContainingClassKey=MyClass, ExpectForActualAttributeKey={}] constructor(): R|second/MyClass| {
             LAZY_super<R|@R|second/Anno|(IntegerLiteral(1).plus#(outer#))  second/Base<@R|second/Anno|(IntegerLiteral(2).plus#(outer#))  second/Base<@R|second/Anno|(IntegerLiteral(3).plus#(outer#))  kotlin/Int>>|>
         }
 
@@ -451,8 +451,8 @@ FILE: [ResolvedTo(IMPORTS)] superTypeCallNestedNameClashWithAnnotation.kt
         public? [ResolvedTo(RAW_FIR)] get(): <implicit>
     public? final? const [ResolvedTo(RAW_FIR)] val inner: <implicit> = LAZY_EXPRESSION
         public? [ResolvedTo(RAW_FIR)] get(): <implicit>
-    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] class MyClass : R|@R|second/Anno|(IntegerLiteral(1).plus#(outer#))  second/Base<@R|second/Anno|(IntegerLiteral(2).plus#(outer#))  second/Base<@R|second/Anno|(IntegerLiteral(3).plus#(outer#))  kotlin/Int>>| {
-        public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=MyClass] constructor(): R|second/MyClass| {
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class MyClass : R|@R|second/Anno|(IntegerLiteral(1).plus#(outer#))  second/Base<@R|second/Anno|(IntegerLiteral(2).plus#(outer#))  second/Base<@R|second/Anno|(IntegerLiteral(3).plus#(outer#))  kotlin/Int>>| {
+        public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=MyClass, ExpectForActualAttributeKey={}] constructor(): R|second/MyClass| {
             LAZY_super<R|@R|second/Anno|(IntegerLiteral(1).plus#(outer#))  second/Base<@R|second/Anno|(IntegerLiteral(2).plus#(outer#))  second/Base<@R|second/Anno|(IntegerLiteral(3).plus#(outer#))  kotlin/Int>>|>
         }
 
@@ -495,12 +495,12 @@ FILE: [ResolvedTo(IMPORTS)] superTypeCallNestedNameClashWithAnnotation.kt
         }
 
     }
-    public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val outer: R|kotlin/Int| = Int(0)
+    public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val outer: R|kotlin/Int| = Int(0)
         public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/Int|
     public? final? const [ResolvedTo(RAW_FIR)] val inner: <implicit> = LAZY_EXPRESSION
         public? [ResolvedTo(RAW_FIR)] get(): <implicit>
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] class MyClass : R|@R|second/Anno|(i = Int(1).R|kotlin/Int.plus|(R|second/outer|))  second/Base<@R|second/Anno|(i = Int(2).R|kotlin/Int.plus|(R|second/outer|))  second/Base<@R|second/Anno|(i = Int(3).R|kotlin/Int.plus|(R|second/outer|))  kotlin/Int>>| {
-        public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=MyClass] constructor(): R|second/MyClass| {
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] class MyClass : R|@R|second/Anno|(i = Int(1).R|kotlin/Int.plus|(R|second/outer|))  second/Base<@R|second/Anno|(i = Int(2).R|kotlin/Int.plus|(R|second/outer|))  second/Base<@R|second/Anno|(i = Int(3).R|kotlin/Int.plus|(R|second/outer|))  kotlin/Int>>| {
+        public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=MyClass, ExpectForActualAttributeKey={}] constructor(): R|second/MyClass| {
             LAZY_super<R|@R|second/Anno|(i = Int(1).R|kotlin/Int.plus|(R|second/outer|))  second/Base<@R|second/Anno|(i = Int(2).R|kotlin/Int.plus|(R|second/outer|))  second/Base<@R|second/Anno|(i = Int(3).R|kotlin/Int.plus|(R|second/outer|))  kotlin/Int>>|>
         }
 
@@ -543,12 +543,12 @@ FILE: [ResolvedTo(IMPORTS)] superTypeCallNestedNameClashWithAnnotation.kt
         }
 
     }
-    public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val outer: R|kotlin/Int| = Int(0)
+    public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val outer: R|kotlin/Int| = Int(0)
         public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/Int|
     public? final? const [ResolvedTo(RAW_FIR)] val inner: <implicit> = LAZY_EXPRESSION
         public? [ResolvedTo(RAW_FIR)] get(): <implicit>
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] class MyClass : R|@R|second/Anno|(i = Int(1).R|kotlin/Int.plus|(R|second/outer|))  second/Base<@R|second/Anno|(i = Int(2).R|kotlin/Int.plus|(R|second/outer|))  second/Base<@R|second/Anno|(i = Int(3).R|kotlin/Int.plus|(R|second/outer|))  kotlin/Int>>| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyClass] constructor(): R|second/MyClass| {
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] class MyClass : R|@R|second/Anno|(i = Int(1).R|kotlin/Int.plus|(R|second/outer|))  second/Base<@R|second/Anno|(i = Int(2).R|kotlin/Int.plus|(R|second/outer|))  second/Base<@R|second/Anno|(i = Int(3).R|kotlin/Int.plus|(R|second/outer|))  kotlin/Int>>| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyClass, ExpectForActualAttributeKey={}] constructor(): R|second/MyClass| {
             super<R|@R|second/Anno|(i = Int(1).R|kotlin/Int.plus|(R|second/outer|))  second/Base<@R|second/Anno|(i = Int(2).R|kotlin/Int.plus|(R|second/outer|))  second/Base<@R|second/Anno|(i = Int(3).R|kotlin/Int.plus|(R|second/outer|))  kotlin/Int>>|>()
         }
 
@@ -576,46 +576,46 @@ FILE: [ResolvedTo(IMPORTS)] superTypeCallNestedNameClashWithAnnotation.kt
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] superTypeCallNestedNameClashWithAnnotation.kt
-    @R|kotlin/annotation/Target|[Types](allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|)) public final [ResolvedTo(BODY_RESOLVE)] annotation class Anno : R|kotlin/Annotation| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=second/Anno.i] i: R|kotlin/Int|): R|second/Anno| {
+    @R|kotlin/annotation/Target|[Types](allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|)) public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] annotation class Anno : R|kotlin/Annotation| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=second/Anno.i] i: R|kotlin/Int|): R|second/Anno| {
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val i: R|kotlin/Int| = R|<local>/i|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val i: R|kotlin/Int| = R|<local>/i|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] get(): R|kotlin/Int|
 
     }
-    public open [ResolvedTo(BODY_RESOLVE)] class Base<[ResolvedTo(BODY_RESOLVE)] T> : R|kotlin/Any| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Base] constructor<[ResolvedTo(BODY_RESOLVE)] T>(): R|second/Base<T>| {
+    public open [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class Base<[ResolvedTo(BODY_RESOLVE)] T> : R|kotlin/Any| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Base, ExpectForActualAttributeKey={}] constructor<[ResolvedTo(BODY_RESOLVE)] T>(): R|second/Base<T>| {
             super<R|kotlin/Any|>()
         }
 
     }
-    public final const [ResolvedTo(BODY_RESOLVE)] val outer: R|kotlin/Int| = Int(0)
+    public final const [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val outer: R|kotlin/Int| = Int(0)
         public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/Int|
-    public final const [ResolvedTo(BODY_RESOLVE)] val inner: R|kotlin/String| = String()
+    public final const [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val inner: R|kotlin/String| = String()
         public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/String|
-    public final [ResolvedTo(BODY_RESOLVE)] class MyClass : R|@R|second/Anno|(i = Int(1).R|kotlin/Int.plus|(R|second/outer|))  second/Base<@R|second/Anno|(i = Int(2).R|kotlin/Int.plus|(R|second/outer|))  second/Base<@R|second/Anno|(i = Int(3).R|kotlin/Int.plus|(R|second/outer|))  kotlin/Int>>| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyClass] constructor(): R|second/MyClass| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class MyClass : R|@R|second/Anno|(i = Int(1).R|kotlin/Int.plus|(R|second/outer|))  second/Base<@R|second/Anno|(i = Int(2).R|kotlin/Int.plus|(R|second/outer|))  second/Base<@R|second/Anno|(i = Int(3).R|kotlin/Int.plus|(R|second/outer|))  kotlin/Int>>| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyClass, ExpectForActualAttributeKey={}] constructor(): R|second/MyClass| {
             super<R|@R|second/Anno|(i = Int(1).R|kotlin/Int.plus|(R|second/outer|))  second/Base<@R|second/Anno|(i = Int(2).R|kotlin/Int.plus|(R|second/outer|))  second/Base<@R|second/Anno|(i = Int(3).R|kotlin/Int.plus|(R|second/outer|))  kotlin/Int>>|>()
         }
 
-        public open [ResolvedTo(BODY_RESOLVE)] class Base<[ResolvedTo(BODY_RESOLVE)] T> : R|kotlin/Any| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Base] constructor<[ResolvedTo(BODY_RESOLVE)] T>(): R|second/MyClass.Base<T>| {
+        public open [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class Base<[ResolvedTo(BODY_RESOLVE)] T> : R|kotlin/Any| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Base, ExpectForActualAttributeKey={}] constructor<[ResolvedTo(BODY_RESOLVE)] T>(): R|second/MyClass.Base<T>| {
                 super<R|kotlin/Any|>()
             }
 
         }
 
-        public final companion [ResolvedTo(BODY_RESOLVE)] object Companion : R|kotlin/Any| {
-            private [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Companion] constructor(): R|second/MyClass.Companion| {
+        public final companion [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] object Companion : R|kotlin/Any| {
+            private [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Companion, ExpectForActualAttributeKey={}] constructor(): R|second/MyClass.Companion| {
                 super<R|kotlin/Any|>()
             }
 
-            public final const [ResolvedTo(BODY_RESOLVE)] val outer: R|kotlin/String| = String()
+            public final const [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val outer: R|kotlin/String| = String()
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Companion] get(): R|kotlin/String|
 
-            public final const [ResolvedTo(BODY_RESOLVE)] val inner: R|kotlin/Int| = Int(0)
+            public final const [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val inner: R|kotlin/Int| = Int(0)
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Companion] get(): R|kotlin/Int|
 
         }

@@ -22,14 +22,14 @@ FILE: [ResolvedTo(IMPORTS)] delegateWithImplicitTypeScript.kts
 
 
 EXPECT_ACTUAL_MATCHING:
-TARGET: public open [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [CallableCopySubstitutionKey=CallableCopySubstitution(substitutor=Empty, baseSymbol=FirNamedFunctionSymbol /Interface.implicitType), DelegatedWrapperDataKey=[wrapped=FirNamedFunctionSymbol /Interface.implicitType, containingClass=Aaa, delegateField=FirFieldSymbol /Aaa.$$delegate_0] fun implicitType(): <implicit>
+TARGET: public open [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [CallableCopySubstitutionKey=CallableCopySubstitution(substitutor=Empty, baseSymbol=FirNamedFunctionSymbol /Interface.implicitType), DelegatedWrapperDataKey=[wrapped=FirNamedFunctionSymbol /Interface.implicitType, containingClass=Aaa, delegateField=FirFieldSymbol /Aaa.$$delegate_0, ExpectForActualAttributeKey={}] fun implicitType(): <implicit>
 
 FILE: [ResolvedTo(IMPORTS)] delegateWithImplicitTypeScript.kts
     context(<script>@kotlin.script.templates.standard.ScriptTemplateWithArgs)
     SCRIPT: [ResolvedTo(RAW_FIR)] <script-delegateWithImplicitTypeScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [DelegateFieldsMapKey={0=FirFieldSymbol /Aaa.$$delegate_0}] class Aaa : R|Interface| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [DelegateFieldsMapKey={0=FirFieldSymbol /Aaa.$$delegate_0}, ExpectForActualAttributeKey={}] class Aaa : R|Interface| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Aaa] constructor([ResolvedTo(STATUS)] i: R|Interface|): R|Aaa| {
                 LAZY_super<<implicit>>
             }
@@ -38,21 +38,21 @@ FILE: [ResolvedTo(IMPORTS)] delegateWithImplicitTypeScript.kts
 
         }
 
-        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface Interface : R|kotlin/Any| {
-            public open [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun implicitType(): <implicit> { LAZY_BLOCK }
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] interface Interface : R|kotlin/Any| {
+            public open [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun implicitType(): <implicit> { LAZY_BLOCK }
 
         }
 
 
 CONTRACTS:
-TARGET: public open [ResolvedTo(CONTRACTS)] [CallableCopySubstitutionKey=CallableCopySubstitution(substitutor=Empty, baseSymbol=FirNamedFunctionSymbol /Interface.implicitType), DelegatedWrapperDataKey=[wrapped=FirNamedFunctionSymbol /Interface.implicitType, containingClass=Aaa, delegateField=FirFieldSymbol /Aaa.$$delegate_0] fun implicitType(): <implicit>
+TARGET: public open [ResolvedTo(CONTRACTS)] [CallableCopySubstitutionKey=CallableCopySubstitution(substitutor=Empty, baseSymbol=FirNamedFunctionSymbol /Interface.implicitType), DelegatedWrapperDataKey=[wrapped=FirNamedFunctionSymbol /Interface.implicitType, containingClass=Aaa, delegateField=FirFieldSymbol /Aaa.$$delegate_0, ExpectForActualAttributeKey={}] fun implicitType(): <implicit>
 
 FILE: [ResolvedTo(IMPORTS)] delegateWithImplicitTypeScript.kts
     context(<script>@R|kotlin/script/templates/standard/ScriptTemplateWithArgs|)
     SCRIPT: [ResolvedTo(TYPES)] <script-delegateWithImplicitTypeScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [DelegateFieldsMapKey={0=FirFieldSymbol /Aaa.$$delegate_0}] class Aaa : R|Interface| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [DelegateFieldsMapKey={0=FirFieldSymbol /Aaa.$$delegate_0}, ExpectForActualAttributeKey={}] class Aaa : R|Interface| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Aaa] constructor([ResolvedTo(STATUS)] i: R|Interface|): R|Aaa| {
                 LAZY_super<<implicit>>
             }
@@ -61,21 +61,21 @@ FILE: [ResolvedTo(IMPORTS)] delegateWithImplicitTypeScript.kts
 
         }
 
-        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface Interface : R|kotlin/Any| {
-            public open [ResolvedTo(CONTRACTS)] fun implicitType(): <implicit> { LAZY_BLOCK }
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] interface Interface : R|kotlin/Any| {
+            public open [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun implicitType(): <implicit> { LAZY_BLOCK }
 
         }
 
 
 IMPLICIT_TYPES_BODY_RESOLVE:
-TARGET: public open [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [DelegatedWrapperDataKey=[wrapped=FirNamedFunctionSymbol /Interface.implicitType, containingClass=Aaa, delegateField=FirFieldSymbol /Aaa.$$delegate_0] fun implicitType(): R|kotlin/Int|
+TARGET: public open [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [DelegatedWrapperDataKey=[wrapped=FirNamedFunctionSymbol /Interface.implicitType, containingClass=Aaa, delegateField=FirFieldSymbol /Aaa.$$delegate_0, ExpectForActualAttributeKey={}] fun implicitType(): R|kotlin/Int|
 
 FILE: [ResolvedTo(IMPORTS)] delegateWithImplicitTypeScript.kts
     context(<script>@R|kotlin/script/templates/standard/ScriptTemplateWithArgs|)
     SCRIPT: [ResolvedTo(TYPES)] <script-delegateWithImplicitTypeScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [DelegateFieldsMapKey={0=FirFieldSymbol /Aaa.$$delegate_0}] class Aaa : R|Interface| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [DelegateFieldsMapKey={0=FirFieldSymbol /Aaa.$$delegate_0}, ExpectForActualAttributeKey={}] class Aaa : R|Interface| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Aaa] constructor([ResolvedTo(STATUS)] i: R|Interface|): R|Aaa| {
                 LAZY_super<<implicit>>
             }
@@ -84,8 +84,8 @@ FILE: [ResolvedTo(IMPORTS)] delegateWithImplicitTypeScript.kts
 
         }
 
-        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface Interface : R|kotlin/Any| {
-            public open [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun implicitType(): R|kotlin/Int| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] interface Interface : R|kotlin/Any| {
+            public open [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun implicitType(): R|kotlin/Int| {
                 ^implicitType Int(42)
             }
 
@@ -93,14 +93,14 @@ FILE: [ResolvedTo(IMPORTS)] delegateWithImplicitTypeScript.kts
 
 
 ANNOTATION_ARGUMENTS:
-TARGET: public open [ResolvedTo(ANNOTATION_ARGUMENTS)] [DelegatedWrapperDataKey=[wrapped=FirNamedFunctionSymbol /Interface.implicitType, containingClass=Aaa, delegateField=FirFieldSymbol /Aaa.$$delegate_0] fun implicitType(): R|kotlin/Int|
+TARGET: public open [ResolvedTo(ANNOTATION_ARGUMENTS)] [DelegatedWrapperDataKey=[wrapped=FirNamedFunctionSymbol /Interface.implicitType, containingClass=Aaa, delegateField=FirFieldSymbol /Aaa.$$delegate_0, ExpectForActualAttributeKey={}] fun implicitType(): R|kotlin/Int|
 
 FILE: [ResolvedTo(IMPORTS)] delegateWithImplicitTypeScript.kts
     context(<script>@R|kotlin/script/templates/standard/ScriptTemplateWithArgs|)
     SCRIPT: [ResolvedTo(TYPES)] <script-delegateWithImplicitTypeScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [DelegateFieldsMapKey={0=FirFieldSymbol /Aaa.$$delegate_0}] class Aaa : R|Interface| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [DelegateFieldsMapKey={0=FirFieldSymbol /Aaa.$$delegate_0}, ExpectForActualAttributeKey={}] class Aaa : R|Interface| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Aaa] constructor([ResolvedTo(STATUS)] i: R|Interface|): R|Aaa| {
                 LAZY_super<<implicit>>
             }
@@ -109,8 +109,8 @@ FILE: [ResolvedTo(IMPORTS)] delegateWithImplicitTypeScript.kts
 
         }
 
-        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface Interface : R|kotlin/Any| {
-            public open [ResolvedTo(ANNOTATION_ARGUMENTS)] fun implicitType(): R|kotlin/Int| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] interface Interface : R|kotlin/Any| {
+            public open [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun implicitType(): R|kotlin/Int| {
                 ^implicitType Int(42)
             }
 
@@ -118,14 +118,14 @@ FILE: [ResolvedTo(IMPORTS)] delegateWithImplicitTypeScript.kts
 
 
 BODY_RESOLVE:
-TARGET: public open [ResolvedTo(BODY_RESOLVE)] [DelegatedWrapperDataKey=[wrapped=FirNamedFunctionSymbol /Interface.implicitType, containingClass=Aaa, delegateField=FirFieldSymbol /Aaa.$$delegate_0] fun implicitType(): R|kotlin/Int|
+TARGET: public open [ResolvedTo(BODY_RESOLVE)] [DelegatedWrapperDataKey=[wrapped=FirNamedFunctionSymbol /Interface.implicitType, containingClass=Aaa, delegateField=FirFieldSymbol /Aaa.$$delegate_0, ExpectForActualAttributeKey={}] fun implicitType(): R|kotlin/Int|
 
 FILE: [ResolvedTo(IMPORTS)] delegateWithImplicitTypeScript.kts
     context(<script>@R|kotlin/script/templates/standard/ScriptTemplateWithArgs|)
     SCRIPT: [ResolvedTo(TYPES)] <script-delegateWithImplicitTypeScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [DelegateFieldsMapKey={0=FirFieldSymbol /Aaa.$$delegate_0}] class Aaa : R|Interface| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [DelegateFieldsMapKey={0=FirFieldSymbol /Aaa.$$delegate_0}, ExpectForActualAttributeKey={}] class Aaa : R|Interface| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Aaa] constructor([ResolvedTo(STATUS)] i: R|Interface|): R|Aaa| {
                 LAZY_super<<implicit>>
             }
@@ -134,8 +134,8 @@ FILE: [ResolvedTo(IMPORTS)] delegateWithImplicitTypeScript.kts
 
         }
 
-        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface Interface : R|kotlin/Any| {
-            public open [ResolvedTo(ANNOTATION_ARGUMENTS)] fun implicitType(): R|kotlin/Int| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] interface Interface : R|kotlin/Any| {
+            public open [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun implicitType(): R|kotlin/Int| {
                 ^implicitType Int(42)
             }
 
@@ -148,8 +148,8 @@ FILE: [ResolvedTo(BODY_RESOLVE)] delegateWithImplicitTypeScript.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-delegateWithImplicitTypeScript.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] [DelegateFieldsMapKey={0=FirFieldSymbol /Aaa.$$delegate_0}] class Aaa : R|Interface| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Aaa] constructor([ResolvedTo(BODY_RESOLVE)] i: R|Interface|): R|Aaa| {
+        public final [ResolvedTo(BODY_RESOLVE)] [DelegateFieldsMapKey={0=FirFieldSymbol /Aaa.$$delegate_0}, ExpectForActualAttributeKey={}] class Aaa : R|Interface| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Aaa, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] i: R|Interface|): R|Aaa| {
                 super<R|kotlin/Any|>()
             }
 
@@ -157,8 +157,8 @@ FILE: [ResolvedTo(BODY_RESOLVE)] delegateWithImplicitTypeScript.kts
 
         }
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] interface Interface : R|kotlin/Any| {
-            public open [ResolvedTo(BODY_RESOLVE)] fun implicitType(): R|kotlin/Int| {
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface Interface : R|kotlin/Any| {
+            public open [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun implicitType(): R|kotlin/Int| {
                 ^implicitType Int(42)
             }
 

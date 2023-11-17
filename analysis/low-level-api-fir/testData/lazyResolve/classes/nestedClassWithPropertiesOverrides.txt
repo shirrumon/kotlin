@@ -168,11 +168,11 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
 
 EXPECT_ACTUAL_MATCHING:
 FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
-    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface OV : R|kotlin/Any| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] interface OV : R|kotlin/Any| {
         public? final? [ResolvedTo(RAW_FIR)] val originalExpressions: A
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=OV] get(): A
 
-        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class ResolveMe : R|OV| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class ResolveMe : R|OV| {
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=ResolveMe] constructor(): R|OV.ResolveMe| {
                 LAZY_super<<implicit>>
             }
@@ -192,11 +192,11 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
 
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
-    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface OV : R|kotlin/Any| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] interface OV : R|kotlin/Any| {
         public abstract [ResolvedTo(STATUS)] val originalExpressions: R|A|
             public [ResolvedTo(STATUS)] [ContainingClassKey=OV] get(): R|A|
 
-        public final [ResolvedTo(CONTRACTS)] class ResolveMe : R|OV| {
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] class ResolveMe : R|OV| {
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=ResolveMe] constructor(): R|OV.ResolveMe| {
                 LAZY_super<<implicit>>
             }
@@ -216,11 +216,11 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
-    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface OV : R|kotlin/Any| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] interface OV : R|kotlin/Any| {
         public abstract [ResolvedTo(STATUS)] val originalExpressions: R|A|
             public [ResolvedTo(STATUS)] [ContainingClassKey=OV] get(): R|A|
 
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] class ResolveMe : R|OV| {
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class ResolveMe : R|OV| {
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=ResolveMe] constructor(): R|OV.ResolveMe| {
                 LAZY_super<<implicit>>
             }
@@ -240,11 +240,11 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
 
 ANNOTATION_ARGUMENTS:
 FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
-    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface OV : R|kotlin/Any| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] interface OV : R|kotlin/Any| {
         public abstract [ResolvedTo(STATUS)] val originalExpressions: R|A|
             public [ResolvedTo(STATUS)] [ContainingClassKey=OV] get(): R|A|
 
-        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] class ResolveMe : R|OV| {
+        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] class ResolveMe : R|OV| {
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=ResolveMe] constructor(): R|OV.ResolveMe| {
                 LAZY_super<<implicit>>
             }
@@ -264,12 +264,12 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
 
 BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
-    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface OV : R|kotlin/Any| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] interface OV : R|kotlin/Any| {
         public abstract [ResolvedTo(STATUS)] val originalExpressions: R|A|
             public [ResolvedTo(STATUS)] [ContainingClassKey=OV] get(): R|A|
 
-        public final [ResolvedTo(BODY_RESOLVE)] class ResolveMe : R|OV| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=ResolveMe] constructor(): R|OV.ResolveMe| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class ResolveMe : R|OV| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=ResolveMe, ExpectForActualAttributeKey={}] constructor(): R|OV.ResolveMe| {
                 super<R|kotlin/Any|>()
             }
 
@@ -288,23 +288,23 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] nestedClassWithPropertiesOverrides.kt
-    public abstract [ResolvedTo(BODY_RESOLVE)] interface OV : R|kotlin/Any| {
-        public abstract [ResolvedTo(BODY_RESOLVE)] val originalExpressions: R|A|
+    public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface OV : R|kotlin/Any| {
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val originalExpressions: R|A|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=OV] get(): R|A|
 
-        public final [ResolvedTo(BODY_RESOLVE)] class ResolveMe : R|OV| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=ResolveMe] constructor(): R|OV.ResolveMe| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class ResolveMe : R|OV| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=ResolveMe, ExpectForActualAttributeKey={}] constructor(): R|OV.ResolveMe| {
                 super<R|kotlin/Any|>()
             }
 
-            public open override [ResolvedTo(BODY_RESOLVE)] val originalExpressions: R|A|
+            public open override [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val originalExpressions: R|A|
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=ResolveMe] get(): R|A|
 
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] class A : R|kotlin/Any| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=A] constructor(): R|A| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class A : R|kotlin/Any| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=A, ExpectForActualAttributeKey={}] constructor(): R|A| {
             super<R|kotlin/Any|>()
         }
 

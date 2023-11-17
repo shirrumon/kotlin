@@ -67,7 +67,7 @@ FILE: [ResolvedTo(IMPORTS)] functionWithTypeParametersScript.kts
     SCRIPT: [ResolvedTo(RAW_FIR)] <script-functionWithTypeParametersScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun <[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T : R|kotlin/Int|, [ResolvedTo(EXPECT_ACTUAL_MATCHING)] K> resolveMe(): R|kotlin/Unit| { LAZY_BLOCK }
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T : R|kotlin/Int|, [ResolvedTo(EXPECT_ACTUAL_MATCHING)] K> resolveMe(): R|kotlin/Unit| { LAZY_BLOCK }
 
 
 CONTRACTS:
@@ -76,7 +76,7 @@ FILE: [ResolvedTo(IMPORTS)] functionWithTypeParametersScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-functionWithTypeParametersScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(CONTRACTS)] fun <[ResolvedTo(CONTRACTS)] T : R|kotlin/Int|, [ResolvedTo(CONTRACTS)] K> resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(CONTRACTS)] T : R|kotlin/Int|, [ResolvedTo(CONTRACTS)] K> resolveMe(): R|kotlin/Unit| {
         }
 
 
@@ -86,7 +86,7 @@ FILE: [ResolvedTo(IMPORTS)] functionWithTypeParametersScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-functionWithTypeParametersScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun <[ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] T : R|kotlin/Int|, [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] K> resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] T : R|kotlin/Int|, [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] K> resolveMe(): R|kotlin/Unit| {
         }
 
 
@@ -96,7 +96,7 @@ FILE: [ResolvedTo(IMPORTS)] functionWithTypeParametersScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-functionWithTypeParametersScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] fun <[ResolvedTo(ANNOTATION_ARGUMENTS)] T : R|kotlin/Int|, [ResolvedTo(ANNOTATION_ARGUMENTS)] K> resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(ANNOTATION_ARGUMENTS)] T : R|kotlin/Int|, [ResolvedTo(ANNOTATION_ARGUMENTS)] K> resolveMe(): R|kotlin/Unit| {
         }
 
 
@@ -106,7 +106,7 @@ FILE: [ResolvedTo(IMPORTS)] functionWithTypeParametersScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-functionWithTypeParametersScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun <[ResolvedTo(BODY_RESOLVE)] T : R|kotlin/Int|, [ResolvedTo(BODY_RESOLVE)] K> resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(BODY_RESOLVE)] T : R|kotlin/Int|, [ResolvedTo(BODY_RESOLVE)] K> resolveMe(): R|kotlin/Unit| {
         }
 
 
@@ -116,5 +116,5 @@ FILE: [ResolvedTo(BODY_RESOLVE)] functionWithTypeParametersScript.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-functionWithTypeParametersScript.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun <[ResolvedTo(BODY_RESOLVE)] T : R|kotlin/Int|, [ResolvedTo(BODY_RESOLVE)] K> resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(BODY_RESOLVE)] T : R|kotlin/Int|, [ResolvedTo(BODY_RESOLVE)] K> resolveMe(): R|kotlin/Unit| {
         }

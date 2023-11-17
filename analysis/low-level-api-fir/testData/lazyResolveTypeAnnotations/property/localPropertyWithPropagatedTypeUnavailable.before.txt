@@ -32,7 +32,7 @@ FILE: [ResolvedTo(IMPORTS)] localPropertyWithPropagatedTypeUnavailable.kt
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Obj : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] object Obj : R|kotlin/Any| {
         private [ResolvedTo(STATUS)] [ContainingClassKey=Obj] constructor(): R|foo/Obj| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -40,11 +40,11 @@ FILE: [ResolvedTo(IMPORTS)] localPropertyWithPropagatedTypeUnavailable.kt
         private final const [ResolvedTo(STATUS)] val constant: <implicit> = LAZY_EXPRESSION
             private [ResolvedTo(STATUS)] [ContainingClassKey=Obj] get(): <implicit>
 
-        public final [ResolvedTo(CONTRACTS)] fun explicitType(): R|@R|foo/Anno|(position = <strcat>(String(return type: ), <Unresolved name: constant>#))  kotlin/collections/List<@R|foo/Anno|(position = <strcat>(String(nested return type: ), <Unresolved name: constant>#))  kotlin/collections/Collection<@R|foo/Anno|(position = <strcat>(String(nested nested return type: ), <Unresolved name: constant>#))  kotlin/String>>| {
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun explicitType(): R|@R|foo/Anno|(position = <strcat>(String(return type: ), <Unresolved name: constant>#))  kotlin/collections/List<@R|foo/Anno|(position = <strcat>(String(nested return type: ), <Unresolved name: constant>#))  kotlin/collections/Collection<@R|foo/Anno|(position = <strcat>(String(nested nested return type: ), <Unresolved name: constant>#))  kotlin/String>>| {
             ^explicitType IntegerLiteral(0)
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
         [ResolvedTo(BODY_RESOLVE)] lval localProperty: R|@R|foo/Anno|(position = <strcat>(String(return type: ), <Unresolved name: constant>#))  kotlin/collections/List<@R|foo/Anno|(position = <strcat>(String(nested return type: ), <Unresolved name: constant>#))  kotlin/collections/Collection<@R|foo/Anno|(position = <strcat>(String(nested nested return type: ), <Unresolved name: constant>#))  kotlin/String>>| = Q|foo/Obj|.R|foo/Obj.explicitType|()
     }

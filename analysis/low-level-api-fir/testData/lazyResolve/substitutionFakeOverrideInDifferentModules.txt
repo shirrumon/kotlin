@@ -22,22 +22,22 @@ FILE: [ResolvedTo(IMPORTS)] SubClass.kt
     }
 
 EXPECT_ACTUAL_MATCHING:
-TARGET: public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [SubstitutedOverrideOriginalKey=/AbstractClass.property] val property: R|kotlin/Int|
+TARGET: public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}, SubstitutedOverrideOriginalKey=/AbstractClass.property] val property: R|kotlin/Int|
 
 
 FILE: [ResolvedTo(IMPORTS)] AbstractClass.kt
-    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AbstractClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T> : R|kotlin/Any| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class AbstractClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T> : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T>(): R|AbstractClass<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] val property: R|T|
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] val property: R|T|
             public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=AbstractClass] get(): R|T|
 
     }
 
 FILE: [ResolvedTo(IMPORTS)] SubClass.kt
-    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class SubClass : R|AbstractClass<kotlin/Int>| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class SubClass : R|AbstractClass<kotlin/Int>| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=SubClass] constructor(): R|SubClass| {
             LAZY_super<R|AbstractClass<kotlin/Int>|>
         }
@@ -45,22 +45,22 @@ FILE: [ResolvedTo(IMPORTS)] SubClass.kt
     }
 
 CONTRACTS:
-TARGET: public abstract [ResolvedTo(CONTRACTS)] [SubstitutedOverrideOriginalKey=/AbstractClass.property] val property: R|kotlin/Int|
+TARGET: public abstract [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}, SubstitutedOverrideOriginalKey=/AbstractClass.property] val property: R|kotlin/Int|
 
 
 FILE: [ResolvedTo(IMPORTS)] AbstractClass.kt
-    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AbstractClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T> : R|kotlin/Any| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class AbstractClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T> : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T>(): R|AbstractClass<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public abstract [ResolvedTo(CONTRACTS)] val property: R|T|
+        public abstract [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] val property: R|T|
             public [ResolvedTo(CONTRACTS)] [ContainingClassKey=AbstractClass] get(): R|T|
 
     }
 
 FILE: [ResolvedTo(IMPORTS)] SubClass.kt
-    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class SubClass : R|AbstractClass<kotlin/Int>| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class SubClass : R|AbstractClass<kotlin/Int>| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=SubClass] constructor(): R|SubClass| {
             LAZY_super<R|AbstractClass<kotlin/Int>|>
         }
@@ -68,22 +68,22 @@ FILE: [ResolvedTo(IMPORTS)] SubClass.kt
     }
 
 IMPLICIT_TYPES_BODY_RESOLVE:
-TARGET: public abstract [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [SubstitutedOverrideOriginalKey=/AbstractClass.property] val property: R|kotlin/Int|
+TARGET: public abstract [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}, SubstitutedOverrideOriginalKey=/AbstractClass.property] val property: R|kotlin/Int|
 
 
 FILE: [ResolvedTo(IMPORTS)] AbstractClass.kt
-    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AbstractClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T> : R|kotlin/Any| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class AbstractClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T> : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T>(): R|AbstractClass<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public abstract [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val property: R|T|
+        public abstract [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val property: R|T|
             public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=AbstractClass] get(): R|T|
 
     }
 
 FILE: [ResolvedTo(IMPORTS)] SubClass.kt
-    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class SubClass : R|AbstractClass<kotlin/Int>| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class SubClass : R|AbstractClass<kotlin/Int>| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=SubClass] constructor(): R|SubClass| {
             LAZY_super<R|AbstractClass<kotlin/Int>|>
         }
@@ -91,22 +91,22 @@ FILE: [ResolvedTo(IMPORTS)] SubClass.kt
     }
 
 ANNOTATION_ARGUMENTS:
-TARGET: public abstract [ResolvedTo(ANNOTATION_ARGUMENTS)] [SubstitutedOverrideOriginalKey=/AbstractClass.property] val property: R|kotlin/Int|
+TARGET: public abstract [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}, SubstitutedOverrideOriginalKey=/AbstractClass.property] val property: R|kotlin/Int|
 
 
 FILE: [ResolvedTo(IMPORTS)] AbstractClass.kt
-    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AbstractClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T> : R|kotlin/Any| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class AbstractClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T> : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T>(): R|AbstractClass<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public abstract [ResolvedTo(ANNOTATION_ARGUMENTS)] val property: R|T|
+        public abstract [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] val property: R|T|
             public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=AbstractClass] get(): R|T|
 
     }
 
 FILE: [ResolvedTo(IMPORTS)] SubClass.kt
-    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class SubClass : R|AbstractClass<kotlin/Int>| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class SubClass : R|AbstractClass<kotlin/Int>| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=SubClass] constructor(): R|SubClass| {
             LAZY_super<R|AbstractClass<kotlin/Int>|>
         }
@@ -114,22 +114,22 @@ FILE: [ResolvedTo(IMPORTS)] SubClass.kt
     }
 
 BODY_RESOLVE:
-TARGET: public abstract [ResolvedTo(BODY_RESOLVE)] [SubstitutedOverrideOriginalKey=/AbstractClass.property] val property: R|kotlin/Int|
+TARGET: public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, SubstitutedOverrideOriginalKey=/AbstractClass.property] val property: R|kotlin/Int|
 
 
 FILE: [ResolvedTo(IMPORTS)] AbstractClass.kt
-    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AbstractClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T> : R|kotlin/Any| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class AbstractClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T> : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T>(): R|AbstractClass<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public abstract [ResolvedTo(ANNOTATION_ARGUMENTS)] val property: R|T|
+        public abstract [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] val property: R|T|
             public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=AbstractClass] get(): R|T|
 
     }
 
 FILE: [ResolvedTo(IMPORTS)] SubClass.kt
-    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class SubClass : R|AbstractClass<kotlin/Int>| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class SubClass : R|AbstractClass<kotlin/Int>| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=SubClass] constructor(): R|SubClass| {
             LAZY_super<R|AbstractClass<kotlin/Int>|>
         }
@@ -138,8 +138,8 @@ FILE: [ResolvedTo(IMPORTS)] SubClass.kt
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] SubClass.kt
-    public abstract [ResolvedTo(BODY_RESOLVE)] class SubClass : R|AbstractClass<kotlin/Int>| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=SubClass] constructor(): R|SubClass| {
+    public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class SubClass : R|AbstractClass<kotlin/Int>| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=SubClass, ExpectForActualAttributeKey={}] constructor(): R|SubClass| {
             super<R|AbstractClass<kotlin/Int>|>()
         }
 

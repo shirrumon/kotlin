@@ -32,20 +32,20 @@ FILE: [ResolvedTo(IMPORTS)] localDelegatedPropertyWithPropagatedTypeUnavailable.
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Obj : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] object Obj : R|kotlin/Any| {
         private [ResolvedTo(STATUS)] [ContainingClassKey=Obj] constructor(): R|foo/Obj| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        private final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val constant: R|kotlin/Int| = Int(0)
+        private final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val constant: R|kotlin/Int| = Int(0)
             private [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=Obj] get(): R|kotlin/Int|
 
-        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] fun explicitType(): R|@R|foo/Anno|(position = <strcat>(String(return type: ), this@R|foo/Obj|.R|foo/Obj.constant|))  kotlin/collections/List<@R|foo/Anno|(position = <strcat>(String(nested return type: ), this@R|foo/Obj|.R|foo/Obj.constant|))  kotlin/collections/Collection<@R|foo/Anno|(position = <strcat>(String(nested nested return type: ), this@R|foo/Obj|.R|foo/Obj.constant|))  kotlin/String>>| {
+        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun explicitType(): R|@R|foo/Anno|(position = <strcat>(String(return type: ), this@R|foo/Obj|.R|foo/Obj.constant|))  kotlin/collections/List<@R|foo/Anno|(position = <strcat>(String(nested return type: ), this@R|foo/Obj|.R|foo/Obj.constant|))  kotlin/collections/Collection<@R|foo/Anno|(position = <strcat>(String(nested nested return type: ), this@R|foo/Obj|.R|foo/Obj.constant|))  kotlin/String>>| {
             ^explicitType IntegerLiteral(0)
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
         [ResolvedTo(BODY_RESOLVE)] lval localProperty: <ERROR TYPE REF: Unresolved name: getValue>by <Unresolved name: lazy>#(<L> = [ResolvedTo(BODY_RESOLVE)] lazy@fun <anonymous>(): R|@R|foo/Anno|(position = <strcat>(String(return type: ), this@R|foo/Obj|.R|foo/Obj.constant|))  kotlin/collections/List<@R|foo/Anno|(position = <strcat>(String(nested return type: ), this@R|foo/Obj|.R|foo/Obj.constant|))  kotlin/collections/Collection<@R|foo/Anno|(position = <strcat>(String(nested nested return type: ), this@R|foo/Obj|.R|foo/Obj.constant|))  kotlin/String>>| <inline=Unknown>  {
             ^ Q|foo/Obj|.R|foo/Obj.explicitType|()
         }

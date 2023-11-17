@@ -13,6 +13,6 @@ FILE: [ResolvedTo(IMPORTS)] noReceiverOnLambda.kt
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] fun dslSpeedTest([ResolvedTo(BODY_RESOLVE)] f2: R|SomeTest.() -> kotlin/Unit|): R|kotlin/Unit| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun dslSpeedTest([ResolvedTo(BODY_RESOLVE)] f2: R|SomeTest.() -> kotlin/Unit|): R|kotlin/Unit| {
         R|<local>/f2|.R|SubstitutionOverride<kotlin/Function1.invoke: R|kotlin/Unit|><Inapplicable(INAPPLICABLE_ARGUMENTS_MAPPING_ERROR): kotlin/Function1.invoke>#|()
     }

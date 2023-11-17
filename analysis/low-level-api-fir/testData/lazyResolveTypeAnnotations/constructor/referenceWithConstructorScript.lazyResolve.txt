@@ -230,8 +230,8 @@ FILE: [ResolvedTo(IMPORTS)] referenceWithConstructorScript.kts
         public? final? [ResolvedTo(SUPER_TYPES)] interface I : R|kotlin/Any| {
         }
 
-        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class MyClass : R|@R|util/Anno|(LAZY_EXPRESSION)  kotlin/collections/List<@R|util/Anno|(LAZY_EXPRESSION)  kotlin/collections/List<@R|util/Anno|(LAZY_EXPRESSION)  util/I>>| {
-            public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=MyClass] constructor(): R|util/MyClass| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class MyClass : R|@R|util/Anno|(LAZY_EXPRESSION)  kotlin/collections/List<@R|util/Anno|(LAZY_EXPRESSION)  kotlin/collections/List<@R|util/Anno|(LAZY_EXPRESSION)  util/I>>| {
+            public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=MyClass, ExpectForActualAttributeKey={}] constructor(): R|util/MyClass| {
                 LAZY_super<<implicit>>
             }
 
@@ -260,8 +260,8 @@ FILE: [ResolvedTo(IMPORTS)] referenceWithConstructorScript.kts
         public? final? [ResolvedTo(SUPER_TYPES)] interface I : R|kotlin/Any| {
         }
 
-        public final [ResolvedTo(CONTRACTS)] class MyClass : R|@R|util/Anno|(LAZY_EXPRESSION)  kotlin/collections/List<@R|util/Anno|(LAZY_EXPRESSION)  kotlin/collections/List<@R|util/Anno|(LAZY_EXPRESSION)  util/I>>| {
-            public [ResolvedTo(CONTRACTS)] [ContainingClassKey=MyClass] constructor(): R|util/MyClass| {
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] class MyClass : R|@R|util/Anno|(LAZY_EXPRESSION)  kotlin/collections/List<@R|util/Anno|(LAZY_EXPRESSION)  kotlin/collections/List<@R|util/Anno|(LAZY_EXPRESSION)  util/I>>| {
+            public [ResolvedTo(CONTRACTS)] [ContainingClassKey=MyClass, ExpectForActualAttributeKey={}] constructor(): R|util/MyClass| {
                 LAZY_super<<implicit>>
             }
 
@@ -290,8 +290,8 @@ FILE: [ResolvedTo(IMPORTS)] referenceWithConstructorScript.kts
         public? final? [ResolvedTo(SUPER_TYPES)] interface I : R|kotlin/Any| {
         }
 
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] class MyClass : R|@R|util/Anno|(LAZY_EXPRESSION)  kotlin/collections/List<@R|util/Anno|(LAZY_EXPRESSION)  kotlin/collections/List<@R|util/Anno|(LAZY_EXPRESSION)  util/I>>| {
-            public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=MyClass] constructor(): R|util/MyClass| {
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class MyClass : R|@R|util/Anno|(LAZY_EXPRESSION)  kotlin/collections/List<@R|util/Anno|(LAZY_EXPRESSION)  kotlin/collections/List<@R|util/Anno|(LAZY_EXPRESSION)  util/I>>| {
+            public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=MyClass, ExpectForActualAttributeKey={}] constructor(): R|util/MyClass| {
                 LAZY_super<<implicit>>
             }
 
@@ -314,14 +314,14 @@ FILE: [ResolvedTo(IMPORTS)] referenceWithConstructorScript.kts
 
         }
 
-        public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val prop: R|kotlin/String| = String(str)
+        public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val prop: R|kotlin/String| = String(str)
             public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/String|
 
         public? final? [ResolvedTo(SUPER_TYPES)] interface I : R|kotlin/Any| {
         }
 
-        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] class MyClass : R|@R|util/Anno|(position = <strcat>(String(super type ref ), R|util/prop|))  kotlin/collections/List<@R|util/Anno|(position = <strcat>(String(nested super type ref ), R|util/prop|))  kotlin/collections/List<@R|util/Anno|(position = <strcat>(String(nested nested super type ref ), R|util/prop|))  util/I>>| {
-            public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=MyClass] constructor(): R|util/MyClass| {
+        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] class MyClass : R|@R|util/Anno|(position = <strcat>(String(super type ref ), R|util/prop|))  kotlin/collections/List<@R|util/Anno|(position = <strcat>(String(nested super type ref ), R|util/prop|))  kotlin/collections/List<@R|util/Anno|(position = <strcat>(String(nested nested super type ref ), R|util/prop|))  util/I>>| {
+            public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=MyClass, ExpectForActualAttributeKey={}] constructor(): R|util/MyClass| {
                 LAZY_super<<implicit>>
             }
 
@@ -344,14 +344,14 @@ FILE: [ResolvedTo(IMPORTS)] referenceWithConstructorScript.kts
 
         }
 
-        public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val prop: R|kotlin/String| = String(str)
+        public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val prop: R|kotlin/String| = String(str)
             public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/String|
 
         public? final? [ResolvedTo(SUPER_TYPES)] interface I : R|kotlin/Any| {
         }
 
-        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] class MyClass : R|@R|util/Anno|(position = <strcat>(String(super type ref ), R|util/prop|))  kotlin/collections/List<@R|util/Anno|(position = <strcat>(String(nested super type ref ), R|util/prop|))  kotlin/collections/List<@R|util/Anno|(position = <strcat>(String(nested nested super type ref ), R|util/prop|))  util/I>>| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyClass] constructor(): R|util/MyClass| {
+        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] class MyClass : R|@R|util/Anno|(position = <strcat>(String(super type ref ), R|util/prop|))  kotlin/collections/List<@R|util/Anno|(position = <strcat>(String(nested super type ref ), R|util/prop|))  kotlin/collections/List<@R|util/Anno|(position = <strcat>(String(nested nested super type ref ), R|util/prop|))  util/I>>| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyClass, ExpectForActualAttributeKey={}] constructor(): R|util/MyClass| {
                 super<R|kotlin/Any|>()
             }
 
@@ -364,26 +364,25 @@ FILE: [ResolvedTo(BODY_RESOLVE)] referenceWithConstructorScript.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-referenceWithConstructorScript.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        @R|kotlin/annotation/Target|[Types](allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|)) public final [ResolvedTo(BODY_RESOLVE)] annotation class Anno : R|kotlin/Annotation| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=util/Anno.position] position: R|kotlin/String|): R|util/Anno| {
+        @R|kotlin/annotation/Target|[Types](allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|)) public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] annotation class Anno : R|kotlin/Annotation| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=util/Anno.position] position: R|kotlin/String|): R|util/Anno| {
                 super<R|kotlin/Any|>()
             }
 
-            public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val position: R|kotlin/String| = R|<local>/position|
+            public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val position: R|kotlin/String| = R|<local>/position|
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
         }
 
-        public final const [ResolvedTo(BODY_RESOLVE)] val prop: R|kotlin/String| = String(str)
+        public final const [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val prop: R|kotlin/String| = String(str)
             public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/String|
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] interface I : R|kotlin/Any| {
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface I : R|kotlin/Any| {
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] class MyClass : R|@R|util/Anno|(position = <strcat>(String(super type ref ), R|util/prop|))  kotlin/collections/List<@R|util/Anno|(position = <strcat>(String(nested super type ref ), R|util/prop|))  kotlin/collections/List<@R|util/Anno|(position = <strcat>(String(nested nested super type ref ), R|util/prop|))  util/I>>| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyClass] constructor(): R|util/MyClass| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class MyClass : R|@R|util/Anno|(position = <strcat>(String(super type ref ), R|util/prop|))  kotlin/collections/List<@R|util/Anno|(position = <strcat>(String(nested super type ref ), R|util/prop|))  kotlin/collections/List<@R|util/Anno|(position = <strcat>(String(nested nested super type ref ), R|util/prop|))  util/I>>| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyClass, ExpectForActualAttributeKey={}] constructor(): R|util/MyClass| {
                 super<R|kotlin/Any|>()
             }
 
         }
-

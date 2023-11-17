@@ -13,7 +13,7 @@ FILE: [ResolvedTo(IMPORTS)] getterScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-getterScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] val x: R|kotlin/String|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val x: R|kotlin/String|
             public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/String| {
                 ^ String()
             }

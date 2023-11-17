@@ -419,7 +419,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationArgumentsMixScript.kts
 
         }
 
-        @R|kotlin/Deprecated|[Types](boo#()) @R|Anno|[Types](LAZY_EXPRESSION, LAZY_EXPRESSION, LAZY_EXPRESSION, LAZY_EXPRESSION) public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun foo(): R|kotlin/Unit| { LAZY_BLOCK }
+        @R|kotlin/Deprecated|[Types](boo#()) @R|Anno|[Types](LAZY_EXPRESSION, LAZY_EXPRESSION, LAZY_EXPRESSION, LAZY_EXPRESSION) public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun foo(): R|kotlin/Unit| { LAZY_BLOCK }
 
 
 CONTRACTS:
@@ -472,7 +472,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationArgumentsMixScript.kts
 
         }
 
-        @R|kotlin/Deprecated|[Types](boo#()) @R|Anno|[Types](LAZY_EXPRESSION, LAZY_EXPRESSION, LAZY_EXPRESSION, LAZY_EXPRESSION) public final [ResolvedTo(CONTRACTS)] fun foo(): R|kotlin/Unit| {
+        @R|kotlin/Deprecated|[Types](boo#()) @R|Anno|[Types](LAZY_EXPRESSION, LAZY_EXPRESSION, LAZY_EXPRESSION, LAZY_EXPRESSION) public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun foo(): R|kotlin/Unit| {
         }
 
 
@@ -526,7 +526,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationArgumentsMixScript.kts
 
         }
 
-        @R|kotlin/Deprecated|[Types](boo#()) @R|Anno|[Types](LAZY_EXPRESSION, LAZY_EXPRESSION, LAZY_EXPRESSION, LAZY_EXPRESSION) public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun foo(): R|kotlin/Unit| {
+        @R|kotlin/Deprecated|[Types](boo#()) @R|Anno|[Types](LAZY_EXPRESSION, LAZY_EXPRESSION, LAZY_EXPRESSION, LAZY_EXPRESSION) public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo(): R|kotlin/Unit| {
         }
 
 
@@ -580,7 +580,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationArgumentsMixScript.kts
 
         }
 
-        @R|kotlin/Deprecated|[Types](message = <Unresolved name: boo>#()) @R|Anno|[Types](str = String(123), ann = R|/AnotherAnnotation.AnotherAnnotation|(), c = <getClass>(Q|AnotherAnnotation|), entry = Q|EnumClass|.R|/EnumClass.Second|) public final [ResolvedTo(ANNOTATION_ARGUMENTS)] fun foo(): R|kotlin/Unit| {
+        @R|kotlin/Deprecated|[Types](message = <Unresolved name: boo>#()) @R|Anno|[Types](str = String(123), ann = R|/AnotherAnnotation.AnotherAnnotation|(), c = <getClass>(Q|AnotherAnnotation|), entry = Q|EnumClass|.R|/EnumClass.Second|) public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun foo(): R|kotlin/Unit| {
         }
 
 
@@ -634,7 +634,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationArgumentsMixScript.kts
 
         }
 
-        @R|kotlin/Deprecated|[Types](message = <Unresolved name: boo>#()) @R|Anno|[Types](str = String(123), ann = R|/AnotherAnnotation.AnotherAnnotation|(), c = <getClass>(Q|AnotherAnnotation|), entry = Q|EnumClass|.R|/EnumClass.Second|) public final [ResolvedTo(BODY_RESOLVE)] fun foo(): R|kotlin/Unit| {
+        @R|kotlin/Deprecated|[Types](message = <Unresolved name: boo>#()) @R|Anno|[Types](str = String(123), ann = R|/AnotherAnnotation.AnotherAnnotation|(), c = <getClass>(Q|AnotherAnnotation|), entry = Q|EnumClass|.R|/EnumClass.Second|) public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo(): R|kotlin/Unit| {
         }
 
 
@@ -644,49 +644,49 @@ FILE: [ResolvedTo(BODY_RESOLVE)] annotationArgumentsMixScript.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-annotationArgumentsMixScript.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] annotation class AnotherAnnotation : R|kotlin/Annotation| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=AnotherAnnotation] constructor(): R|AnotherAnnotation| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] annotation class AnotherAnnotation : R|kotlin/Annotation| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=AnotherAnnotation, ExpectForActualAttributeKey={}] constructor(): R|AnotherAnnotation| {
                 super<R|kotlin/Any|>()
             }
 
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] enum class EnumClass : R|kotlin/Enum<EnumClass>| {
-            private [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=EnumClass] constructor(): R|EnumClass| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] enum class EnumClass : R|kotlin/Enum<EnumClass>| {
+            private [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=EnumClass, ExpectForActualAttributeKey={}] constructor(): R|EnumClass| {
                 super<R|kotlin/Enum<EnumClass>|>()
             }
 
-            public final static [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=EnumClass] enum entry First: R|EnumClass|
-            public final static [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=EnumClass] enum entry Second: R|EnumClass|
-            public final static [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=EnumClass] fun values(): R|kotlin/Array<EnumClass>| {
+            public final static [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=EnumClass, ExpectForActualAttributeKey={}] enum entry First: R|EnumClass|
+            public final static [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=EnumClass, ExpectForActualAttributeKey={}] enum entry Second: R|EnumClass|
+            public final static [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=EnumClass, ExpectForActualAttributeKey={}] fun values(): R|kotlin/Array<EnumClass>| {
             }
 
-            public final static [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=EnumClass] fun valueOf([ResolvedTo(BODY_RESOLVE)] value: R|kotlin/String|): R|EnumClass| {
+            public final static [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=EnumClass, ExpectForActualAttributeKey={}] fun valueOf([ResolvedTo(BODY_RESOLVE)] value: R|kotlin/String|): R|EnumClass| {
             }
 
-            public final static [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=EnumClass] val entries: R|kotlin/enums/EnumEntries<EnumClass>|
+            public final static [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=EnumClass, ExpectForActualAttributeKey={}] val entries: R|kotlin/enums/EnumEntries<EnumClass>|
                 public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/enums/EnumEntries<EnumClass>|
 
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] annotation class Anno : R|kotlin/Annotation| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/Anno.str] str: R|kotlin/String|, [ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/Anno.ann] ann: R|AnotherAnnotation|, [ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/Anno.c] c: R|kotlin/reflect/KClass<*>|, [ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/Anno.entry] entry: R|EnumClass|): R|Anno| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] annotation class Anno : R|kotlin/Annotation| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/Anno.str] str: R|kotlin/String|, [ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/Anno.ann] ann: R|AnotherAnnotation|, [ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/Anno.c] c: R|kotlin/reflect/KClass<*>|, [ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/Anno.entry] entry: R|EnumClass|): R|Anno| {
                 super<R|kotlin/Any|>()
             }
 
-            public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val str: R|kotlin/String| = R|<local>/str|
+            public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val str: R|kotlin/String| = R|<local>/str|
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
-            public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val ann: R|AnotherAnnotation| = R|<local>/ann|
+            public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val ann: R|AnotherAnnotation| = R|<local>/ann|
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] get(): R|AnotherAnnotation|
 
-            public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val c: R|kotlin/reflect/KClass<*>| = R|<local>/c|
+            public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val c: R|kotlin/reflect/KClass<*>| = R|<local>/c|
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] get(): R|kotlin/reflect/KClass<*>|
 
-            public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val entry: R|EnumClass| = R|<local>/entry|
+            public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val entry: R|EnumClass| = R|<local>/entry|
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] get(): R|EnumClass|
 
         }
 
-        @R|kotlin/Deprecated|[Types](message = <Unresolved name: boo>#()) @R|Anno|[Types](str = String(123), ann = R|/AnotherAnnotation.AnotherAnnotation|(), c = <getClass>(Q|AnotherAnnotation|), entry = Q|EnumClass|.R|/EnumClass.Second|) public final [ResolvedTo(BODY_RESOLVE)] fun foo(): R|kotlin/Unit| {
+        @R|kotlin/Deprecated|[Types](message = <Unresolved name: boo>#()) @R|Anno|[Types](str = String(123), ann = R|/AnotherAnnotation.AnotherAnnotation|(), c = <getClass>(Q|AnotherAnnotation|), entry = Q|EnumClass|.R|/EnumClass.Second|) public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo(): R|kotlin/Unit| {
         }

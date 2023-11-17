@@ -91,7 +91,7 @@ FILE: [ResolvedTo(IMPORTS)] getterWithDelegation.kt
 
 EXPECT_ACTUAL_MATCHING:
 FILE: [ResolvedTo(IMPORTS)] getterWithDelegation.kt
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] val one: R|kotlin/Int|by LAZY_EXPRESSION
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] val one: R|kotlin/Int|by LAZY_EXPRESSION
         @R|kotlin/Deprecated|[Types](String(reason)) public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] get(): R|kotlin/Int| { LAZY_BLOCK }
     public? final? [ResolvedTo(RAW_FIR)] class Prp : R|kotlin/Any| {
         public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Prp] constructor(): R|Prp| {
@@ -104,7 +104,7 @@ FILE: [ResolvedTo(IMPORTS)] getterWithDelegation.kt
 
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] getterWithDelegation.kt
-    public final [ResolvedTo(CONTRACTS)] val one: R|kotlin/Int|by LAZY_EXPRESSION
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] val one: R|kotlin/Int|by LAZY_EXPRESSION
         @R|kotlin/Deprecated|[Types](String(reason)) public [ResolvedTo(CONTRACTS)] get(): R|kotlin/Int| { LAZY_BLOCK }
     public? final? [ResolvedTo(RAW_FIR)] class Prp : R|kotlin/Any| {
         public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Prp] constructor(): R|Prp| {
@@ -117,7 +117,7 @@ FILE: [ResolvedTo(IMPORTS)] getterWithDelegation.kt
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] getterWithDelegation.kt
-    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val one: R|kotlin/Int|by LAZY_EXPRESSION
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val one: R|kotlin/Int|by LAZY_EXPRESSION
         @R|kotlin/Deprecated|[Types](String(reason)) public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/Int| { LAZY_BLOCK }
     public? final? [ResolvedTo(RAW_FIR)] class Prp : R|kotlin/Any| {
         public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Prp] constructor(): R|Prp| {
@@ -130,7 +130,7 @@ FILE: [ResolvedTo(IMPORTS)] getterWithDelegation.kt
 
 ANNOTATION_ARGUMENTS:
 FILE: [ResolvedTo(IMPORTS)] getterWithDelegation.kt
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] val one: R|kotlin/Int|by LAZY_EXPRESSION
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] val one: R|kotlin/Int|by LAZY_EXPRESSION
         @R|kotlin/Deprecated|[Types](message = String(reason)) public [ResolvedTo(ANNOTATION_ARGUMENTS)] get(): R|kotlin/Int| { LAZY_BLOCK }
     public? final? [ResolvedTo(RAW_FIR)] class Prp : R|kotlin/Any| {
         public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Prp] constructor(): R|Prp| {
@@ -143,16 +143,16 @@ FILE: [ResolvedTo(IMPORTS)] getterWithDelegation.kt
 
 BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] getterWithDelegation.kt
-    public final [ResolvedTo(BODY_RESOLVE)] val one: R|kotlin/Int|by R|/Prp.Prp|()
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val one: R|kotlin/Int|by R|/Prp.Prp|()
         @R|kotlin/Deprecated|[Types](message = String(reason)) public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/Int| {
             ^ D|/one|.R|/Prp.getValue<Inapplicable(INAPPLICABLE_ARGUMENTS_MAPPING_ERROR): /Prp.getValue>#|(Null(null), ::R|/one|)
         }
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Prp : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class Prp : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Prp] constructor(): R|Prp| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun getValue(): R|kotlin/Int| {
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun getValue(): R|kotlin/Int| {
             ^getValue Int(1)
         }
 
@@ -160,16 +160,16 @@ FILE: [ResolvedTo(IMPORTS)] getterWithDelegation.kt
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] getterWithDelegation.kt
-    public final [ResolvedTo(BODY_RESOLVE)] val one: R|kotlin/Int|by R|/Prp.Prp|()
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val one: R|kotlin/Int|by R|/Prp.Prp|()
         @R|kotlin/Deprecated|[Types](message = String(reason)) public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/Int| {
             ^ D|/one|.R|/Prp.getValue<Inapplicable(INAPPLICABLE_ARGUMENTS_MAPPING_ERROR): /Prp.getValue>#|(Null(null), ::R|/one|)
         }
-    public final [ResolvedTo(BODY_RESOLVE)] class Prp : R|kotlin/Any| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Prp] constructor(): R|Prp| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class Prp : R|kotlin/Any| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Prp, ExpectForActualAttributeKey={}] constructor(): R|Prp| {
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun getValue(): R|kotlin/Int| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun getValue(): R|kotlin/Int| {
             ^getValue Int(1)
         }
 

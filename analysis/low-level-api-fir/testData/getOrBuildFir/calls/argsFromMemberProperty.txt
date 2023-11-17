@@ -11,12 +11,12 @@ FILE: [ResolvedTo(IMPORTS)] argsFromMemberProperty.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-argsFromMemberProperty.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class A : R|kotlin/Any| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class A : R|kotlin/Any| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=A] constructor(): R|A| {
                 LAZY_super<R|kotlin/Any|>
             }
 
-            public final [ResolvedTo(BODY_RESOLVE)] val i: R|kotlin/Int|
+            public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val i: R|kotlin/Int|
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=A] get(): R|kotlin/Int| {
                     ^ R|<local>/args|.R|SubstitutionOverride<kotlin/Array.size: R|kotlin/Int|>|
                 }

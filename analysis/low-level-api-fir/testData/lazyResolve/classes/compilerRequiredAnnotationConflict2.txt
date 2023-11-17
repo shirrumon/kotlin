@@ -133,12 +133,12 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationConflict2.kt
 
 EXPECT_ACTUAL_MATCHING:
 FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationConflict2.kt
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Some : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] object Some : R|kotlin/Any| {
         private [ResolvedTo(RAW_FIR)] [ContainingClassKey=Some] constructor(): R|Some| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        @R|kotlin/annotation/Target|[Types](R|kotlin/annotation/AnnotationTarget.FIELD|) public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] annotation class Ann : R|kotlin/Annotation| {
+        @R|kotlin/annotation/Target|[Types](R|kotlin/annotation/AnnotationTarget.FIELD|) public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] annotation class Ann : R|kotlin/Annotation| {
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Ann] constructor(): R|Some.Ann| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -152,12 +152,12 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationConflict2.kt
 
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationConflict2.kt
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Some : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] object Some : R|kotlin/Any| {
         private [ResolvedTo(STATUS)] [ContainingClassKey=Some] constructor(): R|Some| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        @R|kotlin/annotation/Target|[Types](R|kotlin/annotation/AnnotationTarget.FIELD|) public final [ResolvedTo(CONTRACTS)] annotation class Ann : R|kotlin/Annotation| {
+        @R|kotlin/annotation/Target|[Types](R|kotlin/annotation/AnnotationTarget.FIELD|) public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] annotation class Ann : R|kotlin/Annotation| {
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Ann] constructor(): R|Some.Ann| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -171,12 +171,12 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationConflict2.kt
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationConflict2.kt
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Some : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] object Some : R|kotlin/Any| {
         private [ResolvedTo(STATUS)] [ContainingClassKey=Some] constructor(): R|Some| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        @R|kotlin/annotation/Target|[Types](R|kotlin/annotation/AnnotationTarget.FIELD|) public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] annotation class Ann : R|kotlin/Annotation| {
+        @R|kotlin/annotation/Target|[Types](R|kotlin/annotation/AnnotationTarget.FIELD|) public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] annotation class Ann : R|kotlin/Annotation| {
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Ann] constructor(): R|Some.Ann| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -190,7 +190,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationConflict2.kt
 
 ANNOTATION_ARGUMENTS:
 FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationConflict2.kt
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Some : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] object Some : R|kotlin/Any| {
         private [ResolvedTo(STATUS)] [ContainingClassKey=Some] constructor(): R|Some| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -199,21 +199,21 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationConflict2.kt
             Annotation symbol resolved differently on compiler annotation and symbols stages:
               - compiler annotations: FirEnumEntrySymbol kotlin/annotation/AnnotationTarget.FIELD
               - compiler arguments stage: FirPropertySymbol /Some.FIELD
-        >#) public final [ResolvedTo(ANNOTATION_ARGUMENTS)] annotation class Ann : R|kotlin/Annotation| {
+        >#) public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] annotation class Ann : R|kotlin/Annotation| {
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Ann] constructor(): R|Some.Ann| {
                 LAZY_super<R|kotlin/Any|>
             }
 
         }
 
-        public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val FIELD: R|kotlin/String| = String()
+        public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val FIELD: R|kotlin/String| = String()
             public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=Some] get(): R|kotlin/String|
 
     }
 
 BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationConflict2.kt
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Some : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] object Some : R|kotlin/Any| {
         private [ResolvedTo(STATUS)] [ContainingClassKey=Some] constructor(): R|Some| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -222,22 +222,22 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationConflict2.kt
             Annotation symbol resolved differently on compiler annotation and symbols stages:
               - compiler annotations: FirEnumEntrySymbol kotlin/annotation/AnnotationTarget.FIELD
               - compiler arguments stage: FirPropertySymbol /Some.FIELD
-        >#) public final [ResolvedTo(BODY_RESOLVE)] annotation class Ann : R|kotlin/Annotation| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Ann] constructor(): R|Some.Ann| {
+        >#) public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] annotation class Ann : R|kotlin/Annotation| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Ann, ExpectForActualAttributeKey={}] constructor(): R|Some.Ann| {
                 super<R|kotlin/Any|>()
             }
 
         }
 
-        public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val FIELD: R|kotlin/String| = String()
+        public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val FIELD: R|kotlin/String| = String()
             public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=Some] get(): R|kotlin/String|
 
     }
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] compilerRequiredAnnotationConflict2.kt
-    public final [ResolvedTo(BODY_RESOLVE)] object Some : R|kotlin/Any| {
-        private [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Some] constructor(): R|Some| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] object Some : R|kotlin/Any| {
+        private [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Some, ExpectForActualAttributeKey={}] constructor(): R|Some| {
             super<R|kotlin/Any|>()
         }
 
@@ -245,14 +245,14 @@ FILE: [ResolvedTo(BODY_RESOLVE)] compilerRequiredAnnotationConflict2.kt
             Annotation symbol resolved differently on compiler annotation and symbols stages:
               - compiler annotations: FirEnumEntrySymbol kotlin/annotation/AnnotationTarget.FIELD
               - compiler arguments stage: FirPropertySymbol /Some.FIELD
-        >#) public final [ResolvedTo(BODY_RESOLVE)] annotation class Ann : R|kotlin/Annotation| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Ann] constructor(): R|Some.Ann| {
+        >#) public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] annotation class Ann : R|kotlin/Annotation| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Ann, ExpectForActualAttributeKey={}] constructor(): R|Some.Ann| {
                 super<R|kotlin/Any|>()
             }
 
         }
 
-        public final const [ResolvedTo(BODY_RESOLVE)] val FIELD: R|kotlin/String| = String()
+        public final const [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val FIELD: R|kotlin/String| = String()
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Some] get(): R|kotlin/String|
 
     }

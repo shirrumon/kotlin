@@ -35,30 +35,30 @@ FILE: [ResolvedTo(IMPORTS)] unresolvedAnnotationOnPropertyType.kt
 
 EXPECT_ACTUAL_MATCHING:
 FILE: [ResolvedTo(IMPORTS)] unresolvedAnnotationOnPropertyType.kt
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] val prop: @<ERROR TYPE REF: Symbol not found for Anno>[Unresolved](Foo#) <ERROR TYPE REF: Symbol not found for Foo>
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] val prop: @<ERROR TYPE REF: Symbol not found for Anno>[Unresolved](Foo#) <ERROR TYPE REF: Symbol not found for Foo>
         public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] get(): @<ERROR TYPE REF: Symbol not found for Anno>[Unresolved](Foo#) <ERROR TYPE REF: Symbol not found for Foo>
 
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] unresolvedAnnotationOnPropertyType.kt
-    public final [ResolvedTo(CONTRACTS)] val prop: @<ERROR TYPE REF: Symbol not found for Anno>[Unresolved](Foo#) <ERROR TYPE REF: Symbol not found for Foo>
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] val prop: @<ERROR TYPE REF: Symbol not found for Anno>[Unresolved](Foo#) <ERROR TYPE REF: Symbol not found for Foo>
         public [ResolvedTo(CONTRACTS)] get(): @<ERROR TYPE REF: Symbol not found for Anno>[Unresolved](Foo#) <ERROR TYPE REF: Symbol not found for Foo>
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] unresolvedAnnotationOnPropertyType.kt
-    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val prop: @<ERROR TYPE REF: Symbol not found for Anno>[Unresolved](Foo#) <ERROR TYPE REF: Symbol not found for Foo>
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val prop: @<ERROR TYPE REF: Symbol not found for Anno>[Unresolved](Foo#) <ERROR TYPE REF: Symbol not found for Foo>
         public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): @<ERROR TYPE REF: Symbol not found for Anno>[Unresolved](Foo#) <ERROR TYPE REF: Symbol not found for Foo>
 
 ANNOTATION_ARGUMENTS:
 FILE: [ResolvedTo(IMPORTS)] unresolvedAnnotationOnPropertyType.kt
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] val prop: @<ERROR TYPE REF: Symbol not found for Anno>[Types]() <ERROR TYPE REF: Symbol not found for Foo>
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] val prop: @<ERROR TYPE REF: Symbol not found for Anno>[Types]() <ERROR TYPE REF: Symbol not found for Foo>
         public [ResolvedTo(ANNOTATION_ARGUMENTS)] get(): @<ERROR TYPE REF: Symbol not found for Anno>[Types]() <ERROR TYPE REF: Symbol not found for Foo>
 
 BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] unresolvedAnnotationOnPropertyType.kt
-    public final [ResolvedTo(BODY_RESOLVE)] val prop: @<ERROR TYPE REF: Symbol not found for Anno>[Types]() <ERROR TYPE REF: Symbol not found for Foo>
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val prop: @<ERROR TYPE REF: Symbol not found for Anno>[Types]() <ERROR TYPE REF: Symbol not found for Foo>
         public [ResolvedTo(BODY_RESOLVE)] get(): @<ERROR TYPE REF: Symbol not found for Anno>[Types]() <ERROR TYPE REF: Symbol not found for Foo>
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] unresolvedAnnotationOnPropertyType.kt
-    public final [ResolvedTo(BODY_RESOLVE)] val prop: @<ERROR TYPE REF: Symbol not found for Anno>[Types]() <ERROR TYPE REF: Symbol not found for Foo>
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val prop: @<ERROR TYPE REF: Symbol not found for Anno>[Types]() <ERROR TYPE REF: Symbol not found for Foo>
         public [ResolvedTo(BODY_RESOLVE)] get(): @<ERROR TYPE REF: Symbol not found for Anno>[Types]() <ERROR TYPE REF: Symbol not found for Foo>

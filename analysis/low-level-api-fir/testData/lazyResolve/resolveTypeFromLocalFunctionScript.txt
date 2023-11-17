@@ -203,7 +203,7 @@ FILE: [ResolvedTo(IMPORTS)] resolveTypeFromLocalFunctionScript.kts
 
         }
 
-        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun resolveMe(): R|kotlin/Unit| { LAZY_BLOCK }
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| { LAZY_BLOCK }
 
 
 CONTRACTS:
@@ -229,7 +229,7 @@ FILE: [ResolvedTo(IMPORTS)] resolveTypeFromLocalFunctionScript.kts
 
         }
 
-        public final [ResolvedTo(CONTRACTS)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             local final? [ResolvedTo(RAW_FIR)] class Local : R|kotlin/Any| {
                 public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Local] constructor(): R|<local>/Local| {
                     super<R|kotlin/Any|>()
@@ -266,7 +266,7 @@ FILE: [ResolvedTo(IMPORTS)] resolveTypeFromLocalFunctionScript.kts
 
         }
 
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             local final? [ResolvedTo(RAW_FIR)] class Local : R|kotlin/Any| {
                 public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Local] constructor(): R|<local>/Local| {
                     super<R|kotlin/Any|>()
@@ -303,7 +303,7 @@ FILE: [ResolvedTo(IMPORTS)] resolveTypeFromLocalFunctionScript.kts
 
         }
 
-        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             local final? [ResolvedTo(RAW_FIR)] class Local : R|kotlin/Any| {
                 public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Local] constructor(): R|<local>/Local| {
                     super<R|kotlin/Any|>()
@@ -340,7 +340,7 @@ FILE: [ResolvedTo(IMPORTS)] resolveTypeFromLocalFunctionScript.kts
 
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             local final [ResolvedTo(BODY_RESOLVE)] class Local : R|kotlin/Any| {
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Local] constructor(): R|<local>/Local| {
                     super<R|kotlin/Any|>()
@@ -360,24 +360,24 @@ FILE: [ResolvedTo(BODY_RESOLVE)] resolveTypeFromLocalFunctionScript.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-resolveTypeFromLocalFunctionScript.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] class UnusedClass : R|kotlin/Any| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=UnusedClass] constructor(): R|one/two/UnusedClass| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class UnusedClass : R|kotlin/Any| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=UnusedClass, ExpectForActualAttributeKey={}] constructor(): R|one/two/UnusedClass| {
                 super<R|kotlin/Any|>()
             }
 
         }
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] interface UsedInterface : R|kotlin/Any| {
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface UsedInterface : R|kotlin/Any| {
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] class UsedClass : R|one/two/UsedInterface| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=UsedClass] constructor(): R|one/two/UsedClass| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class UsedClass : R|one/two/UsedInterface| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=UsedClass, ExpectForActualAttributeKey={}] constructor(): R|one/two/UsedClass| {
                 super<R|kotlin/Any|>()
             }
 
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             local final [ResolvedTo(BODY_RESOLVE)] class Local : R|kotlin/Any| {
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Local] constructor(): R|<local>/Local| {
                     super<R|kotlin/Any|>()

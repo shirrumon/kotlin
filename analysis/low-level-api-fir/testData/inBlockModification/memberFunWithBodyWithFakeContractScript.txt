@@ -1,5 +1,5 @@
 BEFORE MODIFICATION:
-public final [ResolvedTo(BODY_RESOLVE)] fun x(): R|kotlin/Unit|
+public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun x(): R|kotlin/Unit|
     [Contract description] <
         <Unresolved name: contract>#(<L> = [ResolvedTo(BODY_RESOLVE)] contract@fun <anonymous>(): <ERROR TYPE REF: Unresolved name: req> <inline=Unknown>  {
             ^ <Unresolved name: req>#
@@ -18,4 +18,4 @@ public final [ResolvedTo(BODY_RESOLVE)] fun x(): R|kotlin/Unit|
 }
 
 AFTER MODIFICATION:
-public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun x(): R|kotlin/Unit| { LAZY_BLOCK }
+public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun x(): R|kotlin/Unit| { LAZY_BLOCK }

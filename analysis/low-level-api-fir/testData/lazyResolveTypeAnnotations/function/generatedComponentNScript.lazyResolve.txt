@@ -255,15 +255,15 @@ FILE: [ResolvedTo(IMPORTS)] generatedComponentNScript.kts
         public? final? const [ResolvedTo(RAW_FIR)] val constant: <implicit> = LAZY_EXPRESSION
             public? [ResolvedTo(RAW_FIR)] get(): <implicit>
 
-        public final data [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class MyClass : R|kotlin/Any| {
-            public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=MyClass] constructor([ResolvedTo(EXPECT_ACTUAL_MATCHING)] [CorrespondingProperty=properties/MyClass.property] property: R|@R|properties/Anno|(<strcat>(String(parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested nested parameter type: ), constant#))  kotlin/Int>>|): R|properties/MyClass| {
+        public final data [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class MyClass : R|kotlin/Any| {
+            public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=MyClass, ExpectForActualAttributeKey={}] constructor([ResolvedTo(EXPECT_ACTUAL_MATCHING)] [CorrespondingProperty=properties/MyClass.property] property: R|@R|properties/Anno|(<strcat>(String(parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested nested parameter type: ), constant#))  kotlin/Int>>|): R|properties/MyClass| {
                 LAZY_super<R|kotlin/Any|>
             }
 
-            public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ComponentFunctionSymbolKey=properties/MyClass.component1, IsFromPrimaryConstructor=true] val property: R|@R|properties/Anno|(<strcat>(String(parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested nested parameter type: ), constant#))  kotlin/Int>>| = R|<local>/property|
+            public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ComponentFunctionSymbolKey=properties/MyClass.component1, ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val property: R|@R|properties/Anno|(<strcat>(String(parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested nested parameter type: ), constant#))  kotlin/Int>>| = R|<local>/property|
                 public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=MyClass] get(): R|@R|properties/Anno|(<strcat>(String(parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested nested parameter type: ), constant#))  kotlin/Int>>|
 
-            public final operator [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun component1(): R|@R|properties/Anno|(<strcat>(String(parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested nested parameter type: ), constant#))  kotlin/Int>>|
+            public final operator [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun component1(): R|@R|properties/Anno|(<strcat>(String(parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested nested parameter type: ), constant#))  kotlin/Int>>|
 
             public final [ResolvedTo(STATUS)] fun copy([ResolvedTo(STATUS)] property: R|@R|properties/Anno|(<strcat>(String(parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested nested parameter type: ), constant#))  kotlin/Int>>| = this@R|properties/MyClass|.R|properties/MyClass.property|): R|properties/MyClass|
 
@@ -289,15 +289,15 @@ FILE: [ResolvedTo(IMPORTS)] generatedComponentNScript.kts
         public? final? const [ResolvedTo(RAW_FIR)] val constant: <implicit> = LAZY_EXPRESSION
             public? [ResolvedTo(RAW_FIR)] get(): <implicit>
 
-        public final data [ResolvedTo(CONTRACTS)] class MyClass : R|kotlin/Any| {
-            public [ResolvedTo(CONTRACTS)] [ContainingClassKey=MyClass] constructor([ResolvedTo(CONTRACTS)] [CorrespondingProperty=properties/MyClass.property] property: R|@R|properties/Anno|(<strcat>(String(parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested nested parameter type: ), constant#))  kotlin/Int>>|): R|properties/MyClass| {
+        public final data [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] class MyClass : R|kotlin/Any| {
+            public [ResolvedTo(CONTRACTS)] [ContainingClassKey=MyClass, ExpectForActualAttributeKey={}] constructor([ResolvedTo(CONTRACTS)] [CorrespondingProperty=properties/MyClass.property] property: R|@R|properties/Anno|(<strcat>(String(parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested nested parameter type: ), constant#))  kotlin/Int>>|): R|properties/MyClass| {
                 LAZY_super<R|kotlin/Any|>
             }
 
-            public final [ResolvedTo(CONTRACTS)] [ComponentFunctionSymbolKey=properties/MyClass.component1, IsFromPrimaryConstructor=true] val property: R|@R|properties/Anno|(<strcat>(String(parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested nested parameter type: ), constant#))  kotlin/Int>>| = R|<local>/property|
+            public final [ResolvedTo(CONTRACTS)] [ComponentFunctionSymbolKey=properties/MyClass.component1, ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val property: R|@R|properties/Anno|(<strcat>(String(parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested nested parameter type: ), constant#))  kotlin/Int>>| = R|<local>/property|
                 public [ResolvedTo(CONTRACTS)] [ContainingClassKey=MyClass] get(): R|@R|properties/Anno|(<strcat>(String(parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested nested parameter type: ), constant#))  kotlin/Int>>|
 
-            public final operator [ResolvedTo(CONTRACTS)] fun component1(): R|@R|properties/Anno|(<strcat>(String(parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested nested parameter type: ), constant#))  kotlin/Int>>|
+            public final operator [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun component1(): R|@R|properties/Anno|(<strcat>(String(parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested nested parameter type: ), constant#))  kotlin/Int>>|
 
             public final [ResolvedTo(STATUS)] fun copy([ResolvedTo(STATUS)] property: R|@R|properties/Anno|(<strcat>(String(parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested nested parameter type: ), constant#))  kotlin/Int>>| = this@R|properties/MyClass|.R|properties/MyClass.property|): R|properties/MyClass|
 
@@ -323,15 +323,15 @@ FILE: [ResolvedTo(IMPORTS)] generatedComponentNScript.kts
         public? final? const [ResolvedTo(RAW_FIR)] val constant: <implicit> = LAZY_EXPRESSION
             public? [ResolvedTo(RAW_FIR)] get(): <implicit>
 
-        public final data [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] class MyClass : R|kotlin/Any| {
-            public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=MyClass] constructor([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [CorrespondingProperty=properties/MyClass.property] property: R|@R|properties/Anno|(<strcat>(String(parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested nested parameter type: ), constant#))  kotlin/Int>>|): R|properties/MyClass| {
+        public final data [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class MyClass : R|kotlin/Any| {
+            public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=MyClass, ExpectForActualAttributeKey={}] constructor([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [CorrespondingProperty=properties/MyClass.property] property: R|@R|properties/Anno|(<strcat>(String(parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested nested parameter type: ), constant#))  kotlin/Int>>|): R|properties/MyClass| {
                 LAZY_super<R|kotlin/Any|>
             }
 
-            public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ComponentFunctionSymbolKey=properties/MyClass.component1, IsFromPrimaryConstructor=true] val property: R|@R|properties/Anno|(<strcat>(String(parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested nested parameter type: ), constant#))  kotlin/Int>>| = R|<local>/property|
+            public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ComponentFunctionSymbolKey=properties/MyClass.component1, ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val property: R|@R|properties/Anno|(<strcat>(String(parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested nested parameter type: ), constant#))  kotlin/Int>>| = R|<local>/property|
                 public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=MyClass] get(): R|@R|properties/Anno|(<strcat>(String(parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested nested parameter type: ), constant#))  kotlin/Int>>|
 
-            public final operator [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun component1(): R|@R|properties/Anno|(<strcat>(String(parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested nested parameter type: ), constant#))  kotlin/Int>>|
+            public final operator [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun component1(): R|@R|properties/Anno|(<strcat>(String(parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested nested parameter type: ), constant#))  kotlin/Int>>|
 
             public final [ResolvedTo(STATUS)] fun copy([ResolvedTo(STATUS)] property: R|@R|properties/Anno|(<strcat>(String(parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested parameter type: ), constant#))  kotlin/collections/List<@R|properties/Anno|(<strcat>(String(nested nested parameter type: ), constant#))  kotlin/Int>>| = this@R|properties/MyClass|.R|properties/MyClass.property|): R|properties/MyClass|
 
@@ -354,18 +354,18 @@ FILE: [ResolvedTo(IMPORTS)] generatedComponentNScript.kts
 
         }
 
-        public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val constant: R|kotlin/Int| = Int(0)
+        public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val constant: R|kotlin/Int| = Int(0)
             public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/Int|
 
-        public final data [ResolvedTo(ANNOTATION_ARGUMENTS)] class MyClass : R|kotlin/Any| {
-            public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=MyClass] constructor([ResolvedTo(ANNOTATION_ARGUMENTS)] [CorrespondingProperty=properties/MyClass.property] property: R|@R|properties/Anno|(position = <strcat>(String(parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested nested parameter type: ), R|properties/constant|))  kotlin/Int>>|): R|properties/MyClass| {
+        public final data [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] class MyClass : R|kotlin/Any| {
+            public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=MyClass, ExpectForActualAttributeKey={}] constructor([ResolvedTo(ANNOTATION_ARGUMENTS)] [CorrespondingProperty=properties/MyClass.property] property: R|@R|properties/Anno|(position = <strcat>(String(parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested nested parameter type: ), R|properties/constant|))  kotlin/Int>>|): R|properties/MyClass| {
                 LAZY_super<R|kotlin/Any|>
             }
 
-            public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ComponentFunctionSymbolKey=properties/MyClass.component1, IsFromPrimaryConstructor=true] val property: R|@R|properties/Anno|(position = <strcat>(String(parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested nested parameter type: ), R|properties/constant|))  kotlin/Int>>| = R|<local>/property|
+            public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ComponentFunctionSymbolKey=properties/MyClass.component1, ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val property: R|@R|properties/Anno|(position = <strcat>(String(parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested nested parameter type: ), R|properties/constant|))  kotlin/Int>>| = R|<local>/property|
                 public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=MyClass] get(): R|@R|properties/Anno|(position = <strcat>(String(parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested nested parameter type: ), R|properties/constant|))  kotlin/Int>>|
 
-            public final operator [ResolvedTo(ANNOTATION_ARGUMENTS)] fun component1(): R|@R|properties/Anno|(position = <strcat>(String(parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested nested parameter type: ), R|properties/constant|))  kotlin/Int>>|
+            public final operator [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun component1(): R|@R|properties/Anno|(position = <strcat>(String(parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested nested parameter type: ), R|properties/constant|))  kotlin/Int>>|
 
             public final [ResolvedTo(STATUS)] fun copy([ResolvedTo(STATUS)] property: R|@R|properties/Anno|(position = <strcat>(String(parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested nested parameter type: ), R|properties/constant|))  kotlin/Int>>| = this@R|properties/MyClass|.R|properties/MyClass.property|): R|properties/MyClass|
 
@@ -388,18 +388,18 @@ FILE: [ResolvedTo(IMPORTS)] generatedComponentNScript.kts
 
         }
 
-        public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val constant: R|kotlin/Int| = Int(0)
+        public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val constant: R|kotlin/Int| = Int(0)
             public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/Int|
 
-        public final data [ResolvedTo(ANNOTATION_ARGUMENTS)] class MyClass : R|kotlin/Any| {
-            public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=MyClass] constructor([ResolvedTo(ANNOTATION_ARGUMENTS)] [CorrespondingProperty=properties/MyClass.property] property: R|@R|properties/Anno|(position = <strcat>(String(parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested nested parameter type: ), R|properties/constant|))  kotlin/Int>>|): R|properties/MyClass| {
+        public final data [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] class MyClass : R|kotlin/Any| {
+            public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=MyClass, ExpectForActualAttributeKey={}] constructor([ResolvedTo(ANNOTATION_ARGUMENTS)] [CorrespondingProperty=properties/MyClass.property] property: R|@R|properties/Anno|(position = <strcat>(String(parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested nested parameter type: ), R|properties/constant|))  kotlin/Int>>|): R|properties/MyClass| {
                 LAZY_super<R|kotlin/Any|>
             }
 
-            public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ComponentFunctionSymbolKey=properties/MyClass.component1, IsFromPrimaryConstructor=true] val property: R|@R|properties/Anno|(position = <strcat>(String(parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested nested parameter type: ), R|properties/constant|))  kotlin/Int>>| = R|<local>/property|
+            public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ComponentFunctionSymbolKey=properties/MyClass.component1, ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val property: R|@R|properties/Anno|(position = <strcat>(String(parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested nested parameter type: ), R|properties/constant|))  kotlin/Int>>| = R|<local>/property|
                 public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=MyClass] get(): R|@R|properties/Anno|(position = <strcat>(String(parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested nested parameter type: ), R|properties/constant|))  kotlin/Int>>|
 
-            public final operator [ResolvedTo(BODY_RESOLVE)] fun component1(): R|@R|properties/Anno|(position = <strcat>(String(parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested nested parameter type: ), R|properties/constant|))  kotlin/Int>>|
+            public final operator [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun component1(): R|@R|properties/Anno|(position = <strcat>(String(parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested nested parameter type: ), R|properties/constant|))  kotlin/Int>>|
 
             public final [ResolvedTo(STATUS)] fun copy([ResolvedTo(STATUS)] property: R|@R|properties/Anno|(position = <strcat>(String(parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested nested parameter type: ), R|properties/constant|))  kotlin/Int>>| = this@R|properties/MyClass|.R|properties/MyClass.property|): R|properties/MyClass|
 
@@ -412,30 +412,29 @@ FILE: [ResolvedTo(BODY_RESOLVE)] generatedComponentNScript.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-generatedComponentNScript.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        @R|kotlin/annotation/Target|[Types](allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|)) public final [ResolvedTo(BODY_RESOLVE)] annotation class Anno : R|kotlin/Annotation| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=properties/Anno.position] position: R|kotlin/String|): R|properties/Anno| {
+        @R|kotlin/annotation/Target|[Types](allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|)) public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] annotation class Anno : R|kotlin/Annotation| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=properties/Anno.position] position: R|kotlin/String|): R|properties/Anno| {
                 super<R|kotlin/Any|>()
             }
 
-            public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val position: R|kotlin/String| = R|<local>/position|
+            public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val position: R|kotlin/String| = R|<local>/position|
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
         }
 
-        public final const [ResolvedTo(BODY_RESOLVE)] val constant: R|kotlin/Int| = Int(0)
+        public final const [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val constant: R|kotlin/Int| = Int(0)
             public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/Int|
 
-        public final data [ResolvedTo(BODY_RESOLVE)] class MyClass : R|kotlin/Any| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyClass] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=properties/MyClass.property] property: R|@R|properties/Anno|(position = <strcat>(String(parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested nested parameter type: ), R|properties/constant|))  kotlin/Int>>|): R|properties/MyClass| {
+        public final data [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class MyClass : R|kotlin/Any| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyClass, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=properties/MyClass.property] property: R|@R|properties/Anno|(position = <strcat>(String(parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested nested parameter type: ), R|properties/constant|))  kotlin/Int>>|): R|properties/MyClass| {
                 super<R|kotlin/Any|>()
             }
 
-            public final [ResolvedTo(BODY_RESOLVE)] [ComponentFunctionSymbolKey=properties/MyClass.component1, IsFromPrimaryConstructor=true] val property: R|@R|properties/Anno|(position = <strcat>(String(parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested nested parameter type: ), R|properties/constant|))  kotlin/Int>>| = R|<local>/property|
+            public final [ResolvedTo(BODY_RESOLVE)] [ComponentFunctionSymbolKey=properties/MyClass.component1, ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val property: R|@R|properties/Anno|(position = <strcat>(String(parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested nested parameter type: ), R|properties/constant|))  kotlin/Int>>| = R|<local>/property|
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyClass] get(): R|@R|properties/Anno|(position = <strcat>(String(parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested nested parameter type: ), R|properties/constant|))  kotlin/Int>>|
 
-            public final operator [ResolvedTo(BODY_RESOLVE)] fun component1(): R|@R|properties/Anno|(position = <strcat>(String(parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested nested parameter type: ), R|properties/constant|))  kotlin/Int>>|
+            public final operator [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun component1(): R|@R|properties/Anno|(position = <strcat>(String(parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested nested parameter type: ), R|properties/constant|))  kotlin/Int>>|
 
-            public final [ResolvedTo(BODY_RESOLVE)] fun copy([ResolvedTo(BODY_RESOLVE)] property: R|@R|properties/Anno|(position = <strcat>(String(parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested nested parameter type: ), R|properties/constant|))  kotlin/Int>>| = this@R|properties/MyClass|.R|properties/MyClass.property|): R|properties/MyClass|
+            public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun copy([ResolvedTo(BODY_RESOLVE)] property: R|@R|properties/Anno|(position = <strcat>(String(parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested nested parameter type: ), R|properties/constant|))  kotlin/Int>>| = this@R|properties/MyClass|.R|properties/MyClass.property|): R|properties/MyClass|
 
         }
-

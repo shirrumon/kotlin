@@ -7,8 +7,8 @@ FIR element rendered:
 
 FIR FILE:
 FILE: [ResolvedTo(IMPORTS)] jvmFieldAnnotationOnConstructorProperty.kt
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] class MyClass : R|A| {
-        public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=MyClass] constructor([ResolvedTo(ANNOTATION_ARGUMENTS)] [CorrespondingProperty=/MyClass.addCommaWarning] @<ERROR TYPE REF: Symbol not found for JvmField>[Types]() addCommaWarning: R|kotlin/Boolean| = LAZY_EXPRESSION): R|MyClass| {
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] class MyClass : R|A| {
+        public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=MyClass, ExpectForActualAttributeKey={}] constructor([ResolvedTo(ANNOTATION_ARGUMENTS)] [CorrespondingProperty=/MyClass.addCommaWarning] @<ERROR TYPE REF: Symbol not found for JvmField>[Types]() addCommaWarning: R|kotlin/Boolean| = LAZY_EXPRESSION): R|MyClass| {
             LAZY_super<R|A|>
         }
 

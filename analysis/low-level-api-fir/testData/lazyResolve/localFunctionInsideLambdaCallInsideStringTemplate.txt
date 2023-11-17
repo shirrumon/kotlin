@@ -6,8 +6,8 @@ FILE: [ResolvedTo(IMPORTS)] localFunctionInsideLambdaCallInsideStringTemplate.kt
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
             super<R|one/ClassWithParameter|>(<strcat>([ResolvedTo(RAW_FIR)] fun <anonymous>(): R|kotlin/String| <inline=Unknown>  {
                 local final [ResolvedTo(RAW_FIR)] fun str(): R|kotlin/String| {
                     ^str Int(42)
@@ -28,8 +28,8 @@ FILE: [ResolvedTo(IMPORTS)] localFunctionInsideLambdaCallInsideStringTemplate.kt
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
             super<R|one/ClassWithParameter|>(<strcat>([ResolvedTo(RAW_FIR)] fun <anonymous>(): R|kotlin/String| <inline=Unknown>  {
                 local final [ResolvedTo(RAW_FIR)] fun str(): R|kotlin/String| {
                     ^str Int(42)
@@ -50,8 +50,8 @@ FILE: [ResolvedTo(IMPORTS)] localFunctionInsideLambdaCallInsideStringTemplate.kt
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
             super<R|one/ClassWithParameter|>(<strcat>([ResolvedTo(RAW_FIR)] fun <anonymous>(): R|kotlin/String| <inline=Unknown>  {
                 local final [ResolvedTo(RAW_FIR)] fun str(): R|kotlin/String| {
                     ^str Int(42)
@@ -72,8 +72,8 @@ FILE: [ResolvedTo(IMPORTS)] localFunctionInsideLambdaCallInsideStringTemplate.kt
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
             super<R|one/ClassWithParameter|>(<strcat>([ResolvedTo(RAW_FIR)] fun <anonymous>(): R|kotlin/String| <inline=Unknown>  {
                 local final [ResolvedTo(RAW_FIR)] fun str(): R|kotlin/String| {
                     ^str Int(42)
@@ -94,8 +94,8 @@ FILE: [ResolvedTo(IMPORTS)] localFunctionInsideLambdaCallInsideStringTemplate.kt
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
             super<R|one/ClassWithParameter|>(<strcat>([ResolvedTo(RAW_FIR)] fun <anonymous>(): R|kotlin/String| <inline=Unknown>  {
                 local final [ResolvedTo(RAW_FIR)] fun str(): R|kotlin/String| {
                     ^str Int(42)
@@ -116,8 +116,8 @@ FILE: [ResolvedTo(IMPORTS)] localFunctionInsideLambdaCallInsideStringTemplate.kt
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
             super<R|one/ClassWithParameter|>(<strcat>([ResolvedTo(RAW_FIR)] fun <anonymous>(): R|kotlin/String| <inline=Unknown>  {
                 local final [ResolvedTo(RAW_FIR)] fun str(): R|kotlin/String| {
                     ^str Int(42)
@@ -138,8 +138,8 @@ FILE: [ResolvedTo(IMPORTS)] localFunctionInsideLambdaCallInsideStringTemplate.kt
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
             super<R|one/ClassWithParameter|>(<strcat>([ResolvedTo(RAW_FIR)] fun <anonymous>(): R|kotlin/String| <inline=Unknown>  {
                 local final [ResolvedTo(RAW_FIR)] fun str(): R|kotlin/String| {
                     ^str Int(42)
@@ -160,8 +160,8 @@ FILE: [ResolvedTo(IMPORTS)] localFunctionInsideLambdaCallInsideStringTemplate.kt
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
             super<R|one/ClassWithParameter|>(<strcat>([ResolvedTo(RAW_FIR)] fun <anonymous>(): R|kotlin/String| <inline=Unknown>  {
                 local final [ResolvedTo(RAW_FIR)] fun str(): R|kotlin/String| {
                     ^str Int(42)
@@ -182,8 +182,8 @@ FILE: [ResolvedTo(IMPORTS)] localFunctionInsideLambdaCallInsideStringTemplate.kt
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
             super<R|one/ClassWithParameter|>(<strcat>([ResolvedTo(RAW_FIR)] fun <anonymous>(): R|kotlin/String| <inline=Unknown>  {
                 local final [ResolvedTo(RAW_FIR)] fun str(): R|kotlin/String| {
                     ^str Int(42)
@@ -204,8 +204,8 @@ FILE: [ResolvedTo(IMPORTS)] localFunctionInsideLambdaCallInsideStringTemplate.kt
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
             super<R|one/ClassWithParameter|>(<strcat>([ResolvedTo(RAW_FIR)] fun <anonymous>(): R|kotlin/String| <inline=Unknown>  {
                 local final [ResolvedTo(RAW_FIR)] fun str(): R|kotlin/String| {
                     ^str Int(42)
@@ -226,8 +226,8 @@ FILE: [ResolvedTo(IMPORTS)] localFunctionInsideLambdaCallInsideStringTemplate.kt
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
             super<R|one/ClassWithParameter|>(<strcat>([ResolvedTo(RAW_FIR)] fun <anonymous>(): R|kotlin/String| <inline=Unknown>  {
                 local final [ResolvedTo(RAW_FIR)] fun str(): R|kotlin/String| {
                     ^str Int(42)
@@ -248,8 +248,8 @@ FILE: [ResolvedTo(IMPORTS)] localFunctionInsideLambdaCallInsideStringTemplate.kt
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
             super<R|one/ClassWithParameter|>(<strcat>([ResolvedTo(RAW_FIR)] fun <anonymous>(): R|kotlin/String| <inline=Unknown>  {
                 local final [ResolvedTo(RAW_FIR)] fun str(): R|kotlin/String| {
                     ^str Int(42)
@@ -264,14 +264,14 @@ FILE: [ResolvedTo(IMPORTS)] localFunctionInsideLambdaCallInsideStringTemplate.kt
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] localFunctionInsideLambdaCallInsideStringTemplate.kt
-    public open [ResolvedTo(BODY_RESOLVE)] class ClassWithParameter : R|kotlin/Any| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=ClassWithParameter] constructor([ResolvedTo(BODY_RESOLVE)] s: R|kotlin/String|): R|one/ClassWithParameter| {
+    public open [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class ClassWithParameter : R|kotlin/Any| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=ClassWithParameter, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] s: R|kotlin/String|): R|one/ClassWithParameter| {
             super<R|kotlin/Any|>()
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] class TopLevelClass : R|one/ClassWithParameter| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass] constructor(): R|one/TopLevelClass| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class TopLevelClass : R|one/ClassWithParameter| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=TopLevelClass, ExpectForActualAttributeKey={}] constructor(): R|one/TopLevelClass| {
             super<R|one/ClassWithParameter|>(<strcat>([ResolvedTo(RAW_FIR)] fun <anonymous>(): R|kotlin/String| <inline=Unknown>  {
                 local final [ResolvedTo(RAW_FIR)] fun str(): R|kotlin/String| {
                     ^str Int(42)

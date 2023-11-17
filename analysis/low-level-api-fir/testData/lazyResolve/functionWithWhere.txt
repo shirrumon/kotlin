@@ -60,7 +60,7 @@ FILE: [ResolvedTo(IMPORTS)] functionWithWhere.kt
     }
     public? final? [ResolvedTo(RAW_FIR)] interface Two : R|kotlin/Any| {
     }
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun <[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T : R|One|, R|Two|> foo([ResolvedTo(EXPECT_ACTUAL_MATCHING)] t: R|T|): <implicit> { LAZY_BLOCK }
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T : R|One|, R|Two|> foo([ResolvedTo(EXPECT_ACTUAL_MATCHING)] t: R|T|): <implicit> { LAZY_BLOCK }
 
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] functionWithWhere.kt
@@ -68,7 +68,7 @@ FILE: [ResolvedTo(IMPORTS)] functionWithWhere.kt
     }
     public? final? [ResolvedTo(RAW_FIR)] interface Two : R|kotlin/Any| {
     }
-    public final [ResolvedTo(CONTRACTS)] fun <[ResolvedTo(CONTRACTS)] T : R|One|, R|Two|> foo([ResolvedTo(CONTRACTS)] t: R|T|): <implicit> { LAZY_BLOCK }
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(CONTRACTS)] T : R|One|, R|Two|> foo([ResolvedTo(CONTRACTS)] t: R|T|): <implicit> { LAZY_BLOCK }
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] functionWithWhere.kt
@@ -76,7 +76,7 @@ FILE: [ResolvedTo(IMPORTS)] functionWithWhere.kt
     }
     public? final? [ResolvedTo(RAW_FIR)] interface Two : R|kotlin/Any| {
     }
-    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun <[ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] T : R|One|, R|Two|> foo([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] t: R|T|): R|T| {
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] T : R|One|, R|Two|> foo([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] t: R|T|): R|T| {
         ^foo R|<local>/t|
     }
 
@@ -86,7 +86,7 @@ FILE: [ResolvedTo(IMPORTS)] functionWithWhere.kt
     }
     public? final? [ResolvedTo(RAW_FIR)] interface Two : R|kotlin/Any| {
     }
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] fun <[ResolvedTo(ANNOTATION_ARGUMENTS)] T : R|One|, R|Two|> foo([ResolvedTo(ANNOTATION_ARGUMENTS)] t: R|T|): R|T| {
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(ANNOTATION_ARGUMENTS)] T : R|One|, R|Two|> foo([ResolvedTo(ANNOTATION_ARGUMENTS)] t: R|T|): R|T| {
         ^foo R|<local>/t|
     }
 
@@ -96,16 +96,16 @@ FILE: [ResolvedTo(IMPORTS)] functionWithWhere.kt
     }
     public? final? [ResolvedTo(RAW_FIR)] interface Two : R|kotlin/Any| {
     }
-    public final [ResolvedTo(BODY_RESOLVE)] fun <[ResolvedTo(BODY_RESOLVE)] T : R|One|, R|Two|> foo([ResolvedTo(BODY_RESOLVE)] t: R|T|): R|T| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(BODY_RESOLVE)] T : R|One|, R|Two|> foo([ResolvedTo(BODY_RESOLVE)] t: R|T|): R|T| {
         ^foo R|<local>/t|
     }
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] functionWithWhere.kt
-    public abstract [ResolvedTo(BODY_RESOLVE)] interface One : R|kotlin/Any| {
+    public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface One : R|kotlin/Any| {
     }
-    public abstract [ResolvedTo(BODY_RESOLVE)] interface Two : R|kotlin/Any| {
+    public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface Two : R|kotlin/Any| {
     }
-    public final [ResolvedTo(BODY_RESOLVE)] fun <[ResolvedTo(BODY_RESOLVE)] T : R|One|, R|Two|> foo([ResolvedTo(BODY_RESOLVE)] t: R|T|): R|T| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(BODY_RESOLVE)] T : R|One|, R|Two|> foo([ResolvedTo(BODY_RESOLVE)] t: R|T|): R|T| {
         ^foo R|<local>/t|
     }

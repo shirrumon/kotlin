@@ -12,7 +12,7 @@ FILE: [ResolvedTo(IMPORTS)] setterScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-setterScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] var x: R|kotlin/String|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] var x: R|kotlin/String|
             public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/String|
             public [ResolvedTo(BODY_RESOLVE)] set([ResolvedTo(BODY_RESOLVE)] value: R|kotlin/String|): R|kotlin/Unit| {
             }

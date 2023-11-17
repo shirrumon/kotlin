@@ -3,7 +3,7 @@ FIR element: FirPropertyImpl
 FIR source kind: KtRealSourceElementKind
 
 FIR element rendered:
-public final [ResolvedTo(BODY_RESOLVE)] val x: R|kotlin/String| = String()
+public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val x: R|kotlin/String| = String()
     public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Y] get(): R|kotlin/String|
 
 FIR FILE:
@@ -12,12 +12,12 @@ FILE: [ResolvedTo(IMPORTS)] memberPropertyScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-memberPropertyScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Y : R|kotlin/Any| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class Y : R|kotlin/Any| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Y] constructor(): R|Y| {
                 LAZY_super<R|kotlin/Any|>
             }
 
-            public final [ResolvedTo(BODY_RESOLVE)] val x: R|kotlin/String| = String()
+            public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val x: R|kotlin/String| = String()
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Y] get(): R|kotlin/String|
 
         }

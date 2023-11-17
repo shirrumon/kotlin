@@ -151,7 +151,7 @@ FILE: [ResolvedTo(IMPORTS)] delegatedFieldNestedNameClash.kt
         public open [ResolvedTo(STATUS)] fun foo(): R|kotlin/Unit| { LAZY_BLOCK }
 
     }
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [DelegateFieldsMapKey={0=FirFieldSymbol second/MyClass.$$delegate_0}] class MyClass : R|second/Base| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [DelegateFieldsMapKey={0=FirFieldSymbol second/MyClass.$$delegate_0}, ExpectForActualAttributeKey={}] class MyClass : R|second/Base| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=MyClass] constructor([ResolvedTo(STATUS)] [CorrespondingProperty=second/MyClass.prop] prop: R|second/Base|): R|second/MyClass| {
             LAZY_super<<implicit>>
         }
@@ -172,7 +172,7 @@ FILE: [ResolvedTo(IMPORTS)] delegatedFieldNestedNameClash.kt
         public open [ResolvedTo(STATUS)] fun foo(): R|kotlin/Unit| { LAZY_BLOCK }
 
     }
-    public final [ResolvedTo(CONTRACTS)] [DelegateFieldsMapKey={0=FirFieldSymbol second/MyClass.$$delegate_0}] class MyClass : R|second/Base| {
+    public final [ResolvedTo(CONTRACTS)] [DelegateFieldsMapKey={0=FirFieldSymbol second/MyClass.$$delegate_0}, ExpectForActualAttributeKey={}] class MyClass : R|second/Base| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=MyClass] constructor([ResolvedTo(STATUS)] [CorrespondingProperty=second/MyClass.prop] prop: R|second/Base|): R|second/MyClass| {
             LAZY_super<<implicit>>
         }
@@ -193,7 +193,7 @@ FILE: [ResolvedTo(IMPORTS)] delegatedFieldNestedNameClash.kt
         public open [ResolvedTo(STATUS)] fun foo(): R|kotlin/Unit| { LAZY_BLOCK }
 
     }
-    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [DelegateFieldsMapKey={0=FirFieldSymbol second/MyClass.$$delegate_0}] class MyClass : R|second/Base| {
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [DelegateFieldsMapKey={0=FirFieldSymbol second/MyClass.$$delegate_0}, ExpectForActualAttributeKey={}] class MyClass : R|second/Base| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=MyClass] constructor([ResolvedTo(STATUS)] [CorrespondingProperty=second/MyClass.prop] prop: R|second/Base|): R|second/MyClass| {
             LAZY_super<<implicit>>
         }
@@ -214,7 +214,7 @@ FILE: [ResolvedTo(IMPORTS)] delegatedFieldNestedNameClash.kt
         public open [ResolvedTo(STATUS)] fun foo(): R|kotlin/Unit| { LAZY_BLOCK }
 
     }
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [DelegateFieldsMapKey={0=FirFieldSymbol second/MyClass.$$delegate_0}] class MyClass : R|second/Base| {
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [DelegateFieldsMapKey={0=FirFieldSymbol second/MyClass.$$delegate_0}, ExpectForActualAttributeKey={}] class MyClass : R|second/Base| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=MyClass] constructor([ResolvedTo(STATUS)] [CorrespondingProperty=second/MyClass.prop] prop: R|second/Base|): R|second/MyClass| {
             LAZY_super<<implicit>>
         }
@@ -235,7 +235,7 @@ FILE: [ResolvedTo(IMPORTS)] delegatedFieldNestedNameClash.kt
         public open [ResolvedTo(STATUS)] fun foo(): R|kotlin/Unit| { LAZY_BLOCK }
 
     }
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [DelegateFieldsMapKey={0=FirFieldSymbol second/MyClass.$$delegate_0}] class MyClass : R|second/Base| {
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [DelegateFieldsMapKey={0=FirFieldSymbol second/MyClass.$$delegate_0}, ExpectForActualAttributeKey={}] class MyClass : R|second/Base| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=MyClass] constructor([ResolvedTo(STATUS)] [CorrespondingProperty=second/MyClass.prop] prop: R|second/Base|): R|second/MyClass| {
             LAZY_super<<implicit>>
         }
@@ -252,22 +252,22 @@ FILE: [ResolvedTo(IMPORTS)] delegatedFieldNestedNameClash.kt
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] delegatedFieldNestedNameClash.kt
-    public abstract [ResolvedTo(BODY_RESOLVE)] interface Base : R|kotlin/Any| {
-        public open [ResolvedTo(BODY_RESOLVE)] fun foo(): R|kotlin/Unit| {
+    public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface Base : R|kotlin/Any| {
+        public open [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo(): R|kotlin/Unit| {
         }
 
     }
-    public final [ResolvedTo(BODY_RESOLVE)] [DelegateFieldsMapKey={0=FirFieldSymbol second/MyClass.$$delegate_0}] class MyClass : R|second/Base| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyClass] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=second/MyClass.prop] prop: R|second/Base|): R|second/MyClass| {
+    public final [ResolvedTo(BODY_RESOLVE)] [DelegateFieldsMapKey={0=FirFieldSymbol second/MyClass.$$delegate_0}, ExpectForActualAttributeKey={}] class MyClass : R|second/Base| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyClass, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=second/MyClass.prop] prop: R|second/Base|): R|second/MyClass| {
             super<R|kotlin/Any|>()
         }
 
         private final [ResolvedTo(BODY_RESOLVE)] field $$delegate_0: R|second/Base| = R|<local>/prop|
 
-        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val prop: R|second/Base| = R|<local>/prop|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val prop: R|second/Base| = R|<local>/prop|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyClass] get(): R|second/Base|
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] interface Base : R|kotlin/Any| {
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface Base : R|kotlin/Any| {
         }
 
     }

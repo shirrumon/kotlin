@@ -7,16 +7,16 @@ Q|A|::R|/A.foo|
 
 FIR FILE:
 FILE: [ResolvedTo(IMPORTS)] propertyReferenceExpression.kt
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class A : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class A : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=A] constructor(): R|A| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(CONTRACTS)] fun foo(): R|kotlin/Unit| {
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun foo(): R|kotlin/Unit| {
         }
 
     }
     public? final? [ResolvedTo(RAW_FIR)] val y: A = LAZY_EXPRESSION
         public? [ResolvedTo(RAW_FIR)] get(): A
-    public final [ResolvedTo(BODY_RESOLVE)] val x: R|kotlin/reflect/KFunction1<A, kotlin/Unit>| = Q|A|::R|/A.foo|
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val x: R|kotlin/reflect/KFunction1<A, kotlin/Unit>| = Q|A|::R|/A.foo|
         public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/reflect/KFunction1<A, kotlin/Unit>|

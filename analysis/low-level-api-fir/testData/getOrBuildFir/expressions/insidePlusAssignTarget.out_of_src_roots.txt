@@ -7,7 +7,7 @@ FIR element rendered:
 
 FIR FILE:
 FILE: [ResolvedTo(IMPORTS)] insidePlusAssignTarget.kt
-    public final [ResolvedTo(BODY_RESOLVE)] fun foo([ResolvedTo(BODY_RESOLVE)] x: R|kotlin/collections/MutableMap<kotlin/Int, kotlin/collections/MutableList<kotlin/String>>|): R|kotlin/Unit| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo([ResolvedTo(BODY_RESOLVE)] x: R|kotlin/collections/MutableMap<kotlin/Int, kotlin/collections/MutableList<kotlin/String>>|): R|kotlin/Unit| {
          {
             [ResolvedTo(BODY_RESOLVE)] lval <receiver>: R|kotlin/collections/MutableMap<kotlin/Int, kotlin/collections/MutableList<kotlin/String>>| = R|<local>/x|
             R|<local>/<receiver>|.<Unresolved name: getOrPut>#(Int(1), <L> = [ResolvedTo(BODY_RESOLVE)] getOrPut@fun <anonymous>(): <ERROR TYPE REF: Unresolved name: mutableListOf> <inline=Unknown>  {
@@ -20,4 +20,3 @@ FILE: [ResolvedTo(IMPORTS)] insidePlusAssignTarget.kt
         }
 
     }
-

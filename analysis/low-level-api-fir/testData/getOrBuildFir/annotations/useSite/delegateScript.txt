@@ -18,12 +18,12 @@ FILE: [ResolvedTo(IMPORTS)] delegateScript.kts
 
         }
 
-        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class X : R|kotlin/Any| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class X : R|kotlin/Any| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=X] constructor(): R|X| {
                 LAZY_super<R|kotlin/Any|>
             }
 
-            field:@PROPERTY_DELEGATE_FIELD:R|Ann|[Types]() public final [ResolvedTo(ANNOTATION_ARGUMENTS)] val a: <ERROR TYPE REF: Unresolved name: getValue>by <Unresolved name: lazy>#(<L> = [ResolvedTo(RAW_FIR)] lazy@fun <anonymous>(): R|kotlin/Int| <inline=Unknown>  {
+            field:@PROPERTY_DELEGATE_FIELD:R|Ann|[Types]() public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] val a: <ERROR TYPE REF: Unresolved name: getValue>by <Unresolved name: lazy>#(<L> = [ResolvedTo(RAW_FIR)] lazy@fun <anonymous>(): R|kotlin/Int| <inline=Unknown>  {
                 ^ Int(1)
             }
             )

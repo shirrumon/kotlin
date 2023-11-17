@@ -67,7 +67,7 @@ FILE: [ResolvedTo(IMPORTS)] typeParameterOfTopFunctionScript.kts
     SCRIPT: [ResolvedTo(RAW_FIR)] <script-typeParameterOfTopFunctionScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun <[ResolvedTo(EXPECT_ACTUAL_MATCHING)] resolveMe> ddd(): R|kotlin/Unit| { LAZY_BLOCK }
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(EXPECT_ACTUAL_MATCHING)] resolveMe> ddd(): R|kotlin/Unit| { LAZY_BLOCK }
 
 
 CONTRACTS:
@@ -76,7 +76,7 @@ FILE: [ResolvedTo(IMPORTS)] typeParameterOfTopFunctionScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-typeParameterOfTopFunctionScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(CONTRACTS)] fun <[ResolvedTo(CONTRACTS)] resolveMe> ddd(): R|kotlin/Unit| {
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(CONTRACTS)] resolveMe> ddd(): R|kotlin/Unit| {
         }
 
 
@@ -86,7 +86,7 @@ FILE: [ResolvedTo(IMPORTS)] typeParameterOfTopFunctionScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-typeParameterOfTopFunctionScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun <[ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] resolveMe> ddd(): R|kotlin/Unit| {
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] resolveMe> ddd(): R|kotlin/Unit| {
         }
 
 
@@ -96,7 +96,7 @@ FILE: [ResolvedTo(IMPORTS)] typeParameterOfTopFunctionScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-typeParameterOfTopFunctionScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] fun <[ResolvedTo(ANNOTATION_ARGUMENTS)] resolveMe> ddd(): R|kotlin/Unit| {
+        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(ANNOTATION_ARGUMENTS)] resolveMe> ddd(): R|kotlin/Unit| {
         }
 
 
@@ -106,7 +106,7 @@ FILE: [ResolvedTo(IMPORTS)] typeParameterOfTopFunctionScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-typeParameterOfTopFunctionScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun <[ResolvedTo(BODY_RESOLVE)] resolveMe> ddd(): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(BODY_RESOLVE)] resolveMe> ddd(): R|kotlin/Unit| {
         }
 
 
@@ -116,5 +116,5 @@ FILE: [ResolvedTo(BODY_RESOLVE)] typeParameterOfTopFunctionScript.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-typeParameterOfTopFunctionScript.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun <[ResolvedTo(BODY_RESOLVE)] resolveMe> ddd(): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun <[ResolvedTo(BODY_RESOLVE)] resolveMe> ddd(): R|kotlin/Unit| {
         }

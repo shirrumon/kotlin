@@ -24,9 +24,9 @@
 
 
 TARGET: public open override [<synthetic> ANNOTATION_ARGUMENTS] var something: R|@R|Anno|(position = <strcat>(String(getter return type ), R|/prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(getter nested return type ), R|/prop|))  kotlin/Int>|
-    @R|Anno|[Types](position = <strcat>(String(getSomething: ), R|/prop|)) public [<synthetic> ResolvedTo(ANNOTATION_ARGUMENTS)] get(): R|@R|Anno|(position = <strcat>(String(getter return type ), R|/prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(getter nested return type ), R|/prop|))  kotlin/Int>| {
+    @R|Anno|[Types](position = <strcat>(String(getSomething: ), R|/prop|)) public [<synthetic> ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] get(): R|@R|Anno|(position = <strcat>(String(getter return type ), R|/prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(getter nested return type ), R|/prop|))  kotlin/Int>| {
     }
-    @R|Anno|[Types](position = <strcat>(String(getSomething: ), R|/prop|)) public [<synthetic> ResolvedTo(ANNOTATION_ARGUMENTS)] set([ResolvedTo(ANNOTATION_ARGUMENTS)] l: R|@R|Anno|(position = <strcat>(String(setter type ), R|/prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(setter nested type ), R|/prop|))  kotlin/Int>|): R|kotlin/Unit| {
+    @R|Anno|[Types](position = <strcat>(String(getSomething: ), R|/prop|)) public [<synthetic> ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] set([ResolvedTo(ANNOTATION_ARGUMENTS)] l: R|@R|Anno|(position = <strcat>(String(setter type ), R|/prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(setter nested type ), R|/prop|))  kotlin/Int>|): R|kotlin/Unit| {
     }
 FILE: [ResolvedTo(IMPORTS)] Derived.kt
     @R|kotlin/annotation/Target|[Types](Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.FUNCTION|, Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|) public final [ResolvedTo(STATUS)] annotation class Anno : R|kotlin/Annotation| {
@@ -38,17 +38,17 @@ FILE: [ResolvedTo(IMPORTS)] Derived.kt
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
-    public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val prop: R|kotlin/String| = String(str)
+    public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val prop: R|kotlin/String| = String(str)
         public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/String|
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Derived : R|Base| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class Derived : R|Base| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Derived] constructor(): R|Derived| {
             LAZY_super<R|Base|>
         }
 
-        @R|Anno|[Types](position = <strcat>(String(getSomething: ), R|/prop|)) public open override [ResolvedTo(ANNOTATION_ARGUMENTS)] fun getSomething(): R|@R|Anno|(position = <strcat>(String(getter return type ), R|/prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(getter nested return type ), R|/prop|))  kotlin/Int>| {
+        @R|Anno|[Types](position = <strcat>(String(getSomething: ), R|/prop|)) public open override [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun getSomething(): R|@R|Anno|(position = <strcat>(String(getter return type ), R|/prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(getter nested return type ), R|/prop|))  kotlin/Int>| {
         }
 
-        @R|Anno|[Types](position = <strcat>(String(getSomething: ), R|/prop|)) public open override [ResolvedTo(ANNOTATION_ARGUMENTS)] fun setSomething([ResolvedTo(ANNOTATION_ARGUMENTS)] l: R|@R|Anno|(position = <strcat>(String(setter type ), R|/prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(setter nested type ), R|/prop|))  kotlin/Int>|): R|kotlin/Unit| {
+        @R|Anno|[Types](position = <strcat>(String(getSomething: ), R|/prop|)) public open override [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun setSomething([ResolvedTo(ANNOTATION_ARGUMENTS)] l: R|@R|Anno|(position = <strcat>(String(setter type ), R|/prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(setter nested type ), R|/prop|))  kotlin/Int>|): R|kotlin/Unit| {
         }
 
     }

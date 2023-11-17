@@ -524,7 +524,7 @@ FILE: [ResolvedTo(IMPORTS)] hierarchyWithOverrideAndNestedClass2.kt
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Foo3] get(): Boolean
 
     }
-    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class OuterClass : R|Foo1| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class OuterClass : R|Foo1| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=OuterClass] constructor(): R|OuterClass| {
             LAZY_super<<implicit>>
         }
@@ -547,12 +547,12 @@ FILE: [ResolvedTo(IMPORTS)] hierarchyWithOverrideAndNestedClass2.kt
 
         }
 
-        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AnotherNestedClass : R|OuterClass.NestedClass| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class AnotherNestedClass : R|OuterClass.NestedClass| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=AnotherNestedClass] constructor(): R|OuterClass.AnotherNestedClass| {
                 LAZY_super<R|OuterClass.NestedClass|>
             }
 
-            public open override [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun bar([ResolvedTo(EXPECT_ACTUAL_MATCHING)] s: R|kotlin/String|): R|kotlin/Unit| { LAZY_BLOCK }
+            public open override [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun bar([ResolvedTo(EXPECT_ACTUAL_MATCHING)] s: R|kotlin/String|): R|kotlin/Unit| { LAZY_BLOCK }
 
         }
 
@@ -594,7 +594,7 @@ FILE: [ResolvedTo(IMPORTS)] hierarchyWithOverrideAndNestedClass2.kt
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Foo3] get(): Boolean
 
     }
-    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class OuterClass : R|Foo1| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class OuterClass : R|Foo1| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=OuterClass] constructor(): R|OuterClass| {
             LAZY_super<<implicit>>
         }
@@ -617,12 +617,12 @@ FILE: [ResolvedTo(IMPORTS)] hierarchyWithOverrideAndNestedClass2.kt
 
         }
 
-        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AnotherNestedClass : R|OuterClass.NestedClass| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class AnotherNestedClass : R|OuterClass.NestedClass| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=AnotherNestedClass] constructor(): R|OuterClass.AnotherNestedClass| {
                 LAZY_super<R|OuterClass.NestedClass|>
             }
 
-            public open override [ResolvedTo(CONTRACTS)] fun bar([ResolvedTo(CONTRACTS)] s: R|kotlin/String|): R|kotlin/Unit| {
+            public open override [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun bar([ResolvedTo(CONTRACTS)] s: R|kotlin/String|): R|kotlin/Unit| {
             }
 
         }
@@ -665,7 +665,7 @@ FILE: [ResolvedTo(IMPORTS)] hierarchyWithOverrideAndNestedClass2.kt
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Foo3] get(): Boolean
 
     }
-    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class OuterClass : R|Foo1| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class OuterClass : R|Foo1| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=OuterClass] constructor(): R|OuterClass| {
             LAZY_super<<implicit>>
         }
@@ -688,12 +688,12 @@ FILE: [ResolvedTo(IMPORTS)] hierarchyWithOverrideAndNestedClass2.kt
 
         }
 
-        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AnotherNestedClass : R|OuterClass.NestedClass| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class AnotherNestedClass : R|OuterClass.NestedClass| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=AnotherNestedClass] constructor(): R|OuterClass.AnotherNestedClass| {
                 LAZY_super<R|OuterClass.NestedClass|>
             }
 
-            public open override [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun bar([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] s: R|kotlin/String|): R|kotlin/Unit| {
+            public open override [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun bar([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] s: R|kotlin/String|): R|kotlin/Unit| {
             }
 
         }
@@ -736,7 +736,7 @@ FILE: [ResolvedTo(IMPORTS)] hierarchyWithOverrideAndNestedClass2.kt
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Foo3] get(): Boolean
 
     }
-    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class OuterClass : R|Foo1| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class OuterClass : R|Foo1| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=OuterClass] constructor(): R|OuterClass| {
             LAZY_super<<implicit>>
         }
@@ -759,12 +759,12 @@ FILE: [ResolvedTo(IMPORTS)] hierarchyWithOverrideAndNestedClass2.kt
 
         }
 
-        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AnotherNestedClass : R|OuterClass.NestedClass| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class AnotherNestedClass : R|OuterClass.NestedClass| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=AnotherNestedClass] constructor(): R|OuterClass.AnotherNestedClass| {
                 LAZY_super<R|OuterClass.NestedClass|>
             }
 
-            public open override [ResolvedTo(ANNOTATION_ARGUMENTS)] fun bar([ResolvedTo(ANNOTATION_ARGUMENTS)] s: R|kotlin/String|): R|kotlin/Unit| {
+            public open override [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun bar([ResolvedTo(ANNOTATION_ARGUMENTS)] s: R|kotlin/String|): R|kotlin/Unit| {
             }
 
         }
@@ -807,7 +807,7 @@ FILE: [ResolvedTo(IMPORTS)] hierarchyWithOverrideAndNestedClass2.kt
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Foo3] get(): Boolean
 
     }
-    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class OuterClass : R|Foo1| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class OuterClass : R|Foo1| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=OuterClass] constructor(): R|OuterClass| {
             LAZY_super<<implicit>>
         }
@@ -830,12 +830,12 @@ FILE: [ResolvedTo(IMPORTS)] hierarchyWithOverrideAndNestedClass2.kt
 
         }
 
-        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AnotherNestedClass : R|OuterClass.NestedClass| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class AnotherNestedClass : R|OuterClass.NestedClass| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=AnotherNestedClass] constructor(): R|OuterClass.AnotherNestedClass| {
                 LAZY_super<R|OuterClass.NestedClass|>
             }
 
-            public open override [ResolvedTo(BODY_RESOLVE)] fun bar([ResolvedTo(BODY_RESOLVE)] s: R|kotlin/String|): R|kotlin/Unit| {
+            public open override [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun bar([ResolvedTo(BODY_RESOLVE)] s: R|kotlin/String|): R|kotlin/Unit| {
             }
 
         }
@@ -844,71 +844,71 @@ FILE: [ResolvedTo(IMPORTS)] hierarchyWithOverrideAndNestedClass2.kt
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] hierarchyWithOverrideAndNestedClass2.kt
-    public abstract [ResolvedTo(BODY_RESOLVE)] interface Foo1 : R|kotlin/Any| {
-        public abstract [ResolvedTo(BODY_RESOLVE)] fun foo(): R|kotlin/Unit|
+    public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface Foo1 : R|kotlin/Any| {
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo(): R|kotlin/Unit|
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] fun bar(): R|kotlin/Unit|
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun bar(): R|kotlin/Unit|
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] val str: R|kotlin/String|
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val str: R|kotlin/String|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Foo1] get(): R|kotlin/String|
 
-        public final [ResolvedTo(BODY_RESOLVE)] class ClassFromInterface : R|kotlin/Any| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=ClassFromInterface] constructor(): R|Foo1.ClassFromInterface| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class ClassFromInterface : R|kotlin/Any| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=ClassFromInterface, ExpectForActualAttributeKey={}] constructor(): R|Foo1.ClassFromInterface| {
                 super<R|kotlin/Any|>()
             }
 
         }
 
     }
-    public abstract [ResolvedTo(BODY_RESOLVE)] interface Foo2 : R|Foo1| {
-        public abstract [ResolvedTo(BODY_RESOLVE)] fun foo([ResolvedTo(BODY_RESOLVE)] i: R|kotlin/Int|): R|kotlin/Unit|
+    public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface Foo2 : R|Foo1| {
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo([ResolvedTo(BODY_RESOLVE)] i: R|kotlin/Int|): R|kotlin/Unit|
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] fun bar([ResolvedTo(BODY_RESOLVE)] s: R|kotlin/String|): R|kotlin/Unit|
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun bar([ResolvedTo(BODY_RESOLVE)] s: R|kotlin/String|): R|kotlin/Unit|
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] val isBoo: R|kotlin/Boolean|
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val isBoo: R|kotlin/Boolean|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Foo2] get(): R|kotlin/Boolean|
 
     }
-    public abstract [ResolvedTo(BODY_RESOLVE)] interface Foo3 : R|Foo1| {
-        public abstract [ResolvedTo(BODY_RESOLVE)] fun foo([ResolvedTo(BODY_RESOLVE)] i: R|kotlin/Int|): R|kotlin/Unit|
+    public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface Foo3 : R|Foo1| {
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo([ResolvedTo(BODY_RESOLVE)] i: R|kotlin/Int|): R|kotlin/Unit|
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] fun bar([ResolvedTo(BODY_RESOLVE)] s: R|kotlin/String|): R|kotlin/Unit|
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun bar([ResolvedTo(BODY_RESOLVE)] s: R|kotlin/String|): R|kotlin/Unit|
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] val isBoo: R|kotlin/Boolean|
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val isBoo: R|kotlin/Boolean|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Foo3] get(): R|kotlin/Boolean|
 
     }
-    public abstract [ResolvedTo(BODY_RESOLVE)] class OuterClass : R|Foo1| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=OuterClass] constructor(): R|OuterClass| {
+    public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class OuterClass : R|Foo1| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=OuterClass, ExpectForActualAttributeKey={}] constructor(): R|OuterClass| {
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] class SimpleNestedClass : R|kotlin/Any| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=SimpleNestedClass] constructor(): R|OuterClass.SimpleNestedClass| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class SimpleNestedClass : R|kotlin/Any| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=SimpleNestedClass, ExpectForActualAttributeKey={}] constructor(): R|OuterClass.SimpleNestedClass| {
                 super<R|kotlin/Any|>()
             }
 
-            public final [ResolvedTo(BODY_RESOLVE)] fun foo(): R|kotlin/Unit| {
+            public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo(): R|kotlin/Unit| {
             }
 
         }
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] class NestedClass : R|Foo2| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=NestedClass] constructor(): R|OuterClass.NestedClass| {
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class NestedClass : R|Foo2| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=NestedClass, ExpectForActualAttributeKey={}] constructor(): R|OuterClass.NestedClass| {
                 super<R|kotlin/Any|>()
             }
 
-            public open override [ResolvedTo(BODY_RESOLVE)] fun foo(): R|kotlin/Unit| {
+            public open override [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo(): R|kotlin/Unit| {
             }
 
         }
 
-        public abstract [ResolvedTo(BODY_RESOLVE)] class AnotherNestedClass : R|OuterClass.NestedClass| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=AnotherNestedClass] constructor(): R|OuterClass.AnotherNestedClass| {
+        public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class AnotherNestedClass : R|OuterClass.NestedClass| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=AnotherNestedClass, ExpectForActualAttributeKey={}] constructor(): R|OuterClass.AnotherNestedClass| {
                 super<R|OuterClass.NestedClass|>()
             }
 
-            public open override [ResolvedTo(BODY_RESOLVE)] fun bar([ResolvedTo(BODY_RESOLVE)] s: R|kotlin/String|): R|kotlin/Unit| {
+            public open override [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun bar([ResolvedTo(BODY_RESOLVE)] s: R|kotlin/String|): R|kotlin/Unit| {
             }
 
         }

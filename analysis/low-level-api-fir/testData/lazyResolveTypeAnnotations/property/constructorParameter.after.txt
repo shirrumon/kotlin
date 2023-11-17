@@ -20,10 +20,10 @@ FILE: [ResolvedTo(IMPORTS)] constructorParameter.kt
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
-    public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val constant: R|kotlin/Int| = Int(0)
+    public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val constant: R|kotlin/Int| = Int(0)
         public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/Int|
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] class MyClass : R|kotlin/Any| {
-        public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=MyClass] constructor([ResolvedTo(ANNOTATION_ARGUMENTS)] [CorrespondingProperty=properties/MyClass.property] @CONSTRUCTOR_PARAMETER:R|properties/Anno|[Types](position = <strcat>(String(param ), R|properties/constant|)) property: R|@R|properties/Anno|(position = <strcat>(String(parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested nested parameter type: ), R|properties/constant|))  kotlin/Int>>|): R|properties/MyClass| {
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] class MyClass : R|kotlin/Any| {
+        public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=MyClass, ExpectForActualAttributeKey={}] constructor([ResolvedTo(ANNOTATION_ARGUMENTS)] [CorrespondingProperty=properties/MyClass.property] @CONSTRUCTOR_PARAMETER:R|properties/Anno|[Types](position = <strcat>(String(param ), R|properties/constant|)) property: R|@R|properties/Anno|(position = <strcat>(String(parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested parameter type: ), R|properties/constant|))  kotlin/collections/List<@R|properties/Anno|(position = <strcat>(String(nested nested parameter type: ), R|properties/constant|))  kotlin/Int>>|): R|properties/MyClass| {
             LAZY_super<R|kotlin/Any|>
         }
 

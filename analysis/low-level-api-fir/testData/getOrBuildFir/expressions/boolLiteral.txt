@@ -7,5 +7,5 @@ Boolean(true)
 
 FIR FILE:
 FILE: [ResolvedTo(IMPORTS)] boolLiteral.kt
-    public final [ResolvedTo(BODY_RESOLVE)] val x: R|kotlin/Boolean| = Boolean(true)
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val x: R|kotlin/Boolean| = Boolean(true)
         public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/Boolean|

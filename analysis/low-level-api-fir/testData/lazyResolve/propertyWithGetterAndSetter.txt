@@ -56,7 +56,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithGetterAndSetter.kt
 
 EXPECT_ACTUAL_MATCHING:
 FILE: [ResolvedTo(IMPORTS)] propertyWithGetterAndSetter.kt
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun resolveMe(): R|kotlin/Unit| { LAZY_BLOCK }
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| { LAZY_BLOCK }
     public? final? [ResolvedTo(RAW_FIR)] fun receive([ResolvedTo(RAW_FIR)] value: Int): R|kotlin/Unit| { LAZY_BLOCK }
     public? final? [ResolvedTo(RAW_FIR)] var withGetterAndSetter: Int = LAZY_EXPRESSION
         public? [ResolvedTo(RAW_FIR)] get(): Int { LAZY_BLOCK }
@@ -64,7 +64,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithGetterAndSetter.kt
 
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] propertyWithGetterAndSetter.kt
-    public final [ResolvedTo(CONTRACTS)] fun resolveMe(): R|kotlin/Unit| {
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
         receive#(withGetterAndSetter#)
         withGetterAndSetter# = IntegerLiteral(123)
     }
@@ -75,7 +75,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithGetterAndSetter.kt
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] propertyWithGetterAndSetter.kt
-    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+    public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
         receive#(withGetterAndSetter#)
         withGetterAndSetter# = IntegerLiteral(123)
     }
@@ -86,7 +86,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithGetterAndSetter.kt
 
 ANNOTATION_ARGUMENTS:
 FILE: [ResolvedTo(IMPORTS)] propertyWithGetterAndSetter.kt
-    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] fun resolveMe(): R|kotlin/Unit| {
+    public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
         receive#(withGetterAndSetter#)
         withGetterAndSetter# = IntegerLiteral(123)
     }
@@ -97,13 +97,13 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithGetterAndSetter.kt
 
 BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] propertyWithGetterAndSetter.kt
-    public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
         R|/receive|(R|/withGetterAndSetter|)
         R|/withGetterAndSetter| = Int(123)
     }
-    public final [ResolvedTo(CONTRACTS)] fun receive([ResolvedTo(CONTRACTS)] value: R|kotlin/Int|): R|kotlin/Unit| {
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun receive([ResolvedTo(CONTRACTS)] value: R|kotlin/Int|): R|kotlin/Unit| {
     }
-    public final [ResolvedTo(CONTRACTS)] var withGetterAndSetter: R|kotlin/Int| = IntegerLiteral(42)
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] var withGetterAndSetter: R|kotlin/Int| = IntegerLiteral(42)
         public [ResolvedTo(CONTRACTS)] get(): R|kotlin/Int| {
             ^ field#
         }
@@ -113,13 +113,13 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithGetterAndSetter.kt
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] propertyWithGetterAndSetter.kt
-    public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
         R|/receive|(R|/withGetterAndSetter|)
         R|/withGetterAndSetter| = Int(123)
     }
-    public final [ResolvedTo(BODY_RESOLVE)] fun receive([ResolvedTo(BODY_RESOLVE)] value: R|kotlin/Int|): R|kotlin/Unit| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun receive([ResolvedTo(BODY_RESOLVE)] value: R|kotlin/Int|): R|kotlin/Unit| {
     }
-    public final [ResolvedTo(BODY_RESOLVE)] [IsReferredViaField=true] var withGetterAndSetter: R|kotlin/Int| = Int(42)
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, IsReferredViaField=true] var withGetterAndSetter: R|kotlin/Int| = Int(42)
         public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/Int| {
             ^ F|/withGetterAndSetter|
         }

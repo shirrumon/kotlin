@@ -179,7 +179,7 @@ FILE: [ResolvedTo(IMPORTS)] lambdaAsSAMInterfaceScript.kts
 
         public? final? [ResolvedTo(RAW_FIR)] fun testMe([ResolvedTo(RAW_FIR)] f: Foo): R|kotlin/Unit| { LAZY_BLOCK }
 
-        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun resolveMe(): R|kotlin/Unit| { LAZY_BLOCK }
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| { LAZY_BLOCK }
 
 
 CONTRACTS:
@@ -202,7 +202,7 @@ FILE: [ResolvedTo(IMPORTS)] lambdaAsSAMInterfaceScript.kts
 
         public? final? [ResolvedTo(RAW_FIR)] fun testMe([ResolvedTo(RAW_FIR)] f: Foo): R|kotlin/Unit| { LAZY_BLOCK }
 
-        public final [ResolvedTo(CONTRACTS)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             testMe#(<L> = [ResolvedTo(RAW_FIR)] testMe@fun <implicit>.<anonymous>([ResolvedTo(RAW_FIR)] b: <implicit>): <implicit> <inline=Unknown>  {
                 b#
             }
@@ -230,7 +230,7 @@ FILE: [ResolvedTo(IMPORTS)] lambdaAsSAMInterfaceScript.kts
 
         public? final? [ResolvedTo(RAW_FIR)] fun testMe([ResolvedTo(RAW_FIR)] f: Foo): R|kotlin/Unit| { LAZY_BLOCK }
 
-        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             testMe#(<L> = [ResolvedTo(RAW_FIR)] testMe@fun <implicit>.<anonymous>([ResolvedTo(RAW_FIR)] b: <implicit>): <implicit> <inline=Unknown>  {
                 b#
             }
@@ -258,7 +258,7 @@ FILE: [ResolvedTo(IMPORTS)] lambdaAsSAMInterfaceScript.kts
 
         public? final? [ResolvedTo(RAW_FIR)] fun testMe([ResolvedTo(RAW_FIR)] f: Foo): R|kotlin/Unit| { LAZY_BLOCK }
 
-        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             testMe#(<L> = [ResolvedTo(RAW_FIR)] testMe@fun <implicit>.<anonymous>([ResolvedTo(RAW_FIR)] b: <implicit>): <implicit> <inline=Unknown>  {
                 b#
             }
@@ -284,10 +284,10 @@ FILE: [ResolvedTo(IMPORTS)] lambdaAsSAMInterfaceScript.kts
 
         }
 
-        public final [ResolvedTo(CONTRACTS)] fun testMe([ResolvedTo(CONTRACTS)] f: R|foo/Foo|): R|kotlin/Unit| {
+        public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun testMe([ResolvedTo(CONTRACTS)] f: R|foo/Foo|): R|kotlin/Unit| {
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             R|foo/testMe|(<L> = [ResolvedTo(BODY_RESOLVE)] [MatchingParameterFunctionTypeKey=foo/Foo] testMe@fun <anonymous>([ResolvedTo(BODY_RESOLVE)] b: R|foo/Arg|): R|foo/Arg| <inline=NoInline>  {
                 ^ R|<local>/b|
             }
@@ -301,22 +301,22 @@ FILE: [ResolvedTo(BODY_RESOLVE)] lambdaAsSAMInterfaceScript.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-lambdaAsSAMInterfaceScript.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(BODY_RESOLVE)] class Arg : R|kotlin/Any| {
-            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Arg] constructor(): R|foo/Arg| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class Arg : R|kotlin/Any| {
+            public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Arg, ExpectForActualAttributeKey={}] constructor(): R|foo/Arg| {
                 super<R|kotlin/Any|>()
             }
 
         }
 
-        public abstract fun [ResolvedTo(BODY_RESOLVE)] interface Foo : R|kotlin/Any| {
-            public abstract [ResolvedTo(BODY_RESOLVE)] fun foo([ResolvedTo(BODY_RESOLVE)] a: R|foo/Arg|): R|foo/Arg|
+        public abstract fun [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] interface Foo : R|kotlin/Any| {
+            public abstract [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun foo([ResolvedTo(BODY_RESOLVE)] a: R|foo/Arg|): R|foo/Arg|
 
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun testMe([ResolvedTo(BODY_RESOLVE)] f: R|foo/Foo|): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun testMe([ResolvedTo(BODY_RESOLVE)] f: R|foo/Foo|): R|kotlin/Unit| {
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] fun resolveMe(): R|kotlin/Unit| {
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun resolveMe(): R|kotlin/Unit| {
             R|foo/testMe|(<L> = [ResolvedTo(BODY_RESOLVE)] [MatchingParameterFunctionTypeKey=foo/Foo] testMe@fun <anonymous>([ResolvedTo(BODY_RESOLVE)] b: R|foo/Arg|): R|foo/Arg| <inline=NoInline>  {
                 ^ R|<local>/b|
             }

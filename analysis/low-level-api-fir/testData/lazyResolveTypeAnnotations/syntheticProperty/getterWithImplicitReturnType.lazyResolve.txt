@@ -26,7 +26,7 @@ FILE: [ResolvedTo(IMPORTS)] Derived.kt
 
 EXPECT_ACTUAL_MATCHING:
 TARGET: public open override [<synthetic> EXPECT_ACTUAL_MATCHING] val something: <implicit>
-    @R|Anno|[Types](LAZY_EXPRESSION) public [<synthetic> ResolvedTo(EXPECT_ACTUAL_MATCHING)] get(): <implicit> { LAZY_BLOCK }
+    @R|Anno|[Types](LAZY_EXPRESSION) public [<synthetic> ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] get(): <implicit> { LAZY_BLOCK }
 
 FILE: [ResolvedTo(IMPORTS)] Derived.kt
     @R|kotlin/annotation/Target|[CompilerRequiredAnnotations](Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|, Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.FUNCTION|) public? final? [ResolvedTo(COMPILER_REQUIRED_ANNOTATIONS)] annotation class Anno : R|kotlin/Annotation| {
@@ -41,18 +41,18 @@ FILE: [ResolvedTo(IMPORTS)] Derived.kt
     public? final? const [ResolvedTo(RAW_FIR)] val prop: <implicit> = LAZY_EXPRESSION
         public? [ResolvedTo(RAW_FIR)] get(): <implicit>
     public? final? [ResolvedTo(RAW_FIR)] fun expectType(): @Anno[Unresolved](LAZY_EXPRESSION) List<@Anno[Unresolved](LAZY_EXPRESSION) Int> { LAZY_BLOCK }
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Derived : R|Base| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class Derived : R|Base| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Derived] constructor(): R|Derived| {
             LAZY_super<R|Base|>
         }
 
-        @R|Anno|[Types](LAZY_EXPRESSION) public open override [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun getSomething(): <implicit> { LAZY_BLOCK }
+        @R|Anno|[Types](LAZY_EXPRESSION) public open override [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] fun getSomething(): <implicit> { LAZY_BLOCK }
 
     }
 
 CONTRACTS:
 TARGET: public open override [<synthetic> CONTRACTS] val something: <implicit>
-    @R|Anno|[Types](LAZY_EXPRESSION) public [<synthetic> ResolvedTo(CONTRACTS)] get(): <implicit> { LAZY_BLOCK }
+    @R|Anno|[Types](LAZY_EXPRESSION) public [<synthetic> ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] get(): <implicit> { LAZY_BLOCK }
 
 FILE: [ResolvedTo(IMPORTS)] Derived.kt
     @R|kotlin/annotation/Target|[CompilerRequiredAnnotations](Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|, Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.FUNCTION|) public? final? [ResolvedTo(COMPILER_REQUIRED_ANNOTATIONS)] annotation class Anno : R|kotlin/Annotation| {
@@ -67,18 +67,18 @@ FILE: [ResolvedTo(IMPORTS)] Derived.kt
     public? final? const [ResolvedTo(RAW_FIR)] val prop: <implicit> = LAZY_EXPRESSION
         public? [ResolvedTo(RAW_FIR)] get(): <implicit>
     public? final? [ResolvedTo(RAW_FIR)] fun expectType(): @Anno[Unresolved](LAZY_EXPRESSION) List<@Anno[Unresolved](LAZY_EXPRESSION) Int> { LAZY_BLOCK }
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Derived : R|Base| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class Derived : R|Base| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Derived] constructor(): R|Derived| {
             LAZY_super<R|Base|>
         }
 
-        @R|Anno|[Types](LAZY_EXPRESSION) public open override [ResolvedTo(CONTRACTS)] fun getSomething(): <implicit> { LAZY_BLOCK }
+        @R|Anno|[Types](LAZY_EXPRESSION) public open override [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun getSomething(): <implicit> { LAZY_BLOCK }
 
     }
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 TARGET: public open override [<synthetic> IMPLICIT_TYPES_BODY_RESOLVE] val something: R|@R|Anno|(<strcat>(String(return type ), prop#))  kotlin/collections/List<@R|Anno|(<strcat>(String(nested return type ), prop#))  kotlin/Int>|
-    @R|Anno|[Types](LAZY_EXPRESSION) public [<synthetic> ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|@R|Anno|(<strcat>(String(return type ), prop#))  kotlin/collections/List<@R|Anno|(<strcat>(String(nested return type ), prop#))  kotlin/Int>| {
+    @R|Anno|[Types](LAZY_EXPRESSION) public [<synthetic> ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] get(): R|@R|Anno|(<strcat>(String(return type ), prop#))  kotlin/collections/List<@R|Anno|(<strcat>(String(nested return type ), prop#))  kotlin/Int>| {
         ^getSomething R|/expectType|()
     }
 
@@ -94,15 +94,15 @@ FILE: [ResolvedTo(IMPORTS)] Derived.kt
     }
     public? final? const [ResolvedTo(RAW_FIR)] val prop: <implicit> = LAZY_EXPRESSION
         public? [ResolvedTo(RAW_FIR)] get(): <implicit>
-    public final [ResolvedTo(CONTRACTS)] fun expectType(): R|@R|Anno|(<strcat>(String(return type ), prop#))  kotlin/collections/List<@R|Anno|(<strcat>(String(nested return type ), prop#))  kotlin/Int>| {
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun expectType(): R|@R|Anno|(<strcat>(String(return type ), prop#))  kotlin/collections/List<@R|Anno|(<strcat>(String(nested return type ), prop#))  kotlin/Int>| {
         ^expectType IntegerLiteral(42)
     }
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Derived : R|Base| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class Derived : R|Base| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Derived] constructor(): R|Derived| {
             LAZY_super<R|Base|>
         }
 
-        @R|Anno|[Types](LAZY_EXPRESSION) public open override [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun getSomething(): R|@R|Anno|(<strcat>(String(return type ), prop#))  kotlin/collections/List<@R|Anno|(<strcat>(String(nested return type ), prop#))  kotlin/Int>| {
+        @R|Anno|[Types](LAZY_EXPRESSION) public open override [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun getSomething(): R|@R|Anno|(<strcat>(String(return type ), prop#))  kotlin/collections/List<@R|Anno|(<strcat>(String(nested return type ), prop#))  kotlin/Int>| {
             ^getSomething R|/expectType|()
         }
 
@@ -110,7 +110,7 @@ FILE: [ResolvedTo(IMPORTS)] Derived.kt
 
 ANNOTATION_ARGUMENTS:
 TARGET: public open override [<synthetic> ANNOTATION_ARGUMENTS] val something: R|@R|Anno|(position = <strcat>(String(return type ), R|/prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(nested return type ), R|/prop|))  kotlin/Int>|
-    @R|Anno|[Types](position = <strcat>(String(getSomething ), R|/prop|)) public [<synthetic> ResolvedTo(ANNOTATION_ARGUMENTS)] get(): R|@R|Anno|(position = <strcat>(String(return type ), R|/prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(nested return type ), R|/prop|))  kotlin/Int>| {
+    @R|Anno|[Types](position = <strcat>(String(getSomething ), R|/prop|)) public [<synthetic> ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] get(): R|@R|Anno|(position = <strcat>(String(return type ), R|/prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(nested return type ), R|/prop|))  kotlin/Int>| {
         ^getSomething R|/expectType|()
     }
 
@@ -124,17 +124,17 @@ FILE: [ResolvedTo(IMPORTS)] Derived.kt
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
-    public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val prop: R|kotlin/String| = String(str)
+    public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val prop: R|kotlin/String| = String(str)
         public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/String|
-    public final [ResolvedTo(CONTRACTS)] fun expectType(): R|@R|Anno|(position = <strcat>(String(return type ), R|/prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(nested return type ), R|/prop|))  kotlin/Int>| {
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun expectType(): R|@R|Anno|(position = <strcat>(String(return type ), R|/prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(nested return type ), R|/prop|))  kotlin/Int>| {
         ^expectType IntegerLiteral(42)
     }
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Derived : R|Base| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class Derived : R|Base| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Derived] constructor(): R|Derived| {
             LAZY_super<R|Base|>
         }
 
-        @R|Anno|[Types](position = <strcat>(String(getSomething ), R|/prop|)) public open override [ResolvedTo(ANNOTATION_ARGUMENTS)] fun getSomething(): R|@R|Anno|(position = <strcat>(String(return type ), R|/prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(nested return type ), R|/prop|))  kotlin/Int>| {
+        @R|Anno|[Types](position = <strcat>(String(getSomething ), R|/prop|)) public open override [ResolvedTo(ANNOTATION_ARGUMENTS)] [ExpectForActualAttributeKey={}] fun getSomething(): R|@R|Anno|(position = <strcat>(String(return type ), R|/prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(nested return type ), R|/prop|))  kotlin/Int>| {
             ^getSomething R|/expectType|()
         }
 
@@ -142,7 +142,7 @@ FILE: [ResolvedTo(IMPORTS)] Derived.kt
 
 BODY_RESOLVE:
 TARGET: public open override [<synthetic> BODY_RESOLVE] val something: R|@R|Anno|(position = <strcat>(String(return type ), R|/prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(nested return type ), R|/prop|))  kotlin/Int>|
-    @R|Anno|[Types](position = <strcat>(String(getSomething ), R|/prop|)) public [<synthetic> ResolvedTo(BODY_RESOLVE)] get(): R|@R|Anno|(position = <strcat>(String(return type ), R|/prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(nested return type ), R|/prop|))  kotlin/Int>| {
+    @R|Anno|[Types](position = <strcat>(String(getSomething ), R|/prop|)) public [<synthetic> ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] get(): R|@R|Anno|(position = <strcat>(String(return type ), R|/prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(nested return type ), R|/prop|))  kotlin/Int>| {
         ^getSomething R|/expectType|()
     }
 
@@ -156,17 +156,17 @@ FILE: [ResolvedTo(IMPORTS)] Derived.kt
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
-    public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val prop: R|kotlin/String| = String(str)
+    public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val prop: R|kotlin/String| = String(str)
         public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/String|
-    public final [ResolvedTo(CONTRACTS)] fun expectType(): R|@R|Anno|(position = <strcat>(String(return type ), R|/prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(nested return type ), R|/prop|))  kotlin/Int>| {
+    public final [ResolvedTo(CONTRACTS)] [ExpectForActualAttributeKey={}] fun expectType(): R|@R|Anno|(position = <strcat>(String(return type ), R|/prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(nested return type ), R|/prop|))  kotlin/Int>| {
         ^expectType IntegerLiteral(42)
     }
-    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Derived : R|Base| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ExpectForActualAttributeKey={}] class Derived : R|Base| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Derived] constructor(): R|Derived| {
             LAZY_super<R|Base|>
         }
 
-        @R|Anno|[Types](position = <strcat>(String(getSomething ), R|/prop|)) public open override [ResolvedTo(BODY_RESOLVE)] fun getSomething(): R|@R|Anno|(position = <strcat>(String(return type ), R|/prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(nested return type ), R|/prop|))  kotlin/Int>| {
+        @R|Anno|[Types](position = <strcat>(String(getSomething ), R|/prop|)) public open override [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun getSomething(): R|@R|Anno|(position = <strcat>(String(return type ), R|/prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(nested return type ), R|/prop|))  kotlin/Int>| {
             ^getSomething R|/expectType|()
         }
 
@@ -174,26 +174,26 @@ FILE: [ResolvedTo(IMPORTS)] Derived.kt
 
 FILE RAW TO BODY:
 FILE: [ResolvedTo(BODY_RESOLVE)] Derived.kt
-    @R|kotlin/annotation/Target|[Types](allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|, Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.FUNCTION|)) public final [ResolvedTo(BODY_RESOLVE)] annotation class Anno : R|kotlin/Annotation| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/Anno.position] position: R|kotlin/String|): R|Anno| {
+    @R|kotlin/annotation/Target|[Types](allowedTargets = vararg(Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.TYPE|, Q|kotlin/annotation/AnnotationTarget|.R|kotlin/annotation/AnnotationTarget.FUNCTION|)) public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] annotation class Anno : R|kotlin/Annotation| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno, ExpectForActualAttributeKey={}] constructor([ResolvedTo(BODY_RESOLVE)] [CorrespondingProperty=/Anno.position] position: R|kotlin/String|): R|Anno| {
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val position: R|kotlin/String| = R|<local>/position|
+        public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}, IsFromPrimaryConstructor=true] val position: R|kotlin/String| = R|<local>/position|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
-    public final const [ResolvedTo(BODY_RESOLVE)] val prop: R|kotlin/String| = String(str)
+    public final const [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] val prop: R|kotlin/String| = String(str)
         public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/String|
-    public final [ResolvedTo(BODY_RESOLVE)] fun expectType(): R|@R|Anno|(position = <strcat>(String(return type ), R|/prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(nested return type ), R|/prop|))  kotlin/Int>| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun expectType(): R|@R|Anno|(position = <strcat>(String(return type ), R|/prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(nested return type ), R|/prop|))  kotlin/Int>| {
         ^expectType Int(42)
     }
-    public final [ResolvedTo(BODY_RESOLVE)] class Derived : R|Base| {
-        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Derived] constructor(): R|Derived| {
+    public final [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] class Derived : R|Base| {
+        public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Derived, ExpectForActualAttributeKey={}] constructor(): R|Derived| {
             super<R|Base|>()
         }
 
-        @R|Anno|[Types](position = <strcat>(String(getSomething ), R|/prop|)) public open override [ResolvedTo(BODY_RESOLVE)] fun getSomething(): R|@R|Anno|(position = <strcat>(String(return type ), R|/prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(nested return type ), R|/prop|))  kotlin/Int>| {
+        @R|Anno|[Types](position = <strcat>(String(getSomething ), R|/prop|)) public open override [ResolvedTo(BODY_RESOLVE)] [ExpectForActualAttributeKey={}] fun getSomething(): R|@R|Anno|(position = <strcat>(String(return type ), R|/prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(nested return type ), R|/prop|))  kotlin/Int>| {
             ^getSomething R|/expectType|()
         }
 
