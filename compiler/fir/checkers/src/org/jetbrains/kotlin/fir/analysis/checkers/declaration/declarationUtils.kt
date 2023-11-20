@@ -99,6 +99,11 @@ fun FirClassSymbol<*>.primaryConstructorSymbol(session: FirSession): FirConstruc
     return fir.primaryConstructorIfAny(session)
 }
 
+@OptIn(SymbolInternals::class)
+fun FirClassSymbol<*>.constructors(session: FirSession): List<FirConstructorSymbol> {
+    return fir.constructors(session)
+}
+
 fun FirTypeRef.needsMultiFieldValueClassFlattening(session: FirSession): Boolean = coneType.needsMultiFieldValueClassFlattening(session)
 
 fun ConeKotlinType.needsMultiFieldValueClassFlattening(session: FirSession) = with(session.typeContext) {

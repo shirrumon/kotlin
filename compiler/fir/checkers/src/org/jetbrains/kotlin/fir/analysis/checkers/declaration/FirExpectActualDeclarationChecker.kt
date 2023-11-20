@@ -13,17 +13,17 @@ import org.jetbrains.kotlin.diagnostics.*
 import org.jetbrains.kotlin.fir.*
 import org.jetbrains.kotlin.fir.analysis.checkers.context.CheckerContext
 import org.jetbrains.kotlin.fir.analysis.checkers.getModifierList
+import org.jetbrains.kotlin.fir.analysis.checkers.hasModifier
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors
 import org.jetbrains.kotlin.fir.declarations.*
-import org.jetbrains.kotlin.fir.declarations.utils.isActual
-import org.jetbrains.kotlin.fir.declarations.utils.isExpect
-import org.jetbrains.kotlin.fir.declarations.utils.isExternal
-import org.jetbrains.kotlin.fir.declarations.utils.isTailRec
+import org.jetbrains.kotlin.fir.declarations.impl.FirPrimaryConstructor
+import org.jetbrains.kotlin.fir.declarations.utils.*
 import org.jetbrains.kotlin.fir.expressions.FirAnnotation
 import org.jetbrains.kotlin.fir.symbols.FirBasedSymbol
 import org.jetbrains.kotlin.fir.symbols.SymbolInternals
 import org.jetbrains.kotlin.fir.symbols.impl.*
 import org.jetbrains.kotlin.lexer.KtTokens
+import org.jetbrains.kotlin.mpp.CallableSymbolMarker
 import org.jetbrains.kotlin.mpp.RegularClassSymbolMarker
 import org.jetbrains.kotlin.name.StandardClassIds
 import org.jetbrains.kotlin.resolve.calls.mpp.AbstractExpectActualAnnotationMatchChecker
@@ -38,6 +38,7 @@ object FirExpectActualDeclarationChecker : FirBasicDeclarationChecker() {
     override fun check(declaration: FirDeclaration, context: CheckerContext, reporter: DiagnosticReporter) {
         if (declaration !is FirMemberDeclaration) return
         if (!context.session.languageVersionSettings.supportsFeature(LanguageFeature.MultiPlatformProjects)) {
+            // todo ticket
             if ((declaration.isExpect || declaration.isActual) && containsExpectOrActualModifier(declaration)) {
                 reporter.reportOn(
                     declaration.source,
@@ -48,12 +49,25 @@ object FirExpectActualDeclarationChecker : FirBasicDeclarationChecker() {
             }
             return
         }
+
+        // This checker performs a more high level checking. It speaks in terms of "properties" and "functions".
+        // It doesn't make sense to check:
+        // - backing fields (fields can't be declared in expect declaration)
+        // - property accessors (they will be checked as part of the properties checking)
+        // - functions and setters parameters (they will be checked as part of the properties/functions checking)
+        // This if is added because hasModifier(KtTokens.ACTUAL_KEYWORD) mistakenly returns `true` for these declarations
+        if (declaration is FirBackingField || declaration is FirPropertyAccessor || declaration is FirValueParameter) return
+
         if (declaration.isExpect) {
             checkExpectDeclarationModifiers(declaration, context, reporter)
             checkOptInAnnotation(declaration, declaration.symbol, context, reporter)
         }
-        if (declaration.isActual) {
-            checkActualDeclarationHasExpected(declaration, context, reporter)
+        val matchingCompatibilityToMembersMap = declaration.symbol.expectForActual.orEmpty()
+        if ((ExpectActualMatchingCompatibility.MatchedSuccessfully in matchingCompatibilityToMembersMap ||
+                    declaration.hasActualModifier()) &&
+            !declaration.isLocalMember // Reduce verbosity. WRONG_MODIFIER_TARGET will be reported anyway.
+        ) {
+            checkActualDeclarationHasExpected(declaration, context, reporter, matchingCompatibilityToMembersMap)
         }
     }
 
@@ -117,10 +131,9 @@ object FirExpectActualDeclarationChecker : FirBasicDeclarationChecker() {
         declaration: FirMemberDeclaration,
         context: CheckerContext,
         reporter: DiagnosticReporter,
-        checkActual: Boolean = true,
+        matchingCompatibilityToMembersMap: ExpectForActualMatchingData,
     ) {
         val symbol = declaration.symbol
-        val matchingCompatibilityToMembersMap = symbol.expectForActual ?: return
         val expectedSingleCandidate =
             matchingCompatibilityToMembersMap[ExpectActualMatchingCompatibility.MatchedSuccessfully]?.singleOrNull()
         val expectActualMatchingContext = context.session.expectActualMatchingContextFactory.create(
@@ -143,10 +156,15 @@ object FirExpectActualDeclarationChecker : FirBasicDeclarationChecker() {
         checkAmbiguousExpects(symbol, matchingCompatibilityToMembersMap, symbol, context, reporter)
 
         val source = declaration.source
-        if (!declaration.isActual) {
-            if (checkActual && ExpectActualMatchingCompatibility.MatchedSuccessfully in matchingCompatibilityToMembersMap) {
-                reporter.reportOn(source, FirErrors.ACTUAL_MISSING, context)
-            }
+        if (!declaration.hasActualModifier() &&
+            ExpectActualMatchingCompatibility.MatchedSuccessfully in matchingCompatibilityToMembersMap &&
+            (actualContainingClass == null || requireActualModifier(declaration, actualContainingClass, context.session)) &&
+            expectedSingleCandidate != null &&
+            // Don't require 'actual' keyword on fake-overrides actualizations.
+            // It's an inconsistency in the language design, but it's the way it works right now
+            !expectedSingleCandidate.isFakeOverride(expectContainingClass, expectActualMatchingContext)
+        ) {
+            reporter.reportOn(source, FirErrors.ACTUAL_MISSING, context)
             return
         }
 
@@ -155,8 +173,7 @@ object FirExpectActualDeclarationChecker : FirBasicDeclarationChecker() {
                 reportClassScopesIncompatibility(symbol, expectedSingleCandidate, declaration, checkingCompatibility, reporter, source, context)
             }
 
-            ExpectActualMatchingCompatibility.MatchedSuccessfully !in matchingCompatibilityToMembersMap &&
-                    requireActualModifier(declaration.symbol, context.session) -> {
+            ExpectActualMatchingCompatibility.MatchedSuccessfully !in matchingCompatibilityToMembersMap -> {
                 reporter.reportOn(
                     source,
                     FirErrors.ACTUAL_WITHOUT_EXPECT,
@@ -171,7 +188,7 @@ object FirExpectActualDeclarationChecker : FirBasicDeclarationChecker() {
                 // A nicer diagnostic for functions with default params
                 if (declaration is FirFunction && checkingCompatibility == ExpectActualCheckingCompatibility.ActualFunctionWithDefaultParameters) {
                     reporter.reportOn(declaration.source, FirErrors.ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS, context)
-                } else if (requireActualModifier(declaration.symbol, context.session)) {
+                } else {
                     reporter.reportOn(
                         source,
                         FirErrors.ACTUAL_WITHOUT_EXPECT,
@@ -250,6 +267,21 @@ object FirExpectActualDeclarationChecker : FirBasicDeclarationChecker() {
                 context
             )
         }
+    }
+
+    private fun FirBasedSymbol<*>.isFakeOverride(
+        expectContainingClass: FirRegularClassSymbol?,
+        expectActualMatchingContext: FirExpectActualMatchingContext,
+    ) = expectContainingClass != null &&
+            this@isFakeOverride is FirCallableSymbol<*> &&
+            with(expectActualMatchingContext) { this@isFakeOverride.isFakeOverride(expectContainingClass) }
+
+    // todo explain why we return `false`
+    private fun FirElement.hasActualModifier(): Boolean = when (source?.kind) {
+        KtFakeSourceElementKind.DataClassGeneratedMembers -> false
+        KtFakeSourceElementKind.EnumGeneratedDeclaration -> false
+        KtFakeSourceElementKind.ImplicitConstructor -> false
+        else -> hasModifier(KtTokens.ACTUAL_KEYWORD) || hasModifier(KtTokens.IMPL_KEYWORD)
     }
 
     private fun getCheckingCompatibility(
@@ -333,6 +365,38 @@ object FirExpectActualDeclarationChecker : FirBasicDeclarationChecker() {
             context,
         )
     }
+
+    // we don't require `actual` modifier on
+    //  - annotation constructors, because annotation classes can only have one constructor
+    //  - inline class primary constructors, because inline class must have primary constructor
+    //  - value parameter inside primary constructor of inline class, because inline class must have one value parameter
+    private fun requireActualModifier(
+        member: FirMemberDeclaration,
+        actualContainingClass: FirRegularClassSymbol,
+        platformSession: FirSession
+    ): Boolean {
+        return member.origin != FirDeclarationOrigin.Synthetic.DataClassMember && // todo only data class?
+                !isSinglePrimaryConstructor(member, actualContainingClass, platformSession) &&
+                !isUnderlyingPropertyOfInlineClass(member, actualContainingClass, platformSession)
+        //return !member.isAnnotationConstructor() && // todo
+        //        !member.isPrimaryConstructorOfInlineClass() &&
+        //        !isUnderlyingPropertyOfInlineClass(member)
+    }
+
+    private fun isSinglePrimaryConstructor(
+        member: FirMemberDeclaration,
+        actualContainingClass: FirRegularClassSymbol,
+        platformSession: FirSession
+    ): Boolean = member is FirPrimaryConstructor && actualContainingClass.constructors(platformSession).size == 1
+
+    private fun isUnderlyingPropertyOfInlineClass(
+        member: FirMemberDeclaration,
+        actualContainingClass: FirRegularClassSymbol,
+        platformSession: FirSession
+    ): Boolean = actualContainingClass.isInline &&
+            member is FirProperty &&
+            member.receiverParameter == null &&
+            actualContainingClass.primaryConstructorSymbol(platformSession)?.valueParameterSymbols?.singleOrNull()?.name == member.nameOrSpecialName
 
     // we don't require `actual` modifier on
     //  - annotation constructors, because annotation classes can only have one constructor
