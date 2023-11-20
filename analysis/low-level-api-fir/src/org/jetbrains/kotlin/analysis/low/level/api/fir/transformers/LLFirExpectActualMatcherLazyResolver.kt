@@ -15,6 +15,8 @@ import org.jetbrains.kotlin.fir.expressions.FirStatement
 import org.jetbrains.kotlin.fir.resolve.ScopeSession
 import org.jetbrains.kotlin.fir.resolve.transformers.body.resolve.FirResolveContextCollector
 import org.jetbrains.kotlin.fir.resolve.transformers.mpp.FirExpectActualMatcherTransformer
+import kotlin.contracts.ExperimentalContracts
+import kotlin.contracts.contract
 
 internal object LLFirExpectActualMatcherLazyResolver : LLFirLazyResolver(FirResolvePhase.EXPECT_ACTUAL_MATCHING) {
     override fun resolve(
@@ -29,8 +31,9 @@ internal object LLFirExpectActualMatcherLazyResolver : LLFirLazyResolver(FirReso
     }
 
     override fun phaseSpecificCheckIsResolved(target: FirElementWithResolveState) {
-        if (target !is FirMemberDeclaration || !target.canHaveExpectCounterPart()) return
-        checkExpectForActualIsResolved(target)
+        if (target.canHaveExpectCounterPart()) {
+            checkExpectForActualIsResolved(target)
+        }
     }
 }
 
@@ -55,18 +58,27 @@ private class LLFirExpectActualMatchingTargetResolver(
     }
 
     override fun doLazyResolveUnderLock(target: FirElementWithResolveState) {
-        if (target !is FirMemberDeclaration) return
-        if (!target.canHaveExpectCounterPart()) return
-        transformer.transformMemberDeclaration(target)
+        if (target.canHaveExpectCounterPart()) {
+            transformer.transformMemberDeclaration(target)
+        }
     }
 }
 
-private fun FirMemberDeclaration.canHaveExpectCounterPart(): Boolean = when (this) {
-    is FirEnumEntry -> true
-    is FirProperty -> true
-    is FirConstructor -> true
-    is FirSimpleFunction -> true
-    is FirRegularClass -> true
-    is FirTypeAlias -> true
-    else -> false
+@OptIn(ExperimentalContracts::class)
+private fun FirElementWithResolveState.canHaveExpectCounterPart(): Boolean {
+    contract {
+        returns(true) implies (this@canHaveExpectCounterPart is FirMemberDeclaration)
+    }
+    if (this is FirDeclaration && origin == FirDeclarationOrigin.ScriptCustomization.ResultProperty) {
+        return false // expect/actual are not possible in kts files. Checked by ScriptGetOrBuildFirTestGenerated
+    }
+    return this is FirMemberDeclaration && when (this) {
+        is FirEnumEntry -> true
+        is FirProperty -> true
+        is FirConstructor -> true
+        is FirSimpleFunction -> true
+        is FirRegularClass -> true
+        is FirTypeAlias -> true
+        else -> false
+    }
 }

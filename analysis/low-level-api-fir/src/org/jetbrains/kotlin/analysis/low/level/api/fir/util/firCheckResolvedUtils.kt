@@ -11,11 +11,14 @@ import org.jetbrains.kotlin.utils.exceptions.ExceptionAttachmentBuilder
 import org.jetbrains.kotlin.utils.exceptions.checkWithAttachment
 import org.jetbrains.kotlin.fir.FirAnnotationContainer
 import org.jetbrains.kotlin.fir.FirElementWithResolveState
+import org.jetbrains.kotlin.fir.analysis.checkers.declaration.FirExpectActualDeclarationChecker
+import org.jetbrains.kotlin.fir.analysis.checkers.declaration.hasActualModifier
 import org.jetbrains.kotlin.fir.contracts.FirLegacyRawContractDescription
 import org.jetbrains.kotlin.fir.contracts.FirResolvedContractDescription
 import org.jetbrains.kotlin.fir.contracts.impl.FirEmptyContractDescription
 import org.jetbrains.kotlin.fir.declarations.*
 import org.jetbrains.kotlin.fir.declarations.utils.isActual
+import org.jetbrains.kotlin.fir.declarations.utils.isExpect
 import org.jetbrains.kotlin.fir.expressions.FirAnnotationCall
 import org.jetbrains.kotlin.fir.expressions.FirExpression
 import org.jetbrains.kotlin.fir.expressions.FirResolvable
@@ -108,7 +111,7 @@ internal fun checkStatementsAreResolved(script: FirScript) {
 }
 
 internal fun checkExpectForActualIsResolved(memberDeclaration: FirMemberDeclaration) {
-    if (!memberDeclaration.isActual) return
+    if (!memberDeclaration.hasActualModifier() || memberDeclaration.isExpect) return
 
     checkWithAttachment(
         condition = memberDeclaration.expectForActual != null,
