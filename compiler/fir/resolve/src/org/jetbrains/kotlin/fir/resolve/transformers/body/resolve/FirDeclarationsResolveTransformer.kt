@@ -664,7 +664,10 @@ open class FirDeclarationsResolveTransformer(
         val result = context.withScript(script, components) {
             action()
         }
-        dataFlowAnalyzer.exitScript() // TODO: FirScript should be a FirControlFlowGraphOwner, KT-59683
+        val controlFlowGraph = dataFlowAnalyzer.exitScript()
+        if (controlFlowGraph != null) {
+            result.replaceControlFlowGraphReference(FirControlFlowGraphReferenceImpl(controlFlowGraph))
+        }
         return result
     }
 
