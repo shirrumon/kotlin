@@ -624,14 +624,61 @@ class ControlFlowGraphBuilder {
         }
     }
 
-    fun enterScript(script: FirScript): ScriptEnterNode {
-        return enterGraph(script, "SCRIPT_GRAPH", ControlFlowGraph.Kind.Function) {
+    // ----------------------------------- Scripts -----------------------------------
+
+    fun enterScript(script: FirScript, buildGraph: Boolean): ScriptEnterNode? {
+        if (!buildGraph) {
+            graphs.push(ControlFlowGraph(declaration = null, "<discarded script graph>", ControlFlowGraph.Kind.Script))
+            return null
+        }
+        return enterGraph(script, script.name.asString(), ControlFlowGraph.Kind.Script) {
             createScriptEnterNode(it) to createScriptExitNode(it)
         }
     }
 
-    fun exitScript(): Pair<ScriptExitNode, ControlFlowGraph> {
-        return exitGraph()
+    fun exitScript(): Pair<ScriptExitNode?, ControlFlowGraph?> {
+        assert(currentGraph.kind == ControlFlowGraph.Kind.Script)
+        if (currentGraph.declaration == null) {
+            graphs.pop() // Discard empty script graph.
+            return null to null
+        }
+
+        // the implementation is based on the one for file
+
+        val node = currentGraph.enterNode
+        lastNodes.pop() // TODO: check validity of this
+        val enterNode = node as ScriptEnterNode
+        val exitNode = currentGraph.exitNode as ScriptExitNode
+
+        val properties = mutableListOf<ControlFlowGraph>()
+        val script = enterNode.fir
+        if ((script as FirControlFlowGraphOwner).controlFlowGraphReference != null) {
+            graphs.pop()
+            return null to null
+        }
+
+        script.statements.forEachGraphOwner {
+            val graph = it.controlFlowGraphReference?.controlFlowGraph ?: return@forEachGraphOwner
+            if (it is FirDeclaration) {
+                if (it is FirProperty) properties.add(graph)
+            }
+        }
+
+        var lastNode: CFGNode<*> = enterNode
+        for (property in properties) {
+            // Top-level property CFGs should never be linked with dead edges.
+            CFGNode.addEdge(lastNode, property.enterNode, kind = EdgeKind.CfgForward, propagateDeadness = false)
+            lastNode = property.exitNode
+        }
+
+        addEdge(lastNode, exitNode, preferredKind = EdgeKind.CfgForward, propagateDeadness = false)
+        if (properties.isNotEmpty()) {
+            // Fake edge to enforce ordering.
+            addEdge(enterNode, exitNode, preferredKind = EdgeKind.DeadForward, propagateDeadness = false)
+        }
+
+        enterNode.subGraphs = properties
+        return exitNode to popGraph()
     }
 
     fun enterCodeFragment(codeFragment: FirCodeFragment): CodeFragmentEnterNode {
@@ -1394,7 +1441,8 @@ class ControlFlowGraphBuilder {
     // ----------------------------------- Edge utils -----------------------------------
 
     private fun addNewSimpleNode(node: CFGNode<*>, isDead: Boolean = false) {
-        addEdge(lastNodes.pop(), node, preferredKind = if (isDead) EdgeKind.DeadForward else EdgeKind.Forward)
+        val from = lastNodes.pop()
+        addEdge(from, node, preferredKind = if (isDead) EdgeKind.DeadForward else EdgeKind.Forward)
         lastNodes.push(node)
     }
 

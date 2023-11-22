@@ -114,7 +114,9 @@ open class FirDeclarationsResolveTransformer(
     override fun transformProperty(property: FirProperty, data: ResolutionMode): FirProperty = whileAnalysing(session, property) {
         require(property !is FirSyntheticProperty) { "Synthetic properties should not be processed by body transformers" }
 
-        if (property.isLocal) {
+        // script top level destructuring declaration container variables should be treated as properties here
+        // to avoid CFG/DFA complications
+        if (property.isLocal && property.origin != FirDeclarationOrigin.Synthetic.ScriptTopLevelDestructuringDeclarationContainer) {
             prepareSignatureForBodyResolve(property)
             property.transformStatus(this, property.resolveStatus().mode())
             property.getter?.let { it.transformStatus(this, it.resolveStatus(containingProperty = property).mode()) }
@@ -529,7 +531,10 @@ open class FirDeclarationsResolveTransformer(
             .transformOtherChildren(transformer, ResolutionMode.ContextIndependent)
 
         context.storeVariable(variable, session)
-        dataFlowAnalyzer.exitLocalVariableDeclaration(variable, hadExplicitType)
+        if (variable.origin != FirDeclarationOrigin.ScriptCustomization.Parameter) {
+            // script parameters should not be added to CFG to avoid graph building compilations
+            dataFlowAnalyzer.exitLocalVariableDeclaration(variable, hadExplicitType)
+        }
         return variable
     }
 
@@ -660,8 +665,9 @@ open class FirDeclarationsResolveTransformer(
     }
 
     fun withScript(script: FirScript, action: () -> FirScript): FirScript {
-        dataFlowAnalyzer.enterScript(script)
         val result = context.withScript(script, components) {
+            // see todo in withFile
+            dataFlowAnalyzer.enterScript(script, buildGraph = transformer.buildCfgForScripts)
             action()
         }
         val controlFlowGraph = dataFlowAnalyzer.exitScript()
@@ -671,8 +677,36 @@ open class FirDeclarationsResolveTransformer(
         return result
     }
 
-    override fun transformScript(script: FirScript, data: ResolutionMode): FirScript = withScript(script) {
-        transformDeclarationContent(script, data) as FirScript
+    override fun transformScript(script: FirScript, data: ResolutionMode): FirScript = whileAnalysing(session, script) {
+        withScript(script) {
+            transformer.firResolveContextCollector?.addDeclarationContext(script, context)
+
+            if (implicitTypeOnly) {
+                script.transformAnnotations(transformer, data)
+                script.replaceParameters(script.parameters.map { it.transform(this, data) })
+                script.replaceContextReceivers(script.contextReceivers.map { it.transform(this, data) })
+                // need to process declarations for implicit type resolution to repeat K1 behavior
+                script.replaceStatements(
+                    script.statements.map {
+                        if (it is FirDeclaration) it.transform(transformer, data)
+                        else it
+                    }
+                )
+            } else {
+                script.replaceStatements(
+                    script.statements.map {
+                        it.transform<FirStatement, ResolutionMode>(transformer, data).also {
+                            if (it is FirProperty) {
+                                // adding the property node to script's body subgraph, to be able to
+                                // detect initialization errors in the checker
+                                dataFlowAnalyzer.exitLocalVariableDeclaration(it, true)
+                            }
+                        }
+                    }
+                )
+            }
+            script
+        }
     }
 
     override fun transformCodeFragment(codeFragment: FirCodeFragment, data: ResolutionMode): FirCodeFragment {
