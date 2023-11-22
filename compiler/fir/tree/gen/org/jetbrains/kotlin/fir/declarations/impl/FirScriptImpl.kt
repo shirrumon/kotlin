@@ -84,4 +84,13 @@ internal class FirScriptImpl(
     override fun replaceStatements(newStatements: List<FirStatement>) {
         statements = newStatements.toMutableOrEmpty()
     }
+
+    override fun replaceParameters(newParameters: List<FirVariable>) {
+        parameters.clear()
+        parameters.addAll(newParameters)
+    }
+
+    override fun replaceContextReceivers(newContextReceivers: List<FirContextReceiver>) {
+        contextReceivers = newContextReceivers.toMutableOrEmpty()
+    }
 }

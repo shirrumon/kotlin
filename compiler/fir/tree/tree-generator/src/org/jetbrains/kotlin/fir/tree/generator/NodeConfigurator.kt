@@ -495,8 +495,8 @@ object NodeConfigurator : AbstractFieldConfigurator<FirTreeBuilder>(FirTreeBuild
             +name
             +fieldList(statement, withReplace = true, useMutableOrEmpty = true).withTransform()
             +symbol("FirScriptSymbol")
-            +fieldList("parameters", variable, withReplace = false)
-            +fieldList(contextReceiver, useMutableOrEmpty = true)
+            +fieldList("parameters", variable, withReplace = true)
+            +fieldList(contextReceiver, useMutableOrEmpty = true, withReplace = true)
             +field("resultPropertyName", nameType, nullable = true)
         }
 

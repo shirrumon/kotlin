@@ -49,6 +49,10 @@ abstract class FirScript : FirDeclaration(), FirControlFlowGraphOwner {
 
     abstract fun replaceStatements(newStatements: List<FirStatement>)
 
+    abstract fun replaceParameters(newParameters: List<FirVariable>)
+
+    abstract fun replaceContextReceivers(newContextReceivers: List<FirContextReceiver>)
+
     abstract override fun <D> transformAnnotations(transformer: FirTransformer<D>, data: D): FirScript
 
     abstract fun <D> transformStatements(transformer: FirTransformer<D>, data: D): FirScript
