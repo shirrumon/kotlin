@@ -104,6 +104,7 @@ private class LLFirBodyTargetResolver(
         firResolveContextCollector = firResolveContextCollector,
     ) {
         override val preserveCFGForClasses: Boolean get() = false
+//        override val buildCfgForScripts: Boolean get() = false
         override val buildCfgForFiles: Boolean get() = false
     }
 
@@ -266,7 +267,7 @@ private class LLFirBodyTargetResolver(
 
     override fun rawResolve(target: FirElementWithResolveState) {
         when (target) {
-            is FirScript -> target.takeUnless(FirScript::isCertainlyResolved)?.let(::resolveScript)
+            is FirScript -> target.let(::resolveScript)
             else -> super.rawResolve(target)
         }
 
