@@ -278,7 +278,7 @@ private class LLFirBodyTargetResolver(
 internal object BodyStateKeepers {
     val SCRIPT: StateKeeper<FirScript, FirDesignationWithFile> = stateKeeper { script, designation ->
         val oldStatements = script.statements
-        if (oldStatements.none { it.isScriptStatement } || script.isCertainlyResolved) return@stateKeeper
+        if (oldStatements.none { it.isScriptStatement }) return@stateKeeper
 
         add(RESULT_PROPERTY, designation)
         add(FirScript::statements, FirScript::replaceStatements) {
@@ -436,14 +436,6 @@ private fun StateKeeperScope<FirFunction, FirDesignationWithFile>.preserveContra
 private fun FirScript.findResultProperty(): FirProperty? = statements.findIsInstanceAnd<FirProperty> {
     it.origin == FirDeclarationOrigin.ScriptCustomization.ResultProperty
 }
-
-private val FirScript.isCertainlyResolved: Boolean
-    get() {
-        val dependentProperty = findResultProperty() ?: return false
-
-        // This meant that we already resolve the entire script on implicit body phase
-        return dependentProperty.bodyResolveState == FirPropertyBodyResolveState.ALL_BODIES_RESOLVED
-    }
 
 private val FirFunction.isCertainlyResolved: Boolean
     get() {
