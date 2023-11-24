@@ -277,18 +277,19 @@ private class LLFirBodyTargetResolver(
 
 internal object BodyStateKeepers {
     val SCRIPT: StateKeeper<FirScript, FirDesignationWithFile> = stateKeeper { script, designation ->
-        val oldStatements = script.statements
-        if (oldStatements.none { it.isScriptStatement }) return@stateKeeper
+        val oldDeclarations = script.declarations
+        if (oldDeclarations.none { it.isScriptBlock }) return@stateKeeper
 
         add(RESULT_PROPERTY, designation)
-        add(FirScript::statements, FirScript::replaceStatements) {
-            val recreatedStatements = FirLazyBodiesCalculator.createStatementsForScript(script)
-            requireSameSize(oldStatements, recreatedStatements)
+        add(FirScript::declarations, FirScript::replaceDeclarations) {
+            val recreatedDeclarations = FirLazyBodiesCalculator.createStatementsForScript(script)
+            requireSameSize(oldDeclarations, recreatedDeclarations)
 
-            ArrayList<FirStatement>(oldStatements.size).apply {
-                oldStatements.zip(recreatedStatements).mapTo(this) { (old, new) ->
+            ArrayList<FirDeclaration>(oldDeclarations.size).apply {
+                oldDeclarations.zip(recreatedDeclarations).mapTo(this) { (old, new) ->
                     when {
-                        !old.isScriptStatement -> old
+                        !old.isScriptBlock -> old
+                        // TODO: check validity of the code below
                         old is FirProperty && old.origin == FirDeclarationOrigin.ScriptCustomization.ResultProperty -> {
                             old.replaceInitializer((new as FirProperty).initializer)
                             old
@@ -433,7 +434,7 @@ private fun StateKeeperScope<FirFunction, FirDesignationWithFile>.preserveContra
     }
 }
 
-private fun FirScript.findResultProperty(): FirProperty? = statements.findIsInstanceAnd<FirProperty> {
+private fun FirScript.findResultProperty(): FirProperty? = declarations.findIsInstanceAnd<FirProperty> {
     it.origin == FirDeclarationOrigin.ScriptCustomization.ResultProperty
 }
 
@@ -506,7 +507,8 @@ private fun delegatedConstructorCallGuard(fir: FirDelegatedConstructorCall): Fir
     }
 }
 
-private fun requireSameSize(old: List<FirStatement>, new: List<FirStatement>) {
+private fun requireSameSize(old: List<FirDeclaration>, new: List<FirDeclaration>) {
+    // TODO: check the meaning after switching to script blocks
     requireWithAttachment(
         condition = old.size == new.size,
         message = { "The number of statements are different" }

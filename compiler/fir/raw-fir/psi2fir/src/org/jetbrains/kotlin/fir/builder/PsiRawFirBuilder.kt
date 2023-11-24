@@ -1222,21 +1222,61 @@ open class PsiRawFirBuilder(
             sourceFile: KtSourceFile?,
             setup: FirScriptBuilder.() -> Unit = {},
         ): FirScript {
+
+            fun buildScriptBlockForCurrent(bodyInit: FirAnonymousInitializerBuilder.() -> Unit): FirAnonymousInitializer =
+                buildAnonymousInitializer {
+                    moduleData = baseModuleData
+                    origin = FirDeclarationOrigin.Source
+                    bodyInit()
+                }
+
             return buildScript {
                 source = script.toFirSourceElement()
                 moduleData = baseModuleData
                 origin = FirDeclarationOrigin.Source
                 name = Name.special("<script-$fileName>")
                 symbol = FirScriptSymbol(context.packageFqName.child(name))
+                val currentStatements = mutableListOf<FirStatement>()
+
+                fun createScriptBlockFromCurrentStatements() {
+                    if (currentStatements.isNotEmpty()) {
+                        declarations.add(
+                            buildScriptBlockForCurrent {
+                                body = buildOrLazyBlock {
+                                    withForcedLocalContext {
+                                        buildBlock {
+                                            statements.addAll(currentStatements)
+                                        }
+                                    }
+                                }
+                            }
+                        )
+                        currentStatements.clear()
+                    }
+                }
+
                 for (declaration in script.declarations) {
+                    val declarationSource = declaration.toFirSourceElement()
                     when (declaration) {
-                        is KtScriptInitializer -> {
-                            declaration.body?.let { statements.add(it.toFirStatement()) }
+                        is KtScriptInitializer -> { // TODO: check if it is still a used case
+                            createScriptBlockFromCurrentStatements()
+                            declarations.add(
+                                buildScriptBlockForCurrent {
+                                    source = declarationSource
+                                    body = buildOrLazyBlock {
+                                        withForcedLocalContext {
+                                            declaration.body.toFirBlock()
+                                        }
+                                    }
+                                    declaration.extractAnnotationsTo(this)
+                                }
+                            )
                         }
                         is KtDestructuringDeclaration -> {
+                            createScriptBlockFromCurrentStatements()
                             val destructuringContainerVar = generateTemporaryVariable(
                                 baseModuleData,
-                                declaration.toFirSourceElement(),
+                                declarationSource,
                                 "destruct",
                                 declaration.initializer.toFirExpression { ConeSyntaxDiagnostic("Initializer required for destructuring declaration") },
                                 origin = FirDeclarationOrigin.Synthetic.ScriptTopLevelDestructuringDeclarationContainer,
@@ -1255,11 +1295,29 @@ open class PsiRawFirBuilder(
                                     (it as FirProperty).destructuringDeclarationContainerVariable = destructuringContainerVar.symbol
                                 }
                             }
-                            statements.add(destructuringContainerVar)
-                            statements.addAll(destructuringBlock.statements)
+                            declarations.add(destructuringContainerVar)
+                            declarations.add(
+                                buildScriptBlockForCurrent {
+                                    source = declarationSource
+                                    body = buildOrLazyBlock {
+                                        withForcedLocalContext {
+                                            buildBlock {
+                                                source = declarationSource
+                                                statements.addAll(destructuringBlock.statements)
+                                            }
+                                        }
+                                    }
+                                }
+                            )
                         }
                         else -> {
-                            statements.add(declaration.toFirStatement())
+                            val firStatement = declaration.toFirStatement()
+                            if (firStatement is FirDeclaration) {
+                                createScriptBlockFromCurrentStatements()
+                                declarations.add(firStatement)
+                            } else {
+                                currentStatements.add(firStatement)
+                            }
                         }
                     }
                 }

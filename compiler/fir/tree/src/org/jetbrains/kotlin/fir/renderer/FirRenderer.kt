@@ -221,7 +221,7 @@ class FirRenderer(
 
             printer.newLine()
 
-            script.statements.forEach {
+            script.declarations.forEach {
                 it.accept(this)
                 printer.newLine()
             }

@@ -518,7 +518,7 @@ class Fir2IrConverter(
                 addDeclarationToParentIfNeeded(irScript)
                 declarationStorage.withScope(irScript.symbol) {
                     irScript.parent = parent
-                    for (scriptStatement in declaration.statements) {
+                    for (scriptStatement in declaration.declarations) {
                         when (scriptStatement) {
                             is FirRegularClass -> {
                                 registerClassAndNestedClasses(scriptStatement, irScript)
@@ -528,10 +528,10 @@ class Fir2IrConverter(
                             else -> {}
                         }
                     }
-                    for (scriptStatement in declaration.statements) {
-                        if (scriptStatement is FirDeclaration) {
+                    for (scriptStatement in declaration.declarations) {
+//                        if (scriptStatement is FirDeclaration) {
                             processMemberDeclaration(scriptStatement, containingClass = null, irScript, delegateFieldToPropertyMap = null)
-                        }
+//                        }
                     }
                 }
             }

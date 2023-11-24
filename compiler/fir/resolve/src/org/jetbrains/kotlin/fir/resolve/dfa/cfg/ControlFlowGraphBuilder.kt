@@ -650,34 +650,44 @@ class ControlFlowGraphBuilder {
         val enterNode = node as ScriptEnterNode
         val exitNode = currentGraph.exitNode as ScriptExitNode
 
-        val properties = mutableListOf<ControlFlowGraph>()
         val script = enterNode.fir
         if ((script as FirControlFlowGraphOwner).controlFlowGraphReference != null) {
             graphs.pop()
             return null to null
         }
 
-        script.statements.forEachGraphOwner {
+        val allGraphs = mutableListOf<ControlFlowGraph>()
+
+        script.declarations.forEachGraphOwner {
             val graph = it.controlFlowGraphReference?.controlFlowGraph ?: return@forEachGraphOwner
-            if (it is FirDeclaration) {
-                if (it is FirProperty) properties.add(graph)
+//            if (it is FirDeclaration) {
+                allGraphs.add(graph)
+//            }
+        }
+
+        val lastNode = allGraphs.fold<_, CFGNode<*>>(enterNode) { lastNode, graph ->
+            // In local classes, we already have control flow (+ data flow) edge from `enterNode`
+            // to first in-place initializer.
+            if (lastNode !== enterNode || lastNode.previousNodes.isEmpty()) {
+                addEdgeToSubGraph(lastNode, graph.enterNode)
             }
+            graph.exitNode
         }
 
-        var lastNode: CFGNode<*> = enterNode
-        for (property in properties) {
-            // Top-level property CFGs should never be linked with dead edges.
-            CFGNode.addEdge(lastNode, property.enterNode, kind = EdgeKind.CfgForward, propagateDeadness = false)
-            lastNode = property.exitNode
-        }
-
+//        var lastNode: CFGNode<*> = enterNode
+//        for (property in allGraphs) {
+//            // Top-level property CFGs should never be linked with dead edges.
+//            CFGNode.addEdge(lastNode, property.enterNode, kind = EdgeKind.CfgForward, propagateDeadness = false)
+//            lastNode = property.exitNode
+//        }
+//
         addEdge(lastNode, exitNode, preferredKind = EdgeKind.CfgForward, propagateDeadness = false)
-        if (properties.isNotEmpty()) {
+        if (allGraphs.isNotEmpty()) {
             // Fake edge to enforce ordering.
             addEdge(enterNode, exitNode, preferredKind = EdgeKind.DeadForward, propagateDeadness = false)
         }
 
-        enterNode.subGraphs = properties
+        enterNode.subGraphs = allGraphs
         return exitNode to popGraph()
     }
 

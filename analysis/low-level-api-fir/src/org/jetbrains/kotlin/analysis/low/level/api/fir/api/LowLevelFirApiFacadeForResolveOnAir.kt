@@ -24,7 +24,7 @@ import org.jetbrains.kotlin.analysis.low.level.api.fir.state.LLFirResolvableReso
 import org.jetbrains.kotlin.analysis.low.level.api.fir.util.FirElementFinder
 import org.jetbrains.kotlin.analysis.low.level.api.fir.util.codeFragment
 import org.jetbrains.kotlin.analysis.low.level.api.fir.util.errorWithFirSpecificEntries
-import org.jetbrains.kotlin.analysis.low.level.api.fir.util.isScriptStatement
+import org.jetbrains.kotlin.analysis.low.level.api.fir.util.isScriptBlock
 import org.jetbrains.kotlin.analysis.low.level.api.fir.util.originalDeclaration
 import org.jetbrains.kotlin.analysis.low.level.api.fir.util.originalKtFile
 import org.jetbrains.kotlin.analysis.utils.printer.parentOfType
@@ -365,11 +365,11 @@ object LowLevelFirApiFacadeForResolveOnAir {
      * We assume that [newScript] has the same declarations as [originalScript]
      */
     private fun restoreOriginalDeclarationsInScript(originalScript: FirScript, newScript: FirScript) {
-        val updatedStatements = ArrayList<FirStatement>(newScript.statements.size)
-        val originalDeclarations = originalScript.statements.iterator()
-        for (recreatedStatement in newScript.statements) {
-            updatedStatements += if (recreatedStatement.isScriptStatement) {
-                recreatedStatement
+        val updatedDeclarations = ArrayList<FirDeclaration>(newScript.declarations.size)
+        val originalDeclarations = originalScript.declarations.iterator()
+        for (recreatedDeclaration in newScript.declarations) {
+            updatedDeclarations += if (recreatedDeclaration.isScriptBlock) {
+                recreatedDeclaration
             } else {
                 originalDeclarations.nextDeclaration() ?: scriptDeclarationInconsistencyError(originalScript, newScript)
             }
@@ -380,12 +380,12 @@ object LowLevelFirApiFacadeForResolveOnAir {
             scriptDeclarationInconsistencyError(originalScript, newScript)
         }
 
-        newScript.replaceStatements(updatedStatements)
+        newScript.replaceDeclarations(updatedDeclarations)
     }
 
     private fun scriptDeclarationInconsistencyError(originalScript: FirScript, newScript: FirScript): Nothing {
-        val originalDeclarations = originalScript.statements.filterNot(FirStatement::isScriptStatement)
-        val newDeclarations = newScript.statements.filterNot(FirStatement::isScriptStatement)
+        val originalDeclarations = originalScript.declarations.filterNot(FirDeclaration::isScriptBlock)
+        val newDeclarations = newScript.declarations.filterNot(FirDeclaration::isScriptBlock)
         errorWithAttachment("New script has ${if (newDeclarations.size > originalDeclarations.size) "more" else "less"} declarations") {
             withFirEntry("originalScript", originalScript)
             withFirEntry("newScript", newScript)
@@ -403,12 +403,12 @@ object LowLevelFirApiFacadeForResolveOnAir {
         }
     }
 
-    private fun Iterator<FirStatement>.nextDeclaration(): FirStatement? {
+    private fun Iterator<FirDeclaration>.nextDeclaration(): FirDeclaration? {
         while (hasNext()) {
-            val statement = next()
-            if (statement.isScriptStatement) continue
+            val declaration = next()
+            if (declaration.isScriptBlock) continue
 
-            return statement
+            return declaration
         }
 
         return null

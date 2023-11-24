@@ -402,7 +402,7 @@ abstract class AbstractFirSpecificAnnotationResolveTransformer(
             computationSession.recordThatAnnotationsAreResolved(script)
             transformDeclaration(script, null).also {
                 transformChildren(script) {
-                    script.transformStatements(this, data)
+                    script.transformDeclarations(this, data)
                 }
             }
         }

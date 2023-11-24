@@ -120,6 +120,15 @@ fun <T : FirStatement> FirBlock.replaceFirstStatement(factory: (T) -> FirStateme
     return existing
 }
 
+fun FirBlock.removeLastStatementIf(predicate: (FirStatement) -> Boolean ): FirStatement? {
+    require(this is FirBlockImpl) {
+        "removeLastStatementIf should not be called for ${this::class.simpleName}"
+    }
+    return if (statements.isNotEmpty() && predicate(statements.last())) {
+        statements.removeLast()
+    } else null
+}
+
 fun FirExpression.unwrapArgument(): FirExpression = (this as? FirWrappedArgumentExpression)?.expression ?: this
 
 fun FirExpression.unwrapAndFlattenArgument(): List<FirExpression> = buildList { unwrapAndFlattenArgumentTo(this) }

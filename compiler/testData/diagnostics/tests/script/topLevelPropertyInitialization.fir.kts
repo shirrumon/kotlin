@@ -35,7 +35,7 @@ val f: String by notInPlaceDelegate { f }
 val g: Int
 val h = 1.also { <!VAL_REASSIGNMENT!>g<!> = 2 }
 <!MUST_BE_INITIALIZED!>val i: Int<!>
-val j by lazy { <!CAPTURED_VAL_INITIALIZATION, CAPTURED_VAL_INITIALIZATION, VAL_REASSIGNMENT!>i<!> = 2; 1 }
+val j by lazy { <!CAPTURED_VAL_INITIALIZATION, VAL_REASSIGNMENT!>i<!> = 2; 1 }
 val k: Int
     get() {
         <!VAL_REASSIGNMENT!>i<!> = 3

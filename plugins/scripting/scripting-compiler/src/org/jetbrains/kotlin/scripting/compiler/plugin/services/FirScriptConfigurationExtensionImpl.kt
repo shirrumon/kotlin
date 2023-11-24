@@ -12,6 +12,7 @@ import org.jetbrains.kotlin.descriptors.Visibilities
 import org.jetbrains.kotlin.fir.FirSession
 import org.jetbrains.kotlin.fir.builder.FirScriptConfiguratorExtension
 import org.jetbrains.kotlin.fir.builder.FirScriptConfiguratorExtension.Factory
+import org.jetbrains.kotlin.fir.declarations.FirAnonymousInitializer
 import org.jetbrains.kotlin.fir.declarations.FirDeclarationOrigin
 import org.jetbrains.kotlin.fir.declarations.builder.*
 import org.jetbrains.kotlin.fir.declarations.impl.FirDeclarationStatusImpl
@@ -20,6 +21,8 @@ import org.jetbrains.kotlin.fir.declarations.primaryConstructorIfAny
 import org.jetbrains.kotlin.fir.declarations.utils.SCRIPT_SPECIAL_NAME_STRING
 import org.jetbrains.kotlin.fir.expressions.FirExpression
 import org.jetbrains.kotlin.fir.expressions.UnresolvedExpressionTypeAccess
+import org.jetbrains.kotlin.fir.expressions.impl.FirSingleExpressionBlock
+import org.jetbrains.kotlin.fir.expressions.removeLastStatementIf
 import org.jetbrains.kotlin.fir.moduleData
 import org.jetbrains.kotlin.fir.resolve.providers.dependenciesSymbolProvider
 import org.jetbrains.kotlin.fir.symbols.SymbolInternals
@@ -137,10 +140,19 @@ class FirScriptConfiguratorExtensionImpl(
         }
 
         configuration[ScriptCompilationConfiguration.resultField]?.takeIf { it.isNotBlank() }?.let { resultFieldName ->
-            val lastExpression = statements.lastOrNull()
-            if (lastExpression != null && lastExpression is FirExpression) {
-                statements.removeAt(statements.size - 1)
-                statements.add(
+            val lastScriptBlock = declarations.lastOrNull() as? FirAnonymousInitializer
+            val lastScriptBlockBody = lastScriptBlock?.body
+            val lastExpression =
+                if (lastScriptBlockBody is FirSingleExpressionBlock) {
+                    (lastScriptBlockBody.statement as? FirExpression)?.also {
+                        declarations.removeLast()
+                    }
+                } else {
+                    lastScriptBlockBody?.removeLastStatementIf { it is FirExpression } as? FirExpression
+                }
+
+            if (lastExpression != null) {
+                declarations.add(
                     @OptIn(UnresolvedExpressionTypeAccess::class)
                     buildProperty {
                         this.name = Name.identifier(resultFieldName)
