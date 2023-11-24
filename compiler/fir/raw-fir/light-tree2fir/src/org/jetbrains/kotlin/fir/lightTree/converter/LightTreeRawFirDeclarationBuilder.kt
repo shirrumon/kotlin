@@ -891,8 +891,8 @@ class LightTreeRawFirDeclarationBuilder(
         fun ClassKind.isEnumRelated(): Boolean = this == ClassKind.ENUM_CLASS || this == ClassKind.ENUM_ENTRY
         val shouldGenerateImplicitConstructor =
             (classWrapper.isEnumEntry() || !classWrapper.hasSecondaryConstructor) &&
-            !classWrapper.isInterface() &&
-            (!containingClassIsExpectClass || classWrapper.classBuilder.classKind.isEnumRelated())
+                    !classWrapper.isInterface() &&
+                    !containingClassIsExpectClass
         val isErrorConstructor = primaryConstructor == null && !shouldGenerateImplicitConstructor
         if (isErrorConstructor && classWrapper.delegatedSuperCalls.isEmpty()) {
             return null
