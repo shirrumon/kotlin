@@ -1284,31 +1284,17 @@ open class PsiRawFirBuilder(
                             ).apply {
                                 isDestructuringDeclarationContainerVariable = true
                             }
-                            val destructuringBlock = generateDestructuringBlock(
-                                baseModuleData,
+                            declarations.add(destructuringContainerVar)
+
+                            declarations.addDestructuringVariables(
+                                moduleData,
                                 declaration,
                                 destructuringContainerVar,
                                 tmpVariable = false,
                                 localEntries = false,
-                            ).apply {
-                                statements.forEach {
-                                    (it as FirProperty).destructuringDeclarationContainerVariable = destructuringContainerVar.symbol
-                                }
+                            ) {
+                                (it as FirProperty).destructuringDeclarationContainerVariable = destructuringContainerVar.symbol
                             }
-                            declarations.add(destructuringContainerVar)
-                            declarations.add(
-                                buildScriptBlockForCurrent {
-                                    source = declarationSource
-                                    body = buildOrLazyBlock {
-                                        withForcedLocalContext {
-                                            buildBlock {
-                                                source = declarationSource
-                                                statements.addAll(destructuringBlock.statements)
-                                            }
-                                        }
-                                    }
-                                }
-                            )
                         }
                         else -> {
                             val firStatement = declaration.toFirStatement()
@@ -1831,7 +1817,7 @@ open class PsiRawFirBuilder(
                 isLambda = true
                 hasExplicitParameterList = expression.functionLiteral.arrow != null
 
-                val destructuringStatements = mutableListOf<FirStatement>()
+                val destructuringVariables = mutableListOf<FirStatement>()
                 for (valueParameter in literal.valueParameters) {
                     val multiDeclaration = valueParameter.destructuringDeclaration
                     valueParameters += if (multiDeclaration != null) {
@@ -1848,7 +1834,7 @@ open class PsiRawFirBuilder(
                             isNoinline = false
                             isVararg = false
                         }
-                        destructuringStatements.addDestructuringStatements(
+                        destructuringVariables.addDestructuringVariables(
                             baseModuleData,
                             multiDeclaration,
                             multiParameter,
@@ -1877,7 +1863,7 @@ open class PsiRawFirBuilder(
                         val errorExpression = buildErrorExpression(source, ConeSyntaxDiagnostic("Lambda has no body"))
                         FirSingleExpressionBlock(errorExpression.toReturn())
                     } else {
-                        val kind = runIf(destructuringStatements.isNotEmpty()) {
+                        val kind = runIf(destructuringVariables.isNotEmpty()) {
                             KtFakeSourceElementKind.LambdaDestructuringBlock
                         }
                         val bodyBlock = configureBlockWithoutBuilding(ktBody, kind).apply {
@@ -1901,11 +1887,11 @@ open class PsiRawFirBuilder(
                             }
                         }.build()
 
-                        if (destructuringStatements.isNotEmpty()) {
+                        if (destructuringVariables.isNotEmpty()) {
                             // Destructured variables must be in a separate block so that they can be shadowed.
                             buildBlock {
                                 source = bodyBlock.source?.realElement()
-                                statements.addAll(destructuringStatements)
+                                statements.addAll(destructuringVariables)
                                 statements.add(bodyBlock)
                             }
                         } else {
@@ -2718,7 +2704,7 @@ open class PsiRawFirBuilder(
                             extractedAnnotations = ktParameter.modifierList?.annotationEntries?.map { it.convert<FirAnnotation>() },
                         )
                         if (multiDeclaration != null) {
-                            blockBuilder.statements.addDestructuringStatements(
+                            blockBuilder.statements.addDestructuringVariables(
                                 baseModuleData,
                                 multiDeclaration = multiDeclaration,
                                 container = firLoopParameter,
