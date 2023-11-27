@@ -85,7 +85,7 @@ FILE: [ResolvedTo(IMPORTS)] localConstructor.kt
 EXPECT_ACTUAL_MATCHING:
 FILE: [ResolvedTo(IMPORTS)] localConstructor.kt
     public? final? [ResolvedTo(RAW_FIR)] fun <[ResolvedTo(RAW_FIR)] T> magic(): T { LAZY_BLOCK }
-    public final [ResolvedTo(STATUS)] class Q : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Q : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Q] constructor(): R|Q| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -97,7 +97,7 @@ FILE: [ResolvedTo(IMPORTS)] localConstructor.kt
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] localConstructor.kt
     public? final? [ResolvedTo(RAW_FIR)] fun <[ResolvedTo(RAW_FIR)] T> magic(): T { LAZY_BLOCK }
-    public final [ResolvedTo(STATUS)] class Q : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Q : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Q] constructor(): R|Q| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -111,7 +111,7 @@ FILE: [ResolvedTo(IMPORTS)] localConstructor.kt
     public final [ResolvedTo(CONTRACTS)] fun <[ResolvedTo(CONTRACTS)] T> magic(): R|T| {
         ^magic Null(null)!!
     }
-    public final [ResolvedTo(STATUS)] class Q : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Q : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Q] constructor(): R|Q| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -146,7 +146,7 @@ FILE: [ResolvedTo(IMPORTS)] localConstructor.kt
     public final [ResolvedTo(CONTRACTS)] fun <[ResolvedTo(CONTRACTS)] T> magic(): R|T| {
         ^magic Null(null)!!
     }
-    public final [ResolvedTo(STATUS)] class Q : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Q : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Q] constructor(): R|Q| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -181,7 +181,7 @@ FILE: [ResolvedTo(IMPORTS)] localConstructor.kt
     public final [ResolvedTo(CONTRACTS)] fun <[ResolvedTo(CONTRACTS)] T> magic(): R|T| {
         ^magic Null(null)!!
     }
-    public final [ResolvedTo(STATUS)] class Q : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Q : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Q] constructor(): R|Q| {
             LAZY_super<R|kotlin/Any|>
         }

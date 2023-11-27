@@ -137,7 +137,7 @@ FILE: [ResolvedTo(IMPORTS)] functionInValueClassScript.kts
     SCRIPT: [ResolvedTo(RAW_FIR)] <script-functionInValueClassScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        @R|kotlin/jvm/JvmInline|[Types]() public final inline [ResolvedTo(STATUS)] [FirValueClassRepresentationKey=InlineClassRepresentation(underlyingPropertyName=value, underlyingType=kotlin/Int)] class Value : R|kotlin/Any| {
+        @R|kotlin/jvm/JvmInline|[Types]() public final inline [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [FirValueClassRepresentationKey=InlineClassRepresentation(underlyingPropertyName=value, underlyingType=kotlin/Int)] class Value : R|kotlin/Any| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Value] constructor([ResolvedTo(STATUS)] [CorrespondingProperty=/Value.value] value: R|kotlin/Int|): R|Value| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -156,7 +156,7 @@ FILE: [ResolvedTo(IMPORTS)] functionInValueClassScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-functionInValueClassScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        @R|kotlin/jvm/JvmInline|[Types]() public final inline [ResolvedTo(STATUS)] [FirValueClassRepresentationKey=InlineClassRepresentation(underlyingPropertyName=value, underlyingType=kotlin/Int)] class Value : R|kotlin/Any| {
+        @R|kotlin/jvm/JvmInline|[Types]() public final inline [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [FirValueClassRepresentationKey=InlineClassRepresentation(underlyingPropertyName=value, underlyingType=kotlin/Int)] class Value : R|kotlin/Any| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Value] constructor([ResolvedTo(STATUS)] [CorrespondingProperty=/Value.value] value: R|kotlin/Int|): R|Value| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -176,7 +176,7 @@ FILE: [ResolvedTo(IMPORTS)] functionInValueClassScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-functionInValueClassScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        @R|kotlin/jvm/JvmInline|[Types]() public final inline [ResolvedTo(STATUS)] [FirValueClassRepresentationKey=InlineClassRepresentation(underlyingPropertyName=value, underlyingType=kotlin/Int)] class Value : R|kotlin/Any| {
+        @R|kotlin/jvm/JvmInline|[Types]() public final inline [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [FirValueClassRepresentationKey=InlineClassRepresentation(underlyingPropertyName=value, underlyingType=kotlin/Int)] class Value : R|kotlin/Any| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Value] constructor([ResolvedTo(STATUS)] [CorrespondingProperty=/Value.value] value: R|kotlin/Int|): R|Value| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -196,7 +196,7 @@ FILE: [ResolvedTo(IMPORTS)] functionInValueClassScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-functionInValueClassScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        @R|kotlin/jvm/JvmInline|[Types]() public final inline [ResolvedTo(STATUS)] [FirValueClassRepresentationKey=InlineClassRepresentation(underlyingPropertyName=value, underlyingType=kotlin/Int)] class Value : R|kotlin/Any| {
+        @R|kotlin/jvm/JvmInline|[Types]() public final inline [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [FirValueClassRepresentationKey=InlineClassRepresentation(underlyingPropertyName=value, underlyingType=kotlin/Int)] class Value : R|kotlin/Any| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Value] constructor([ResolvedTo(STATUS)] [CorrespondingProperty=/Value.value] value: R|kotlin/Int|): R|Value| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -216,7 +216,7 @@ FILE: [ResolvedTo(IMPORTS)] functionInValueClassScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-functionInValueClassScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        @R|kotlin/jvm/JvmInline|[Types]() public final inline [ResolvedTo(STATUS)] [FirValueClassRepresentationKey=InlineClassRepresentation(underlyingPropertyName=value, underlyingType=kotlin/Int)] class Value : R|kotlin/Any| {
+        @R|kotlin/jvm/JvmInline|[Types]() public final inline [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [FirValueClassRepresentationKey=InlineClassRepresentation(underlyingPropertyName=value, underlyingType=kotlin/Int)] class Value : R|kotlin/Any| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Value] constructor([ResolvedTo(STATUS)] [CorrespondingProperty=/Value.value] value: R|kotlin/Int|): R|Value| {
                 LAZY_super<R|kotlin/Any|>
             }

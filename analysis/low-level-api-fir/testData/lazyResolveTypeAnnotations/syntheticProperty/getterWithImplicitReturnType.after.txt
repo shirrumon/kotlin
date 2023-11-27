@@ -34,7 +34,7 @@ FILE: [ResolvedTo(IMPORTS)] Derived.kt
     public final [ResolvedTo(ANNOTATION_ARGUMENTS)] fun expectType(): R|@R|Anno|(position = <strcat>(String(return type ), R|/prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(nested return type ), R|/prop|))  kotlin/Int>| {
         ^expectType IntegerLiteral(42)
     }
-    public final [ResolvedTo(STATUS)] class Derived : R|Base| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Derived : R|Base| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Derived] constructor(): R|Derived| {
             LAZY_super<R|Base|>
         }

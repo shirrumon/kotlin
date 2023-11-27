@@ -218,7 +218,7 @@ FILE: [ResolvedTo(IMPORTS)] getterWithDelegationScript.kts
                 ^ D|/one|.R|/Prp.getValue<Inapplicable(INAPPLICABLE_ARGUMENTS_MAPPING_ERROR): /Prp.getValue>#|(Null(null), ::R|/one|)
             }
 
-        public final [ResolvedTo(STATUS)] class Prp : R|kotlin/Any| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Prp : R|kotlin/Any| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Prp] constructor(): R|Prp| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -251,4 +251,3 @@ FILE: [ResolvedTo(BODY_RESOLVE)] getterWithDelegationScript.kts
             }
 
         }
-

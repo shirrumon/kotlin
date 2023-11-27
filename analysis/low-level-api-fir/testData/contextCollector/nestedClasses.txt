@@ -31,13 +31,13 @@ Tower Data Context:
         Scope: FirLocalScope
 
 FILE: [ResolvedTo(IMPORTS)] nestedClasses.kt
-    public final [ResolvedTo(STATUS)] class Foo<[ResolvedTo(STATUS)] F> : R|kotlin/Any| {
-        public [ResolvedTo(STATUS)] constructor<[ResolvedTo(STATUS)] F>(): R|test/Foo<F>| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Foo<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] F> : R|kotlin/Any| {
+        public [ResolvedTo(STATUS)] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] F>(): R|test/Foo<F>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(STATUS)] class Bar<[ResolvedTo(STATUS)] B> : R|kotlin/Any| {
-            public [ResolvedTo(STATUS)] constructor<[ResolvedTo(STATUS)] B>(): R|test/Foo.Bar<B>| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Bar<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] B> : R|kotlin/Any| {
+            public [ResolvedTo(STATUS)] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] B>(): R|test/Foo.Bar<B>| {
                 LAZY_super<R|kotlin/Any|>
             }
 

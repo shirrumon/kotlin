@@ -821,7 +821,7 @@ FILE: [ResolvedTo(IMPORTS)] complexRedeclarationScript.kts
 
         }
 
-        public final [ResolvedTo(STATUS)] object B : R|kotlin/Any| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object B : R|kotlin/Any| {
             private [ResolvedTo(STATUS)] [ContainingClassKey=B] constructor(): R|B| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -926,7 +926,7 @@ FILE: [ResolvedTo(IMPORTS)] complexRedeclarationScript.kts
 
         }
 
-        public final [ResolvedTo(STATUS)] object B : R|kotlin/Any| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object B : R|kotlin/Any| {
             private [ResolvedTo(STATUS)] [ContainingClassKey=B] constructor(): R|B| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -1031,7 +1031,7 @@ FILE: [ResolvedTo(IMPORTS)] complexRedeclarationScript.kts
 
         }
 
-        public final [ResolvedTo(STATUS)] object B : R|kotlin/Any| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object B : R|kotlin/Any| {
             private [ResolvedTo(STATUS)] [ContainingClassKey=B] constructor(): R|B| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -1136,7 +1136,7 @@ FILE: [ResolvedTo(IMPORTS)] complexRedeclarationScript.kts
 
         }
 
-        public final [ResolvedTo(STATUS)] object B : R|kotlin/Any| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object B : R|kotlin/Any| {
             private [ResolvedTo(STATUS)] [ContainingClassKey=B] constructor(): R|B| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -1241,7 +1241,7 @@ FILE: [ResolvedTo(IMPORTS)] complexRedeclarationScript.kts
 
         }
 
-        public final [ResolvedTo(STATUS)] object B : R|kotlin/Any| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object B : R|kotlin/Any| {
             private [ResolvedTo(STATUS)] [ContainingClassKey=B] constructor(): R|B| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -1388,4 +1388,3 @@ FILE: [ResolvedTo(BODY_RESOLVE)] complexRedeclarationScript.kts
             }
 
         }
-

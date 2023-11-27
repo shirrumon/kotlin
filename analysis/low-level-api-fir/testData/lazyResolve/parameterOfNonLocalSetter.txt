@@ -91,7 +91,7 @@ FILE: [ResolvedTo(IMPORTS)] parameterOfNonLocalSetter.kt
 
 EXPECT_ACTUAL_MATCHING:
 FILE: [ResolvedTo(IMPORTS)] parameterOfNonLocalSetter.kt
-    public final [ResolvedTo(STATUS)] class X : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class X : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=X] constructor(): R|X| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -104,7 +104,7 @@ FILE: [ResolvedTo(IMPORTS)] parameterOfNonLocalSetter.kt
 
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] parameterOfNonLocalSetter.kt
-    public final [ResolvedTo(STATUS)] class X : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class X : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=X] constructor(): R|X| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -119,7 +119,7 @@ FILE: [ResolvedTo(IMPORTS)] parameterOfNonLocalSetter.kt
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] parameterOfNonLocalSetter.kt
-    public final [ResolvedTo(STATUS)] class X : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class X : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=X] constructor(): R|X| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -134,7 +134,7 @@ FILE: [ResolvedTo(IMPORTS)] parameterOfNonLocalSetter.kt
 
 ANNOTATION_ARGUMENTS:
 FILE: [ResolvedTo(IMPORTS)] parameterOfNonLocalSetter.kt
-    public final [ResolvedTo(STATUS)] class X : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class X : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=X] constructor(): R|X| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -149,7 +149,7 @@ FILE: [ResolvedTo(IMPORTS)] parameterOfNonLocalSetter.kt
 
 BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] parameterOfNonLocalSetter.kt
-    public final [ResolvedTo(STATUS)] class X : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class X : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=X] constructor(): R|X| {
             LAZY_super<R|kotlin/Any|>
         }

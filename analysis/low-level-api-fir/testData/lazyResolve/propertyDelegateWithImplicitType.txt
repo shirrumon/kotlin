@@ -49,7 +49,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyDelegateWithImplicitType.kt
     }
     public? final? const [ResolvedTo(RAW_FIR)] val constant: <implicit> = LAZY_EXPRESSION
         public? [ResolvedTo(RAW_FIR)] get(): <implicit>
-    public final [ResolvedTo(STATUS)] [DelegateFieldsMapKey={0=FirFieldSymbol second/Aaa.$$delegate_0}] class Aaa : R|second/Interface| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [DelegateFieldsMapKey={0=FirFieldSymbol second/Aaa.$$delegate_0}] class Aaa : R|second/Interface| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Aaa] constructor([ResolvedTo(STATUS)] i: R|second/Interface|): R|second/Aaa| {
             LAZY_super<<implicit>>
         }
@@ -57,7 +57,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyDelegateWithImplicitType.kt
         private final [ResolvedTo(STATUS)] field $$delegate_0: R|second/Interface| = LAZY_EXPRESSION
 
     }
-    public abstract [ResolvedTo(STATUS)] interface Interface : R|kotlin/Any| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface Interface : R|kotlin/Any| {
         public open [ResolvedTo(STATUS)] fun explicitType(): R|kotlin/String?| { LAZY_BLOCK }
 
         @PROPERTY:R|second/Anno|[Types](LAZY_EXPRESSION) field:@FIELD:R|second/Anno|[Types](LAZY_EXPRESSION) public open [ResolvedTo(EXPECT_ACTUAL_MATCHING)] var resolveMe: <implicit> = LAZY_EXPRESSION
@@ -83,7 +83,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyDelegateWithImplicitType.kt
     }
     public? final? const [ResolvedTo(RAW_FIR)] val constant: <implicit> = LAZY_EXPRESSION
         public? [ResolvedTo(RAW_FIR)] get(): <implicit>
-    public final [ResolvedTo(STATUS)] [DelegateFieldsMapKey={0=FirFieldSymbol second/Aaa.$$delegate_0}] class Aaa : R|second/Interface| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [DelegateFieldsMapKey={0=FirFieldSymbol second/Aaa.$$delegate_0}] class Aaa : R|second/Interface| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Aaa] constructor([ResolvedTo(STATUS)] i: R|second/Interface|): R|second/Aaa| {
             LAZY_super<<implicit>>
         }
@@ -91,7 +91,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyDelegateWithImplicitType.kt
         private final [ResolvedTo(STATUS)] field $$delegate_0: R|second/Interface| = LAZY_EXPRESSION
 
     }
-    public abstract [ResolvedTo(STATUS)] interface Interface : R|kotlin/Any| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface Interface : R|kotlin/Any| {
         public open [ResolvedTo(STATUS)] fun explicitType(): R|kotlin/String?| { LAZY_BLOCK }
 
         @PROPERTY:R|second/Anno|[Types](LAZY_EXPRESSION) field:@FIELD:R|second/Anno|[Types](LAZY_EXPRESSION) public open [ResolvedTo(CONTRACTS)] var resolveMe: <implicit> = explicitType#()
@@ -117,7 +117,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyDelegateWithImplicitType.kt
     }
     public? final? const [ResolvedTo(RAW_FIR)] val constant: <implicit> = LAZY_EXPRESSION
         public? [ResolvedTo(RAW_FIR)] get(): <implicit>
-    public final [ResolvedTo(STATUS)] [DelegateFieldsMapKey={0=FirFieldSymbol second/Aaa.$$delegate_0}] class Aaa : R|second/Interface| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [DelegateFieldsMapKey={0=FirFieldSymbol second/Aaa.$$delegate_0}] class Aaa : R|second/Interface| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Aaa] constructor([ResolvedTo(STATUS)] i: R|second/Interface|): R|second/Aaa| {
             LAZY_super<<implicit>>
         }
@@ -125,7 +125,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyDelegateWithImplicitType.kt
         private final [ResolvedTo(STATUS)] field $$delegate_0: R|second/Interface| = LAZY_EXPRESSION
 
     }
-    public abstract [ResolvedTo(STATUS)] interface Interface : R|kotlin/Any| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface Interface : R|kotlin/Any| {
         public open [ResolvedTo(CONTRACTS)] fun explicitType(): R|kotlin/String?| {
             ^explicitType Null(null)
         }
@@ -153,7 +153,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyDelegateWithImplicitType.kt
     }
     public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val constant: R|kotlin/String| = String(str)
         public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/String|
-    public final [ResolvedTo(STATUS)] [DelegateFieldsMapKey={0=FirFieldSymbol second/Aaa.$$delegate_0}] class Aaa : R|second/Interface| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [DelegateFieldsMapKey={0=FirFieldSymbol second/Aaa.$$delegate_0}] class Aaa : R|second/Interface| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Aaa] constructor([ResolvedTo(STATUS)] i: R|second/Interface|): R|second/Aaa| {
             LAZY_super<<implicit>>
         }
@@ -161,7 +161,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyDelegateWithImplicitType.kt
         private final [ResolvedTo(STATUS)] field $$delegate_0: R|second/Interface| = LAZY_EXPRESSION
 
     }
-    public abstract [ResolvedTo(STATUS)] interface Interface : R|kotlin/Any| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface Interface : R|kotlin/Any| {
         public open [ResolvedTo(CONTRACTS)] fun explicitType(): R|kotlin/String?| {
             ^explicitType Null(null)
         }
@@ -189,7 +189,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyDelegateWithImplicitType.kt
     }
     public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val constant: R|kotlin/String| = String(str)
         public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/String|
-    public final [ResolvedTo(STATUS)] [DelegateFieldsMapKey={0=FirFieldSymbol second/Aaa.$$delegate_0}] class Aaa : R|second/Interface| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [DelegateFieldsMapKey={0=FirFieldSymbol second/Aaa.$$delegate_0}] class Aaa : R|second/Interface| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Aaa] constructor([ResolvedTo(STATUS)] i: R|second/Interface|): R|second/Aaa| {
             LAZY_super<<implicit>>
         }
@@ -197,7 +197,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyDelegateWithImplicitType.kt
         private final [ResolvedTo(STATUS)] field $$delegate_0: R|second/Interface| = LAZY_EXPRESSION
 
     }
-    public abstract [ResolvedTo(STATUS)] interface Interface : R|kotlin/Any| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface Interface : R|kotlin/Any| {
         public open [ResolvedTo(CONTRACTS)] fun explicitType(): R|kotlin/String?| {
             ^explicitType Null(null)
         }

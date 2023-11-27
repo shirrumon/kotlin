@@ -179,7 +179,7 @@ FILE: [ResolvedTo(IMPORTS)] initWithAnnotation.kt
     }
     public? final? const [ResolvedTo(RAW_FIR)] val constant: <implicit> = LAZY_EXPRESSION
         public? [ResolvedTo(RAW_FIR)] get(): <implicit>
-    public final [ResolvedTo(STATUS)] class MyClass : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class MyClass : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=MyClass] constructor(): R|low/MyClass| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -203,7 +203,7 @@ FILE: [ResolvedTo(IMPORTS)] initWithAnnotation.kt
     }
     public? final? const [ResolvedTo(RAW_FIR)] val constant: <implicit> = LAZY_EXPRESSION
         public? [ResolvedTo(RAW_FIR)] get(): <implicit>
-    public final [ResolvedTo(STATUS)] class MyClass : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class MyClass : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=MyClass] constructor(): R|low/MyClass| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -227,7 +227,7 @@ FILE: [ResolvedTo(IMPORTS)] initWithAnnotation.kt
     }
     public? final? const [ResolvedTo(RAW_FIR)] val constant: <implicit> = LAZY_EXPRESSION
         public? [ResolvedTo(RAW_FIR)] get(): <implicit>
-    public final [ResolvedTo(STATUS)] class MyClass : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class MyClass : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=MyClass] constructor(): R|low/MyClass| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -251,7 +251,7 @@ FILE: [ResolvedTo(IMPORTS)] initWithAnnotation.kt
     }
     public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val constant: R|kotlin/Int| = Int(0)
         public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/Int|
-    public final [ResolvedTo(STATUS)] class MyClass : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class MyClass : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=MyClass] constructor(): R|low/MyClass| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -275,7 +275,7 @@ FILE: [ResolvedTo(IMPORTS)] initWithAnnotation.kt
     }
     public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val constant: R|kotlin/Int| = Int(0)
         public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/Int|
-    public final [ResolvedTo(STATUS)] class MyClass : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class MyClass : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=MyClass] constructor(): R|low/MyClass| {
             LAZY_super<R|kotlin/Any|>
         }

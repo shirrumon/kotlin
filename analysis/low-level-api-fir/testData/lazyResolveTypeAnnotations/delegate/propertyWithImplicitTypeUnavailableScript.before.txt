@@ -61,12 +61,12 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithImplicitTypeUnavailableScript.kts
 
         }
 
-        public final [ResolvedTo(STATUS)] class Delegate : <ERROR TYPE REF: Symbol not found for ReadWriteProperty> {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Delegate : <ERROR TYPE REF: Symbol not found for ReadWriteProperty> {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Delegate] constructor(): R|Delegate| {
                 LAZY_super<<implicit>>
             }
 
-            private final companion [ResolvedTo(STATUS)] object Companion : R|kotlin/Any| {
+            private final companion [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Companion : R|kotlin/Any| {
                 private [ResolvedTo(STATUS)] [ContainingClassKey=Companion] constructor(): R|Delegate.Companion| {
                     LAZY_super<R|kotlin/Any|>
                 }

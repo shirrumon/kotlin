@@ -61,7 +61,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithExplicitTypeUnavailableScript.kts
 
         }
 
-        public final [ResolvedTo(STATUS)] class Delegate : <ERROR TYPE REF: Symbol not found for ReadWriteProperty> {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Delegate : <ERROR TYPE REF: Symbol not found for ReadWriteProperty> {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Delegate] constructor(): R|Delegate| {
                 LAZY_super<<implicit>>
             }

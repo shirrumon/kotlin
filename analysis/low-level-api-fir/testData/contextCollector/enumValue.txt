@@ -44,7 +44,7 @@ Tower Data Context:
         Scope: FirLocalScope
 
 FILE: [ResolvedTo(IMPORTS)] enumValue.kt
-    public final [ResolvedTo(STATUS)] enum class Direction : R|kotlin/Enum<Direction>| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] enum class Direction : R|kotlin/Enum<Direction>| {
         private [ResolvedTo(STATUS)] constructor(): R|Direction| {
             LAZY_super<R|kotlin/Enum<Direction>|>
         }

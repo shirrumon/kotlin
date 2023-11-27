@@ -420,7 +420,7 @@ FILE: [ResolvedTo(IMPORTS)] TypeReference.kt
 
 EXPECT_ACTUAL_MATCHING:
 FILE: [ResolvedTo(IMPORTS)] TypeReference.kt
-    @R|kotlin/SinceKotlin|[Types](String(1.4)) public final [ResolvedTo(STATUS)] class TypeReference : R|kotlin/reflect/KType| {
+    @R|kotlin/SinceKotlin|[Types](String(1.4)) public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class TypeReference : R|kotlin/reflect/KType| {
         @R|kotlin/SinceKotlin|[Types](String(1.6)) public [ResolvedTo(STATUS)] [ContainingClassKey=TypeReference] constructor([ResolvedTo(STATUS)] [CorrespondingProperty=kotlin/jvm/internal/TypeReference.classifier] classifier: R|kotlin/reflect/KClassifier|, [ResolvedTo(STATUS)] [CorrespondingProperty=kotlin/jvm/internal/TypeReference.arguments] arguments: R|kotlin/collections/List<kotlin/reflect/KTypeProjection>|, [ResolvedTo(STATUS)] [CorrespondingProperty=kotlin/jvm/internal/TypeReference.platformTypeUpperBound] platformTypeUpperBound: R|kotlin/reflect/KType?|, [ResolvedTo(STATUS)] [CorrespondingProperty=kotlin/jvm/internal/TypeReference.flags] flags: R|kotlin/Int|): R|kotlin/jvm/internal/TypeReference| {
             LAZY_super<<implicit>>
         }
@@ -460,7 +460,7 @@ FILE: [ResolvedTo(IMPORTS)] TypeReference.kt
 
         private final [ResolvedTo(STATUS)] fun R|kotlin/reflect/KTypeProjection|.asString(): R|kotlin/String| { LAZY_BLOCK }
 
-        internal final companion [ResolvedTo(STATUS)] object Companion : R|kotlin/Any| {
+        internal final companion [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Companion : R|kotlin/Any| {
             private [ResolvedTo(STATUS)] [ContainingClassKey=Companion] constructor(): R|kotlin/jvm/internal/TypeReference.Companion| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -480,7 +480,7 @@ FILE: [ResolvedTo(IMPORTS)] TypeReference.kt
 
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] TypeReference.kt
-    @R|kotlin/SinceKotlin|[Types](String(1.4)) public final [ResolvedTo(STATUS)] class TypeReference : R|kotlin/reflect/KType| {
+    @R|kotlin/SinceKotlin|[Types](String(1.4)) public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class TypeReference : R|kotlin/reflect/KType| {
         @R|kotlin/SinceKotlin|[Types](String(1.6)) public [ResolvedTo(STATUS)] [ContainingClassKey=TypeReference] constructor([ResolvedTo(STATUS)] [CorrespondingProperty=kotlin/jvm/internal/TypeReference.classifier] classifier: R|kotlin/reflect/KClassifier|, [ResolvedTo(STATUS)] [CorrespondingProperty=kotlin/jvm/internal/TypeReference.arguments] arguments: R|kotlin/collections/List<kotlin/reflect/KTypeProjection>|, [ResolvedTo(STATUS)] [CorrespondingProperty=kotlin/jvm/internal/TypeReference.platformTypeUpperBound] platformTypeUpperBound: R|kotlin/reflect/KType?|, [ResolvedTo(STATUS)] [CorrespondingProperty=kotlin/jvm/internal/TypeReference.flags] flags: R|kotlin/Int|): R|kotlin/jvm/internal/TypeReference| {
             LAZY_super<<implicit>>
         }
@@ -520,7 +520,7 @@ FILE: [ResolvedTo(IMPORTS)] TypeReference.kt
 
         private final [ResolvedTo(STATUS)] fun R|kotlin/reflect/KTypeProjection|.asString(): R|kotlin/String| { LAZY_BLOCK }
 
-        internal final companion [ResolvedTo(STATUS)] object Companion : R|kotlin/Any| {
+        internal final companion [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Companion : R|kotlin/Any| {
             private [ResolvedTo(STATUS)] [ContainingClassKey=Companion] constructor(): R|kotlin/jvm/internal/TypeReference.Companion| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -540,7 +540,7 @@ FILE: [ResolvedTo(IMPORTS)] TypeReference.kt
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] TypeReference.kt
-    @R|kotlin/SinceKotlin|[Types](String(1.4)) public final [ResolvedTo(STATUS)] class TypeReference : R|kotlin/reflect/KType| {
+    @R|kotlin/SinceKotlin|[Types](String(1.4)) public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class TypeReference : R|kotlin/reflect/KType| {
         @R|kotlin/SinceKotlin|[Types](String(1.6)) public [ResolvedTo(STATUS)] [ContainingClassKey=TypeReference] constructor([ResolvedTo(STATUS)] [CorrespondingProperty=kotlin/jvm/internal/TypeReference.classifier] classifier: R|kotlin/reflect/KClassifier|, [ResolvedTo(STATUS)] [CorrespondingProperty=kotlin/jvm/internal/TypeReference.arguments] arguments: R|kotlin/collections/List<kotlin/reflect/KTypeProjection>|, [ResolvedTo(STATUS)] [CorrespondingProperty=kotlin/jvm/internal/TypeReference.platformTypeUpperBound] platformTypeUpperBound: R|kotlin/reflect/KType?|, [ResolvedTo(STATUS)] [CorrespondingProperty=kotlin/jvm/internal/TypeReference.flags] flags: R|kotlin/Int|): R|kotlin/jvm/internal/TypeReference| {
             LAZY_super<<implicit>>
         }
@@ -580,7 +580,7 @@ FILE: [ResolvedTo(IMPORTS)] TypeReference.kt
 
         private final [ResolvedTo(STATUS)] fun R|kotlin/reflect/KTypeProjection|.asString(): R|kotlin/String| { LAZY_BLOCK }
 
-        internal final companion [ResolvedTo(STATUS)] object Companion : R|kotlin/Any| {
+        internal final companion [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Companion : R|kotlin/Any| {
             private [ResolvedTo(STATUS)] [ContainingClassKey=Companion] constructor(): R|kotlin/jvm/internal/TypeReference.Companion| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -600,7 +600,7 @@ FILE: [ResolvedTo(IMPORTS)] TypeReference.kt
 
 ANNOTATION_ARGUMENTS:
 FILE: [ResolvedTo(IMPORTS)] TypeReference.kt
-    @R|kotlin/SinceKotlin|[Types](String(1.4)) public final [ResolvedTo(STATUS)] class TypeReference : R|kotlin/reflect/KType| {
+    @R|kotlin/SinceKotlin|[Types](String(1.4)) public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class TypeReference : R|kotlin/reflect/KType| {
         @R|kotlin/SinceKotlin|[Types](String(1.6)) public [ResolvedTo(STATUS)] [ContainingClassKey=TypeReference] constructor([ResolvedTo(STATUS)] [CorrespondingProperty=kotlin/jvm/internal/TypeReference.classifier] classifier: R|kotlin/reflect/KClassifier|, [ResolvedTo(STATUS)] [CorrespondingProperty=kotlin/jvm/internal/TypeReference.arguments] arguments: R|kotlin/collections/List<kotlin/reflect/KTypeProjection>|, [ResolvedTo(STATUS)] [CorrespondingProperty=kotlin/jvm/internal/TypeReference.platformTypeUpperBound] platformTypeUpperBound: R|kotlin/reflect/KType?|, [ResolvedTo(STATUS)] [CorrespondingProperty=kotlin/jvm/internal/TypeReference.flags] flags: R|kotlin/Int|): R|kotlin/jvm/internal/TypeReference| {
             LAZY_super<<implicit>>
         }
@@ -640,7 +640,7 @@ FILE: [ResolvedTo(IMPORTS)] TypeReference.kt
 
         private final [ResolvedTo(STATUS)] fun R|kotlin/reflect/KTypeProjection|.asString(): R|kotlin/String| { LAZY_BLOCK }
 
-        internal final companion [ResolvedTo(STATUS)] object Companion : R|kotlin/Any| {
+        internal final companion [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Companion : R|kotlin/Any| {
             private [ResolvedTo(STATUS)] [ContainingClassKey=Companion] constructor(): R|kotlin/jvm/internal/TypeReference.Companion| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -660,7 +660,7 @@ FILE: [ResolvedTo(IMPORTS)] TypeReference.kt
 
 BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] TypeReference.kt
-    @R|kotlin/SinceKotlin|[Types](String(1.4)) public final [ResolvedTo(STATUS)] class TypeReference : R|kotlin/reflect/KType| {
+    @R|kotlin/SinceKotlin|[Types](String(1.4)) public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class TypeReference : R|kotlin/reflect/KType| {
         @R|kotlin/SinceKotlin|[Types](String(1.6)) public [ResolvedTo(STATUS)] [ContainingClassKey=TypeReference] constructor([ResolvedTo(STATUS)] [CorrespondingProperty=kotlin/jvm/internal/TypeReference.classifier] classifier: R|kotlin/reflect/KClassifier|, [ResolvedTo(STATUS)] [CorrespondingProperty=kotlin/jvm/internal/TypeReference.arguments] arguments: R|kotlin/collections/List<kotlin/reflect/KTypeProjection>|, [ResolvedTo(STATUS)] [CorrespondingProperty=kotlin/jvm/internal/TypeReference.platformTypeUpperBound] platformTypeUpperBound: R|kotlin/reflect/KType?|, [ResolvedTo(STATUS)] [CorrespondingProperty=kotlin/jvm/internal/TypeReference.flags] flags: R|kotlin/Int|): R|kotlin/jvm/internal/TypeReference| {
             LAZY_super<<implicit>>
         }
@@ -700,7 +700,7 @@ FILE: [ResolvedTo(IMPORTS)] TypeReference.kt
 
         private final [ResolvedTo(STATUS)] fun R|kotlin/reflect/KTypeProjection|.asString(): R|kotlin/String| { LAZY_BLOCK }
 
-        internal final companion [ResolvedTo(STATUS)] object Companion : R|kotlin/Any| {
+        internal final companion [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Companion : R|kotlin/Any| {
             private [ResolvedTo(STATUS)] [ContainingClassKey=Companion] constructor(): R|kotlin/jvm/internal/TypeReference.Companion| {
                 LAZY_super<R|kotlin/Any|>
             }

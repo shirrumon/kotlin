@@ -29,7 +29,7 @@ FILE: [ResolvedTo(IMPORTS)] delegateWithImplicitTypeScript.kts
     SCRIPT: [ResolvedTo(RAW_FIR)] <script-delegateWithImplicitTypeScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(STATUS)] [DelegateFieldsMapKey={0=FirFieldSymbol /Aaa.$$delegate_0}] class Aaa : R|Interface| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [DelegateFieldsMapKey={0=FirFieldSymbol /Aaa.$$delegate_0}] class Aaa : R|Interface| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Aaa] constructor([ResolvedTo(STATUS)] i: R|Interface|): R|Aaa| {
                 LAZY_super<<implicit>>
             }
@@ -38,7 +38,7 @@ FILE: [ResolvedTo(IMPORTS)] delegateWithImplicitTypeScript.kts
 
         }
 
-        public abstract [ResolvedTo(STATUS)] interface Interface : R|kotlin/Any| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface Interface : R|kotlin/Any| {
             public open [ResolvedTo(EXPECT_ACTUAL_MATCHING)] fun implicitType(): <implicit> { LAZY_BLOCK }
 
         }
@@ -52,7 +52,7 @@ FILE: [ResolvedTo(IMPORTS)] delegateWithImplicitTypeScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-delegateWithImplicitTypeScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(STATUS)] [DelegateFieldsMapKey={0=FirFieldSymbol /Aaa.$$delegate_0}] class Aaa : R|Interface| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [DelegateFieldsMapKey={0=FirFieldSymbol /Aaa.$$delegate_0}] class Aaa : R|Interface| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Aaa] constructor([ResolvedTo(STATUS)] i: R|Interface|): R|Aaa| {
                 LAZY_super<<implicit>>
             }
@@ -61,7 +61,7 @@ FILE: [ResolvedTo(IMPORTS)] delegateWithImplicitTypeScript.kts
 
         }
 
-        public abstract [ResolvedTo(STATUS)] interface Interface : R|kotlin/Any| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface Interface : R|kotlin/Any| {
             public open [ResolvedTo(CONTRACTS)] fun implicitType(): <implicit> { LAZY_BLOCK }
 
         }
@@ -75,7 +75,7 @@ FILE: [ResolvedTo(IMPORTS)] delegateWithImplicitTypeScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-delegateWithImplicitTypeScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(STATUS)] [DelegateFieldsMapKey={0=FirFieldSymbol /Aaa.$$delegate_0}] class Aaa : R|Interface| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [DelegateFieldsMapKey={0=FirFieldSymbol /Aaa.$$delegate_0}] class Aaa : R|Interface| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Aaa] constructor([ResolvedTo(STATUS)] i: R|Interface|): R|Aaa| {
                 LAZY_super<<implicit>>
             }
@@ -84,7 +84,7 @@ FILE: [ResolvedTo(IMPORTS)] delegateWithImplicitTypeScript.kts
 
         }
 
-        public abstract [ResolvedTo(STATUS)] interface Interface : R|kotlin/Any| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface Interface : R|kotlin/Any| {
             public open [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun implicitType(): R|kotlin/Int| {
                 ^implicitType Int(42)
             }
@@ -100,7 +100,7 @@ FILE: [ResolvedTo(IMPORTS)] delegateWithImplicitTypeScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-delegateWithImplicitTypeScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(STATUS)] [DelegateFieldsMapKey={0=FirFieldSymbol /Aaa.$$delegate_0}] class Aaa : R|Interface| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [DelegateFieldsMapKey={0=FirFieldSymbol /Aaa.$$delegate_0}] class Aaa : R|Interface| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Aaa] constructor([ResolvedTo(STATUS)] i: R|Interface|): R|Aaa| {
                 LAZY_super<<implicit>>
             }
@@ -109,7 +109,7 @@ FILE: [ResolvedTo(IMPORTS)] delegateWithImplicitTypeScript.kts
 
         }
 
-        public abstract [ResolvedTo(STATUS)] interface Interface : R|kotlin/Any| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface Interface : R|kotlin/Any| {
             public open [ResolvedTo(ANNOTATION_ARGUMENTS)] fun implicitType(): R|kotlin/Int| {
                 ^implicitType Int(42)
             }
@@ -125,7 +125,7 @@ FILE: [ResolvedTo(IMPORTS)] delegateWithImplicitTypeScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-delegateWithImplicitTypeScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(STATUS)] [DelegateFieldsMapKey={0=FirFieldSymbol /Aaa.$$delegate_0}] class Aaa : R|Interface| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [DelegateFieldsMapKey={0=FirFieldSymbol /Aaa.$$delegate_0}] class Aaa : R|Interface| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Aaa] constructor([ResolvedTo(STATUS)] i: R|Interface|): R|Aaa| {
                 LAZY_super<<implicit>>
             }
@@ -134,7 +134,7 @@ FILE: [ResolvedTo(IMPORTS)] delegateWithImplicitTypeScript.kts
 
         }
 
-        public abstract [ResolvedTo(STATUS)] interface Interface : R|kotlin/Any| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface Interface : R|kotlin/Any| {
             public open [ResolvedTo(ANNOTATION_ARGUMENTS)] fun implicitType(): R|kotlin/Int| {
                 ^implicitType Int(42)
             }
@@ -163,4 +163,3 @@ FILE: [ResolvedTo(BODY_RESOLVE)] delegateWithImplicitTypeScript.kts
             }
 
         }
-

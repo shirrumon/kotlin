@@ -35,7 +35,7 @@ FILE: [ResolvedTo(IMPORTS)] onReference.kt
     }
     public final [ResolvedTo(CONTRACTS)] fun check([ResolvedTo(CONTRACTS)] condition: R|kotlin/Boolean|): R|kotlin/Unit| {
     }
-    public abstract [ResolvedTo(STATUS)] interface Foo : R|kotlin/Any| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface Foo : R|kotlin/Any| {
         public abstract [ResolvedTo(CONTRACTS)] fun process(): R|kotlin/Boolean|
 
     }

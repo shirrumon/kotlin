@@ -4,7 +4,7 @@ FILE: [ResolvedTo(IMPORTS)] statement2.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-statement2.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(STATUS)] class Builder : R|kotlin/Any| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Builder : R|kotlin/Any| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Builder] constructor(): R|Builder| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -66,4 +66,3 @@ FILE: [ResolvedTo(BODY_RESOLVE)] statement2.kts
 
         public final [ResolvedTo(BODY_RESOLVE)] val $$result: R|kotlin/Unit| = R|/builder|.R|/Builder.execute|()
             public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/Unit|
-

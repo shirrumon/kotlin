@@ -30,7 +30,7 @@ TARGET: public open override [<synthetic> EXPECT_ACTUAL_MATCHING] val something:
     @R|Anno|[Types](LAZY_EXPRESSION) public [<synthetic> ResolvedTo(EXPECT_ACTUAL_MATCHING)] get(): <implicit> { LAZY_BLOCK }
 
 FILE: [ResolvedTo(IMPORTS)] Derived.kt
-    public final [ResolvedTo(STATUS)] class Derived : R|Base| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Derived : R|Base| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Derived] constructor(): R|Derived| {
             LAZY_super<R|Base|>
         }
@@ -57,7 +57,7 @@ TARGET: public open override [<synthetic> CONTRACTS] val something: <implicit>
     @R|Anno|[Types](LAZY_EXPRESSION) public [<synthetic> ResolvedTo(CONTRACTS)] get(): <implicit> { LAZY_BLOCK }
 
 FILE: [ResolvedTo(IMPORTS)] Derived.kt
-    public final [ResolvedTo(STATUS)] class Derived : R|Base| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Derived : R|Base| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Derived] constructor(): R|Derived| {
             LAZY_super<R|Base|>
         }
@@ -86,7 +86,7 @@ TARGET: public open override [<synthetic> IMPLICIT_TYPES_BODY_RESOLVE] val somet
     }
 
 FILE: [ResolvedTo(IMPORTS)] Derived.kt
-    public final [ResolvedTo(STATUS)] class Derived : R|Base| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Derived : R|Base| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Derived] constructor(): R|Derived| {
             LAZY_super<R|Base|>
         }
@@ -117,7 +117,7 @@ TARGET: public open override [<synthetic> ANNOTATION_ARGUMENTS] val something: R
     }
 
 FILE: [ResolvedTo(IMPORTS)] Derived.kt
-    public final [ResolvedTo(STATUS)] class Derived : R|Base| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Derived : R|Base| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Derived] constructor(): R|Derived| {
             LAZY_super<R|Base|>
         }
@@ -151,7 +151,7 @@ TARGET: public open override [<synthetic> BODY_RESOLVE] val something: R|kotlin/
     }
 
 FILE: [ResolvedTo(IMPORTS)] Derived.kt
-    public final [ResolvedTo(STATUS)] class Derived : R|Base| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Derived : R|Base| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Derived] constructor(): R|Derived| {
             LAZY_super<R|Base|>
         }

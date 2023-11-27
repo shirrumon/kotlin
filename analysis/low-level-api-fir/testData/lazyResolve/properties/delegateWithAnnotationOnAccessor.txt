@@ -241,7 +241,7 @@ FILE: [ResolvedTo(IMPORTS)] delegateWithAnnotationOnAccessor.kt
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
-    public final [ResolvedTo(STATUS)] class MyDelegate : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class MyDelegate : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=MyDelegate] constructor(): R|MyDelegate| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -273,7 +273,7 @@ FILE: [ResolvedTo(IMPORTS)] delegateWithAnnotationOnAccessor.kt
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
-    public final [ResolvedTo(STATUS)] class MyDelegate : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class MyDelegate : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=MyDelegate] constructor(): R|MyDelegate| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -305,7 +305,7 @@ FILE: [ResolvedTo(IMPORTS)] delegateWithAnnotationOnAccessor.kt
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
-    public final [ResolvedTo(STATUS)] class MyDelegate : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class MyDelegate : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=MyDelegate] constructor(): R|MyDelegate| {
             LAZY_super<R|kotlin/Any|>
         }

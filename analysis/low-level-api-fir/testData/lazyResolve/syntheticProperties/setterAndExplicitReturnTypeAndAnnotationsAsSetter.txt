@@ -34,7 +34,7 @@ EXPECT_ACTUAL_MATCHING:
 TARGET: @R|Anno|[Types](LAZY_EXPRESSION) public [<synthetic> ResolvedTo(EXPECT_ACTUAL_MATCHING)] set([ResolvedTo(EXPECT_ACTUAL_MATCHING)] s: R|@R|Anno|(<strcat>(String(setter type ), propertyFromSetter#))  kotlin/String|): <implicit> { LAZY_BLOCK }
 
 FILE: [ResolvedTo(IMPORTS)] Derived.kt
-    public final [ResolvedTo(STATUS)] class Derived : R|Base| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Derived : R|Base| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Derived] constructor(): R|Derived| {
             LAZY_super<R|Base|>
         }
@@ -66,7 +66,7 @@ CONTRACTS:
 TARGET: @R|Anno|[Types](LAZY_EXPRESSION) public [<synthetic> ResolvedTo(CONTRACTS)] set([ResolvedTo(CONTRACTS)] s: R|@R|Anno|(<strcat>(String(setter type ), propertyFromSetter#))  kotlin/String|): <implicit> { LAZY_BLOCK }
 
 FILE: [ResolvedTo(IMPORTS)] Derived.kt
-    public final [ResolvedTo(STATUS)] class Derived : R|Base| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Derived : R|Base| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Derived] constructor(): R|Derived| {
             LAZY_super<R|Base|>
         }
@@ -100,7 +100,7 @@ TARGET: @R|Anno|[Types](LAZY_EXPRESSION) public [<synthetic> ResolvedTo(IMPLICIT
 }
 
 FILE: [ResolvedTo(IMPORTS)] Derived.kt
-    public final [ResolvedTo(STATUS)] class Derived : R|Base| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Derived : R|Base| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Derived] constructor(): R|Derived| {
             LAZY_super<R|Base|>
         }
@@ -136,7 +136,7 @@ TARGET: @R|Anno|[Types](s = <strcat>(String(setSomething: ), R|/setterProperty|)
 }
 
 FILE: [ResolvedTo(IMPORTS)] Derived.kt
-    public final [ResolvedTo(STATUS)] class Derived : R|Base| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Derived : R|Base| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Derived] constructor(): R|Derived| {
             LAZY_super<R|Base|>
         }
@@ -175,7 +175,7 @@ TARGET: @R|Anno|[Types](s = <strcat>(String(setSomething: ), R|/setterProperty|)
 }
 
 FILE: [ResolvedTo(IMPORTS)] Derived.kt
-    public final [ResolvedTo(STATUS)] class Derived : R|Base| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Derived : R|Base| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Derived] constructor(): R|Derived| {
             LAZY_super<R|Base|>
         }

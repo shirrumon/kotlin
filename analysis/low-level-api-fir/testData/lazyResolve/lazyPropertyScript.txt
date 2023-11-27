@@ -267,7 +267,7 @@ FILE: [ResolvedTo(IMPORTS)] lazyPropertyScript.kts
 
         public? final? [ResolvedTo(RAW_FIR)] fun <[ResolvedTo(RAW_FIR)] Q> materialize(): Q { LAZY_BLOCK }
 
-        public final [ResolvedTo(STATUS)] class Test : R|kotlin/Any| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Test : R|kotlin/Any| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Test] constructor(): R|Test| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -302,7 +302,7 @@ FILE: [ResolvedTo(IMPORTS)] lazyPropertyScript.kts
 
         public? final? [ResolvedTo(RAW_FIR)] fun <[ResolvedTo(RAW_FIR)] Q> materialize(): Q { LAZY_BLOCK }
 
-        public final [ResolvedTo(STATUS)] class Test : R|kotlin/Any| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Test : R|kotlin/Any| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Test] constructor(): R|Test| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -337,7 +337,7 @@ FILE: [ResolvedTo(IMPORTS)] lazyPropertyScript.kts
 
         public? final? [ResolvedTo(RAW_FIR)] fun <[ResolvedTo(RAW_FIR)] Q> materialize(): Q { LAZY_BLOCK }
 
-        public final [ResolvedTo(STATUS)] class Test : R|kotlin/Any| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Test : R|kotlin/Any| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Test] constructor(): R|Test| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -372,7 +372,7 @@ FILE: [ResolvedTo(IMPORTS)] lazyPropertyScript.kts
 
         public? final? [ResolvedTo(RAW_FIR)] fun <[ResolvedTo(RAW_FIR)] Q> materialize(): Q { LAZY_BLOCK }
 
-        public final [ResolvedTo(STATUS)] class Test : R|kotlin/Any| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Test : R|kotlin/Any| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Test] constructor(): R|Test| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -389,8 +389,8 @@ FILE: [ResolvedTo(IMPORTS)] lazyPropertyScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-lazyPropertyScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(STATUS)] class LazyDelegate<[ResolvedTo(STATUS)] T> : R|kotlin/Any| {
-            public [ResolvedTo(STATUS)] [ContainingClassKey=LazyDelegate] constructor<[ResolvedTo(STATUS)] T>([ResolvedTo(STATUS)] [CorrespondingProperty=/LazyDelegate.value] value: R|T|): R|LazyDelegate<T>| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class LazyDelegate<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T> : R|kotlin/Any| {
+            public [ResolvedTo(STATUS)] [ContainingClassKey=LazyDelegate] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T>([ResolvedTo(STATUS)] [CorrespondingProperty=/LazyDelegate.value] value: R|T|): R|LazyDelegate<T>| {
                 LAZY_super<R|kotlin/Any|>
             }
 
@@ -413,7 +413,7 @@ FILE: [ResolvedTo(IMPORTS)] lazyPropertyScript.kts
             ^materialize Null(null)!!
         }
 
-        public final [ResolvedTo(STATUS)] class Test : R|kotlin/Any| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Test : R|kotlin/Any| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Test] constructor(): R|Test| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -475,4 +475,3 @@ FILE: [ResolvedTo(BODY_RESOLVE)] lazyPropertyScript.kts
                 }
 
         }
-

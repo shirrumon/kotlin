@@ -132,7 +132,7 @@ FILE: [ResolvedTo(IMPORTS)] localConstructorScript.kts
 
         public? final? [ResolvedTo(RAW_FIR)] fun <[ResolvedTo(RAW_FIR)] T> magic(): T { LAZY_BLOCK }
 
-        public final [ResolvedTo(STATUS)] class Q : R|kotlin/Any| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Q : R|kotlin/Any| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Q] constructor(): R|Q| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -150,7 +150,7 @@ FILE: [ResolvedTo(IMPORTS)] localConstructorScript.kts
 
         public? final? [ResolvedTo(RAW_FIR)] fun <[ResolvedTo(RAW_FIR)] T> magic(): T { LAZY_BLOCK }
 
-        public final [ResolvedTo(STATUS)] class Q : R|kotlin/Any| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Q : R|kotlin/Any| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Q] constructor(): R|Q| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -170,7 +170,7 @@ FILE: [ResolvedTo(IMPORTS)] localConstructorScript.kts
             ^magic Null(null)!!
         }
 
-        public final [ResolvedTo(STATUS)] class Q : R|kotlin/Any| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Q : R|kotlin/Any| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Q] constructor(): R|Q| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -211,7 +211,7 @@ FILE: [ResolvedTo(IMPORTS)] localConstructorScript.kts
             ^magic Null(null)!!
         }
 
-        public final [ResolvedTo(STATUS)] class Q : R|kotlin/Any| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Q : R|kotlin/Any| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Q] constructor(): R|Q| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -252,7 +252,7 @@ FILE: [ResolvedTo(IMPORTS)] localConstructorScript.kts
             ^magic Null(null)!!
         }
 
-        public final [ResolvedTo(STATUS)] class Q : R|kotlin/Any| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Q : R|kotlin/Any| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Q] constructor(): R|Q| {
                 LAZY_super<R|kotlin/Any|>
             }

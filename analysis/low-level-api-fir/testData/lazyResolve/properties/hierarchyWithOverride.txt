@@ -242,7 +242,7 @@ FILE: [ResolvedTo(IMPORTS)] hierarchyWithOverride.kt
             public [ResolvedTo(STATUS)] [ContainingClassKey=Foo2] get(): R|kotlin/Boolean|
 
     }
-    public abstract [ResolvedTo(STATUS)] class Usage : R|Foo2| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Usage : R|Foo2| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Usage] constructor(): R|Usage| {
             LAZY_super<<implicit>>
         }
@@ -274,7 +274,7 @@ FILE: [ResolvedTo(IMPORTS)] hierarchyWithOverride.kt
             public [ResolvedTo(STATUS)] [ContainingClassKey=Foo2] get(): R|kotlin/Boolean|
 
     }
-    public abstract [ResolvedTo(STATUS)] class Usage : R|Foo2| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Usage : R|Foo2| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Usage] constructor(): R|Usage| {
             LAZY_super<<implicit>>
         }
@@ -306,7 +306,7 @@ FILE: [ResolvedTo(IMPORTS)] hierarchyWithOverride.kt
             public [ResolvedTo(STATUS)] [ContainingClassKey=Foo2] get(): R|kotlin/Boolean|
 
     }
-    public abstract [ResolvedTo(STATUS)] class Usage : R|Foo2| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Usage : R|Foo2| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Usage] constructor(): R|Usage| {
             LAZY_super<<implicit>>
         }
@@ -338,7 +338,7 @@ FILE: [ResolvedTo(IMPORTS)] hierarchyWithOverride.kt
             public [ResolvedTo(STATUS)] [ContainingClassKey=Foo2] get(): R|kotlin/Boolean|
 
     }
-    public abstract [ResolvedTo(STATUS)] class Usage : R|Foo2| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Usage : R|Foo2| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Usage] constructor(): R|Usage| {
             LAZY_super<<implicit>>
         }
@@ -370,7 +370,7 @@ FILE: [ResolvedTo(IMPORTS)] hierarchyWithOverride.kt
             public [ResolvedTo(STATUS)] [ContainingClassKey=Foo2] get(): R|kotlin/Boolean|
 
     }
-    public abstract [ResolvedTo(STATUS)] class Usage : R|Foo2| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Usage : R|Foo2| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Usage] constructor(): R|Usage| {
             LAZY_super<<implicit>>
         }

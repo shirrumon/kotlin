@@ -263,8 +263,8 @@ FILE: [ResolvedTo(IMPORTS)] nestedTypeAliasScript.kts
     SCRIPT: [ResolvedTo(RAW_FIR)] <script-nestedTypeAliasScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(STATUS)] class OuterClass<[ResolvedTo(STATUS)] T1> : R|SuperForOuter| {
-            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=OuterClass] constructor<[ResolvedTo(STATUS)] T1>(): R|OuterClass<T1>| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class OuterClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T1> : R|SuperForOuter| {
+            public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=OuterClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T1>(): R|OuterClass<T1>| {
                 LAZY_super<SuperForOuter>
             }
 
@@ -300,8 +300,8 @@ FILE: [ResolvedTo(IMPORTS)] nestedTypeAliasScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-nestedTypeAliasScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(STATUS)] class OuterClass<[ResolvedTo(STATUS)] T1> : R|SuperForOuter| {
-            public [ResolvedTo(STATUS)] [ContainingClassKey=OuterClass] constructor<[ResolvedTo(STATUS)] T1>(): R|OuterClass<T1>| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class OuterClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T1> : R|SuperForOuter| {
+            public [ResolvedTo(STATUS)] [ContainingClassKey=OuterClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T1>(): R|OuterClass<T1>| {
                 LAZY_super<R|SuperForOuter|>
             }
 
@@ -337,8 +337,8 @@ FILE: [ResolvedTo(IMPORTS)] nestedTypeAliasScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-nestedTypeAliasScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(STATUS)] class OuterClass<[ResolvedTo(STATUS)] T1> : R|SuperForOuter| {
-            public [ResolvedTo(STATUS)] [ContainingClassKey=OuterClass] constructor<[ResolvedTo(STATUS)] T1>(): R|OuterClass<T1>| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class OuterClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T1> : R|SuperForOuter| {
+            public [ResolvedTo(STATUS)] [ContainingClassKey=OuterClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T1>(): R|OuterClass<T1>| {
                 LAZY_super<R|SuperForOuter|>
             }
 
@@ -374,8 +374,8 @@ FILE: [ResolvedTo(IMPORTS)] nestedTypeAliasScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-nestedTypeAliasScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(STATUS)] class OuterClass<[ResolvedTo(STATUS)] T1> : R|SuperForOuter| {
-            public [ResolvedTo(STATUS)] [ContainingClassKey=OuterClass] constructor<[ResolvedTo(STATUS)] T1>(): R|OuterClass<T1>| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class OuterClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T1> : R|SuperForOuter| {
+            public [ResolvedTo(STATUS)] [ContainingClassKey=OuterClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T1>(): R|OuterClass<T1>| {
                 LAZY_super<R|SuperForOuter|>
             }
 
@@ -411,8 +411,8 @@ FILE: [ResolvedTo(IMPORTS)] nestedTypeAliasScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-nestedTypeAliasScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(STATUS)] class OuterClass<[ResolvedTo(STATUS)] T1> : R|SuperForOuter| {
-            public [ResolvedTo(STATUS)] [ContainingClassKey=OuterClass] constructor<[ResolvedTo(STATUS)] T1>(): R|OuterClass<T1>| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class OuterClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T1> : R|SuperForOuter| {
+            public [ResolvedTo(STATUS)] [ContainingClassKey=OuterClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T1>(): R|OuterClass<T1>| {
                 LAZY_super<R|SuperForOuter|>
             }
 

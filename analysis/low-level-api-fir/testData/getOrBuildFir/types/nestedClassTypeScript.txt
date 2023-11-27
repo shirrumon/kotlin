@@ -25,7 +25,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassTypeScript.kts
 
         }
 
-        public final [ResolvedTo(STATUS)] class Bar : R|Foo| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Bar : R|Foo| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Bar] constructor(): R|Bar| {
                 LAZY_super<R|Foo|>
             }

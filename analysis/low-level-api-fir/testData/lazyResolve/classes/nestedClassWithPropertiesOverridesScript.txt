@@ -214,7 +214,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverridesScript.kts
     SCRIPT: [ResolvedTo(RAW_FIR)] <script-nestedClassWithPropertiesOverridesScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public abstract [ResolvedTo(STATUS)] interface OV : R|kotlin/Any| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface OV : R|kotlin/Any| {
             public? final? [ResolvedTo(RAW_FIR)] val originalExpressions: A
                 public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=OV] get(): A
 
@@ -244,7 +244,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverridesScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-nestedClassWithPropertiesOverridesScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public abstract [ResolvedTo(STATUS)] interface OV : R|kotlin/Any| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface OV : R|kotlin/Any| {
             public abstract [ResolvedTo(STATUS)] val originalExpressions: R|A|
                 public [ResolvedTo(STATUS)] [ContainingClassKey=OV] get(): R|A|
 
@@ -274,7 +274,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverridesScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-nestedClassWithPropertiesOverridesScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public abstract [ResolvedTo(STATUS)] interface OV : R|kotlin/Any| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface OV : R|kotlin/Any| {
             public abstract [ResolvedTo(STATUS)] val originalExpressions: R|A|
                 public [ResolvedTo(STATUS)] [ContainingClassKey=OV] get(): R|A|
 
@@ -304,7 +304,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverridesScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-nestedClassWithPropertiesOverridesScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public abstract [ResolvedTo(STATUS)] interface OV : R|kotlin/Any| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface OV : R|kotlin/Any| {
             public abstract [ResolvedTo(STATUS)] val originalExpressions: R|A|
                 public [ResolvedTo(STATUS)] [ContainingClassKey=OV] get(): R|A|
 
@@ -334,7 +334,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverridesScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-nestedClassWithPropertiesOverridesScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public abstract [ResolvedTo(STATUS)] interface OV : R|kotlin/Any| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface OV : R|kotlin/Any| {
             public abstract [ResolvedTo(STATUS)] val originalExpressions: R|A|
                 public [ResolvedTo(STATUS)] [ContainingClassKey=OV] get(): R|A|
 

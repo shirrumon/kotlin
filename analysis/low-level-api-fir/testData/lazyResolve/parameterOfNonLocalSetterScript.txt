@@ -130,7 +130,7 @@ FILE: [ResolvedTo(IMPORTS)] parameterOfNonLocalSetterScript.kts
     SCRIPT: [ResolvedTo(RAW_FIR)] <script-parameterOfNonLocalSetterScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(STATUS)] class X : R|kotlin/Any| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class X : R|kotlin/Any| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=X] constructor(): R|X| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -148,7 +148,7 @@ FILE: [ResolvedTo(IMPORTS)] parameterOfNonLocalSetterScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-parameterOfNonLocalSetterScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(STATUS)] class X : R|kotlin/Any| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class X : R|kotlin/Any| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=X] constructor(): R|X| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -168,7 +168,7 @@ FILE: [ResolvedTo(IMPORTS)] parameterOfNonLocalSetterScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-parameterOfNonLocalSetterScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(STATUS)] class X : R|kotlin/Any| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class X : R|kotlin/Any| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=X] constructor(): R|X| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -188,7 +188,7 @@ FILE: [ResolvedTo(IMPORTS)] parameterOfNonLocalSetterScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-parameterOfNonLocalSetterScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(STATUS)] class X : R|kotlin/Any| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class X : R|kotlin/Any| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=X] constructor(): R|X| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -208,7 +208,7 @@ FILE: [ResolvedTo(IMPORTS)] parameterOfNonLocalSetterScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-parameterOfNonLocalSetterScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(STATUS)] class X : R|kotlin/Any| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class X : R|kotlin/Any| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=X] constructor(): R|X| {
                 LAZY_super<R|kotlin/Any|>
             }
