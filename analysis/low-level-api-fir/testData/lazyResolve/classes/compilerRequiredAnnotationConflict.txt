@@ -231,7 +231,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationConflict.kt
 
 EXPECT_ACTUAL_MATCHING:
 FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationConflict.kt
-    public final [ResolvedTo(STATUS)] object Some : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Some : R|kotlin/Any| {
         private [ResolvedTo(RAW_FIR)] [ContainingClassKey=Some] constructor(): R|Some| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -264,7 +264,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationConflict.kt
 
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationConflict.kt
-    public final [ResolvedTo(STATUS)] object Some : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Some : R|kotlin/Any| {
         private [ResolvedTo(STATUS)] [ContainingClassKey=Some] constructor(): R|Some| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -297,7 +297,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationConflict.kt
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationConflict.kt
-    public final [ResolvedTo(STATUS)] object Some : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Some : R|kotlin/Any| {
         private [ResolvedTo(STATUS)] [ContainingClassKey=Some] constructor(): R|Some| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -330,7 +330,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationConflict.kt
 
 ANNOTATION_ARGUMENTS:
 FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationConflict.kt
-    public final [ResolvedTo(STATUS)] object Some : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Some : R|kotlin/Any| {
         private [ResolvedTo(STATUS)] [ContainingClassKey=Some] constructor(): R|Some| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -367,7 +367,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationConflict.kt
 
 BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationConflict.kt
-    public final [ResolvedTo(STATUS)] object Some : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Some : R|kotlin/Any| {
         private [ResolvedTo(STATUS)] [ContainingClassKey=Some] constructor(): R|Some| {
             LAZY_super<R|kotlin/Any|>
         }

@@ -255,7 +255,7 @@ FILE: [ResolvedTo(IMPORTS)] implicitTypeWithInaccessibleAnnotation.kt
     public final [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] fun implicitType1(): R|@R|usage/Anno|(privateConstVal#)  kotlin/Int| {
         ^implicitType1 Q|usage/TopLevelObject|.R|usage/TopLevelObject.expectedType|()
     }
-    public final [ResolvedTo(STATUS)] object TopLevelObject : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object TopLevelObject : R|kotlin/Any| {
         private [ResolvedTo(STATUS)] [ContainingClassKey=TopLevelObject] constructor(): R|usage/TopLevelObject| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -286,7 +286,7 @@ FILE: [ResolvedTo(IMPORTS)] implicitTypeWithInaccessibleAnnotation.kt
     public final [ResolvedTo(ANNOTATION_ARGUMENTS)] fun implicitType1(): R|@R|usage/Anno|(s = <Unresolved name: privateConstVal>#)  kotlin/Int| {
         ^implicitType1 Q|usage/TopLevelObject|.R|usage/TopLevelObject.expectedType|()
     }
-    public final [ResolvedTo(STATUS)] object TopLevelObject : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object TopLevelObject : R|kotlin/Any| {
         private [ResolvedTo(STATUS)] [ContainingClassKey=TopLevelObject] constructor(): R|usage/TopLevelObject| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -317,7 +317,7 @@ FILE: [ResolvedTo(IMPORTS)] implicitTypeWithInaccessibleAnnotation.kt
     public final [ResolvedTo(BODY_RESOLVE)] fun implicitType1(): R|@R|usage/Anno|(s = <Unresolved name: privateConstVal>#)  kotlin/Int| {
         ^implicitType1 Q|usage/TopLevelObject|.R|usage/TopLevelObject.expectedType|()
     }
-    public final [ResolvedTo(STATUS)] object TopLevelObject : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object TopLevelObject : R|kotlin/Any| {
         private [ResolvedTo(STATUS)] [ContainingClassKey=TopLevelObject] constructor(): R|usage/TopLevelObject| {
             LAZY_super<R|kotlin/Any|>
         }

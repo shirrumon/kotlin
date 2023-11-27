@@ -297,7 +297,7 @@ FILE: [ResolvedTo(IMPORTS)] hierarchyWithOverrideScript.kts
 
         }
 
-        public abstract [ResolvedTo(STATUS)] class Usage : R|Foo2| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Usage : R|Foo2| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Usage] constructor(): R|Usage| {
                 LAZY_super<<implicit>>
             }
@@ -336,7 +336,7 @@ FILE: [ResolvedTo(IMPORTS)] hierarchyWithOverrideScript.kts
 
         }
 
-        public abstract [ResolvedTo(STATUS)] class Usage : R|Foo2| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Usage : R|Foo2| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Usage] constructor(): R|Usage| {
                 LAZY_super<<implicit>>
             }
@@ -375,7 +375,7 @@ FILE: [ResolvedTo(IMPORTS)] hierarchyWithOverrideScript.kts
 
         }
 
-        public abstract [ResolvedTo(STATUS)] class Usage : R|Foo2| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Usage : R|Foo2| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Usage] constructor(): R|Usage| {
                 LAZY_super<<implicit>>
             }
@@ -414,7 +414,7 @@ FILE: [ResolvedTo(IMPORTS)] hierarchyWithOverrideScript.kts
 
         }
 
-        public abstract [ResolvedTo(STATUS)] class Usage : R|Foo2| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Usage : R|Foo2| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Usage] constructor(): R|Usage| {
                 LAZY_super<<implicit>>
             }
@@ -453,7 +453,7 @@ FILE: [ResolvedTo(IMPORTS)] hierarchyWithOverrideScript.kts
 
         }
 
-        public abstract [ResolvedTo(STATUS)] class Usage : R|Foo2| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Usage : R|Foo2| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Usage] constructor(): R|Usage| {
                 LAZY_super<<implicit>>
             }

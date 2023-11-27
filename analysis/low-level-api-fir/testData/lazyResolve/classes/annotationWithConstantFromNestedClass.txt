@@ -254,12 +254,12 @@ FILE: [ResolvedTo(IMPORTS)] annotationWithConstantFromNestedClass.kt
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): Int
 
     }
-    public final [ResolvedTo(STATUS)] class Outer : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Outer : R|kotlin/Any| {
         public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Outer] constructor(): R|Outer| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final companion [ResolvedTo(STATUS)] object Companion : R|kotlin/Any| {
+        public final companion [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Companion : R|kotlin/Any| {
             private [ResolvedTo(RAW_FIR)] [ContainingClassKey=Companion] constructor(): R|Outer.Companion| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -289,12 +289,12 @@ FILE: [ResolvedTo(IMPORTS)] annotationWithConstantFromNestedClass.kt
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): Int
 
     }
-    public final [ResolvedTo(STATUS)] class Outer : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Outer : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Outer] constructor(): R|Outer| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final companion [ResolvedTo(STATUS)] object Companion : R|kotlin/Any| {
+        public final companion [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Companion : R|kotlin/Any| {
             private [ResolvedTo(STATUS)] [ContainingClassKey=Companion] constructor(): R|Outer.Companion| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -324,12 +324,12 @@ FILE: [ResolvedTo(IMPORTS)] annotationWithConstantFromNestedClass.kt
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): Int
 
     }
-    public final [ResolvedTo(STATUS)] class Outer : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Outer : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Outer] constructor(): R|Outer| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final companion [ResolvedTo(STATUS)] object Companion : R|kotlin/Any| {
+        public final companion [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Companion : R|kotlin/Any| {
             private [ResolvedTo(STATUS)] [ContainingClassKey=Companion] constructor(): R|Outer.Companion| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -359,12 +359,12 @@ FILE: [ResolvedTo(IMPORTS)] annotationWithConstantFromNestedClass.kt
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): R|kotlin/Int|
 
     }
-    public final [ResolvedTo(STATUS)] class Outer : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Outer : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Outer] constructor(): R|Outer| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final companion [ResolvedTo(STATUS)] object Companion : R|kotlin/Any| {
+        public final companion [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Companion : R|kotlin/Any| {
             private [ResolvedTo(STATUS)] [ContainingClassKey=Companion] constructor(): R|Outer.Companion| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -394,12 +394,12 @@ FILE: [ResolvedTo(IMPORTS)] annotationWithConstantFromNestedClass.kt
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): R|kotlin/Int|
 
     }
-    public final [ResolvedTo(STATUS)] class Outer : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Outer : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Outer] constructor(): R|Outer| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final companion [ResolvedTo(STATUS)] object Companion : R|kotlin/Any| {
+        public final companion [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Companion : R|kotlin/Any| {
             private [ResolvedTo(STATUS)] [ContainingClassKey=Companion] constructor(): R|Outer.Companion| {
                 LAZY_super<R|kotlin/Any|>
             }

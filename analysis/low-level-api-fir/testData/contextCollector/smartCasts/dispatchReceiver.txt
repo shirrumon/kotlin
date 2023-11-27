@@ -28,7 +28,7 @@ Smart Casts:
         kotlin.Any
 
 FILE: [ResolvedTo(IMPORTS)] dispatchReceiver.kt
-    public open [ResolvedTo(STATUS)] class Foo : R|kotlin/Any| {
+    public open [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Foo : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] constructor(): R|Foo| {
             LAZY_super<R|kotlin/Any|>
         }

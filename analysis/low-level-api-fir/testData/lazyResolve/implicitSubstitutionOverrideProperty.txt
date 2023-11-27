@@ -51,14 +51,14 @@ FILE: [ResolvedTo(IMPORTS)] implicitSubstitutionOverrideProperty.kt
     }
     public? final? const [ResolvedTo(RAW_FIR)] val constant: <implicit> = LAZY_EXPRESSION
         public? [ResolvedTo(RAW_FIR)] get(): <implicit>
-    public abstract [ResolvedTo(STATUS)] class SubClass : R|second/AbstractClass<kotlin/String>| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class SubClass : R|second/AbstractClass<kotlin/String>| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=SubClass] constructor(): R|second/SubClass| {
             LAZY_super<R|second/AbstractClass<kotlin/String>|>
         }
 
     }
-    public abstract [ResolvedTo(STATUS)] class AbstractClass<[ResolvedTo(STATUS)] T> : R|kotlin/Any| {
-        public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(STATUS)] T>(): R|second/AbstractClass<T>| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AbstractClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T> : R|kotlin/Any| {
+        public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T>(): R|second/AbstractClass<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
@@ -87,14 +87,14 @@ FILE: [ResolvedTo(IMPORTS)] implicitSubstitutionOverrideProperty.kt
     }
     public? final? const [ResolvedTo(RAW_FIR)] val constant: <implicit> = LAZY_EXPRESSION
         public? [ResolvedTo(RAW_FIR)] get(): <implicit>
-    public abstract [ResolvedTo(STATUS)] class SubClass : R|second/AbstractClass<kotlin/String>| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class SubClass : R|second/AbstractClass<kotlin/String>| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=SubClass] constructor(): R|second/SubClass| {
             LAZY_super<R|second/AbstractClass<kotlin/String>|>
         }
 
     }
-    public abstract [ResolvedTo(STATUS)] class AbstractClass<[ResolvedTo(STATUS)] T> : R|kotlin/Any| {
-        public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(STATUS)] T>(): R|second/AbstractClass<T>| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AbstractClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T> : R|kotlin/Any| {
+        public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T>(): R|second/AbstractClass<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
@@ -123,14 +123,14 @@ FILE: [ResolvedTo(IMPORTS)] implicitSubstitutionOverrideProperty.kt
     }
     public? final? const [ResolvedTo(RAW_FIR)] val constant: <implicit> = LAZY_EXPRESSION
         public? [ResolvedTo(RAW_FIR)] get(): <implicit>
-    public abstract [ResolvedTo(STATUS)] class SubClass : R|second/AbstractClass<kotlin/String>| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class SubClass : R|second/AbstractClass<kotlin/String>| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=SubClass] constructor(): R|second/SubClass| {
             LAZY_super<R|second/AbstractClass<kotlin/String>|>
         }
 
     }
-    public abstract [ResolvedTo(STATUS)] class AbstractClass<[ResolvedTo(STATUS)] T> : R|kotlin/Any| {
-        public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(STATUS)] T>(): R|second/AbstractClass<T>| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AbstractClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T> : R|kotlin/Any| {
+        public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T>(): R|second/AbstractClass<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
@@ -161,14 +161,14 @@ FILE: [ResolvedTo(IMPORTS)] implicitSubstitutionOverrideProperty.kt
     }
     public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val constant: R|kotlin/String| = String(str)
         public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/String|
-    public abstract [ResolvedTo(STATUS)] class SubClass : R|second/AbstractClass<kotlin/String>| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class SubClass : R|second/AbstractClass<kotlin/String>| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=SubClass] constructor(): R|second/SubClass| {
             LAZY_super<R|second/AbstractClass<kotlin/String>|>
         }
 
     }
-    public abstract [ResolvedTo(STATUS)] class AbstractClass<[ResolvedTo(STATUS)] T> : R|kotlin/Any| {
-        public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(STATUS)] T>(): R|second/AbstractClass<T>| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AbstractClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T> : R|kotlin/Any| {
+        public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T>(): R|second/AbstractClass<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
@@ -199,14 +199,14 @@ FILE: [ResolvedTo(IMPORTS)] implicitSubstitutionOverrideProperty.kt
     }
     public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val constant: R|kotlin/String| = String(str)
         public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/String|
-    public abstract [ResolvedTo(STATUS)] class SubClass : R|second/AbstractClass<kotlin/String>| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class SubClass : R|second/AbstractClass<kotlin/String>| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=SubClass] constructor(): R|second/SubClass| {
             LAZY_super<R|second/AbstractClass<kotlin/String>|>
         }
 
     }
-    public abstract [ResolvedTo(STATUS)] class AbstractClass<[ResolvedTo(STATUS)] T> : R|kotlin/Any| {
-        public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(STATUS)] T>(): R|second/AbstractClass<T>| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AbstractClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T> : R|kotlin/Any| {
+        public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T>(): R|second/AbstractClass<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 

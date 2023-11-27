@@ -13,7 +13,7 @@ FILE: [ResolvedTo(IMPORTS)] delegate.kt
         }
 
     }
-    public final [ResolvedTo(STATUS)] class X : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class X : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=X] constructor(): R|X| {
             LAZY_super<R|kotlin/Any|>
         }

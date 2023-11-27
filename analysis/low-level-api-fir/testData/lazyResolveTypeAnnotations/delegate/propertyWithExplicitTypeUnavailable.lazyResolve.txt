@@ -324,7 +324,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithExplicitTypeUnavailable.kt
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
-    public final [ResolvedTo(STATUS)] class Delegate : R|kotlin/properties/ReadWriteProperty<kotlin/Any?, kotlin/collections/List<kotlin/collections/List<kotlin/Int>>>| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Delegate : R|kotlin/properties/ReadWriteProperty<kotlin/Any?, kotlin/collections/List<kotlin/collections/List<kotlin/Int>>>| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Delegate] constructor(): R|Delegate| {
             LAZY_super<<implicit>>
         }
@@ -366,7 +366,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithExplicitTypeUnavailable.kt
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
-    public final [ResolvedTo(STATUS)] class Delegate : R|kotlin/properties/ReadWriteProperty<kotlin/Any?, kotlin/collections/List<kotlin/collections/List<kotlin/Int>>>| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Delegate : R|kotlin/properties/ReadWriteProperty<kotlin/Any?, kotlin/collections/List<kotlin/collections/List<kotlin/Int>>>| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Delegate] constructor(): R|Delegate| {
             LAZY_super<<implicit>>
         }
@@ -408,7 +408,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithExplicitTypeUnavailable.kt
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
-    public final [ResolvedTo(STATUS)] class Delegate : R|kotlin/properties/ReadWriteProperty<kotlin/Any?, kotlin/collections/List<kotlin/collections/List<kotlin/Int>>>| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Delegate : R|kotlin/properties/ReadWriteProperty<kotlin/Any?, kotlin/collections/List<kotlin/collections/List<kotlin/Int>>>| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Delegate] constructor(): R|Delegate| {
             LAZY_super<<implicit>>
         }

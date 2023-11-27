@@ -587,7 +587,7 @@ FILE: [ResolvedTo(IMPORTS)] hierarchyWithOverrideAndNestedClass2Script.kts
 
         }
 
-        public abstract [ResolvedTo(STATUS)] class OuterClass : R|Foo1| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class OuterClass : R|Foo1| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=OuterClass] constructor(): R|OuterClass| {
                 LAZY_super<<implicit>>
             }
@@ -610,7 +610,7 @@ FILE: [ResolvedTo(IMPORTS)] hierarchyWithOverrideAndNestedClass2Script.kts
 
             }
 
-            public abstract [ResolvedTo(STATUS)] class AnotherNestedClass : R|OuterClass.NestedClass| {
+            public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AnotherNestedClass : R|OuterClass.NestedClass| {
                 public [ResolvedTo(STATUS)] [ContainingClassKey=AnotherNestedClass] constructor(): R|OuterClass.AnotherNestedClass| {
                     LAZY_super<R|OuterClass.NestedClass|>
                 }
@@ -665,7 +665,7 @@ FILE: [ResolvedTo(IMPORTS)] hierarchyWithOverrideAndNestedClass2Script.kts
 
         }
 
-        public abstract [ResolvedTo(STATUS)] class OuterClass : R|Foo1| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class OuterClass : R|Foo1| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=OuterClass] constructor(): R|OuterClass| {
                 LAZY_super<<implicit>>
             }
@@ -688,7 +688,7 @@ FILE: [ResolvedTo(IMPORTS)] hierarchyWithOverrideAndNestedClass2Script.kts
 
             }
 
-            public abstract [ResolvedTo(STATUS)] class AnotherNestedClass : R|OuterClass.NestedClass| {
+            public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AnotherNestedClass : R|OuterClass.NestedClass| {
                 public [ResolvedTo(STATUS)] [ContainingClassKey=AnotherNestedClass] constructor(): R|OuterClass.AnotherNestedClass| {
                     LAZY_super<R|OuterClass.NestedClass|>
                 }
@@ -744,7 +744,7 @@ FILE: [ResolvedTo(IMPORTS)] hierarchyWithOverrideAndNestedClass2Script.kts
 
         }
 
-        public abstract [ResolvedTo(STATUS)] class OuterClass : R|Foo1| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class OuterClass : R|Foo1| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=OuterClass] constructor(): R|OuterClass| {
                 LAZY_super<<implicit>>
             }
@@ -767,7 +767,7 @@ FILE: [ResolvedTo(IMPORTS)] hierarchyWithOverrideAndNestedClass2Script.kts
 
             }
 
-            public abstract [ResolvedTo(STATUS)] class AnotherNestedClass : R|OuterClass.NestedClass| {
+            public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AnotherNestedClass : R|OuterClass.NestedClass| {
                 public [ResolvedTo(STATUS)] [ContainingClassKey=AnotherNestedClass] constructor(): R|OuterClass.AnotherNestedClass| {
                     LAZY_super<R|OuterClass.NestedClass|>
                 }
@@ -823,7 +823,7 @@ FILE: [ResolvedTo(IMPORTS)] hierarchyWithOverrideAndNestedClass2Script.kts
 
         }
 
-        public abstract [ResolvedTo(STATUS)] class OuterClass : R|Foo1| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class OuterClass : R|Foo1| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=OuterClass] constructor(): R|OuterClass| {
                 LAZY_super<<implicit>>
             }
@@ -846,7 +846,7 @@ FILE: [ResolvedTo(IMPORTS)] hierarchyWithOverrideAndNestedClass2Script.kts
 
             }
 
-            public abstract [ResolvedTo(STATUS)] class AnotherNestedClass : R|OuterClass.NestedClass| {
+            public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AnotherNestedClass : R|OuterClass.NestedClass| {
                 public [ResolvedTo(STATUS)] [ContainingClassKey=AnotherNestedClass] constructor(): R|OuterClass.AnotherNestedClass| {
                     LAZY_super<R|OuterClass.NestedClass|>
                 }
@@ -902,7 +902,7 @@ FILE: [ResolvedTo(IMPORTS)] hierarchyWithOverrideAndNestedClass2Script.kts
 
         }
 
-        public abstract [ResolvedTo(STATUS)] class OuterClass : R|Foo1| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class OuterClass : R|Foo1| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=OuterClass] constructor(): R|OuterClass| {
                 LAZY_super<<implicit>>
             }
@@ -925,7 +925,7 @@ FILE: [ResolvedTo(IMPORTS)] hierarchyWithOverrideAndNestedClass2Script.kts
 
             }
 
-            public abstract [ResolvedTo(STATUS)] class AnotherNestedClass : R|OuterClass.NestedClass| {
+            public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AnotherNestedClass : R|OuterClass.NestedClass| {
                 public [ResolvedTo(STATUS)] [ContainingClassKey=AnotherNestedClass] constructor(): R|OuterClass.AnotherNestedClass| {
                     LAZY_super<R|OuterClass.NestedClass|>
                 }

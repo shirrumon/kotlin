@@ -436,7 +436,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedCompilerRequiredAnnotationsForMember.kt
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
-    @R|kotlin/Deprecated|[Types](String(FirstClass)) @R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(STATUS)] class FirstClass : R|kotlin/Any| {
+    @R|kotlin/Deprecated|[Types](String(FirstClass)) @R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class FirstClass : R|kotlin/Any| {
         @R|kotlin/Deprecated|[Types](String(constructor)) @R|Anno|[Types](LAZY_EXPRESSION) public [ResolvedTo(STATUS)] [ContainingClassKey=FirstClass] constructor([ResolvedTo(STATUS)] [CorrespondingProperty=/FirstClass.a] @R|Anno|[Types](LAZY_EXPRESSION) a: R|kotlin/Int|): R|FirstClass| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -449,7 +449,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedCompilerRequiredAnnotationsForMember.kt
         @R|kotlin/Deprecated|[Types](String(memberProperty)) @R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(STATUS)] val memberProperty: <implicit> = LAZY_EXPRESSION
             public [ResolvedTo(STATUS)] [ContainingClassKey=FirstClass] get(): <implicit>
 
-        @R|kotlin/Deprecated|[Types](String(NestedClass)) @R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(STATUS)] class NestedClass : R|kotlin/Any| {
+        @R|kotlin/Deprecated|[Types](String(NestedClass)) @R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class NestedClass : R|kotlin/Any| {
             @R|kotlin/Deprecated|[Types](String(constructor)) @R|Anno|[Types](LAZY_EXPRESSION) public [ResolvedTo(STATUS)] [ContainingClassKey=NestedClass] constructor([ResolvedTo(STATUS)] [CorrespondingProperty=/FirstClass.NestedClass.a] @R|Anno|[Types](LAZY_EXPRESSION) a: R|kotlin/Int|): R|FirstClass.NestedClass| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -497,7 +497,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedCompilerRequiredAnnotationsForMember.kt
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
-    @R|kotlin/Deprecated|[Types](String(FirstClass)) @R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(STATUS)] class FirstClass : R|kotlin/Any| {
+    @R|kotlin/Deprecated|[Types](String(FirstClass)) @R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class FirstClass : R|kotlin/Any| {
         @R|kotlin/Deprecated|[Types](String(constructor)) @R|Anno|[Types](LAZY_EXPRESSION) public [ResolvedTo(STATUS)] [ContainingClassKey=FirstClass] constructor([ResolvedTo(STATUS)] [CorrespondingProperty=/FirstClass.a] @R|Anno|[Types](LAZY_EXPRESSION) a: R|kotlin/Int|): R|FirstClass| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -510,7 +510,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedCompilerRequiredAnnotationsForMember.kt
         @R|kotlin/Deprecated|[Types](String(memberProperty)) @R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(STATUS)] val memberProperty: <implicit> = LAZY_EXPRESSION
             public [ResolvedTo(STATUS)] [ContainingClassKey=FirstClass] get(): <implicit>
 
-        @R|kotlin/Deprecated|[Types](String(NestedClass)) @R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(STATUS)] class NestedClass : R|kotlin/Any| {
+        @R|kotlin/Deprecated|[Types](String(NestedClass)) @R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class NestedClass : R|kotlin/Any| {
             @R|kotlin/Deprecated|[Types](String(constructor)) @R|Anno|[Types](LAZY_EXPRESSION) public [ResolvedTo(STATUS)] [ContainingClassKey=NestedClass] constructor([ResolvedTo(STATUS)] [CorrespondingProperty=/FirstClass.NestedClass.a] @R|Anno|[Types](LAZY_EXPRESSION) a: R|kotlin/Int|): R|FirstClass.NestedClass| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -559,7 +559,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedCompilerRequiredAnnotationsForMember.kt
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
-    @R|kotlin/Deprecated|[Types](String(FirstClass)) @R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(STATUS)] class FirstClass : R|kotlin/Any| {
+    @R|kotlin/Deprecated|[Types](String(FirstClass)) @R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class FirstClass : R|kotlin/Any| {
         @R|kotlin/Deprecated|[Types](String(constructor)) @R|Anno|[Types](LAZY_EXPRESSION) public [ResolvedTo(STATUS)] [ContainingClassKey=FirstClass] constructor([ResolvedTo(STATUS)] [CorrespondingProperty=/FirstClass.a] @R|Anno|[Types](LAZY_EXPRESSION) a: R|kotlin/Int|): R|FirstClass| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -572,7 +572,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedCompilerRequiredAnnotationsForMember.kt
         @R|kotlin/Deprecated|[Types](String(memberProperty)) @R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(STATUS)] val memberProperty: <implicit> = LAZY_EXPRESSION
             public [ResolvedTo(STATUS)] [ContainingClassKey=FirstClass] get(): <implicit>
 
-        @R|kotlin/Deprecated|[Types](String(NestedClass)) @R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(STATUS)] class NestedClass : R|kotlin/Any| {
+        @R|kotlin/Deprecated|[Types](String(NestedClass)) @R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class NestedClass : R|kotlin/Any| {
             @R|kotlin/Deprecated|[Types](String(constructor)) @R|Anno|[Types](LAZY_EXPRESSION) public [ResolvedTo(STATUS)] [ContainingClassKey=NestedClass] constructor([ResolvedTo(STATUS)] [CorrespondingProperty=/FirstClass.NestedClass.a] @R|Anno|[Types](LAZY_EXPRESSION) a: R|kotlin/Int|): R|FirstClass.NestedClass| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -621,7 +621,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedCompilerRequiredAnnotationsForMember.kt
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
-    @R|kotlin/Deprecated|[Types](String(FirstClass)) @R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(STATUS)] class FirstClass : R|kotlin/Any| {
+    @R|kotlin/Deprecated|[Types](String(FirstClass)) @R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class FirstClass : R|kotlin/Any| {
         @R|kotlin/Deprecated|[Types](String(constructor)) @R|Anno|[Types](LAZY_EXPRESSION) public [ResolvedTo(STATUS)] [ContainingClassKey=FirstClass] constructor([ResolvedTo(STATUS)] [CorrespondingProperty=/FirstClass.a] @R|Anno|[Types](LAZY_EXPRESSION) a: R|kotlin/Int|): R|FirstClass| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -634,7 +634,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedCompilerRequiredAnnotationsForMember.kt
         @R|kotlin/Deprecated|[Types](String(memberProperty)) @R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(STATUS)] val memberProperty: <implicit> = LAZY_EXPRESSION
             public [ResolvedTo(STATUS)] [ContainingClassKey=FirstClass] get(): <implicit>
 
-        @R|kotlin/Deprecated|[Types](String(NestedClass)) @R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(STATUS)] class NestedClass : R|kotlin/Any| {
+        @R|kotlin/Deprecated|[Types](String(NestedClass)) @R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class NestedClass : R|kotlin/Any| {
             @R|kotlin/Deprecated|[Types](String(constructor)) @R|Anno|[Types](LAZY_EXPRESSION) public [ResolvedTo(STATUS)] [ContainingClassKey=NestedClass] constructor([ResolvedTo(STATUS)] [CorrespondingProperty=/FirstClass.NestedClass.a] @R|Anno|[Types](LAZY_EXPRESSION) a: R|kotlin/Int|): R|FirstClass.NestedClass| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -683,7 +683,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedCompilerRequiredAnnotationsForMember.kt
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
-    @R|kotlin/Deprecated|[Types](String(FirstClass)) @R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(STATUS)] class FirstClass : R|kotlin/Any| {
+    @R|kotlin/Deprecated|[Types](String(FirstClass)) @R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class FirstClass : R|kotlin/Any| {
         @R|kotlin/Deprecated|[Types](String(constructor)) @R|Anno|[Types](LAZY_EXPRESSION) public [ResolvedTo(STATUS)] [ContainingClassKey=FirstClass] constructor([ResolvedTo(STATUS)] [CorrespondingProperty=/FirstClass.a] @R|Anno|[Types](LAZY_EXPRESSION) a: R|kotlin/Int|): R|FirstClass| {
             LAZY_super<R|kotlin/Any|>
         }
@@ -696,7 +696,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedCompilerRequiredAnnotationsForMember.kt
         @R|kotlin/Deprecated|[Types](String(memberProperty)) @R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(STATUS)] val memberProperty: <implicit> = LAZY_EXPRESSION
             public [ResolvedTo(STATUS)] [ContainingClassKey=FirstClass] get(): <implicit>
 
-        @R|kotlin/Deprecated|[Types](String(NestedClass)) @R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(STATUS)] class NestedClass : R|kotlin/Any| {
+        @R|kotlin/Deprecated|[Types](String(NestedClass)) @R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class NestedClass : R|kotlin/Any| {
             @R|kotlin/Deprecated|[Types](String(constructor)) @R|Anno|[Types](LAZY_EXPRESSION) public [ResolvedTo(STATUS)] [ContainingClassKey=NestedClass] constructor([ResolvedTo(STATUS)] [CorrespondingProperty=/FirstClass.NestedClass.a] @R|Anno|[Types](LAZY_EXPRESSION) a: R|kotlin/Int|): R|FirstClass.NestedClass| {
                 LAZY_super<R|kotlin/Any|>
             }

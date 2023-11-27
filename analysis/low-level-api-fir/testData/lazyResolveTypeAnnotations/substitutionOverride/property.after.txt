@@ -134,8 +134,8 @@ FILE: [ResolvedTo(IMPORTS)] property.kt
         }
 
     }
-    public abstract [ResolvedTo(STATUS)] class AbstractClass<[ResolvedTo(STATUS)] T> : R|kotlin/Any| {
-        public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(STATUS)] T>(): R|second/AbstractClass<T>| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AbstractClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T> : R|kotlin/Any| {
+        public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T>(): R|second/AbstractClass<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 

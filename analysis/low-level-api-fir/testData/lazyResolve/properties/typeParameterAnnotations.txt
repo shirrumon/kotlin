@@ -198,7 +198,7 @@ FILE: [ResolvedTo(IMPORTS)] typeParameterAnnotations.kt
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
-    public abstract [ResolvedTo(STATUS)] interface OriginalInterface : R|kotlin/Any| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface OriginalInterface : R|kotlin/Any| {
         public open [ResolvedTo(EXPECT_ACTUAL_MATCHING)] val <@R|Anno|[Types](LAZY_EXPRESSION) [ResolvedTo(EXPECT_ACTUAL_MATCHING)] F : R|@R|Anno|(<strcat>(String(bound ), prop#))  kotlin/Number|> explicitType: R|@R|Anno|(<strcat>(String(bound ), prop#))  kotlin/Int|
             public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=OriginalInterface] get(): R|@R|Anno|(<strcat>(String(bound ), prop#))  kotlin/Int| { LAZY_BLOCK }
 
@@ -225,7 +225,7 @@ FILE: [ResolvedTo(IMPORTS)] typeParameterAnnotations.kt
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
-    public abstract [ResolvedTo(STATUS)] interface OriginalInterface : R|kotlin/Any| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface OriginalInterface : R|kotlin/Any| {
         public open [ResolvedTo(CONTRACTS)] val <@R|Anno|[Types](LAZY_EXPRESSION) [ResolvedTo(CONTRACTS)] F : R|@R|Anno|(<strcat>(String(bound ), prop#))  kotlin/Number|> explicitType: R|@R|Anno|(<strcat>(String(bound ), prop#))  kotlin/Int|
             public [ResolvedTo(CONTRACTS)] [ContainingClassKey=OriginalInterface] get(): R|@R|Anno|(<strcat>(String(bound ), prop#))  kotlin/Int| {
                 ^ IntegerLiteral(1)
@@ -254,7 +254,7 @@ FILE: [ResolvedTo(IMPORTS)] typeParameterAnnotations.kt
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
-    public abstract [ResolvedTo(STATUS)] interface OriginalInterface : R|kotlin/Any| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface OriginalInterface : R|kotlin/Any| {
         public open [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val <@R|Anno|[Types](LAZY_EXPRESSION) [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] F : R|@R|Anno|(<strcat>(String(bound ), prop#))  kotlin/Number|> explicitType: R|@R|Anno|(<strcat>(String(bound ), prop#))  kotlin/Int|
             public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=OriginalInterface] get(): R|@R|Anno|(<strcat>(String(bound ), prop#))  kotlin/Int| {
                 ^ IntegerLiteral(1)
@@ -283,13 +283,13 @@ FILE: [ResolvedTo(IMPORTS)] typeParameterAnnotations.kt
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
-    public abstract [ResolvedTo(STATUS)] interface OriginalInterface : R|kotlin/Any| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface OriginalInterface : R|kotlin/Any| {
         public open [ResolvedTo(ANNOTATION_ARGUMENTS)] val <@R|Anno|[Types](position = <strcat>(String(type param ), this@R|/OriginalInterface.Companion|.R|/OriginalInterface.Companion.prop|)) [ResolvedTo(ANNOTATION_ARGUMENTS)] F : R|@R|Anno|(position = <strcat>(String(bound ), this@R|/OriginalInterface.Companion|.R|/OriginalInterface.Companion.prop|))  kotlin/Number|> explicitType: R|@R|Anno|(position = <strcat>(String(bound ), this@R|/OriginalInterface.Companion|.R|/OriginalInterface.Companion.prop|))  kotlin/Int|
             public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=OriginalInterface] get(): R|@R|Anno|(position = <strcat>(String(bound ), this@R|/OriginalInterface.Companion|.R|/OriginalInterface.Companion.prop|))  kotlin/Int| {
                 ^ IntegerLiteral(1)
             }
 
-        public final companion [ResolvedTo(STATUS)] object Companion : R|kotlin/Any| {
+        public final companion [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Companion : R|kotlin/Any| {
             private [ResolvedTo(STATUS)] [ContainingClassKey=Companion] constructor(): R|OriginalInterface.Companion| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -312,13 +312,13 @@ FILE: [ResolvedTo(IMPORTS)] typeParameterAnnotations.kt
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
-    public abstract [ResolvedTo(STATUS)] interface OriginalInterface : R|kotlin/Any| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface OriginalInterface : R|kotlin/Any| {
         public open [ResolvedTo(BODY_RESOLVE)] val <@R|Anno|[Types](position = <strcat>(String(type param ), this@R|/OriginalInterface.Companion|.R|/OriginalInterface.Companion.prop|)) [ResolvedTo(BODY_RESOLVE)] F : R|@R|Anno|(position = <strcat>(String(bound ), this@R|/OriginalInterface.Companion|.R|/OriginalInterface.Companion.prop|))  kotlin/Number|> explicitType: R|@R|Anno|(position = <strcat>(String(bound ), this@R|/OriginalInterface.Companion|.R|/OriginalInterface.Companion.prop|))  kotlin/Int|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=OriginalInterface] get(): R|@R|Anno|(position = <strcat>(String(bound ), this@R|/OriginalInterface.Companion|.R|/OriginalInterface.Companion.prop|))  kotlin/Int| {
                 ^ Int(1)
             }
 
-        public final companion [ResolvedTo(STATUS)] object Companion : R|kotlin/Any| {
+        public final companion [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Companion : R|kotlin/Any| {
             private [ResolvedTo(STATUS)] [ContainingClassKey=Companion] constructor(): R|OriginalInterface.Companion| {
                 LAZY_super<R|kotlin/Any|>
             }

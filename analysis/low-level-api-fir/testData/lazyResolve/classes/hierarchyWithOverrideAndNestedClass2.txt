@@ -524,7 +524,7 @@ FILE: [ResolvedTo(IMPORTS)] hierarchyWithOverrideAndNestedClass2.kt
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Foo3] get(): Boolean
 
     }
-    public abstract [ResolvedTo(STATUS)] class OuterClass : R|Foo1| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class OuterClass : R|Foo1| {
         public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=OuterClass] constructor(): R|OuterClass| {
             LAZY_super<<implicit>>
         }
@@ -594,7 +594,7 @@ FILE: [ResolvedTo(IMPORTS)] hierarchyWithOverrideAndNestedClass2.kt
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Foo3] get(): Boolean
 
     }
-    public abstract [ResolvedTo(STATUS)] class OuterClass : R|Foo1| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class OuterClass : R|Foo1| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=OuterClass] constructor(): R|OuterClass| {
             LAZY_super<<implicit>>
         }
@@ -664,7 +664,7 @@ FILE: [ResolvedTo(IMPORTS)] hierarchyWithOverrideAndNestedClass2.kt
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Foo3] get(): Boolean
 
     }
-    public abstract [ResolvedTo(STATUS)] class OuterClass : R|Foo1| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class OuterClass : R|Foo1| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=OuterClass] constructor(): R|OuterClass| {
             LAZY_super<<implicit>>
         }
@@ -734,7 +734,7 @@ FILE: [ResolvedTo(IMPORTS)] hierarchyWithOverrideAndNestedClass2.kt
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Foo3] get(): Boolean
 
     }
-    public abstract [ResolvedTo(STATUS)] class OuterClass : R|Foo1| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class OuterClass : R|Foo1| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=OuterClass] constructor(): R|OuterClass| {
             LAZY_super<<implicit>>
         }
@@ -804,7 +804,7 @@ FILE: [ResolvedTo(IMPORTS)] hierarchyWithOverrideAndNestedClass2.kt
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Foo3] get(): Boolean
 
     }
-    public abstract [ResolvedTo(STATUS)] class OuterClass : R|Foo1| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class OuterClass : R|Foo1| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=OuterClass] constructor(): R|OuterClass| {
             LAZY_super<<implicit>>
         }

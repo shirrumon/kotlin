@@ -455,8 +455,8 @@ FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
         }
 
     }
-    public sealed [ResolvedTo(STATUS)] class Kind<[ResolvedTo(STATUS)] T> : R|kotlin/Any| {
-        protected [ResolvedTo(STATUS)] [ContainingClassKey=Kind] constructor<[ResolvedTo(STATUS)] T>([ResolvedTo(STATUS)] [CorrespondingProperty=/Kind.asString] asString: R|kotlin/String|): R|Kind<T>| {
+    public sealed [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Kind<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T> : R|kotlin/Any| {
+        protected [ResolvedTo(STATUS)] [ContainingClassKey=Kind] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T>([ResolvedTo(STATUS)] [CorrespondingProperty=/Kind.asString] asString: R|kotlin/String|): R|Kind<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
@@ -467,7 +467,7 @@ FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
             ^valueOf (R|<local>/aConst| as R|IrConst<T>|).R|SubstitutionOverride</IrConst.value: R|T|>|
         }
 
-        public final [ResolvedTo(STATUS)] object Null : R|Kind<kotlin/Nothing?>| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Null : R|Kind<kotlin/Nothing?>| {
             private [ResolvedTo(STATUS)] [ContainingClassKey=Null] constructor(): R|Kind.Null| {
                 LAZY_super<R|Kind<kotlin/Nothing?>|>
             }
@@ -477,8 +477,8 @@ FILE: [ResolvedTo(IMPORTS)] fakeOverride.kt
         public open override [ResolvedTo(STATUS)] fun toString(): <implicit> { LAZY_BLOCK }
 
     }
-    public abstract [ResolvedTo(STATUS)] class IrConst<[ResolvedTo(STATUS)] T> : R|kotlin/Any| {
-        public [ResolvedTo(STATUS)] [ContainingClassKey=IrConst] constructor<[ResolvedTo(STATUS)] T>(): R|IrConst<T>| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class IrConst<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T> : R|kotlin/Any| {
+        public [ResolvedTo(STATUS)] [ContainingClassKey=IrConst] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T>(): R|IrConst<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 

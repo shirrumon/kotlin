@@ -40,7 +40,7 @@ FILE: [ResolvedTo(IMPORTS)] Derived.kt
     }
     public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val prop: R|kotlin/String| = String(str)
         public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/String|
-    public final [ResolvedTo(STATUS)] class Derived : R|Base| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Derived : R|Base| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Derived] constructor(): R|Derived| {
             LAZY_super<R|Base|>
         }

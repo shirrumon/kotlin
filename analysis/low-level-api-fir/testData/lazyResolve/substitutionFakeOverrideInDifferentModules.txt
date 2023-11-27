@@ -26,8 +26,8 @@ TARGET: public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [SubstitutedOverrid
 
 
 FILE: [ResolvedTo(IMPORTS)] AbstractClass.kt
-    public abstract [ResolvedTo(STATUS)] class AbstractClass<[ResolvedTo(STATUS)] T> : R|kotlin/Any| {
-        public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(STATUS)] T>(): R|AbstractClass<T>| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AbstractClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T> : R|kotlin/Any| {
+        public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T>(): R|AbstractClass<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
@@ -37,7 +37,7 @@ FILE: [ResolvedTo(IMPORTS)] AbstractClass.kt
     }
 
 FILE: [ResolvedTo(IMPORTS)] SubClass.kt
-    public abstract [ResolvedTo(STATUS)] class SubClass : R|AbstractClass<kotlin/Int>| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class SubClass : R|AbstractClass<kotlin/Int>| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=SubClass] constructor(): R|SubClass| {
             LAZY_super<R|AbstractClass<kotlin/Int>|>
         }
@@ -49,8 +49,8 @@ TARGET: public abstract [ResolvedTo(CONTRACTS)] [SubstitutedOverrideOriginalKey=
 
 
 FILE: [ResolvedTo(IMPORTS)] AbstractClass.kt
-    public abstract [ResolvedTo(STATUS)] class AbstractClass<[ResolvedTo(STATUS)] T> : R|kotlin/Any| {
-        public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(STATUS)] T>(): R|AbstractClass<T>| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AbstractClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T> : R|kotlin/Any| {
+        public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T>(): R|AbstractClass<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
@@ -60,7 +60,7 @@ FILE: [ResolvedTo(IMPORTS)] AbstractClass.kt
     }
 
 FILE: [ResolvedTo(IMPORTS)] SubClass.kt
-    public abstract [ResolvedTo(STATUS)] class SubClass : R|AbstractClass<kotlin/Int>| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class SubClass : R|AbstractClass<kotlin/Int>| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=SubClass] constructor(): R|SubClass| {
             LAZY_super<R|AbstractClass<kotlin/Int>|>
         }
@@ -72,8 +72,8 @@ TARGET: public abstract [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [SubstitutedOv
 
 
 FILE: [ResolvedTo(IMPORTS)] AbstractClass.kt
-    public abstract [ResolvedTo(STATUS)] class AbstractClass<[ResolvedTo(STATUS)] T> : R|kotlin/Any| {
-        public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(STATUS)] T>(): R|AbstractClass<T>| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AbstractClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T> : R|kotlin/Any| {
+        public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T>(): R|AbstractClass<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
@@ -83,7 +83,7 @@ FILE: [ResolvedTo(IMPORTS)] AbstractClass.kt
     }
 
 FILE: [ResolvedTo(IMPORTS)] SubClass.kt
-    public abstract [ResolvedTo(STATUS)] class SubClass : R|AbstractClass<kotlin/Int>| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class SubClass : R|AbstractClass<kotlin/Int>| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=SubClass] constructor(): R|SubClass| {
             LAZY_super<R|AbstractClass<kotlin/Int>|>
         }
@@ -95,8 +95,8 @@ TARGET: public abstract [ResolvedTo(ANNOTATION_ARGUMENTS)] [SubstitutedOverrideO
 
 
 FILE: [ResolvedTo(IMPORTS)] AbstractClass.kt
-    public abstract [ResolvedTo(STATUS)] class AbstractClass<[ResolvedTo(STATUS)] T> : R|kotlin/Any| {
-        public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(STATUS)] T>(): R|AbstractClass<T>| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AbstractClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T> : R|kotlin/Any| {
+        public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T>(): R|AbstractClass<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
@@ -106,7 +106,7 @@ FILE: [ResolvedTo(IMPORTS)] AbstractClass.kt
     }
 
 FILE: [ResolvedTo(IMPORTS)] SubClass.kt
-    public abstract [ResolvedTo(STATUS)] class SubClass : R|AbstractClass<kotlin/Int>| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class SubClass : R|AbstractClass<kotlin/Int>| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=SubClass] constructor(): R|SubClass| {
             LAZY_super<R|AbstractClass<kotlin/Int>|>
         }
@@ -118,8 +118,8 @@ TARGET: public abstract [ResolvedTo(BODY_RESOLVE)] [SubstitutedOverrideOriginalK
 
 
 FILE: [ResolvedTo(IMPORTS)] AbstractClass.kt
-    public abstract [ResolvedTo(STATUS)] class AbstractClass<[ResolvedTo(STATUS)] T> : R|kotlin/Any| {
-        public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(STATUS)] T>(): R|AbstractClass<T>| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AbstractClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T> : R|kotlin/Any| {
+        public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T>(): R|AbstractClass<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
@@ -129,7 +129,7 @@ FILE: [ResolvedTo(IMPORTS)] AbstractClass.kt
     }
 
 FILE: [ResolvedTo(IMPORTS)] SubClass.kt
-    public abstract [ResolvedTo(STATUS)] class SubClass : R|AbstractClass<kotlin/Int>| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class SubClass : R|AbstractClass<kotlin/Int>| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=SubClass] constructor(): R|SubClass| {
             LAZY_super<R|AbstractClass<kotlin/Int>|>
         }

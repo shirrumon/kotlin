@@ -210,8 +210,8 @@ FILE: [ResolvedTo(IMPORTS)] nestedTypeAlias.kt
 
 EXPECT_ACTUAL_MATCHING:
 FILE: [ResolvedTo(IMPORTS)] nestedTypeAlias.kt
-    public final [ResolvedTo(STATUS)] class OuterClass<[ResolvedTo(STATUS)] T1> : R|SuperForOuter| {
-        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=OuterClass] constructor<[ResolvedTo(STATUS)] T1>(): R|OuterClass<T1>| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class OuterClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T1> : R|SuperForOuter| {
+        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=OuterClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T1>(): R|OuterClass<T1>| {
             LAZY_super<SuperForOuter>
         }
 
@@ -240,8 +240,8 @@ FILE: [ResolvedTo(IMPORTS)] nestedTypeAlias.kt
 
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] nestedTypeAlias.kt
-    public final [ResolvedTo(STATUS)] class OuterClass<[ResolvedTo(STATUS)] T1> : R|SuperForOuter| {
-        public [ResolvedTo(STATUS)] [ContainingClassKey=OuterClass] constructor<[ResolvedTo(STATUS)] T1>(): R|OuterClass<T1>| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class OuterClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T1> : R|SuperForOuter| {
+        public [ResolvedTo(STATUS)] [ContainingClassKey=OuterClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T1>(): R|OuterClass<T1>| {
             LAZY_super<R|SuperForOuter|>
         }
 
@@ -270,8 +270,8 @@ FILE: [ResolvedTo(IMPORTS)] nestedTypeAlias.kt
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] nestedTypeAlias.kt
-    public final [ResolvedTo(STATUS)] class OuterClass<[ResolvedTo(STATUS)] T1> : R|SuperForOuter| {
-        public [ResolvedTo(STATUS)] [ContainingClassKey=OuterClass] constructor<[ResolvedTo(STATUS)] T1>(): R|OuterClass<T1>| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class OuterClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T1> : R|SuperForOuter| {
+        public [ResolvedTo(STATUS)] [ContainingClassKey=OuterClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T1>(): R|OuterClass<T1>| {
             LAZY_super<R|SuperForOuter|>
         }
 
@@ -300,8 +300,8 @@ FILE: [ResolvedTo(IMPORTS)] nestedTypeAlias.kt
 
 ANNOTATION_ARGUMENTS:
 FILE: [ResolvedTo(IMPORTS)] nestedTypeAlias.kt
-    public final [ResolvedTo(STATUS)] class OuterClass<[ResolvedTo(STATUS)] T1> : R|SuperForOuter| {
-        public [ResolvedTo(STATUS)] [ContainingClassKey=OuterClass] constructor<[ResolvedTo(STATUS)] T1>(): R|OuterClass<T1>| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class OuterClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T1> : R|SuperForOuter| {
+        public [ResolvedTo(STATUS)] [ContainingClassKey=OuterClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T1>(): R|OuterClass<T1>| {
             LAZY_super<R|SuperForOuter|>
         }
 
@@ -330,8 +330,8 @@ FILE: [ResolvedTo(IMPORTS)] nestedTypeAlias.kt
 
 BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] nestedTypeAlias.kt
-    public final [ResolvedTo(STATUS)] class OuterClass<[ResolvedTo(STATUS)] T1> : R|SuperForOuter| {
-        public [ResolvedTo(STATUS)] [ContainingClassKey=OuterClass] constructor<[ResolvedTo(STATUS)] T1>(): R|OuterClass<T1>| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class OuterClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T1> : R|SuperForOuter| {
+        public [ResolvedTo(STATUS)] [ContainingClassKey=OuterClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T1>(): R|OuterClass<T1>| {
             LAZY_super<R|SuperForOuter|>
         }
 

@@ -112,12 +112,12 @@ FILE: [ResolvedTo(IMPORTS)] typeParameterOfClass2.kt
 
 EXPECT_ACTUAL_MATCHING:
 FILE: [ResolvedTo(IMPORTS)] typeParameterOfClass2.kt
-    public final [ResolvedTo(STATUS)] class MyClass<[ResolvedTo(STATUS)] Type> : R|kotlin/Any| {
-        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyClass] constructor<[ResolvedTo(STATUS)] Type>(): R|MyClass<Type>| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class MyClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] Type> : R|kotlin/Any| {
+        public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] Type>(): R|MyClass<Type>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final inner [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Second<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] Type2, [ResolvedTo(STATUS)] Outer(Type)> : R|kotlin/Any| {
+        public final inner [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Second<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] Type2, [ResolvedTo(EXPECT_ACTUAL_MATCHING)] Outer(Type)> : R|kotlin/Any| {
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Second] MyClass<Type>.constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] Type2>(): R|MyClass.Second<Type2, Type>| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -128,12 +128,12 @@ FILE: [ResolvedTo(IMPORTS)] typeParameterOfClass2.kt
 
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] typeParameterOfClass2.kt
-    public final [ResolvedTo(STATUS)] class MyClass<[ResolvedTo(STATUS)] Type> : R|kotlin/Any| {
-        public [ResolvedTo(STATUS)] [ContainingClassKey=MyClass] constructor<[ResolvedTo(STATUS)] Type>(): R|MyClass<Type>| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class MyClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] Type> : R|kotlin/Any| {
+        public [ResolvedTo(STATUS)] [ContainingClassKey=MyClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] Type>(): R|MyClass<Type>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final inner [ResolvedTo(CONTRACTS)] class Second<[ResolvedTo(CONTRACTS)] Type2, [ResolvedTo(STATUS)] Outer(Type)> : R|kotlin/Any| {
+        public final inner [ResolvedTo(CONTRACTS)] class Second<[ResolvedTo(CONTRACTS)] Type2, [ResolvedTo(EXPECT_ACTUAL_MATCHING)] Outer(Type)> : R|kotlin/Any| {
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Second] MyClass<Type>.constructor<[ResolvedTo(CONTRACTS)] Type2>(): R|MyClass.Second<Type2, Type>| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -144,12 +144,12 @@ FILE: [ResolvedTo(IMPORTS)] typeParameterOfClass2.kt
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] typeParameterOfClass2.kt
-    public final [ResolvedTo(STATUS)] class MyClass<[ResolvedTo(STATUS)] Type> : R|kotlin/Any| {
-        public [ResolvedTo(STATUS)] [ContainingClassKey=MyClass] constructor<[ResolvedTo(STATUS)] Type>(): R|MyClass<Type>| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class MyClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] Type> : R|kotlin/Any| {
+        public [ResolvedTo(STATUS)] [ContainingClassKey=MyClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] Type>(): R|MyClass<Type>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final inner [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] class Second<[ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] Type2, [ResolvedTo(STATUS)] Outer(Type)> : R|kotlin/Any| {
+        public final inner [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] class Second<[ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] Type2, [ResolvedTo(EXPECT_ACTUAL_MATCHING)] Outer(Type)> : R|kotlin/Any| {
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Second] MyClass<Type>.constructor<[ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] Type2>(): R|MyClass.Second<Type2, Type>| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -160,12 +160,12 @@ FILE: [ResolvedTo(IMPORTS)] typeParameterOfClass2.kt
 
 ANNOTATION_ARGUMENTS:
 FILE: [ResolvedTo(IMPORTS)] typeParameterOfClass2.kt
-    public final [ResolvedTo(STATUS)] class MyClass<[ResolvedTo(STATUS)] Type> : R|kotlin/Any| {
-        public [ResolvedTo(STATUS)] [ContainingClassKey=MyClass] constructor<[ResolvedTo(STATUS)] Type>(): R|MyClass<Type>| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class MyClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] Type> : R|kotlin/Any| {
+        public [ResolvedTo(STATUS)] [ContainingClassKey=MyClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] Type>(): R|MyClass<Type>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final inner [ResolvedTo(ANNOTATION_ARGUMENTS)] class Second<[ResolvedTo(ANNOTATION_ARGUMENTS)] Type2, [ResolvedTo(STATUS)] Outer(Type)> : R|kotlin/Any| {
+        public final inner [ResolvedTo(ANNOTATION_ARGUMENTS)] class Second<[ResolvedTo(ANNOTATION_ARGUMENTS)] Type2, [ResolvedTo(EXPECT_ACTUAL_MATCHING)] Outer(Type)> : R|kotlin/Any| {
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Second] MyClass<Type>.constructor<[ResolvedTo(ANNOTATION_ARGUMENTS)] Type2>(): R|MyClass.Second<Type2, Type>| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -176,12 +176,12 @@ FILE: [ResolvedTo(IMPORTS)] typeParameterOfClass2.kt
 
 BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] typeParameterOfClass2.kt
-    public final [ResolvedTo(STATUS)] class MyClass<[ResolvedTo(STATUS)] Type> : R|kotlin/Any| {
-        public [ResolvedTo(STATUS)] [ContainingClassKey=MyClass] constructor<[ResolvedTo(STATUS)] Type>(): R|MyClass<Type>| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class MyClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] Type> : R|kotlin/Any| {
+        public [ResolvedTo(STATUS)] [ContainingClassKey=MyClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] Type>(): R|MyClass<Type>| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final inner [ResolvedTo(BODY_RESOLVE)] class Second<[ResolvedTo(BODY_RESOLVE)] Type2, [ResolvedTo(STATUS)] Outer(Type)> : R|kotlin/Any| {
+        public final inner [ResolvedTo(BODY_RESOLVE)] class Second<[ResolvedTo(BODY_RESOLVE)] Type2, [ResolvedTo(EXPECT_ACTUAL_MATCHING)] Outer(Type)> : R|kotlin/Any| {
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Second] MyClass<Type>.constructor<[ResolvedTo(BODY_RESOLVE)] Type2>(): R|MyClass.Second<Type2, Type>| {
                 super<R|kotlin/Any|>()
             }

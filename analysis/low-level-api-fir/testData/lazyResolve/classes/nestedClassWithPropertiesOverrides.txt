@@ -168,7 +168,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
 
 EXPECT_ACTUAL_MATCHING:
 FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
-    public abstract [ResolvedTo(STATUS)] interface OV : R|kotlin/Any| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface OV : R|kotlin/Any| {
         public? final? [ResolvedTo(RAW_FIR)] val originalExpressions: A
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=OV] get(): A
 
@@ -192,7 +192,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
 
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
-    public abstract [ResolvedTo(STATUS)] interface OV : R|kotlin/Any| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface OV : R|kotlin/Any| {
         public abstract [ResolvedTo(STATUS)] val originalExpressions: R|A|
             public [ResolvedTo(STATUS)] [ContainingClassKey=OV] get(): R|A|
 
@@ -216,7 +216,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
 
 IMPLICIT_TYPES_BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
-    public abstract [ResolvedTo(STATUS)] interface OV : R|kotlin/Any| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface OV : R|kotlin/Any| {
         public abstract [ResolvedTo(STATUS)] val originalExpressions: R|A|
             public [ResolvedTo(STATUS)] [ContainingClassKey=OV] get(): R|A|
 
@@ -240,7 +240,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
 
 ANNOTATION_ARGUMENTS:
 FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
-    public abstract [ResolvedTo(STATUS)] interface OV : R|kotlin/Any| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface OV : R|kotlin/Any| {
         public abstract [ResolvedTo(STATUS)] val originalExpressions: R|A|
             public [ResolvedTo(STATUS)] [ContainingClassKey=OV] get(): R|A|
 
@@ -264,7 +264,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
 
 BODY_RESOLVE:
 FILE: [ResolvedTo(IMPORTS)] nestedClassWithPropertiesOverrides.kt
-    public abstract [ResolvedTo(STATUS)] interface OV : R|kotlin/Any| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface OV : R|kotlin/Any| {
         public abstract [ResolvedTo(STATUS)] val originalExpressions: R|A|
             public [ResolvedTo(STATUS)] [ContainingClassKey=OV] get(): R|A|
 

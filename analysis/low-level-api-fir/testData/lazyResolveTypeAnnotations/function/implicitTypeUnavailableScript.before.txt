@@ -25,7 +25,7 @@ FILE: [ResolvedTo(IMPORTS)] implicitTypeUnavailableScript.kts
 
         }
 
-        public final [ResolvedTo(STATUS)] object Obj : R|kotlin/Any| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Obj : R|kotlin/Any| {
             private [ResolvedTo(STATUS)] [ContainingClassKey=Obj] constructor(): R|lowlevel/Obj| {
                 LAZY_super<R|kotlin/Any|>
             }

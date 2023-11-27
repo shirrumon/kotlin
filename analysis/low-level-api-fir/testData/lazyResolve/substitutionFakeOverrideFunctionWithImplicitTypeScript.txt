@@ -33,15 +33,15 @@ FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideFunctionWithImplicitTypeScri
     SCRIPT: [ResolvedTo(RAW_FIR)] <script-substitutionFakeOverrideFunctionWithImplicitTypeScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public abstract [ResolvedTo(STATUS)] class SubClass : R|second/AbstractClass<kotlin/String>| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class SubClass : R|second/AbstractClass<kotlin/String>| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=SubClass] constructor(): R|second/SubClass| {
                 LAZY_super<R|second/AbstractClass<kotlin/String>|>
             }
 
         }
 
-        public abstract [ResolvedTo(STATUS)] class AbstractClass<[ResolvedTo(STATUS)] T> : R|kotlin/Any| {
-            public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(STATUS)] T>(): R|second/AbstractClass<T>| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AbstractClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T> : R|kotlin/Any| {
+            public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T>(): R|second/AbstractClass<T>| {
                 LAZY_super<R|kotlin/Any|>
             }
 
@@ -60,15 +60,15 @@ FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideFunctionWithImplicitTypeScri
     SCRIPT: [ResolvedTo(TYPES)] <script-substitutionFakeOverrideFunctionWithImplicitTypeScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public abstract [ResolvedTo(STATUS)] class SubClass : R|second/AbstractClass<kotlin/String>| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class SubClass : R|second/AbstractClass<kotlin/String>| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=SubClass] constructor(): R|second/SubClass| {
                 LAZY_super<R|second/AbstractClass<kotlin/String>|>
             }
 
         }
 
-        public abstract [ResolvedTo(STATUS)] class AbstractClass<[ResolvedTo(STATUS)] T> : R|kotlin/Any| {
-            public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(STATUS)] T>(): R|second/AbstractClass<T>| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AbstractClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T> : R|kotlin/Any| {
+            public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T>(): R|second/AbstractClass<T>| {
                 LAZY_super<R|kotlin/Any|>
             }
 
@@ -87,15 +87,15 @@ FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideFunctionWithImplicitTypeScri
     SCRIPT: [ResolvedTo(TYPES)] <script-substitutionFakeOverrideFunctionWithImplicitTypeScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public abstract [ResolvedTo(STATUS)] class SubClass : R|second/AbstractClass<kotlin/String>| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class SubClass : R|second/AbstractClass<kotlin/String>| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=SubClass] constructor(): R|second/SubClass| {
                 LAZY_super<R|second/AbstractClass<kotlin/String>|>
             }
 
         }
 
-        public abstract [ResolvedTo(STATUS)] class AbstractClass<[ResolvedTo(STATUS)] T> : R|kotlin/Any| {
-            public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(STATUS)] T>(): R|second/AbstractClass<T>| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AbstractClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T> : R|kotlin/Any| {
+            public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T>(): R|second/AbstractClass<T>| {
                 LAZY_super<R|kotlin/Any|>
             }
 
@@ -118,15 +118,15 @@ FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideFunctionWithImplicitTypeScri
     SCRIPT: [ResolvedTo(TYPES)] <script-substitutionFakeOverrideFunctionWithImplicitTypeScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public abstract [ResolvedTo(STATUS)] class SubClass : R|second/AbstractClass<kotlin/String>| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class SubClass : R|second/AbstractClass<kotlin/String>| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=SubClass] constructor(): R|second/SubClass| {
                 LAZY_super<R|second/AbstractClass<kotlin/String>|>
             }
 
         }
 
-        public abstract [ResolvedTo(STATUS)] class AbstractClass<[ResolvedTo(STATUS)] T> : R|kotlin/Any| {
-            public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(STATUS)] T>(): R|second/AbstractClass<T>| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AbstractClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T> : R|kotlin/Any| {
+            public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T>(): R|second/AbstractClass<T>| {
                 LAZY_super<R|kotlin/Any|>
             }
 
@@ -149,15 +149,15 @@ FILE: [ResolvedTo(IMPORTS)] substitutionFakeOverrideFunctionWithImplicitTypeScri
     SCRIPT: [ResolvedTo(TYPES)] <script-substitutionFakeOverrideFunctionWithImplicitTypeScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public abstract [ResolvedTo(STATUS)] class SubClass : R|second/AbstractClass<kotlin/String>| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class SubClass : R|second/AbstractClass<kotlin/String>| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=SubClass] constructor(): R|second/SubClass| {
                 LAZY_super<R|second/AbstractClass<kotlin/String>|>
             }
 
         }
 
-        public abstract [ResolvedTo(STATUS)] class AbstractClass<[ResolvedTo(STATUS)] T> : R|kotlin/Any| {
-            public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(STATUS)] T>(): R|second/AbstractClass<T>| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AbstractClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T> : R|kotlin/Any| {
+            public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T>(): R|second/AbstractClass<T>| {
                 LAZY_super<R|kotlin/Any|>
             }
 
@@ -199,4 +199,3 @@ FILE: [ResolvedTo(BODY_RESOLVE)] substitutionFakeOverrideFunctionWithImplicitTyp
             }
 
         }
-

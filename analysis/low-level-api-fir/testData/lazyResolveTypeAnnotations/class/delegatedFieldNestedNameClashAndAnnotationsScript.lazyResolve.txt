@@ -654,7 +654,7 @@ FILE: [ResolvedTo(IMPORTS)] delegatedFieldNestedNameClashAndAnnotationsScript.kt
             public? final? [ResolvedTo(RAW_FIR)] interface Base : R|kotlin/Any| {
             }
 
-            public final companion [ResolvedTo(STATUS)] object Companion : R|kotlin/Any| {
+            public final companion [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Companion : R|kotlin/Any| {
                 private [ResolvedTo(STATUS)] [ContainingClassKey=Companion] constructor(): R|second/MyClass.Companion| {
                     LAZY_super<R|kotlin/Any|>
                 }
@@ -725,4 +725,3 @@ FILE: [ResolvedTo(BODY_RESOLVE)] delegatedFieldNestedNameClashAndAnnotationsScri
             }
 
         }
-

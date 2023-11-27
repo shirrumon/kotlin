@@ -41,7 +41,7 @@ FILE: [ResolvedTo(IMPORTS)] Derived.kt
     public? final? const [ResolvedTo(RAW_FIR)] val prop: <implicit> = LAZY_EXPRESSION
         public? [ResolvedTo(RAW_FIR)] get(): <implicit>
     public? final? [ResolvedTo(RAW_FIR)] fun expectType(): @Anno[Unresolved](LAZY_EXPRESSION) List<@Anno[Unresolved](LAZY_EXPRESSION) Int> { LAZY_BLOCK }
-    public final [ResolvedTo(STATUS)] class Derived : R|Base| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Derived : R|Base| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Derived] constructor(): R|Derived| {
             LAZY_super<R|Base|>
         }
@@ -67,7 +67,7 @@ FILE: [ResolvedTo(IMPORTS)] Derived.kt
     public? final? const [ResolvedTo(RAW_FIR)] val prop: <implicit> = LAZY_EXPRESSION
         public? [ResolvedTo(RAW_FIR)] get(): <implicit>
     public? final? [ResolvedTo(RAW_FIR)] fun expectType(): @Anno[Unresolved](LAZY_EXPRESSION) List<@Anno[Unresolved](LAZY_EXPRESSION) Int> { LAZY_BLOCK }
-    public final [ResolvedTo(STATUS)] class Derived : R|Base| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Derived : R|Base| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Derived] constructor(): R|Derived| {
             LAZY_super<R|Base|>
         }
@@ -97,7 +97,7 @@ FILE: [ResolvedTo(IMPORTS)] Derived.kt
     public final [ResolvedTo(CONTRACTS)] fun expectType(): R|@R|Anno|(<strcat>(String(return type ), prop#))  kotlin/collections/List<@R|Anno|(<strcat>(String(nested return type ), prop#))  kotlin/Int>| {
         ^expectType IntegerLiteral(42)
     }
-    public final [ResolvedTo(STATUS)] class Derived : R|Base| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Derived : R|Base| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Derived] constructor(): R|Derived| {
             LAZY_super<R|Base|>
         }
@@ -129,7 +129,7 @@ FILE: [ResolvedTo(IMPORTS)] Derived.kt
     public final [ResolvedTo(CONTRACTS)] fun expectType(): R|@R|Anno|(position = <strcat>(String(return type ), R|/prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(nested return type ), R|/prop|))  kotlin/Int>| {
         ^expectType IntegerLiteral(42)
     }
-    public final [ResolvedTo(STATUS)] class Derived : R|Base| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Derived : R|Base| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Derived] constructor(): R|Derived| {
             LAZY_super<R|Base|>
         }
@@ -161,7 +161,7 @@ FILE: [ResolvedTo(IMPORTS)] Derived.kt
     public final [ResolvedTo(CONTRACTS)] fun expectType(): R|@R|Anno|(position = <strcat>(String(return type ), R|/prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(nested return type ), R|/prop|))  kotlin/Int>| {
         ^expectType IntegerLiteral(42)
     }
-    public final [ResolvedTo(STATUS)] class Derived : R|Base| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Derived : R|Base| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Derived] constructor(): R|Derived| {
             LAZY_super<R|Base|>
         }

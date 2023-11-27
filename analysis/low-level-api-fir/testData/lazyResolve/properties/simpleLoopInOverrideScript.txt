@@ -221,7 +221,7 @@ FILE: [ResolvedTo(IMPORTS)] simpleLoopInOverrideScript.kts
     SCRIPT: [ResolvedTo(RAW_FIR)] <script-simpleLoopInOverrideScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public abstract [ResolvedTo(STATUS)] interface Foo1 : <ERROR TYPE REF: Loop in supertype: /Foo1 -> /Foo2> {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface Foo1 : <ERROR TYPE REF: Loop in supertype: /Foo1 -> /Foo2> {
             public abstract override [ResolvedTo(STATUS)] fun foo(): R|kotlin/Unit|
 
             public abstract override [ResolvedTo(EXPECT_ACTUAL_MATCHING)] val str: R|kotlin/String|
@@ -252,7 +252,7 @@ FILE: [ResolvedTo(IMPORTS)] simpleLoopInOverrideScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-simpleLoopInOverrideScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public abstract [ResolvedTo(STATUS)] interface Foo1 : <ERROR TYPE REF: Loop in supertype: /Foo1 -> /Foo2> {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface Foo1 : <ERROR TYPE REF: Loop in supertype: /Foo1 -> /Foo2> {
             public abstract override [ResolvedTo(STATUS)] fun foo(): R|kotlin/Unit|
 
             public abstract override [ResolvedTo(CONTRACTS)] val str: R|kotlin/String|
@@ -283,7 +283,7 @@ FILE: [ResolvedTo(IMPORTS)] simpleLoopInOverrideScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-simpleLoopInOverrideScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public abstract [ResolvedTo(STATUS)] interface Foo1 : <ERROR TYPE REF: Loop in supertype: /Foo1 -> /Foo2> {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface Foo1 : <ERROR TYPE REF: Loop in supertype: /Foo1 -> /Foo2> {
             public abstract override [ResolvedTo(STATUS)] fun foo(): R|kotlin/Unit|
 
             public abstract override [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val str: R|kotlin/String|
@@ -314,7 +314,7 @@ FILE: [ResolvedTo(IMPORTS)] simpleLoopInOverrideScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-simpleLoopInOverrideScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public abstract [ResolvedTo(STATUS)] interface Foo1 : <ERROR TYPE REF: Loop in supertype: /Foo1 -> /Foo2> {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface Foo1 : <ERROR TYPE REF: Loop in supertype: /Foo1 -> /Foo2> {
             public abstract override [ResolvedTo(STATUS)] fun foo(): R|kotlin/Unit|
 
             public abstract override [ResolvedTo(ANNOTATION_ARGUMENTS)] val str: R|kotlin/String|
@@ -345,7 +345,7 @@ FILE: [ResolvedTo(IMPORTS)] simpleLoopInOverrideScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-simpleLoopInOverrideScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public abstract [ResolvedTo(STATUS)] interface Foo1 : <ERROR TYPE REF: Loop in supertype: /Foo1 -> /Foo2> {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface Foo1 : <ERROR TYPE REF: Loop in supertype: /Foo1 -> /Foo2> {
             public abstract override [ResolvedTo(STATUS)] fun foo(): R|kotlin/Unit|
 
             public abstract override [ResolvedTo(BODY_RESOLVE)] val str: R|kotlin/String|

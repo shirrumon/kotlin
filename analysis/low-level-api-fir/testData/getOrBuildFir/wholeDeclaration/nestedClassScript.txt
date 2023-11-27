@@ -18,7 +18,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-nestedClassScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(STATUS)] class Y : R|kotlin/Any| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Y : R|kotlin/Any| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Y] constructor(): R|Y| {
                 LAZY_super<R|kotlin/Any|>
             }

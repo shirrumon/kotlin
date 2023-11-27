@@ -263,7 +263,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassScript.kts
 
         }
 
-        public final [ResolvedTo(STATUS)] class OuterClass : R|AnotherTopLevelClass| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class OuterClass : R|AnotherTopLevelClass| {
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=OuterClass] constructor(): R|OuterClass| {
                 LAZY_super<AnotherTopLevelClass>
             }
@@ -298,7 +298,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassScript.kts
 
         }
 
-        public final [ResolvedTo(STATUS)] class OuterClass : R|AnotherTopLevelClass| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class OuterClass : R|AnotherTopLevelClass| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=OuterClass] constructor(): R|OuterClass| {
                 LAZY_super<R|AnotherTopLevelClass|>
             }
@@ -333,7 +333,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassScript.kts
 
         }
 
-        public final [ResolvedTo(STATUS)] class OuterClass : R|AnotherTopLevelClass| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class OuterClass : R|AnotherTopLevelClass| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=OuterClass] constructor(): R|OuterClass| {
                 LAZY_super<R|AnotherTopLevelClass|>
             }
@@ -368,7 +368,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassScript.kts
 
         }
 
-        public final [ResolvedTo(STATUS)] class OuterClass : R|AnotherTopLevelClass| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class OuterClass : R|AnotherTopLevelClass| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=OuterClass] constructor(): R|OuterClass| {
                 LAZY_super<R|AnotherTopLevelClass|>
             }
@@ -403,7 +403,7 @@ FILE: [ResolvedTo(IMPORTS)] nestedClassScript.kts
 
         }
 
-        public final [ResolvedTo(STATUS)] class OuterClass : R|AnotherTopLevelClass| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class OuterClass : R|AnotherTopLevelClass| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=OuterClass] constructor(): R|OuterClass| {
                 LAZY_super<R|AnotherTopLevelClass|>
             }

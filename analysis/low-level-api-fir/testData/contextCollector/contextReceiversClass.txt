@@ -28,12 +28,12 @@ Tower Data Context:
         Scope: FirLocalScope
 
 FILE: [ResolvedTo(IMPORTS)] contextReceiversClass.kt
-    public abstract [ResolvedTo(STATUS)] interface Foo : R|kotlin/Any| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface Foo : R|kotlin/Any| {
         public abstract [ResolvedTo(CONTRACTS)] fun foo(): R|kotlin/Int|
 
     }
     context(R|Foo|)
-    public final [ResolvedTo(STATUS)] class Test : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Test : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] constructor(): R|Test| {
             LAZY_super<R|kotlin/Any|>
         }

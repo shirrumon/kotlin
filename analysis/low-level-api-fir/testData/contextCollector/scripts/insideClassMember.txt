@@ -76,7 +76,7 @@ FILE: [ResolvedTo(IMPORTS)] insideClassMember.kts
 
         }
 
-        public final [ResolvedTo(STATUS)] class MyClass : R|kotlin/Any| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class MyClass : R|kotlin/Any| {
             public [ResolvedTo(STATUS)] constructor(): R|MyClass| {
                 LAZY_super<R|kotlin/Any|>
             }

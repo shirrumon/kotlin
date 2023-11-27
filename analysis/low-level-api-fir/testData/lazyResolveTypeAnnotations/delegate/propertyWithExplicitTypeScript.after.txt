@@ -76,7 +76,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithExplicitTypeScript.kts
         public final const [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] val prop: R|kotlin/Int| = Int(0)
             public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/Int|
 
-        public final [ResolvedTo(STATUS)] class Delegate : <ERROR TYPE REF: Symbol not found for ReadWriteProperty> {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Delegate : <ERROR TYPE REF: Symbol not found for ReadWriteProperty> {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Delegate] constructor(): R|Delegate| {
                 LAZY_super<<implicit>>
             }

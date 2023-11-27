@@ -132,8 +132,8 @@ FILE: [ResolvedTo(IMPORTS)] propertyUnavailable.kt
         }
 
     }
-    public abstract [ResolvedTo(STATUS)] class AbstractClass<[ResolvedTo(STATUS)] T> : R|kotlin/Any| {
-        public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(STATUS)] T>(): R|second/AbstractClass<T>| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AbstractClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T> : R|kotlin/Any| {
+        public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T>(): R|second/AbstractClass<T>| {
             LAZY_super<R|kotlin/Any|>
         }
 
@@ -141,7 +141,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyUnavailable.kt
             @PROPERTY_GETTER:R|second/Anno|[Types](position = <strcat>(String(get ), this@R|second/AbstractClass.Companion|.R|second/AbstractClass.Companion.constant|)) public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=AbstractClass] get(): R|@R|second/Anno|(position = <strcat>(String(return type ), this@R|second/AbstractClass.Companion|.R|second/AbstractClass.Companion.constant|))  kotlin/collections/List<@R|second/Anno|(position = <strcat>(String(nested return type ), this@R|second/AbstractClass.Companion|.R|second/AbstractClass.Companion.constant|))  kotlin/collections/Collection<@R|second/Anno|(position = <strcat>(String(nested nested return type ), this@R|second/AbstractClass.Companion|.R|second/AbstractClass.Companion.constant|))  T>>|
             @PROPERTY_SETTER:R|second/Anno|[Types](position = <strcat>(String(set ), this@R|second/AbstractClass.Companion|.R|second/AbstractClass.Companion.constant|)) public [ResolvedTo(ANNOTATION_ARGUMENTS)] [ContainingClassKey=AbstractClass] set([ResolvedTo(ANNOTATION_ARGUMENTS)] @SETTER_PARAMETER:R|second/Anno|[Types](position = <strcat>(String(set ), this@R|second/AbstractClass.Companion|.R|second/AbstractClass.Companion.constant|)) value: R|@R|second/Anno|(position = <strcat>(String(return type ), this@R|second/AbstractClass.Companion|.R|second/AbstractClass.Companion.constant|))  kotlin/collections/List<@R|second/Anno|(position = <strcat>(String(nested return type ), this@R|second/AbstractClass.Companion|.R|second/AbstractClass.Companion.constant|))  kotlin/collections/Collection<@R|second/Anno|(position = <strcat>(String(nested nested return type ), this@R|second/AbstractClass.Companion|.R|second/AbstractClass.Companion.constant|))  T>>|): R|kotlin/Unit|
 
-        public final companion [ResolvedTo(STATUS)] object Companion : R|kotlin/Any| {
+        public final companion [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Companion : R|kotlin/Any| {
             private [ResolvedTo(STATUS)] [ContainingClassKey=Companion] constructor(): R|second/AbstractClass.Companion| {
                 LAZY_super<R|kotlin/Any|>
             }

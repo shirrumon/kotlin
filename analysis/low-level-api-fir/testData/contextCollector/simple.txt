@@ -25,7 +25,7 @@ Tower Data Context:
                 FirPropertySymbol lval x: R|kotlin/Float|
 
 FILE: [ResolvedTo(IMPORTS)] simple.kt
-    public final [ResolvedTo(STATUS)] class Foo : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Foo : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] constructor(): R|foo/Foo| {
             LAZY_super<R|kotlin/Any|>
         }

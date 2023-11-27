@@ -27,11 +27,11 @@ Tower Data Context:
         Scope: FirLocalScope
 
 FILE: [ResolvedTo(IMPORTS)] contextReceivers.kt
-    public abstract [ResolvedTo(STATUS)] interface Foo : R|kotlin/Any| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface Foo : R|kotlin/Any| {
         public abstract [ResolvedTo(CONTRACTS)] fun foo(): R|kotlin/Int|
 
     }
-    public abstract [ResolvedTo(STATUS)] interface Bar : R|kotlin/Any| {
+    public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] interface Bar : R|kotlin/Any| {
         public abstract [ResolvedTo(CONTRACTS)] fun bar(): R|kotlin/Int|
 
     }

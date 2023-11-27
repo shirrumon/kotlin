@@ -672,7 +672,7 @@ FILE: [ResolvedTo(IMPORTS)] copyTypeCollisionAndAnnotationsScript.kts
 
             }
 
-            public final companion [ResolvedTo(STATUS)] object Companion : R|kotlin/Any| {
+            public final companion [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Companion : R|kotlin/Any| {
                 private [ResolvedTo(STATUS)] [ContainingClassKey=Companion] constructor(): R|one/two/MyDataClass.Companion| {
                     LAZY_super<R|kotlin/Any|>
                 }
@@ -735,7 +735,7 @@ FILE: [ResolvedTo(IMPORTS)] copyTypeCollisionAndAnnotationsScript.kts
 
             }
 
-            public final companion [ResolvedTo(STATUS)] object Companion : R|kotlin/Any| {
+            public final companion [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Companion : R|kotlin/Any| {
                 private [ResolvedTo(STATUS)] [ContainingClassKey=Companion] constructor(): R|one/two/MyDataClass.Companion| {
                     LAZY_super<R|kotlin/Any|>
                 }
@@ -815,4 +815,3 @@ FILE: [ResolvedTo(BODY_RESOLVE)] copyTypeCollisionAndAnnotationsScript.kts
             public final [ResolvedTo(BODY_RESOLVE)] fun copy([ResolvedTo(BODY_RESOLVE)] prop1: R|@R|one/two/Anno|(i = Int(0).R|kotlin/Int.plus|(this@R|one/two/MyDataClass.Companion|.R|one/two/MyDataClass.Companion.constant|))  one/two/MyDataClass.MyClass<@R|one/two/Anno|(i = Int(1).R|kotlin/Int.plus|(this@R|one/two/MyDataClass.Companion|.R|one/two/MyDataClass.Companion.constant|))  one/two/MyDataClass.MyClass<@R|one/two/Anno|(i = Int(2).R|kotlin/Int.plus|(this@R|one/two/MyDataClass.Companion|.R|one/two/MyDataClass.Companion.constant|))  kotlin/Int>>| = this@R|one/two/MyDataClass|.R|one/two/MyDataClass.prop1|, [ResolvedTo(BODY_RESOLVE)] prop2: R|@R|one/two/Anno|(i = Int(3).R|kotlin/Int.plus|(this@R|one/two/MyDataClass.Companion|.R|one/two/MyDataClass.Companion.constant|))  one/two/MyDataClass.MyClass<@R|one/two/Anno|(i = Int(4).R|kotlin/Int.plus|(this@R|one/two/MyDataClass.Companion|.R|one/two/MyDataClass.Companion.constant|))  one/two/MyDataClass.MyClass<@R|one/two/Anno|(i = Int(5).R|kotlin/Int.plus|(this@R|one/two/MyDataClass.Companion|.R|one/two/MyDataClass.Companion.constant|))  kotlin/Int>>| = this@R|one/two/MyDataClass|.R|one/two/MyDataClass.prop2|): R|one/two/MyDataClass|
 
         }
-

@@ -11,7 +11,7 @@ FILE: [ResolvedTo(IMPORTS)] assignmentStatement.kts
     SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-assignmentStatement.kts>
         [ResolvedTo(BODY_RESOLVE)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public open [ResolvedTo(STATUS)] class Builder : R|kotlin/Any| {
+        public open [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Builder : R|kotlin/Any| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=Builder] constructor(): R|Builder| {
                 LAZY_super<R|kotlin/Any|>
             }

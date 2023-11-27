@@ -147,7 +147,7 @@ FILE: [ResolvedTo(IMPORTS)] getterWithDelegation.kt
         @R|kotlin/Deprecated|[Types](message = String(reason)) public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/Int| {
             ^ D|/one|.R|/Prp.getValue<Inapplicable(INAPPLICABLE_ARGUMENTS_MAPPING_ERROR): /Prp.getValue>#|(Null(null), ::R|/one|)
         }
-    public final [ResolvedTo(STATUS)] class Prp : R|kotlin/Any| {
+    public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class Prp : R|kotlin/Any| {
         public [ResolvedTo(STATUS)] [ContainingClassKey=Prp] constructor(): R|Prp| {
             LAZY_super<R|kotlin/Any|>
         }

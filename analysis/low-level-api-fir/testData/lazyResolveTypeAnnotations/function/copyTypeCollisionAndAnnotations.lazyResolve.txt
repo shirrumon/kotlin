@@ -585,7 +585,7 @@ FILE: [ResolvedTo(IMPORTS)] copyTypeCollisionAndAnnotations.kt
 
         }
 
-        public final companion [ResolvedTo(STATUS)] object Companion : R|kotlin/Any| {
+        public final companion [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Companion : R|kotlin/Any| {
             private [ResolvedTo(STATUS)] [ContainingClassKey=Companion] constructor(): R|one/two/MyDataClass.Companion| {
                 LAZY_super<R|kotlin/Any|>
             }
@@ -640,7 +640,7 @@ FILE: [ResolvedTo(IMPORTS)] copyTypeCollisionAndAnnotations.kt
 
         }
 
-        public final companion [ResolvedTo(STATUS)] object Companion : R|kotlin/Any| {
+        public final companion [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Companion : R|kotlin/Any| {
             private [ResolvedTo(STATUS)] [ContainingClassKey=Companion] constructor(): R|one/two/MyDataClass.Companion| {
                 LAZY_super<R|kotlin/Any|>
             }

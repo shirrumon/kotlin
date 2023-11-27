@@ -172,7 +172,7 @@ FILE: [ResolvedTo(IMPORTS)] enumEntriesScript.kts
     SCRIPT: [ResolvedTo(RAW_FIR)] <script-enumEntriesScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(STATUS)] enum class MyEnum : R|kotlin/Enum<one/MyEnum>| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] enum class MyEnum : R|kotlin/Enum<one/MyEnum>| {
             private [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] constructor(): R|one/MyEnum| {
                 LAZY_super<R|kotlin/Enum<one/MyEnum>|>
             }
@@ -196,7 +196,7 @@ FILE: [ResolvedTo(IMPORTS)] enumEntriesScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-enumEntriesScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(STATUS)] enum class MyEnum : R|kotlin/Enum<one/MyEnum>| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] enum class MyEnum : R|kotlin/Enum<one/MyEnum>| {
             private [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] constructor(): R|one/MyEnum| {
                 LAZY_super<R|kotlin/Enum<one/MyEnum>|>
             }
@@ -220,7 +220,7 @@ FILE: [ResolvedTo(IMPORTS)] enumEntriesScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-enumEntriesScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(STATUS)] enum class MyEnum : R|kotlin/Enum<one/MyEnum>| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] enum class MyEnum : R|kotlin/Enum<one/MyEnum>| {
             private [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] constructor(): R|one/MyEnum| {
                 LAZY_super<R|kotlin/Enum<one/MyEnum>|>
             }
@@ -244,7 +244,7 @@ FILE: [ResolvedTo(IMPORTS)] enumEntriesScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-enumEntriesScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(STATUS)] enum class MyEnum : R|kotlin/Enum<one/MyEnum>| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] enum class MyEnum : R|kotlin/Enum<one/MyEnum>| {
             private [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] constructor(): R|one/MyEnum| {
                 LAZY_super<R|kotlin/Enum<one/MyEnum>|>
             }
@@ -268,7 +268,7 @@ FILE: [ResolvedTo(IMPORTS)] enumEntriesScript.kts
     SCRIPT: [ResolvedTo(TYPES)] <script-enumEntriesScript.kts>
         [ResolvedTo(RAW_FIR)] lval args: R|kotlin/Array<kotlin/String>|
 
-        public final [ResolvedTo(STATUS)] enum class MyEnum : R|kotlin/Enum<one/MyEnum>| {
+        public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] enum class MyEnum : R|kotlin/Enum<one/MyEnum>| {
             private [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] constructor(): R|one/MyEnum| {
                 LAZY_super<R|kotlin/Enum<one/MyEnum>|>
             }

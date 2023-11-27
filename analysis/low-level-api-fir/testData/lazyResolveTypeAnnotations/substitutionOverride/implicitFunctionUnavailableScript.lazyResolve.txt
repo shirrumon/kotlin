@@ -63,15 +63,15 @@ FILE: [ResolvedTo(IMPORTS)] implicitFunctionUnavailableScript.kts
 
         }
 
-        public abstract [ResolvedTo(STATUS)] class SubClass : R|second/AbstractClass<@R|second/Anno|(<strcat>(String(type argument: ), constant#))  kotlin/collections/List<@R|second/Anno|(<strcat>(String(nested type argument: ), constant#))  kotlin/collections/Collection<@R|second/Anno|(<strcat>(String(nested nested type argument: ), constant#))  kotlin/String>>>| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class SubClass : R|second/AbstractClass<@R|second/Anno|(<strcat>(String(type argument: ), constant#))  kotlin/collections/List<@R|second/Anno|(<strcat>(String(nested type argument: ), constant#))  kotlin/collections/Collection<@R|second/Anno|(<strcat>(String(nested nested type argument: ), constant#))  kotlin/String>>>| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=SubClass] constructor(): R|second/SubClass| {
                 LAZY_super<R|second/AbstractClass<@R|second/Anno|(<strcat>(String(type argument: ), constant#))  kotlin/collections/List<@R|second/Anno|(<strcat>(String(nested type argument: ), constant#))  kotlin/collections/Collection<@R|second/Anno|(<strcat>(String(nested nested type argument: ), constant#))  kotlin/String>>>|>
             }
 
         }
 
-        public abstract [ResolvedTo(STATUS)] class AbstractClass<[ResolvedTo(STATUS)] T> : R|kotlin/Any| {
-            public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(STATUS)] T>(): R|second/AbstractClass<T>| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AbstractClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T> : R|kotlin/Any| {
+            public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T>(): R|second/AbstractClass<T>| {
                 LAZY_super<R|kotlin/Any|>
             }
 
@@ -110,15 +110,15 @@ FILE: [ResolvedTo(IMPORTS)] implicitFunctionUnavailableScript.kts
 
         }
 
-        public abstract [ResolvedTo(STATUS)] class SubClass : R|second/AbstractClass<@R|second/Anno|(<strcat>(String(type argument: ), constant#))  kotlin/collections/List<@R|second/Anno|(<strcat>(String(nested type argument: ), constant#))  kotlin/collections/Collection<@R|second/Anno|(<strcat>(String(nested nested type argument: ), constant#))  kotlin/String>>>| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class SubClass : R|second/AbstractClass<@R|second/Anno|(<strcat>(String(type argument: ), constant#))  kotlin/collections/List<@R|second/Anno|(<strcat>(String(nested type argument: ), constant#))  kotlin/collections/Collection<@R|second/Anno|(<strcat>(String(nested nested type argument: ), constant#))  kotlin/String>>>| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=SubClass] constructor(): R|second/SubClass| {
                 LAZY_super<R|second/AbstractClass<@R|second/Anno|(<strcat>(String(type argument: ), constant#))  kotlin/collections/List<@R|second/Anno|(<strcat>(String(nested type argument: ), constant#))  kotlin/collections/Collection<@R|second/Anno|(<strcat>(String(nested nested type argument: ), constant#))  kotlin/String>>>|>
             }
 
         }
 
-        public abstract [ResolvedTo(STATUS)] class AbstractClass<[ResolvedTo(STATUS)] T> : R|kotlin/Any| {
-            public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(STATUS)] T>(): R|second/AbstractClass<T>| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AbstractClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T> : R|kotlin/Any| {
+            public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T>(): R|second/AbstractClass<T>| {
                 LAZY_super<R|kotlin/Any|>
             }
 
@@ -157,15 +157,15 @@ FILE: [ResolvedTo(IMPORTS)] implicitFunctionUnavailableScript.kts
 
         }
 
-        public abstract [ResolvedTo(STATUS)] class SubClass : R|second/AbstractClass<@R|second/Anno|(<strcat>(String(type argument: ), constant#))  kotlin/collections/List<@R|second/Anno|(<strcat>(String(nested type argument: ), constant#))  kotlin/collections/Collection<@R|second/Anno|(<strcat>(String(nested nested type argument: ), constant#))  kotlin/String>>>| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class SubClass : R|second/AbstractClass<@R|second/Anno|(<strcat>(String(type argument: ), constant#))  kotlin/collections/List<@R|second/Anno|(<strcat>(String(nested type argument: ), constant#))  kotlin/collections/Collection<@R|second/Anno|(<strcat>(String(nested nested type argument: ), constant#))  kotlin/String>>>| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=SubClass] constructor(): R|second/SubClass| {
                 LAZY_super<R|second/AbstractClass<@R|second/Anno|(<strcat>(String(type argument: ), constant#))  kotlin/collections/List<@R|second/Anno|(<strcat>(String(nested type argument: ), constant#))  kotlin/collections/Collection<@R|second/Anno|(<strcat>(String(nested nested type argument: ), constant#))  kotlin/String>>>|>
             }
 
         }
 
-        public abstract [ResolvedTo(STATUS)] class AbstractClass<[ResolvedTo(STATUS)] T> : R|kotlin/Any| {
-            public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(STATUS)] T>(): R|second/AbstractClass<T>| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AbstractClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T> : R|kotlin/Any| {
+            public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T>(): R|second/AbstractClass<T>| {
                 LAZY_super<R|kotlin/Any|>
             }
 
@@ -173,7 +173,7 @@ FILE: [ResolvedTo(IMPORTS)] implicitFunctionUnavailableScript.kts
                 ^resolveMe this@R|second/AbstractClass.Companion|.R|second/AbstractClass.Companion.explicitType|()
             }
 
-            private final companion [ResolvedTo(STATUS)] object Companion : R|kotlin/Any| {
+            private final companion [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Companion : R|kotlin/Any| {
                 private [ResolvedTo(STATUS)] [ContainingClassKey=Companion] constructor(): R|second/AbstractClass.Companion| {
                     LAZY_super<R|kotlin/Any|>
                 }
@@ -208,15 +208,15 @@ FILE: [ResolvedTo(IMPORTS)] implicitFunctionUnavailableScript.kts
 
         }
 
-        public abstract [ResolvedTo(STATUS)] class SubClass : R|second/AbstractClass<@R|second/Anno|(position = <strcat>(String(type argument: ), this@R|second/AbstractClass.Companion|.R|second/AbstractClass.Companion.constant<HIDDEN: second/AbstractClass.Companion is invisible>#|))  kotlin/collections/List<@R|second/Anno|(position = <strcat>(String(nested type argument: ), this@R|second/AbstractClass.Companion|.R|second/AbstractClass.Companion.constant<HIDDEN: second/AbstractClass.Companion is invisible>#|))  kotlin/collections/Collection<@R|second/Anno|(position = <strcat>(String(nested nested type argument: ), this@R|second/AbstractClass.Companion|.R|second/AbstractClass.Companion.constant<HIDDEN: second/AbstractClass.Companion is invisible>#|))  kotlin/String>>>| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class SubClass : R|second/AbstractClass<@R|second/Anno|(position = <strcat>(String(type argument: ), this@R|second/AbstractClass.Companion|.R|second/AbstractClass.Companion.constant<HIDDEN: second/AbstractClass.Companion is invisible>#|))  kotlin/collections/List<@R|second/Anno|(position = <strcat>(String(nested type argument: ), this@R|second/AbstractClass.Companion|.R|second/AbstractClass.Companion.constant<HIDDEN: second/AbstractClass.Companion is invisible>#|))  kotlin/collections/Collection<@R|second/Anno|(position = <strcat>(String(nested nested type argument: ), this@R|second/AbstractClass.Companion|.R|second/AbstractClass.Companion.constant<HIDDEN: second/AbstractClass.Companion is invisible>#|))  kotlin/String>>>| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=SubClass] constructor(): R|second/SubClass| {
                 LAZY_super<R|second/AbstractClass<@R|second/Anno|(position = <strcat>(String(type argument: ), this@R|second/AbstractClass.Companion|.R|second/AbstractClass.Companion.constant<HIDDEN: second/AbstractClass.Companion is invisible>#|))  kotlin/collections/List<@R|second/Anno|(position = <strcat>(String(nested type argument: ), this@R|second/AbstractClass.Companion|.R|second/AbstractClass.Companion.constant<HIDDEN: second/AbstractClass.Companion is invisible>#|))  kotlin/collections/Collection<@R|second/Anno|(position = <strcat>(String(nested nested type argument: ), this@R|second/AbstractClass.Companion|.R|second/AbstractClass.Companion.constant<HIDDEN: second/AbstractClass.Companion is invisible>#|))  kotlin/String>>>|>
             }
 
         }
 
-        public abstract [ResolvedTo(STATUS)] class AbstractClass<[ResolvedTo(STATUS)] T> : R|kotlin/Any| {
-            public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(STATUS)] T>(): R|second/AbstractClass<T>| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AbstractClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T> : R|kotlin/Any| {
+            public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T>(): R|second/AbstractClass<T>| {
                 LAZY_super<R|kotlin/Any|>
             }
 
@@ -224,7 +224,7 @@ FILE: [ResolvedTo(IMPORTS)] implicitFunctionUnavailableScript.kts
                 ^resolveMe this@R|second/AbstractClass.Companion|.R|second/AbstractClass.Companion.explicitType|()
             }
 
-            private final companion [ResolvedTo(STATUS)] object Companion : R|kotlin/Any| {
+            private final companion [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Companion : R|kotlin/Any| {
                 private [ResolvedTo(STATUS)] [ContainingClassKey=Companion] constructor(): R|second/AbstractClass.Companion| {
                     LAZY_super<R|kotlin/Any|>
                 }
@@ -259,15 +259,15 @@ FILE: [ResolvedTo(IMPORTS)] implicitFunctionUnavailableScript.kts
 
         }
 
-        public abstract [ResolvedTo(STATUS)] class SubClass : R|second/AbstractClass<@R|second/Anno|(position = <strcat>(String(type argument: ), this@R|second/AbstractClass.Companion|.R|second/AbstractClass.Companion.constant<HIDDEN: second/AbstractClass.Companion is invisible>#|))  kotlin/collections/List<@R|second/Anno|(position = <strcat>(String(nested type argument: ), this@R|second/AbstractClass.Companion|.R|second/AbstractClass.Companion.constant<HIDDEN: second/AbstractClass.Companion is invisible>#|))  kotlin/collections/Collection<@R|second/Anno|(position = <strcat>(String(nested nested type argument: ), this@R|second/AbstractClass.Companion|.R|second/AbstractClass.Companion.constant<HIDDEN: second/AbstractClass.Companion is invisible>#|))  kotlin/String>>>| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class SubClass : R|second/AbstractClass<@R|second/Anno|(position = <strcat>(String(type argument: ), this@R|second/AbstractClass.Companion|.R|second/AbstractClass.Companion.constant<HIDDEN: second/AbstractClass.Companion is invisible>#|))  kotlin/collections/List<@R|second/Anno|(position = <strcat>(String(nested type argument: ), this@R|second/AbstractClass.Companion|.R|second/AbstractClass.Companion.constant<HIDDEN: second/AbstractClass.Companion is invisible>#|))  kotlin/collections/Collection<@R|second/Anno|(position = <strcat>(String(nested nested type argument: ), this@R|second/AbstractClass.Companion|.R|second/AbstractClass.Companion.constant<HIDDEN: second/AbstractClass.Companion is invisible>#|))  kotlin/String>>>| {
             public [ResolvedTo(STATUS)] [ContainingClassKey=SubClass] constructor(): R|second/SubClass| {
                 LAZY_super<R|second/AbstractClass<@R|second/Anno|(position = <strcat>(String(type argument: ), this@R|second/AbstractClass.Companion|.R|second/AbstractClass.Companion.constant<HIDDEN: second/AbstractClass.Companion is invisible>#|))  kotlin/collections/List<@R|second/Anno|(position = <strcat>(String(nested type argument: ), this@R|second/AbstractClass.Companion|.R|second/AbstractClass.Companion.constant<HIDDEN: second/AbstractClass.Companion is invisible>#|))  kotlin/collections/Collection<@R|second/Anno|(position = <strcat>(String(nested nested type argument: ), this@R|second/AbstractClass.Companion|.R|second/AbstractClass.Companion.constant<HIDDEN: second/AbstractClass.Companion is invisible>#|))  kotlin/String>>>|>
             }
 
         }
 
-        public abstract [ResolvedTo(STATUS)] class AbstractClass<[ResolvedTo(STATUS)] T> : R|kotlin/Any| {
-            public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(STATUS)] T>(): R|second/AbstractClass<T>| {
+        public abstract [ResolvedTo(EXPECT_ACTUAL_MATCHING)] class AbstractClass<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T> : R|kotlin/Any| {
+            public [ResolvedTo(STATUS)] [ContainingClassKey=AbstractClass] constructor<[ResolvedTo(EXPECT_ACTUAL_MATCHING)] T>(): R|second/AbstractClass<T>| {
                 LAZY_super<R|kotlin/Any|>
             }
 
@@ -275,7 +275,7 @@ FILE: [ResolvedTo(IMPORTS)] implicitFunctionUnavailableScript.kts
                 ^resolveMe this@R|second/AbstractClass.Companion|.R|second/AbstractClass.Companion.explicitType|()
             }
 
-            private final companion [ResolvedTo(STATUS)] object Companion : R|kotlin/Any| {
+            private final companion [ResolvedTo(EXPECT_ACTUAL_MATCHING)] object Companion : R|kotlin/Any| {
                 private [ResolvedTo(STATUS)] [ContainingClassKey=Companion] constructor(): R|second/AbstractClass.Companion| {
                     LAZY_super<R|kotlin/Any|>
                 }
@@ -339,4 +339,3 @@ FILE: [ResolvedTo(BODY_RESOLVE)] implicitFunctionUnavailableScript.kts
             }
 
         }
-
