@@ -97,7 +97,7 @@ class CandidateFactory private constructor(
                     )
                 }
             }
-        } else if (objectsByName && symbol.isRegularClassWithoutCompanion(callInfo.session)) {
+        } else if (objectsByName && symbol.isRegularClassWithoutCompanion(callInfo.session) /*&& !callInfo.isUsedAsReceiver*/) {
             result.addDiagnostic(NoCompanionObject)
         }
         if (callInfo.origin == FirFunctionCallOrigin.Operator && symbol is FirPropertySymbol) {

@@ -157,6 +157,7 @@ class FirCallResolver(
         resolutionContext: ResolutionContext = transformer.resolutionContext,
         collector: CandidateCollector? = null,
         callSite: FirElement = qualifiedAccess,
+        isUsedAsReceiver: Boolean = false,
     ): ResolutionResult {
         val explicitReceiver = qualifiedAccess.explicitReceiver
         val argumentList = (qualifiedAccess as? FirFunctionCall)?.argumentList ?: FirEmptyArgumentList
@@ -173,7 +174,8 @@ class FirCallResolver(
             session,
             components.file,
             containingDeclarations,
-            origin = origin
+            origin = origin,
+            isUsedAsReceiver = isUsedAsReceiver,
         )
         towerResolver.reset()
         val result = towerResolver.runResolver(info, resolutionContext, collector)
@@ -250,7 +252,7 @@ class FirCallResolver(
         val nonFatalDiagnosticFromExpression = (qualifiedAccess as? FirPropertyAccessExpression)?.nonFatalDiagnostics
 
         val basicResult by lazy(LazyThreadSafetyMode.NONE) {
-            collectCandidates(qualifiedAccess, callee.name, callSite = callSite)
+            collectCandidates(qualifiedAccess, callee.name, callSite = callSite, isUsedAsReceiver = isUsedAsReceiver)
         }
 
         // Even if it's not receiver, it makes sense to continue qualifier if resolution is unsuccessful
@@ -290,7 +292,7 @@ class FirCallResolver(
 
         var functionCallExpected = false
         if (result.candidates.isEmpty() && qualifiedAccess !is FirFunctionCall) {
-            val newResult = collectCandidates(qualifiedAccess, callee.name, CallKind.Function)
+            val newResult = collectCandidates(qualifiedAccess, callee.name, CallKind.Function, isUsedAsReceiver = isUsedAsReceiver)
             if (newResult.candidates.isNotEmpty()) {
                 result = newResult
                 functionCallExpected = true
