@@ -15,6 +15,7 @@ import org.jetbrains.kotlin.fir.expressions.FirStatement
 import org.jetbrains.kotlin.fir.resolve.ScopeSession
 import org.jetbrains.kotlin.fir.resolve.transformers.body.resolve.FirResolveContextCollector
 import org.jetbrains.kotlin.fir.resolve.transformers.mpp.FirExpectActualMatcherTransformer
+import org.jetbrains.kotlin.fir.symbols.lazyResolveToPhase
 
 internal object LLFirExpectActualMatcherLazyResolver : LLFirLazyResolver(FirResolvePhase.EXPECT_ACTUAL_MATCHING) {
     override fun resolve(
@@ -40,6 +41,14 @@ private class LLFirExpectActualMatchingTargetResolver(
     session: FirSession,
     scopeSession: ScopeSession,
 ) : LLFirTargetResolver(target, lockProvider, FirResolvePhase.EXPECT_ACTUAL_MATCHING) {
+    @Deprecated("Should never be called directly, only for override purposes, please use withRegularClass", level = DeprecationLevel.ERROR)
+    override fun withRegularClassImpl(firClass: FirRegularClass, action: () -> Unit) {
+        // Resolve outer classes before resolving inner declarations. It's the requirement of FirExpectActualResolver
+        firClass.lazyResolveToPhase(resolverPhase.previous)
+        performResolve(firClass)
+        action()
+    }
+
     private val transformer = object : FirExpectActualMatcherTransformer(session, scopeSession) {
         override fun transformRegularClass(regularClass: FirRegularClass, data: Nothing?): FirStatement {
             transformMemberDeclaration(regularClass)
