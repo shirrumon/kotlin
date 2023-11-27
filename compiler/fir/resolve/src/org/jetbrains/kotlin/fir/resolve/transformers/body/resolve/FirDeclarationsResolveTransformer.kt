@@ -680,42 +680,6 @@ open class FirDeclarationsResolveTransformer(
     override fun transformScript(script: FirScript, data: ResolutionMode): FirScript = whileAnalysing(session, script) {
         withScript(script) {
             transformDeclarationContent(script, data) as FirScript
-//            transformer.firResolveContextCollector?.addDeclarationContext(script, context)
-//
-//            if (implicitTypeOnly) {
-//                script.transformAnnotations(transformer, data)
-//                script.transformParameters(transformer, data)
-//                script.transformContextReceivers(transformer, data)
-//                // need to process declarations for implicit type resolution to repeat K1 behavior
-//                script.transformDeclarations(
-//                    transformer = object : FirTransformer<Any?>() {
-//                        override fun <E : FirElement> transformElement(element: E, data: Any?): E {
-//                            if (element !is ) return element
-//
-//                            transformer.firResolveContextCollector?.addStatementContext(element, transformer.context)
-//                            return element.transformSingle(transformer, ResolutionMode.ContextIndependent)
-//                        }
-//                    },
-//                    data = null,
-//                    script.statements.map {
-//                        if (it is FirDeclaration) it.transform(transformer, data)
-//                        else it
-//                    }
-//                )
-//            } else {
-//                script.replaceStatements(
-//                    script.statements.map {
-//                        it.transform<FirStatement, ResolutionMode>(transformer, data).also {
-//                            if (it is FirProperty) {
-//                                // adding the property node to script's body subgraph, to be able to
-//                                // detect initialization errors in the checker
-//                                dataFlowAnalyzer.exitLocalVariableDeclaration(it, true)
-//                            }
-//                        }
-//                    }
-//                )
-//            }
-//            script
         }
     }
 
