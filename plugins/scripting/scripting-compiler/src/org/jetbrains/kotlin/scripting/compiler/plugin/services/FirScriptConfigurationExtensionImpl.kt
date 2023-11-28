@@ -20,9 +20,11 @@ import org.jetbrains.kotlin.fir.declarations.impl.FirDefaultPropertyGetter
 import org.jetbrains.kotlin.fir.declarations.primaryConstructorIfAny
 import org.jetbrains.kotlin.fir.declarations.utils.SCRIPT_SPECIAL_NAME_STRING
 import org.jetbrains.kotlin.fir.expressions.FirExpression
+import org.jetbrains.kotlin.fir.expressions.FirLazyBlock
+import org.jetbrains.kotlin.fir.expressions.FirLazyExpression
 import org.jetbrains.kotlin.fir.expressions.UnresolvedExpressionTypeAccess
+import org.jetbrains.kotlin.fir.expressions.builder.buildLazyExpression
 import org.jetbrains.kotlin.fir.expressions.impl.FirSingleExpressionBlock
-import org.jetbrains.kotlin.fir.expressions.removeLastStatementIf
 import org.jetbrains.kotlin.fir.moduleData
 import org.jetbrains.kotlin.fir.resolve.providers.dependenciesSymbolProvider
 import org.jetbrains.kotlin.fir.symbols.SymbolInternals
@@ -141,19 +143,20 @@ class FirScriptConfiguratorExtensionImpl(
 
         configuration[ScriptCompilationConfiguration.resultField]?.takeIf { it.isNotBlank() }?.let { resultFieldName ->
             val lastScriptBlock = declarations.lastOrNull() as? FirAnonymousInitializer
-            val lastScriptBlockBody = lastScriptBlock?.body
             val lastExpression =
-                if (lastScriptBlockBody is FirSingleExpressionBlock) {
-                    (lastScriptBlockBody.statement as? FirExpression)?.also {
-                        declarations.removeLast()
-                    }
-                } else {
-                    lastScriptBlockBody?.removeLastStatementIf { it is FirExpression } as? FirExpression
+                when (val lastScriptBlockBody = lastScriptBlock?.body) {
+                    is FirSingleExpressionBlock -> lastScriptBlockBody.statement as? FirExpression
+                    is FirLazyBlock -> buildLazyExpression { source = lastScriptBlock.source }
+                    else -> lastScriptBlockBody?.statements?.singleOrNull { it is FirExpression } as? FirExpression
                 }
 
             if (lastExpression != null) {
+                declarations.removeLast()
+                @OptIn(UnresolvedExpressionTypeAccess::class)
+                val lastExpressionTypeRef =
+                    lastExpression.takeUnless { it is FirLazyExpression }?.coneTypeOrNull?.toFirResolvedTypeRef()
+                        ?: FirImplicitTypeRefImplWithoutSource
                 declarations.add(
-                    @OptIn(UnresolvedExpressionTypeAccess::class)
                     buildProperty {
                         this.name = Name.identifier(resultFieldName)
                         this.symbol = FirPropertySymbol(this.name)
@@ -161,12 +164,12 @@ class FirScriptConfiguratorExtensionImpl(
                         moduleData = session.moduleData
                         origin = FirDeclarationOrigin.ScriptCustomization.ResultProperty
                         initializer = lastExpression
-                        returnTypeRef = lastExpression.coneTypeOrNull?.toFirResolvedTypeRef() ?: FirImplicitTypeRefImplWithoutSource
+                        returnTypeRef = lastExpressionTypeRef
                         getter = FirDefaultPropertyGetter(
                             lastExpression.source,
                             session.moduleData,
                             FirDeclarationOrigin.ScriptCustomization.ResultProperty,
-                            lastExpression.coneTypeOrNull?.toFirResolvedTypeRef() ?: FirImplicitTypeRefImplWithoutSource,
+                            lastExpressionTypeRef,
                             Visibilities.Public,
                             this.symbol,
                         )

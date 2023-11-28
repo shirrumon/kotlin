@@ -289,9 +289,11 @@ internal object BodyStateKeepers {
                 oldDeclarations.zip(recreatedDeclarations).mapTo(this) { (old, new) ->
                     when {
                         !old.isScriptBlock -> old
-                        // TODO: check validity of the code below
                         old is FirProperty && old.origin == FirDeclarationOrigin.ScriptCustomization.ResultProperty -> {
                             old.replaceInitializer((new as FirProperty).initializer)
+                            old.replaceReturnTypeRef(new.returnTypeRef)
+                            old.getter?.replaceReturnTypeRef(new.getter!!.returnTypeRef)
+                            // TODO: seems source could be different too, check if ok
                             old
                         }
 

@@ -1255,7 +1255,10 @@ open class PsiRawFirBuilder(
                     }
                 }
 
-                for (declaration in script.declarations) {
+                val scriptDeclarationsIter = script.declarations.listIterator()
+                while (scriptDeclarationsIter.hasNext()) {
+                    val declaration = scriptDeclarationsIter.next()
+                    val isLast = !scriptDeclarationsIter.hasNext()
                     val declarationSource = declaration.toFirSourceElement()
                     when (declaration) {
                         is KtScriptInitializer -> { // TODO: check if it is still a used case
@@ -1302,11 +1305,16 @@ open class PsiRawFirBuilder(
                                 createScriptBlockFromCurrentStatements()
                                 declarations.add(firStatement)
                             } else {
+                                if (firStatement is FirExpression && isLast) {
+                                    // put it in a separate block for result property
+                                    createScriptBlockFromCurrentStatements()
+                                }
                                 currentStatements.add(firStatement)
                             }
                         }
                     }
                 }
+                createScriptBlockFromCurrentStatements()
                 setup()
                 if (sourceFile != null) {
                     for (configurator in baseSession.extensionService.scriptConfigurators) {
