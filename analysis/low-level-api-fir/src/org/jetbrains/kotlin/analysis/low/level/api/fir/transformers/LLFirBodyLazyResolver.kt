@@ -290,10 +290,9 @@ internal object BodyStateKeepers {
                     when {
                         !old.isScriptBlock -> old
                         old is FirProperty && old.origin == FirDeclarationOrigin.ScriptCustomization.ResultProperty -> {
-                            old.replaceInitializer((new as FirProperty).initializer)
-                            old.replaceReturnTypeRef(new.returnTypeRef)
-                            old.getter?.replaceReturnTypeRef(new.getter!!.returnTypeRef)
-                            // TODO: seems source could be different too, check if ok
+                            if (old.bodyResolveState != FirPropertyBodyResolveState.ALL_BODIES_RESOLVED) {
+                                old.replaceInitializer((new as FirProperty).initializer)
+                            }
                             old
                         }
 
