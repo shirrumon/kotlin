@@ -282,7 +282,7 @@ internal object BodyStateKeepers {
 
         add(RESULT_PROPERTY, designation)
         add(FirScript::declarations, FirScript::replaceDeclarations) {
-            val recreatedDeclarations = FirLazyBodiesCalculator.createStatementsForScript(script)
+            val recreatedDeclarations = FirLazyBodiesCalculator.createDeclarationsForScript(script)
             requireSameSize(oldDeclarations, recreatedDeclarations)
 
             ArrayList<FirDeclaration>(oldDeclarations.size).apply {
