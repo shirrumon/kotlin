@@ -43,3 +43,7 @@ Tower Data Context:
                     public get(): R|kotlin/Unit|
                 Type: kotlin.script.templates.standard.ScriptTemplateWithArgs
                 Label: <script>
+    Element 10
+        Scope: FirLocalScope
+    Element 11
+        Scope: FirLocalScope
