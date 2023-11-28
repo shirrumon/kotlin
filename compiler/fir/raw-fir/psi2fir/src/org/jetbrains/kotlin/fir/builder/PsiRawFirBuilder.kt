@@ -26,6 +26,7 @@ import org.jetbrains.kotlin.fir.expressions.*
 import org.jetbrains.kotlin.fir.expressions.builder.*
 import org.jetbrains.kotlin.fir.expressions.impl.FirContractCallBlock
 import org.jetbrains.kotlin.fir.expressions.impl.FirSingleExpressionBlock
+import org.jetbrains.kotlin.fir.expressions.impl.buildSingleExpressionBlock
 import org.jetbrains.kotlin.fir.extensions.extensionService
 import org.jetbrains.kotlin.fir.references.builder.*
 import org.jetbrains.kotlin.fir.scopes.FirScopeProvider
@@ -1255,25 +1256,46 @@ open class PsiRawFirBuilder(
                     }
                 }
 
+                fun createScriptBlockFromRemainingStatements() {
+                    // needed to decide on result property
+                    val separateLastStatement =
+                        if (currentStatements.isNotEmpty()) {
+                            currentStatements.removeLast()
+                        } else null
+                    createScriptBlockFromCurrentStatements()
+                    if (separateLastStatement != null) {
+                        // TODO: consider building result property right here instead of doing it in the configurator
+                        declarations.add(
+                            buildScriptBlockForCurrent {
+                                body = withForcedLocalContext { buildSingleExpressionBlock(separateLastStatement) }
+                            }
+                        )
+                    }
+                }
+
                 val scriptDeclarationsIter = script.declarations.listIterator()
                 while (scriptDeclarationsIter.hasNext()) {
                     val declaration = scriptDeclarationsIter.next()
                     val isLast = !scriptDeclarationsIter.hasNext()
                     val declarationSource = declaration.toFirSourceElement()
                     when (declaration) {
-                        is KtScriptInitializer -> { // TODO: check if it is still a used case
-                            createScriptBlockFromCurrentStatements()
-                            declarations.add(
-                                buildScriptBlockForCurrent {
-                                    source = declarationSource
-                                    body = buildOrLazyBlock {
-                                        withForcedLocalContext {
-                                            declaration.body.toFirBlock()
-                                        }
+                        is KtScriptInitializer -> {
+                            if (isLast) {
+                                // add as separate statements, because the last one need to be analyzed to decide on result property
+                                // therefore no lazy conversion here
+                                val firBlock = buildBlock { withForcedLocalContext { declaration.body.toFirBlock() } }
+                                // TODO: check the case then a declaration appears inside the block - shall it be moved to the top-level?
+                                currentStatements.addAll(firBlock.statements)
+                            } else {
+                                createScriptBlockFromCurrentStatements()
+                                declarations.add(
+                                    buildScriptBlockForCurrent {
+                                        source = declarationSource
+                                        body = buildOrLazyBlock { withForcedLocalContext { declaration.body.toFirBlock() } }
+                                        declaration.extractAnnotationsTo(this)
                                     }
-                                    declaration.extractAnnotationsTo(this)
-                                }
-                            )
+                                )
+                            }
                         }
                         is KtDestructuringDeclaration -> {
                             createScriptBlockFromCurrentStatements()
@@ -1305,16 +1327,12 @@ open class PsiRawFirBuilder(
                                 createScriptBlockFromCurrentStatements()
                                 declarations.add(firStatement)
                             } else {
-                                if (firStatement is FirExpression && isLast) {
-                                    // put it in a separate block for result property
-                                    createScriptBlockFromCurrentStatements()
-                                }
                                 currentStatements.add(firStatement)
                             }
                         }
                     }
                 }
-                createScriptBlockFromCurrentStatements()
+                createScriptBlockFromRemainingStatements()
                 setup()
                 if (sourceFile != null) {
                     for (configurator in baseSession.extensionService.scriptConfigurators) {
