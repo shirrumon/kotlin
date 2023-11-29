@@ -13,6 +13,7 @@ import org.jetbrains.kotlin.konan.test.blackbox.support.TestModule
 import org.jetbrains.kotlin.konan.test.blackbox.support.compilation.*
 import org.jetbrains.kotlin.konan.test.blackbox.support.compilation.TestCompilationArtifact.KLIB
 import org.jetbrains.kotlin.konan.test.blackbox.support.compilation.TestCompilationArtifact.KLIBStaticCache
+import org.jetbrains.kotlin.konan.test.blackbox.support.compilation.TestCompilationArtifact.KLIBStaticCacheImpl
 import org.jetbrains.kotlin.konan.test.blackbox.support.compilation.TestCompilationResult.Companion.assertSuccess
 import org.jetbrains.kotlin.konan.test.blackbox.support.group.UsePartialLinkage
 import org.jetbrains.kotlin.konan.test.blackbox.support.runner.TestExecutable
@@ -147,13 +148,28 @@ abstract class AbstractNativeKlibEvolutionTest : AbstractNativeSimpleTest() {
     ) {
         val klib = module.klibFile
 
+        if (useHeaders) {
+            val compilation = StaticCacheCompilation(
+                settings = testRunSettings,
+                freeCompilerArgs = COMPILER_ARGS_FOR_STATIC_CACHE_AND_EXECUTABLE,
+                options = staticCacheCompilationOptions,
+                pipelineType = testRunSettings.get(),
+                dependencies = moduleDependencies.map {
+                    it.klibFile.toHeaderCacheArtifact().toDependency()
+                } + klib.toHeaderCacheArtifact().toDependency(),
+                createHeaderCache = true,
+                expectedArtifact = klib.toHeaderCacheArtifact()
+            )
+            compilation.trigger()
+        }
+
         val compilation = StaticCacheCompilation(
             settings = testRunSettings,
             freeCompilerArgs = COMPILER_ARGS_FOR_STATIC_CACHE_AND_EXECUTABLE,
             options = staticCacheCompilationOptions,
             pipelineType = testRunSettings.get(),
             dependencies = moduleDependencies.map {
-                it.klibFile.toStaticCacheArtifact().toDependency()
+                if (useHeaders) it.klibFile.toStaticCacheArtifact().toDependency() else it.klibFile.toStaticCacheArtifact().toDependency()
             } + klib.toKlib().toDependency(),
             expectedArtifact = klib.toStaticCacheArtifact()
         )
@@ -283,6 +299,7 @@ abstract class AbstractNativeKlibEvolutionTest : AbstractNativeSimpleTest() {
 
     private val buildDir: File get() = testRunSettings.get<Binaries>().testBinariesDir
     private val useStaticCacheForUserLibraries: Boolean get() = testRunSettings.get<CacheMode>().useStaticCacheForUserLibraries
+    private val useHeaders: Boolean get() = testRunSettings.get<CacheMode>().useHeaders
 
     companion object {
         private val COMPILER_ARGS_FOR_KLIB = TestCompilerArgs.EMPTY
@@ -301,8 +318,13 @@ private fun File.resolveKlibFileWithVersion(moduleName: String, version: Int): F
     resolveModuleWithVersion(moduleName, version).resolve("${moduleName}.klib")
 
 private fun File.toKlib(): KLIB = KLIB(this)
-private fun File.toStaticCacheArtifact() = KLIBStaticCache(
+private fun File.toStaticCacheArtifact() = KLIBStaticCacheImpl(
     cacheDir = parentFile.resolve(STATIC_CACHE_DIR_NAME).apply { mkdirs() },
+    klib = KLIB(this)
+)
+
+private fun File.toHeaderCacheArtifact() = KLIBStaticCacheImpl(
+    cacheDir = parentFile.resolve(HEADER_CACHE_DIR_NAME).apply { mkdirs() },
     klib = KLIB(this)
 )
 
