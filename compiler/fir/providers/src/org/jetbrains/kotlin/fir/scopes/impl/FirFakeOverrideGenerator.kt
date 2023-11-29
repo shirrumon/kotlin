@@ -121,6 +121,7 @@ object FirFakeOverrideGenerator {
         newVisibility: Visibility? = null,
         callableCopySubstitutionForTypeUpdater: CallableCopySubstitution? = null,
         newSource: KtSourceElement? = null,
+        copyDefaultValues: Boolean = true,
     ): FirSimpleFunction = buildSimpleFunction {
         source = newSource ?: derivedClassLookupTag?.toSymbol(session)?.source ?: baseFunction.source
         moduleData = session.nullableModuleData ?: baseFunction.moduleData
@@ -134,11 +135,13 @@ object FirFakeOverrideGenerator {
         attributes = baseFunction.attributes.copy()
         typeParameters += configureAnnotationsTypeParametersAndSignature(
             session, baseFunction, newParameterTypes, newTypeParameters,
-            newReceiverType, newContextReceiverTypes, newReturnType, callableCopySubstitutionForTypeUpdater, newSymbol
-        ).filterIsInstance<FirTypeParameter>()
-        deprecationsProvider = baseFunction.deprecationsProvider
-    }.apply {
-        containingClassForStaticMemberAttr = derivedClassLookupTag.takeIf { shouldOverrideSetContainingClass(baseFunction) }
+            newReceiverType, newContextReceiverTypes, newReturnType, callableCopySubstitutionForTypeUpdater, newSymbol,
+                copyDefaultValues,
+            ).filterIsInstance<FirTypeParameter>()
+            deprecationsProvider = baseFunction.deprecationsProvider
+        }.apply {
+            containingClassForStaticMemberAttr = derivedClassLookupTag.takeIf { shouldOverrideSetContainingClass(baseFunction) }
+
     }
 
     fun createCopyForFirConstructor(
@@ -203,6 +206,7 @@ object FirFakeOverrideGenerator {
         newReturnType: ConeKotlinType?,
         callableCopySubstitutionForTypeUpdater: CallableCopySubstitution?,
         symbolForOverride: FirFunctionSymbol<*>,
+        copyDefaultValues: Boolean = true,
     ): List<FirTypeParameterRef> {
         return when {
             baseFunction.typeParameters.isEmpty() -> {
@@ -215,6 +219,7 @@ object FirFakeOverrideGenerator {
                     newReturnType,
                     callableCopySubstitutionForTypeUpdater,
                     origin,
+                    copyDefaultValues,
                 )
                 emptyList()
             }
@@ -242,6 +247,7 @@ object FirFakeOverrideGenerator {
                     copiedReturnType,
                     newCallableCopySubstitutionForTypeUpdater,
                     origin,
+                    copyDefaultValues,
                 )
                 copiedTypeParameters
             }
@@ -255,6 +261,7 @@ object FirFakeOverrideGenerator {
                     newReturnType,
                     callableCopySubstitutionForTypeUpdater,
                     origin,
+                    copyDefaultValues,
                 )
                 newTypeParameters
             }
@@ -270,6 +277,7 @@ object FirFakeOverrideGenerator {
         newReturnType: ConeKotlinType?,
         callableCopySubstitutionForTypeUpdater: CallableCopySubstitution?,
         origin: FirDeclarationOrigin,
+        copyDefaultValues: Boolean = true,
     ) {
         checkStatusIsResolved(baseFunction)
         annotations += baseFunction.annotations
@@ -303,7 +311,8 @@ object FirFakeOverrideGenerator {
                 valueParameter.returnTypeRef.withReplacedConeType(newType),
                 origin,
                 fakeFunctionSymbol,
-                this@configureAnnotationsAndSignature.source ?: valueParameter.source
+                this@configureAnnotationsAndSignature.source ?: valueParameter.source,
+                copyDefaultValues,
             )
         }
 
@@ -321,18 +330,21 @@ object FirFakeOverrideGenerator {
         returnTypeRef: FirTypeRef,
         origin: FirDeclarationOrigin,
         containingFunctionSymbol: FirFunctionSymbol<*>,
-        source: KtSourceElement?
+        source: KtSourceElement?,
+        copyDefaultValues: Boolean = true,
     ): FirValueParameter = buildValueParameterCopy(original) {
         this.origin = origin
         this.source = source
         this.returnTypeRef = returnTypeRef
         symbol = FirValueParameterSymbol(original.name)
         this.containingFunctionSymbol = containingFunctionSymbol
-        defaultValue = defaultValue?.let {
-            buildExpressionStub {
-                coneTypeOrNull = returnTypeRef.coneTypeOrNull
+        defaultValue = defaultValue
+            ?.takeIf { copyDefaultValues }
+            ?.let {
+                buildExpressionStub {
+                    coneTypeOrNull = returnTypeRef.coneTypeOrNull
+                }
             }
-        }
 
         resolvePhase = origin.resolvePhaseForCopy
     }
