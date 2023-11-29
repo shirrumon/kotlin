@@ -1259,7 +1259,7 @@ open class PsiRawFirBuilder(
                 fun createScriptBlockFromRemainingStatements() {
                     // needed to decide on result property
                     val separateLastStatement =
-                        if (currentStatements.isNotEmpty()) {
+                        if (currentStatements.lastOrNull() is FirExpression) {
                             currentStatements.removeLast()
                         } else null
                     createScriptBlockFromCurrentStatements()
@@ -1280,22 +1280,26 @@ open class PsiRawFirBuilder(
                     val declarationSource = declaration.toFirSourceElement()
                     when (declaration) {
                         is KtScriptInitializer -> {
+                            var firBlock: FirBlock? = null
                             if (isLast) {
                                 // add as separate statements, because the last one need to be analyzed to decide on result property
                                 // therefore no lazy conversion here
-                                val firBlock = withForcedLocalContext { declaration.body.toFirBlock() }
-                                // TODO: check the case then a declaration appears inside the block - shall it be moved to the top-level?
-                                currentStatements.addAll(firBlock.statements)
-                            } else {
-                                createScriptBlockFromCurrentStatements()
-                                declarations.add(
-                                    buildScriptBlockForCurrent {
-                                        source = declarationSource
-                                        body = buildOrLazyBlock { withForcedLocalContext { declaration.body.toFirBlock() } }
-                                        declaration.extractAnnotationsTo(this)
-                                    }
-                                )
+                                firBlock = withForcedLocalContext { declaration.body.toFirBlock() }
+                                if (firBlock.statements.lastOrNull() is FirExpression) {
+                                    // TODO: check the case then a declaration appears inside the block - shall it be moved to the top-level?
+                                    // (end is it even possible?)
+                                    currentStatements.addAll(firBlock.statements)
+                                    continue
+                                }
                             }
+                            createScriptBlockFromCurrentStatements()
+                            declarations.add(
+                                buildScriptBlockForCurrent {
+                                    source = declarationSource
+                                    body = firBlock ?: buildOrLazyBlock { withForcedLocalContext { declaration.body.toFirBlock() } }
+                                    declaration.extractAnnotationsTo(this)
+                                }
+                            )
                         }
                         is KtDestructuringDeclaration -> {
                             createScriptBlockFromCurrentStatements()

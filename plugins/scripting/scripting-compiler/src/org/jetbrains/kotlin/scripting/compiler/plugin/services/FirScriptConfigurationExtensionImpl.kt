@@ -145,10 +145,9 @@ class FirScriptConfiguratorExtensionImpl(
             val lastScriptBlock = declarations.lastOrNull() as? FirAnonymousInitializer
             val lastExpression =
                 when (val lastScriptBlockBody = lastScriptBlock?.body) {
-                    is FirSingleExpressionBlock -> lastScriptBlockBody.statement as? FirExpression
                     is FirLazyBlock -> null
-                    // TODO: consider using single + takeIf, to signal an error if the last block structure unexpectedly contains more statements
-                    else -> lastScriptBlockBody?.statements?.singleOrNull { it is FirExpression } as? FirExpression
+                    is FirSingleExpressionBlock -> lastScriptBlockBody.statement as? FirExpression
+                    else -> lastScriptBlockBody?.statements?.single()?.takeIf { it is FirExpression } as? FirExpression
                 }
 
             if (lastExpression != null) {
