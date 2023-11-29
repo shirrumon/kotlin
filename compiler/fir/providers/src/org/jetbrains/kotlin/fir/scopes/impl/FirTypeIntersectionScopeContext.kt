@@ -382,6 +382,7 @@ class FirTypeIntersectionScopeContext(
             newVisibility = newVisibility,
             newDispatchReceiverType = dispatchReceiverType,
             newReturnType = if (!forClassUseSiteScope) intersectReturnTypes(mostSpecific) else null,
+            newSource = dispatchReceiverType.toSymbol(session)?.source,
         ).apply {
             originalForIntersectionOverrideAttr = keyFir
         }
@@ -408,7 +409,8 @@ class FirTypeIntersectionScopeContext(
                 newDispatchReceiverType = dispatchReceiverType,
                 // If any of the properties are vars and the types are not equal, these declarations are conflicting
                 // anyway and their uses should result in an overload resolution error.
-                newReturnType = returnType
+                newReturnType = returnType,
+                source = dispatchReceiverType.toSymbol(session)?.source,
             )
         }
     }
