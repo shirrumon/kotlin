@@ -1283,7 +1283,7 @@ open class PsiRawFirBuilder(
                             if (isLast) {
                                 // add as separate statements, because the last one need to be analyzed to decide on result property
                                 // therefore no lazy conversion here
-                                val firBlock = buildBlock { withForcedLocalContext { declaration.body.toFirBlock() } }
+                                val firBlock = withForcedLocalContext { declaration.body.toFirBlock() }
                                 // TODO: check the case then a declaration appears inside the block - shall it be moved to the top-level?
                                 currentStatements.addAll(firBlock.statements)
                             } else {
