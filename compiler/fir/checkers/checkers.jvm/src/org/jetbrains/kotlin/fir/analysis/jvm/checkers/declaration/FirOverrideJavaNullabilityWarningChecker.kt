@@ -142,7 +142,6 @@ private fun FirSimpleFunction.substituteOrNull(
             newReturnType = newReturnType,
             newContextReceiverTypes = newContextReceiverTypes,
             newReceiverType = newExtensionReceiverType,
-            copyDefaultValues = true,
         )
     }
 }
