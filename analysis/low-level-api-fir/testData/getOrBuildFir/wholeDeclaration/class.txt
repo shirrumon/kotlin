@@ -58,5 +58,6 @@ FILE: [ResolvedTo(IMPORTS)] class.kts
 
         [ResolvedTo(RAW_FIR)] init { LAZY_BLOCK }
 
-        public final [ResolvedTo(TYPES)] val $$result: <implicit> = LAZY_EXPRESSION
-            public [ResolvedTo(TYPES)] get(): <implicit>
+        [ResolvedTo(RAW_FIR)] init {
+            builder#.version# = String()
+        }

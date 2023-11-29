@@ -11,7 +11,9 @@ SCRIPT: [ResolvedTo(BODY_RESOLVE)] <script-compoundAssignOnVarScript.kts>
         public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/Int|
         public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] set([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] value: R|kotlin/Int|): R|kotlin/Unit|
 
-    R|/i| = R|/i|.R|kotlin/Int.plus|(Int(1))
+    [ResolvedTo(BODY_RESOLVE)] init {
+        R|/i| = R|/i|.R|kotlin/Int.plus|(Int(1))
+    }
 
 FIR FILE:
 FILE: [ResolvedTo(IMPORTS)] compoundAssignOnVarScript.kts
@@ -23,4 +25,6 @@ FILE: [ResolvedTo(IMPORTS)] compoundAssignOnVarScript.kts
             public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/Int|
             public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] set([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] value: R|kotlin/Int|): R|kotlin/Unit|
 
-        R|/i| = R|/i|.R|kotlin/Int.plus|(Int(1))
+        [ResolvedTo(BODY_RESOLVE)] init {
+            R|/i| = R|/i|.R|kotlin/Int.plus|(Int(1))
+        }
