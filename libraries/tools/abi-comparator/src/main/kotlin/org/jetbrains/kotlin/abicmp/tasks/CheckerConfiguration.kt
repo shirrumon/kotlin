@@ -5,11 +5,11 @@
 
 package org.jetbrains.kotlin.abicmp.tasks
 
-import kotlinx.metadata.ExperimentalContextReceivers
-import kotlinx.metadata.hasConstant
-import kotlinx.metadata.isVar
-import kotlinx.metadata.jvm.*
-import kotlinx.metadata.visibility
+import kotlin.metadata.ExperimentalContextReceivers
+import kotlin.metadata.hasConstant
+import kotlin.metadata.isVar
+import kotlin.metadata.jvm.*
+import kotlin.metadata.visibility
 import org.jetbrains.kotlin.abicmp.*
 import org.jetbrains.kotlin.abicmp.checkers.*
 import org.jetbrains.kotlin.kotlinp.*
