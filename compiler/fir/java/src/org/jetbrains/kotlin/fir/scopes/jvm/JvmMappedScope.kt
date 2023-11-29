@@ -224,6 +224,7 @@ class JvmMappedScope(
             newParameterTypes = oldFunction.valueParameters.map { substitutor.substituteOrSelf(it.returnTypeRef.coneType) },
             newReturnType = substitutor.substituteOrSelf(oldFunction.returnTypeRef.coneType),
             newSource = oldFunction.source,
+            copyDefaultValues = true,
         ).apply {
             if (jdkMemberStatus == JDKMemberStatus.HIDDEN) {
                 isHiddenEverywhereBesideSuperCalls = true

@@ -243,6 +243,7 @@ class FirSamResolver(
             newReturnType = newReturnType,
             newParameterTypes = newParameterTypes,
             newTypeParameters = typeAliasSymbol.fir.typeParameters,
+            copyDefaultValues = true,
         ).symbol
     }
 
