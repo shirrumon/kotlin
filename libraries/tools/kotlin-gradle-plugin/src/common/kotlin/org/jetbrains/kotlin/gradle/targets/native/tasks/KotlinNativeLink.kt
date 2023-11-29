@@ -33,7 +33,6 @@ import org.jetbrains.kotlin.gradle.report.UsesBuildMetricsService
 import org.jetbrains.kotlin.gradle.targets.native.UsesKonanPropertiesBuildService
 import org.jetbrains.kotlin.gradle.targets.native.tasks.CompilerPluginData
 import org.jetbrains.kotlin.gradle.targets.native.toolchain.KotlinNativeProvider
-import org.jetbrains.kotlin.gradle.targets.native.toolchain.UsesKotlinNativeToolchain
 import org.jetbrains.kotlin.gradle.utils.*
 import org.jetbrains.kotlin.konan.target.CompilerOutputKind
 import org.jetbrains.kotlin.konan.target.KonanTarget
@@ -57,8 +56,7 @@ constructor(
 ) : AbstractKotlinCompileTool<K2NativeCompilerArguments>(objectFactory),
     UsesKonanPropertiesBuildService,
     UsesBuildMetricsService,
-    KotlinToolTask<KotlinCommonCompilerToolOptions>,
-    UsesKotlinNativeToolchain {
+    KotlinToolTask<KotlinCommonCompilerToolOptions> {
 
     @Deprecated("Visibility will be lifted to private in the future releases")
     @get:Internal
@@ -347,7 +345,7 @@ constructor(
     var kotlinPluginData: Provider<KotlinCompilerPluginData>? = null
 
     @Nested
-    final override val kotlinNativeProvider: Provider<KotlinNativeProvider> = project.provider {
+    internal val kotlinNativeProvider: Provider<KotlinNativeProvider> = project.provider {
         KotlinNativeProvider(project, konanTarget)
     }
 

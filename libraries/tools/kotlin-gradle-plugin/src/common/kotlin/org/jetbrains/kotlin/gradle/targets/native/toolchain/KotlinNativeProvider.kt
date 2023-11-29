@@ -26,7 +26,7 @@ import java.io.File
 /**
  * This is a nested provider for all native tasks
  */
-class KotlinNativeProvider(project: Project, konanTarget: KonanTarget) {
+internal class KotlinNativeProvider(project: Project, konanTarget: KonanTarget) {
 
     @get:Internal
     val konanDataDir: Provider<String?> = project.provider { project.konanDataDir }

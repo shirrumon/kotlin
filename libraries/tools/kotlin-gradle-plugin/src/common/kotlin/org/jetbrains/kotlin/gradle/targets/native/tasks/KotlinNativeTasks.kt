@@ -42,7 +42,6 @@ import org.jetbrains.kotlin.gradle.report.*
 import org.jetbrains.kotlin.gradle.targets.native.KonanPropertiesBuildService
 import org.jetbrains.kotlin.gradle.targets.native.tasks.*
 import org.jetbrains.kotlin.gradle.targets.native.toolchain.KotlinNativeProvider
-import org.jetbrains.kotlin.gradle.targets.native.toolchain.UsesKotlinNativeToolchain
 import org.jetbrains.kotlin.gradle.utils.*
 import org.jetbrains.kotlin.gradle.utils.GradleLoggerAdapter
 import org.jetbrains.kotlin.gradle.utils.listFilesOrEmpty
@@ -306,8 +305,7 @@ internal constructor(
     K2MultiplatformCompilationTask,
     UsesBuildMetricsService,
     KotlinCompilationTask<KotlinNativeCompilerOptions>,
-    UsesBuildFusService,
-    UsesKotlinNativeToolchain {
+    UsesBuildFusService {
 
     @get:Input
     override val outputKind = LIBRARY
@@ -344,7 +342,7 @@ internal constructor(
     val commonSources: ConfigurableFileCollection = project.files()
 
     @Nested
-    final override val kotlinNativeProvider: Provider<KotlinNativeProvider> = project.provider {
+    internal val kotlinNativeProvider: Provider<KotlinNativeProvider> = project.provider {
         KotlinNativeProvider(project, konanTarget)
     }
 
@@ -1007,7 +1005,7 @@ internal class CacheBuilder(
 
 @CacheableTask
 abstract class CInteropProcess @Inject internal constructor(params: Params) :
-    DefaultTask(), UsesBuildMetricsService, UsesKotlinNativeToolchain {
+    DefaultTask(), UsesBuildMetricsService {
 
     internal class Params(
         val settings: DefaultCInteropSettings,
@@ -1070,7 +1068,7 @@ abstract class CInteropProcess @Inject internal constructor(params: Params) :
         get() = outputFileProvider.get()
 
     @Nested
-    final override val kotlinNativeProvider: Provider<KotlinNativeProvider> = project.provider {
+    internal val kotlinNativeProvider: Provider<KotlinNativeProvider> = project.provider {
         KotlinNativeProvider(project, konanTarget)
     }
 

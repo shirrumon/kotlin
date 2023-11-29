@@ -23,12 +23,6 @@ internal fun Project.whenJsOrMppEnabled(action: () -> Unit) = whenPluginsEnabled
     action,
 )
 
-internal fun Project.whenKotlinNativeToolchainEnabled(action: () -> Unit) {
-    if (kotlinNativeToolchainEnabled) {
-        action()
-    }
-}
-
 private fun Project.whenPluginsEnabled(
     pluginIds: Set<String>,
     action: () -> Unit,
