@@ -28,17 +28,17 @@ val size: kotlin.Int
 
 fun isEmpty(): kotlin.Boolean
 
-operator fun contains(element: E): kotlin.Boolean
+override operator fun contains(element: E): kotlin.Boolean
 
-operator fun iterator(): kotlin.collections.MutableIterator<E>
+override operator fun iterator(): kotlin.collections.MutableIterator<E>
 
-fun containsAll(elements: kotlin.collections.Collection<E>): kotlin.Boolean
+override fun containsAll(elements: kotlin.collections.Collection<E>): kotlin.Boolean
 
-operator fun get(index: kotlin.Int): E
+override operator fun get(index: kotlin.Int): E
 
-fun indexOf(element: E): kotlin.Int
+override fun indexOf(element: E): kotlin.Int
 
-fun lastIndexOf(element: E): kotlin.Int
+override fun lastIndexOf(element: E): kotlin.Int
 
 open operator fun equals(other: kotlin.Any?): kotlin.Boolean
 
