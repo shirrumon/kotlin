@@ -290,4 +290,3 @@ FILE: [ResolvedTo(BODY_RESOLVE)] implicitFunctionScript.kts
             }
 
         }
-

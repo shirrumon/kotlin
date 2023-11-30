@@ -256,4 +256,3 @@ FILE: [ResolvedTo(BODY_RESOLVE)] delegateWithExplicitTypeScript.kts
             }
 
         }
-

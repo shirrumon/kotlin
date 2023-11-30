@@ -357,4 +357,3 @@ FILE: [ResolvedTo(BODY_RESOLVE)] implicitPropertyUnavailableScript.kts
             }
 
         }
-

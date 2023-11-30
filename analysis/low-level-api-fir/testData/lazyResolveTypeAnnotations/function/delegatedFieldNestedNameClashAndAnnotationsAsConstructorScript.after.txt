@@ -55,4 +55,3 @@ FILE: [ResolvedTo(IMPORTS)] delegatedFieldNestedNameClashAndAnnotationsAsConstru
             }
 
         }
-
