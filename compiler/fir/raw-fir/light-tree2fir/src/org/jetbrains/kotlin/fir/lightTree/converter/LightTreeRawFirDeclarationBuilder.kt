@@ -1190,7 +1190,7 @@ class LightTreeRawFirDeclarationBuilder(
         var identifier: String? = null
         val firTypeParameters = mutableListOf<FirTypeParameter>()
         var isReturnType = false
-        var delegateExpression: LighterASTNode? = null
+        var delegate: LighterASTNode? = null
         var isVar = false
         var receiverType: FirTypeRef? = null
         var returnType: FirTypeRef = implicitType
@@ -1207,7 +1207,7 @@ class LightTreeRawFirDeclarationBuilder(
                 COLON -> isReturnType = true
                 TYPE_REFERENCE -> if (isReturnType) returnType = convertType(it) else receiverType = convertType(it)
                 TYPE_CONSTRAINT_LIST -> typeConstraints += convertTypeConstraints(it)
-                PROPERTY_DELEGATE -> delegateExpression = it
+                PROPERTY_DELEGATE -> delegate = it
                 VAR_KEYWORD -> isVar = true
                 PROPERTY_ACCESSOR -> {
                     accessors += it
@@ -1239,8 +1239,8 @@ class LightTreeRawFirDeclarationBuilder(
             initializer = propertyInitializer
 
             //probably can do this for delegateExpression itself
-            val delegateSource = delegateExpression?.let {
-                (it.getExpressionInParentheses() ?: it).toFirSourceElement()
+            val delegateSource = delegate?.let {
+                (it.getChildExpression() ?: it).toFirSourceElement()
             }
 
             symbol = if (isLocal) FirPropertySymbol(propertyName) else FirPropertySymbol(callableIdForName(propertyName))
@@ -1257,7 +1257,7 @@ class LightTreeRawFirDeclarationBuilder(
 
             if (isLocal) {
                 this.isLocal = true
-                val delegateBuilder = delegateExpression?.let {
+                val delegateBuilder = delegate?.let {
                     FirWrappedDelegateExpressionBuilder().apply {
                         source = delegateSource?.fakeElement(KtFakeSourceElementKind.WrappedDelegate)
                         expression = expressionConverter.getAsFirExpression(it, "Incorrect delegate expression")
@@ -1282,7 +1282,7 @@ class LightTreeRawFirDeclarationBuilder(
                 withCapturedTypeParameters(true, propertySource, firTypeParameters) {
                     typeParameters += firTypeParameters
 
-                    val delegateBuilder = delegateExpression?.let {
+                    val delegateBuilder = delegate?.let {
                         FirWrappedDelegateExpressionBuilder().apply {
                             source = delegateSource?.fakeElement(KtFakeSourceElementKind.WrappedDelegate)
                             expression = expressionConverter.getAsFirExpression(it, "Should have delegate")
