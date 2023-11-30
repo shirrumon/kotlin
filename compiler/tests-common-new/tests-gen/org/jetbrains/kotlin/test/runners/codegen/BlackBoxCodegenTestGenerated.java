@@ -42761,6 +42761,12 @@ public class BlackBoxCodegenTestGenerated extends AbstractBlackBoxCodegenTest {
             }
 
             @Test
+            @TestMetadata("inlineClassInterfaceJvmDefault.kt")
+            public void testInlineClassInterfaceJvmDefault() throws Exception {
+                runTest("compiler/testData/codegen/box/reflection/callBy/inlineClassInterfaceJvmDefault.kt");
+            }
+
+            @Test
             @TestMetadata("inlineClassMembers.kt")
             public void testInlineClassMembers() throws Exception {
                 runTest("compiler/testData/codegen/box/reflection/callBy/inlineClassMembers.kt");
