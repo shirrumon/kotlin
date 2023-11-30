@@ -325,4 +325,3 @@ FILE: [ResolvedTo(BODY_RESOLVE)] delegateWithImplicitTypeUnavailableScript.kts
             }
 
         }
-

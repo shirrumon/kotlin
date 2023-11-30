@@ -632,4 +632,3 @@ FILE: [ResolvedTo(BODY_RESOLVE)] fakeOverrideScript.kts
                 public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=IrConst] set([ResolvedTo(BODY_RESOLVE)] value: R|T|): R|kotlin/Unit|
 
         }
-

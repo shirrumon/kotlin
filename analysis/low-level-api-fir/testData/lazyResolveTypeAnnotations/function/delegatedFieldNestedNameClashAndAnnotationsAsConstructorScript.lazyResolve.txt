@@ -725,4 +725,3 @@ FILE: [ResolvedTo(BODY_RESOLVE)] delegatedFieldNestedNameClashAndAnnotationsAsCo
             }
 
         }
-

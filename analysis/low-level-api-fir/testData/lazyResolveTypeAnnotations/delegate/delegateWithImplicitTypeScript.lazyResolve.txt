@@ -276,4 +276,3 @@ FILE: [ResolvedTo(BODY_RESOLVE)] delegateWithImplicitTypeScript.kts
         public final [ResolvedTo(BODY_RESOLVE)] fun explicitType(): R|@R|Anno|(position = <strcat>(String(explicitType return type ), R|/prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested return type ), R|/prop|))  kotlin/collections/List<@R|Anno|(position = <strcat>(String(explicitType nested nested return type ), R|/prop|))  kotlin/Int>>| {
             ^explicitType Int(1)
         }
-

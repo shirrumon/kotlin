@@ -302,4 +302,3 @@ FILE: [ResolvedTo(BODY_RESOLVE)] explicitSubstitutionOverridePropertyScript.kts
                 @PROPERTY_SETTER:R|second/Anno|[Types](position = <strcat>(String(set ), R|second/constant|)) public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=AbstractClass] set([ResolvedTo(BODY_RESOLVE)] @SETTER_PARAMETER:R|second/Anno|[Types](position = <strcat>(String(set ), R|second/constant|)) value: R|T?|): R|kotlin/Unit|
 
         }
-
