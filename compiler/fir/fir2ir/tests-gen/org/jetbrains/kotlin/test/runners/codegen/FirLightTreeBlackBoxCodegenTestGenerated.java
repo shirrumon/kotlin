@@ -46247,6 +46247,12 @@ public class FirLightTreeBlackBoxCodegenTestGenerated extends AbstractFirLightTr
             }
 
             @Test
+            @TestMetadata("brokenDefaultParametersFromDifferentFunctionsJvmDefault.kt")
+            public void testBrokenDefaultParametersFromDifferentFunctionsJvmDefault() throws Exception {
+                runTest("compiler/testData/codegen/box/reflection/callBy/brokenDefaultParametersFromDifferentFunctionsJvmDefault.kt");
+            }
+
+            @Test
             @TestMetadata("companionObject.kt")
             public void testCompanionObject() throws Exception {
                 runTest("compiler/testData/codegen/box/reflection/callBy/companionObject.kt");
