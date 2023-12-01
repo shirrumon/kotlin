@@ -91,7 +91,7 @@ abstract class FirSerializerExtensionBase(
         if (!Flags.HAS_CONSTANT.get(proto.flags)) return
         property.initializer?.toConstantValue<ConstantValue<*>>(session, constValueProvider)?.let {
             proto.setExtension(protocol.compileTimeValue, annotationSerializer.valueProto(it).build())
-        }
+        } ?: error("Non constant value in metadata")
     }
 
     override fun serializeEnumEntry(enumEntry: FirEnumEntry, proto: ProtoBuf.EnumEntry.Builder) {
