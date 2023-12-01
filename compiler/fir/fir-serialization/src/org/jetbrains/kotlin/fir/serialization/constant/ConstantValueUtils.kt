@@ -25,9 +25,9 @@ internal fun Map<Name, FirExpression>.convertToConstantValues(
     return this.mapValuesTo(mutableMapOf()) { (_, firExpression) ->
         constValueProvider?.findConstantValueFor(firExpression)
             ?: firExpression.toConstantValue(session, constValueProvider)
-            ?: runIf(session.languageVersionSettings.getFlag(AnalysisFlags.metadataCompilation)) {
+            /*?: runIf(session.languageVersionSettings.getFlag(AnalysisFlags.metadataCompilation)) {
                 ErrorValue.ErrorValueWithMessage("Constant conversion can be ignored in metadata compilation mode")
-            }
+            }*/
             ?: error("Cannot convert expression ${firExpression.render()} to constant")
     }
 }

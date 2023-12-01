@@ -58,12 +58,12 @@ class FirAnnotationSerializer(
                     continue
                 }
 
-                if (!session.languageVersionSettings.getFlag(AnalysisFlags.metadataCompilation)) {
+//                if (!session.languageVersionSettings.getFlag(AnalysisFlags.metadataCompilation)) {
                     error(
                         (argument as? ErrorValue.ErrorValueWithMessage)?.message
                             ?: "Error value after conversion of expression of $name argument"
                     )
-                }
+//                }
             }
         }.build()
     }
