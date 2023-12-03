@@ -273,8 +273,9 @@ if (splitGradleIntegrationTestTasks) {
 
 val KGP_TEST_TASKS_GROUP = "Kotlin Gradle Plugin Verification"
 val memoryPerGradleTestWorkerMb = 6000
-val maxParallelTestForks =
-    (totalMaxMemoryForTestsMb / memoryPerGradleTestWorkerMb).coerceIn(1, Runtime.getRuntime().availableProcessors())
+val maxParallelTestForks = project.providers.gradleProperty("gradle.integration.tests.max.parallel.forks")
+    .map { it.toInt() }
+    .getOrElse((totalMaxMemoryForTestsMb / memoryPerGradleTestWorkerMb).coerceIn(1, Runtime.getRuntime().availableProcessors()))
 
 val allParallelTestsTask = tasks.register<Test>("kgpAllParallelTests") {
     group = KGP_TEST_TASKS_GROUP
