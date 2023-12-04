@@ -39,6 +39,10 @@ class FragmentContext(
         }
     }
 
+    //TODO if you really want to test "partial IC", something like
+    // `fun promoteDirtyFilesToDirtyFragments(dirtySet: Iterable<File>): Iterable<File>`
+    // can be implemented
+
     companion object {
         fun fromCompilerArguments(args: CommonCompilerArguments): FragmentContext? {
             val noFragmentData = listOf(args.fragments, args.fragmentRefines, args.fragmentSources).any {

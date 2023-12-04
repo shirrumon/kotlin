@@ -5,6 +5,7 @@
 
 package org.jetbrains.kotlin.gradle.mpp
 
+import org.gradle.api.logging.LogLevel
 import org.gradle.util.GradleVersion
 import org.jetbrains.kotlin.gradle.testbase.*
 import org.jetbrains.kotlin.test.TestMetadata
@@ -13,16 +14,17 @@ import kotlin.io.path.readText
 import kotlin.io.path.writeText
 
 @MppGradlePluginTests
-@DisplayName("Tests for compatible overloads in common and platform sourceSets")
+@DisplayName("Tests for IC with compatible overloads in common and platform sourceSets")
 class CommonCodeWithPlatformSymbolsIT : KGPBaseTest() {
+    override val defaultBuildOptions: BuildOptions
+        get() = super.defaultBuildOptions.copy(logLevel = LogLevel.DEBUG, languageVersion = "2.0")
 
     @GradleTest
     @DisplayName("kt-62686-mpp-jvm-expect-new-dep")
     @TestMetadata("kt-62686-mpp-jvm-expect-dep")
     fun testKt62686v1(gradleVersion: GradleVersion) {
         project(
-            "kt-62686-mpp-jvm-expect-dep", gradleVersion,
-            buildOptions = defaultBuildOptions.copy(languageVersion = "2.0"),
+            "kt-62686-mpp-jvm-expect-dep", gradleVersion
         ) {
             val taskToExecute = ":compileKotlinJvm"
             build(taskToExecute) {
@@ -35,8 +37,9 @@ class CommonCodeWithPlatformSymbolsIT : KGPBaseTest() {
             assert(originalText != modifiedText)
             sourceFileToTouch.writeText(modifiedText)
 
-            buildAndFail(taskToExecute) {
-                //assertTasksExecuted(taskToExecute)
+            build(taskToExecute) {
+                assertTasksExecuted(taskToExecute)
+       //         assertNoIncrementalBuildForAnyReason()
             }
         }
     }
@@ -46,8 +49,7 @@ class CommonCodeWithPlatformSymbolsIT : KGPBaseTest() {
     @TestMetadata("kt-62686-mpp-jvm-expect-dep")
     fun testKt62686v2(gradleVersion: GradleVersion) {
         project(
-            "kt-62686-mpp-jvm-expect-dep", gradleVersion,
-            buildOptions = defaultBuildOptions.copy(languageVersion = "2.0"),
+            "kt-62686-mpp-jvm-expect-dep", gradleVersion
         ) {
             val taskToExecute = ":compileKotlinJvm"
             val sourceFileToTouch = projectPath.resolve("src/commonMain/kotlin/commonTest.kt")
@@ -67,8 +69,9 @@ class CommonCodeWithPlatformSymbolsIT : KGPBaseTest() {
 
             sourceFileToTouch.writeText(modifiedTextV2)
 
-            buildAndFail(taskToExecute) {
-                //assertTasksExecuted(taskToExecute)
+            build(taskToExecute) {
+                assertTasksExecuted(taskToExecute)
+      ///          assertNoIncrementalBuildForAnyReason()
             }
         }
     }
@@ -78,8 +81,7 @@ class CommonCodeWithPlatformSymbolsIT : KGPBaseTest() {
     @TestMetadata("kt-62686-mpp-jvm-expect-dep")
     fun testKt62686v3(gradleVersion: GradleVersion) {
         project(
-            "kt-62686-mpp-jvm-expect-dep", gradleVersion,
-            buildOptions = defaultBuildOptions.copy(languageVersion = "2.0"),
+            "kt-62686-mpp-jvm-expect-dep", gradleVersion
         ) {
             val taskToExecute = ":compileKotlinJvm"
             build(taskToExecute) {
@@ -92,13 +94,14 @@ class CommonCodeWithPlatformSymbolsIT : KGPBaseTest() {
             assert(originalText != modifiedText)
             sourceFileToTouch.writeText(modifiedText)
 
-            buildAndFail(taskToExecute) {
-              //  assertTasksExecuted(taskToExecute)
+            build(taskToExecute) {
+                assertTasksExecuted(taskToExecute)
+                printBuildOutput()
             }
         }
     }
 
-    //TODO: add js implementation to see space perf etc
+    //TODO: test js implementation
     //TODO(won't do yet) test Native version of the bug - does it exist? it shouldn't, right?
     //TODO add test that confirms that the right overload is used after incremental change
 }
