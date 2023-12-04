@@ -97,4 +97,8 @@ class CommonCodeWithPlatformSymbolsIT : KGPBaseTest() {
             }
         }
     }
+
+    //TODO: add js implementation to see space perf etc
+    //TODO(won't do yet) test Native version of the bug - does it exist? it shouldn't, right?
+    //TODO add test that confirms that the right overload is used after incremental change
 }

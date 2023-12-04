@@ -89,6 +89,7 @@ abstract class IncrementalCompilerRunner<
     private fun createIncrementalCompilationContext(
         fileLocations: FileLocations?,
         transaction: CompilationTransaction,
+        fragmentContext: FragmentContext? = null,
     ) = IncrementalCompilationContext(
         pathConverterForSourceFiles = fileLocations?.let { it.getRelocatablePathConverterForSourceFiles() } ?: BasicFileToPathConverter,
         pathConverterForOutputFiles = fileLocations?.let { it.getRelocatablePathConverterForOutputFiles() } ?: BasicFileToPathConverter,
@@ -97,6 +98,7 @@ abstract class IncrementalCompilerRunner<
         trackChangesInLookupCache = shouldTrackChangesInLookupCache,
         storeFullFqNamesInLookupCache = shouldStoreFullFqNamesInLookupCache,
         keepIncrementalCompilationCachesInMemory = keepIncrementalCompilationCachesInMemory,
+        fragmentContext = fragmentContext
     )
 
     protected abstract val shouldTrackChangesInLookupCache: Boolean
@@ -186,8 +188,19 @@ abstract class IncrementalCompilerRunner<
         }
         changedFiles as ChangedFiles.Known?
 
+        val safeMultiplatformIC = true //see KT-62686
+        val fragmentContext = if (safeMultiplatformIC) {
+            FragmentContext.fromCompilerArguments(args)
+        } else {
+            null
+        }
+
         return createTransaction().runWithin(::incrementalCompilationExceptionTransformer) { transaction ->
-            val icContext = createIncrementalCompilationContext(fileLocations, transaction)
+            val icContext = createIncrementalCompilationContext(
+                fileLocations,
+                transaction,
+                fragmentContext
+            )
             val caches = createCacheManager(icContext, args).also {
                 // this way we make the transaction to be responsible for closing the caches manager
                 transaction.cachesManager = it
@@ -214,6 +227,15 @@ abstract class IncrementalCompilerRunner<
 
                 if (compilationMode is CompilationMode.Rebuild) {
                     return ICResult.RequiresRebuild(compilationMode.reason)
+                } else if (compilationMode is CompilationMode.Incremental) {
+                    //TODO: clean up
+                    if (
+                        fragmentContext?.dirtySetTouchesNonLeafFragments(
+                            compilationMode.dirtyFiles.toMutableLinkedSet()
+                        ) == true
+                    ) {
+                        return ICResult.RequiresRebuild(BuildAttribute.UNSAFE_INCREMENTAL_CHANGE)
+                    }
                 }
 
                 val abiSnapshotData = if (withAbiSnapshot) {
@@ -464,6 +486,15 @@ abstract class IncrementalCompilerRunner<
             //TODO(valtman) sourceToCompile calculate based on abiSnapshot
             val (sourcesToCompile, removedKotlinSources) = dirtySources.partition { it.exists() && allKotlinSources.contains(it) }
 
+            //TODO: clean up
+            if (
+                icContext.fragmentContext?.dirtySetTouchesNonLeafFragments(
+                    sourcesToCompile
+                ) == true
+            ) {
+                throw Exception("force rebuild")
+            }
+
             val services = makeServices(
                 args, lookupTracker, expectActualTracker, caches,
                 dirtySources.toSet(), compilationMode is CompilationMode.Incremental
@@ -498,6 +529,16 @@ abstract class IncrementalCompilerRunner<
                 val dirtySourcesSet = dirtySources.toHashSet()
                 val additionalDirtyFiles = additionalDirtyFiles(caches, generatedFiles, services).filter { it !in dirtySourcesSet }
                 if (additionalDirtyFiles.isNotEmpty()) {
+
+                    //TODO: clean up
+                    if (
+                        icContext.fragmentContext?.dirtySetTouchesNonLeafFragments(
+                            additionalDirtyFiles
+                        ) == true
+                    ) {
+                        throw Exception("force rebuild")
+                    }
+
                     dirtySources.addAll(additionalDirtyFiles)
                     generatedFiles.forEach { transaction.deleteFile(it.outputFile.toPath()) }
                     continue

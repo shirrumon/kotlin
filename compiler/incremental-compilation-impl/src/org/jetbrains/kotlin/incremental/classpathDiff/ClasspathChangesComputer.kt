@@ -204,7 +204,7 @@ object ClasspathChangesComputer {
     ): ProgramSymbolSet {
         val workingDir =
             FileUtil.createTempDirectory(this::class.java.simpleName, "_WorkingDir_${UUID.randomUUID()}", /* deleteOnExit */ true)
-        val icContext = IncrementalCompilationContext()
+        val icContext = IncrementalCompilationContext() //TODO: by the way, this thing does not really need ICContext, does it?
         val incrementalJvmCache = IncrementalJvmCache(workingDir, icContext, null)
 
         // Step 1:

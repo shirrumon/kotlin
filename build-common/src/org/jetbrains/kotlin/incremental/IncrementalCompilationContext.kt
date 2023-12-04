@@ -29,6 +29,10 @@ class IncrementalCompilationContext(
      * Required for optimizing Gradle side outputs backup
      */
     val keepIncrementalCompilationCachesInMemory: Boolean = false,
+    /**
+     * Holds current mapping from source files to fragments, in the K2 KMP context
+     */
+    val fragmentContext: FragmentContext? = null
 ) {
     @Deprecated("This constructor is scheduled to be removed. KSP is using it")
     constructor(
