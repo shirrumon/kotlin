@@ -1,6 +1,6 @@
 
 actual class A {
-    fun foo(x: Base) = "aloha"
+    actual fun foo(x: Base) = "aloha"
     fun foo(x: Child) = 42
 }
 

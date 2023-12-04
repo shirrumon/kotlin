@@ -9,8 +9,6 @@ import org.gradle.util.GradleVersion
 import org.jetbrains.kotlin.gradle.testbase.*
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.DisplayName
-import kotlin.io.path.readText
-import kotlin.io.path.writeText
 import kotlin.test.Ignore
 
 @Disabled("Used for local testing only")
@@ -213,85 +211,6 @@ class CustomK2Tests : KGPBaseTest() {
         ) {
             build("compileCommonMainKotlinMetadata") {
                 assertTasksExecuted(":compileCommonMainKotlinMetadata")
-            }
-        }
-    }
-
-    @GradleTest
-    @DisplayName("kt-62686-mpp-jvm-expect-new-dep")
-    fun testKt62686v1(gradleVersion: GradleVersion) {
-        project(
-            "kt-62686-mpp-jvm-expect-dep", gradleVersion,
-            buildOptions = defaultBuildOptions.copy(languageVersion = "2.0"),
-        ) {
-            val taskToExecute = ":compileKotlinJvm"
-            build(taskToExecute) {
-                assertTasksExecuted(taskToExecute)
-            }
-
-            val sourceFileToTouch = projectPath.resolve("src/commonMain/kotlin/commonTest.kt")
-            val originalText = sourceFileToTouch.readText()
-            val modifiedText = originalText.replace("\"!\" //", "")
-            assert(originalText != modifiedText)
-            sourceFileToTouch.writeText(modifiedText)
-
-            build(taskToExecute) {
-                assertTasksExecuted(taskToExecute)
-            }
-        }
-    }
-
-    @GradleTest
-    @DisplayName("kt-62686-mpp-jvm-expect-touched-dep")
-    fun testKt62686v2(gradleVersion: GradleVersion) {
-        project(
-            "kt-62686-mpp-jvm-expect-dep", gradleVersion,
-            buildOptions = defaultBuildOptions.copy(languageVersion = "2.0"),
-        ) {
-            val taskToExecute = ":compileKotlinJvm"
-            val sourceFileToTouch = projectPath.resolve("src/commonMain/kotlin/commonTest.kt")
-            val originalText = sourceFileToTouch.readText()
-            val modifiedTextV2 = originalText.replace("\"!\" //", "")
-            val modifiedTextV1 = modifiedTextV2.replace("Child", " Child")
-
-            assert(originalText != modifiedTextV2)
-            assert(originalText != modifiedTextV1)
-            assert(modifiedTextV1 != modifiedTextV2)
-
-            sourceFileToTouch.writeText(modifiedTextV1)
-
-            build(taskToExecute) {
-                assertTasksExecuted(taskToExecute)
-            }
-
-            sourceFileToTouch.writeText(modifiedTextV2)
-
-            build(taskToExecute) {
-                assertTasksExecuted(taskToExecute)
-            }
-        }
-    }
-
-    @GradleTest
-    @DisplayName("kt-62686-mpp-jvm-fun-new-dep")
-    fun testKt62686v3(gradleVersion: GradleVersion) {
-        project(
-            "kt-62686-mpp-jvm-expect-dep", gradleVersion,
-            buildOptions = defaultBuildOptions.copy(languageVersion = "2.0"),
-        ) {
-            val taskToExecute = ":compileKotlinJvm"
-            build(taskToExecute) {
-                assertTasksExecuted(taskToExecute)
-            }
-
-            val sourceFileToTouch = projectPath.resolve("src/commonMain/kotlin/commonTest.kt")
-            val originalText = sourceFileToTouch.readText()
-            val modifiedText = originalText.replace("\"?\" //", "")
-            assert(originalText != modifiedText)
-            sourceFileToTouch.writeText(modifiedText)
-
-            build(taskToExecute) {
-                assertTasksExecuted(taskToExecute)
             }
         }
     }
