@@ -26062,6 +26062,12 @@ public class DiagnosticTestGenerated extends AbstractDiagnosticTest {
                 }
 
                 @Test
+                @TestMetadata("ambiguous.kt")
+                public void testAmbiguous() throws Exception {
+                    runTest("compiler/testData/diagnostics/tests/multiplatform/hmpp/ambiguous.kt");
+                }
+
+                @Test
                 @TestMetadata("intermediateActualHasAdditionalSupertypes.kt")
                 public void testIntermediateActualHasAdditionalSupertypes() throws Exception {
                     runTest("compiler/testData/diagnostics/tests/multiplatform/hmpp/intermediateActualHasAdditionalSupertypes.kt");
