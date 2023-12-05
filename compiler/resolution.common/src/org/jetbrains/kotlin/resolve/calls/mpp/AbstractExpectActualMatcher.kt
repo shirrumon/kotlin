@@ -11,6 +11,7 @@ import org.jetbrains.kotlin.resolve.multiplatform.ExpectActualMatchingCompatibil
 import org.jetbrains.kotlin.types.model.KotlinTypeMarker
 import org.jetbrains.kotlin.types.model.TypeSubstitutorMarker
 import org.jetbrains.kotlin.utils.SmartList
+import org.jetbrains.kotlin.utils.addToStdlib.partitionIsInstance
 import org.jetbrains.kotlin.utils.keysToMap
 import org.jetbrains.kotlin.utils.zipIfSizesAreEqual
 
@@ -107,20 +108,28 @@ object AbstractExpectActualMatcher {
             }
         }
 
-        val incompatibilityMap = mutableMapOf<ExpectActualMatchingCompatibility.Mismatch, MutableList<DeclarationSymbolMarker>>()
+        val matched = ArrayList<DeclarationSymbolMarker>()
+        val mismatched = ArrayList<Pair<DeclarationSymbolMarker, ExpectActualMatchingCompatibility.Mismatch>>()
         for ((actualMember, compatibility) in mapping) {
             when (compatibility) {
-                ExpectActualMatchingCompatibility.MatchedSuccessfully -> {
-                    onMatchedMembers(expectMember, actualMember, expectClassSymbol, actualClassSymbol)
-                    return actualMember
-                }
-
-                is ExpectActualMatchingCompatibility.Mismatch -> incompatibilityMap.getOrPut(compatibility) { SmartList() }.add(actualMember)
+                ExpectActualMatchingCompatibility.MatchedSuccessfully -> matched.add(actualMember)
+                is ExpectActualMatchingCompatibility.Mismatch -> mismatched.add(actualMember to compatibility)
             }
         }
 
-        mismatchedMembers?.add(expectMember to incompatibilityMap)
-        onMismatchedMembersFromClassScope(expectMember, incompatibilityMap, expectClassSymbol, actualClassSymbol)
+        for (actualMember in matched) {
+            onMatchedMembers(expectMember, actualMember, expectClassSymbol, actualClassSymbol)
+        }
+        matched.singleOrNull()?.let { return it }
+
+        val mismatchedGrouped = mismatched
+            .groupingBy { (_, compatibility) -> compatibility }
+            .fold(SmartList<DeclarationSymbolMarker>()) { acc, (actualMember, _) ->
+                acc.add(actualMember); acc
+            }
+
+        mismatchedMembers?.add(expectMember to mismatchedGrouped)
+        onMismatchedMembersFromClassScope(expectMember, mismatchedGrouped, expectClassSymbol, actualClassSymbol)
         return null
     }
 
