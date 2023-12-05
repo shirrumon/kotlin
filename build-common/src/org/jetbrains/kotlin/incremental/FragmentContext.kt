@@ -51,6 +51,11 @@ class FragmentContext(
             if (noFragmentData) {
                 return null
             }
+            args.languageVersion?.let {lv ->
+                if (lv < "2.0") {
+                    return null
+                }
+            }
 
             val fileToFragment = args.fragmentSources!!.associate {
                 // expected format: -Xfragment-sources=jvmMain:/tmp/<..>/kotlin/main.kt,<...>
