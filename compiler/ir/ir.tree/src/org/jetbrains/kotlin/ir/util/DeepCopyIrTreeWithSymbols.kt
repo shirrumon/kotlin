@@ -816,12 +816,6 @@ open class DeepCopyIrTreeWithSymbols(
             expression.value.transform()
         ).copyAttributes(expression)
 
-    private fun SymbolRemapper.getReferencedReturnTarget(returnTarget: IrReturnTargetSymbol): IrReturnTargetSymbol =
-        when (returnTarget) {
-            is IrFunctionSymbol -> getReferencedFunction(returnTarget)
-            is IrReturnableBlockSymbol -> getReferencedReturnableBlock(returnTarget)
-        }
-
     override fun visitThrow(expression: IrThrow): IrThrow =
         IrThrowImpl(
             expression.startOffset, expression.endOffset,

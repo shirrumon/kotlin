@@ -223,8 +223,11 @@ open class DeepCopySymbolRemapper(
             is IrConstructorSymbol -> constructors.getReferenced(symbol)
         }
 
-    override fun getReferencedReturnableBlock(symbol: IrReturnableBlockSymbol): IrReturnableBlockSymbol =
-        returnableBlocks.getReferenced(symbol)
+    override fun getReferencedReturnTarget(symbol: IrReturnTargetSymbol): IrReturnTargetSymbol =
+        when (symbol) {
+            is IrFunctionSymbol -> getReferencedFunction(symbol)
+            is IrReturnableBlockSymbol -> returnableBlocks.getReferenced(symbol)
+        }
 
     override fun getReferencedClassifier(symbol: IrClassifierSymbol): IrClassifierSymbol =
         when (symbol) {
