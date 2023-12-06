@@ -124,7 +124,7 @@ abstract class DefaultKotlinBasePlugin : KotlinBasePlugin {
         project.configurations
             .create(KOTLIN_NATIVE_COMPILER_CONFIGURATION_NAME) { configuration ->
                 configuration.isVisible = false
-                configuration.markResolvable()
+                configuration.isCanBeConsumed = false
                 configuration.defaultDependencies {
                     it.add(
                         project.dependencies.create(
