@@ -17,10 +17,9 @@
 package org.jetbrains.kotlin.ir.util
 
 import org.jetbrains.kotlin.descriptors.DeclarationDescriptor
-import org.jetbrains.kotlin.ir.ObsoleteDescriptorBasedAPI
 import org.jetbrains.kotlin.ir.IrElement
+import org.jetbrains.kotlin.ir.ObsoleteDescriptorBasedAPI
 import org.jetbrains.kotlin.ir.declarations.*
-import org.jetbrains.kotlin.ir.expressions.IrBlock
 import org.jetbrains.kotlin.ir.expressions.IrCall
 import org.jetbrains.kotlin.ir.expressions.IrReturnableBlock
 import org.jetbrains.kotlin.ir.symbols.*
@@ -161,11 +160,9 @@ open class DeepCopySymbolRemapper(
         declaration.acceptChildrenVoid(this)
     }
 
-    override fun visitBlock(expression: IrBlock) {
-        if (expression is IrReturnableBlock) {
-            remapSymbol(returnableBlocks, expression) {
-                IrReturnableBlockSymbolImpl()
-            }
+    override fun visitReturnableBlock(expression: IrReturnableBlock) {
+        remapSymbol(returnableBlocks, expression) {
+            IrReturnableBlockSymbolImpl()
         }
         expression.acceptChildrenVoid(this)
     }
