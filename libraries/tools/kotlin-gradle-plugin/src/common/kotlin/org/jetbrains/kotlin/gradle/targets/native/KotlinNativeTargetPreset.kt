@@ -37,7 +37,7 @@ abstract class AbstractKotlinNativeTargetPreset<T : KotlinNativeTarget>(
 
     private fun setupNativeHomePrivateProperty() = with(project) {
         if (!hasProperty(KOTLIN_NATIVE_HOME_PRIVATE_PROPERTY))
-            extensions.extraProperties.set(KOTLIN_NATIVE_HOME_PRIVATE_PROPERTY, konanHome)
+            extensions.extraProperties.set(KOTLIN_NATIVE_HOME_PRIVATE_PROPERTY, konanHome.absolutePath)
     }
 
     protected abstract fun createTargetConfigurator(): AbstractKotlinTargetConfigurator<T>

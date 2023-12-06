@@ -209,7 +209,7 @@ class NativeCompilerDownloader(
 
     private fun checkClassPath() {
         project.providers.of(NativeCompilerDownloaderClassPathChecker::class.java) {
-            it.parameters.classPath.setFrom(KotlinNativeToolRunner.Settings.of(project.konanHome, project.konanDataDir, project).classpath)
+            it.parameters.classPath.setFrom(KotlinNativeToolRunner.Settings.of(project.konanHome.absolutePath, project.konanDataDir, project).classpath)
         }.usedAtConfigurationTime(project.configurationTimePropertiesAccessor).get()
     }
 
@@ -251,9 +251,9 @@ internal fun Project.setupNativeCompiler(konanTarget: KonanTarget) {
         }
 
         downloader.downloadIfNeeded()
-        logger.info("Kotlin/Native distribution: $konanHome")
+        logger.info("Kotlin/Native distribution: ${konanHome.absolutePath}")
     } else {
-        logger.info("User-provided Kotlin/Native distribution: $konanHome")
+        logger.info("User-provided Kotlin/Native distribution: ${konanHome.absolutePath}")
     }
 
     val distributionType = NativeDistributionTypeProvider(project).getDistributionType()

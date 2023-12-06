@@ -7,6 +7,7 @@ package org.jetbrains.kotlin.gradle.targets.native.toolchain
 
 import org.gradle.api.Project
 import org.gradle.api.file.ConfigurableFileCollection
+import org.gradle.api.file.RegularFile
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Internal
@@ -19,6 +20,7 @@ import org.jetbrains.kotlin.gradle.targets.native.internal.NativeDistributionTyp
 import org.jetbrains.kotlin.gradle.targets.native.internal.PlatformLibrariesGenerator
 import org.jetbrains.kotlin.gradle.utils.NativeCompilerDownloader
 import org.jetbrains.kotlin.gradle.utils.filesProvider
+import org.jetbrains.kotlin.gradle.utils.getFile
 import org.jetbrains.kotlin.konan.target.KonanTarget
 import org.jetbrains.kotlin.konan.util.DependencyDirectories
 import java.io.File
@@ -32,7 +34,11 @@ internal class KotlinNativeProvider(project: Project, konanTarget: KonanTarget) 
     val konanDataDir: Provider<String?> = project.provider { project.konanDataDir }
 
     @get:Internal
-    val konanHome: Provider<String> = project.provider { project.konanHome }
+    val konanHome: Provider<RegularFile> = project.layout.file(
+        project.provider {
+            project.konanHome
+        }
+    )
 
     @get:Internal
     internal val kotlinNativeCompilerConfiguration: ConfigurableFileCollection = project.filesProvider {
@@ -42,25 +48,27 @@ internal class KotlinNativeProvider(project: Project, konanTarget: KonanTarget) 
     }
 
     @get:Input
-    internal val kotlinNativeCompilerDirectory: Provider<String?> = project.provider {
-        if (project.kotlinNativeToolchainEnabled && !File(konanHome.get()).exists()) {
+    internal val kotlinNativeCompilerDirectory: Provider<RegularFile> = konanHome.map {
+        if (project.kotlinNativeToolchainEnabled && !konanHome.getFile().exists()) {
             val kotlinNativeExtractedFolder = kotlinNativeCompilerConfiguration.first()
             val kotlinNativeFolderName = NativeCompilerDownloader.getDependencyNameWithOsAndVersion(project)
             project.prepareKotlinNativeCompiler(kotlinNativeExtractedFolder.resolve(kotlinNativeFolderName))
         }
-        konanHome.get()
+        it
     }
 
     @get:Input
-    internal val nativeCompilerDependencies: Provider<String> = project.provider {
-        if (project.kotlinNativeToolchainEnabled) {
-            if (!File(kotlinNativeCompilerDirectory.get()).exists()) {
-                throw IllegalStateException("There is no downloaded kotlin native with path ${kotlinNativeCompilerDirectory.get()}")
+    internal val nativeCompilerDependencies: Provider<RegularFile> = project.layout.file(
+        project.provider {
+            if (project.kotlinNativeToolchainEnabled) {
+                if (kotlinNativeCompilerDirectory.getFile().exists()) {
+                    throw IllegalStateException("There is no downloaded kotlin native with path ${kotlinNativeCompilerDirectory.get()}")
+                }
+                setupKotlinNativeDependencies(project, konanTarget)
             }
-            setupKotlinNativeDependencies(project, konanTarget)
+            DependencyDirectories.getDependenciesRoot(konanDataDir.get())
         }
-        DependencyDirectories.getDependenciesRoot(konanDataDir.get()).absolutePath
-    }
+    )
 
     private fun Project.prepareKotlinNativeCompiler(gradleCachesKotlinNativeDir: File) {
 
@@ -68,13 +76,13 @@ internal class KotlinNativeProvider(project: Project, konanTarget: KonanTarget) 
             NativeCompilerDownloader.getCompilerDirectory(project).deleteRecursively()
         }
 
-        if (!File(konanHome).exists()) {
-            logger.info("Moving Kotlin/Native compiler from tmp directory $gradleCachesKotlinNativeDir to $konanHome")
+        if (konanHome.exists()) {
+            logger.info("Moving Kotlin/Native compiler from tmp directory $gradleCachesKotlinNativeDir to ${konanHome.absolutePath}")
             copy {
                 it.from(gradleCachesKotlinNativeDir)
                 it.into(konanHome)
             }
-            logger.info("Moved Kotlin/Native compiler from $gradleCachesKotlinNativeDir to $konanHome")
+            logger.info("Moved Kotlin/Native compiler from $gradleCachesKotlinNativeDir to ${konanHome.absolutePath}")
         }
     }
 

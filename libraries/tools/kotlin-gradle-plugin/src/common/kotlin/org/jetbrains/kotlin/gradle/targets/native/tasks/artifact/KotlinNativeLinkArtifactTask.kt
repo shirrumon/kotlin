@@ -36,6 +36,7 @@ import org.jetbrains.kotlin.gradle.targets.native.tasks.buildKotlinNativeBinaryL
 import org.jetbrains.kotlin.gradle.targets.native.toolchain.KotlinNativeProvider
 import org.jetbrains.kotlin.gradle.tasks.KotlinToolTask
 import org.jetbrains.kotlin.gradle.utils.XcodeUtils
+import org.jetbrains.kotlin.gradle.utils.getFile
 import org.jetbrains.kotlin.gradle.utils.newInstance
 import org.jetbrains.kotlin.gradle.utils.property
 import org.jetbrains.kotlin.konan.target.CompilerOutputKind
@@ -175,7 +176,7 @@ abstract class KotlinNativeLinkArtifactTask @Inject constructor(
     }
 
     private val runnerSettings = KotlinNativeCompilerRunner.Settings.of(
-        kotlinNativeProvider.get().konanHome.get(),
+        kotlinNativeProvider.get().konanHome.getFile().absolutePath,
         kotlinNativeProvider.get().konanDataDir.getOrNull(),
         project
     )
