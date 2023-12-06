@@ -543,7 +543,7 @@ open class DeepCopyIrTreeWithSymbols(
             expression.type.remapType(),
             expression.receiver?.transform(),
             mapStatementOrigin(expression.origin),
-            symbolRemapper.getReferencedClassOrNull(expression.superQualifierSymbol)
+            expression.superQualifierSymbol?.let(symbolRemapper::getDeclaredClass)
         ).copyAttributes(expression)
 
     override fun visitSetField(expression: IrSetField): IrSetField =
@@ -554,7 +554,7 @@ open class DeepCopyIrTreeWithSymbols(
             expression.value.transform(),
             expression.type.remapType(),
             mapStatementOrigin(expression.origin),
-            symbolRemapper.getReferencedClassOrNull(expression.superQualifierSymbol)
+            expression.superQualifierSymbol?.let(symbolRemapper::getDeclaredClass)
         ).copyAttributes(expression)
 
     override fun visitCall(expression: IrCall): IrCall =
@@ -597,7 +597,7 @@ open class DeepCopyIrTreeWithSymbols(
             expression.typeArgumentsCount,
             expression.valueArgumentsCount,
             mapStatementOrigin(expression.origin),
-            symbolRemapper.getReferencedClassOrNull(expression.superQualifierSymbol)
+            expression.superQualifierSymbol?.let(symbolRemapper::getDeclaredClass)
         ).apply {
             copyRemappedTypeArgumentsFrom(expression)
         }.copyAttributes(expression)
