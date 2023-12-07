@@ -344,7 +344,7 @@ constructor(
     @get:Nested
     var kotlinPluginData: Provider<KotlinCompilerPluginData>? = null
 
-    @Nested
+    @get:Nested
     internal val kotlinNativeProvider: Provider<KotlinNativeProvider> = project.provider {
         KotlinNativeProvider(project, konanTarget)
     }

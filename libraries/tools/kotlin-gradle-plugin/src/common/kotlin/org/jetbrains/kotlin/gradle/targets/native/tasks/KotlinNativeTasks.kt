@@ -341,7 +341,7 @@ internal constructor(
     @get:Internal // these sources are normally a subset of `source` ones which are already tracked
     val commonSources: ConfigurableFileCollection = project.files()
 
-    @Nested
+    @get:Nested
     internal val kotlinNativeProvider: Provider<KotlinNativeProvider> = project.provider {
         KotlinNativeProvider(project, konanTarget)
     }
@@ -1067,7 +1067,7 @@ abstract class CInteropProcess @Inject internal constructor(params: Params) :
     val outputFile: File
         get() = outputFileProvider.get()
 
-    @Nested
+    @get:Nested
     internal val kotlinNativeProvider: Provider<KotlinNativeProvider> = project.provider {
         KotlinNativeProvider(project, konanTarget)
     }
