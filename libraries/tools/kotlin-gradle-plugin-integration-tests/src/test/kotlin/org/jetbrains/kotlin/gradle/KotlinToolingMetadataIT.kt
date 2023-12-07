@@ -24,6 +24,13 @@ class KotlinToolingMetadataMppIT : BaseGradleIT() {
         get() = BuildKotlinToolingMetadataTask.defaultTaskName
 
     @Test
+    fun testKt64121() = with(transformProjectWithPluginsDsl("kt64121")) {
+        build("assemble") {
+            assertSuccessful()
+        }
+    }
+
+    @Test
     fun `new-mpp-published`() = with(transformProjectWithPluginsDsl("new-mpp-published")) {
 
         build("publish") {
