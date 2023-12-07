@@ -5,6 +5,7 @@
 
 package org.jetbrains.kotlin.analysis.low.level.api.fir.transformers
 
+import com.intellij.openapi.diagnostic.ControlFlowException
 import org.jetbrains.kotlin.KtFakeSourceElementKind
 import org.jetbrains.kotlin.analysis.low.level.api.fir.api.FirDesignationWithFile
 import org.jetbrains.kotlin.analysis.low.level.api.fir.api.targets.LLFirResolveTarget
@@ -50,6 +51,7 @@ import org.jetbrains.kotlin.fir.types.FirImplicitTypeRef
 import org.jetbrains.kotlin.fir.util.setMultimapOf
 import org.jetbrains.kotlin.fir.utils.exceptions.withFirEntry
 import org.jetbrains.kotlin.fir.utils.exceptions.withFirSymbolEntry
+import org.jetbrains.kotlin.utils.exceptions.checkWithAttachment
 import org.jetbrains.kotlin.utils.exceptions.errorWithAttachment
 import org.jetbrains.kotlin.utils.exceptions.requireWithAttachment
 
@@ -92,10 +94,12 @@ internal class LLImplicitBodyResolveComputationSession : ImplicitBodyResolveComp
 
     override fun <D : FirCallableDeclaration> executeTransformation(symbol: FirCallableSymbol<*>, transformation: () -> D): D {
         // Do not store local declarations as we can postpone only non-local callables
-        return if (symbol.cannotResolveAnnotationsOnDemand()) {
-            transformation()
-        } else {
-            withAnchorForForeignAnnotations(symbol, transformation)
+        return withCancellationBlock {
+            if (symbol.cannotResolveAnnotationsOnDemand()) {
+                transformation()
+            } else {
+                withAnchorForForeignAnnotations(symbol, transformation)
+            }
         }
     }
 
@@ -137,6 +141,48 @@ internal class LLImplicitBodyResolveComputationSession : ImplicitBodyResolveComp
     fun postponedSymbols(target: FirCallableDeclaration): Collection<FirBasedSymbol<*>> {
         return postponedSymbols[target.symbol]
     }
+
+    fun <D : FirCallableDeclaration> computeInCancellableBlock(symbol: FirCallableSymbol<*>, transformation: () -> D): D {
+        stackOfCancellableSymbols += symbol
+        return try {
+            compute(symbol, transformation)
+        } finally {
+            val removed = stackOfCancellableSymbols.removeLast()
+            requireWithAttachment(removed == symbol, { "Inconsistent state" }) {
+                withFirSymbolEntry("expected", symbol)
+                withFirSymbolEntry("actual", removed)
+            }
+        }
+    }
+
+    private fun <D : FirCallableDeclaration> withCancellationBlock(action: () -> D): D = try {
+        action()
+    } catch (e: RedundantResolutionException) {
+        val symbolFromException = e.cancelledSymbol
+        val cancelledSymbol = stackOfCancellableSymbols.lastOrNull()
+            ?: errorWithAttachment("Unexpected state – the stack must be not empty", cause = e) {
+                withFirSymbolEntry("cancelledSymbol", symbolFromException)
+            }
+
+        checkWithAttachment(cancelledSymbol == symbolFromException, { "Inconsistency between cancelled and guarded symbol" }) {
+            withFirSymbolEntry("cancelledSymbol", symbolFromException)
+            withFirSymbolEntry("stackSymbol", cancelledSymbol)
+        }
+
+        @Suppress("UNCHECKED_CAST")
+        cancelledSymbol.fir as D
+    }
+
+    private val stackOfCancellableSymbols = mutableListOf<FirCallableSymbol<*>>()
+
+    override fun checkIsResolutionOutdated() {
+        val topSymbol = stackOfCancellableSymbols.lastOrNull() ?: return
+        if (topSymbol.fir.resolvePhase >= FirResolvePhase.IMPLICIT_TYPES_BODY_RESOLVE) {
+            throw RedundantResolutionException(topSymbol)
+        }
+    }
+
+    internal class RedundantResolutionException(val cancelledSymbol: FirCallableSymbol<*>) : RuntimeException(), ControlFlowException
 }
 
 internal class LLFirImplicitBodyTargetResolver(
@@ -462,6 +508,9 @@ internal class LLFirImplicitBodyTargetResolver(
         preserveContext: (original: T, copied: T) -> Unit,
         crossinline publishResult: (original: T, copied: T) -> Unit,
     ) {
+        // check the previous declaration in the stack if we still should resolve it
+        llImplicitBodyResolveComputationSession.checkIsResolutionOutdated()
+
         if (requireOnlyPhaseUpdate(target)) {
             return performCustomResolveUnderLock(target) {
                 // just update phase
@@ -485,7 +534,7 @@ internal class LLFirImplicitBodyTargetResolver(
         preserveContext(target, copiedDeclaration)
 
         // we should mark the original declaration as in progress
-        llImplicitBodyResolveComputationSession.compute(target.symbol) {
+        llImplicitBodyResolveComputationSession.computeInCancellableBlock(target.symbol) {
             // We need this lock to be sure that resolution contracts are not violated
             // It is safe because we can't get a recursion here due to a new element
             performCustomResolveUnderLock(copiedDeclaration) {
