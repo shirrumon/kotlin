@@ -63,6 +63,11 @@ val testTags = findProperty("kotlin.native.tests.tags")?.toString()
 // Sets if the XCTest runner should be enabled
 val runWithXCTest = (testTags?.contains("xctest") ?: false) && HostManager.host.family.isAppleFamily
 
+// Task to run xctest locally without a need to explicitly specify "xctest" test tag.
+if (HostManager.host.family.isAppleFamily) {
+    nativeTest("xcTest", "xctest", requirePlatformLibs = true, xcTestRunner = true)
+}
+
 val test by nativeTest("test", testTags, requirePlatformLibs = runWithXCTest, xcTestRunner = runWithXCTest)
 
 val generateTests by generator("org.jetbrains.kotlin.generators.tests.GenerateNativeTestsKt") {
