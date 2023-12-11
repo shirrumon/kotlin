@@ -23,6 +23,8 @@ import org.jetbrains.kotlin.fir.types.*
 import org.jetbrains.kotlin.fir.types.impl.ConeClassLikeTypeImpl
 import org.jetbrains.kotlin.fir.types.impl.ConeTypeParameterTypeImpl
 import org.jetbrains.kotlin.name.ClassId
+import org.jetbrains.kotlin.types.TypeApproximatorConfiguration
+import org.jetbrains.kotlin.types.model.CaptureStatus
 
 fun FirSmartCastExpression.smartcastScope(
     useSiteSession: FirSession,
@@ -125,6 +127,13 @@ private fun ConeKotlinType.scope(
     is ConeDefinitelyNotNullType -> original.scope(useSiteSession, scopeSession, requiredMembersPhase)
     is ConeIntegerConstantOperatorType -> scopeSession.getOrBuildScopeForIntegerConstantOperatorType(useSiteSession, this)
     is ConeIntegerLiteralConstantType -> error("ILT should not be in receiver position")
+    is ConeCapturedType -> if (captureStatus == CaptureStatus.FROM_EXPRESSION) {
+        useSiteSession.typeApproximator.approximateToSuperType(
+            this, TypeApproximatorConfiguration.FinalApproximationAfterResolutionAndInference
+        )?.scope(useSiteSession, scopeSession, requiredMembersPhase)
+    } else {
+        null
+    }
     else -> null
 }
 
