@@ -28,7 +28,7 @@ fun testStar(builder: Builder<*>) {
 
     builder
         .test()
-        .bar { <!ARGUMENT_TYPE_MISMATCH!>Out()<!> }
+        .bar { Out() }
 }
 
 fun <K : Builder<K>> testTypeParam(builder: Builder<K>) {

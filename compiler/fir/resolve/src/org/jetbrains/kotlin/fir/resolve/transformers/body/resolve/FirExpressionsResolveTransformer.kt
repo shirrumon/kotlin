@@ -1714,15 +1714,28 @@ open class FirExpressionsResolveTransformer(transformer: FirAbstractBodyResolveT
 
     internal fun storeTypeFromCallee(access: FirQualifiedAccessExpression, isLhsOfAssignment: Boolean) {
         val typeFromCallee = components.typeFromCallee(access)
+        val type = typeFromCallee.type
+        val typeApproximator = session.typeApproximator
         access.resultType = if (isLhsOfAssignment) {
-            session.typeApproximator.approximateToSubType(
-                typeFromCallee.type, TypeApproximatorConfiguration.FinalApproximationAfterResolutionAndInference
+            typeApproximator.approximateToSubType(
+                type, TypeApproximatorConfiguration.FinalApproximationAfterResolutionAndInference
             )
         } else {
-            session.typeApproximator.approximateToSuperType(
-                typeFromCallee.type, TypeApproximatorConfiguration.FinalApproximationAfterResolutionAndInference
-            )
-        } ?: typeFromCallee.type
+            typeApproximator.approximateToSuperType(
+                type, TypeApproximatorConfiguration.FinalApproximationAfterResolutionAndInference
+            )?.let {
+                val forResolve = typeApproximator.approximateToSuperType(
+                    type = type,
+                    TypeApproximatorConfiguration.FinalApproximationAfterResolutionAndInferenceNoCapturedTypes,
+                ) ?: type
+
+                if (forResolve != it) {
+                    it.withAttributes(it.attributes + TypeForResolveAttribute(forResolve))
+                } else {
+                    it
+                }
+            }
+        } ?: type
     }
 
 }

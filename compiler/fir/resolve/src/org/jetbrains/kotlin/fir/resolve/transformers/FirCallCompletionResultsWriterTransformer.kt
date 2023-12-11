@@ -20,10 +20,7 @@ import org.jetbrains.kotlin.fir.references.FirNamedReference
 import org.jetbrains.kotlin.fir.references.builder.buildResolvedCallableReference
 import org.jetbrains.kotlin.fir.references.builder.buildResolvedNamedReference
 import org.jetbrains.kotlin.fir.resolve.*
-import org.jetbrains.kotlin.fir.resolve.calls.Candidate
-import org.jetbrains.kotlin.fir.resolve.calls.FirErrorReferenceWithCandidate
-import org.jetbrains.kotlin.fir.resolve.calls.FirNamedReferenceWithCandidate
-import org.jetbrains.kotlin.fir.resolve.calls.ResolutionResultOverridesOtherToPreserveCompatibility
+import org.jetbrains.kotlin.fir.resolve.calls.*
 import org.jetbrains.kotlin.fir.resolve.dfa.FirDataFlowAnalyzer
 import org.jetbrains.kotlin.fir.resolve.diagnostics.*
 import org.jetbrains.kotlin.fir.resolve.inference.ResolvedLambdaAtom
@@ -447,20 +444,29 @@ class FirCallCompletionResultsWriterTransformer(
             type = substitutedType ?: initialType, TypeApproximatorConfiguration.FinalApproximationAfterResolutionAndInference,
         ) ?: substitutedType
 
+        if (finalType == null) return this
+
+        val forResolve = typeApproximator.approximateToSuperType(
+            type = substitutedType ?: initialType,
+            TypeApproximatorConfiguration.FinalApproximationAfterResolutionAndInferenceNoCapturedTypes,
+        ) ?: substitutedType ?: initialType
+
+        var attributes = finalType.attributes
+
+        if (forResolve != finalType) {
+            attributes += TypeForResolveAttribute(forResolve)
+        }
+
         // This is probably a temporary hack, but it seems necessary because elvis has that attribute and it may leak further like
         // fun <E> foo() = materializeNullable<E>() ?: materialize<E>() // `foo` return type unexpectedly gets inferred to @Exact E
         //
         // In FE1.0, it's not necessary since the annotation for elvis have some strange form (see org.jetbrains.kotlin.resolve.descriptorUtil.AnnotationsWithOnly)
         // that is not propagated further.
-        return finalType?.removeExactAttribute() ?: this
-    }
-
-    private fun ConeKotlinType.removeExactAttribute(): ConeKotlinType {
         if (attributes.contains(CompilerConeAttributes.Exact)) {
-            return withAttributes(attributes.remove(CompilerConeAttributes.Exact))
+            attributes = attributes.remove(CompilerConeAttributes.Exact)
         }
 
-        return this
+        return finalType.withAttributes(attributes)
     }
 
     override fun transformSafeCallExpression(

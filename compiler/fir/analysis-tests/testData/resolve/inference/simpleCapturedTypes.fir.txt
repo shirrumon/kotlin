@@ -22,7 +22,7 @@ FILE: simpleCapturedTypes.kt
         R|/id|<R|CapturedType(out Ann)|>(R|<local>/kc|).R|SubstitutionOverride</KC.x: R|CapturedType(out Ann)|>|.R|/Ann.foo|()
         R|<local>/kc|.R|/idR|<R|CapturedType(out Ann)|>().R|SubstitutionOverride</KC.x: R|CapturedType(out Ann)|>|.R|/Ann.foo|()
         R|<local>/kc|.R|/idP|<R|CapturedType(out Ann)|>.R|SubstitutionOverride</KC.x: R|CapturedType(out Ann)|>|.R|/Ann.foo|()
-        lval x1: R|KC<out Ann>| = R|/id|<R|CapturedType(out Ann)|>(R|<local>/kc|)
-        lval x2: R|KC<out Ann>| = R|<local>/kc|.R|/idR|<R|CapturedType(out Ann)|>()
-        lval x3: R|KC<out Ann>| = R|<local>/kc|.R|/idP|<R|CapturedType(out Ann)|>
+        lval x1: R|For Resolution(KC<CapturedType(out Ann)>) KC<out Ann>| = R|/id|<R|CapturedType(out Ann)|>(R|<local>/kc|)
+        lval x2: R|For Resolution(KC<CapturedType(out Ann)>) KC<out Ann>| = R|<local>/kc|.R|/idR|<R|CapturedType(out Ann)|>()
+        lval x3: R|For Resolution(KC<CapturedType(out Ann)>) KC<out Ann>| = R|<local>/kc|.R|/idP|<R|CapturedType(out Ann)|>
     }

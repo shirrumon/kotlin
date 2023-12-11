@@ -220,7 +220,8 @@ fun Candidate.resolvePlainExpressionArgument(
     // TODO Remove when KT-61843 is fixed
     if (argument is FirArrayLiteral && !argument.isResolved) return
 
-    val argumentType = argument.resolvedType
+    val argumentType = argument.resolvedType.forResolveOrSelf()
+
     resolvePlainArgumentType(
         csBuilder,
         argument,

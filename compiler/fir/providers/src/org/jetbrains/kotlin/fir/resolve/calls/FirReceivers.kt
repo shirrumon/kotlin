@@ -9,7 +9,6 @@ import org.jetbrains.kotlin.KtFakeSourceElementKind
 import org.jetbrains.kotlin.fakeElement
 import org.jetbrains.kotlin.fir.FirSession
 import org.jetbrains.kotlin.fir.declarations.FirResolvePhase
-import org.jetbrains.kotlin.fir.diagnostics.ConeIntermediateDiagnostic
 import org.jetbrains.kotlin.fir.expressions.FirCheckNotNullCall
 import org.jetbrains.kotlin.fir.expressions.FirExpression
 import org.jetbrains.kotlin.fir.expressions.FirSmartCastExpression
@@ -18,7 +17,6 @@ import org.jetbrains.kotlin.fir.expressions.builder.buildInaccessibleReceiverExp
 import org.jetbrains.kotlin.fir.expressions.builder.buildSmartCastExpression
 import org.jetbrains.kotlin.fir.expressions.builder.buildThisReceiverExpression
 import org.jetbrains.kotlin.fir.references.builder.buildImplicitThisReference
-import org.jetbrains.kotlin.fir.renderWithType
 import org.jetbrains.kotlin.fir.resolve.ScopeSession
 import org.jetbrains.kotlin.fir.resolve.scope
 import org.jetbrains.kotlin.fir.resolve.smartcastScope
@@ -48,7 +46,7 @@ abstract class ReceiverValue {
 
 class ExpressionReceiverValue(override val receiverExpression: FirExpression) : ReceiverValue() {
     override val type: ConeKotlinType
-        get() = receiverExpression.resolvedType
+        get() = receiverExpression.resolvedType.forResolveOrSelf()
 
     override fun scope(useSiteSession: FirSession, scopeSession: ScopeSession): FirTypeScope? {
         var receiverExpr: FirExpression? = receiverExpression
