@@ -293,6 +293,24 @@ public class FirNativeCodegenLocalTestGenerated extends AbstractNativeCodegenBox
         }
 
         @Test
+        @TestMetadata("unchecked_cast10.kt")
+        public void testUnchecked_cast10() throws Exception {
+            runTest("native/native.tests/testData/codegen/basics/unchecked_cast10.kt");
+        }
+
+        @Test
+        @TestMetadata("unchecked_cast11.kt")
+        public void testUnchecked_cast11() throws Exception {
+            runTest("native/native.tests/testData/codegen/basics/unchecked_cast11.kt");
+        }
+
+        @Test
+        @TestMetadata("unchecked_cast12.kt")
+        public void testUnchecked_cast12() throws Exception {
+            runTest("native/native.tests/testData/codegen/basics/unchecked_cast12.kt");
+        }
+
+        @Test
         @TestMetadata("unchecked_cast2.kt")
         public void testUnchecked_cast2() throws Exception {
             runTest("native/native.tests/testData/codegen/basics/unchecked_cast2.kt");
@@ -332,6 +350,12 @@ public class FirNativeCodegenLocalTestGenerated extends AbstractNativeCodegenBox
         @TestMetadata("unchecked_cast8.kt")
         public void testUnchecked_cast8() throws Exception {
             runTest("native/native.tests/testData/codegen/basics/unchecked_cast8.kt");
+        }
+
+        @Test
+        @TestMetadata("unchecked_cast9.kt")
+        public void testUnchecked_cast9() throws Exception {
+            runTest("native/native.tests/testData/codegen/basics/unchecked_cast9.kt");
         }
 
         @Test
