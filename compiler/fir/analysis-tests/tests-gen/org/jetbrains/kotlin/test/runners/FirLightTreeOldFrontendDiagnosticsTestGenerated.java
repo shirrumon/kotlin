@@ -17570,6 +17570,18 @@ public class FirLightTreeOldFrontendDiagnosticsTestGenerated extends AbstractFir
                 }
 
                 @Test
+                @TestMetadata("capturedInLambda.kt")
+                public void testCapturedInLambda() throws Exception {
+                    runTest("compiler/testData/diagnostics/tests/inference/capturedTypes/capturedInLambda.kt");
+                }
+
+                @Test
+                @TestMetadata("capturedInTypeInference.kt")
+                public void testCapturedInTypeInference() throws Exception {
+                    runTest("compiler/testData/diagnostics/tests/inference/capturedTypes/capturedInTypeInference.kt");
+                }
+
+                @Test
                 @TestMetadata("capturedType.kt")
                 public void testCapturedType() throws Exception {
                     runTest("compiler/testData/diagnostics/tests/inference/capturedTypes/capturedType.kt");
@@ -17609,6 +17621,12 @@ public class FirLightTreeOldFrontendDiagnosticsTestGenerated extends AbstractFir
                 @TestMetadata("capturingFromArgumentOfFlexibleType.kt")
                 public void testCapturingFromArgumentOfFlexibleType() throws Exception {
                     runTest("compiler/testData/diagnostics/tests/inference/capturedTypes/capturingFromArgumentOfFlexibleType.kt");
+                }
+
+                @Test
+                @TestMetadata("capturingOfDnn.kt")
+                public void testCapturingOfDnn() throws Exception {
+                    runTest("compiler/testData/diagnostics/tests/inference/capturedTypes/capturingOfDnn.kt");
                 }
 
                 @Test
@@ -31010,6 +31028,12 @@ public class FirLightTreeOldFrontendDiagnosticsTestGenerated extends AbstractFir
             @TestMetadata("DoubleInner.kt")
             public void testDoubleInner() throws Exception {
                 runTest("compiler/testData/diagnostics/tests/sealed/DoubleInner.kt");
+            }
+
+            @Test
+            @TestMetadata("ExhaustiveOnCaptured.kt")
+            public void testExhaustiveOnCaptured() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/sealed/ExhaustiveOnCaptured.kt");
             }
 
             @Test
