@@ -9,6 +9,7 @@ import org.jetbrains.kotlin.konan.target.*
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.nio.file.Files
+import java.nio.file.Paths
 
 /**
  * An abstract class representing a local execution of XCTest tests.
@@ -63,7 +64,8 @@ abstract class AbstractXCTestExecutor(
         val originalBundle = File(request.executableAbsolutePath)
         val bundleToExecute = if (request.args.isNotEmpty()) {
             // Copy the bundle to a temp dir
-            val dir = Files.createTempDirectory("tmp-xctest-runner")
+            val workDir = request.workingDirectory?.toPath() ?: Paths.get(".")
+            val dir = Files.createTempDirectory(workDir, "tmp-xctest-runner")
             val newBundleFile = originalBundle.run {
                 val newPath = dir.resolve(name)
                 copyRecursively(newPath.toFile())
@@ -76,6 +78,14 @@ abstract class AbstractXCTestExecutor(
                 .firstOrNull { it.name == "Info.plist" }
                 ?.absolutePath
             checkNotNull(infoPlist) { "Info.plist of xctest-bundle wasn't found. Check the bundle contents and location " }
+
+            check(request.args.all { !it.contains(" ") }) {
+                // TODO: Consider also check for other incorrect symbols and escaping them or use CDATA section.
+                """
+                    Provided arguments contain spaces that not supported as arguments: 
+                    ${request.args.joinToString()}
+                """.trimIndent()
+            }
 
             val writeArgsRequest = ExecuteRequest(
                 executableAbsolutePath = "/usr/libexec/PlistBuddy",
