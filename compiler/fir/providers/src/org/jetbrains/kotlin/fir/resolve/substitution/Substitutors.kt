@@ -12,6 +12,7 @@ import org.jetbrains.kotlin.fir.diagnostics.DiagnosticKind
 import org.jetbrains.kotlin.fir.resolve.fullyExpandedType
 import org.jetbrains.kotlin.fir.resolve.toFirRegularClassSymbol
 import org.jetbrains.kotlin.fir.resolve.withCombinedAttributesFrom
+import org.jetbrains.kotlin.fir.symbols.impl.FirCallableSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirTypeParameterSymbol
 import org.jetbrains.kotlin.fir.types.*
 import org.jetbrains.kotlin.fir.types.impl.ConeClassLikeTypeImpl
@@ -199,6 +200,24 @@ abstract class AbstractConeSubstitutor(protected val typeContext: ConeTypeContex
     }
 
 
+}
+
+fun substitutorByTypeArguments(
+    symbol: FirCallableSymbol<*>,
+    typeArguments: List<FirTypeProjection>,
+    session: FirSession,
+): ConeSubstitutor {
+    if (typeArguments.isEmpty()) return ConeSubstitutor.Empty
+
+    val substitutionMap = buildMap {
+        for ((parameter, argument) in symbol.typeParameterSymbols.zip(typeArguments)) {
+            if (argument is FirTypeProjectionWithVariance) {
+                put(parameter, argument.typeRef.coneType)
+            }
+        }
+    }
+
+    return substitutorByMap(substitutionMap, session)
 }
 
 fun substitutorByMap(substitution: Map<FirTypeParameterSymbol, ConeKotlinType>, useSiteSession: FirSession): ConeSubstitutor {
