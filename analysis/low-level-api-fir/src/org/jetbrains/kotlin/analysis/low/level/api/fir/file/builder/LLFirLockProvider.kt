@@ -22,6 +22,8 @@ import java.util.concurrent.locks.ReentrantLock
 internal class LLFirLockProvider(private val checker: LLFirLazyResolveContractChecker) {
     private val globalLock = ReentrantLock()
 
+    private val implicitTypesLock = ReentrantLock()
+
     inline fun <R> withGlobalLock(
         lockingIntervalMs: Long = DEFAULT_LOCKING_INTERVAL,
         action: () -> R,
@@ -29,6 +31,22 @@ internal class LLFirLockProvider(private val checker: LLFirLazyResolveContractCh
         if (!globalLockEnabled) return action()
 
         return globalLock.lockWithPCECheck(lockingIntervalMs, action)
+    }
+
+    fun withGlobalPhaseLock(
+        phase: FirResolvePhase,
+        action: () -> Unit,
+    ) {
+        val lock = when (phase) {
+            FirResolvePhase.IMPLICIT_TYPES_BODY_RESOLVE -> implicitTypesLock
+            else -> null
+        }
+
+        if (lock == null) {
+            action()
+        } else {
+            lock.lockWithPCECheck(DEFAULT_LOCKING_INTERVAL, action)
+        }
     }
 
     /**
