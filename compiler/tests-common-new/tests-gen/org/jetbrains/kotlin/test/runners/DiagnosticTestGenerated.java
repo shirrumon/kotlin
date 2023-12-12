@@ -17582,6 +17582,12 @@ public class DiagnosticTestGenerated extends AbstractDiagnosticTest {
                 }
 
                 @Test
+                @TestMetadata("capturedInSmartCast.kt")
+                public void testCapturedInSmartCast() throws Exception {
+                    runTest("compiler/testData/diagnostics/tests/inference/capturedTypes/capturedInSmartCast.kt");
+                }
+
+                @Test
                 @TestMetadata("capturedInTypeInference.kt")
                 public void testCapturedInTypeInference() throws Exception {
                     runTest("compiler/testData/diagnostics/tests/inference/capturedTypes/capturedInTypeInference.kt");

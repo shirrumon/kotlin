@@ -17576,6 +17576,12 @@ public class FirLightTreeOldFrontendDiagnosticsTestGenerated extends AbstractFir
                 }
 
                 @Test
+                @TestMetadata("capturedInSmartCast.kt")
+                public void testCapturedInSmartCast() throws Exception {
+                    runTest("compiler/testData/diagnostics/tests/inference/capturedTypes/capturedInSmartCast.kt");
+                }
+
+                @Test
                 @TestMetadata("capturedInTypeInference.kt")
                 public void testCapturedInTypeInference() throws Exception {
                     runTest("compiler/testData/diagnostics/tests/inference/capturedTypes/capturedInTypeInference.kt");

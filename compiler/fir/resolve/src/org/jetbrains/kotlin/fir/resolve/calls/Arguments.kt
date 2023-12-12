@@ -220,7 +220,14 @@ fun Candidate.resolvePlainExpressionArgument(
     // TODO Remove when KT-61843 is fixed
     if (argument is FirArrayLiteral && !argument.isResolved) return
 
-    val argumentType = argument.resolvedType.forResolveOrSelf()
+    val resolvedType = argument.resolvedType
+    // Since DNNs don't apply their not-nullness to their attributes, we need to manually do it here.
+    val forResolveOrSelf = resolvedType.forResolveOrSelf()
+    val argumentType = if (forResolveOrSelf !== resolvedType && resolvedType.nullability == ConeNullability.NOT_NULL) {
+        forResolveOrSelf.withNullability(ConeNullability.NOT_NULL, context.typeContext)
+    } else {
+        forResolveOrSelf
+    }
 
     resolvePlainArgumentType(
         csBuilder,
