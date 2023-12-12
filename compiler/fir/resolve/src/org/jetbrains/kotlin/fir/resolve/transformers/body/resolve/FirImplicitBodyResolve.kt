@@ -210,8 +210,6 @@ open class ReturnTypeCalculatorWithJump(
     var outerTowerDataContexts: FirRegularTowerDataContexts? = null
 
     override fun tryCalculateReturnTypeOrNull(declaration: FirCallableDeclaration): FirResolvedTypeRef {
-        implicitBodyResolveComputationSession.checkIsResolutionOutdated()
-
         // Local declarations must be handled by `ReturnTypeCalculatorForFullBodyResolve` to avoid resolution cycles in LL FIR.
         if (declaration.visibility == Visibilities.Local) {
             return ReturnTypeCalculatorForFullBodyResolve.Default.tryCalculateReturnType(declaration)
@@ -404,8 +402,6 @@ open class ImplicitBodyResolveComputationSession {
         }
         return implicitBodyResolveStatusMap[symbol] ?: ImplicitBodyResolveComputationStatus.NotComputed
     }
-
-    open fun checkIsResolutionOutdated() {}
 
     protected open fun <D : FirCallableDeclaration> executeTransformation(symbol: FirCallableSymbol<*>, transformation: () -> D): D {
         return transformation()
