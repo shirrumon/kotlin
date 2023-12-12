@@ -170,22 +170,25 @@ fun <T : ConeKotlinType> T.withAttributes(attributes: ConeAttributes): T {
     } as T
 }
 
-fun <T : ConeKotlinType> T.withNullability(
+fun ConeKotlinType.withNullability(
     nullability: ConeNullability,
     typeContext: ConeTypeContext,
     attributes: ConeAttributes = this.attributes,
     preserveEnhancedNullability: Boolean = false,
-): T {
+): ConeKotlinType {
     val theAttributes = attributes.butIf(!preserveEnhancedNullability) {
         val withoutEnhanced = it.remove(CompilerConeAttributes.EnhancedNullability)
         withoutEnhanced.transformTypesWith { t -> t.withNullability(nullability, typeContext) } ?: withoutEnhanced
+    }
+
+    if (this is ConeCapturedType && nullability == ConeNullability.NOT_NULL) {
+        ConeDefinitelyNotNullType.create(this, typeContext)?.let { return it }
     }
 
     if (this.nullability == nullability && this.attributes == theAttributes) {
         return this
     }
 
-    @Suppress("UNCHECKED_CAST")
     return when (this) {
         is ConeErrorType -> this
         is ConeClassLikeTypeImpl -> ConeClassLikeTypeImpl(lookupTag, typeArguments, nullability.isNullable, theAttributes)
@@ -231,7 +234,7 @@ fun <T : ConeKotlinType> T.withNullability(
         is ConeIntegerLiteralConstantType -> ConeIntegerLiteralConstantTypeImpl(value, possibleTypes, isUnsigned, nullability)
         is ConeIntegerConstantOperatorType -> ConeIntegerConstantOperatorTypeImpl(isUnsigned, nullability)
         else -> error("sealed: ${this::class}")
-    } as T
+    }
 }
 
 fun coneFlexibleOrSimpleType(
