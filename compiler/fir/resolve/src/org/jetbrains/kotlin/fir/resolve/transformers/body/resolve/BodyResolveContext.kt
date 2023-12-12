@@ -213,6 +213,22 @@ class BodyResolveContext(
         dataFlowAnalyzerContext.reset()
     }
 
+    @OptIn(PrivateForInline::class)
+    fun reset() {
+        clear()
+        val new = BodyResolveContext(returnTypeCalculator, dataFlowAnalyzerContext)
+        containers.clear()
+        containingClass = null
+        inferenceSession = new.inferenceSession
+        insideClassHeader = new.insideClassHeader
+        regularTowerDataContexts = new.regularTowerDataContexts
+        towerDataMode = new.towerDataMode
+        whenSubjectImportingScopes.clear()
+        outerConstraintStorage = new.outerConstraintStorage
+        anonymousFunctionsAnalyzedInDependentContext.clear()
+        containingClassDeclarations.clear()
+    }
+
     @PrivateForInline
     fun addNonLocalTowerDataElement(element: FirTowerDataElement) {
         replaceTowerDataContext(towerDataContext.addNonLocalTowerDataElements(listOf(element)))
@@ -408,6 +424,33 @@ class BodyResolveContext(
     }
 
     @OptIn(PrivateForInline::class)
+    fun addFileToContext(file: FirFile, holder: SessionHolder) {
+        clear()
+        this.file = file
+        val importingScopes = createImportingScopes(file, holder.session, holder.scopeSession)
+        fileImportsScope += importingScopes
+        addNonLocalTowerDataElements(importingScopes.map { it.asTowerDataElement(isLocal = false) })
+        containers.add(file)
+    }
+
+    @OptIn(PrivateForInline::class)
+    fun addClassToContext(regularClass: FirRegularClass, holder: SessionHolder) {
+        storeClassIfNotNested(regularClass, holder.session)
+        if (!regularClass.isInner && containerIfAny is FirRegularClass) {
+            towerDataMode = if (regularClass.isCompanion) {
+                FirTowerDataMode.COMPANION_OBJECT
+            } else {
+                FirTowerDataMode.NESTED_CLASS
+            }
+        }
+
+        regularTowerDataContexts = classContext(regularClass, holder)
+        containingClass = regularClass
+        containers += regularClass
+        containingClassDeclarations += regularClass
+    }
+
+    @OptIn(PrivateForInline::class)
     fun <T> withRegularClass(
         regularClass: FirRegularClass,
         holder: SessionHolder,
@@ -440,11 +483,7 @@ class BodyResolveContext(
         }
     }
 
-    fun <T> withScopesForClass(
-        owner: FirClass,
-        holder: SessionHolder,
-        f: () -> T
-    ): T {
+    fun classContext(owner: FirClass, holder: SessionHolder): FirRegularTowerDataContexts {
         val labelName = (owner as? FirRegularClass)?.name
             ?: if (owner.classKind == ClassKind.ENUM_ENTRY) {
                 owner.primaryConstructorIfAny(holder.session)?.callableId?.className?.shortName()
@@ -508,7 +547,7 @@ class BodyResolveContext(
                 null to null
             }
 
-        val newContexts = FirRegularTowerDataContexts(
+        return FirRegularTowerDataContexts(
             regular = forMembersResolution,
             forClassHeaderAnnotations = base,
             forNestedClasses = newTowerDataContextForStaticNestedClasses,
@@ -518,18 +557,29 @@ class BodyResolveContext(
             primaryConstructorPureParametersScope = primaryConstructorPureParametersScope,
             primaryConstructorAllParametersScope = primaryConstructorAllParametersScope
         )
+    }
 
-        return withTowerDataContexts(newContexts) {
+    fun <T> withScopesForClass(
+        owner: FirClass,
+        holder: SessionHolder,
+        f: () -> T
+    ): T {
+        return withTowerDataContexts(classContext(owner, holder)) {
             f()
         }
     }
 
     @OptIn(PrivateForInline::class)
-    fun <T> withScript(
+    fun addScriptContext(owner: FirScript,
+                         holder: SessionHolder) {
+        regularTowerDataContexts = scriptContext(owner, holder)
+        containers += owner
+    }
+
+    fun scriptContext(
         owner: FirScript,
         holder: SessionHolder,
-        f: () -> T
-    ): T {
+    ): FirRegularTowerDataContexts {
         val towerElementsForScript = holder.collectTowerDataElementsForScript(owner)
 
         val base = towerDataContext.addNonLocalTowerDataElements(emptyList())
@@ -550,7 +600,7 @@ class BodyResolveContext(
                     }
                 }
 
-        val newContexts = FirRegularTowerDataContexts(
+        return FirRegularTowerDataContexts(
             regular = forMembersResolution,
             forClassHeaderAnnotations = base,
             forNestedClasses = forMembersResolution,
@@ -560,8 +610,15 @@ class BodyResolveContext(
             primaryConstructorPureParametersScope = null,
             primaryConstructorAllParametersScope = null
         )
+    }
 
-        return withTowerDataContexts(newContexts) {
+    @OptIn(PrivateForInline::class)
+    fun <T> withScript(
+        owner: FirScript,
+        holder: SessionHolder,
+        f: () -> T
+    ): T {
+        return withTowerDataContexts(scriptContext(owner, holder)) {
             withContainer(owner) {
                 f()
             }
