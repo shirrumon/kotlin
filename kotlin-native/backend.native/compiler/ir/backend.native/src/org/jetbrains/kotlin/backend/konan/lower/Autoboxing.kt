@@ -156,34 +156,34 @@ private class AutoboxingTransformer(val context: Context) : AbstractValueUsageTr
      */
     private fun IrExpression.checkedCast(actualType: IrType, expectedType: IrType) =
             irBuilders.peek()!!.at(this).run {
-                val expression = this@checkedCast
-                when {
-                    expectedType == irBuiltIns.unitType ->
-                        irImplicitCoercionToUnit(expression)
-                    expectedType.isNullable() ->
-                        irAs(irImplicitCast(expression, actualType), expectedType)
-                    else ->
-                        irAs(irImplicitCast(expression, actualType), expectedType.makeNullable()).uncheckedCast(expectedType)
-                }
+                val expression = irImplicitCast(this@checkedCast, actualType)
+                if (expectedType.isNullable())
+                    irAs(expression, expectedType)
+                else irAs(expression, expectedType.makeNullable()).uncheckedCast(expectedType)
             }
 
     private fun IrExpression.adaptIfNecessary(actualType: IrType, expectedType: IrType): IrExpression {
         val conversion = context.getTypeConversion(actualType, expectedType)
         return if (conversion == null) {
-            val expectedClass = expectedType.classOrNull?.owner
-            return if (insertSafeCasts
-                    && expectedClass != null
-                    && !expectedClass.isNothing()
-                    && actualType.classifierOrFail is IrTypeParameterSymbol
-                    && actualType.getInlinedClassNative() == null
-                    && expectedType.computePrimitiveBinaryTypeOrNull() == null
-                    && !expectedClass.isObjCForwardDeclaration()
-                    && !expectedClass.isObjCMetaClass()
-            ) {
-                this.checkedCast(actualType, expectedType)
-                        .uncheckedCast(this.type) // Try not to bring new type incompatibilities.
-            } else {
-                this
+            val actualTypeIsGeneric = actualType.classifierOrFail is IrTypeParameterSymbol
+            return if (actualTypeIsGeneric && expectedType.isUnit())
+                irBuilders.peek()!!.at(this).irImplicitCoercionToUnit(this)
+            else {
+                val expectedClass = expectedType.classOrNull?.owner
+                if (insertSafeCasts
+                        && actualTypeIsGeneric
+                        && expectedClass != null
+                        && !expectedClass.isNothing()
+                        && actualType.getInlinedClassNative() == null
+                        && expectedType.computePrimitiveBinaryTypeOrNull() == null
+                        && !expectedClass.isObjCForwardDeclaration()
+                        && !expectedClass.isObjCMetaClass()
+                ) {
+                    this.checkedCast(actualType, expectedType)
+                            .uncheckedCast(this.type) // Try not to bring new type incompatibilities.
+                } else {
+                    this
+                }
             }
         } else {
             when (this) {
