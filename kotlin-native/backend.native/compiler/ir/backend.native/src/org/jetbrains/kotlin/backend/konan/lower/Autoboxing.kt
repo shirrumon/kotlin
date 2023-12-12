@@ -19,7 +19,6 @@ import org.jetbrains.kotlin.ir.builders.*
 import org.jetbrains.kotlin.ir.builders.declarations.buildFun
 import org.jetbrains.kotlin.ir.declarations.*
 import org.jetbrains.kotlin.ir.expressions.*
-import org.jetbrains.kotlin.ir.expressions.impl.IrCallImpl
 import org.jetbrains.kotlin.ir.expressions.impl.IrConstantPrimitiveImpl
 import org.jetbrains.kotlin.ir.objcinterop.isObjCForwardDeclaration
 import org.jetbrains.kotlin.ir.objcinterop.isObjCMetaClass
@@ -97,21 +96,12 @@ private class AutoboxingTransformer(val context: Context) : AbstractValueUsageTr
     }
 
     override fun IrExpression.useAs(type: IrType): IrExpression {
-        val actualType = when (this) {
-            is IrGetField -> this.symbol.owner.type
-
-            is IrTypeOperatorCall -> when (this.operator) {
-                IrTypeOperator.IMPLICIT_INTEGER_COERCION ->
-                    // TODO: is it a workaround for inconsistent IR?
-                    this.typeOperand
-
-                IrTypeOperator.CAST, IrTypeOperator.IMPLICIT_CAST -> context.irBuiltIns.anyNType
-
-                else -> this.type
-            }
-
-            else -> this.type
+        if (this is IrTypeOperatorCall) {
+            if (this.operator == IrTypeOperator.CAST || this.operator == IrTypeOperator.IMPLICIT_CAST)
+                return this.adaptIfNecessary(context.irBuiltIns.anyNType, type, skipTypeCheck = true)
         }
+
+        val actualType = (this as? IrGetField)?.symbol?.owner?.type ?: this.type
         return this.adaptIfNecessary(actualType, type)
     }
 
@@ -162,7 +152,7 @@ private class AutoboxingTransformer(val context: Context) : AbstractValueUsageTr
                 else irAs(expression, expectedType.makeNullable()).uncheckedCast(expectedType)
             }
 
-    private fun IrExpression.adaptIfNecessary(actualType: IrType, expectedType: IrType): IrExpression {
+    private fun IrExpression.adaptIfNecessary(actualType: IrType, expectedType: IrType, skipTypeCheck: Boolean = false): IrExpression {
         val conversion = context.getTypeConversion(actualType, expectedType)
         return if (conversion == null) {
             val actualTypeIsGeneric = actualType.classifierOrFail is IrTypeParameterSymbol
@@ -170,7 +160,7 @@ private class AutoboxingTransformer(val context: Context) : AbstractValueUsageTr
                 irBuilders.peek()!!.at(this).irImplicitCoercionToUnit(this)
             else {
                 val expectedClass = expectedType.classOrNull?.owner
-                if (insertSafeCasts
+                if (insertSafeCasts && !skipTypeCheck
                         && actualTypeIsGeneric
                         && expectedClass != null
                         && !expectedClass.isNothing()
@@ -195,7 +185,7 @@ private class AutoboxingTransformer(val context: Context) : AbstractValueUsageTr
                 return it
             }
             val parameter = conversion.owner.valueParameters.single()
-            val argument = if (insertSafeCasts && expectedType.isInlinedNative())
+            val argument = if (insertSafeCasts && !skipTypeCheck && expectedType.isInlinedNative())
                 this.checkedCast(actualType, conversion.owner.returnType)
             else this.uncheckedCast(parameter.type)
 
