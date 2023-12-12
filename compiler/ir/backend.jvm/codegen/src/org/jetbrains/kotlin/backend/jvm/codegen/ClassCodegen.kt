@@ -422,7 +422,7 @@ class ClassCodegen private constructor(
             }
 
             override fun visitLocalVariable(name: String, descriptor: String, signature: String?, start: Label, end: Label, index: Int) {
-                if (state.configuration.getBoolean(JVMConfigurationKeys.ENABLE_INLINE_SCOPES_NUMBERS) && isFakeLocalVariableForInline(name)) {
+                if (state.configuration.getBoolean(JVMConfigurationKeys.USE_INLINE_SCOPES_NUMBERS) && isFakeLocalVariableForInline(name)) {
                     val newName = updateCallSiteLineNumber(name, lineNumberMapping)
                     return super.visitLocalVariable(newName, descriptor, signature, start, end, index)
                 }

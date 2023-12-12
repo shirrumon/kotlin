@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.test.directives.AsmLikeInstructionListingDirectives.
 import org.jetbrains.kotlin.test.directives.AsmLikeInstructionListingDirectives.IR_DIFFERENCE
 import org.jetbrains.kotlin.test.directives.AsmLikeInstructionListingDirectives.LOCAL_VARIABLE_TABLE
 import org.jetbrains.kotlin.test.directives.AsmLikeInstructionListingDirectives.RENDER_ANNOTATIONS
-import org.jetbrains.kotlin.test.directives.LanguageSettingsDirectives.ENABLE_INLINE_SCOPES_NUMBERS
+import org.jetbrains.kotlin.test.directives.LanguageSettingsDirectives.USE_INLINE_SCOPES_NUMBERS
 import org.jetbrains.kotlin.test.directives.model.Directive
 import org.jetbrains.kotlin.test.directives.model.DirectivesContainer
 import org.jetbrains.kotlin.test.model.BinaryArtifacts
@@ -395,7 +395,7 @@ class AsmLikeInstructionListingHandler(testServices: TestServices) : JvmBinaryAr
 
         val firstModule = testServices.moduleStructure.modules.first()
 
-        val inlineScopesNumbersEnabled = firstModule.directives.contains(ENABLE_INLINE_SCOPES_NUMBERS)
+        val inlineScopesNumbersEnabled = firstModule.directives.contains(USE_INLINE_SCOPES_NUMBERS)
         val extension = when {
             inlineScopesNumbersEnabled && inlineScopesDifference && firstModule.targetBackend?.isIR == true ->
                 INLINE_SCOPES_DUMP_EXTENSION

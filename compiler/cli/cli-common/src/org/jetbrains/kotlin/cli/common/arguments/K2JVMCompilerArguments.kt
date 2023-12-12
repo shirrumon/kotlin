@@ -846,10 +846,10 @@ This option is deprecated and will be deleted in future versions."""
         }
 
     @Argument(
-        value = "-Xinline-scopes-numbers",
+        value = "-Xuse-inline-scopes-numbers",
         description = "Enable inline scopes numbers for inline marker variables."
     )
-    var enableInlineScopesNumbers: Boolean = false
+    var useInlineScopesNumbers: Boolean = false
         set(value) {
             checkFrozen()
             field = value

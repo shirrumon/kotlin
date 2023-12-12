@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.backend.jvm.irInlinerIsEnabled
 import org.jetbrains.kotlin.codegen.AsmUtil
 import org.jetbrains.kotlin.codegen.inline.*
 import org.jetbrains.kotlin.codegen.inline.coroutines.FOR_INLINE_SUFFIX
-import org.jetbrains.kotlin.config.JVMConfigurationKeys.ENABLE_INLINE_SCOPES_NUMBERS
+import org.jetbrains.kotlin.config.JVMConfigurationKeys.USE_INLINE_SCOPES_NUMBERS
 import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.IrStatement
 import org.jetbrains.kotlin.ir.builders.createTmpVariable
@@ -55,7 +55,7 @@ internal class FakeLocalVariablesForIrInlinerLowering(
 
     override fun lower(irFile: IrFile) {
         irFile.accept(this, null)
-        if (context.configuration.getBoolean(ENABLE_INLINE_SCOPES_NUMBERS)) {
+        if (context.configuration.getBoolean(USE_INLINE_SCOPES_NUMBERS)) {
             irFile.acceptVoid(ScopeNumberVariableProcessor())
         } else {
             irFile.acceptVoid(FunctionParametersProcessor())

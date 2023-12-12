@@ -160,7 +160,7 @@ class ExpressionCodegen(
     val config: JvmBackendConfig = context.config
 
     override val inlineScopesGenerator =
-        if (state.configuration.getBoolean(JVMConfigurationKeys.ENABLE_INLINE_SCOPES_NUMBERS)) {
+        if (state.configuration.getBoolean(JVMConfigurationKeys.USE_INLINE_SCOPES_NUMBERS)) {
             InlineScopesGenerator()
         } else {
             null
@@ -769,7 +769,7 @@ class ExpressionCodegen(
         val index = frameMap.enter(declaration.symbol, varType)
         val name = declaration.name.asString()
 
-        if (state.configuration.getBoolean(JVMConfigurationKeys.ENABLE_INLINE_SCOPES_NUMBERS) &&
+        if (state.configuration.getBoolean(JVMConfigurationKeys.USE_INLINE_SCOPES_NUMBERS) &&
             state.configuration.getBoolean(JVMConfigurationKeys.ENABLE_IR_INLINER) &&
             isFakeLocalVariableForInline(name) &&
             name.contains(INLINE_SCOPE_NUMBER_SEPARATOR)

@@ -99,7 +99,7 @@ fun TestConfigurationBuilder.useIrInliner() {
 
 fun TestConfigurationBuilder.useInlineScopesNumbers() {
     defaultDirectives {
-        +LanguageSettingsDirectives.ENABLE_INLINE_SCOPES_NUMBERS
+        +LanguageSettingsDirectives.USE_INLINE_SCOPES_NUMBERS
     }
 }
 

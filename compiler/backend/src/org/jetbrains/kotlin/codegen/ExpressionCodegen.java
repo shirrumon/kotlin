@@ -169,7 +169,7 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
         this.switchCodegenProvider = new SwitchCodegenProvider(this);
         this.typeSystem = new ClassicTypeSystemContextImpl(state.getModule().getBuiltIns());
 
-        boolean inlineScopesEnabled = state.getConfiguration().getBoolean(JVMConfigurationKeys.ENABLE_INLINE_SCOPES_NUMBERS);
+        boolean inlineScopesEnabled = state.getConfiguration().getBoolean(JVMConfigurationKeys.USE_INLINE_SCOPES_NUMBERS);
         this.inlineScopesGenerator = inlineScopesEnabled ? new InlineScopesGenerator() : null;
     }
 

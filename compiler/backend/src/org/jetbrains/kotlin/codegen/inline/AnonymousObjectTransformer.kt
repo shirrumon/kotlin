@@ -333,7 +333,7 @@ class AnonymousObjectTransformer(
                 null
             }
         val inlineScopesGenerator =
-            if (state.configuration.getBoolean(JVMConfigurationKeys.ENABLE_INLINE_SCOPES_NUMBERS)) {
+            if (state.configuration.getBoolean(JVMConfigurationKeys.USE_INLINE_SCOPES_NUMBERS)) {
                 InlineScopesGenerator()
             } else {
                 null
