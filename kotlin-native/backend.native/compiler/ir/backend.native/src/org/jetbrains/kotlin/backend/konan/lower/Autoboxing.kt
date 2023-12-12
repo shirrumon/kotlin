@@ -171,6 +171,7 @@ private class AutoboxingTransformer(val context: Context) : AbstractValueUsageTr
             val expectedClass = expectedType.classOrNull?.owner
             return if (insertSafeCasts
                     && expectedClass != null
+                    && !expectedClass.isNothing()
                     && actualType.classifierOrFail is IrTypeParameterSymbol
                     && actualType.getInlinedClassNative() == null
                     && expectedType.computePrimitiveBinaryTypeOrNull() == null
