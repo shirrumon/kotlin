@@ -175,7 +175,6 @@ private class AutoboxingTransformer(val context: Context) : AbstractValueUsageTr
                         && expectedClass != null
                         && !expectedClass.isNothing()
                         && actualType.getInlinedClassNative() == null
-                        && expectedType.computePrimitiveBinaryTypeOrNull() == null
                         && !expectedClass.isObjCForwardDeclaration()
                         && !expectedClass.isObjCMetaClass()
                 ) {
