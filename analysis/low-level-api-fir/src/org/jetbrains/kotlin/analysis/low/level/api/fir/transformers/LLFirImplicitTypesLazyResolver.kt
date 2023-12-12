@@ -94,10 +94,10 @@ internal class LLImplicitBodyResolveComputationSession : ImplicitBodyResolveComp
 
     override fun <D : FirCallableDeclaration> executeTransformation(symbol: FirCallableSymbol<*>, transformation: () -> D): D {
         // Do not store local declarations as we can postpone only non-local callables
-        return if (symbol.cannotResolveAnnotationsOnDemand()) {
-            transformation()
-        } else {
-            withCancellationBlock {
+        return withCancellationBlock {
+            if (symbol.cannotResolveAnnotationsOnDemand()) {
+                transformation()
+            } else {
                 withAnchorForForeignAnnotations(symbol, transformation)
             }
         }
@@ -142,16 +142,8 @@ internal class LLImplicitBodyResolveComputationSession : ImplicitBodyResolveComp
         return postponedSymbols[target.symbol]
     }
 
-    private var rollback: (() -> Unit)? = null
-
-    fun <D : FirCallableDeclaration> computeInCancellableBlock(
-        symbol: FirCallableSymbol<*>,
-        rollBackCallback: () -> Unit,
-        transformation: () -> D,
-    ): D {
+    fun <D : FirCallableDeclaration> computeInCancellableBlock(symbol: FirCallableSymbol<*>, transformation: () -> D): D {
         stackOfCancellableSymbols += symbol
-        val oldRollback = rollback
-        rollback = rollBackCallback
         return try {
             compute(symbol, transformation)
         } finally {
@@ -160,17 +152,12 @@ internal class LLImplicitBodyResolveComputationSession : ImplicitBodyResolveComp
                 withFirSymbolEntry("expected", symbol)
                 withFirSymbolEntry("actual", removed)
             }
-
-            rollback = oldRollback
         }
     }
 
     private fun <D : FirCallableDeclaration> withCancellationBlock(action: () -> D): D = try {
         action()
     } catch (e: RedundantResolutionException) {
-        check(isLast = false)
-        rollback!!()
-
         val symbolFromException = e.cancelledSymbol
         val cancelledSymbol = stackOfCancellableSymbols.lastOrNull()
             ?: errorWithAttachment("Unexpected state – the stack must be not empty", cause = e) {
@@ -189,23 +176,13 @@ internal class LLImplicitBodyResolveComputationSession : ImplicitBodyResolveComp
     private val stackOfCancellableSymbols = mutableListOf<FirCallableSymbol<*>>()
 
     override fun checkIsResolutionOutdated() {
-        check(isLast = true)
-    }
-
-    private fun check(isLast: Boolean) {
-        val reversed = stackOfCancellableSymbols.asReversed()
-        val symbol = reversed.getOrNull(if (isLast) 0 else 1) ?: return
-        if (symbol.fir.resolvePhase >= FirResolvePhase.IMPLICIT_TYPES_BODY_RESOLVE) {
-            throw RedundantResolutionException(symbol)
+        val topSymbol = stackOfCancellableSymbols.lastOrNull() ?: return
+        if (topSymbol.fir.resolvePhase >= FirResolvePhase.IMPLICIT_TYPES_BODY_RESOLVE) {
+            throw RedundantResolutionException(topSymbol)
         }
     }
 
-    internal class RedundantResolutionException(val cancelledSymbol: FirCallableSymbol<*>) : RuntimeException(
-        /* message = */ null,
-        /* cause = */ null,
-        /* enableSuppression = */ false,
-        /* writableStackTrace = */ false,
-    ), ControlFlowException
+    internal class RedundantResolutionException(val cancelledSymbol: FirCallableSymbol<*>) : RuntimeException(), ControlFlowException
 }
 
 internal class LLFirImplicitBodyTargetResolver(
@@ -557,7 +534,7 @@ internal class LLFirImplicitBodyTargetResolver(
         preserveContext(target, copiedDeclaration)
 
         // we should mark the original declaration as in progress
-        llImplicitBodyResolveComputationSession.computeInCancellableBlock(target.symbol, ::rollback) {
+        llImplicitBodyResolveComputationSession.computeInCancellableBlock(target.symbol) {
             // We need this lock to be sure that resolution contracts are not violated
             // It is safe because we can't get a recursion here due to a new element
             performCustomResolveUnderLock(copiedDeclaration) {
@@ -572,24 +549,6 @@ internal class LLFirImplicitBodyTargetResolver(
 
             // store calculated result in the session
             target
-        }
-    }
-
-    fun rollback() {
-        val firFile = resolveTarget.firFile
-        val bodyResolveContext = transformer.context
-        bodyResolveContext.reset()
-        bodyResolveContext.addFileToContext(firFile, transformer.components)
-        transformer.dataFlowAnalyzer.enterFile(firFile, buildGraph = false)
-        val script = firFile.declarations.singleOrNull() as? FirScript
-        if (script != null) {
-            transformer.dataFlowAnalyzer.enterScript(script)
-            bodyResolveContext.addScriptContext(script, transformer.components)
-        }
-
-        for (regularClass in nestedClassesStack) {
-            transformer.dataFlowAnalyzer.enterClass(regularClass, buildGraph = false)
-            bodyResolveContext.addClassToContext(regularClass, transformer.components)
         }
     }
 
