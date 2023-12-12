@@ -83,7 +83,7 @@ class FirStdlibTest : AbstractNativeBlackBoxTest() {
 @Tag("xctest")
 @PredefinedTestCases(
     TC(
-        name = "xctest",
+        name = "test-ios-launchTests",
         runnerType = TestRunnerType.DEFAULT,
         freeCompilerArgs = [
             ENABLE_MPP, STDLIB_IS_A_FRIEND, ENABLE_X_STDLIB_API, ENABLE_X_ENCODING_API, ENABLE_RANGE_UNTIL,
@@ -107,7 +107,7 @@ class StdlibTestWithXCTest : AbstractNativeBlackBoxTest() {
             System.getProperty(ClassLevelProperty.XCTEST_FRAMEWORK.propertyName).isNotEmpty()
         }
 
-        return dynamicTestCase(TestCaseId.Named("xctest"))
+        return dynamicTestCase(TestCaseId.Named("test-ios-launchTests"))
     }
 }
 
@@ -116,7 +116,7 @@ class StdlibTestWithXCTest : AbstractNativeBlackBoxTest() {
 @Tag("xctest")
 @PredefinedTestCases(
     TC(
-        name = "xctest",
+        name = "test-ios-launchTests",
         runnerType = TestRunnerType.DEFAULT,
         freeCompilerArgs = [
             ENABLE_MPP, STDLIB_IS_A_FRIEND, ENABLE_X_STDLIB_API, ENABLE_X_ENCODING_API, ENABLE_RANGE_UNTIL,
@@ -133,7 +133,7 @@ class StdlibTestWithXCTest : AbstractNativeBlackBoxTest() {
             "libraries/stdlib/native-wasm/test/**.kt",
             "kotlin-native/runtime/test/**.kt"
         ],
-        ignoredTests = []
+        ignoredTests = [DISABLED_STDLIB_TEST]
     )
 )
 @EnforcedProperty(property = ClassLevelProperty.EXECUTION_TIMEOUT, propertyValue = "2m")
@@ -146,7 +146,7 @@ class FirStdlibTestWithXCTest : AbstractNativeBlackBoxTest() {
             System.getProperty(ClassLevelProperty.XCTEST_FRAMEWORK.propertyName).isNotEmpty()
         }
 
-        return dynamicTestCase(TestCaseId.Named("xctest"))
+        return dynamicTestCase(TestCaseId.Named("test-ios-launchTests"))
     }
 }
 
