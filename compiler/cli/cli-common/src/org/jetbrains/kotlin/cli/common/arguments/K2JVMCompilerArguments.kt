@@ -847,7 +847,7 @@ This option is deprecated and will be deleted in future versions."""
 
     @Argument(
         value = "-Xuse-inline-scopes-numbers",
-        description = "Enable inline scopes numbers for inline marker variables."
+        description = "Use inline scopes numbers for inline marker variables."
     )
     var useInlineScopesNumbers: Boolean = false
         set(value) {

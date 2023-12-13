@@ -7,7 +7,7 @@ fun box() {
     val b = a.copy(b = 3.0)
 }
 
-// EXPECTATIONS JVM_IR
+// EXPECTATIONS JVM_IR JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:6 box:
 // test.kt:3 <init>: a:double=1.0:double, b:double=2.0:double
 // test.kt:6 box:

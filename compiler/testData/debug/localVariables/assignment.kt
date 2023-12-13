@@ -13,7 +13,7 @@ fun box(): String {
     return o + k
 }
 
-// EXPECTATIONS JVM_IR
+// EXPECTATIONS JVM_IR JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:8 box:
 // EXPECTATIONS ClassicFrontend JVM_IR
 // test.kt:6 box:

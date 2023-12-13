@@ -20,7 +20,7 @@ suspend fun box() {
     }
 }
 
-// EXPECTATIONS JVM_IR
+// EXPECTATIONS JVM_IR JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:10 box:
 // test.kt:12 box: $continuation:kotlin.coroutines.Continuation=TestKt$box$1, $result:java.lang.Object=null
 // test.kt:6 h: $completion:kotlin.coroutines.Continuation=TestKt$box$1

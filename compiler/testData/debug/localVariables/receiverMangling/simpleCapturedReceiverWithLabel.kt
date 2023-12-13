@@ -10,7 +10,7 @@ fun box() {
     }
 }
 
-// EXPECTATIONS JVM_IR
+// EXPECTATIONS JVM_IR JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:8 box:
 // test.kt:5 blockFun: blockArg:kotlin.jvm.functions.Function1=TestKt$box$1
 // test.kt:9 invoke: $this$label:java.lang.String="OK":java.lang.String

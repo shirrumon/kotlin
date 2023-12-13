@@ -20,14 +20,14 @@ inline fun flaf() {
 }
 
 // MODULE: test(library)
-// ENABLE_INLINE_SCOPES_NUMBERS
+// USE_INLINE_SCOPES_NUMBERS
 // FILE: test.kt
 
 fun box() {
     flaf()
 }
 
-// EXPECTATIONS JVM_IR
+// EXPECTATIONS JVM_IR JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:27 box:
 // library.kt:10 box: $i$f$flaf\1\27:int=0:int
 // library.kt:11 box: $i$f$flaf\1\27:int=0:int, flafVar\1:int=0:int

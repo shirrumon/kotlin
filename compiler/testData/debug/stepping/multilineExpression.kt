@@ -12,7 +12,7 @@ fun test(a: Boolean, b: Boolean, c: Boolean): Boolean {
             && c
 }
 
-// EXPECTATIONS JVM_IR
+// EXPECTATIONS JVM_IR JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:6 box
 // test.kt:10 test
 // test.kt:11 test

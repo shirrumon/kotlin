@@ -10,7 +10,7 @@ fun box() {
     y++
 }
 
-// EXPECTATIONS JVM_IR_WITH_INLINE_SCOPES
+// EXPECTATIONS JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:8 box:
 // test.kt:2 <init>:
 // test.kt:8 box:

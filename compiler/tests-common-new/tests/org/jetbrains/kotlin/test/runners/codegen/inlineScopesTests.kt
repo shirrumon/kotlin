@@ -5,7 +5,6 @@
 
 package org.jetbrains.kotlin.test.runners.codegen
 
-import org.jetbrains.kotlin.test.TargetBackend
 import org.jetbrains.kotlin.test.builders.TestConfigurationBuilder
 
 open class AbstractIrBlackBoxInlineCodegenWithBytecodeInlinerTestWithInlineScopes :
@@ -17,13 +16,6 @@ open class AbstractIrBlackBoxInlineCodegenWithBytecodeInlinerTestWithInlineScope
 }
 
 open class AbstractIrBlackBoxInlineCodegenWithIrInlinerTestWithInlineScopes : AbstractIrBlackBoxInlineCodegenWithIrInlinerTest() {
-    override fun configure(builder: TestConfigurationBuilder) {
-        super.configure(builder)
-        builder.useInlineScopesNumbers()
-    }
-}
-
-open class AbstractCompileKotlinAgainstInlineKotlinTestWithInlineScopes : AbstractCompileKotlinAgainstInlineKotlinTest() {
     override fun configure(builder: TestConfigurationBuilder) {
         super.configure(builder)
         builder.useInlineScopesNumbers()
@@ -58,7 +50,7 @@ open class AbstractIrBytecodeListingTestWithInlineScopes : AbstractIrBytecodeLis
     }
 }
 
-open class AbstractIrBytecodeTextTestWithInlineScopes : AbstractIrBytecodeTextTest(TargetBackend.JVM_IR_WITH_INLINE_SCOPES) {
+open class AbstractIrBytecodeTextTestWithInlineScopes : AbstractIrBytecodeTextTest() {
     override fun configure(builder: TestConfigurationBuilder) {
         super.configure(builder)
         builder.useInlineScopesNumbers()
@@ -73,8 +65,6 @@ open class AbstractIrCompileKotlinAgainstInlineKotlinTestWithInlineScopes : Abst
 }
 
 open class AbstractIrLocalVariableBytecodeInlinerTestWithInlineScopes : AbstractIrLocalVariableBytecodeInlinerTest() {
-    override val targetBackend = TargetBackend.JVM_IR_WITH_INLINE_SCOPES
-
     override fun configure(builder: TestConfigurationBuilder) {
         super.configure(builder)
         builder.useInlineScopesNumbers()
@@ -82,8 +72,6 @@ open class AbstractIrLocalVariableBytecodeInlinerTestWithInlineScopes : Abstract
 }
 
 open class AbstractIrLocalVariableIrInlinerTestWithInlineScopes : AbstractIrLocalVariableIrInlinerTest() {
-    override val targetBackend = TargetBackend.JVM_IR_WITH_INLINE_SCOPES
-
     override fun configure(builder: TestConfigurationBuilder) {
         super.configure(builder)
         builder.useInlineScopesNumbers()
@@ -112,45 +100,7 @@ open class AbstractIrSteppingWithIrInlinerTestWithInlineScopes : AbstractIrStepp
     }
 }
 
-open class AbstractJvmIrAgainstOldBoxInlineTestWithInlineScopes : AbstractJvmIrAgainstOldBoxInlineTest() {
-    override fun configure(builder: TestConfigurationBuilder) {
-        super.configure(builder)
-        builder.useInlineScopesNumbers()
-    }
-}
-
-open class AbstractJvmIrAgainstOldBoxTestWithInlineScopes : AbstractJvmIrAgainstOldBoxTest() {
-    override fun configure(builder: TestConfigurationBuilder) {
-        super.configure(builder)
-        builder.useInlineScopesNumbers()
-    }
-}
-
-open class AbstractJvmOldAgainstIrBoxInlineTestWithInlineScopes : AbstractJvmOldAgainstIrBoxInlineTest() {
-    override fun configure(builder: TestConfigurationBuilder) {
-        super.configure(builder)
-        builder.useInlineScopesNumbers()
-    }
-}
-
-open class AbstractJvmOldAgainstIrBoxTestWithInlineScopes : AbstractJvmOldAgainstIrBoxTest() {
-    override fun configure(builder: TestConfigurationBuilder) {
-        super.configure(builder)
-        builder.useInlineScopesNumbers()
-    }
-}
-
 open class AbstractSteppingTestWithInlineScopes : AbstractSteppingTest() {
-    override fun configure(builder: TestConfigurationBuilder) {
-        super.configure(builder)
-        builder.useInlineScopesNumbers()
-    }
-}
-
-open class AbstractModularIrLocalVariableBytecodeInlinerTestWithInlineScopes : AbstractIrLocalVariableBytecodeInlinerTest()
-
-open class AbstractModularIrLocalVariableBytecodeInlinerTestWithInlineScopesAndFlagEnabled : AbstractIrLocalVariableBytecodeInlinerTest() {
-    override val targetBackend = TargetBackend.JVM_IR_WITH_INLINE_SCOPES
     override fun configure(builder: TestConfigurationBuilder) {
         super.configure(builder)
         builder.useInlineScopesNumbers()

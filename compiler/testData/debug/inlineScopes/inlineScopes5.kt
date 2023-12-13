@@ -36,7 +36,7 @@ inline fun x6(x6Var: Int) {
 }
 
 // MODULE: test(library)
-// ENABLE_INLINE_SCOPES_NUMBERS
+// USE_INLINE_SCOPES_NUMBERS
 // FILE: test.kt
 
 fun box() {
@@ -45,7 +45,7 @@ fun box() {
     foo()
 }
 
-// EXPECTATIONS JVM_IR
+// EXPECTATIONS JVM_IR JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:43 box:
 // test.kt:44 box: m:int=1:int
 // library.kt:5 box: m:int=1:int, $i$f$foo\1\44:int=0:int

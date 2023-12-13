@@ -26,8 +26,7 @@ enum class TargetBackend(
     JVM_WITH_OLD_EVALUATOR(false),
     JVM_IR_WITH_OLD_EVALUATOR(true),
     JVM_WITH_IR_EVALUATOR(false),
-    JVM_IR_WITH_IR_EVALUATOR(true),
-    JVM_IR_WITH_INLINE_SCOPES(true, JVM_IR);
+    JVM_IR_WITH_IR_EVALUATOR(true);
 
     val compatibleWith get() = compatibleWithTargetBackend ?: ANY
 }

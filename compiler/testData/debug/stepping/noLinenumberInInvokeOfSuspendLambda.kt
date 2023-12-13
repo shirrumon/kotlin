@@ -23,7 +23,7 @@ fun box() {
     }
 }
 
-// EXPECTATIONS JVM_IR
+// EXPECTATIONS JVM_IR JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:18 box
 // test.kt:10 builder
 // Continuation.kt:66 <init>

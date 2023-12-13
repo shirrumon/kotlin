@@ -20,18 +20,18 @@ fun box() {
     return
 }
 
-// EXPECTATIONS JVM_IR
+// EXPECTATIONS JVM_IR JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:9 box:
 // test.kt:4 <init>: x:java.lang.String="O":java.lang.String, y:int=123:int
 // test.kt:9 box:
 // test.kt:6 foo: a:A=A, block:kotlin.jvm.functions.Function1=TestKt$box$1
-// EXPECTATIONS ClassicFrontend JVM_IR
+// EXPECTATIONS ClassicFrontend JVM_IR JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:11 invoke:
-// EXPECTATIONS JVM_IR
+// EXPECTATIONS JVM_IR JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:12 invoke:
-// EXPECTATIONS ClassicFrontend JVM_IR
+// EXPECTATIONS ClassicFrontend JVM_IR JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:11 invoke: x:java.lang.String="O":java.lang.String
-// EXPECTATIONS JVM_IR
+// EXPECTATIONS JVM_IR JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:14 invoke: x:java.lang.String="O":java.lang.String
 // test.kt:17 invoke: x:java.lang.String="O":java.lang.String, y:int=123:int
 // test.kt:6 foo: a:A=A, block:kotlin.jvm.functions.Function1=TestKt$box$1

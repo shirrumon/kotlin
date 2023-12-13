@@ -42,7 +42,7 @@ inline fun html(init: () -> Unit) {
     return init(init)
 }
 
-// EXPECTATIONS JVM_IR
+// EXPECTATIONS JVM_IR JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:20 box
 // test.kt:8 box
 // test.kt:10 box

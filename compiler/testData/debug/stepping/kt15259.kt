@@ -12,7 +12,7 @@ fun box() {
     makeFace()
 }
 
-// EXPECTATIONS JVM_IR
+// EXPECTATIONS JVM_IR JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:12 box
 // test.kt:6 makeFace
 // test.kt:6 <init>

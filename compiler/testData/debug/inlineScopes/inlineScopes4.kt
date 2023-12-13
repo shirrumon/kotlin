@@ -14,7 +14,7 @@ inline fun bar(xBar: Int) {
 }
 
 // MODULE: test(library)
-// ENABLE_INLINE_SCOPES_NUMBERS
+// USE_INLINE_SCOPES_NUMBERS
 // FILE: test.kt
 
 fun box() {
@@ -23,7 +23,7 @@ fun box() {
     bar(2)
 }
 
-// EXPECTATIONS JVM_IR
+// EXPECTATIONS JVM_IR JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:21 box:
 // test.kt:22 box: m:int=1:int
 // library.kt:10 box: m:int=1:int, xBar\1:int=1:int, $i$f$bar\1\22:int=0:int

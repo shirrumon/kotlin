@@ -21,7 +21,7 @@ fun testExpressionBody(nullable: String?) =
             // Some comment
             nullable.length == 2
 
-// EXPECTATIONS JVM_IR
+// EXPECTATIONS JVM_IR JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:7 box
 // test.kt:14 test
 // test.kt:16 test

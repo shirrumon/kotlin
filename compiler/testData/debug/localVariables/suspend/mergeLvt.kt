@@ -29,7 +29,7 @@ suspend fun box() {
 
 // FIXME(JS_IR): KT-54657
 
-// EXPECTATIONS JVM_IR_WITH_INLINE_SCOPES
+// EXPECTATIONS JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:26 box:
 // test.kt:27 box: $continuation:kotlin.coroutines.Continuation=TestKt$box$1, $result:java.lang.Object=null
 // test.kt:20 box: $continuation:kotlin.coroutines.Continuation=TestKt$box$1, $result:java.lang.Object=null, $i$f$suspendBar\1\27:int=0:int
@@ -41,10 +41,10 @@ suspend fun box() {
 // test.kt:21 box: $continuation:kotlin.coroutines.Continuation=TestKt$box$1, $result:java.lang.Object=null, $i$f$suspendBar\1\27:int=0:int
 // test.kt:22 box: $continuation:kotlin.coroutines.Continuation=TestKt$box$1, $result:java.lang.Object=null, $i$f$suspendBar\1\27:int=0:int, $i$a$-suspendCoroutineUninterceptedOrReturn-TestKt$suspendBar$2\3\105\1:int=0:int
 
-// EXPECTATIONS ClassicFrontend JVM_IR_WITH_INLINE_SCOPES
+// EXPECTATIONS ClassicFrontend JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:23 box: $continuation:kotlin.coroutines.Continuation=TestKt$box$1, $result:java.lang.Object=null, $i$f$suspendBar\1\27:int=0:int, $i$a$-suspendCoroutineUninterceptedOrReturn-TestKt$suspendBar$2\3\105\1:int=0:int
 
-// EXPECTATIONS ClassicFrontend FIR JVM_IR_WITH_INLINE_SCOPES
+// EXPECTATIONS ClassicFrontend FIR JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:21 box: $continuation:kotlin.coroutines.Continuation=TestKt$box$1, $result:java.lang.Object=null, $i$f$suspendBar\1\27:int=0:int
 // test.kt:24 box: $continuation:kotlin.coroutines.Continuation=TestKt$box$1, $result:java.lang.Object=null, $i$f$suspendBar\1\27:int=0:int
 // test.kt:27 box: $continuation:kotlin.coroutines.Continuation=TestKt$box$1, $result:java.lang.Object=null

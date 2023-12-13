@@ -28,7 +28,7 @@ inline fun Int.rid(): Int = this
 
 fun nop() {}
 
-// EXPECTATIONS JVM_IR
+// EXPECTATIONS JVM_IR JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:4 box
 // test.kt:20 value
 // test.kt:4 box

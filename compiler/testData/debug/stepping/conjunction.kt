@@ -19,7 +19,7 @@ fun getC() = false
 
 fun getD() = true
 
-// EXPECTATIONS JVM_IR
+// EXPECTATIONS JVM_IR JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:4 box
 // test.kt:14 getA
 // test.kt:4 box

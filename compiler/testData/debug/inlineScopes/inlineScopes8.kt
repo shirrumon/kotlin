@@ -57,7 +57,7 @@ inline fun test() {
 }
 
 // MODULE: test(library)
-// ENABLE_INLINE_SCOPES_NUMBERS
+// USE_INLINE_SCOPES_NUMBERS
 // FILE: test.kt
 
 fun box() {
@@ -65,7 +65,7 @@ fun box() {
     foo()
 }
 
-// EXPECTATIONS JVM_IR
+// EXPECTATIONS JVM_IR JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:64 box:
 // library.kt:20 box: $i$f$foo\1\64:int=0:int
 // library.kt:21 box: $i$f$foo\1\64:int=0:int, array\1:java.lang.Integer[]=java.lang.Integer[]

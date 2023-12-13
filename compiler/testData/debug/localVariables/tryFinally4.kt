@@ -29,7 +29,7 @@ fun box() {
     compute()
 }
 
-// EXPECTATIONS JVM_IR
+// EXPECTATIONS JVM_IR JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:29 box:
 // test.kt:7 compute:
 // test.kt:8 compute: result:java.lang.String="":java.lang.String

@@ -16,7 +16,7 @@ fun box(): String {
     return "FAIL"
 }
 
-// EXPECTATIONS JVM_IR
+// EXPECTATIONS JVM_IR JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:4 box:
 // test.kt:5 box:
 // test.kt:6 box: i:int=0:int

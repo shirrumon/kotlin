@@ -12,7 +12,7 @@ fun box() {
     "OK"
 }
 
-// EXPECTATIONS JVM_IR
+// EXPECTATIONS JVM_IR JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:6 box
 // test.kt:10 box
 // test.kt:11 box

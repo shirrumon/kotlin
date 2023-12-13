@@ -26,7 +26,7 @@ inline fun inlineCall(block: () -> Unit) {
 }
 
 // MODULE: test(library)
-// ENABLE_INLINE_SCOPES_NUMBERS
+// USE_INLINE_SCOPES_NUMBERS
 // FILE: test.kt
 
 fun box() {
@@ -35,7 +35,7 @@ fun box() {
     }
 }
 
-// EXPECTATIONS JVM_IR
+// EXPECTATIONS JVM_IR JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:33 box:
 // library.kt:5 box: $i$f$bar\1\33:int=0:int
 // library.kt:5 <init>:

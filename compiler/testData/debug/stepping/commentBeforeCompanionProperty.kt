@@ -12,7 +12,7 @@ fun box() {
     AWithCompanion.compPropVal
 }
 
-// EXPECTATIONS JVM_IR
+// EXPECTATIONS JVM_IR JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:12 box
 // test.kt:7 <clinit>
 // test.kt:7 getCompPropVal

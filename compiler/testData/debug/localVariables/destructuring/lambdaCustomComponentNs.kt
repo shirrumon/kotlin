@@ -16,7 +16,7 @@ fun box() {
     foo(MyPair("X", "Y")) { (x, y) -> x + y }
 }
 
-// EXPECTATIONS JVM_IR
+// EXPECTATIONS JVM_IR JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:16 box:
 // test.kt:3 <init>: x:java.lang.String="X":java.lang.String, y:java.lang.String="Y":java.lang.String
 // test.kt:16 box:

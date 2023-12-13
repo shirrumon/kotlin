@@ -5,7 +5,7 @@ fun box() {
     F("foo")
 }
 
-// EXPECTATIONS JVM_IR
+// EXPECTATIONS JVM_IR JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:5 box:
 // test.kt:2 <init>: a:java.lang.String="foo":java.lang.String
 // test.kt:5 box:

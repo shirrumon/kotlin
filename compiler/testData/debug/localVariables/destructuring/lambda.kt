@@ -8,7 +8,7 @@ fun box() {
     foo(A("O", 123)) { (x, y) -> x + y }
 }
 
-// EXPECTATIONS JVM_IR
+// EXPECTATIONS JVM_IR JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:8 box:
 // test.kt:3 <init>: x:java.lang.String="O":java.lang.String, y:int=123:int
 // test.kt:8 box:

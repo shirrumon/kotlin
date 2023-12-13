@@ -9,7 +9,7 @@ fun box() {
     }
 }
 
-// EXPECTATIONS JVM_IR
+// EXPECTATIONS JVM_IR JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:7 box
 // test.kt:4 eval
 // test.kt:8 invoke

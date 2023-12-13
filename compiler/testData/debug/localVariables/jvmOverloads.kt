@@ -10,7 +10,7 @@ fun box() {
     C().foo(4)
 }
 
-// EXPECTATIONS JVM_IR
+// EXPECTATIONS JVM_IR JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:10 box:
 // test.kt:4 <init>:
 // test.kt:10 box:

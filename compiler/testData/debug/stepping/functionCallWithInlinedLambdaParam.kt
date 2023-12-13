@@ -17,7 +17,7 @@ inline fun foo(f: () -> Unit) {
     f()
 }
 
-// EXPECTATIONS JVM_IR
+// EXPECTATIONS JVM_IR JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:6 box
 // test.kt:16 box
 // test.kt:17 box

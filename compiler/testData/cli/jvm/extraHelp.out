@@ -29,7 +29,6 @@ where advanced options include:
   -Xemit-jvm-type-annotations Emit JVM type annotations in bytecode.
   -Xdebug                    Enable debug mode for compilation.
                              Currently this includes spilling all variables in a suspending context regardless of whether they are alive.
-  -Xuse-inline-scopes-numbers Use inline scopes numbers for inline marker variables.
   -Xir-inliner               Inline functions using the IR inliner instead of the bytecode inliner.
   -Xjvm-enable-preview       Allow using Java features that are in the preview phase.
                              This works like '--enable-preview' in Java. All class files are marked as compiled with preview features, meaning it won't be possible to use them in release environments.
@@ -142,6 +141,7 @@ where advanced options include:
                              including the ability to read type-use annotations from class files.
                              See KT-45671 for more details.
   -Xuse-fast-jar-file-system Use the fast implementation of Jar FS. This may speed up compilation time, but it is experimental.
+  -Xuse-inline-scopes-numbers Enable inline scopes numbers for inline marker variables.
   -Xuse-javac                Use javac for Java source and class file analysis.
   -Xuse-kapt4                Enable the experimental KAPT 4.
   -Xuse-old-backend          Use the old JVM backend.

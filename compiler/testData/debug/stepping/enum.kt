@@ -24,7 +24,7 @@ fun box() {
     E2.C;
 }
 
-// EXPECTATIONS JVM_IR
+// EXPECTATIONS JVM_IR JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:23 box
 // test.kt:5 <clinit>
 // test.kt:6 <clinit>
