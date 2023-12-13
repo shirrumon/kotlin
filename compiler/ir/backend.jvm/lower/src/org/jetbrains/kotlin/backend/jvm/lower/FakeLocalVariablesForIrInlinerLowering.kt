@@ -188,16 +188,7 @@ private class FunctionParametersProcessor : IrElementVisitorVoid {
     private fun IrStatement.processFunctionParameter(inlinedBlock: IrInlinedFunctionBlock) {
         if (this !is IrVariable || !this.isTmpForInline) return
 
-        val varName = this.name.asString().substringAfterLast("_")
-        val varNewName = when {
-            this.origin == IrDeclarationOrigin.IR_TEMPORARY_VARIABLE_FOR_INLINED_EXTENSION_RECEIVER ->
-                inlinedBlock.getReceiverParameterName()
-            varName == SpecialNames.THIS.asStringStripSpecialMarkers() ->
-                AsmUtil.INLINE_DECLARATION_SITE_THIS
-            else ->
-                varName
-        }
-        this.name = Name.identifier(varNewName + INLINE_FUN_VAR_SUFFIX)
+        this.name = Name.identifier(calculateNewName(inlinedBlock) + INLINE_FUN_VAR_SUFFIX)
         this.origin = IrDeclarationOrigin.DEFINED
     }
 }
@@ -238,18 +229,21 @@ private class ScopeNumberVariableProcessor : IrElementVisitorVoid {
         }
 
         val (inlinedBlock, scopeNumber) = inlinedStack.last()
-        val name = declaration.name.asString().substringAfterLast("_")
-        val newName = when {
-            declaration.origin == IrDeclarationOrigin.IR_TEMPORARY_VARIABLE_FOR_INLINED_EXTENSION_RECEIVER ->
-                inlinedBlock.getReceiverParameterName()
-            name == SpecialNames.THIS.asStringStripSpecialMarkers() ->
-                AsmUtil.INLINE_DECLARATION_SITE_THIS
-            else ->
-                name
-        }
-
+        val newName = declaration.calculateNewName(inlinedBlock)
         declaration.name = Name.identifier(addInlineScopeInfo(newName, scopeNumber))
         super.visitVariable(declaration)
+    }
+}
+
+private fun IrVariable.calculateNewName(inlinedBlock: IrInlinedFunctionBlock): String {
+    val varName = name.asString().substringAfterLast("_")
+    return when {
+        this.origin == IrDeclarationOrigin.IR_TEMPORARY_VARIABLE_FOR_INLINED_EXTENSION_RECEIVER ->
+            inlinedBlock.getReceiverParameterName()
+        varName == SpecialNames.THIS.asStringStripSpecialMarkers() ->
+            AsmUtil.INLINE_DECLARATION_SITE_THIS
+        else ->
+            varName
     }
 }
 
