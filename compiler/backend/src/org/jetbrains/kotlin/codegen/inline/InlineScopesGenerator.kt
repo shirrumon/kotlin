@@ -75,9 +75,7 @@ class InlineScopesGenerator {
                     computeInlineScopeInfo(newNode)
                     currentNode = newNode
 
-                    for (variableWithNotMatchingDepth in variablesWithNotMatchingDepth) {
-                        currentNode.variables.add(variableWithNotMatchingDepth)
-                    }
+                    currentNode.variables.addAll(variablesWithNotMatchingDepth)
                     variablesWithNotMatchingDepth.clear()
                 } else if (!currentNode.isRoot || !shouldSkipVariable(variable)) {
                     if (variable.belongsToInlineScope(currentNode)) {
@@ -332,11 +330,11 @@ class InlineScopesGenerator {
             if (callSiteLineNumber != null) {
                 append(INLINE_SCOPE_NUMBER_SEPARATOR)
                 append(callSiteLineNumber)
-            }
 
-            if (surroundingScopeNumber != null) {
-                append(INLINE_SCOPE_NUMBER_SEPARATOR)
-                append(surroundingScopeNumber)
+                if (surroundingScopeNumber != null) {
+                    append(INLINE_SCOPE_NUMBER_SEPARATOR)
+                    append(surroundingScopeNumber)
+                }
             }
         }
     }
