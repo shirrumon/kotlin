@@ -66,8 +66,13 @@ class CandidateFactory private constructor(
         isFromOriginalTypeInPresenceOfSmartCast: Boolean = false,
     ): Candidate {
         var pluginAmbiguity: AmbiguousInterceptedSymbol? = null
+
         @Suppress("NAME_SHADOWING")
-        val symbol: FirBasedSymbol<*> = if (callRefinementExtensions != null && callInfo.callKind == CallKind.Function) {
+        val symbol: FirBasedSymbol<*> = if (
+            callRefinementExtensions != null &&
+            callInfo.callKind == CallKind.Function &&
+            symbol is FirNamedFunctionSymbol
+        ) {
             if (callRefinementExtensions.size == 1) {
                 val extension = callRefinementExtensions[0]
                 val result = extension.intercept(callInfo, symbol)

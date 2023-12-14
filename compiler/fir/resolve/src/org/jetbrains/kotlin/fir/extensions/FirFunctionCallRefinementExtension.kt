@@ -12,6 +12,7 @@ import org.jetbrains.kotlin.fir.declarations.FirDeclarationDataRegistry
 import org.jetbrains.kotlin.fir.expressions.FirFunctionCall
 import org.jetbrains.kotlin.fir.resolve.calls.CallInfo
 import org.jetbrains.kotlin.fir.symbols.FirBasedSymbol
+import org.jetbrains.kotlin.fir.symbols.impl.FirNamedFunctionSymbol
 import kotlin.reflect.KClass
 
 abstract class FirFunctionCallRefinementExtension(session: FirSession) : FirExtension(session) {
@@ -28,7 +29,7 @@ abstract class FirFunctionCallRefinementExtension(session: FirSession) : FirExte
     /**
      * @return null if plugin is not interested in a [symbol]
      */
-    abstract fun intercept(callInfo: CallInfo, symbol: FirBasedSymbol<*>): FirBasedSymbol<*>?
+    abstract fun intercept(callInfo: CallInfo, symbol: FirNamedFunctionSymbol): FirNamedFunctionSymbol?
 
     abstract fun transform(call: FirFunctionCall, originalSymbol: FirBasedSymbol<*>): FirFunctionCall
 
@@ -37,7 +38,7 @@ abstract class FirFunctionCallRefinementExtension(session: FirSession) : FirExte
 
 val FirExtensionService.callRefinementExtensions: List<FirFunctionCallRefinementExtension> by FirExtensionService.registeredExtensions()
 
-internal class OriginalCallData(val originalSymbol: FirBasedSymbol<*>, val extension: FirFunctionCallRefinementExtension)
+internal class OriginalCallData(val originalSymbol: FirNamedFunctionSymbol, val extension: FirFunctionCallRefinementExtension)
 
 internal object OriginalCallDataKey : FirDeclarationDataKey()
 

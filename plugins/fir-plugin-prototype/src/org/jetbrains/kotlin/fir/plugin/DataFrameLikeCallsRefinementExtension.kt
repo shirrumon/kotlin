@@ -52,9 +52,8 @@ class DataFrameLikeCallsRefinementExtension(session: FirSession) : FirFunctionCa
     }
 
     @OptIn(SymbolInternals::class)
-    override fun intercept(callInfo: CallInfo, symbol: FirBasedSymbol<*>): FirBasedSymbol<*>? {
+    override fun intercept(callInfo: CallInfo, symbol: FirNamedFunctionSymbol): FirNamedFunctionSymbol? {
         if (!symbol.hasAnnotation(REFINE, session)) return null
-        if (symbol !is FirNamedFunctionSymbol) return null
         val generatedName = CallableId(FqName.ROOT, callableName = Name.identifier("add_123"))
         val newSymbol = FirNamedFunctionSymbol(generatedName)
         val lookupTag = ConeClassLikeLookupTagImpl(DATAFRAME)
