@@ -150,9 +150,7 @@ private val Drop: BridgeDirectionBuilder = { _, _, _ -> BridgeDirection.DROP }
 private val Box: BridgeDirectionBuilder = { _, _, to -> BridgeDirection(to, BridgeDirectionKind.BOX) }
 private val Unbox: BridgeDirectionBuilder = { _, _, _ -> BridgeDirection.UNBOX }
 private val Cast: BridgeDirectionBuilder = { index, from, to ->
-    if (from == null || to == null
-            || from.classOrFail.owner.isNothing()
-    ) {
+    if (from == null || to == null) {
         BridgeDirection.NONE
     } else {
         val (superClass, subType) =
