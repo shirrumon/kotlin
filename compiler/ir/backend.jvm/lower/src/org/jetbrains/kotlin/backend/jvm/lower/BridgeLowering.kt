@@ -22,6 +22,7 @@ import org.jetbrains.kotlin.ir.builders.*
 import org.jetbrains.kotlin.ir.builders.declarations.addFunction
 import org.jetbrains.kotlin.ir.declarations.*
 import org.jetbrains.kotlin.ir.expressions.*
+import org.jetbrains.kotlin.ir.overrides.IrOverrideChecker
 import org.jetbrains.kotlin.ir.symbols.IrClassSymbol
 import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
 import org.jetbrains.kotlin.ir.types.IrType
@@ -30,6 +31,7 @@ import org.jetbrains.kotlin.ir.types.isPrimitiveType
 import org.jetbrains.kotlin.ir.types.makeNullable
 import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.name.Name
+import org.jetbrains.kotlin.resolve.OverridingUtil
 import org.jetbrains.kotlin.utils.SmartList
 import org.jetbrains.org.objectweb.asm.Type
 import org.jetbrains.org.objectweb.asm.commons.Method
@@ -124,6 +126,8 @@ internal class BridgeLowering(val context: JvmBackendContext) : ClassLoweringPas
         val overriddenSymbols: MutableList<IrSimpleFunctionSymbol> = mutableListOf()
     )
 
+    private val overrideChecker = IrOverrideChecker(context.typeSystem, emptyList())
+
     override fun lower(irClass: IrClass) {
         // Bridges in DefaultImpls classes are handled in InterfaceLowering.
         if (irClass.origin == JvmLoweredDeclarationOrigin.DEFAULT_IMPLS || irClass.isAnnotationClass) return
@@ -203,6 +207,26 @@ internal class BridgeLowering(val context: JvmBackendContext) : ClassLoweringPas
             // If the current function overrides a special bridge then it's possible that we already generated a final
             // bridge methods in a superclass.
             irFunction.allOverridden().flatMapTo(blacklist) { it.getSpecialBridgeSignatures() }
+
+            // Overridden symbols in K2 are incomplete in the case of intersection overrides and diamond hierarchies.
+            // Therefore, we need to manually look into superclasses and search for potential overridden fake overrides.
+            // See KT-57299.
+            if (context.config.useFir) {
+                val overriddenFromSuperClass = generateSequence(irClass.superClass) { it.superClass }
+                    .firstNotNullOfOrNull { klass ->
+                        klass.declarations.firstOrNull { declaration ->
+                            declaration is IrOverridableMember &&
+                                    declaration.name == targetFunction.name &&
+                                    overrideChecker.isOverridableBy(
+                                        superMember = declaration,
+                                        subMember = targetFunction,
+                                        checkIsInlineFlag = false,
+                                    ).result == OverridingUtil.OverrideCompatibilityInfo.Result.OVERRIDABLE
+                        }
+                    }
+
+                (overriddenFromSuperClass as? IrSimpleFunction)?.getSpecialBridgeSignatures()?.let { blacklist += it }
+            }
 
             fun getSpecialBridgeTargetAddingExtraBridges(): IrSimpleFunction {
                 // We only generate a special bridge method if it does not clash with a final method in a superclass or the current method
