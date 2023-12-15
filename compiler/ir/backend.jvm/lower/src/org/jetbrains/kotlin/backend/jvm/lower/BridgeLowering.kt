@@ -202,7 +202,7 @@ internal class BridgeLowering(val context: JvmBackendContext) : ClassLoweringPas
         if (specialBridge != null) {
             // If the current function overrides a special bridge then it's possible that we already generated a final
             // bridge methods in a superclass.
-            blacklist += irFunction.allOverridden().flatMapTo(arrayListOf()) { it.getSpecialBridgeSignatures() }
+            irFunction.allOverridden().flatMapTo(blacklist) { it.getSpecialBridgeSignatures() }
 
             fun getSpecialBridgeTargetAddingExtraBridges(): IrSimpleFunction {
                 // We only generate a special bridge method if it does not clash with a final method in a superclass or the current method
