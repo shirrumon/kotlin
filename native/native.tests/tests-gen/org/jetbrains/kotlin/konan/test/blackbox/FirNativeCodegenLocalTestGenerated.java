@@ -861,6 +861,12 @@ public class FirNativeCodegenLocalTestGenerated extends AbstractNativeCodegenBox
         }
 
         @Test
+        @TestMetadata("test24.kt")
+        public void testTest24() throws Exception {
+            runTest("native/native.tests/testData/codegen/bridges/test24.kt");
+        }
+
+        @Test
         @TestMetadata("test3.kt")
         public void testTest3() throws Exception {
             runTest("native/native.tests/testData/codegen/bridges/test3.kt");
