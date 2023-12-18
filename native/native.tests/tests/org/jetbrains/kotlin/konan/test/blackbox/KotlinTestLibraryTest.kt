@@ -57,7 +57,7 @@ class FirKotlinTestLibraryTest : AbstractNativeBlackBoxTest() {
 )
 @PredefinedTestCases(
     TC(
-        name = "defaultXCTest",
+        name = "test-ios-launchTests-testLib",
         runnerType = TestRunnerType.DEFAULT,
         freeCompilerArgs = [STDLIB_IS_A_FRIEND],
         sourceLocations = ["libraries/kotlin.test/common/src/test/kotlin/**.kt"]
@@ -66,7 +66,7 @@ class FirKotlinTestLibraryTest : AbstractNativeBlackBoxTest() {
 @UsePartialLinkage(UsePartialLinkage.Mode.DISABLED)
 class KotlinTestLibraryTestWithXCTest : AbstractNativeBlackBoxTest() {
     @TestFactory
-    fun default() = dynamicTestCase(TestCaseId.Named("defaultXCTest"))
+    fun default() = dynamicTestCase(TestCaseId.Named("test-ios-launchTests-testLib"))
 }
 
 @Tag("kotlin-test")
@@ -79,7 +79,7 @@ class KotlinTestLibraryTestWithXCTest : AbstractNativeBlackBoxTest() {
 )
 @PredefinedTestCases(
     TC(
-        name = "defaultXCTest",
+        name = "test-ios-launchTests-testLib",
         runnerType = TestRunnerType.DEFAULT,
         freeCompilerArgs = [STDLIB_IS_A_FRIEND],
         sourceLocations = ["libraries/kotlin.test/common/src/test/kotlin/**.kt"]
@@ -89,6 +89,6 @@ class KotlinTestLibraryTestWithXCTest : AbstractNativeBlackBoxTest() {
 @UsePartialLinkage(UsePartialLinkage.Mode.DISABLED)
 class FirKotlinTestLibraryTestWithXCTest : AbstractNativeBlackBoxTest() {
     @TestFactory
-    fun default() = dynamicTestCase(TestCaseId.Named("defaultXCTest"))
+    fun default() = dynamicTestCase(TestCaseId.Named("test-ios-launchTests-testLib"))
 }
 
