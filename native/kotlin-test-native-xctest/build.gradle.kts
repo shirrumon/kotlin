@@ -2,7 +2,6 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinUsages
 import org.jetbrains.kotlin.gradle.tasks.CInteropProcess
-import org.jetbrains.kotlin.gradle.tasks.KotlinNativeCompile
 import org.jetbrains.kotlin.konan.target.*
 import java.io.ByteArrayOutputStream
 import java.nio.file.Paths
@@ -70,11 +69,11 @@ val nativeTargets = mutableListOf<KotlinNativeTarget>()
 if (HostManager.hostIsMac) {
     kotlin {
         with(nativeTargets) {
-            add(macosX64(KonanTarget.MACOS_X64.name))
-            add(macosArm64(KonanTarget.MACOS_ARM64.name))
-            add(iosX64(KonanTarget.IOS_X64.name))
-            add(iosArm64(KonanTarget.IOS_ARM64.name))
-            add(iosSimulatorArm64(KonanTarget.IOS_SIMULATOR_ARM64.name))
+            add(macosX64())
+            add(macosArm64())
+            add(iosX64())
+            add(iosArm64())
+            add(iosSimulatorArm64())
 
             forEach {
                 val copyTask = registerCopyFrameworkTask(it.konanTarget)
@@ -82,9 +81,10 @@ if (HostManager.hostIsMac) {
                     cinterops {
                         register("XCTest") {
                             compilerOpts(
-                                "-iframework",
-                                project.layout.buildDirectory.dir("$konanTarget/Frameworks")
-                                    .get().asFile
+                                "-iframework", project.layout.buildDirectory
+                                    .dir("$konanTarget/Frameworks")
+                                    .get()
+                                    .asFile
                                     .absolutePath
                             )
                             // cinterop task should depend on the framework copy task
@@ -116,8 +116,16 @@ val kotlinTestNativeXCTest by configurations.creating {
 
 nativeTargets.forEach { target ->
     val targetName = target.konanTarget.name
-    val outputKlibTask = tasks.named<KotlinNativeCompile>("compileKotlin${targetName.capitalize()}")
-    val cinteropKlibTask = tasks.named<CInteropProcess>("cinteropXCTest${targetName.capitalize()}")
+    val mainCompilation = target.compilations.getByName("main")
+    val outputKlibTask = mainCompilation.compileTaskProvider
+
+    @Suppress("UNCHECKED_CAST")
+    val cinteropKlibTask = tasks.named(
+        mainCompilation.cinterops
+            .getByName("XCTest")
+            .interopProcessingTaskName
+    ) as? TaskProvider<CInteropProcess> ?: error("Unable to get CInteropProcess task provider")
+
     val frameworkCopyTask = tasks.named<Sync>("${targetName}FrameworkCopy")
 
     artifacts {
