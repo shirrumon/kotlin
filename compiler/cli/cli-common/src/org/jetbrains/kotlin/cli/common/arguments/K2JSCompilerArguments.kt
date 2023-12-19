@@ -164,7 +164,7 @@ class K2JSCompilerArguments : CommonCompilerArguments() {
         gradleInputType = GradleInputTypes.INPUT,
         shouldGenerateDeprecatedKotlinOptions = true,
     )
-    @Argument(value = "-target", valueDescription = "{ v5 }", description = "Generate JS files for the specified ECMA version.")
+    @Argument(value = "-target", valueDescription = "{ v5, v2015 }", description = "Generate JS files for the specified ECMA version.")
     var target: String? = null
         set(value) {
             checkFrozen()

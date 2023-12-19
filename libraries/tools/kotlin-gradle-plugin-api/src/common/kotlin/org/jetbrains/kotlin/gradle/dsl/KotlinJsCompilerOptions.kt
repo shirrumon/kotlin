@@ -114,7 +114,7 @@ interface KotlinJsCompilerOptions : org.jetbrains.kotlin.gradle.dsl.KotlinCommon
     /**
      * Generate JS files for the specified ECMA version.
      *
-     * Possible values: "v5"
+     * Possible values: "v5", "v2015"
      *
      * Default value: "v5"
      */
