@@ -308,7 +308,7 @@ private fun makeKotlinParameterTypes(
 
 private fun Member.isFromDefaultImpls(): Boolean {
     val clazz = declaringClass ?: return false
-    if (clazz.simpleName.endsWith("$${JvmAbi.DEFAULT_IMPLS_CLASS_NAME}")) return false
+    if (clazz.simpleName != JvmAbi.DEFAULT_IMPLS_CLASS_NAME) return false
     val descriptor = (clazz.enclosingClass?.kotlin as? KClassImpl)?.descriptor as? DeserializedClassDescriptor ?: return false
     return descriptor.kind == ClassKind.INTERFACE && !JvmProtoBufUtil.isNewPlaceForBodyGeneration(descriptor.classProto)
 }
