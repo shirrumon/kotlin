@@ -46,7 +46,7 @@ internal val Project.konanDataDir: String?
     get() = PropertiesProvider(this).konanDataDir
 
 internal val Project.kotlinNativeToolchainEnabled: Boolean
-    get() = PropertiesProvider(this).kotlinNativeToolchainEnabled
+    get() = PropertiesProvider(this).kotlinNativeToolchainEnabled && PropertiesProvider(this).nativeDownloadFromMaven
 
 internal fun Project.getKonanCacheKind(target: KonanTarget): NativeCacheKind {
     val commonCacheKind = PropertiesProvider(this).nativeCacheKind

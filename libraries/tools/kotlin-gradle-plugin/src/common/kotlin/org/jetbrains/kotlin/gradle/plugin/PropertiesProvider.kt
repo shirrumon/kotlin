@@ -504,7 +504,6 @@ internal class PropertiesProvider private constructor(private val project: Proje
 
     /**
      * Enables kotlin native toolchain in native projects.
-     * This property can be removed after finishing KFC-655.
      */
     val kotlinNativeToolchainEnabled: Boolean
         get() = booleanProperty(KOTLIN_NATIVE_TOOLCHAIN_ENABLED) ?: true

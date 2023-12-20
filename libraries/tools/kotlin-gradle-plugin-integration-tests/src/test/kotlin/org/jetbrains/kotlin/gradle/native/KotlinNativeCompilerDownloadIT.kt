@@ -8,6 +8,7 @@ package org.jetbrains.kotlin.gradle.native
 import org.gradle.util.GradleVersion
 import org.jetbrains.kotlin.gradle.testbase.*
 import org.jetbrains.kotlin.gradle.testbase.TestVersions.Kotlin.STABLE_RELEASE
+import org.jetbrains.kotlin.gradle.util.capitalize
 import org.jetbrains.kotlin.konan.target.HostManager
 import org.jetbrains.kotlin.test.TestMetadata
 import org.junit.jupiter.api.DisplayName
@@ -24,6 +25,8 @@ class KotlinNativeCompilerDownloadIT : KGPBaseTest() {
 
     private val currentPlatform = HostManager.platformName()
 
+    private val nativeHostTargetName = MPPNativeTargets.current
+
     private val UNPUCK_KONAN_FINISHED_LOG =
         "Moving Kotlin/Native compiler from tmp directory"
 
@@ -31,6 +34,14 @@ class KotlinNativeCompilerDownloadIT : KGPBaseTest() {
 
     private val DOWNLOAD_KONAN_FINISHED_LOG =
         "Download $STABLE_VERSION_DIR_NAME.${if (HostManager.hostIsMingw) "zip" else "tar.gz"} finished,"
+
+    override val defaultBuildOptions: BuildOptions
+        get() = super.defaultBuildOptions.copy(
+            nativeOptions = super.defaultBuildOptions.nativeOptions.copy(
+                version = STABLE_RELEASE,
+                distributionDownloadFromMaven = true
+            )
+        )
 
     @DisplayName("KT-58303: Kotlin Native must not be downloaded during configuration phase")
     @GradleTest
@@ -40,9 +51,6 @@ class KotlinNativeCompilerDownloadIT : KGPBaseTest() {
             gradleVersion,
             buildOptions = defaultBuildOptions.copy(
                 konanDataDir = konanTemp,
-                nativeOptions = defaultBuildOptions.nativeOptions.copy(
-                    version = STABLE_RELEASE,
-                ),
             ),
         ) {
             build("help") {
@@ -61,9 +69,6 @@ class KotlinNativeCompilerDownloadIT : KGPBaseTest() {
             gradleVersion,
             buildOptions = defaultBuildOptions.copy(
                 konanDataDir = konanTemp,
-                nativeOptions = defaultBuildOptions.nativeOptions.copy(
-                    version = STABLE_RELEASE,
-                ),
             ),
         ) {
             build("assemble") {
@@ -83,10 +88,6 @@ class KotlinNativeCompilerDownloadIT : KGPBaseTest() {
             buildOptions = defaultBuildOptions.copy(
                 konanDataDir = konanTemp,
                 freeArgs = listOf("-Pkotlin.native.toolchain.enabled=false"),
-                nativeOptions = defaultBuildOptions.nativeOptions.copy(
-                    version = STABLE_RELEASE,
-                    distributionDownloadFromMaven = true,
-                ),
             ),
         ) {
             build("assemble") {
@@ -101,7 +102,8 @@ class KotlinNativeCompilerDownloadIT : KGPBaseTest() {
     fun multiModuleProjectWithDifferentKotlinNativeCompilers(gradleVersion: GradleVersion, @TempDir customNativeHomePath: Path) {
         nativeProject("native-multi-module-project", gradleVersion, configureSubProjects = true) {
             val defaultKotlinNativeHomePath =
-                defaultBuildOptions.konanDataDir?.toAbsolutePath()?.normalize() ?: error("Default konan data dir must be set in this test before overriding")
+                defaultBuildOptions.konanDataDir?.toAbsolutePath()?.normalize()
+                    ?: error("Default konan data dir must be set in this test before overriding")
 
             // setting different konan home in different subprojects
             subProject("native1").gradleProperties.appendKonanToGradleProperties(customNativeHomePath.absolutePathString())
@@ -109,22 +111,19 @@ class KotlinNativeCompilerDownloadIT : KGPBaseTest() {
 
             val buildOptions = defaultBuildOptions.copy(
                 konanDataDir = null,
-                nativeOptions = defaultBuildOptions.nativeOptions.copy(
-                    version = STABLE_RELEASE,
-                )
             )
 
             build("assemble", buildOptions = buildOptions) {
 
                 // check that in first project we use k/n from custom konan location
-                assertNativeTasksClasspath(":native1:compileKotlinMacosArm64") {
+                assertNativeTasksClasspath(":native1:compileKotlin${nativeHostTargetName.capitalize()}") {
                     val konanLibsPath = customNativeHomePath.resolve(STABLE_VERSION_DIR_NAME).resolve("konan").resolve("lib")
                     assertContains(it, konanLibsPath.resolve("kotlin-native-compiler-embeddable.jar").absolutePathString())
                     assertContains(it, konanLibsPath.resolve("trove4j.jar").absolutePathString())
                 }
 
                 // check that in second project we use k/n from default konan location
-                assertNativeTasksClasspath(":native2:compileKotlinMacosArm64") {
+                assertNativeTasksClasspath(":native2:compileKotlin${nativeHostTargetName.capitalize()}") {
                     val konanLibsPath = defaultKotlinNativeHomePath.resolve(STABLE_VERSION_DIR_NAME).resolve("konan").resolve("lib")
                     assertContains(it, konanLibsPath.resolve("kotlin-native-compiler-embeddable.jar").absolutePathString())
                     assertContains(it, konanLibsPath.resolve("trove4j.jar").absolutePathString())
@@ -137,9 +136,9 @@ class KotlinNativeCompilerDownloadIT : KGPBaseTest() {
         this.appendText(
             """
                     
-                kotlin.native.home=${konanAbsolutePathString}
-                konan.data.dir=${konanAbsolutePathString}
-                """.trimIndent()
+            kotlin.native.home=${konanAbsolutePathString}
+            konan.data.dir=${konanAbsolutePathString}
+            """.trimIndent()
         )
     }
 }

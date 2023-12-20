@@ -20,7 +20,10 @@ import org.gradle.api.logging.LogLevel
 import org.gradle.util.GradleVersion
 import org.jetbrains.kotlin.gradle.report.BuildReportType
 import org.jetbrains.kotlin.gradle.testbase.*
+import org.jetbrains.kotlin.gradle.util.capitalize
 import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.io.TempDir
+import java.nio.file.Path
 import kotlin.io.path.ExperimentalPathApi
 import kotlin.io.path.readText
 import kotlin.io.path.relativeTo
@@ -144,11 +147,42 @@ class BuildCacheIT : KGPBaseTest() {
         }
     }
 
+    @DisplayName("Changing native toolchain location should not break build cache")
+    @GradleTest
+    fun testNativeToolchainWithBuildCache(gradleVersion: GradleVersion, @TempDir customNativeHomePath: Path) {
+        nativeProject("native-simple-project", gradleVersion) {
+            enableLocalBuildCache(localBuildCacheDir)
+
+            val buildOptionsBeforeCaching = defaultBuildOptions.copy(
+                nativeOptions = super.defaultBuildOptions.nativeOptions.copy(
+                    version = TestVersions.Kotlin.STABLE_RELEASE,
+                    distributionDownloadFromMaven = true
+                )
+            )
+            val nativeCompileTask = ":compileKotlin${MPPNativeTargets.current.capitalize()}"
+            build(":assemble", buildOptions = buildOptionsBeforeCaching) {
+                assertTasksPackedToCache(nativeCompileTask)
+            }
+
+            val buildOptionsAfterCaching = buildOptionsBeforeCaching.copy(
+                konanDataDir = customNativeHomePath,
+            )
+
+            build("clean", ":assemble", buildOptions = buildOptionsAfterCaching) {
+                assertTasksFromCache(nativeCompileTask)
+            }
+        }
+    }
+
     //doesn't work for build history files approach
     @DisplayName("Restore from build cache should not break incremental compilation")
     @GradleTest
     fun testIncrementalCompilationAfterCacheHit(gradleVersion: GradleVersion) {
-        project("incrementalMultiproject", gradleVersion, buildOptions = defaultBuildOptions.copy(useICClasspathSnapshot = true, useGradleClasspathSnapshot = false)) {
+        project(
+            "incrementalMultiproject",
+            gradleVersion,
+            buildOptions = defaultBuildOptions.copy(useICClasspathSnapshot = true, useGradleClasspathSnapshot = false)
+        ) {
             enableLocalBuildCache(localBuildCacheDir)
             build("assemble")
             build("clean", "assemble") {
@@ -159,8 +193,15 @@ class BuildCacheIT : KGPBaseTest() {
 
             bKtSourceFile.modify { it.replace("fun b() {}", "fun b() {}\nfun b2() {}") }
 
-            build("assemble", buildOptions = defaultBuildOptions.copy(useICClasspathSnapshot = true, useGradleClasspathSnapshot = false, logLevel = LogLevel.DEBUG)) {
-                assertIncrementalCompilation(expectedCompiledKotlinFiles = setOf(bKtSourceFile).map { it.relativeTo(projectPath)})
+            build(
+                "assemble",
+                buildOptions = defaultBuildOptions.copy(
+                    useICClasspathSnapshot = true,
+                    useGradleClasspathSnapshot = false,
+                    logLevel = LogLevel.DEBUG
+                )
+            ) {
+                assertIncrementalCompilation(expectedCompiledKotlinFiles = setOf(bKtSourceFile).map { it.relativeTo(projectPath) })
                 assertOutputContains("Incremental compilation with ABI snapshot enabled")
             }
         }

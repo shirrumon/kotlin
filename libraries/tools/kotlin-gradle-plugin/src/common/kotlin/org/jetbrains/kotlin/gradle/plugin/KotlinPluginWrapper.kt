@@ -122,21 +122,9 @@ abstract class DefaultKotlinBasePlugin : KotlinBasePlugin {
 
     private fun addKotlinNativeCompilerConfiguration(project: Project) {
         project.configurations
-            .create(KOTLIN_NATIVE_COMPILER_CONFIGURATION_NAME) { configuration ->
-                configuration.isVisible = false
-                configuration.isCanBeConsumed = false
+            .createResolvable(KOTLIN_NATIVE_COMPILER_CONFIGURATION_NAME).also { configuration ->
                 configuration.defaultDependencies {
-                    it.add(
-                        project.dependencies.create(
-                            mapOf(
-                                "group" to NativeCompilerDownloader.KOTLIN_GROUP_ID,
-                                "name" to NativeCompilerDownloader.getDependencyName(project),
-                                "version" to NativeCompilerDownloader.getCompilerVersion(project),
-                                "classifier" to NativeCompilerDownloader.simpleOsName,
-                                "ext" to NativeCompilerDownloader.archiveExtension
-                            )
-                        )
-                    )
+                    it.add(project.dependencies.create(NativeCompilerDownloader.getCompilerDependencyNotation(project)))
                 }
                 configuration.attributes.attribute(
                     KotlinNativeCompilerAttribute.attribute,

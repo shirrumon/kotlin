@@ -45,19 +45,34 @@ class NativeCompilerDownloader(
         internal const val BASE_DOWNLOAD_URL = "https://download.jetbrains.com/kotlin/native/builds"
         internal const val KOTLIN_GROUP_ID = "org.jetbrains.kotlin"
 
+        internal fun getCompilerDependencyNotation(project: Project): Map<String, String> {
+            return mapOf(
+                "group" to KOTLIN_GROUP_ID,
+                "name" to getDependencyName(project),
+                "version" to getCompilerVersion(project),
+                "classifier" to simpleOsName,
+                "ext" to archiveExtension
+            )
+        }
+
         internal fun getCompilerDirectory(project: Project): File {
             return DependencyDirectories
                 .getLocalKonanDir(project.konanDataDir)
                 .resolve(getDependencyNameWithOsAndVersion(project))
         }
 
-        internal val simpleOsName = HostManager.platformName()
+        internal fun getDependencyNameWithOsAndVersion(project: Project): String {
+            return "${getDependencyName(project)}-$simpleOsName-${getCompilerVersion(project)}"
+        }
 
-        internal fun getCompilerVersion(project: Project): String {
+
+        private val simpleOsName = HostManager.platformName()
+
+        private fun getCompilerVersion(project: Project): String {
             return project.konanVersion
         }
 
-        internal fun getDependencyName(project: Project): String {
+        private fun getDependencyName(project: Project): String {
             val dependencySuffix = NativeDistributionTypeProvider(project).getDistributionType().suffix
             return if (dependencySuffix != null) {
                 "kotlin-native-$dependencySuffix"
@@ -66,16 +81,12 @@ class NativeCompilerDownloader(
             }
         }
 
-        internal val archiveExtension
+        private val archiveExtension
             get() = if (useZip) {
                 "zip"
             } else {
                 "tar.gz"
             }
-
-        internal fun getDependencyNameWithOsAndVersion(project: Project): String {
-            return "${getDependencyName(project)}-$simpleOsName-${getCompilerVersion(project)}"
-        }
 
         private val useZip = HostManager.hostIsMingw
 
@@ -135,15 +146,7 @@ class NativeCompilerDownloader(
         } else null
 
         val compilerDependency = if (kotlinProperties.nativeDownloadFromMaven) {
-            project.dependencies.create(
-                mapOf(
-                    "group" to KOTLIN_GROUP_ID,
-                    "name" to getDependencyName(project),
-                    "version" to getCompilerVersion(project),
-                    "classifier" to simpleOsName,
-                    "ext" to archiveExtension
-                )
-            )
+            project.dependencies.create(getCompilerDependencyNotation(project))
         } else {
             project.dependencies.create(
                 mapOf(
