@@ -40454,6 +40454,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
         public void testScriptNestedClassInstance() throws Exception {
             runTest("compiler/testData/codegen/box/script/scriptNestedClassInstance.kt");
         }
+
+        @TestMetadata("syntheticJavaPropertyInScript.kt")
+        public void testSyntheticJavaPropertyInScript() throws Exception {
+            runTest("compiler/testData/codegen/box/script/syntheticJavaPropertyInScript.kt");
+        }
     }
 
     @TestMetadata("compiler/testData/codegen/box/sealed")
