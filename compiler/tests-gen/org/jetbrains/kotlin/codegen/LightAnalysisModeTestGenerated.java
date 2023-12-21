@@ -40496,11 +40496,6 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
             runTest("compiler/testData/codegen/box/script/scriptNestedClassInstanceK2.kt");
         }
 
-        @TestMetadata("scriptPropFromAnotherModuleK2.kt")
-        public void ignoreScriptPropFromAnotherModuleK2() throws Exception {
-            runTest("compiler/testData/codegen/box/script/scriptPropFromAnotherModuleK2.kt");
-        }
-
         private void runTest(String testDataFilePath) throws Exception {
             KotlinTestUtils.runTest(this::doTest, TargetBackend.JVM_IR, testDataFilePath);
         }
@@ -40527,6 +40522,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
         @TestMetadata("scriptNestedClassInstance.kt")
         public void testScriptNestedClassInstance() throws Exception {
             runTest("compiler/testData/codegen/box/script/scriptNestedClassInstance.kt");
+        }
+
+        @TestMetadata("scriptPropFromAnotherModuleK2.kt")
+        public void testScriptPropFromAnotherModuleK2() throws Exception {
+            runTest("compiler/testData/codegen/box/script/scriptPropFromAnotherModuleK2.kt");
         }
     }
 
