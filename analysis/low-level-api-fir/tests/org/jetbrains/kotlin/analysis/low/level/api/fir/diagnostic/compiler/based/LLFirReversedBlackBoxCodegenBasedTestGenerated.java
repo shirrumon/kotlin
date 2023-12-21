@@ -51581,6 +51581,12 @@ public class LLFirReversedBlackBoxCodegenBasedTestGenerated extends AbstractLLFi
         public void testScriptPropFromAnotherModuleK2() throws Exception {
             runTest("compiler/testData/codegen/box/script/scriptPropFromAnotherModuleK2.kt");
         }
+
+        @Test
+        @TestMetadata("syntheticJavaPropertyInScript.kt")
+        public void testSyntheticJavaPropertyInScript() throws Exception {
+            runTest("compiler/testData/codegen/box/script/syntheticJavaPropertyInScript.kt");
+        }
     }
 
     @Nested
