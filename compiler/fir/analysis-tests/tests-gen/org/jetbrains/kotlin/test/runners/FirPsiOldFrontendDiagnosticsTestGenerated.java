@@ -31561,6 +31561,12 @@ public class FirPsiOldFrontendDiagnosticsTestGenerated extends AbstractFirPsiDia
             }
 
             @Test
+            @TestMetadata("scriptDeclsShouldVisibleLocally.kts")
+            public void testScriptDeclsShouldVisibleLocally() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/script/scriptDeclsShouldVisibleLocally.kts");
+            }
+
+            @Test
             @TestMetadata("scriptScopes.kts")
             public void testScriptScopes() throws Exception {
                 runTest("compiler/testData/diagnostics/tests/script/scriptScopes.kts");
