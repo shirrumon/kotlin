@@ -124,11 +124,11 @@ open class YarnRootExtension(
         )
     }
 
-    val restoreYarnLockTaskProvider: TaskProvider<out Task>
-        get() = project.tasks.named(RESTORE_YARN_LOCK_NAME)
+    val restoreYarnLockTaskProvider: TaskProvider<YarnLockCopyTask>
+        get() = project.tasks.withType(YarnLockCopyTask::class.java).named(RESTORE_YARN_LOCK_NAME)
 
-    val storeYarnLockTaskProvider: TaskProvider<out Task>
-        get() = project.tasks.named(STORE_YARN_LOCK_NAME)
+    val storeYarnLockTaskProvider: TaskProvider<YarnLockStoreTask>
+        get() = project.tasks.withType(YarnLockStoreTask::class.java).named(STORE_YARN_LOCK_NAME)
 
     companion object {
         const val YARN: String = "kotlinYarn"
