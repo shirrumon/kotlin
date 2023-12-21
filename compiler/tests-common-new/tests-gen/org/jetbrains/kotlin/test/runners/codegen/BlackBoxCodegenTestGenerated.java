@@ -47418,6 +47418,12 @@ public class BlackBoxCodegenTestGenerated extends AbstractBlackBoxCodegenTest {
         }
 
         @Test
+        @TestMetadata("localCaptureTestsK2.kt")
+        public void testLocalCaptureTestsK2() throws Exception {
+            runTest("compiler/testData/codegen/box/script/localCaptureTestsK2.kt");
+        }
+
+        @Test
         @TestMetadata("scripInstance.kt")
         public void testScripInstance() throws Exception {
             runTest("compiler/testData/codegen/box/script/scripInstance.kt");
@@ -47427,6 +47433,12 @@ public class BlackBoxCodegenTestGenerated extends AbstractBlackBoxCodegenTest {
         @TestMetadata("scriptNestedClassInstance.kt")
         public void testScriptNestedClassInstance() throws Exception {
             runTest("compiler/testData/codegen/box/script/scriptNestedClassInstance.kt");
+        }
+
+        @Test
+        @TestMetadata("scriptNestedClassInstanceK2.kt")
+        public void testScriptNestedClassInstanceK2() throws Exception {
+            runTest("compiler/testData/codegen/box/script/scriptNestedClassInstanceK2.kt");
         }
     }
 
