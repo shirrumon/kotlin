@@ -157,10 +157,10 @@ open class NodeJsRootPlugin : Plugin<Project> {
 
         project.tasks.register(LockCopyTask.STORE_PACKAGE_LOCK_NAME, LockStoreTask::class.java) { task ->
             task.dependsOn(npmInstall)
-            task.inputFile.set(nodeJs.rootPackageDir.resolve(LockCopyTask.PACKAGE_LOCK))
+            task.inputFile.set(nodeJs.rootPackageDirectory.map { it.file(LockCopyTask.PACKAGE_LOCK) })
 
             task.additionalInputFiles.from(
-                nodeJs.rootPackageDir.resolve(LockCopyTask.YARN_LOCK)
+                nodeJs.rootPackageDirectory.map { it.file(LockCopyTask.YARN_LOCK) }
             )
             task.additionalInputFiles.from(
                 task.outputDirectory.map { it.file(LockCopyTask.YARN_LOCK) }
@@ -182,12 +182,12 @@ open class NodeJsRootPlugin : Plugin<Project> {
 
         project.tasks.register(LockCopyTask.UPGRADE_PACKAGE_LOCK, LockStoreTask::class.java) { task ->
             task.dependsOn(npmInstall)
-            task.inputFile.set(nodeJs.rootPackageDir.resolve(LockCopyTask.PACKAGE_LOCK))
+            task.inputFile.set(nodeJs.rootPackageDirectory.map { it.file(LockCopyTask.PACKAGE_LOCK) })
             task.outputDirectory.set(npm.lockFileDirectory)
             task.fileName.set(npm.lockFileName)
 
             task.additionalInputFiles.from(
-                nodeJs.rootPackageDir.resolve(LockCopyTask.YARN_LOCK)
+                nodeJs.rootPackageDirectory.map { it.file(LockCopyTask.YARN_LOCK) }
             )
             task.additionalInputFiles.from(
                 task.outputDirectory.map { it.file(LockCopyTask.YARN_LOCK) }
@@ -213,7 +213,7 @@ open class NodeJsRootPlugin : Plugin<Project> {
             task.additionalInputFiles.from(
                 npm.lockFileDirectory.map { it.file(LockCopyTask.YARN_LOCK) }
             )
-            task.outputDirectory.set(nodeJs.rootPackageDir)
+            task.outputDirectory.set(nodeJs.rootPackageDirectory)
             task.fileName.set(LockCopyTask.PACKAGE_LOCK)
             task.onlyIf {
                 val inputFileExists = task.inputFile.getOrNull()?.asFile?.exists() == true
