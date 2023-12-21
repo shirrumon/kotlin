@@ -684,26 +684,28 @@ class Fir2IrDeclarationStorage(
         val signature = runIf(!isLocal && configuration.linkViaSignatures) {
             signatureComposer.composeSignature(property, fakeOverrideOwnerLookupTag)
         }
-        val irParent = findIrParent(property, fakeOverrideOwnerLookupTag)
-        if (irParent?.isExternalParent() == true) {
-            val symbols = createPropertySymbols(signature, property, fakeOverrideOwnerLookupTag, parentIsExternal = true)
-            val firForLazyProperty = calculateFirForLazyDeclaration(
-                property, fakeOverrideOwnerLookupTag, irParent,
-                fakeOverrideGenerator::createFirPropertyFakeOverrideIfNeeded
-            )
+        if (!isLocal) {
+            val irParent = findIrParent(property, fakeOverrideOwnerLookupTag)
+            if (irParent?.isExternalParent() == true) {
+                val symbols = createPropertySymbols(signature, property, fakeOverrideOwnerLookupTag, parentIsExternal = true)
+                val firForLazyProperty = calculateFirForLazyDeclaration(
+                    property, fakeOverrideOwnerLookupTag, irParent,
+                    fakeOverrideGenerator::createFirPropertyFakeOverrideIfNeeded
+                )
 
-            callablesGenerator.createIrProperty(
-                firForLazyProperty,
-                irParent,
-                symbols,
-                predefinedOrigin = firForLazyProperty.computeExternalOrigin(),
-                allowLazyDeclarationsCreation = true
-            ).also {
-                check(it is Fir2IrLazyProperty)
+                callablesGenerator.createIrProperty(
+                    firForLazyProperty,
+                    irParent,
+                    symbols,
+                    predefinedOrigin = firForLazyProperty.computeExternalOrigin(),
+                    allowLazyDeclarationsCreation = true
+                ).also {
+                    check(it is Fir2IrLazyProperty)
+                }
+
+                cacheIrPropertySymbols(property, symbols, fakeOverrideOwnerLookupTag)
+                return symbols
             }
-
-            cacheIrPropertySymbols(property, symbols, fakeOverrideOwnerLookupTag)
-            return symbols
         }
 
         val symbols = createPropertySymbols(signature, property, fakeOverrideOwnerLookupTag, parentIsExternal = false)
