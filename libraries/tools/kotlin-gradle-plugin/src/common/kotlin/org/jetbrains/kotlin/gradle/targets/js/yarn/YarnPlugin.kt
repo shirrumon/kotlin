@@ -32,7 +32,7 @@ open class YarnPlugin : Plugin<Project> {
         yarnRootExtension.platform.value(nodeJs.platform)
             .disallowChanges()
 
-        nodeJs.packageManagerExtension.convention(
+        nodeJs.packageManagerExtension.set(
             yarnRootExtension
         )
 

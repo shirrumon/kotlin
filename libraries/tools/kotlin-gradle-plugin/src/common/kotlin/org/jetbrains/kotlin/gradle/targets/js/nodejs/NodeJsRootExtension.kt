@@ -19,6 +19,9 @@ import org.jetbrains.kotlin.gradle.targets.js.npm.resolver.PACKAGE_JSON_UMBRELLA
 import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmCachesSetup
 import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask
 import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.RootPackageJsonTask
+import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnLockCopyTask
+import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnLockStoreTask
+import org.jetbrains.kotlin.gradle.targets.js.yarn.yarn
 import org.jetbrains.kotlin.gradle.tasks.internal.CleanableStore
 import org.jetbrains.kotlin.gradle.utils.getFile
 import org.jetbrains.kotlin.gradle.utils.property
@@ -88,7 +91,7 @@ open class NodeJsRootExtension(
             command = value
         }
 
-    var packageManagerExtension: org.gradle.api.provider.Property<NpmApiExt> = project.objects.property()
+    val packageManagerExtension: org.gradle.api.provider.Property<NpmApiExt> = project.objects.property()
 
     val taskRequirements: TasksRequirements
         get() = resolver.tasksRequirements
@@ -179,6 +182,10 @@ open class NodeJsRootExtension(
 
     val npmCachesSetupTaskProvider: TaskProvider<out KotlinNpmCachesSetup>
         get() = project.tasks.withType(KotlinNpmCachesSetup::class.java).named(KotlinNpmCachesSetup.NAME)
+
+    @Deprecated("This is deprecated and will be removed. Use corresponding property from YarnRootExtension")
+    val storeYarnLockTaskProvider: TaskProvider<YarnLockStoreTask>
+        get() = project.yarn.storeYarnLockTaskProvider
 
     companion object {
         const val EXTENSION_NAME: String = "kotlinNodeJs"
