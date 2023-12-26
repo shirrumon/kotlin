@@ -62,7 +62,7 @@ import java.io.File
 open class IncrementalJvmCompilerRunner(
     workingDir: File,
     reporter: BuildReporter<GradleBuildTime, GradleBuildPerformanceMetric>,
-    private val usePreciseJavaTracking: Boolean,
+    usePreciseJavaTracking: Boolean,
     buildHistoryFile: File?,
     outputDirs: Collection<File>?,
     private val modulesApiHistory: ModulesApiHistory,
@@ -119,11 +119,16 @@ open class IncrementalJvmCompilerRunner(
 
     private val changedUntrackedJavaClasses = mutableSetOf<ClassId>()
 
-    private var javaFilesProcessor =
-        if (!usePreciseJavaTracking)
+    private val javaFilesProcessor by lazy {
+        if (!this.usePreciseJavaTracking)
             ChangedJavaFilesProcessor(reporter) { psiFileProvider.javaFile(it) }
         else
             null
+    }
+
+    private val usePreciseJavaTracking: Boolean = usePreciseJavaTracking
+        //TODO: KT-57147 - when preciseJavaTracking is implemented for k2, we can remove this
+        get() = field && !compilerConfiguration.languageVersionSettings.languageVersion.usesK2
 
     override fun calculateSourcesToCompile(
         caches: IncrementalJvmCachesManager,

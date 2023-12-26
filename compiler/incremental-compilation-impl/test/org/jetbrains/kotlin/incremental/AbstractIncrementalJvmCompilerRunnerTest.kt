@@ -73,12 +73,11 @@ abstract class AbstractIncrementalJvmCompilerRunnerTest : AbstractIncrementalCom
         val buildReporter = TestBuildReporter(testICReporter = reporter, buildMetricsReporter = DoNothingBuildMetricsReporter)
 
         withIncrementalCompilation(args) {
-            val k2Mode = args.useK2 || (
-                    (args.languageVersion ?: LanguageVersion.LATEST_STABLE.versionString) >= LanguageVersion.KOTLIN_2_0.versionString
-                    )
+            val languageVersion = LanguageVersion.fromVersionString(args.languageVersion) ?: LanguageVersion.LATEST_STABLE
+            val useK2 = args.useK2 || languageVersion.usesK2
 
             val compiler =
-                if (k2Mode && args.useFirIC && args.useFirLT /* TODO by @Ilya.Chernikov: move LT check into runner */)
+                if (useK2 && args.useFirIC && args.useFirLT /* TODO by @Ilya.Chernikov: move LT check into runner */)
                     IncrementalFirJvmCompilerTestRunner(
                         cachesDir,
                         buildReporter,
@@ -94,7 +93,7 @@ abstract class AbstractIncrementalJvmCompilerRunnerTest : AbstractIncrementalCom
                         cachesDir,
                         buildReporter,
                         // Use precise setting in case of non-Gradle build
-                        usePreciseJavaTracking = !k2Mode, // TODO by @Ilya.Chernikov: add fir-based java classes tracker when available and set this to true
+                        usePreciseJavaTracking = true,
                         buildHistoryFile = buildHistoryFile,
                         outputDirs = null,
                         modulesApiHistory = EmptyModulesApiHistory,
