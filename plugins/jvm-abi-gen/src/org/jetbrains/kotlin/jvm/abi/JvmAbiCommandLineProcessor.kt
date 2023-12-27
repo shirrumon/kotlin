@@ -32,18 +32,31 @@ class JvmAbiCommandLineProcessor : CommandLineProcessor {
                         "sites of inline functions.",
                 false,
             )
+
+        val REMOVE_PRIVATE_TOP_LEVEL_CLASSES_OPTION: CliOption =
+            CliOption(
+                "removePrivateTopLevelClasses",
+                "true/false",
+                "Remove private top-level classes from ABI. False by default due to backwards compatibility. If enabled — " +
+                        "top-level private classes will no longer be available from Java.",
+                false,
+            )
     }
 
     override val pluginId: String
         get() = COMPILER_PLUGIN_ID
 
     override val pluginOptions: Collection<CliOption>
-        get() = listOf(OUTPUT_PATH_OPTION, REMOVE_DEBUG_INFO_OPTION)
+        get() = listOf(OUTPUT_PATH_OPTION, REMOVE_DEBUG_INFO_OPTION, REMOVE_PRIVATE_TOP_LEVEL_CLASSES_OPTION)
 
     override fun processOption(option: AbstractCliOption, value: String, configuration: CompilerConfiguration) {
         when (option) {
             OUTPUT_PATH_OPTION -> configuration.put(JvmAbiConfigurationKeys.OUTPUT_PATH, value)
             REMOVE_DEBUG_INFO_OPTION -> configuration.put(JvmAbiConfigurationKeys.REMOVE_DEBUG_INFO, value == "true")
+            REMOVE_PRIVATE_TOP_LEVEL_CLASSES_OPTION -> configuration.put(
+                JvmAbiConfigurationKeys.REMOVE_PRIVATE_TOP_LEVEL_CLASSES,
+                value == "true"
+            )
             else -> throw CliOptionProcessingException("Unknown option: ${option.optionName}")
         }
     }

@@ -8,9 +8,9 @@ package org.jetbrains.kotlin.jvm.abi;
 import com.intellij.testFramework.TestDataPath;
 import org.jetbrains.kotlin.test.JUnit3RunnerWithInners;
 import org.jetbrains.kotlin.test.KotlinTestUtils;
-import org.jetbrains.kotlin.test.util.KtTestUtil;
 import org.jetbrains.kotlin.test.TargetBackend;
 import org.jetbrains.kotlin.test.TestMetadata;
+import org.jetbrains.kotlin.test.util.KtTestUtil;
 import org.junit.runner.RunWith;
 
 import java.io.File;
@@ -115,9 +115,19 @@ public class CompareJvmAbiTestGenerated extends AbstractCompareJvmAbiTest {
         runTest("plugins/jvm-abi-gen/testData/compare/lambdas/");
     }
 
+    @TestMetadata("nestedPrivateClasses")
+    public void testNestedPrivateClasses() throws Exception {
+        runTest("plugins/jvm-abi-gen/testData/compare/nestedPrivateClasses/");
+    }
+
     @TestMetadata("parameterName")
     public void testParameterName() throws Exception {
         runTest("plugins/jvm-abi-gen/testData/compare/parameterName/");
+    }
+
+    @TestMetadata("privateTopLevelClasses")
+    public void testPrivateTopLevelClasses() throws Exception {
+        runTest("plugins/jvm-abi-gen/testData/compare/privateTopLevelClasses/");
     }
 
     @TestMetadata("privateTypealias")

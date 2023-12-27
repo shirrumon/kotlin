@@ -79,7 +79,10 @@ abstract class BaseJvmAbiTest : TestCase() {
                 abiOption(JvmAbiCommandLineProcessor.OUTPUT_PATH_OPTION.optionName, compilation.abiDir.canonicalPath),
                 abiOption(JvmAbiCommandLineProcessor.REMOVE_DEBUG_INFO_OPTION.optionName, true.toString()).takeIf {
                     InTextDirectivesUtils.findStringWithPrefixes(directives, "// REMOVE_DEBUG_INFO") != null
-                }
+                },
+                abiOption(JvmAbiCommandLineProcessor.REMOVE_PRIVATE_TOP_LEVEL_CLASSES_OPTION.optionName, true.toString()).takeIf {
+                    InTextDirectivesUtils.findStringWithPrefixes(directives, "// REMOVE_PRIVATE_TOP_LEVEL_CLASSES") != null
+                },
             ).toTypedArray()
             destination = compilation.destinationDir.canonicalPath
             noSourceDebugExtension = InTextDirectivesUtils.findStringWithPrefixes(directives, "// NO_SOURCE_DEBUG_EXTENSION") != null

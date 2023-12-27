@@ -5,25 +5,16 @@
 
 package org.jetbrains.kotlin.jvm.abi
 
-import com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.backend.jvm.extensions.ClassGenerator
 import org.jetbrains.kotlin.backend.jvm.extensions.ClassGeneratorExtension
-import org.jetbrains.kotlin.codegen.ClassBuilder
-import org.jetbrains.kotlin.codegen.ClassBuilderFactory
-import org.jetbrains.kotlin.codegen.DelegatingClassBuilder
-import org.jetbrains.kotlin.codegen.DelegatingClassBuilderFactory
 import org.jetbrains.kotlin.codegen.inline.coroutines.FOR_INLINE_SUFFIX
 import org.jetbrains.kotlin.codegen.`when`.WhenByEnumsMapping
-import org.jetbrains.kotlin.descriptors.ClassDescriptor
 import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
-import org.jetbrains.kotlin.descriptors.FunctionDescriptor
-import org.jetbrains.kotlin.descriptors.MemberDescriptor
-import org.jetbrains.kotlin.diagnostics.DiagnosticSink
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrFunction
+import org.jetbrains.kotlin.ir.overrides.isEffectivelyPrivate
+import org.jetbrains.kotlin.ir.util.isTopLevel
 import org.jetbrains.kotlin.load.java.JvmAnnotationNames
-import org.jetbrains.kotlin.resolve.BindingContext
-import org.jetbrains.kotlin.resolve.jvm.diagnostics.JvmDeclarationOrigin
 import org.jetbrains.org.objectweb.asm.AnnotationVisitor
 import org.jetbrains.org.objectweb.asm.MethodVisitor
 import org.jetbrains.org.objectweb.asm.Opcodes
@@ -37,6 +28,7 @@ enum class AbiMethodInfo {
 sealed class AbiClassInfo {
     object Public : AbiClassInfo()
     class Stripped(val methodInfo: Map<Method, AbiMethodInfo>) : AbiClassInfo()
+    object Deleted : AbiClassInfo()
 }
 
 /**
@@ -64,31 +56,39 @@ sealed class AbiClassInfo {
  * be stripped. However, if `f` is not callable directly, we only generate a
  * single inline method `f` which should be kept.
  */
-class JvmAbiClassBuilderInterceptor : ClassGeneratorExtension {
+class JvmAbiClassBuilderInterceptor(
+    private val removePrivateTopLevelClasses: Boolean,
+) : ClassGeneratorExtension {
     val abiClassInfo: MutableMap<String, AbiClassInfo> = mutableMapOf()
 
     override fun generateClass(generator: ClassGenerator, declaration: IrClass?): ClassGenerator =
-        AbiInfoClassGenerator(generator, declaration)
+        AbiInfoClassGenerator(
+            abiClassInfo,
+            removePrivateTopLevelClasses,
+            generator,
+            declaration
+        )
 
-    private inner class AbiInfoClassGenerator(
+    private class AbiInfoClassGenerator(
+        private val abiClassInfo: MutableMap<String, AbiClassInfo>,
+        removePrivateTopLevelClasses: Boolean,
         private val delegate: ClassGenerator,
         irClass: IrClass?,
     ) : ClassGenerator by delegate {
         private val isPrivateClass = irClass != null && DescriptorVisibilities.isPrivate(irClass.visibility)
-        lateinit var internalName: String
-        var localOrAnonymousClass = false
-        var publicAbi = false
-        val methodInfos = mutableMapOf<Method, AbiMethodInfo>()
-        val maskedMethods = mutableSetOf<Method>() // Methods which should be stripped even if they are marked as KEEP
+        private val removeClassFromAbi = shouldRemoveFromAbi(irClass, removePrivateTopLevelClasses)
+        private lateinit var internalName: String
+        private var localOrAnonymousClass = false
+        private var keepClassAsIs = false
+        private val methodInfos = mutableMapOf<Method, AbiMethodInfo>()
+        private val maskedMethods = mutableSetOf<Method>() // Methods which should be stripped even if they are marked as KEEP
 
         override fun defineClass(
             version: Int, access: Int, name: String, signature: String?, superName: String, interfaces: Array<out String>
         ) {
             // Always keep annotation classes
             // TODO: Investigate whether there are cases where we can remove annotation classes from the ABI.
-            if (access and Opcodes.ACC_ANNOTATION != 0) {
-                publicAbi = true
-            }
+            keepClassAsIs = keepClassAsIs || access and Opcodes.ACC_ANNOTATION != 0
 
             internalName = name
             delegate.defineClass(version, access, name, signature, superName, interfaces)
@@ -102,7 +102,8 @@ class JvmAbiClassBuilderInterceptor : ClassGeneratorExtension {
         override fun newMethod(
             declaration: IrFunction?, access: Int, name: String, desc: String, signature: String?, exceptions: Array<out String>?
         ): MethodVisitor {
-            if (publicAbi) {
+            if (keepClassAsIs || removeClassFromAbi) {
+                //we don't care about methods when we remove or keep this class completely
                 return delegate.newMethod(declaration, access, name, desc, signature, exceptions)
             }
 
@@ -138,13 +139,13 @@ class JvmAbiClassBuilderInterceptor : ClassGeneratorExtension {
         // Parse the public ABI flag from the Kotlin metadata annotation
         override fun visitAnnotation(desc: String, visible: Boolean): AnnotationVisitor {
             val delegate = delegate.visitAnnotation(desc, visible)
-            if (publicAbi || desc != JvmAnnotationNames.METADATA_DESC)
+            if (keepClassAsIs || desc != JvmAnnotationNames.METADATA_DESC)
                 return delegate
 
             return object : AnnotationVisitor(Opcodes.API_VERSION, delegate) {
                 override fun visit(name: String?, value: Any?) {
                     if ((name == JvmAnnotationNames.METADATA_EXTRA_INT_FIELD_NAME) && (value is Int)) {
-                        publicAbi = publicAbi || value and JvmAnnotationNames.METADATA_PUBLIC_ABI_FLAG != 0
+                        keepClassAsIs = keepClassAsIs || value and JvmAnnotationNames.METADATA_PUBLIC_ABI_FLAG != 0
                     }
                     super.visit(name, value)
                 }
@@ -154,14 +155,16 @@ class JvmAbiClassBuilderInterceptor : ClassGeneratorExtension {
         override fun done(generateSmapCopyToAnnotation: Boolean) {
             // Remove local or anonymous classes unless they are in the scope of an inline function and
             // strip non-inline methods from all other classes.
-            when {
-                publicAbi ->
-                    abiClassInfo[internalName] = AbiClassInfo.Public
-                !localOrAnonymousClass && !isWhenMappingClass -> {
+            abiClassInfo[internalName] = when {
+                keepClassAsIs -> AbiClassInfo.Public
+                removeClassFromAbi -> AbiClassInfo.Deleted
+                localOrAnonymousClass -> AbiClassInfo.Deleted
+                isWhenMappingClass -> AbiClassInfo.Deleted
+                else -> {
                     for (method in maskedMethods) {
-                        methodInfos.replace(method, AbiMethodInfo.STRIP)
+                        methodInfos[method] = AbiMethodInfo.STRIP
                     }
-                    abiClassInfo[internalName] = AbiClassInfo.Stripped(methodInfos)
+                    AbiClassInfo.Stripped(methodInfos)
                 }
             }
             delegate.done(generateSmapCopyToAnnotation)
@@ -170,4 +173,10 @@ class JvmAbiClassBuilderInterceptor : ClassGeneratorExtension {
         private val isWhenMappingClass: Boolean
             get() = internalName.endsWith(WhenByEnumsMapping.MAPPINGS_CLASS_NAME_POSTFIX)
     }
+}
+
+private fun shouldRemoveFromAbi(irClass: IrClass?, removePrivateTopLevelClasses: Boolean) = when {
+    irClass == null -> false
+    DescriptorVisibilities.isPrivate(irClass.visibility) -> removePrivateTopLevelClasses || !irClass.isTopLevel
+    else -> irClass.isEffectivelyPrivate()
 }

@@ -18,7 +18,10 @@ import org.jetbrains.org.objectweb.asm.Opcodes
  * Wrap the visitor for a Kotlin Metadata annotation to strip out private and local
  * functions, properties, and type aliases as well as local delegated properties.
  */
-fun abiMetadataProcessor(annotationVisitor: AnnotationVisitor): AnnotationVisitor =
+fun abiMetadataProcessor(
+    annotationVisitor: AnnotationVisitor,
+    classesToBeDeleted: Set<String>,
+): AnnotationVisitor =
     kotlinClassHeaderVisitor { header ->
         // kotlinx-metadata only supports writing Kotlin metadata of version >= 1.4, so we need to
         // update the metadata version if we encounter older metadata annotations.
@@ -32,7 +35,7 @@ fun abiMetadataProcessor(annotationVisitor: AnnotationVisitor): AnnotationVisito
             KotlinClassMetadata.transform(header) { metadata ->
                 when (metadata) {
                     is KotlinClassMetadata.Class -> {
-                        metadata.kmClass.removePrivateDeclarations()
+                        metadata.kmClass.removePrivateDeclarations(classesToBeDeleted)
                     }
                     is KotlinClassMetadata.FileFacade -> {
                         metadata.kmPackage.removePrivateDeclarations()
@@ -149,9 +152,11 @@ private fun AnnotationVisitor.visitKotlinMetadata(header: Metadata) {
     visitEnd()
 }
 
-private fun KmClass.removePrivateDeclarations() {
+private fun KmClass.removePrivateDeclarations(classesToBeDeleted: Set<String>) {
     constructors.removeIf { it.visibility.isPrivate }
     (this as KmDeclarationContainer).removePrivateDeclarations()
+    nestedClasses.removeIf { "$name\$$it" in classesToBeDeleted }
+    companionObject = companionObject?.takeUnless { "$name\$$it" in classesToBeDeleted }
     localDelegatedProperties.clear()
     // TODO: do not serialize private type aliases once KT-17229 is fixed.
 }

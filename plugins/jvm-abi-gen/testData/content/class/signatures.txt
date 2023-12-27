@@ -19,23 +19,8 @@ public class test/BaseClass {
     protected final method baseClassProtectedFun(): int
 }
 @kotlin.Metadata
-public final class test/Class$NestedInnerClass$NestedNestedInnerClass {
-    // source: 'classes.kt'
-    private final inner class test/Class$NestedInnerClass
-    public final inner class test/Class$NestedInnerClass$NestedNestedInnerClass
-    public method <init>(): void
-}
-@kotlin.Metadata
-final class test/Class$NestedInnerClass {
-    // source: 'classes.kt'
-    private final inner class test/Class$NestedInnerClass
-    public final inner class test/Class$NestedInnerClass$NestedNestedInnerClass
-    public method <init>(): void
-}
-@kotlin.Metadata
 public final class test/Class {
     // source: 'classes.kt'
-    private final inner class test/Class$NestedInnerClass
     public method <init>(): void
     public final method classPublicMethod(): void
 }
