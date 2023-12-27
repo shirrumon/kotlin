@@ -46,6 +46,7 @@ data class BuildOptions(
     val statisticsForceValidation: Boolean = true,
     val usePreciseOutputsBackup: Boolean? = null,
     val keepIncrementalCompilationCachesInMemory: Boolean? = null,
+    val enableUnsafeIncrementalCompilationForMultiplatform: Boolean = true, // true by default, because it doesn't make sense to change or disable tests for the "normal" behaviour
     val useDaemonFallbackStrategy: Boolean = false,
     val useParsableDiagnosticsFormatting: Boolean = true,
     val showDiagnosticsStacktrace: Boolean? = false, // false by default to not clutter the testdata + stacktraces change often
@@ -194,6 +195,8 @@ data class BuildOptions(
         if (keepIncrementalCompilationCachesInMemory != null) {
             arguments.add("-Pkotlin.compiler.keepIncrementalCompilationCachesInMemory=$keepIncrementalCompilationCachesInMemory")
         }
+
+        arguments.add("-Pkotlin.internal.incremental.enableUnsafeOptimizationsForMultiplatform=$enableUnsafeIncrementalCompilationForMultiplatform")
 
         arguments.add("-Pkotlin.daemon.useFallbackStrategy=$useDaemonFallbackStrategy")
 
