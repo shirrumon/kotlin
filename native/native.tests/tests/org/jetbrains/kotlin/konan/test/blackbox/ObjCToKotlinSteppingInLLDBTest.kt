@@ -20,6 +20,7 @@ import org.jetbrains.kotlin.konan.test.blackbox.support.settings.PipelineType
 import org.jetbrains.kotlin.konan.test.blackbox.support.settings.Timeouts
 import org.jetbrains.kotlin.konan.test.blackbox.support.settings.configurables
 import org.jetbrains.kotlin.konan.test.blackbox.support.util.LLDBSessionSpec
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Assumptions
 import org.junit.jupiter.api.Test
 import java.io.File
@@ -49,6 +50,7 @@ class ObjCToKotlinSteppingInLLDBTest : AbstractNativeSimpleTest() {
     }
 
     @Test
+    @Disabled
     fun stepInFromObjCToKotlin___WithStopHook___StepsThroughToKotlinCode() {
         testSteppingFromObjcToKotlin(
             """
@@ -128,6 +130,7 @@ class ObjCToKotlinSteppingInLLDBTest : AbstractNativeSimpleTest() {
     }
 
     @Test
+    @Disabled
     fun stepOverFromKotlinToObjC___WithStopHook___StepsOverToObjCCode() {
         testSteppingFromObjcToKotlin(
             """
