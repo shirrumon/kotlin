@@ -215,10 +215,6 @@ fun generateJUnit5CompilerTests(args: Array<String>, mainClassName: String?) {
                 model("codegen/box")
             }
 
-            testClass<AbstractSteppingTestWithInlineScopes> {
-                model("debug/stepping")
-            }
-
             testClass<AbstractIrLocalVariableBytecodeInlinerTest>("ModularIrLocalVariableBytecodeInlinerTestWithInlineScopesGenerated") {
                 model("debug/inlineScopes")
             }

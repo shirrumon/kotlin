@@ -2283,6 +2283,12 @@ public class IrBytecodeListingTestWithInlineScopesGenerated extends AbstractIrBy
         }
 
         @Test
+        @TestMetadata("samWithContravariantProjection.kt")
+        public void testSamWithContravariantProjection() throws Exception {
+            runTest("compiler/testData/codegen/bytecodeListing/sam/samWithContravariantProjection.kt");
+        }
+
+        @Test
         @TestMetadata("severalProxyFunsInInit.kt")
         public void testSeveralProxyFunsInInit() throws Exception {
             runTest("compiler/testData/codegen/bytecodeListing/sam/severalProxyFunsInInit.kt");

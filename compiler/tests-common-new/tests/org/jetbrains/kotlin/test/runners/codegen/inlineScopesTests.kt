@@ -99,10 +99,3 @@ open class AbstractIrSteppingWithIrInlinerTestWithInlineScopes : AbstractIrStepp
         builder.useInlineScopesNumbers()
     }
 }
-
-open class AbstractSteppingTestWithInlineScopes : AbstractSteppingTest() {
-    override fun configure(builder: TestConfigurationBuilder) {
-        super.configure(builder)
-        builder.useInlineScopesNumbers()
-    }
-}
