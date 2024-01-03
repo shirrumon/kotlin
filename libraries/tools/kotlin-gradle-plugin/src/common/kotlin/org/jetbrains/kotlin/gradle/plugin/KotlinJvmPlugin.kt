@@ -30,7 +30,6 @@ internal open class KotlinJvmPlugin(
             extensionCompilerOptions: KotlinJvmCompilerOptions,
             targetCompilerOptions: KotlinJvmCompilerOptions
         ) {
-            extensionCompilerOptions.verbose.convention(logger.isDebugEnabled)
             extensionCompilerOptions.moduleName.convention(baseModuleName())
             DefaultKotlinJavaToolchain.wireJvmTargetToToolchain(
                 extensionCompilerOptions,

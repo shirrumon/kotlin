@@ -47,10 +47,6 @@ abstract class KotlinCompileCommon @Inject constructor(
     KotlinCompilationTask<KotlinMultiplatformCommonCompilerOptions>,
     KotlinCommonCompile {
 
-    init {
-        compilerOptions.verbose.convention(logger.isDebugEnabled)
-    }
-
     override val kotlinOptions: KotlinMultiplatformCommonOptions = KotlinMultiplatformCommonOptionsCompat(
         { this },
         compilerOptions

@@ -58,7 +58,6 @@ abstract class Kotlin2JsCompile @Inject constructor(
 
     init {
         incremental = true
-        compilerOptions.verbose.convention(logger.isDebugEnabled)
     }
 
     override val kotlinOptions: KotlinJsOptions = KotlinJsOptionsCompat(
