@@ -16,6 +16,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.compilerOptions
 import org.jetbrains.kotlin.gradle.plugin.mpp.internal
 import org.jetbrains.kotlin.gradle.targets.js.ir.KotlinJsIrSingleTargetPreset
 import org.jetbrains.kotlin.gradle.utils.*
+import org.jetbrains.kotlin.gradle.utils.configureCommonCompilerOptions
 
 open class KotlinJsPlugin: Plugin<Project> {
 
@@ -85,7 +86,7 @@ open class KotlinJsPlugin: Plugin<Project> {
         kotlinExtension.sourceSets.maybeCreate(TEST_COMPILATION_NAME)
 
         kotlinExtension.registerTargetObserver { target ->
-            target?.internal?.compilerOptions?.configureExperimentalTryNext(project)
+            target?.internal?.compilerOptions?.configureCommonCompilerOptions(project)
         }
     }
 }

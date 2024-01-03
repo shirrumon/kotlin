@@ -10,7 +10,7 @@ import org.gradle.tooling.provider.model.ToolingModelBuilderRegistry
 import org.jetbrains.kotlin.gradle.dsl.*
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinWithJavaTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinTasksProvider
-import org.jetbrains.kotlin.gradle.utils.configureExperimentalTryNext
+import org.jetbrains.kotlin.gradle.utils.configureCommonCompilerOptions
 
 internal open class KotlinCommonPlugin(
     registry: ToolingModelBuilderRegistry
@@ -37,7 +37,7 @@ internal open class KotlinCommonPlugin(
                 object : HasCompilerOptions<KotlinMultiplatformCommonCompilerOptions> {
                     override val options: KotlinMultiplatformCommonCompilerOptions = project.objects
                         .newInstance(KotlinMultiplatformCommonCompilerOptionsDefault::class.java)
-                        .configureExperimentalTryNext(project)
+                        .configureCommonCompilerOptions(project)
                 }
             },
             { compilerOptions: KotlinMultiplatformCommonCompilerOptions ->

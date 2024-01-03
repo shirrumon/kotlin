@@ -28,7 +28,7 @@ import org.jetbrains.kotlin.gradle.utils.*
 import org.jetbrains.kotlin.gradle.utils.CompletableFuture
 import org.jetbrains.kotlin.gradle.utils.Future
 import org.jetbrains.kotlin.gradle.utils.castIsolatedKotlinPluginClassLoaderAware
-import org.jetbrains.kotlin.gradle.utils.configureExperimentalTryNext
+import org.jetbrains.kotlin.gradle.utils.configureCommonCompilerOptions
 import org.jetbrains.kotlin.konan.target.CompilerOutputKind
 import org.jetbrains.kotlin.tooling.core.HasMutableExtras
 import org.jetbrains.kotlin.tooling.core.MutableExtras
@@ -202,7 +202,7 @@ abstract class KotlinJvmProjectExtension(project: Project) : KotlinSingleJavaTar
 
     val compilerOptions: KotlinJvmCompilerOptions = project.objects
         .newInstance(KotlinJvmCompilerOptionsDefault::class.java)
-        .configureExperimentalTryNext(project)
+        .configureCommonCompilerOptions(project)
 
     fun compilerOptions(configure: Action<KotlinJvmCompilerOptions>) {
         configure.execute(compilerOptions)
@@ -334,7 +334,7 @@ abstract class KotlinAndroidProjectExtension(project: Project) : KotlinSingleTar
 
     val compilerOptions: KotlinJvmCompilerOptions = project.objects
         .newInstance(KotlinJvmCompilerOptionsDefault::class.java)
-        .configureExperimentalTryNext(project)
+        .configureCommonCompilerOptions(project)
 
     fun compilerOptions(configure: Action<KotlinJvmCompilerOptions>) {
         configure.execute(compilerOptions)

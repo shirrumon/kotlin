@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.gradle.dsl.*
 import org.jetbrains.kotlin.gradle.plugin.PropertiesProvider.Companion.kotlinPropertiesProvider
 import org.jetbrains.kotlin.gradle.plugin.mpp.*
 import org.jetbrains.kotlin.gradle.tasks.*
-import org.jetbrains.kotlin.gradle.utils.configureExperimentalTryNext
+import org.jetbrains.kotlin.gradle.utils.configureCommonCompilerOptions
 
 const val KOTLIN_DSL_NAME = "kotlin"
 
@@ -58,7 +58,7 @@ internal open class KotlinJvmPlugin(
                     override val options: KotlinJvmCompilerOptions =
                         project.objects
                             .newInstance(KotlinJvmCompilerOptionsDefault::class.java)
-                            .configureExperimentalTryNext(project)
+                            .configureCommonCompilerOptions(project)
                 }
             },
             { compilerOptions: KotlinJvmCompilerOptions ->

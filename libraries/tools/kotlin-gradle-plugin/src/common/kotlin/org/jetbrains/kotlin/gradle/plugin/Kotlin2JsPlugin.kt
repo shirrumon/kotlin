@@ -10,7 +10,7 @@ import org.gradle.tooling.provider.model.ToolingModelBuilderRegistry
 import org.jetbrains.kotlin.gradle.dsl.*
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinWithJavaTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinTasksProvider
-import org.jetbrains.kotlin.gradle.utils.configureExperimentalTryNext
+import org.jetbrains.kotlin.gradle.utils.configureCommonCompilerOptions
 
 @Deprecated(
     message = "Should be removed with Js platform plugin",
@@ -41,7 +41,7 @@ internal open class Kotlin2JsPlugin(
                 object : HasCompilerOptions<KotlinJsCompilerOptions> {
                     override val options: KotlinJsCompilerOptions = project.objects
                         .newInstance(KotlinJsCompilerOptionsDefault::class.java)
-                        .configureExperimentalTryNext(project)
+                        .configureCommonCompilerOptions(project)
                 }
             },
             { compilerOptions: KotlinJsCompilerOptions ->

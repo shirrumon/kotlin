@@ -17,7 +17,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.internal
 import org.jetbrains.kotlin.gradle.plugin.sources.DefaultLanguageSettingsBuilder
 import org.jetbrains.kotlin.gradle.utils.newInstance
 
-internal fun KotlinMultiplatformExtension.syncCommonOptions(
+internal fun KotlinMultiplatformExtension.syncCommonMultiplatformOptions(
     extensionCompilerOptions: KotlinCommonCompilerOptions
 ) {
     targets.configureEach { target ->

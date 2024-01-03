@@ -20,12 +20,12 @@ internal object KotlinCompilationCompilerOptionsFromTargetConfigurator : KotlinC
             is KotlinNativeCompilerOptions -> {
                 if (compilation.target is KotlinMetadataTarget) {
                     // Shared native compilation, for example, 'appleMain'
-                    compilation.configureCommonCompilerOptions(compilationCompilerOptions)
+                    compilation.configureCommonCompilerOptionsImpl(compilationCompilerOptions)
                 } else {
                     compilation.configureNativeCompilerOptions(compilationCompilerOptions)
                 }
             }
-            else -> compilation.configureCommonCompilerOptions(compilationCompilerOptions)
+            else -> compilation.configureCommonCompilerOptionsImpl(compilationCompilerOptions)
         }
     }
 
@@ -86,7 +86,8 @@ internal object KotlinCompilationCompilerOptionsFromTargetConfigurator : KotlinC
         )
     }
 
-    private fun DecoratedKotlinCompilation<*>.configureCommonCompilerOptions(
+    // Not to be confused with [org.jetbrains.kotlin.gradle.utils.configureCommonCompilerOptions]
+    private fun DecoratedKotlinCompilation<*>.configureCommonCompilerOptionsImpl(
         commonCompilerOptions: KotlinCommonCompilerOptions
     ) {
         KotlinCommonCompilerOptionsHelper.syncOptionsAsConvention(
