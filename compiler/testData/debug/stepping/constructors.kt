@@ -75,7 +75,7 @@ class O<T>(i: T) {
     }
 }
 
-// EXPECTATIONS JVM_IR
+// EXPECTATIONS JVM_IR JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:5 box
 // test.kt:20 <init>
 // test.kt:5 box

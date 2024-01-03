@@ -23,7 +23,7 @@ fun box() {
     foo(21)
 }
 
-// EXPECTATIONS JVM_IR
+// EXPECTATIONS JVM_IR JVM_IR +USE_INLINE_SCOPES_NUMBERS
 // test.kt:23 box
 // test.kt:6 foo
 // test.kt:5 foo

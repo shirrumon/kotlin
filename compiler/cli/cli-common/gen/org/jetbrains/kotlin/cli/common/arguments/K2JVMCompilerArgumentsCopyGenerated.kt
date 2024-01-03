@@ -26,7 +26,6 @@ fun copyK2JVMCompilerArguments(from: K2JVMCompilerArguments, to: K2JVMCompilerAr
     to.doNotClearBindingContext = from.doNotClearBindingContext
     to.emitJvmTypeAnnotations = from.emitJvmTypeAnnotations
     to.enableDebugMode = from.enableDebugMode
-    to.useInlineScopesNumbers = from.useInlineScopesNumbers
     to.enableIrInliner = from.enableIrInliner
     to.enableJvmPreview = from.enableJvmPreview
     to.enhanceTypeParameterTypesToDefNotNull = from.enhanceTypeParameterTypesToDefNotNull
@@ -78,6 +77,7 @@ fun copyK2JVMCompilerArguments(from: K2JVMCompilerArguments, to: K2JVMCompilerAr
     to.suppressMissingBuiltinsError = from.suppressMissingBuiltinsError
     to.typeEnhancementImprovementsInStrictMode = from.typeEnhancementImprovementsInStrictMode
     to.useFastJarFileSystem = from.useFastJarFileSystem
+    to.useInlineScopesNumbers = from.useInlineScopesNumbers
     to.useJavac = from.useJavac
     to.useKapt4 = from.useKapt4
     to.useOldBackend = from.useOldBackend
