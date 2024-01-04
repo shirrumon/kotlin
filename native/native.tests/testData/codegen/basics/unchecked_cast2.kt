@@ -1,3 +1,5 @@
+// IGNORE_NATIVE: optimizationMode=OPT
+
 fun box(): String {
     try {
         val x = cast<String>(Any())

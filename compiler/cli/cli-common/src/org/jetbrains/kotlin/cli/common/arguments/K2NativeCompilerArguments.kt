@@ -432,6 +432,13 @@ The default value is 1."""
     @Argument(value = "-Xlazy-ir-for-caches", valueDescription = "{disable|enable}", description = "Use lazy IR for cached libraries.")
     var lazyIrForCaches: String? = null
 
+    @Argument(
+        value = "-Xgeneric-safe-casts",
+        valueDescription = "{disable|enable}",
+        description = "Insert additional safe casts for generic type materialization."
+    )
+    var genericSafeCasts: String? = null
+
     @Argument(value = "-Xpartial-linkage", valueDescription = "{enable|disable}", description = "Use partial linkage mode.")
     var partialLinkageMode: String? = null
         set(value) {
