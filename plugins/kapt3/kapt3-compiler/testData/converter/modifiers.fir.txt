@@ -274,7 +274,7 @@ package modifiers;
 @kotlin.Metadata()
 public abstract class SealedClass {
 
-    protected SealedClass() {
+    private SealedClass() {
         super();
     }
 
@@ -291,7 +291,6 @@ public abstract class SealedClass {
     public static final class One extends modifiers.SealedClass {
 
         public One() {
-            super();
         }
     }
 
@@ -308,7 +307,6 @@ public abstract class SealedClass {
     public static class Two extends modifiers.SealedClass {
 
         public Two() {
-            super();
         }
     }
 

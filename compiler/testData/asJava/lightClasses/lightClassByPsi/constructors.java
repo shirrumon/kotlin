@@ -5,7 +5,7 @@ public abstract class A /* A*/ {
   @org.jetbrains.annotations.Nullable()
   public final java.lang.String getX();//  getX()
 
-  protected  A(@org.jetbrains.annotations.Nullable() java.lang.String);//  .ctor(java.lang.String)
+  private  A(java.lang.String);//  .ctor(java.lang.String)
 
   class C ...
 }
