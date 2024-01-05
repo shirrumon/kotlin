@@ -271,6 +271,18 @@ public class SymbolLightClassesEqualityByFqNameForLibraryTestGenerated extends A
     }
 
     @Test
+    @TestMetadata("sealedClass.kt")
+    public void testSealedClass() throws Exception {
+        runTest("compiler/testData/asJava/lightClasses/lightClassByFqName/sealedClass.kt");
+    }
+
+    @Test
+    @TestMetadata("sealedInterface.kt")
+    public void testSealedInterface() throws Exception {
+        runTest("compiler/testData/asJava/lightClasses/lightClassByFqName/sealedInterface.kt");
+    }
+
+    @Test
     @TestMetadata("SimpleObject.kt")
     public void testSimpleObject() throws Exception {
         runTest("compiler/testData/asJava/lightClasses/lightClassByFqName/SimpleObject.kt");

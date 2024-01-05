@@ -234,6 +234,16 @@ public class CompilerLightClassTestGenerated extends AbstractCompilerLightClassT
         runTest("compiler/testData/asJava/lightClasses/lightClassByFqName/PublishedApi.kt");
     }
 
+    @TestMetadata("sealedClass.kt")
+    public void testSealedClass() throws Exception {
+        runTest("compiler/testData/asJava/lightClasses/lightClassByFqName/sealedClass.kt");
+    }
+
+    @TestMetadata("sealedInterface.kt")
+    public void testSealedInterface() throws Exception {
+        runTest("compiler/testData/asJava/lightClasses/lightClassByFqName/sealedInterface.kt");
+    }
+
     @TestMetadata("SimpleObject.kt")
     public void testSimpleObject() throws Exception {
         runTest("compiler/testData/asJava/lightClasses/lightClassByFqName/SimpleObject.kt");
