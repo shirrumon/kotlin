@@ -211,6 +211,11 @@ fun generateJUnit5CompilerTests(args: Array<String>, mainClassName: String?) {
                 model("codegen/box")
             }
 
+
+            testClass<AbstractIrBytecodeTextTestWithInlineScopes> {
+                model("codegen/bytecodeText")
+            }
+
             testClass<AbstractIrBlackBoxCodegenWithIrInlinerTestWithInlineScopes> {
                 model("codegen/box")
             }

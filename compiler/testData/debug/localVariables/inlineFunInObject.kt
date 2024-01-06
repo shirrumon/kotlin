@@ -46,8 +46,8 @@ fun box() {
 // test.kt:6 baz: param:int=5:int, a:int=1:int
 // test.kt:26 baz: param:int=5:int, a:int=1:int, $i$f$inlineCall\1\6:int=0:int
 // test.kt:27 baz: param:int=5:int, a:int=1:int, $i$f$inlineCall\1\6:int=0:int, e\1:int=5:int
-// test.kt:7 baz: param:int=5:int, a:int=1:int, $i$f$inlineCall\1\6:int=0:int, e\1:int=5:int, $i$a$-inlineCall-TestKt$foo$1$baz$1\2\141\0:int=0:int
-// test.kt:8 baz: param:int=5:int, a:int=1:int, $i$f$inlineCall\1\6:int=0:int, e\1:int=5:int, $i$a$-inlineCall-TestKt$foo$1$baz$1\2\141\0:int=0:int, f\2:int=6:int
+// test.kt:7 baz: param:int=5:int, a:int=1:int, $i$f$inlineCall\1\6:int=0:int, e\1:int=5:int, $i$a$-inlineCall-TestKt$foo$1$baz$1\2\129\0:int=0:int
+// test.kt:8 baz: param:int=5:int, a:int=1:int, $i$f$inlineCall\1\6:int=0:int, e\1:int=5:int, $i$a$-inlineCall-TestKt$foo$1$baz$1\2\129\0:int=0:int, f\2:int=6:int
 // test.kt:27 baz: param:int=5:int, a:int=1:int, $i$f$inlineCall\1\6:int=0:int, e\1:int=5:int
 // test.kt:28 baz: param:int=5:int, a:int=1:int, $i$f$inlineCall\1\6:int=0:int, e\1:int=5:int
 // test.kt:9 baz: param:int=5:int, a:int=1:int
@@ -64,8 +64,8 @@ fun box() {
 // test.kt:18 baz: param:int=6:int, b:int=2:int
 // test.kt:26 baz: param:int=6:int, b:int=2:int, $i$f$inlineCall\2\18:int=0:int
 // test.kt:27 baz: param:int=6:int, b:int=2:int, $i$f$inlineCall\2\18:int=0:int, e\2:int=5:int
-// test.kt:19 baz: param:int=6:int, b:int=2:int, $i$f$inlineCall\2\18:int=0:int, e\2:int=5:int, $i$a$-inlineCall-TestKt$bar$1$baz$1\3\143\0:int=0:int
-// test.kt:20 baz: param:int=6:int, b:int=2:int, $i$f$inlineCall\2\18:int=0:int, e\2:int=5:int, $i$a$-inlineCall-TestKt$bar$1$baz$1\3\143\0:int=0:int, g\3:int=7:int
+// test.kt:19 baz: param:int=6:int, b:int=2:int, $i$f$inlineCall\2\18:int=0:int, e\2:int=5:int, $i$a$-inlineCall-TestKt$bar$1$baz$1\3\131\0:int=0:int
+// test.kt:20 baz: param:int=6:int, b:int=2:int, $i$f$inlineCall\2\18:int=0:int, e\2:int=5:int, $i$a$-inlineCall-TestKt$bar$1$baz$1\3\131\0:int=0:int, g\3:int=7:int
 // test.kt:27 baz: param:int=6:int, b:int=2:int, $i$f$inlineCall\2\18:int=0:int, e\2:int=5:int
 // test.kt:28 baz: param:int=6:int, b:int=2:int, $i$f$inlineCall\2\18:int=0:int, e\2:int=5:int
 // test.kt:21 baz: param:int=6:int, b:int=2:int
