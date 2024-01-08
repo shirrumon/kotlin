@@ -1,7 +1,7 @@
 group = "com.example"
 
 plugins {
-    kotlin("js") version "<pluginMarkerVersion>"
+    kotlin("multiplatform") version "<pluginMarkerVersion>"
 }
 
 repositories {
@@ -9,12 +9,23 @@ repositories {
     mavenCentral()
 }
 
-kotlin.js {
-    nodejs()
-    browser()
+kotlin {
+    js {
+        nodejs()
+        browser()
+
+        sourceSets {
+            val jsMain by getting {
+                dependencies {
+                    implementation(kotlin("stdlib-js"))
+                    implementation(npm("decamelize", "1.1.1"))
+                }
+            }
+        }
+    }
 }
 
-tasks.named("browserTest") {
+tasks.named("jsBrowserTest") {
     enabled = false
 }
 
@@ -31,8 +42,3 @@ rootProject.tasks
             )
         )
     }
-
-dependencies {
-    implementation(kotlin("stdlib-js"))
-    implementation(npm("decamelize", "1.1.1"))
-}

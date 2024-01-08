@@ -361,13 +361,13 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
             )
 
             buildAndFail("compileDevelopmentExecutableKotlinJs") {
-                assertTasksFailed(":developmentExecutableValidateGeneratedByCompilerTypeScript")
+                assertTasksFailed(":jsDevelopmentExecutableValidateGeneratedByCompilerTypeScript")
                 assertFileInProjectExists("build/js/packages/js-ir-validate-ts/kotlin/js-ir-validate-ts.js")
                 assertFileInProjectExists("build/js/packages/js-ir-validate-ts/kotlin/js-ir-validate-ts.d.ts")
             }
 
             build("compileProductionExecutableKotlinJs") {
-                assertTasksExecuted(":productionExecutableValidateGeneratedByCompilerTypeScript")
+                assertTasksExecuted(":jsProductionExecutableValidateGeneratedByCompilerTypeScript")
                 assertFileInProjectExists("build/js/packages/js-ir-validate-ts/kotlin/js-ir-validate-ts.js")
                 assertFileInProjectExists("build/js/packages/js-ir-validate-ts/kotlin/js-ir-validate-ts.d.ts")
             }
@@ -547,12 +547,12 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
         project("kotlin-js-with-friend-paths", gradleVersion) {
             build("assemble")
 
-            val oldFriendPaths = "friendPaths.from(project(\":lib\").buildDir.resolve(\"libs/lib.klib\"))"
+            val oldFriendPaths = "friendPaths.from(project(\":lib\").buildDir.resolve(\"libs/lib-js.klib\"))"
             val appModuleGradleBuildKts = subProject("app").buildGradleKts
             assertFileInProjectContains(appModuleGradleBuildKts.absolutePathString(), oldFriendPaths)
             appModuleGradleBuildKts.replaceText(
                 oldFriendPaths,
-                "friendPaths.from(project(\":lib\").buildDir.resolve(\"libs/lib.klib\"), project(\":lib\").buildDir.resolve(\"libs/not_existed_lib.klib\"))"
+                "friendPaths.from(project(\":lib\").buildDir.resolve(\"libs/lib-js.klib\"), project(\":lib\").buildDir.resolve(\"libs/not_existed_lib.klib\"))"
             )
 
             build("assemble") {
@@ -568,7 +568,7 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
             val fingerprints = Array(2) {
                 build("compileDevelopmentExecutableKotlinJs")
 
-                val manifestLines = projectPath.resolve("build/classes/kotlin/main/default/manifest").readLines()
+                val manifestLines = projectPath.resolve("build/classes/kotlin/js/main/default/manifest").readLines()
                 val serializedKlibFingerprint = manifestLines.singleOrNull { it.startsWith("serializedKlibFingerprint=") }
                 assertNotNull(serializedKlibFingerprint) { "can not find serializedKlibFingerprint" }
                 assertTrue("bad serializedKlibFingerprint format '$serializedKlibFingerprint'") {
@@ -771,7 +771,7 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
                     ":compileKotlinJs",
                     ":compileTestKotlinJs"
                 )
-                assertFileInProjectExists("build/classes/kotlin/main/default/manifest")
+                assertFileInProjectExists("build/classes/kotlin/js/main/default/manifest")
 
                 assertFileInProjectExists("build/js/packages/kotlin2JsProjectWithTests-test/kotlin/kotlin2JsProjectWithTests-test.js")
             }
@@ -959,28 +959,28 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
     @GradleTest
     fun testNewKotlinJsPlugin(gradleVersion: GradleVersion) {
         project("kotlin-js-plugin-project", gradleVersion) {
-            build("publish", "assemble", "test", "compileBenchmarkKotlinJs") {
+            build("publish", "assemble", "jsTest", "compileBenchmarkKotlinJs") {
                 assertTasksExecuted(
                     ":compileKotlinJs", ":compileTestKotlinJs", ":compileBenchmarkKotlinJs"
                 )
 
-                val moduleDir = projectPath.resolve("build/repo/com/example/kotlin-js-plugin/1.0/")
+                val moduleDir = projectPath.resolve("build/repo/com/example/kotlin-js-plugin-js/1.0/")
 
-                val publishedJar = moduleDir.resolve("kotlin-js-plugin-1.0.klib")
+                val publishedJar = moduleDir.resolve("kotlin-js-plugin-js-1.0.klib")
                 ZipFile(publishedJar.toFile()).use { zip ->
                     val entries = zip.entries().asSequence().map { it.name }
                     assertTrue { "default/manifest" in entries }
                 }
 
-                val publishedPom = moduleDir.resolve("kotlin-js-plugin-1.0.pom")
+                val publishedPom = moduleDir.resolve("kotlin-js-plugin-js-1.0.pom")
                 val kotlinVersion = defaultBuildOptions.kotlinVersion
                 val pomText = publishedPom.readText().replace(Regex("\\s+"), "")
                 assertTrue { "kotlinx-html-js</artifactId><version>0.7.5</version><scope>compile</scope>" in pomText }
                 assertTrue { "kotlin-stdlib-js</artifactId><version>$kotlinVersion</version><scope>runtime</scope>" in pomText }
 
-                assertFileExists(moduleDir.resolve("kotlin-js-plugin-1.0-sources.jar"))
+                assertFileExists(moduleDir.resolve("kotlin-js-plugin-js-1.0-sources.jar"))
 
-                assertTestResults(projectPath.resolve("tests.xml"), "nodeTest")
+                assertTestResults(projectPath.resolve("tests.xml"), "jsNodeTest")
             }
         }
     }
@@ -1549,7 +1549,7 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
     @GradleTest
     fun testWebpackConfig(gradleVersion: GradleVersion) {
         project("kotlin-js-test-webpack-config", gradleVersion) {
-            build("browserDevelopmentWebpack")
+            build("jsBrowserDevelopmentWebpack")
 
             build("checkConfigDevelopmentWebpack")
 
@@ -1762,30 +1762,30 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
             subProject("app").buildGradleKts.modify {
                 it + """
                     
-                    tasks.named("testPackageJson") {
+                    tasks.named("jsTestPackageJson") {
                         enabled = false
                     }
 
-                    tasks.named("testPublicPackageJson") {
+                    tasks.named("jsTestPublicPackageJson") {
                         enabled = false
                     }
                 """.trimIndent()
             }
 
             build("assemble") {
-                assertTasksExecuted(":app:packageJson")
-                assertTasksExecuted(":base:packageJson")
-                assertTasksExecuted(":lib:packageJson")
+                assertTasksExecuted(":app:jsPackageJson")
+                assertTasksExecuted(":base:jsPackageJson")
+                assertTasksExecuted(":lib:jsPackageJson")
             }
 
             build("check") {
-                assertTasksUpToDate(":app:packageJson")
-                assertTasksUpToDate(":base:packageJson")
-                assertTasksUpToDate(":lib:packageJson")
+                assertTasksUpToDate(":app:jsPackageJson")
+                assertTasksUpToDate(":base:jsPackageJson")
+                assertTasksUpToDate(":lib:jsPackageJson")
 
-                assertTasksSkipped(":app:testPackageJson")
-                assertTasksExecuted(":lib:testPackageJson")
-                assertTasksExecuted(":base:testPackageJson")
+                assertTasksSkipped(":app:jsTestPackageJson")
+                assertTasksExecuted(":lib:jsTestPackageJson")
+                assertTasksExecuted(":base:jsTestPackageJson")
             }
         }
     }
@@ -1875,12 +1875,12 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
                 |}
                """.trimMargin()
             )
-            buildAndFail("nodeTest") {
-                assertTasksFailed(":nodeTest")
+            buildAndFail("jsNodeTest") {
+                assertTasksFailed(":jsNodeTest")
 
                 assertTestResults(
                     projectPath.resolve("TEST-all.xml"),
-                    "nodeTest"
+                    "jsNodeTest"
                 )
             }
         }
@@ -1900,12 +1900,12 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
                 |}
                """.trimMargin()
             )
-            buildAndFail("nodeTest") {
-                assertTasksFailed(":nodeTest")
+            buildAndFail("jsNodeTest") {
+                assertTasksFailed(":jsNodeTest")
 
                 assertTestResults(
                     projectPath.resolve("TEST-all.xml"),
-                    "nodeTest"
+                    "jsNodeTest"
                 )
             }
         }

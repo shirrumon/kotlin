@@ -1,5 +1,5 @@
 plugins {
-    kotlin("js")
+    kotlin("multiplatform")
     `maven-publish`
 }
 
@@ -12,36 +12,38 @@ repositories {
     maven { setUrl("https://maven.pkg.jetbrains.space/public/p/kotlinx-html/maven") }
 }
 
+kotlin {
+    js {
+        nodejs()
+        browser {
+            testTask {
+                useKarma {
+                    useChromeHeadless()
+                }
+                enabled = false // Task is disabled because it requires browser to be installed. That may be a problem on CI.
+                // Disabled but configured task allows us to check at least a part of configuration cache correctness.
+            }
+        }
+    }
+}
+
 kotlin.sourceSets {
-    getByName("main") {
+    getByName("jsMain") {
         dependencies {
             api("org.jetbrains.kotlinx:kotlinx-html-js:0.7.5")
             implementation(kotlin("stdlib-js"))
         }
     }
-    getByName("test") {
+    getByName("jsTest") {
         dependencies {
             implementation(kotlin("test-js"))
         }
     }
 }
 
-kotlin.target {
-    nodejs()
-    browser {
-        testTask {
-            useKarma {
-                useChromeHeadless()
-            }
-            enabled = false // Task is disabled because it requires browser to be installed. That may be a problem on CI.
-            // Disabled but configured task allows us to check at least a part of configuration cache correctness.
-        }
-    }
-}
-
-kotlin.target.compilations.create("benchmark") {
+kotlin.js().compilations.create("benchmark") {
     defaultSourceSet.dependencies {
-        val main by kotlin.target.compilations
+        val main by kotlin.js().compilations
         implementation(main.compileDependencyFiles + main.output.classesDirs)
         runtimeOnly(files(main.runtimeDependencyFiles))
     }

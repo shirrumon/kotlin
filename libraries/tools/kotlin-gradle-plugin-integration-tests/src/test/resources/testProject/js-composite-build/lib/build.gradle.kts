@@ -1,5 +1,5 @@
 plugins {
-    kotlin("js") version "<pluginMarkerVersion>" apply false
+    kotlin("multiplatform") version "<pluginMarkerVersion>" apply false
 }
 
 repositories {

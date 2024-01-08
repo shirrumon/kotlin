@@ -1,5 +1,5 @@
 plugins {
-    kotlin("js")
+    kotlin("multiplatform")
 }
 
 kotlin {
@@ -16,14 +16,14 @@ kotlin {
     }
 
     sourceSets {
-        val main by getting {
-            kotlin.exclude("**/other/**")
+        val jsMain by getting {
+            kotlin.exclude("**/jsOther/**")
             dependencies {
                 runtimeOnly(files(tasks.named("otherKlib")))
             }
         }
-        val other by getting {
-            kotlin.srcDirs("src/main/kotlin/other")
+        val jsOther by getting {
+            kotlin.srcDirs("src/jsMain/kotlin/jsOther")
             dependencies {
                 implementation(project(path = project.path))
             }

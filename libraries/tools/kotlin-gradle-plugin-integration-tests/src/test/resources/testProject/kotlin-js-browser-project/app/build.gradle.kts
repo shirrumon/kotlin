@@ -3,14 +3,7 @@ import org.jetbrains.kotlin.gradle.targets.js.ir.KotlinJsIrLink
 import javax.inject.Inject
 
 plugins {
-    kotlin("js")
-}
-
-dependencies {
-    implementation(kotlin("stdlib-js"))
-    implementation(project(":lib"))
-    implementation(npm(projectDir.resolve("src/main/css")))
-    testImplementation(kotlin("test-js"))
+    kotlin("multiplatform")
 }
 
 abstract class CustomWebpackRule
@@ -23,7 +16,7 @@ constructor(name: String) : org.jetbrains.kotlin.gradle.targets.js.webpack.Kotli
 }
 
 kotlin {
-    target {
+    js {
         browser {
             webpackTask {
                 cssSupport {
@@ -54,6 +47,22 @@ kotlin {
                 customField("customField3" to null)
                 customField("customField4", mapOf("foo" to null))
                 customField("customField5", "@as/${nameOfModule}")
+            }
+        }
+    }
+
+    sourceSets {
+        val jsMain by getting {
+            dependencies {
+                implementation(kotlin("stdlib-js"))
+                implementation(project(":lib"))
+                implementation(npm(projectDir.resolve("src/jsMain/css")))
+            }
+        }
+
+        val jsTest by getting {
+            dependencies {
+                implementation(kotlin("test-js"))
             }
         }
     }

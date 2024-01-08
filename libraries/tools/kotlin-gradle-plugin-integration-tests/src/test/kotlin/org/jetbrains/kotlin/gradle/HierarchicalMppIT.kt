@@ -400,7 +400,7 @@ open class HierarchicalMppIT : KGPBaseTest() {
             projectName = projectName,
             gradleVersion = gradleVersion,
             localRepoDir = localRepoDir,
-            buildOptions = defaultBuildOptions.copy(jsOptions = BuildOptions.JsOptions())
+            buildOptions = defaultBuildOptions
         ).apply {
             beforePublishing()
 

@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.targets.js.yarn.YarnSetupTask
 import org.jetbrains.kotlin.gradle.targets.js.yarn.yarn
 
 plugins {
-    kotlin("js")
+    kotlin("multiplatform")
 }
 
 group = "com.example"
@@ -11,6 +11,12 @@ version = "1.0"
 repositories {
     mavenLocal()
     mavenCentral()
+}
+
+kotlin {
+    js {
+        nodejs()
+    }
 }
 
 yarn
@@ -44,13 +50,9 @@ tasks {
 }
 
 kotlin.sourceSets {
-    getByName("main") {
+    getByName("jsMain") {
         dependencies {
             implementation(kotlin("stdlib-js"))
         }
     }
-}
-
-kotlin.target {
-    nodejs()
 }

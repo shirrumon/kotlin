@@ -1,15 +1,11 @@
 plugins {
-    kotlin("js")
+    kotlin("multiplatform")
     kotlin("plugin.serialization")
 }
 
 repositories {
     mavenCentral()
     mavenLocal()
-}
-
-dependencies {
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
 }
 
 kotlin {
@@ -25,4 +21,8 @@ kotlin {
             }
         }
     }
+}
+
+dependencies {
+    "jsMainImplementation"("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
 }

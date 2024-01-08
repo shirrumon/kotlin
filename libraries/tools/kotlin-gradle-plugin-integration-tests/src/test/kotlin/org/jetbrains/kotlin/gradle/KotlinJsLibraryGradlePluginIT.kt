@@ -18,11 +18,6 @@ import kotlin.test.assertNotNull
 // Should be fixed via planned fixes in Kotlin/JS plugin: https://youtrack.jetbrains.com/issue/KFC-252
 abstract class KotlinJsIrLibraryGradlePluginITBase : KGPBaseTest() {
 
-    override val defaultBuildOptions = super.defaultBuildOptions.copy(
-        jsOptions = BuildOptions.JsOptions(
-        )
-    )
-
     @DisplayName("simple binary library")
     @GradleTest
     fun testSimpleJsBinaryLibrary(gradleVersion: GradleVersion) {

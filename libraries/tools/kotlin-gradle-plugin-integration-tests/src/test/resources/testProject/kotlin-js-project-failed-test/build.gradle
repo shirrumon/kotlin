@@ -1,12 +1,7 @@
 import org.jetbrains.kotlin.gradle.dsl.KotlinJsCompile
 
 plugins {
-    id("org.jetbrains.kotlin.js")
-}
-
-dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-js")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-js")
+    id("org.jetbrains.kotlin.multiplatform")
 }
 
 repositories {
@@ -19,4 +14,9 @@ kotlin {
         binaries.executable()
         nodejs()
     }
+}
+
+dependencies {
+    jsMainImplementation("org.jetbrains.kotlin:kotlin-stdlib-js")
+    jsTestImplementation("org.jetbrains.kotlin:kotlin-test-js")
 }

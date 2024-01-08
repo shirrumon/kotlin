@@ -34,7 +34,7 @@ class KotlinJsDomApiDependencyIT : KGPBaseTest() {
                 it + "\n" +
                         """
                         dependencies {
-                            implementation("org.jetbrains.kotlin:kotlin-stdlib-js")
+                            "jsMainImplementation"("org.jetbrains.kotlin:kotlin-stdlib-js")
                         }
                         """.trimIndent().also { added = it }
             }
@@ -48,7 +48,7 @@ class KotlinJsDomApiDependencyIT : KGPBaseTest() {
                 replaced + "\n" +
                         """
                         dependencies {
-                            implementation("org.jetbrains.kotlin:kotlin-dom-api-compat")
+                            "jsMainImplementation"("org.jetbrains.kotlin:kotlin-dom-api-compat")
                         }
                         """.trimIndent().also { added = it }
             }
@@ -62,8 +62,8 @@ class KotlinJsDomApiDependencyIT : KGPBaseTest() {
                 replaced + "\n" +
                         """
                         dependencies {
-                            implementation("org.jetbrains.kotlin:kotlin-stdlib-js")
-                            implementation("org.jetbrains.kotlin:kotlin-dom-api-compat")
+                            "jsMainImplementation"("org.jetbrains.kotlin:kotlin-stdlib-js")
+                            "jsMainImplementation"("org.jetbrains.kotlin:kotlin-dom-api-compat")
                         }
                         """.trimIndent().also { added = it }
             }
@@ -95,7 +95,7 @@ class KotlinJsDomApiDependencyIT : KGPBaseTest() {
                 it + "\n" +
                         """
                         dependencies {
-                            implementation("org.jetbrains.kotlin:kotlin-stdlib-js")
+                            "jsMainImplementation"("org.jetbrains.kotlin:kotlin-stdlib-js")
                         }
                         """.trimIndent().also { added = it }
             }
@@ -109,7 +109,7 @@ class KotlinJsDomApiDependencyIT : KGPBaseTest() {
                 replaced + "\n" +
                         """
                         dependencies {
-                            implementation("org.jetbrains.kotlin:kotlin-dom-api-compat")
+                            "jsMainImplementation"("org.jetbrains.kotlin:kotlin-dom-api-compat")
                         }
                         """.trimIndent().also { added = it }
             }
@@ -123,8 +123,8 @@ class KotlinJsDomApiDependencyIT : KGPBaseTest() {
                 replaced + "\n" +
                         """
                         dependencies {
-                            implementation("org.jetbrains.kotlin:kotlin-stdlib-js")
-                            implementation("org.jetbrains.kotlin:kotlin-dom-api-compat")
+                            "jsMainImplementation"("org.jetbrains.kotlin:kotlin-stdlib-js")
+                            "jsMainImplementation"("org.jetbrains.kotlin:kotlin-dom-api-compat")
                         }
                         """.trimIndent().also { added = it }
             }
@@ -156,7 +156,7 @@ class KotlinJsDomApiDependencyIT : KGPBaseTest() {
                 it + "\n" +
                         """
                         dependencies {
-                            implementation("org.jetbrains.kotlin:kotlin-stdlib-js")
+                            "jsMainImplementation"("org.jetbrains.kotlin:kotlin-stdlib-js")
                         }
                         """.trimIndent().also { added = it }
             }
@@ -170,7 +170,7 @@ class KotlinJsDomApiDependencyIT : KGPBaseTest() {
                 replaced + "\n" +
                         """
                         dependencies {
-                            implementation("org.jetbrains.kotlin:kotlin-dom-api-compat")
+                            "jsMainImplementation"("org.jetbrains.kotlin:kotlin-dom-api-compat")
                         }
                         """.trimIndent().also { added = it }
             }
@@ -184,8 +184,8 @@ class KotlinJsDomApiDependencyIT : KGPBaseTest() {
                 replaced + "\n" +
                         """
                         dependencies {
-                            implementation("org.jetbrains.kotlin:kotlin-stdlib-js")
-                            implementation("org.jetbrains.kotlin:kotlin-dom-api-compat")
+                            "jsMainImplementation"("org.jetbrains.kotlin:kotlin-stdlib-js")
+                            "jsMainImplementation"("org.jetbrains.kotlin:kotlin-dom-api-compat")
                         }
                         """.trimIndent().also { added = it }
             }

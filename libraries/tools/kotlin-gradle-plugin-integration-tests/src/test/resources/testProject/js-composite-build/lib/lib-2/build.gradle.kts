@@ -1,5 +1,5 @@
 plugins {
-    kotlin("js")
+    kotlin("multiplatform")
 }
 
 group = "com.example"
@@ -9,12 +9,24 @@ repositories {
     mavenCentral()
 }
 
-kotlin.js {
-    nodejs()
-    browser()
+kotlin {
+    js {
+        nodejs()
+        browser()
+
+        sourceSets {
+            val jsMain by getting {
+                dependencies {
+                    implementation(kotlin("stdlib-js"))
+                    implementation("com.example:base2")
+                    implementation(npm("async", "2.6.2"))
+                }
+            }
+        }
+    }
 }
 
-tasks.named("browserTest") {
+tasks.named("jsBrowserTest") {
     enabled = false
 }
 
@@ -31,9 +43,3 @@ rootProject.tasks
             )
         )
     }
-
-dependencies {
-    implementation(kotlin("stdlib-js"))
-    implementation("com.example:base2")
-    implementation(npm("async", "2.6.2"))
-}

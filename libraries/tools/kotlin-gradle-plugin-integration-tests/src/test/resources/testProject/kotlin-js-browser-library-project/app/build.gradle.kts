@@ -1,11 +1,5 @@
 plugins {
-    kotlin("js")
-}
-
-dependencies {
-    implementation(kotlin("stdlib-js"))
-    implementation(project(":lib"))
-    testImplementation(kotlin("test-js"))
+    kotlin("multiplatform")
 }
 
 kotlin {
@@ -13,6 +7,21 @@ kotlin {
         browser {
             testTask {
                 enabled = false
+            }
+        }
+    }
+
+    sourceSets {
+        val jsMain by getting {
+            dependencies {
+                implementation(kotlin("stdlib-js"))
+                implementation(project(":lib"))
+            }
+        }
+
+        val jsTest by getting {
+            dependencies {
+                implementation(kotlin("test-js"))
             }
         }
     }

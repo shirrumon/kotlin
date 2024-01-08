@@ -1,9 +1,5 @@
 plugins {
-    kotlin("js")
-}
-
-dependencies {
-    implementation(project(":lib"))
+    kotlin("multiplatform")
 }
 
 kotlin {
@@ -11,8 +7,16 @@ kotlin {
         browser {}
         binaries.executable()
     }
+
+    sourceSets {
+        val jsMain by getting {
+            dependencies {
+                implementation(project(":lib"))
+            }
+        }
+    }
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile>().configureEach {
-    friendPaths.from(project(":lib").buildDir.resolve("libs/lib.klib"))
+    friendPaths.from(project(":lib").buildDir.resolve("libs/lib-js.klib"))
 }

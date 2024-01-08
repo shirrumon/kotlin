@@ -2,12 +2,7 @@ import org.jetbrains.kotlin.gradle.targets.js.dsl.KotlinJsBinaryMode
 import org.jetbrains.kotlin.gradle.targets.js.ir.JsIrBinary
 
 plugins {
-    kotlin("js")
-}
-
-dependencies {
-    implementation(project(":lib"))
-    testImplementation(kotlin("test-js"))
+    kotlin("multiplatform")
 }
 
 kotlin {
@@ -15,5 +10,19 @@ kotlin {
         browser {
         }
         binaries.executable()
+    }
+
+    sourceSets {
+        val jsMain by getting {
+            dependencies {
+                implementation(project(":lib"))
+            }
+        }
+
+        val jsTest by getting {
+            dependencies {
+                implementation(kotlin("test-js"))
+            }
+        }
     }
 }

@@ -1,5 +1,5 @@
 plugins {
-    kotlin("js") version "<pluginMarkerVersion>"
+    kotlin("multiplatform") version "<pluginMarkerVersion>"
 }
 
 repositories {
@@ -18,9 +18,25 @@ kotlin {
         browser()
         binaries.executable()
     }
+
+    sourceSets {
+        val jsMain by getting {
+            dependencies {
+                implementation(kotlin("stdlib-js"))
+                implementation("com.example:lib-2")
+                implementation(npm("node-fetch", "3.2.8"))
+            }
+        }
+
+        val jsTest by getting {
+            dependencies {
+                implementation(kotlin("test-js"))
+            }
+        }
+    }
 }
 
-tasks.named("browserTest") {
+tasks.named("jsBrowserTest") {
     enabled = false
 }
 
@@ -37,10 +53,3 @@ rootProject.tasks
             )
         )
     }
-
-dependencies {
-    implementation(kotlin("stdlib-js"))
-    implementation("com.example:lib-2")
-    implementation(npm("node-fetch", "3.2.8"))
-    testImplementation(kotlin("test-js"))
-}
