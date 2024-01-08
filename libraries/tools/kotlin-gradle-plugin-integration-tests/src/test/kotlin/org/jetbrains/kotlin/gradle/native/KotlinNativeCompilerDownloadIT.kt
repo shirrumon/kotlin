@@ -70,6 +70,8 @@ class KotlinNativeCompilerDownloadIT : KGPBaseTest() {
             buildOptions = defaultBuildOptions.copy(
                 konanDataDir = konanTemp,
             ),
+            enableGradleDebug = true,
+            forceOutput = true
         ) {
             build("assemble") {
                 assertOutputDoesNotContain(DOWNLOAD_KONAN_FINISHED_LOG)

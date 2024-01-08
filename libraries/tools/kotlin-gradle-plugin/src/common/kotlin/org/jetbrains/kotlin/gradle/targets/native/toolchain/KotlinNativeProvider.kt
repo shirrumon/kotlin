@@ -7,8 +7,8 @@ package org.jetbrains.kotlin.gradle.targets.native.toolchain
 
 import org.gradle.api.Project
 import org.gradle.api.file.ConfigurableFileCollection
-import org.gradle.api.file.Directory
 import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.*
 import org.jetbrains.kotlin.compilerRunner.konanDataDir
@@ -21,10 +21,11 @@ import org.jetbrains.kotlin.gradle.targets.native.internal.PlatformLibrariesGene
 import org.jetbrains.kotlin.gradle.utils.NativeCompilerDownloader
 import org.jetbrains.kotlin.gradle.utils.directoryProperty
 import org.jetbrains.kotlin.gradle.utils.filesProvider
-import org.jetbrains.kotlin.gradle.utils.getFile
+import org.jetbrains.kotlin.gradle.utils.property
 import org.jetbrains.kotlin.konan.target.KonanTarget
 import org.jetbrains.kotlin.konan.util.DependencyDirectories
 import java.io.File
+import java.util.logging.Logger
 
 /**
  * This is a nested provider for all native tasks
@@ -44,21 +45,22 @@ internal class KotlinNativeProvider(project: Project, konanTarget: KonanTarget) 
         )
     }
 
+    @get:Internal
+    val reinstallCompiler: Property<Boolean> = project.objects.property(project.kotlinPropertiesProvider.nativeReinstall)
+
     @get:Input
-    internal val kotlinNativeCompilerDirectory: Provider<String> = konanHome.map {
-        if (project.kotlinNativeToolchainEnabled
-            && (project.kotlinPropertiesProvider.nativeReinstall || !it.asFile.exists())
-        ) {
+    internal val kotlinNativeCompiler: Provider<String> = konanHome.zip(reinstallCompiler) { home, reinstall ->
+        if (project.kotlinNativeToolchainEnabled && (reinstall || !home.asFile.exists())) {
             val kotlinNativeExtractedFolder =
                 kotlinNativeCompilerConfiguration.singleOrNull() ?: error("Kotlin Native dependency has not been properly resolved.")
             val kotlinNativeFolderName = NativeCompilerDownloader.getDependencyNameWithOsAndVersion(project)
-            project.prepareKotlinNativeCompiler(kotlinNativeExtractedFolder.resolve(kotlinNativeFolderName))
+            project.prepareKotlinNativeCompiler(home.asFile, reinstall, kotlinNativeExtractedFolder.resolve(kotlinNativeFolderName))
         }
         NativeCompilerDownloader.getDependencyNameWithOsAndVersion(project)
     }
 
     @get:Input
-    internal val nativeCompilerDependencies: Provider<String> = konanDataDir.map { konanDataDir ->
+    internal val nativeCompilerDependencies: Provider<String> = kotlinNativeCompiler.map {
         if (project.kotlinNativeToolchainEnabled) {
             val compilerDirectory = NativeCompilerDownloader.getCompilerDirectory(project)
             if (!compilerDirectory.exists()) {
@@ -72,9 +74,9 @@ internal class KotlinNativeProvider(project: Project, konanTarget: KonanTarget) 
     }
 
 
-    private fun Project.prepareKotlinNativeCompiler(gradleCachesKotlinNativeDir: File) {
+    private fun Project.prepareKotlinNativeCompiler(konanHome: File, reinstallFlag: Boolean, gradleCachesKotlinNativeDir: File) {
 
-        if (project.kotlinPropertiesProvider.nativeReinstall) {
+        if (reinstallFlag) {
             NativeCompilerDownloader.getCompilerDirectory(project).deleteRecursively()
         }
 
