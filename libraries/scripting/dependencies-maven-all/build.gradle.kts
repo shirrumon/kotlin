@@ -119,6 +119,7 @@ val normalizedJar by task<Jar> {
 
 val proguard by task<CacheableProguardTask> {
     dependsOn(normalizedJar)
+    notCompatibleWithConfigurationCache("CacheableProguardTask is not CC compatible")
     configuration("dependencies-maven.pro")
 
     injars(mapOf("filter" to "!META-INF/versions/**,!kotlinx/coroutines/debug/**"), normalizedJar.get().outputs.files)
@@ -156,7 +157,7 @@ val resultJar by task<Jar> {
     dependsOn(pack)
     setupPublicJar(jarBaseName)
     from {
-        zipTree(pack.get().singleOutputFile())
+        zipTree(pack.map { it.singleOutputFile() })
     }
 }
 

@@ -14,6 +14,9 @@ import java.io.File
 
 @CacheableTask
 open class CacheableProguardTask : proguard.gradle.ProGuardTask() {
+    init {
+        notCompatibleWithConfigurationCache("Proguard is still not compatible: https://github.com/Guardsquare/proguard/issues/254")
+    }
 
     @get:Internal
     val javaLauncher: Property<JavaLauncher> = project.objects.property()

@@ -294,6 +294,7 @@ val packCompiler by task<Jar> {
 }
 
 val proguard by task<CacheableProguardTask> {
+    notCompatibleWithConfigurationCache("CacheableProguardTask is not CC compatible")
     dependsOn(packCompiler)
 
     javaLauncher.set(project.getToolchainLauncherFor(JdkMajorVersion.JDK_1_8))
@@ -345,7 +346,7 @@ val proguard by task<CacheableProguardTask> {
     printconfiguration(layout.buildDirectory.file("compiler.pro.dump"))
 }
 
-val pack = if (kotlinBuildProperties.proguard) proguard else packCompiler
+val pack: TaskProvider<out DefaultTask> = if (kotlinBuildProperties.proguard) proguard else packCompiler
 val distDir: String by rootProject.extra
 
 val jar = runtimeJar {
@@ -353,7 +354,7 @@ val jar = runtimeJar {
     dependsOn(compilerVersion)
 
     from {
-        zipTree(pack.get().singleOutputFile())
+        zipTree(pack.map { it.singleOutputFile() })
     }
 
     from {
