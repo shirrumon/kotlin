@@ -551,3 +551,18 @@ tasks.withType<GenerateModuleMetadata> {
         }
     }
 }
+
+fun org.jetbrains.kotlin.gradle.tasks.KotlinCompile.debugFriendPathsSet() {
+    val buildDirFile = project.layout.buildDirectory.asFile.get()
+    val friendPathsSet = friendPaths
+        .filter { it.exists() }
+        .map { it.normalize().relativeTo(buildDirFile).invariantSeparatorsPath }.toSet()
+    logger.info("${name}.friendPathsSet")
+    friendPathsSet.forEach { logger.info(it) }
+}
+
+tasks.named<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>("compileJUnitKotlinJvm").configure {
+    doLast {
+        debugFriendPathsSet()
+    }
+}
