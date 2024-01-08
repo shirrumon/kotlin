@@ -3073,6 +3073,12 @@ public class IrBoxJsTestGenerated extends AbstractIrBoxJsTest {
         }
 
         @Test
+        @TestMetadata("exportWithJsStatic.kt")
+        public void testExportWithJsStatic() throws Exception {
+            runTest("js/js.translator/testData/box/export/exportWithJsStatic.kt");
+        }
+
+        @Test
         @TestMetadata("nonIndetifierModuleName.kt")
         public void testNonIndetifierModuleName() throws Exception {
             runTest("js/js.translator/testData/box/export/nonIndetifierModuleName.kt");
