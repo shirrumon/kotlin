@@ -33421,9 +33421,27 @@ public class DiagnosticTestGenerated extends AbstractDiagnosticTest {
             }
 
             @Test
+            @TestMetadata("topLevelClass.kts")
+            public void testTopLevelClass() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/script/topLevelClass.kts");
+            }
+
+            @Test
+            @TestMetadata("topLevelEnum.kts")
+            public void testTopLevelEnum() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/script/topLevelEnum.kts");
+            }
+
+            @Test
             @TestMetadata("topLevelInlineFun.kts")
             public void testTopLevelInlineFun() throws Exception {
                 runTest("compiler/testData/diagnostics/tests/script/topLevelInlineFun.kts");
+            }
+
+            @Test
+            @TestMetadata("topLevelObject.kts")
+            public void testTopLevelObject() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/script/topLevelObject.kts");
             }
 
             @Test
