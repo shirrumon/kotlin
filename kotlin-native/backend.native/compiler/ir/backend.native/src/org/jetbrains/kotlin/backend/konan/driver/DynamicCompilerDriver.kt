@@ -118,7 +118,7 @@ internal class DynamicCompilerDriver : CompilerDriver() {
             val headerKlibPath = config.headerKlibPath
             if (!headerKlibPath.isNullOrEmpty()) {
                 val headerKlib = engine.runFir2IrSerializer(FirSerializerInput(fir2IrOutput, produceHeaderKlib = true))
-                engine.writeKlib(headerKlib, headerKlibPath)
+                engine.writeKlib(headerKlib, headerKlibPath, produceHeaderKlib = true)
             }
 
             engine.runK2SpecialBackendChecks(fir2IrOutput)
@@ -139,7 +139,7 @@ internal class DynamicCompilerDriver : CompilerDriver() {
         }
         if (!config.headerKlibPath.isNullOrEmpty()) {
             val headerKlib = engine.runSerializer(frontendOutput.moduleDescriptor, psiToIrOutput, produceHeaderKlib = true)
-            engine.writeKlib(headerKlib, config.headerKlibPath)
+            engine.writeKlib(headerKlib, config.headerKlibPath, produceHeaderKlib = true)
         }
         return engine.runSerializer(frontendOutput.moduleDescriptor, psiToIrOutput)
     }
