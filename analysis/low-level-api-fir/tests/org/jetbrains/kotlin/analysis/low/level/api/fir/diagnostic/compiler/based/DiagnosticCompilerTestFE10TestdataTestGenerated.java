@@ -26092,9 +26092,9 @@ public class DiagnosticCompilerTestFE10TestdataTestGenerated extends AbstractDia
                 }
 
                 @Test
-                @TestMetadata("ambiguous.kt")
-                public void testAmbiguous() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/multiplatform/hmpp/ambiguous.kt");
+                @TestMetadata("ambiguousActuals.kt")
+                public void testAmbiguousActuals() throws Exception {
+                    runTest("compiler/testData/diagnostics/tests/multiplatform/hmpp/ambiguousActuals.kt");
                 }
 
                 @Test

@@ -109,27 +109,21 @@ object AbstractExpectActualMatcher {
         }
 
         val matched = ArrayList<DeclarationSymbolMarker>()
-        val mismatched = ArrayList<Pair<DeclarationSymbolMarker, ExpectActualMatchingCompatibility.Mismatch>>()
+        val mismatched = HashMap<ExpectActualMatchingCompatibility.Mismatch, MutableList<DeclarationSymbolMarker>>()
         for ((actualMember, compatibility) in mapping) {
             when (compatibility) {
-                ExpectActualMatchingCompatibility.MatchedSuccessfully -> matched.add(actualMember)
-                is ExpectActualMatchingCompatibility.Mismatch -> mismatched.add(actualMember to compatibility)
+                ExpectActualMatchingCompatibility.MatchedSuccessfully -> {
+                    onMatchedMembers(expectMember, actualMember, expectClassSymbol, actualClassSymbol)
+                    matched.add(actualMember)
+                }
+                is ExpectActualMatchingCompatibility.Mismatch -> mismatched.getOrPut(compatibility) { SmartList() }.add(actualMember)
             }
         }
 
-        for (actualMember in matched) {
-            onMatchedMembers(expectMember, actualMember, expectClassSymbol, actualClassSymbol)
-        }
         matched.singleOrNull()?.let { return it }
 
-        val mismatchedGrouped = mismatched
-            .groupingBy { (_, compatibility) -> compatibility }
-            .fold(SmartList<DeclarationSymbolMarker>()) { acc, (actualMember, _) ->
-                acc.add(actualMember); acc
-            }
-
-        mismatchedMembers?.add(expectMember to mismatchedGrouped)
-        onMismatchedMembersFromClassScope(expectMember, mismatchedGrouped, expectClassSymbol, actualClassSymbol)
+        mismatchedMembers?.add(expectMember to mismatched)
+        onMismatchedMembersFromClassScope(expectMember, mismatched, expectClassSymbol, actualClassSymbol)
         return null
     }
 
