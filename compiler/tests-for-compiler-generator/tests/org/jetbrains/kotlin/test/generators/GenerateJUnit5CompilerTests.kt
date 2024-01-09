@@ -208,16 +208,15 @@ fun generateJUnit5CompilerTests(args: Array<String>, mainClassName: String?) {
             // ------------- Inline scopes tests duplication -------------
 
             testClass<AbstractIrBlackBoxCodegenTestWithInlineScopes> {
-                model("codegen/box")
+                model("codegen/box", excludeDirs = k2BoxTestDir)
             }
-
 
             testClass<AbstractIrBytecodeTextTestWithInlineScopes> {
                 model("codegen/bytecodeText")
             }
 
             testClass<AbstractIrBlackBoxCodegenWithIrInlinerTestWithInlineScopes> {
-                model("codegen/box")
+                model("codegen/box", excludeDirs = k2BoxTestDir)
             }
 
             testClass<AbstractIrLocalVariableBytecodeInlinerTest>("ModularIrLocalVariableBytecodeInlinerTestWithInlineScopesGenerated") {
@@ -245,7 +244,7 @@ fun generateJUnit5CompilerTests(args: Array<String>, mainClassName: String?) {
             }
 
             testClass<AbstractIrBlackBoxCodegenTestWithInlineScopes> {
-                model("codegen/boxInline")
+                model("codegen/boxInline", excludeDirs = k2BoxTestDir)
             }
 
             testClass<AbstractIrBlackBoxInlineCodegenWithIrInlinerTestWithInlineScopes> {
