@@ -294,7 +294,6 @@ val packCompiler by task<Jar> {
 }
 
 val proguard by task<CacheableProguardTask> {
-    notCompatibleWithConfigurationCache("CacheableProguardTask is not CC compatible")
     dependsOn(packCompiler)
 
     javaLauncher.set(project.getToolchainLauncherFor(JdkMajorVersion.JDK_1_8))
@@ -315,7 +314,7 @@ val proguard by task<CacheableProguardTask> {
             **.class,**.properties,**.kt,**.kotlin_*,**.jnilib,**.so,**.dll,**.txt,**.caps,
             META-INF/services/**,META-INF/native/**,META-INF/extensions/**,META-INF/MANIFEST.MF,
             messages/**""".trimIndent()),
-        provider { packCompiler.get().outputs.files.singleFile }
+        packCompiler.map { it.outputs.files.singleFile }
     )
 
     outjars(layout.buildDirectory.file("libs/$compilerBaseName-after-proguard.jar"))
@@ -354,7 +353,7 @@ val jar = runtimeJar {
     dependsOn(compilerVersion)
 
     from {
-        zipTree(pack.map { it.singleOutputFile() })
+        pack.map { zipTree(it.singleOutputFile()) }
     }
 
     from {

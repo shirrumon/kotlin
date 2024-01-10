@@ -13,13 +13,9 @@ import org.gradle.kotlin.dsl.property
 import java.io.File
 
 @CacheableTask
-open class CacheableProguardTask : proguard.gradle.ProGuardTask() {
-    init {
-        notCompatibleWithConfigurationCache("Proguard is still not compatible: https://github.com/Guardsquare/proguard/issues/254")
-    }
-
+abstract class CacheableProguardTask : proguard.gradle.ProGuardTask() {
     @get:Internal
-    val javaLauncher: Property<JavaLauncher> = project.objects.property()
+    abstract val javaLauncher: Property<JavaLauncher>
 
     @get:Internal
     val jdkHomePath: Provider<File> = javaLauncher.map { it.metadata.installationPath.asFile }
