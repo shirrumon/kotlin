@@ -102,7 +102,7 @@ open class AbstractIrJsCodegenInlineTest : AbstractJsIrTest(
 
 open class AbstractIrJsTypeScriptExportTest : AbstractJsIrTest(
     pathToTestDir = "${JsEnvironmentConfigurator.TEST_DATA_DIR_PATH}/typescript-export/",
-    testGroupOutputDirPrefix = "typescript-export/"
+    testGroupOutputDirPrefix = "typescript-export/ir/"
 ) {
     override fun configure(builder: TestConfigurationBuilder) {
         super.configure(builder)
@@ -112,7 +112,7 @@ open class AbstractIrJsTypeScriptExportTest : AbstractJsIrTest(
 
 open class AbstractIrJsES6TypeScriptExportTest : AbstractJsIrES6Test(
     pathToTestDir = "${JsEnvironmentConfigurator.TEST_DATA_DIR_PATH}/typescript-export/",
-    testGroupOutputDirPrefix = "es6-typescript-export/"
+    testGroupOutputDirPrefix = "typescript-export/ir-es6/"
 ) {
     override fun configure(builder: TestConfigurationBuilder) {
         super.configure(builder)
