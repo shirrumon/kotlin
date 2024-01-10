@@ -10,6 +10,7 @@ import org.jetbrains.kotlin.compiler.plugin.CompilerPluginRegistrar
 import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.fir.extensions.FirExtensionRegistrar
 import org.jetbrains.kotlin.fir.extensions.FirExtensionRegistrarAdapter
+import org.jetbrains.kotlin.fir.extensions.FirExtensionSessionComponent.Factory
 import org.jetbrains.kotlin.fir.plugin.generators.*
 import org.jetbrains.kotlin.fir.plugin.types.FirNumberSignAttributeExtension
 import org.jetbrains.kotlin.fir.plugin.types.ComposableLikeFunctionTypeKindExtension
@@ -29,6 +30,7 @@ class FirPluginPrototypeExtensionRegistrar : FirExtensionRegistrar() {
         +::ComposableLikeFunctionTypeKindExtension
         +::DataFrameLikeCallsRefinementExtension
         +::DataFrameLikeReturnTypeInjector
+        +Factory { CallDataStorage(it) }
 
         // Declaration generators
         +::TopLevelDeclarationsGenerator

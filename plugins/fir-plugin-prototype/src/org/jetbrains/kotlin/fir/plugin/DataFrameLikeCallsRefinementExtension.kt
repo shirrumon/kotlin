@@ -12,6 +12,7 @@ import org.jetbrains.kotlin.descriptors.EffectiveVisibility
 import org.jetbrains.kotlin.descriptors.Modality
 import org.jetbrains.kotlin.descriptors.Visibilities
 import org.jetbrains.kotlin.fir.FirSession
+import org.jetbrains.kotlin.fir.caches.firCachesFactory
 import org.jetbrains.kotlin.fir.declarations.*
 import org.jetbrains.kotlin.fir.declarations.builder.*
 import org.jetbrains.kotlin.fir.declarations.impl.FirResolvedDeclarationStatusImpl
@@ -22,6 +23,7 @@ import org.jetbrains.kotlin.fir.expressions.builder.buildAnonymousFunctionExpres
 import org.jetbrains.kotlin.fir.expressions.builder.buildBlock
 import org.jetbrains.kotlin.fir.expressions.builder.buildFunctionCall
 import org.jetbrains.kotlin.fir.expressions.builder.buildLambdaArgumentExpression
+import org.jetbrains.kotlin.fir.extensions.FirExtensionSessionComponent
 import org.jetbrains.kotlin.fir.extensions.FirFunctionCallRefinementExtension
 import org.jetbrains.kotlin.fir.moduleData
 import org.jetbrains.kotlin.fir.references.builder.buildResolvedNamedReference
@@ -225,6 +227,7 @@ class DataFrameLikeCallsRefinementExtension(session: FirSession) : FirFunctionCa
                 resolvedSymbol = resolvedLet
             }
         }
+        session.callDataStorage.cache.getValue(newCall, OriginalCallData(originalSymbol, this))
         return newCall
     }
 
@@ -232,3 +235,11 @@ class DataFrameLikeCallsRefinementExtension(session: FirSession) : FirFunctionCa
         return session.symbolProvider.getTopLevelFunctionSymbols(FqName("kotlin"), Name.identifier("let")).single()
     }
 }
+
+class CallDataStorage(session: FirSession) : FirExtensionSessionComponent(session) {
+    val cache = session.firCachesFactory.createCache<FirFunctionCall, OriginalCallData, OriginalCallData?> { _, context -> context ?: error("") }
+}
+
+class OriginalCallData(val originalSymbol: FirNamedFunctionSymbol, val extension: FirFunctionCallRefinementExtension)
+
+val FirSession.callDataStorage: CallDataStorage by FirSession.sessionComponentAccessor()
