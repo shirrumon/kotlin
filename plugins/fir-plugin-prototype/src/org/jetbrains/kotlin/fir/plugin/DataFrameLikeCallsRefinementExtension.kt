@@ -28,17 +28,15 @@ import org.jetbrains.kotlin.fir.references.builder.buildResolvedNamedReference
 import org.jetbrains.kotlin.fir.resolve.calls.CallInfo
 import org.jetbrains.kotlin.fir.resolve.providers.symbolProvider
 import org.jetbrains.kotlin.fir.scopes.FirKotlinScopeProvider
-import org.jetbrains.kotlin.fir.symbols.FirBasedSymbol
 import org.jetbrains.kotlin.fir.symbols.SymbolInternals
 import org.jetbrains.kotlin.fir.symbols.impl.*
+import org.jetbrains.kotlin.fir.types.FirResolvedTypeRef
 import org.jetbrains.kotlin.fir.types.builder.buildResolvedTypeRef
 import org.jetbrains.kotlin.fir.types.builder.buildTypeProjectionWithVariance
-import org.jetbrains.kotlin.fir.types.classId
 import org.jetbrains.kotlin.fir.types.impl.ConeClassLikeTypeImpl
 import org.jetbrains.kotlin.fir.types.impl.FirImplicitAnyTypeRef
 import org.jetbrains.kotlin.fir.types.resolvedType
 import org.jetbrains.kotlin.fir.types.toClassSymbol
-import org.jetbrains.kotlin.name.CallableId
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
@@ -51,11 +49,8 @@ class DataFrameLikeCallsRefinementExtension(session: FirSession) : FirFunctionCa
         object KEY : GeneratedDeclarationKey()
     }
 
-    @OptIn(SymbolInternals::class)
-    override fun intercept(callInfo: CallInfo, symbol: FirNamedFunctionSymbol): FirNamedFunctionSymbol? {
+    override fun intercept(callInfo: CallInfo, symbol: FirNamedFunctionSymbol): FirResolvedTypeRef? {
         if (!symbol.hasAnnotation(REFINE, session)) return null
-        val generatedName = CallableId(FqName.ROOT, callableName = Name.identifier("add_123"))
-        val newSymbol = FirNamedFunctionSymbol(generatedName)
         val lookupTag = ConeClassLikeLookupTagImpl(DATAFRAME)
         val refinedTypeId = ClassId(FqName.ROOT, Name.identifier("DataFrameType"))
 
@@ -110,18 +105,11 @@ class DataFrameLikeCallsRefinementExtension(session: FirSession) : FirFunctionCa
                 isNullable = false
             )
         }
-        val function = buildSimpleFunctionCopy(symbol.fir) {
-            name = generatedName.callableName
-            body = null
-            this.symbol = newSymbol
-            returnTypeRef = typeRef
-        }
-        newSymbol.bind(function)
-        return newSymbol
+        return typeRef
     }
 
     @OptIn(SymbolInternals::class)
-    override fun transform(call: FirFunctionCall, originalSymbol: FirBasedSymbol<*>): FirFunctionCall {
+    override fun transform(call: FirFunctionCall, originalSymbol: FirNamedFunctionSymbol): FirFunctionCall {
         val resolvedLet = findLet()
         val parameter = resolvedLet.valueParameterSymbols[0]
 
@@ -214,17 +202,7 @@ class DataFrameLikeCallsRefinementExtension(session: FirSession) : FirFunctionCa
         }
 
         val newCall = buildFunctionCall {
-            this.coneTypeOrNull = ConeClassLikeTypeImpl(
-                ConeClassLikeLookupTagImpl(call.resolvedType.classId!!),
-                arrayOf(
-                    ConeClassLikeTypeImpl(
-                        ConeClassLookupTagWithFixedSymbol(refinedType.symbol.classId, refinedType.symbol),
-                        emptyArray(),
-                        isNullable = false
-                    )
-                ),
-                isNullable = false
-            )
+            this.coneTypeOrNull = returnType
             typeArguments += buildTypeProjectionWithVariance {
                 typeRef = buildResolvedTypeRef {
                     type = receiverType

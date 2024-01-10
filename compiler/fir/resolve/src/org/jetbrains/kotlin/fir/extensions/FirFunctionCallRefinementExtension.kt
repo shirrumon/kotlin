@@ -11,8 +11,8 @@ import org.jetbrains.kotlin.fir.declarations.FirDeclarationDataKey
 import org.jetbrains.kotlin.fir.declarations.FirDeclarationDataRegistry
 import org.jetbrains.kotlin.fir.expressions.FirFunctionCall
 import org.jetbrains.kotlin.fir.resolve.calls.CallInfo
-import org.jetbrains.kotlin.fir.symbols.FirBasedSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirNamedFunctionSymbol
+import org.jetbrains.kotlin.fir.types.FirResolvedTypeRef
 import kotlin.reflect.KClass
 
 abstract class FirFunctionCallRefinementExtension(session: FirSession) : FirExtension(session) {
@@ -27,11 +27,32 @@ abstract class FirFunctionCallRefinementExtension(session: FirSession) : FirExte
     final override val extensionType: KClass<out FirExtension> = FirFunctionCallRefinementExtension::class
 
     /**
+     * Allows a call to be completed with more specific type than declared return type of function
+     * ```
+     * interface Container<out T> { }
+     * fun Container<T>.add(item: String): Container<Any>
+     * ```
+     * at call site `Container<Any>` can be modified to become `Container<NewLocalType>`
+     * ```
+     * container.add("A")
+     * ```
+     * this `NewLocalType` can be created in [intercept]. It must be later saved into FIR tree in [transform]
+     * Generated declarations should be local because this [FirExtension] works at body resolve stage and thus cannot create new top level declarations
+     *
+     * [transform] implementation needs to generate valid FIR
      * @return null if plugin is not interested in a [symbol]
      */
-    abstract fun intercept(callInfo: CallInfo, symbol: FirNamedFunctionSymbol): FirNamedFunctionSymbol?
+    abstract fun intercept(callInfo: CallInfo, symbol: FirNamedFunctionSymbol): FirResolvedTypeRef?
 
-    abstract fun transform(call: FirFunctionCall, originalSymbol: FirBasedSymbol<*>): FirFunctionCall
+    /**
+     * @param call to a dummy function that was created with modified [FirResolvedTypeRef] as a result of [intercept].
+     * Dummy copy doesn't exist in FIR, it was needed to complete the call.
+     * @param originalSymbol [intercept] is called with symbol to a declaration that exists somewhere in FIR: library, project code.
+     * The same symbol is [originalSymbol].
+     * [transform] needs to generate call to [let] with the same return type as [call]
+     * and put all generated declarations used in [FirResolvedTypeRef] in statements.
+     */
+    abstract fun transform(call: FirFunctionCall, originalSymbol: FirNamedFunctionSymbol): FirFunctionCall
 
     fun interface Factory : FirExtension.Factory<FirFunctionCallRefinementExtension>
 }
