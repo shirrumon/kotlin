@@ -51,8 +51,8 @@ abstract class PathAwareControlFlowGraphVisitor<I : ControlFlowInfo<I, *, *>> :
                         }
                     }.ifEmpty { emptyInfo } // there should always be UncaughtExceptionPath data, but just in case
                 } else {
-                    val info = data[label] ?: return emptyInfo
-                    persistentMapOf(NormalPath to info)
+                    val info = data[label] ?: return data
+                    persistentMapOf(label to info)
                 }
             }
             // A normal or postponed path forwards all data. (Non-normal paths should only have data in finally blocks.)

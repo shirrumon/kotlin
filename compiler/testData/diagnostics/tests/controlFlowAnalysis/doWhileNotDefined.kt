@@ -1,3 +1,5 @@
+// FIR_IDENTICAL
+
 fun test(cond1: Boolean) {
     do {
         if (cond1) continue

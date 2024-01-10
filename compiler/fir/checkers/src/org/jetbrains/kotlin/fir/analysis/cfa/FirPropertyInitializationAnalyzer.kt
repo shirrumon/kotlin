@@ -63,7 +63,7 @@ fun FirPropertySymbol.requiresInitialization(isForInitialization: Boolean): Bool
     return when {
         this is FirSyntheticPropertySymbol -> false
         isForInitialization -> hasDelegate || hasImplicitBackingField
-        else -> !hasInitializer && hasImplicitBackingField && fir.isCatchParameter != true
+        else -> hasImplicitBackingField && fir.isCatchParameter != true
     }
 }
 
