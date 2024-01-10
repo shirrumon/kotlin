@@ -1,19 +1,10 @@
 // FIR_IDENTICAL
-annotation class AnnE(val i: String)
+//!DIAGNOSTICS: -UNUSED_PARAMETER
 
-enum class MyEnum {
-    A
+@Suppress("INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
+fun <T> test1(t1: T, t2: @kotlin.internal.NoInfer T): T = t1
+
+fun usage() {
+    test1(1, <!TYPE_MISMATCH("Int; String")!>"312"<!>)
 }
-
-@AnnE(<!ANNOTATION_ARGUMENT_MUST_BE_CONST!>"1" + MyEnum.A<!>)
-class Test
-
-@AnnE(<!ANNOTATION_ARGUMENT_MUST_BE_CONST!>"1" + MyEnum::class<!>)
-class Test2
-
-@AnnE(<!ANNOTATION_ARGUMENT_MUST_BE_CONST!>"1" + AnnE("23")<!>)
-class Test3
-
-@AnnE(<!ANNOTATION_ARGUMENT_MUST_BE_CONST!>"1" + arrayOf("23", "34")<!>)
-class Test4
 
