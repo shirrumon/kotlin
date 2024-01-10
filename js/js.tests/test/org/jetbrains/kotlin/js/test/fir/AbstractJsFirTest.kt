@@ -8,6 +8,9 @@ import org.jetbrains.kotlin.js.test.converters.incremental.RecompileModuleJsIrBa
 import org.jetbrains.kotlin.js.test.handlers.JsDebugRunner
 import org.jetbrains.kotlin.js.test.handlers.JsIrRecompiledArtifactsIdentityHandler
 import org.jetbrains.kotlin.js.test.handlers.createFirJsLineNumberHandler
+import org.jetbrains.kotlin.js.test.handlers.createIrJsLineNumberHandler
+import org.jetbrains.kotlin.js.test.utils.configureLineNumberTests
+import org.jetbrains.kotlin.js.test.utils.configureSteppingTests
 import org.jetbrains.kotlin.parsing.parseBoolean
 import org.jetbrains.kotlin.test.Constructor
 import org.jetbrains.kotlin.test.FirParser
@@ -141,17 +144,7 @@ open class AbstractFirJsLineNumberTest : AbstractFirJsTest(
 ) {
     override fun configure(builder: TestConfigurationBuilder) {
         super.configure(builder)
-        with(builder) {
-            defaultDirectives {
-                +JsEnvironmentConfigurationDirectives.KJS_WITH_FULL_RUNTIME
-                +JsEnvironmentConfigurationDirectives.NO_COMMON_FILES
-                -JsEnvironmentConfigurationDirectives.GENERATE_NODE_JS_RUNNER
-                JsEnvironmentConfigurationDirectives.DONT_RUN_GENERATED_CODE.with(listOf("JS", "JS_IR", "JS_IR_ES6"))
-            }
-            configureJsArtifactsHandlersStep {
-                useHandlers(::createFirJsLineNumberHandler)
-            }
-        }
+        builder.configureLineNumberTests(::createFirJsLineNumberHandler)
     }
 }
 
@@ -161,15 +154,7 @@ open class AbstractFirJsSteppingTest : AbstractFirJsTest(
 ) {
     override fun TestConfigurationBuilder.configuration() {
         commonConfigurationForJsBlackBoxCodegenTest()
-        defaultDirectives {
-            +JsEnvironmentConfigurationDirectives.NO_COMMON_FILES
-        }
-        useAdditionalSourceProviders(::JsSteppingTestAdditionalSourceProvider)
-        jsArtifactsHandlersStep {
-            useHandlers(
-                ::JsDebugRunner.bind(false)
-            )
-        }
+        configureSteppingTests()
     }
 }
 
