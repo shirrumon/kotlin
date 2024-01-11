@@ -1113,6 +1113,7 @@ abstract class FirDataFlowAnalyzer(
         rightEnterNode.mergeIncomingFlow { _, flow ->
             val leftOperandVariable = variableStorage.get(flow, binaryLogicExpression.leftOperand) ?: return@mergeIncomingFlow
             val isAnd = binaryLogicExpression.kind == LogicOperationKind.AND
+            // is needed for      x is String && true
             flow.commitOperationStatement(leftOperandVariable eq isAnd)
         }
     }
@@ -1142,8 +1143,10 @@ abstract class FirDataFlowAnalyzer(
             // If `left && right` is true, then both are evaluated to true. If `left || right` is false, then both are false.
             // Approved type statements for RHS already contain everything implied by the corresponding value of LHS.
             val bothEvaluated = operatorVariable eq isAnd
+            // is needed for               x is String && true
             flow.addAllConditionally(bothEvaluated, flowFromRight)
             if (rightIsBoolean) {
+                // is needed for               true && x is String
                 flow.addAllConditionally(bothEvaluated, logicSystem.approveOperationStatement(flowFromRight, rightVariable!! eq isAnd))
             }
             // If `left && right` is false, then either `left` is false, or both were evaluated and `right` is false.
