@@ -16,6 +16,7 @@ import org.jetbrains.kotlin.fir.*
 import org.jetbrains.kotlin.fir.analysis.checkers.context.CheckerContext
 import org.jetbrains.kotlin.fir.analysis.checkers.getModifierList
 import org.jetbrains.kotlin.fir.analysis.checkers.hasModifier
+import org.jetbrains.kotlin.fir.analysis.checkers.isTopLevelMainFunction
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors
 import org.jetbrains.kotlin.fir.declarations.*
 import org.jetbrains.kotlin.fir.declarations.utils.*
@@ -157,9 +158,9 @@ object FirExpectActualDeclarationChecker : FirBasicDeclarationChecker() {
 
         val source = declaration.source
         if (!declaration.hasActualModifier() &&
-            ExpectActualMatchingCompatibility.MatchedSuccessfully in matchingCompatibilityToMembersMap &&
             (actualContainingClass == null || requireActualModifier(symbol, actualContainingClass, context.session)) &&
             expectedSingleCandidate != null &&
+            expectedSingleCandidate.isExpectOrInsideExpect &&
             // Don't require 'actual' keyword on fake-overrides actualizations.
             // It's an inconsistency in the language design, but it's the way it works right now
             !expectedSingleCandidate.isFakeOverride(expectContainingClass, expectActualMatchingContext)
@@ -168,12 +169,31 @@ object FirExpectActualDeclarationChecker : FirBasicDeclarationChecker() {
             return
         }
 
+        if (expectContainingClass == null && expectedSingleCandidate != null &&
+            !expectedSingleCandidate.isExpectOrInsideExpect && !declaration.hasActualModifier()
+        ) {
+            if (expectedSingleCandidate is FirCallableSymbol<*>) {
+                if (!symbol.isTopLevelMainFunction(context.session)) {
+                    // We reuse expect-actual matcher to report CONFLICTING_OVERLOADS for declarations from different modules (common vs platform)
+                    reporter.reportOn(source, FirErrors.CONFLICTING_OVERLOADS, listOf(expectedSingleCandidate), context)
+                }
+                return
+            }
+            if (expectedSingleCandidate is FirRegularClassSymbol) {
+                // We reuse expect-actual matcher to report PACKAGE_OR_CLASSIFIER_REDECLARATION for declarations from different modules (common vs platform)
+                reporter.reportOn(source, FirErrors.PACKAGE_OR_CLASSIFIER_REDECLARATION, listOf(expectedSingleCandidate), context)
+                return
+            }
+        }
+
         when {
             checkingCompatibility is ExpectActualCheckingCompatibility.ClassScopes -> {
                 reportClassScopesIncompatibility(symbol, expectedSingleCandidate, declaration, checkingCompatibility, reporter, source, context)
             }
 
-            ExpectActualMatchingCompatibility.MatchedSuccessfully !in matchingCompatibilityToMembersMap -> {
+            expectedSingleCandidate == null ||
+                    declaration.hasActualModifier() &&
+                    (!expectedSingleCandidate.isExpectOrInsideExpect || expectedSingleCandidate.isFakeOverride(expectContainingClass, expectActualMatchingContext)) -> {
                 reporter.reportOn(
                     source,
                     FirErrors.ACTUAL_WITHOUT_EXPECT,
@@ -184,7 +204,6 @@ object FirExpectActualDeclarationChecker : FirBasicDeclarationChecker() {
             }
 
             checkingCompatibility != null && checkingCompatibility != ExpectActualCheckingCompatibility.Compatible -> {
-                check(expectedSingleCandidate != null) // It can't be null, because checkingCompatibility is not null
                 // A nicer diagnostic for functions with default params
                 if (declaration is FirFunction && checkingCompatibility == ExpectActualCheckingCompatibility.ActualFunctionWithDefaultParameters) {
                     reporter.reportOn(declaration.source, FirErrors.ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS, context)
@@ -205,6 +224,13 @@ object FirExpectActualDeclarationChecker : FirBasicDeclarationChecker() {
             checkOptInAnnotation(declaration, expectedSingleCandidate, context, reporter)
         }
     }
+
+    private val FirBasedSymbol<*>.isExpectOrInsideExpect: Boolean
+        get() = when (this) {
+            is FirRegularClassSymbol -> isExpect
+            is FirCallableSymbol<*> -> isExpect
+            else -> error("These expect/actual shouldn't have been matched by FirExpectActualResolver")
+        }
 
     private fun reportClassScopesIncompatibility(
         symbol: FirBasedSymbol<out FirDeclaration>,

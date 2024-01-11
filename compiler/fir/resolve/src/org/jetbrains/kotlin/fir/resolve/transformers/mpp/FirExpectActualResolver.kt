@@ -5,13 +5,14 @@
 
 package org.jetbrains.kotlin.fir.resolve.transformers.mpp
 
+import org.jetbrains.kotlin.descriptors.Visibilities
 import org.jetbrains.kotlin.fir.FirExpectActualMatchingContext
 import org.jetbrains.kotlin.fir.FirSession
 import org.jetbrains.kotlin.fir.declarations.ExpectForActualMatchingData
 import org.jetbrains.kotlin.fir.declarations.expectForActual
 import org.jetbrains.kotlin.fir.declarations.fullyExpandedClass
-import org.jetbrains.kotlin.fir.declarations.utils.isExpect
-import org.jetbrains.kotlin.fir.resolve.providers.dependenciesSymbolProvider
+import org.jetbrains.kotlin.fir.declarations.utils.visibility
+import org.jetbrains.kotlin.fir.resolve.providers.dependsOnSymbolProvider
 import org.jetbrains.kotlin.fir.resolve.providers.symbolProvider
 import org.jetbrains.kotlin.fir.scopes.impl.FirPackageMemberScope
 import org.jetbrains.kotlin.fir.symbols.FirBasedSymbol
@@ -36,7 +37,7 @@ object FirExpectActualResolver {
                     val classId = callableId.classId
                     var actualContainingClass: FirRegularClassSymbol? = null
                     var expectContainingClass: FirRegularClassSymbol? = null
-                    val candidates = when {
+                    val matchedByNamesExpectCandidates = when {
                         callableId.isLocal -> return emptyMap()
                         classId != null -> {
                             actualContainingClass = useSiteSession.symbolProvider.getClassLikeSymbolByClassId(classId)
@@ -51,15 +52,24 @@ object FirExpectActualResolver {
                             }.orEmpty()
                         }
                         else -> {
-                            val scope = FirPackageMemberScope(callableId.packageName, useSiteSession, useSiteSession.dependenciesSymbolProvider)
+                            val scope = FirPackageMemberScope(callableId.packageName, useSiteSession, useSiteSession.dependsOnSymbolProvider)
                             mutableListOf<FirCallableSymbol<*>>().apply {
                                 scope.processFunctionsByName(callableId.callableName) { add(it) }
                                 scope.processPropertiesByName(callableId.callableName) { add(it) }
                             }
                         }
                     }
-                    candidates.filter { expectSymbol ->
-                        actualSymbol != expectSymbol && (expectContainingClass != null /*match fake overrides*/ || expectSymbol.isExpect)
+                    matchedByNamesExpectCandidates.filter { expectSymbol ->
+                        actualSymbol != expectSymbol &&
+                                // 1. Don't match with private top-level callables. It's allowed for private top-level callables from
+                                //    different modules (common vs platform) to "clash" (on JVM, filenames also need to be different, but it
+                                //    is checked by the JVM backend)
+                                //
+                                //    The reason why it's supported, is because K1 supported it. Probably, for the consistency sake with
+                                //    callables inside classifiers, it'd be better to discard such callables
+                                //
+                                // 2. Only match with such private top-level if it's explicitly marked as "expect" to make diagnostics nicer
+                                (!expectSymbol.isPrivateTopLevel(expectContainingClass) || expectSymbol.isExpect)
                     }.groupBy { expectDeclaration ->
                         AbstractExpectActualMatcher.getCallablesMatchingCompatibility(
                             expectDeclaration,
@@ -77,18 +87,18 @@ object FirExpectActualResolver {
                     }
                 }
                 is FirClassLikeSymbol<*> -> {
-                    val expectClassSymbol = useSiteSession.dependenciesSymbolProvider
+                    val expectClassSymbol = useSiteSession.dependsOnSymbolProvider
                         .getClassLikeSymbolByClassId(actualSymbol.classId) as? FirRegularClassSymbol ?: return emptyMap()
-                    if (expectClassSymbol.isExpect) {
-                        val compatibility = AbstractExpectActualMatcher.matchClassifiers(expectClassSymbol, actualSymbol, context)
-                        mapOf(compatibility to listOf(expectClassSymbol))
-                    } else {
-                        emptyMap()
-                    }
+                    val compatibility = AbstractExpectActualMatcher.matchClassifiers(expectClassSymbol, actualSymbol, context)
+                    mapOf(compatibility to listOf(expectClassSymbol))
                 }
                 else -> emptyMap()
             }
             return result
         }
     }
+}
+
+fun FirCallableSymbol<*>.isPrivateTopLevel(containingClass: FirRegularClassSymbol?): Boolean {
+    return visibility == Visibilities.Private && containingClass == null
 }
