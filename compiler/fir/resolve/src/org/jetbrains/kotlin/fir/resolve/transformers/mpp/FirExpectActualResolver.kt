@@ -59,7 +59,7 @@ object FirExpectActualResolver {
                         }
                     }
                     candidates.filter { expectSymbol ->
-                        actualSymbol != expectSymbol && (expectContainingClass != null /*match fake overrides*/ || expectSymbol.isExpect)
+                        actualSymbol != expectSymbol
                     }.groupBy { expectDeclaration ->
                         AbstractExpectActualMatcher.getCallablesMatchingCompatibility(
                             expectDeclaration,

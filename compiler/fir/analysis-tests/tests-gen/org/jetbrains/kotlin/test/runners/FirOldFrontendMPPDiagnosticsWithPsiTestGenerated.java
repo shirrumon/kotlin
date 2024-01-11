@@ -200,6 +200,12 @@ public class FirOldFrontendMPPDiagnosticsWithPsiTestGenerated extends AbstractFi
     }
 
     @Test
+    @TestMetadata("expectActualRedeclaration.kt")
+    public void testExpectActualRedeclaration() throws Exception {
+        runTest("compiler/testData/diagnostics/tests/multiplatform/expectActualRedeclaration.kt");
+    }
+
+    @Test
     @TestMetadata("expectDataObject.kt")
     public void testExpectDataObject() throws Exception {
         runTest("compiler/testData/diagnostics/tests/multiplatform/expectDataObject.kt");
