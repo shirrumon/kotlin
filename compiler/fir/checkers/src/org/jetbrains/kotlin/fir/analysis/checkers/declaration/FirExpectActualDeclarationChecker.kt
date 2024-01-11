@@ -16,6 +16,7 @@ import org.jetbrains.kotlin.fir.*
 import org.jetbrains.kotlin.fir.analysis.checkers.context.CheckerContext
 import org.jetbrains.kotlin.fir.analysis.checkers.getModifierList
 import org.jetbrains.kotlin.fir.analysis.checkers.hasModifier
+import org.jetbrains.kotlin.fir.analysis.checkers.isTopLevelMainFunction
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors
 import org.jetbrains.kotlin.fir.declarations.*
 import org.jetbrains.kotlin.fir.declarations.utils.*
@@ -162,7 +163,8 @@ object FirExpectActualDeclarationChecker : FirBasicDeclarationChecker() {
             expectedSingleCandidate != null &&
             // Don't require 'actual' keyword on fake-overrides actualizations.
             // It's an inconsistency in the language design, but it's the way it works right now
-            !expectedSingleCandidate.isFakeOverride(expectContainingClass, expectActualMatchingContext)
+            !expectedSingleCandidate.isFakeOverride(expectContainingClass, expectActualMatchingContext) &&
+            (!symbol.isTopLevelMainFunction(context.session) || (expectedSingleCandidate as? FirCallableSymbol)?.isExpect == true)
         ) {
             reporter.reportOn(source, FirErrors.ACTUAL_MISSING, context)
             return

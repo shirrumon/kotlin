@@ -24779,6 +24779,18 @@ public class DiagnosticCompilerTestFE10TestdataTestGenerated extends AbstractDia
             }
 
             @Test
+            @TestMetadata("expectActualInTheSameModule.kt")
+            public void testExpectActualInTheSameModule() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/multiplatform/expectActualInTheSameModule.kt");
+            }
+
+            @Test
+            @TestMetadata("expectActualInTheSameModuleDifferentFiles.kt")
+            public void testExpectActualInTheSameModuleDifferentFiles() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/multiplatform/expectActualInTheSameModuleDifferentFiles.kt");
+            }
+
+            @Test
             @TestMetadata("expectDataObject.kt")
             public void testExpectDataObject() throws Exception {
                 runTest("compiler/testData/diagnostics/tests/multiplatform/expectDataObject.kt");
@@ -24935,6 +24947,18 @@ public class DiagnosticCompilerTestFE10TestdataTestGenerated extends AbstractDia
             }
 
             @Test
+            @TestMetadata("mainActualMissing.kt")
+            public void testMainActualMissing() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/multiplatform/mainActualMissing.kt");
+            }
+
+            @Test
+            @TestMetadata("mainRedeclarationAcrossCommonPlatformModules.kt")
+            public void testMainRedeclarationAcrossCommonPlatformModules() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/multiplatform/mainRedeclarationAcrossCommonPlatformModules.kt");
+            }
+
+            @Test
             @TestMetadata("manyImplMemberNotImplemented.kt")
             public void testManyImplMemberNotImplemented() throws Exception {
                 runTest("compiler/testData/diagnostics/tests/multiplatform/manyImplMemberNotImplemented.kt");
@@ -24998,6 +25022,12 @@ public class DiagnosticCompilerTestFE10TestdataTestGenerated extends AbstractDia
             @TestMetadata("privateTopLevelDeclarations.kt")
             public void testPrivateTopLevelDeclarations() throws Exception {
                 runTest("compiler/testData/diagnostics/tests/multiplatform/privateTopLevelDeclarations.kt");
+            }
+
+            @Test
+            @TestMetadata("redeclarationAcrossCommonPlatformModules.kt")
+            public void testRedeclarationAcrossCommonPlatformModules() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/multiplatform/redeclarationAcrossCommonPlatformModules.kt");
             }
 
             @Test
