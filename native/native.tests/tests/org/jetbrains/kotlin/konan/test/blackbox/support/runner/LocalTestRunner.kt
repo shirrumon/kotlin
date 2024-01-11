@@ -27,7 +27,7 @@ internal class LocalTestRunner(private val testRun: TestRun) : AbstractLocalProc
 
     override fun getLoggedParameters() = LoggedData.TestRunParameters(
         compilationToolCall = executable.loggedCompilationToolCall,
-        testCaseId = testRun.testCaseId,
+        testCaseId = testRun.testCase.id,
         runArgs = programArgs,
         runParameters = testRun.runParameters
     )
@@ -59,7 +59,7 @@ internal class ResultHandler(
     checks: TestRunChecks,
     private val testRun: TestRun,
     private val loggedParameters: LoggedData.TestRunParameters
-) : LocalResultHandler<Unit>(runResult, visibleProcessName, checks, testRun.testCaseId, testRun.expectedFailure) {
+) : LocalResultHandler<Unit>(runResult, visibleProcessName, checks, testRun.testCase.id, testRun.expectedFailure) {
     override fun getLoggedRun() = LoggedData.TestRun(loggedParameters, runResult)
 
     override fun doHandle() {

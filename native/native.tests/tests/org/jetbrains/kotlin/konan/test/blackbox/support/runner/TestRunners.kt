@@ -8,12 +8,7 @@ package org.jetbrains.kotlin.konan.test.blackbox.support.runner
 import org.jetbrains.kotlin.konan.target.*
 import org.jetbrains.kotlin.konan.test.blackbox.support.TestName
 import org.jetbrains.kotlin.konan.test.blackbox.support.settings.*
-import org.jetbrains.kotlin.native.executors.EmulatorExecutor
-import org.jetbrains.kotlin.native.executors.Executor
-import org.jetbrains.kotlin.native.executors.RosettaExecutor
-import org.jetbrains.kotlin.native.executors.XcodeSimulatorExecutor
-import org.jetbrains.kotlin.native.executors.XCTestHostExecutor
-import org.jetbrains.kotlin.native.executors.XCTestSimulatorExecutor
+import org.jetbrains.kotlin.native.executors.*
 import org.jetbrains.kotlin.test.services.JUnit5Assertions.fail
 import java.util.concurrent.ConcurrentHashMap
 
@@ -30,13 +25,13 @@ internal object TestRunners {
                     "Running tests with XCTest is not supported on non-Apple $configurables"
                 }
                 val executor = cached(
-                    if (testTarget == hostTarget) {
-                        XCTestHostExecutor(configurables)
-                    } else {
-                        XCTestSimulatorExecutor(configurables)
+                    when (testTarget) {
+                        is KonanTarget.IOS_ARM64 -> FirebaseCloudExecutor(configurables)
+                        hostTarget -> XCTestHostExecutor(configurables)
+                        else -> XCTestSimulatorExecutor(configurables)
                     }
                 )
-                RunnerWithExecutor(executor, testRun)
+                SharedExecution.buildRunner(executor, testRun)
             } else if (testTarget == hostTarget) {
                 LocalTestRunner(testRun)
             } else {
