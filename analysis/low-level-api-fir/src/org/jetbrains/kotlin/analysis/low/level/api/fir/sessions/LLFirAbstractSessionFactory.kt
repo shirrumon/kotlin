@@ -32,7 +32,7 @@ import org.jetbrains.kotlin.fir.backend.jvm.FirJvmTypeMapper
 import org.jetbrains.kotlin.fir.extensions.*
 import org.jetbrains.kotlin.fir.java.JavaSymbolProvider
 import org.jetbrains.kotlin.fir.languageVersionSettings
-import org.jetbrains.kotlin.fir.resolve.providers.DEPENDENCIES_SYMBOL_PROVIDER_QUALIFIED_KEY
+import org.jetbrains.kotlin.fir.resolve.providers.*
 import org.jetbrains.kotlin.fir.resolve.providers.FirProvider
 import org.jetbrains.kotlin.fir.resolve.providers.FirSymbolProvider
 import org.jetbrains.kotlin.fir.resolve.providers.dependenciesSymbolProvider
@@ -134,7 +134,12 @@ internal abstract class LLFirAbstractSessionFactory(protected val project: Proje
 
             val dependencyProvider = LLFirDependenciesSymbolProvider(this) {
                 buildList {
-                    addMerged(collectDependencySymbolProviders(module))
+                    addMerged(
+                        collectDependencySymbolProviders(
+                            module,
+                            (module.directRegularDependencies + module.transitiveDependsOnDependencies).toSet()
+                        )
+                    )
                     add(builtinsSession.symbolProvider)
                 }
             }
@@ -156,6 +161,7 @@ internal abstract class LLFirAbstractSessionFactory(protected val project: Proje
 
             register(FirPredicateBasedProvider::class, FirEmptyPredicateBasedProvider)
             register(DEPENDENCIES_SYMBOL_PROVIDER_QUALIFIED_KEY, dependencyProvider)
+            register(DEPENDS_ON_SYMBOL_PROVIDER_QUALIFIED_KEY, LLFirDependenciesSymbolProvider(this) { listOf() })
             register(FirRegisteredPluginAnnotations::class, FirRegisteredPluginAnnotationsImpl(this))
             register(FirJvmTypeMapper::class, FirJvmTypeMapper(this))
 
@@ -230,6 +236,7 @@ internal abstract class LLFirAbstractSessionFactory(protected val project: Proje
 
             register(FirPredicateBasedProvider::class, FirEmptyPredicateBasedProvider)
             register(DEPENDENCIES_SYMBOL_PROVIDER_QUALIFIED_KEY, dependencyProvider)
+            register(DEPENDS_ON_SYMBOL_PROVIDER_QUALIFIED_KEY, LLFirDependenciesSymbolProvider(this) { listOf() })
             register(FirJvmTypeMapper::class, FirJvmTypeMapper(this))
             register(FirRegisteredPluginAnnotations::class, FirRegisteredPluginAnnotations.Empty)
 
@@ -286,14 +293,33 @@ internal abstract class LLFirAbstractSessionFactory(protected val project: Proje
             registerCompilerPluginExtensions(project, module)
             registerCommonComponentsAfterExtensionsAreConfigured()
 
+            val dependsOnProvider = LLFirDependenciesSymbolProvider(this) {
+                buildList {
+                    addMerged(
+                        collectDependencySymbolProviders(
+                            module,
+                            module.transitiveDependsOnDependencies.toSet()
+                        )
+                    )
+                }
+            }
+
             val dependencyProvider = LLFirDependenciesSymbolProvider(this) {
                 buildList {
-                    addMerged(collectDependencySymbolProviders(module))
+                    addMerged(
+                        collectDependencySymbolProviders(
+                            module,
+                            // The dependency provider needs to have access to all direct and indirect `dependsOn` dependencies, as `dependsOn`
+                            // dependencies are transitive.
+                            (module.directRegularDependencies + module.transitiveDependsOnDependencies).toSet()
+                        )
+                    )
                     add(builtinsSession.symbolProvider)
                 }
             }
 
             register(DEPENDENCIES_SYMBOL_PROVIDER_QUALIFIED_KEY, dependencyProvider)
+            register(DEPENDS_ON_SYMBOL_PROVIDER_QUALIFIED_KEY, dependsOnProvider)
             register(LLFirFirClassByPsiClassProvider::class, LLFirFirClassByPsiClassProvider(this))
 
             LLFirSessionConfigurator.configure(this)
@@ -409,6 +435,7 @@ internal abstract class LLFirAbstractSessionFactory(protected val project: Proje
             }
 
             register(DEPENDENCIES_SYMBOL_PROVIDER_QUALIFIED_KEY, dependencyProvider)
+            register(DEPENDS_ON_SYMBOL_PROVIDER_QUALIFIED_KEY, LLFirDependenciesSymbolProvider(this) { listOf() })
             register(LLFirFirClassByPsiClassProvider::class, LLFirFirClassByPsiClassProvider(this))
 
             val context = LibrarySessionCreationContext(moduleData, firProvider.searchScope, firProvider, dependencyProvider)
@@ -524,6 +551,7 @@ internal abstract class LLFirAbstractSessionFactory(protected val project: Proje
             }
 
             register(DEPENDENCIES_SYMBOL_PROVIDER_QUALIFIED_KEY, dependencyProvider)
+            register(DEPENDS_ON_SYMBOL_PROVIDER_QUALIFIED_KEY, LLFirDependenciesSymbolProvider(this) { listOf() })
             register(LLFirFirClassByPsiClassProvider::class, LLFirFirClassByPsiClassProvider(this))
 
             LLFirSessionConfigurator.configure(this)
@@ -575,7 +603,7 @@ internal abstract class LLFirAbstractSessionFactory(protected val project: Proje
         }
     }
 
-    private fun collectDependencySymbolProviders(module: KtModule): List<FirSymbolProvider> {
+    private fun collectDependencySymbolProviders(module: KtModule, dependencies: Set<KtModule>): List<FirSymbolProvider> {
         val llFirSessionCache = LLFirSessionCache.getInstance(project)
 
         fun getOrCreateSessionForDependency(dependency: KtModule): LLFirSession? = when (dependency) {
@@ -606,15 +634,7 @@ internal abstract class LLFirAbstractSessionFactory(protected val project: Proje
             }
         }
 
-        val dependencyModules = buildSet {
-            addAll(module.directRegularDependencies)
-
-            // The dependency provider needs to have access to all direct and indirect `dependsOn` dependencies, as `dependsOn`
-            // dependencies are transitive.
-            addAll(module.transitiveDependsOnDependencies)
-        }
-
-        val dependencySessions = dependencyModules.mapNotNull(::getOrCreateSessionForDependency)
+        val dependencySessions = dependencies.mapNotNull(::getOrCreateSessionForDependency)
         return computeFlattenedSymbolProviders(dependencySessions)
     }
 

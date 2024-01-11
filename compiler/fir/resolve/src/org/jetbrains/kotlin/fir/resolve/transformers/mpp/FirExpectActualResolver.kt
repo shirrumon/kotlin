@@ -10,8 +10,7 @@ import org.jetbrains.kotlin.fir.FirSession
 import org.jetbrains.kotlin.fir.declarations.ExpectForActualMatchingData
 import org.jetbrains.kotlin.fir.declarations.expectForActual
 import org.jetbrains.kotlin.fir.declarations.fullyExpandedClass
-import org.jetbrains.kotlin.fir.declarations.utils.isExpect
-import org.jetbrains.kotlin.fir.resolve.providers.dependenciesSymbolProvider
+import org.jetbrains.kotlin.fir.resolve.providers.dependsOnSymbolProvider
 import org.jetbrains.kotlin.fir.resolve.providers.symbolProvider
 import org.jetbrains.kotlin.fir.scopes.impl.FirPackageMemberScope
 import org.jetbrains.kotlin.fir.symbols.FirBasedSymbol
@@ -51,7 +50,7 @@ object FirExpectActualResolver {
                             }.orEmpty()
                         }
                         else -> {
-                            val scope = FirPackageMemberScope(callableId.packageName, useSiteSession, useSiteSession.dependenciesSymbolProvider)
+                            val scope = FirPackageMemberScope(callableId.packageName, useSiteSession, useSiteSession.dependsOnSymbolProvider)
                             mutableListOf<FirCallableSymbol<*>>().apply {
                                 scope.processFunctionsByName(callableId.callableName) { add(it) }
                                 scope.processPropertiesByName(callableId.callableName) { add(it) }
@@ -59,7 +58,7 @@ object FirExpectActualResolver {
                         }
                     }
                     candidates.filter { expectSymbol ->
-                        actualSymbol != expectSymbol && (expectContainingClass != null /*match fake overrides*/ || expectSymbol.isExpect)
+                        actualSymbol != expectSymbol
                     }.groupBy { expectDeclaration ->
                         AbstractExpectActualMatcher.getCallablesMatchingCompatibility(
                             expectDeclaration,
@@ -77,14 +76,10 @@ object FirExpectActualResolver {
                     }
                 }
                 is FirClassLikeSymbol<*> -> {
-                    val expectClassSymbol = useSiteSession.dependenciesSymbolProvider
+                    val expectClassSymbol = useSiteSession.dependsOnSymbolProvider
                         .getClassLikeSymbolByClassId(actualSymbol.classId) as? FirRegularClassSymbol ?: return emptyMap()
-                    if (expectClassSymbol.isExpect) {
-                        val compatibility = AbstractExpectActualMatcher.matchClassifiers(expectClassSymbol, actualSymbol, context)
-                        mapOf(compatibility to listOf(expectClassSymbol))
-                    } else {
-                        emptyMap()
-                    }
+                    val compatibility = AbstractExpectActualMatcher.matchClassifiers(expectClassSymbol, actualSymbol, context)
+                    mapOf(compatibility to listOf(expectClassSymbol))
                 }
                 else -> emptyMap()
             }
