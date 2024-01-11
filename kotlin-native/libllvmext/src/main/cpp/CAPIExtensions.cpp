@@ -58,7 +58,7 @@ int LLVMInlineCall(LLVMValueRef call) {
 }
 
 void LLVMAddThreadSanitizerPass(LLVMPassManagerRef PM) {
-  unwrap(PM)->add(createThreadSanitizerLegacyPassPass());
+  /* unwrap(PM)->add(createThreadSanitizerLegacyPassPass()); */
 }
 
 void LLVMSetTimePasses(int enabled) {
