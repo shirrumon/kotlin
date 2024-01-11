@@ -103,7 +103,7 @@ class JvmAbiClassBuilderInterceptor(
             declaration: IrFunction?, access: Int, name: String, desc: String, signature: String?, exceptions: Array<out String>?
         ): MethodVisitor {
             if (keepClassAsIs || removeClassFromAbi) {
-                //we don't care about methods when we remove or keep this class completely
+                // We don't care about methods when we remove or keep this class completely.
                 return delegate.newMethod(declaration, access, name, desc, signature, exceptions)
             }
 
@@ -175,7 +175,7 @@ class JvmAbiClassBuilderInterceptor(
     }
 }
 
-private fun shouldRemoveFromAbi(irClass: IrClass?, removePrivateTopLevelClasses: Boolean) = when {
+private fun shouldRemoveFromAbi(irClass: IrClass?, removePrivateTopLevelClasses: Boolean): Boolean = when {
     irClass == null -> false
     DescriptorVisibilities.isPrivate(irClass.visibility) -> removePrivateTopLevelClasses || !irClass.isTopLevel
     else -> irClass.isEffectivelyPrivate()

@@ -53,11 +53,9 @@ class JvmAbiOutputExtension(
         val outputFiles: OutputFileCollection,
         val removeDebugInfo: Boolean,
     ) : OutputFileCollection {
-
-        private val classesToBeDeleted = abiClassInfos.mapNotNull { (className, action) ->
+        private val classesToBeDeleted = abiClassInfos.mapNotNullTo(mutableSetOf()) { (className, action) ->
             className.takeIf { action == AbiClassInfo.Deleted }
         }
-            .toSet()
 
         override fun get(relativePath: String): OutputFile? {
             error("AbiOutputFiles does not implement `get`.")
@@ -75,8 +73,8 @@ class JvmAbiOutputExtension(
                 when (val abiInfo = abiClassInfos.getValue(internalName)) {
                     is AbiClassInfo.Deleted -> null
                     is AbiClassInfo.Public -> outputFile // Copy verbatim
-                    else -> /* abiInfo is AbiClassInfo.Strip */ {
-                        val methodInfo = (abiInfo as AbiClassInfo.Stripped).methodInfo
+                    is AbiClassInfo.Stripped -> {
+                        val methodInfo = abiInfo.methodInfo
                         val innerClassInfos = mutableMapOf<String, InnerClassInfo>()
                         val innerClassesToKeep = mutableSetOf<String>()
                         val writer = ClassWriter(0)
@@ -91,7 +89,7 @@ class JvmAbiOutputExtension(
                                 name: String?,
                                 descriptor: String?,
                                 signature: String?,
-                                value: Any?,
+                                value: Any?
                             ): FieldVisitor? {
                                 if (access and Opcodes.ACC_PRIVATE != 0)
                                     return null
@@ -103,7 +101,7 @@ class JvmAbiOutputExtension(
                                 name: String,
                                 descriptor: String,
                                 signature: String?,
-                                exceptions: Array<out String>?,
+                                exceptions: Array<out String>?
                             ): MethodVisitor? {
                                 val info = methodInfo[Method(name, descriptor)]
                                     ?: return null
@@ -204,7 +202,7 @@ class JvmAbiOutputExtension(
                 add(next)
                 // Classes form a tree by nesting, so none of the children have been visited yet.
                 innerClassesByOuterName[next]?.mapNotNullTo(stack) { info ->
-                    info.name.takeIf { abiClassInfos[it] != AbiClassInfo.Deleted }
+                    info.name.takeIf { abiClassInfos.getValue(it) != AbiClassInfo.Deleted }
                 }
             }
         }

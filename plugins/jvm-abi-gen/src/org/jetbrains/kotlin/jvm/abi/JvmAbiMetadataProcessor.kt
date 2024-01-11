@@ -156,7 +156,7 @@ private fun KmClass.removePrivateDeclarations(classesToBeDeleted: Set<String>) {
     constructors.removeIf { it.visibility.isPrivate }
     (this as KmDeclarationContainer).removePrivateDeclarations()
     nestedClasses.removeIf { "$name\$$it" in classesToBeDeleted }
-    companionObject = companionObject?.takeUnless { "$name\$$it" in classesToBeDeleted }
+    companionObject = companionObject.takeUnless { "$name\$$it" in classesToBeDeleted }
     localDelegatedProperties.clear()
     // TODO: do not serialize private type aliases once KT-17229 is fixed.
 }

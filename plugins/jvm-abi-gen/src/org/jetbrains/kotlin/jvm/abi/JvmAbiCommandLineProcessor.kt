@@ -37,8 +37,8 @@ class JvmAbiCommandLineProcessor : CommandLineProcessor {
             CliOption(
                 "removePrivateTopLevelClasses",
                 "true/false",
-                "Remove private top-level classes from ABI. False by default due to backwards compatibility. If enabled — " +
-                        "top-level private classes will no longer be available from Java.",
+                "Remove private top-level classes from ABI. False by default due to backwards compatibility. If enabled, " +
+                        "private top-level classes will no longer be available from Java classes in the same package.",
                 false,
             )
     }
