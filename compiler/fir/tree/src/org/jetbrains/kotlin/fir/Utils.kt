@@ -276,6 +276,7 @@ val FirExpression.isArraySet: Boolean
 val FirExpression.isStatementLikeExpression: Boolean
     get() = when (this) {
         is FirFunctionCall -> origin == FirFunctionCallOrigin.Operator && calleeReference.name in STATEMENT_LIKE_OPERATORS
+        is FirBlock -> source?.kind == KtFakeSourceElementKind.DesugaredForLoop // For loop statement
         else -> isIndexedAssignment
     }
 
