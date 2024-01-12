@@ -18,7 +18,8 @@ class ProjectInfo(
     val muted: Boolean,
     val moduleKind: ModuleKind,
     val ignoredGranularities: Set<JsGenerationGranularity>,
-    val callMain: Boolean
+    val callMain: Boolean,
+    val compilerMutableLibraries: Set<String>
 ) {
 
     class ProjectBuildStep(
@@ -74,6 +75,7 @@ class ModuleInfo(val moduleName: String) {
 const val PROJECT_INFO_FILE = "project.info"
 private const val CALL_MAIN = "CALL_MAIN"
 private const val MODULES_LIST = "MODULES"
+private const val COMPILER_MUTABLE_MODULES_LIST = "COMPILER_MUTABLE_MODULES"
 private const val MODULES_KIND = "MODULE_KIND"
 private const val LIBS_LIST = "libs"
 private const val DIRTY_JS_FILES_LIST = "dirty js files"
@@ -172,6 +174,7 @@ class ProjectInfoParser(infoFile: File) : InfoParser<ProjectInfo>(infoFile) {
 
     override fun parse(entryName: String): ProjectInfo {
         val libraries = mutableListOf<String>()
+        val compilerMutableLibraries = mutableSetOf<String>()
         val steps = mutableListOf<ProjectInfo.ProjectBuildStep>()
         val ignoredGranularities = mutableSetOf<JsGenerationGranularity>()
         var muted = false
@@ -194,6 +197,7 @@ class ProjectInfoParser(infoFile: File) : InfoParser<ProjectInfo>(infoFile) {
 
             when {
                 op == MODULES_LIST -> libraries += split[1].splitAndTrim()
+                op == COMPILER_MUTABLE_MODULES_LIST -> compilerMutableLibraries += split[1].splitAndTrim()
                 op == CALL_MAIN && split[1].trim() == "true" -> callMain = true
                 op == IGNORE_PER_FILE && split[1].trim() == "true" -> ignoredGranularities += JsGenerationGranularity.PER_FILE
                 op == IGNORE_PER_MODULE && split[1].trim() == "true" -> ignoredGranularities += JsGenerationGranularity.PER_MODULE
@@ -226,7 +230,7 @@ class ProjectInfoParser(infoFile: File) : InfoParser<ProjectInfo>(infoFile) {
             false
         }
 
-        return ProjectInfo(entryName, libraries, steps, muted, moduleKind, ignoredGranularities, callMain)
+        return ProjectInfo(entryName, libraries, steps, muted, moduleKind, ignoredGranularities, callMain, compilerMutableLibraries)
     }
 }
 
