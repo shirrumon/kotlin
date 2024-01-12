@@ -21,6 +21,8 @@ import org.gradle.util.GradleVersion
 import org.jetbrains.kotlin.gradle.report.BuildReportType
 import org.jetbrains.kotlin.gradle.testbase.*
 import org.jetbrains.kotlin.gradle.util.capitalize
+import org.jetbrains.kotlin.konan.target.HostManager
+import org.jetbrains.kotlin.konan.target.presetName
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.io.TempDir
 import java.nio.file.Path
@@ -159,8 +161,8 @@ class BuildCacheIT : KGPBaseTest() {
                     distributionDownloadFromMaven = true
                 )
             )
-            val nativeCompileTask = ":compileKotlin${MPPNativeTargets.current.capitalize()}"
-            build(":assemble", buildOptions = buildOptionsBeforeCaching) {
+            val nativeCompileTask = ":compileKotlin${HostManager.host.presetName.capitalize()}"
+            build(nativeCompileTask, buildOptions = buildOptionsBeforeCaching) {
                 assertTasksPackedToCache(nativeCompileTask)
             }
 
@@ -168,7 +170,7 @@ class BuildCacheIT : KGPBaseTest() {
                 konanDataDir = customNativeHomePath,
             )
 
-            build("clean", ":assemble", buildOptions = buildOptionsAfterCaching) {
+            build("clean", nativeCompileTask, buildOptions = buildOptionsAfterCaching) {
                 assertTasksFromCache(nativeCompileTask)
             }
         }
