@@ -42,9 +42,14 @@ internal class KotlinNativeProvider(project: Project, konanTarget: KonanTarget) 
 
     @get:Internal
     private val kotlinNativeCompilerConfiguration: ConfigurableFileCollection = project.filesProvider {
-        project.configurations.named(
-            KOTLIN_NATIVE_COMPILER_CONFIGURATION_NAME
-        )
+        // without enabled there is no configuration with this name, so we should return empty provider to support configuraiton cache
+        if (project.kotlinNativeToolchainEnabled) {
+            project.configurations.named(
+                KOTLIN_NATIVE_COMPILER_CONFIGURATION_NAME
+            )
+        } else {
+            null
+        }
     }
 
     @get:Internal
@@ -53,30 +58,28 @@ internal class KotlinNativeProvider(project: Project, konanTarget: KonanTarget) 
     @get:Input
     internal val kotlinNativeCompilerVersion: Provider<String> = compilerDirectory.zip(reinstallCompiler) { compilerDir, reinstallFlag ->
         if (project.kotlinNativeToolchainEnabled && (reinstallFlag || !compilerDir.asFile.exists())) {
-            val kotlinNativeExtractedFolder =
-                kotlinNativeCompilerConfiguration.singleOrNull() ?: error("Kotlin Native dependency has not been properly resolved.")
-            val kotlinNativeFolderName = NativeCompilerDownloader.getDependencyNameWithOsAndVersion(project)
-            project.prepareKotlinNativeCompiler(compilerDir.asFile, reinstallFlag, kotlinNativeExtractedFolder.resolve(kotlinNativeFolderName))
+            val kotlinNativeCompilerExtractedFolder =
+                kotlinNativeCompilerConfiguration
+                    .singleOrNull()
+                    ?.resolve(NativeCompilerDownloader.getDependencyNameWithOsAndVersion(project))
+                    ?: error("Kotlin Native dependency has not been properly resolved.")
+
+            project.prepareKotlinNativeCompiler(
+                compilerDir.asFile,
+                reinstallFlag,
+                kotlinNativeCompilerExtractedFolder,
+                konanTarget
+            )
         }
         NativeCompilerDownloader.getDependencyNameWithOsAndVersion(project)
     }
 
-    @get:Input
-    internal val platformLibraries: Provider<String> = kotlinNativeCompilerVersion.zip(compilerDirectory) { compilerVersion, compilerDir ->
-        if (project.kotlinNativeToolchainEnabled) {
-            val compilerDirectory = compilerDir.asFile
-            if (!compilerDirectory.exists()) {
-                throw IllegalStateException(
-                    "There is no downloaded kotlin native with path $compilerDirectory"
-                )
-            }
-            setupKotlinNativeDependencies(project, konanTarget)
-        }
-        NativeCompilerDownloader.getDependencyNameWithOsAndVersion(project)
-    }
-
-
-    private fun Project.prepareKotlinNativeCompiler(compilerDir: File, reinstallFlag: Boolean, gradleCachesKotlinNativeDir: File) {
+    private fun Project.prepareKotlinNativeCompiler(
+        compilerDir: File,
+        reinstallFlag: Boolean,
+        gradleCachesKotlinNativeDir: File,
+        konanTarget: KonanTarget,
+    ) {
 
         if (reinstallFlag) {
             NativeCompilerDownloader.getCompilerDirectory(project).deleteRecursively()
@@ -90,10 +93,12 @@ internal class KotlinNativeProvider(project: Project, konanTarget: KonanTarget) 
             }
             logger.info("Moved Kotlin/Native compiler from $gradleCachesKotlinNativeDir to ${compilerDir.absolutePath}")
         }
+
+        setupKotlinNativeDependencies(konanTarget)
     }
 
-    private fun setupKotlinNativeDependencies(project: Project, konanTarget: KonanTarget) {
-        val distributionType = NativeDistributionTypeProvider(project).getDistributionType()
+    private fun Project.setupKotlinNativeDependencies(konanTarget: KonanTarget) {
+        val distributionType = NativeDistributionTypeProvider(this).getDistributionType()
         if (distributionType.mustGeneratePlatformLibs) {
             PlatformLibrariesGenerator(project, konanTarget).generatePlatformLibsIfNeeded()
         }
