@@ -120,6 +120,7 @@ public class ArrayDeque<E> : AbstractMutableList<E> {
      * Prepends the specified [element] to this deque.
      */
     public fun addFirst(element: E) {
+        registerModification()
         ensureCapacity(size + 1)
 
         head = decremented(head)
@@ -131,6 +132,7 @@ public class ArrayDeque<E> : AbstractMutableList<E> {
      * Appends the specified [element] to this deque.
      */
     public fun addLast(element: E) {
+        registerModification()
         ensureCapacity(size + 1)
 
         elementData[internalIndex(size)] = element
@@ -142,6 +144,7 @@ public class ArrayDeque<E> : AbstractMutableList<E> {
      */
     public fun removeFirst(): E {
         if (isEmpty()) throw NoSuchElementException("ArrayDeque is empty.")
+        registerModification()
 
         val element = internalGet(head)
         elementData[head] = null
@@ -160,6 +163,7 @@ public class ArrayDeque<E> : AbstractMutableList<E> {
      */
     public fun removeLast(): E {
         if (isEmpty()) throw NoSuchElementException("ArrayDeque is empty.")
+        registerModification()
 
         val internalLastIndex = internalIndex(lastIndex)
         val element = internalGet(internalLastIndex)
@@ -190,6 +194,7 @@ public class ArrayDeque<E> : AbstractMutableList<E> {
             return
         }
 
+        registerModification()
         ensureCapacity(size + 1)
 
         // Elements in circular array lay in 2 ways:
@@ -268,6 +273,7 @@ public class ArrayDeque<E> : AbstractMutableList<E> {
     }
 
     public override fun addAll(elements: Collection<E>): Boolean {
+        registerModification()
         if (elements.isEmpty()) return false
         ensureCapacity(this.size + elements.size)
         copyCollectionElements(internalIndex(size), elements)
@@ -277,12 +283,10 @@ public class ArrayDeque<E> : AbstractMutableList<E> {
     public override fun addAll(index: Int, elements: Collection<E>): Boolean {
         AbstractList.checkPositionIndex(index, size)
 
-        if (elements.isEmpty()) {
-            return false
-        } else if (index == size) {
-            return addAll(elements)
-        }
+        if (index == size) return addAll(elements)
 
+        registerModification()
+        if (elements.isEmpty()) return false
         ensureCapacity(this.size + elements.size)
 
         val tail = internalIndex(size)
@@ -424,6 +428,8 @@ public class ArrayDeque<E> : AbstractMutableList<E> {
             return removeFirst()
         }
 
+        registerModification()
+
         val internalIndex = internalIndex(index)
         val element = internalGet(internalIndex)
 
@@ -510,13 +516,19 @@ public class ArrayDeque<E> : AbstractMutableList<E> {
                 }
             }
         }
-        if (modified)
+        if (modified) {
+            registerModification()
             size = negativeMod(newTail - head)
+        }
 
         return modified
     }
 
     public override fun clear() {
+        if (size == 0) return
+
+        registerModification()
+
         val tail = internalIndex(size)
         if (head < tail) {
             elementData.fill(null, head, tail)
@@ -548,6 +560,10 @@ public class ArrayDeque<E> : AbstractMutableList<E> {
     @Suppress("NOTHING_TO_OVERRIDE", "NO_EXPLICIT_VISIBILITY_IN_API_MODE") // different visibility inherited from the base class
     override fun toArray(): Array<Any?> {
         return toArray(arrayOfNulls<Any?>(size))
+    }
+
+    private fun registerModification() {
+        modCount += 1
     }
 
     // for testing
