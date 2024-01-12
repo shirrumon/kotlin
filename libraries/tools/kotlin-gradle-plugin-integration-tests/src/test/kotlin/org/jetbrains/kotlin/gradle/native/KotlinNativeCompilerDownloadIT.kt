@@ -10,6 +10,7 @@ import org.jetbrains.kotlin.gradle.testbase.*
 import org.jetbrains.kotlin.gradle.testbase.TestVersions.Kotlin.STABLE_RELEASE
 import org.jetbrains.kotlin.gradle.util.capitalize
 import org.jetbrains.kotlin.konan.target.HostManager
+import org.jetbrains.kotlin.konan.target.presetName
 import org.jetbrains.kotlin.test.TestMetadata
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.io.TempDir
@@ -25,7 +26,7 @@ class KotlinNativeCompilerDownloadIT : KGPBaseTest() {
 
     private val currentPlatform = HostManager.platformName()
 
-    private val nativeHostTargetName = MPPNativeTargets.current
+    private val nativeHostTargetName = HostManager.host.presetName
 
     private val UNPUCK_KONAN_FINISHED_LOG =
         "Moving Kotlin/Native compiler from tmp directory"
@@ -70,8 +71,6 @@ class KotlinNativeCompilerDownloadIT : KGPBaseTest() {
             buildOptions = defaultBuildOptions.copy(
                 konanDataDir = konanTemp,
             ),
-            enableGradleDebug = true,
-            forceOutput = true
         ) {
             build("assemble") {
                 assertOutputDoesNotContain(DOWNLOAD_KONAN_FINISHED_LOG)
