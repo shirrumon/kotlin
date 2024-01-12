@@ -415,8 +415,8 @@ internal constructor(
         get() = compilerOptions.freeCompilerArgs as Provider<Collection<String>>
 
     private val runnerSettings = KotlinNativeCompilerRunner.Settings.of(
-        kotlinNativeProvider.get().konanHome.getFile().absolutePath,
-        kotlinNativeProvider.get().konanDataDir.getFile().absolutePath,
+        kotlinNativeProvider.get().compilerDirectory.getFile().absolutePath,
+        kotlinNativeProvider.get().konanDataDir.orNull,
         project
     )
     // endregion.
@@ -1073,8 +1073,8 @@ abstract class CInteropProcess @Inject internal constructor(params: Params) :
     }
 
     private val runnerSettings = KotlinNativeToolRunner.Settings.of(
-        kotlinNativeProvider.get().konanHome.getFile().absolutePath,
-        kotlinNativeProvider.get().konanDataDir.getFile().absolutePath,
+        kotlinNativeProvider.get().compilerDirectory.getFile().absolutePath,
+        kotlinNativeProvider.get().konanDataDir.orNull,
         project
     )
     // Inputs and outputs.

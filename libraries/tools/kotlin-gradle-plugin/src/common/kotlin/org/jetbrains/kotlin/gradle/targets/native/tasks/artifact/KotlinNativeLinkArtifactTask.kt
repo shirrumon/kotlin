@@ -176,8 +176,8 @@ abstract class KotlinNativeLinkArtifactTask @Inject constructor(
     }
 
     private val runnerSettings = KotlinNativeCompilerRunner.Settings.of(
-        kotlinNativeProvider.get().konanHome.getFile().absolutePath,
-        kotlinNativeProvider.get().konanDataDir.getFile().absolutePath,
+        kotlinNativeProvider.get().compilerDirectory.getFile().absolutePath,
+        kotlinNativeProvider.get().konanDataDir.orNull,
         project
     )
 
