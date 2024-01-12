@@ -122,7 +122,7 @@ abstract class DefaultKotlinBasePlugin : KotlinBasePlugin {
 
     private fun addKotlinNativeCompilerConfiguration(project: Project) {
         project.configurations
-            .createResolvable(KOTLIN_NATIVE_COMPILER_CONFIGURATION_NAME).also { configuration ->
+            .maybeCreateResolvable(KOTLIN_NATIVE_COMPILER_CONFIGURATION_NAME).also { configuration ->
                 configuration.defaultDependencies {
                     it.add(project.dependencies.create(NativeCompilerDownloader.getCompilerDependencyNotation(project)))
                 }
