@@ -8,6 +8,7 @@ package org.jetbrains.kotlin.swiftexport
 import com.intellij.openapi.util.io.FileUtil
 import org.jetbrains.kotlin.cli.common.CLITool
 import org.jetbrains.kotlin.cli.common.ExitCode
+import org.jetbrains.kotlin.cli.common.messages.MessageRenderer
 import org.jetbrains.kotlin.cli.jvm.K2JVMCompiler
 import org.jetbrains.kotlin.compiler.plugin.CommandLineProcessor
 import org.jetbrains.kotlin.compiler.plugin.CompilerPluginRegistrar
@@ -60,6 +61,7 @@ internal class JvmCompilerWithSwiftExportPluginFacade(
         compiler: CLITool<*>,
         src: List<KtFile>,
         outputDir: File,
+        messageRenderer: MessageRenderer? = null,
     ) {
         val sources = src.map {
             tmpDir.resolve(it.name).apply {
@@ -83,7 +85,8 @@ internal class JvmCompilerWithSwiftExportPluginFacade(
 
         val (output, exitCode) = CompilerTestUtil.executeCompiler(
             compiler,
-            args + outputPath
+            args + outputPath,
+            messageRenderer,
         )
         assertEquals(ExitCode.OK, exitCode, output)
     }
