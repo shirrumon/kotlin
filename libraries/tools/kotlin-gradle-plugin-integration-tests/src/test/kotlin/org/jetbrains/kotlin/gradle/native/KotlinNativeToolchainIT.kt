@@ -24,7 +24,8 @@ class KotlinNativeToolchainIT : KGPBaseTest() {
         nativeProject(
             "native-with-maven-dependencies",
             gradleVersion = gradleVersion,
-            environmentVariables = EnvironmentalVariables(Pair("KONAN_DATA_DIR", anotherKonanDataDir.absolutePathString()))
+            environmentVariables = EnvironmentalVariables(Pair("KONAN_DATA_DIR", anotherKonanDataDir.absolutePathString())),
+            forceOutput = true,
         ) {
             build(
                 "linkDebugExecutableNative",
