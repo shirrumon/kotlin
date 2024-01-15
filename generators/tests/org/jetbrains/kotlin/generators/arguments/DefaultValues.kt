@@ -91,10 +91,10 @@ open class DefaultValues(
     )
 
     object JsEcmaVersions : DefaultValues(
-        "\"v5\"",
+        "\"es5\"",
         typeOf<String>(),
         typeOf<String>(),
-        possibleValues = listOf("\"v5\"", "\"v2015\"")
+        possibleValues = listOf("\"es5\"", "\"es2015\"")
     )
 
     object JsModuleKinds : DefaultValues(

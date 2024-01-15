@@ -44,7 +44,7 @@ internal abstract class KotlinJsCompilerOptionsDefault @javax.inject.Inject cons
         objectFactory.property(kotlin.String::class.java)
 
     override val target: org.gradle.api.provider.Property<kotlin.String> =
-        objectFactory.property(kotlin.String::class.java).convention("v5")
+        objectFactory.property(kotlin.String::class.java).convention("es5")
 
     override val typedArrays: org.gradle.api.provider.Property<kotlin.Boolean> =
         objectFactory.property(kotlin.Boolean::class.java).convention(true)

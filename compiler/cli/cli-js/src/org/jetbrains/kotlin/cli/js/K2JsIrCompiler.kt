@@ -141,6 +141,17 @@ class K2JsIrCompiler : CLICompiler<K2JSCompilerArguments>() {
     }
 
 
+    private val K2JSCompilerArguments.targetVersion: EcmaVersion?
+        get() {
+            val targetString = target
+            return when {
+                // Backward compatibility
+                targetString == "v5" -> EcmaVersion.es5
+                targetString != null -> EcmaVersion.entries.firstOrNull { it.name == targetString }
+                else -> EcmaVersion.defaultVersion()
+            }
+        }
+
     override fun doExecute(
         arguments: K2JSCompilerArguments,
         configuration: CompilerConfiguration,
@@ -150,7 +161,13 @@ class K2JsIrCompiler : CLICompiler<K2JSCompilerArguments>() {
         val messageCollector = configuration.getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
 
         if (configuration[JSConfigurationKeys.TARGET] == null) {
-            configuration.put(JSConfigurationKeys.TARGET, arguments.target?.let(EcmaVersion::valueOf) ?: EcmaVersion.defaultVersion())
+            val targetVersion = arguments.targetVersion
+            if (targetVersion != null) {
+                configuration.put(JSConfigurationKeys.TARGET, targetVersion)
+            } else {
+                messageCollector.report(ERROR, "Unsupported ECMA version: ${arguments.target}")
+                return COMPILATION_ERROR
+            }
         }
 
         val pluginLoadResult = loadPlugins(paths, arguments, configuration)
@@ -294,10 +311,10 @@ class K2JsIrCompiler : CLICompiler<K2JSCompilerArguments>() {
         if (arguments.irProduceJs) {
             val target = configurationJs[JSConfigurationKeys.TARGET] ?: error("cannot get 'target' from configuration")
             val moduleKind = configurationJs[JSConfigurationKeys.MODULE_KIND] ?: error("cannot get 'module kind' from configuration")
-            val isES2015 = target == EcmaVersion.v2015
+            val isES2015 = target == EcmaVersion.es2015
 
-            configuration.put(JSConfigurationKeys.USE_ES6_CLASSES, arguments.useEsClasses || isES2015)
-            configurationJs.put(JSConfigurationKeys.COMPILE_SUSPEND_AS_JS_GENERATOR, arguments.useEsGenerators || isES2015)
+            configuration.put(JSConfigurationKeys.USE_ES6_CLASSES, arguments.useEsClasses ?: isES2015)
+            configurationJs.put(JSConfigurationKeys.COMPILE_SUSPEND_AS_JS_GENERATOR, arguments.useEsGenerators ?: isES2015)
 
             messageCollector.report(INFO, "Produce executable: $outputDirPath")
             messageCollector.report(INFO, "Cache directory: ${arguments.cacheDirectory}")
@@ -684,8 +701,6 @@ class K2JsIrCompiler : CLICompiler<K2JSCompilerArguments>() {
     ) {
         val messageCollector = configuration.getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
 
-        configuration.put(JSConfigurationKeys.TARGET, arguments.target?.let(EcmaVersion::valueOf) ?: EcmaVersion.defaultVersion())
-
         if (arguments.sourceMap) {
             configuration.put(JSConfigurationKeys.SOURCE_MAP, true)
             if (arguments.sourceMapPrefix != null) {
@@ -735,7 +750,7 @@ class K2JsIrCompiler : CLICompiler<K2JSCompilerArguments>() {
         val moduleKindName = arguments.moduleKind
         var moduleKind: ModuleKind? = when {
             moduleKindName != null -> moduleKindMap[moduleKindName]
-            configuration[JSConfigurationKeys.TARGET] == EcmaVersion.v2015 -> ModuleKind.ES
+            configuration[JSConfigurationKeys.TARGET] == EcmaVersion.es2015 -> ModuleKind.ES
             else -> ModuleKind.PLAIN
         }
 

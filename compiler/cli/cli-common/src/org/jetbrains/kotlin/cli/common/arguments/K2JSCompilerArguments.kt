@@ -164,7 +164,7 @@ class K2JSCompilerArguments : CommonCompilerArguments() {
         gradleInputType = GradleInputTypes.INPUT,
         shouldGenerateDeprecatedKotlinOptions = true,
     )
-    @Argument(value = "-target", valueDescription = "{ v5, v2015 }", description = "Generate JS files for the specified ECMA version.")
+    @Argument(value = "-target", valueDescription = "{ es5, es2015 }", description = "Generate JS files for the specified ECMA version.")
     var target: String? = null
         set(value) {
             checkFrozen()
@@ -488,7 +488,7 @@ In combination with '-meta-info', this generates both IR and pre-IR versions of 
         value = "-Xes-classes",
         description = "Let generated JavaScript code use ES2015 classes."
     )
-    var useEsClasses = false
+    var useEsClasses: Boolean? = null
         set(value) {
             checkFrozen()
             field = value
@@ -508,7 +508,7 @@ In combination with '-meta-info', this generates both IR and pre-IR versions of 
         value = "-Xes-generators",
         description = "Enable ES2015 generator functions usage inside the compiled code"
     )
-    var useEsGenerators = false
+    var useEsGenerators: Boolean? = null
         set(value) {
             checkFrozen()
             field = value
