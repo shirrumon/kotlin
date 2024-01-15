@@ -36,7 +36,7 @@ abstract class AbstractCompileKotlinAgainstKlibTest : AbstractBlackBoxCodegenTes
         val classpath: MutableList<File> = ArrayList()
         classpath.add(KtTestUtil.getAnnotationsJar())
         val configuration = createConfiguration(
-            configurationKind, getTestJdkKind(files), backend, classpath, listOf(outputDir), files
+            configurationKind, getTestJdkKind(files), classpath, listOf(outputDir), files
         )
         myEnvironment = createForTests(
             testRootDisposable, configuration, EnvironmentConfigFiles.JVM_CONFIG_FILES

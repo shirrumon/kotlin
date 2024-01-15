@@ -6,14 +6,11 @@
 package org.jetbrains.kotlin.codegen.ir;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.kotlin.codegen.AbstractGenerateNotNullAssertionsTest;
+import org.jetbrains.kotlin.codegen.GenerateNotNullAssertionsTest;
 import org.jetbrains.kotlin.test.TargetBackend;
 
-public class IrGenerateNotNullAssertionsTest extends AbstractGenerateNotNullAssertionsTest {
-    public void testNoAssertionsForKotlinFromBinary() {
-        doTestNoAssertionsForKotlinFromBinary("noAssertionsForKotlin.kt", "noAssertionsForKotlinMain.kt");
-    }
-
+@SuppressWarnings("JUnitTestCaseWithNoTests")
+public class IrGenerateNotNullAssertionsTest extends GenerateNotNullAssertionsTest {
     @NotNull
     @Override
     protected TargetBackend getBackend() {

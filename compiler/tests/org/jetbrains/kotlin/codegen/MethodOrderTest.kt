@@ -24,7 +24,7 @@ import org.jetbrains.org.objectweb.asm.MethodVisitor
 import org.jetbrains.org.objectweb.asm.Opcodes
 import java.util.*
 
-class MethodOrderTest : CodegenTestCase() {
+open class MethodOrderTest : CodegenTestCase() {
     fun testDelegatedMethod() {
         doTest(
             """

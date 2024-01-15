@@ -57,20 +57,29 @@ abstract class KotlinBaseTest<F : KotlinBaseTest.TestFile> : KtUsefulTestCase() 
 
     protected open fun parseDirectivesPerFiles() = false
 
-    protected open val backend = TargetBackend.ANY
+    protected open val useFir: Boolean
+        get() = false
+    protected open val firParser: FirParser
+        get() = FirParser.Psi
+    protected open val backend
+        get() = TargetBackend.ANY
 
     protected open fun configureTestSpecific(configuration: CompilerConfiguration, testFiles: List<TestFile>) {}
 
     protected fun createConfiguration(
         kind: ConfigurationKind,
         jdkKind: TestJdkKind,
-        backend: TargetBackend,
         classpath: List<File?>,
         javaSource: List<File?>,
-        testFilesWithConfigurationDirectives: List<TestFile>
+        testFilesWithConfigurationDirectives: List<TestFile>,
     ): CompilerConfiguration {
         val configuration = KotlinTestUtils.newConfiguration(kind, jdkKind, classpath, javaSource)
         configuration.put(JVMConfigurationKeys.IR, backend.isIR)
+        configuration.put(CommonConfigurationKeys.USE_FIR, useFir)
+        when (firParser) {
+            FirParser.LightTree -> configuration.put(CommonConfigurationKeys.USE_LIGHT_TREE, true)
+            FirParser.Psi -> {}
+        }
         updateConfigurationByDirectivesInTestFiles(
             testFilesWithConfigurationDirectives,
             configuration,

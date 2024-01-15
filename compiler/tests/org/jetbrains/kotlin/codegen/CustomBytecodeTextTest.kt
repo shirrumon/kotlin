@@ -21,7 +21,7 @@ import org.jetbrains.kotlin.test.ConfigurationKind
 import org.jetbrains.kotlin.test.testFramework.KtUsefulTestCase
 
 @OptIn(ObsoleteTestInfrastructure::class)
-class CustomBytecodeTextTest : AbstractBytecodeTextTest() {
+open class CustomBytecodeTextTest : AbstractBytecodeTextTest() {
     fun testEnumMapping() {
         createEnvironmentWithMockJdkAndIdeaAnnotations(ConfigurationKind.ALL)
         myFiles = CodegenTestFiles.create(
