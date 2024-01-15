@@ -100,6 +100,26 @@ public class CompileAgainstJvmAbiTestGenerated extends AbstractCompileAgainstJvm
         runTest("plugins/jvm-abi-gen/testData/compile/kt-40340/");
     }
 
+    @TestMetadata("multifileClass")
+    public void testMultifileClass() throws Exception {
+        runTest("plugins/jvm-abi-gen/testData/compile/multifileClass/");
+    }
+
+    @TestMetadata("multifileClassOptimized")
+    public void testMultifileClassOptimized() throws Exception {
+        runTest("plugins/jvm-abi-gen/testData/compile/multifileClassOptimized/");
+    }
+
+    @TestMetadata("multifileClassOptimizedWithRemovePrivateOption")
+    public void testMultifileClassOptimizedWithRemovePrivateOption() throws Exception {
+        runTest("plugins/jvm-abi-gen/testData/compile/multifileClassOptimizedWithRemovePrivateOption/");
+    }
+
+    @TestMetadata("multifileClassWithRemovePrivateOption")
+    public void testMultifileClassWithRemovePrivateOption() throws Exception {
+        runTest("plugins/jvm-abi-gen/testData/compile/multifileClassWithRemovePrivateOption/");
+    }
+
     @TestMetadata("privateAnnotationsFromJavaApp")
     public void testPrivateAnnotationsFromJavaApp() throws Exception {
         runTest("plugins/jvm-abi-gen/testData/compile/privateAnnotationsFromJavaApp/");

@@ -90,6 +90,9 @@ abstract class BaseJvmAbiTest : TestCase() {
             if (InTextDirectivesUtils.findStringWithPrefixes(directives, "// USE_K2") != null) {
                 useK2 = true
             }
+            if (InTextDirectivesUtils.findStringWithPrefixes(directives, "// INHERIT_MULTIFILE_PARTS") != null) {
+                inheritMultifileParts = true
+            }
         }
         val exitCode = compiler.exec(messageCollector, Services.EMPTY, args)
         if (exitCode != ExitCode.OK || messageCollector.errors.isNotEmpty()) {

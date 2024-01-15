@@ -177,6 +177,7 @@ class JvmAbiClassBuilderInterceptor(
 
 private fun shouldRemoveFromAbi(irClass: IrClass?, removePrivateTopLevelClasses: Boolean): Boolean = when {
     irClass == null -> false
-    DescriptorVisibilities.isPrivate(irClass.visibility) -> removePrivateTopLevelClasses || !irClass.isTopLevel
-    else -> irClass.isEffectivelyPrivate()
+    !irClass.isTopLevel -> irClass.isEffectivelyPrivate()
+    removePrivateTopLevelClasses -> DescriptorVisibilities.isPrivate(irClass.visibility)
+    else -> false
 }

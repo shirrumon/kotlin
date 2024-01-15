@@ -115,6 +115,11 @@ public class CompareJvmAbiTestGenerated extends AbstractCompareJvmAbiTest {
         runTest("plugins/jvm-abi-gen/testData/compare/lambdas/");
     }
 
+    @TestMetadata("multifileClass")
+    public void testMultifileClass() throws Exception {
+        runTest("plugins/jvm-abi-gen/testData/compare/multifileClass/");
+    }
+
     @TestMetadata("nestedPrivateClasses")
     public void testNestedPrivateClasses() throws Exception {
         runTest("plugins/jvm-abi-gen/testData/compare/nestedPrivateClasses/");
