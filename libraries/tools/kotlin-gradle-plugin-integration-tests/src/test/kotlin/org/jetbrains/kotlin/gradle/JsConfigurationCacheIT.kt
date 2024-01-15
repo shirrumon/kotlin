@@ -37,11 +37,11 @@ class JsIrConfigurationCacheIT : KGPBaseTest() {
                 ":app:build",
                 buildOptions = defaultBuildOptions,
                 executedTaskNames = listOf(
-                    ":app:packageJson",
-                    ":app:publicPackageJson",
+                    ":app:jsPackageJson",
+                    ":app:jsPublicPackageJson",
                     ":app:compileKotlinJs",
                     ":app:compileProductionExecutableKotlinJs",
-                    ":app:browserProductionWebpack",
+                    ":app:jsBrowserProductionWebpack",
                 )
             )
         }

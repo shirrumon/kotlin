@@ -19,7 +19,7 @@ kotlin {
         binaries.executable()
     }
 
-    sourceSets {
+    this.sourceSets {
         val jsMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-js"))

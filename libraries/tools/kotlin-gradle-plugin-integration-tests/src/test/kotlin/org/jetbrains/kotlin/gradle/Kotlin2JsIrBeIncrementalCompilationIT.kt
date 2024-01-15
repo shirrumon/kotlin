@@ -61,13 +61,13 @@ abstract class Kotlin2JsIrBeIncrementalCompilationIT : KGPBaseTest() {
                 return cacheFiles
             }
 
-            val srcFile = projectPath.resolve("app/src/main/kotlin/App.kt").toFile()
+            val srcFile = projectPath.resolve("app/src/jsMain/kotlin/App.kt").toFile()
             val guardFile = projectPath.resolve("app/build/klib/cache/js/developmentExecutable/cache.guard").toFile()
             val badCode = srcFile.readText()
 
             var successfulBuildCacheFiles = emptyMap<String, Int>()
             srcFile.appendText("\nfun unknownFunction() = 1\n")
-            build("nodeDevelopmentRun") {
+            build("jsNodeDevelopmentRun") {
                 assertTasksExecuted(":app:compileDevelopmentExecutableKotlinJs")
                 assertOutputContains("Hello, World!")
                 successfulBuildCacheFiles = readCacheFiles()
@@ -77,14 +77,14 @@ abstract class Kotlin2JsIrBeIncrementalCompilationIT : KGPBaseTest() {
             srcFile.writeText(badCode)
 
             for (i in 0..1) {
-                buildAndFail("nodeDevelopmentRun") {
+                buildAndFail("jsNodeDevelopmentRun") {
                     assertTasksFailed(":app:compileDevelopmentExecutableKotlinJs")
                     assertTrue("guard file after compilation error expected") { guardFile.exists() }
                 }
             }
 
             srcFile.writeText(badCode.replace("Hello, World!", "Hello, Kotlin!") + "\nfun unknownFunction() = 2\n")
-            build("nodeDevelopmentRun") {
+            build("jsNodeDevelopmentRun") {
                 assertTasksExecuted(":app:compileDevelopmentExecutableKotlinJs")
                 assertOutputContains("Hello, Kotlin!")
                 val successfulRebuildCacheFiles = readCacheFiles()
@@ -121,19 +121,19 @@ abstract class Kotlin2JsIrBeIncrementalCompilationIT : KGPBaseTest() {
             }
 
             // -Xir-property-lazy-initialization default is true
-            build("nodeRun") {
+            build("jsNodeRun") {
                 assertTasksExecuted(":compileDevelopmentExecutableKotlinJs")
                 assertEquals(listOf("Hello, Gradle."), output.testScriptOutLines())
             }
 
             setLazyInitializationArg(false)
-            build("nodeRun") {
+            build("jsNodeRun") {
                 assertTasksExecuted(":compileDevelopmentExecutableKotlinJs")
                 assertEquals(listOf("TOP LEVEL!", "Hello, Gradle."), output.testScriptOutLines())
             }
 
             setLazyInitializationArg(true)
-            build("nodeRun") {
+            build("jsNodeRun") {
                 assertTasksExecuted(":compileDevelopmentExecutableKotlinJs")
                 assertEquals(listOf("Hello, Gradle."), output.testScriptOutLines())
             }

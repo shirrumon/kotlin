@@ -187,15 +187,15 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
             }
 
             build("kotlinUpgradeYarnLock") {
-                assertTasksExecuted(":base:publicPackageJson")
-                assertTasksExecuted(":lib:lib-2:publicPackageJson")
+                assertTasksExecuted(":base:jsPublicPackageJson")
+                assertTasksExecuted(":lib:lib-2:jsPublicPackageJson")
                 assertTasksExecuted(":kotlinNpmInstall")
                 assertTasksExecuted(":kotlinUpgradeYarnLock")
             }
 
-            build(":nodeTest") {
-                assertTasksUpToDate(":base:publicPackageJson")
-                assertTasksUpToDate(":lib:lib-2:publicPackageJson")
+            build(":jsNodeTest") {
+                assertTasksUpToDate(":base:jsPublicPackageJson")
+                assertTasksUpToDate(":lib:lib-2:jsPublicPackageJson")
                 assertTasksUpToDate(":kotlinNpmInstall")
                 assertTasksExecuted(":kotlinStoreYarnLock")
             }
@@ -471,7 +471,7 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
         project("kotlin-js-browser-project", gradleVersion) {
             buildGradleKts.modify(::transformBuildScriptWithPluginsDsl)
 
-            projectPath.resolve("app/src/main/kotlin/App.kt").modify {
+            projectPath.resolve("app/src/jsMain/kotlin/App.kt").modify {
                 it.replace("require(\"css/main.css\")", "")
             }
 
@@ -479,7 +479,7 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
                 assertOutputContains("Sheldon: 73")
             }
 
-            projectPath.resolve("base/src/main/kotlin/Base.kt").modify {
+            projectPath.resolve("base/src/jsMain/kotlin/Base.kt").modify {
                 it.replace("73", "37")
             }
 
@@ -522,7 +522,7 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
 
             build(":app:compileProductionExecutableKotlinJs")
 
-            projectPath.resolve("app/src/main/kotlin/App.kt").modify {
+            projectPath.resolve("app/src/jsMain/kotlin/App.kt").modify {
                 it.replace("sheldon()", "best()")
             }
 
@@ -648,12 +648,16 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
             subProject("app").buildGradleKts.modify {
                 it + """
                     |
-                    |kotlin.target.useEsModules()
+                    |kotlin {
+                    |    js {
+                    |        useEsModules()
+                    |    }
+                    |}
                     |
                 """.trimMargin()
             }
 
-            build(":app:packageJson") {
+            build(":app:jsPackageJson") {
                 val packageJson = projectPath
                     .resolve("build/js/packages/kotlin-js-browser-app")
                     .resolve(NpmProject.PACKAGE_JSON)
@@ -675,12 +679,16 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
             subProject("app").buildGradleKts.modify {
                 it + """
                     |
-                    |kotlin.target.useEsModules()
+                    |kotlin {
+                    |    js {
+                    |        useEsModules()
+                    |    }
+                    |}
                     |
                 """.trimMargin()
             }
 
-            build(":app:publicPackageJson") {
+            build(":app:jsPublicPackageJson") {
                 val packageJson = subProject("app").projectPath
                     .resolve("build/tmp/publicPackageJson")
                     .resolve(NpmProject.PACKAGE_JSON)
@@ -857,9 +865,9 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
             build("compileDevelopmentExecutableKotlinJs") {
                 val mapFilePath = subProject("app").projectPath
                     .resolve("build/kotlin2js/app.js.map")
-                assertFileContains(mapFilePath, "\"../../src/main/kotlin/main.kt\"")
+                assertFileContains(mapFilePath, "\"../../src/jsMain/kotlin/main.kt\"")
                 // The IR BE generates correct paths for dependencies
-                assertFileContains(mapFilePath, "\"../../../lib/src/main/kotlin/foo.kt\"")
+                assertFileContains(mapFilePath, "\"../../../lib/src/jsMain/kotlin/foo.kt\"")
             }
         }
     }

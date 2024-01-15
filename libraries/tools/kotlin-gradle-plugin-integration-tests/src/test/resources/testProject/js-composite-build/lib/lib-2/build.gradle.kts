@@ -14,7 +14,7 @@ kotlin {
         nodejs()
         browser()
 
-        sourceSets {
+        this@kotlin.sourceSets {
             val jsMain by getting {
                 dependencies {
                     implementation(kotlin("stdlib-js"))

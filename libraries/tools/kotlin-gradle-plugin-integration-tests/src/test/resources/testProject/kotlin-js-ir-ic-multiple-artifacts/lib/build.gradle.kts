@@ -14,8 +14,8 @@ kotlin {
             isCanBeConsumed = true
             isCanBeResolved = false
         }
-        val runtimeOnly by configurations.getting
-        runtimeOnly.extendsFrom(otherDist)
+        val jsMainRuntimeOnly by configurations.getting
+        jsMainRuntimeOnly.extendsFrom(otherDist)
         artifacts {
             add(otherDist.name, tasks.named("otherKlib").map { it.outputs.files.files.first() })
         }
