@@ -147,7 +147,7 @@ object KotlinToolingDiagnostics {
                 Kotlin Multiplatform <-> Android Gradle Plugin compatibility issue:
                 The applied Android Gradle Plugin version ($androidGradlePluginVersionString) is higher 
                 than the maximum known to the Kotlin Gradle Plugin.
-                Tooling stability in such configuration isn't tested, please report encountered issues to https://kotl.in/issue"
+                Tooling stability in such configuration isn't tested, please report encountered issues to https://kotl.in/issue
                 
                 Minimum supported Android Gradle Plugin version: $minSupported
                 Maximum tested Android Gradle Plugin version: $maxTested
@@ -707,9 +707,8 @@ object KotlinToolingDiagnostics {
         operator fun invoke(xcodeVersionString: String, maxTested: String) = build(
             """
                 Kotlin <-> Xcode compatibility issue:
-                The selected Xcode version ($xcodeVersionString) is higher 
-                than the maximum known to the Kotlin Gradle Plugin.
-                Stability in such configuration hasn't been tested, please report encountered issues to https://kotl.in/issue"
+                The selected Xcode version ($xcodeVersionString) is higher than the maximum known to the Kotlin Gradle Plugin.
+                Stability in such configuration hasn't been tested, please report encountered issues to https://kotl.in/issue
                 
                 Maximum tested Xcode version: $maxTested
                 

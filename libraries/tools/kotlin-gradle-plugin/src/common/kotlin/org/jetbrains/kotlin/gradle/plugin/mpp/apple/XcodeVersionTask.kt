@@ -29,7 +29,7 @@ internal abstract class XcodeVersionTask : DefaultTask(), UsesKotlinToolingDiagn
 
     companion object {
         fun locateOrRegister(project: Project): Provider<XcodeVersionTask> {
-            return project.rootProject.locateOrRegisterTask("xcodeVersion") { task ->
+            return project.locateOrRegisterTask("xcodeVersion") { task ->
                 if (!HostManager.hostIsMac) {
                     task.onlyIfCompat("Task can be run only on MacOS") { false }
                     return@locateOrRegisterTask
