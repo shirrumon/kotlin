@@ -59,10 +59,10 @@ class JsIrConfigurationCacheIT : KGPBaseTest() {
             build(":app:build", "-Didea.version=2020.1") {
                 assertConfigurationCacheReused()
                 assertTasksUpToDate(
-                    ":app:packageJson",
-                    ":app:publicPackageJson",
+                    ":app:jsPackageJson",
+                    ":app:jsPublicPackageJson",
                     ":app:compileProductionExecutableKotlinJs",
-                    ":app:browserProductionWebpack",
+                    ":app:jsBrowserProductionWebpack",
                 )
             }
         }

@@ -67,13 +67,12 @@ class FusStatisticsIT : KGPDaemonsBaseTest() {
     @DisplayName("Verify that the metric for applying the Kotlin JS plugin is being collected")
     @GradleTest
     fun testMetricCollectingOfApplyingKotlinJsPlugin(gradleVersion: GradleVersion) {
-        project("simple-js-library", gradleVersion) {
+        project("kotlin-js-plugin-for-statistics", gradleVersion) {
             build("assemble", "-Pkotlin.session.logger.root.path=$projectPath") {
                 assertFileContains(fusStatisticsPath, "KOTLIN_JS_PLUGIN_ENABLED=true")
             }
         }
     }
-
 
     @DisplayName("Ensure that the metric are not collected if plugins were not applied to simple project")
     @GradleTest

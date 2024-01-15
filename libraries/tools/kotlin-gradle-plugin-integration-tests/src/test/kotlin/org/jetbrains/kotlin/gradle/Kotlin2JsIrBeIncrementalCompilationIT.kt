@@ -155,7 +155,9 @@ abstract class Kotlin2JsIrBeIncrementalCompilationIT : KGPBaseTest() {
                 // 2 for lib.klib + 1 for stdlib + 1 for dom-api-compat + 1 for main
                 assertEquals(5, klibCacheDirs?.size, "cache should contain 5 dirs")
 
-                val libKlibCacheDirs = klibCacheDirs?.filter { dir -> dir.startsWith("lib.klib.") }
+                val libKlibCacheDirs = klibCacheDirs?.filter { dir ->
+                    dir.startsWith("lib.klib.") || dir.startsWith("lib-js.klib.")
+                }
                 assertEquals(2, libKlibCacheDirs?.size, "cache should contain 2 dirs for lib.klib")
 
                 var lib = false
@@ -204,7 +206,7 @@ abstract class Kotlin2JsIrBeIncrementalCompilationIT : KGPBaseTest() {
                 """
                 |
                 |dependencies {
-                |    implementation(project(":lib"))
+                |    "jsMainImplementation"(project(":lib"))
                 |}
                 |
                 """.trimMargin()
@@ -226,7 +228,7 @@ abstract class Kotlin2JsIrBeIncrementalCompilationIT : KGPBaseTest() {
     @GradleTest
     fun testCacheGuardInvalidation(gradleVersion: GradleVersion) {
         project("kotlin2JsIrICProject", gradleVersion) {
-            build("nodeDevelopmentRun") {
+            build("jsNodeDevelopmentRun") {
                 assertTasksExecuted(":compileDevelopmentExecutableKotlinJs")
                 assertOutputContains("module [main] was built clean")
                 assertOutputContains(">>> TEST OUT: Hello, Gradle.")
@@ -235,11 +237,11 @@ abstract class Kotlin2JsIrBeIncrementalCompilationIT : KGPBaseTest() {
             val cacheGuard = projectPath.resolve("build/klib/cache/js/developmentExecutable/cache.guard").toFile()
             assertFalse(cacheGuard.exists(), "Cache guard file should be removed after successful build")
 
-            val srcFile = projectPath.resolve("src/main/kotlin/Main.kt").toFile()
+            val srcFile = projectPath.resolve("src/jsMain/kotlin/Main.kt").toFile()
             srcFile.writeText(srcFile.readText().replace("greeting(\"Gradle\")", "greeting(\"Kotlin\")"))
 
             cacheGuard.createNewFile()
-            build("nodeDevelopmentRun") {
+            build("jsNodeDevelopmentRun") {
                 assertTasksExecuted(":compileDevelopmentExecutableKotlinJs")
                 assertOutputContains(Regex("Cache guard file detected, cache directory '.+' cleared"))
                 assertOutputContains("module [main] was built clean")

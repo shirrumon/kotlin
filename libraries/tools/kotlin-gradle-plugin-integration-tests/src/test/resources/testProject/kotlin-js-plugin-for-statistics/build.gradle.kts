@@ -1,5 +1,5 @@
 plugins {
-    kotlin("multiplatform")
+    kotlin("js")
 }
 
 group = "com.example"
@@ -12,11 +12,6 @@ repositories {
 
 kotlin {
     js {
-        nodejs {
-        }
+        nodejs()
     }
-}
-
-dependencies {
-    "jsTestRuntimeOnly"(npm("xmlhttprequest", "1.8.0"))
 }

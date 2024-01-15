@@ -14,3 +14,7 @@ kotlin {
         }
     }
 }
+
+dependencies {
+    "jsMainImplementation"(kotlin("stdlib-js"))
+}

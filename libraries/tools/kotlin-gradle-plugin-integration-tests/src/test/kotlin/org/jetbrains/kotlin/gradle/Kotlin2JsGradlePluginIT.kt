@@ -228,7 +228,7 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
             val filesModified: MutableMap<String, Long> = mutableMapOf()
 
             build("compileDevelopmentExecutableKotlinJs") {
-                assertTasksExecuted(":app:developmentExecutableCompileSync")
+                assertTasksExecuted(":app:jsDevelopmentExecutableCompileSync")
 
                 projectPath.resolve("build/js/packages/kotlin-js-browser-app")
                     .resolve("kotlin")
@@ -239,16 +239,16 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
                     }
             }
 
-            projectPath.resolve("base/src/main/kotlin/Base.kt").modify {
+            projectPath.resolve("base/src/jsMain/kotlin/Base.kt").modify {
                 it.replace("73", "37")
             }
 
-            val fooTxt = projectPath.resolve("app/src/main/resources/foo/foo.txt")
+            val fooTxt = projectPath.resolve("app/src/jsMain/resources/foo/foo.txt")
             fooTxt.parent.toFile().mkdirs()
             fooTxt.createFile().writeText("foo")
 
             build("compileDevelopmentExecutableKotlinJs") {
-                assertTasksExecuted(":app:developmentExecutableCompileSync")
+                assertTasksExecuted(":app:jsDevelopmentExecutableCompileSync")
 
                 val modified = projectPath.resolve("build/js/packages/kotlin-js-browser-app")
                     .resolve("kotlin")
@@ -278,7 +278,7 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
             fooTxt.writeText("bar")
 
             build("compileDevelopmentExecutableKotlinJs") {
-                assertTasksExecuted(":app:developmentExecutableCompileSync")
+                assertTasksExecuted(":app:jsDevelopmentExecutableCompileSync")
 
                 val modified = projectPath.resolve("build/js/packages/kotlin-js-browser-app")
                     .resolve("kotlin")
@@ -300,7 +300,7 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
 
 
             build("compileDevelopmentExecutableKotlinJs") {
-                assertTasksExecuted(":app:developmentExecutableCompileSync")
+                assertTasksExecuted(":app:jsDevelopmentExecutableCompileSync")
 
                 assertFileInProjectNotExists("build/js/packages/kotlin-js-browser-app/kotlin/foo/foo.txt")
             }
@@ -497,7 +497,7 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
 
             build("assemble")
 
-            projectPath.resolve("app/src/main/kotlin/App.kt").modify {
+            projectPath.resolve("app/src/jsMain/kotlin/App.kt").modify {
                 it.replace("sheldon()", "best()")
             }
 
@@ -632,8 +632,8 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
                 }
             }
 
-            build("browserDistribution") {
-                assertTasksExecuted(":app:browserProductionWebpack")
+            build("jsBrowserDistribution") {
+                assertTasksExecuted(":app:jsBrowserProductionWebpack")
                 assertFileExists(subProject("app").projectPath.resolve("build/${Distribution.DIST}/js/productionExecutable/app.js"))
             }
         }
@@ -753,8 +753,8 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
                 }
             }
 
-            build("browserDistribution") {
-                assertTasksExecuted(":browserProductionWebpack")
+            build("jsBrowserDistribution") {
+                assertTasksExecuted(":jsBrowserProductionWebpack")
                 assertFileExists(projectPath.resolve("build/${Distribution.DIST}/js/productionExecutable/CORRECT_NAME.js"))
             }
         }
@@ -804,8 +804,8 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
                     .resolve("build/compileSync/js/main/developmentExecutable/kotlin/$projectName-app.js.map")
                 assertFileContains(
                     appSourceMap,
-                    "\"../../../../../../src/main/kotlin/main.kt\"",
-                    "\"../../../../../../../lib/src/main/kotlin/foo.kt\"",
+                    "\"../../../../../../src/jsMain/kotlin/main.kt\"",
+                    "\"../../../../../../../lib/src/jsMain/kotlin/foo.kt\"",
                     "\"sourcesContent\":[null",
                 )
 
@@ -818,7 +818,7 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
                     .resolve("build/compileSync/js/main/developmentExecutable/kotlin/$projectName-lib.js.map")
                 assertFileContains(
                     libSourceMap,
-                    "\"../../../../../../../lib/src/main/kotlin/foo.kt\"",
+                    "\"../../../../../../../lib/src/jsMain/kotlin/foo.kt\"",
                     "\"sourcesContent\":[null",
                 )
 
@@ -829,7 +829,7 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
                     .resolve("build/js/packages/$projectName-app/kotlin/$projectName-lib.js.map")
                 assertFileContains(
                     libSourceMap2,
-                    "\"../../../../../lib/src/main/kotlin/foo.kt\"",
+                    "\"../../../../../lib/src/jsMain/kotlin/foo.kt\"",
                     "\"sourcesContent\":[null",
                 )
 
@@ -838,8 +838,8 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
                 assertFileContains(
                     projectPath
                         .resolve("build/js/packages/$projectName-app/kotlin/$projectName-app.js.map"),
-                    "\"../../../../../app/src/main/kotlin/main.kt\"",
-                    "\"../../../../../lib/src/main/kotlin/foo.kt\"",
+                    "\"../../../../../app/src/jsMain/kotlin/main.kt\"",
+                    "\"../../../../../lib/src/jsMain/kotlin/foo.kt\"",
                     "\"sourcesContent\":[null",
                 )
             }
@@ -1174,7 +1174,7 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
             buildGradleKts.modify(::transformBuildScriptWithPluginsDsl)
 
             build("rootPackageJson") {
-                assertTasksExecuted(":app:packageJson")
+                assertTasksExecuted(":app:jsPackageJson")
 
                 val jso = projectPath.resolve("build/js/packages/kotlin-js-browser-app")
                     .resolve(NpmProject.PACKAGE_JSON)
@@ -1211,7 +1211,7 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
         project("kotlin-js-browser-project", gradleVersion) {
             buildGradleKts.modify(::transformBuildScriptWithPluginsDsl)
 
-            build("browserProductionWebpack") {
+            build("jsBrowserProductionWebpack") {
                 val appPackageJson = getSubprojectPackageJson(projectName = "kotlin-js-browser", subProject = "app")
                 val libPackageJson = getSubprojectPackageJson(projectName = "kotlin-js-browser", subProject = "lib")
 
