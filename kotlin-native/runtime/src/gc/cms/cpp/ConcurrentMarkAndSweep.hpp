@@ -39,7 +39,10 @@ public:
 
         void OnSuspendForGC() noexcept;
 
-        void safePoint() noexcept { barriers_.onSafePoint(); }
+        void safePoint() noexcept {
+            barriers_.onSafePoint(); // TODO remove?
+            mark_.onSafePoint();
+        }
 
         void onThreadRegistration() noexcept { barriers_.onThreadRegistration(); }
 
@@ -72,6 +75,8 @@ public:
     bool FinalizersThreadIsRunning() noexcept;
 
     GCStateHolder& state() noexcept { return state_; }
+
+    auto& mark() noexcept { return markDispatcher_; }
 
 private:
     void mainGCThreadBody();

@@ -9,6 +9,10 @@
 #include <utility>
 
 #include "Utils.hpp"
+#include "ThreadRegistry.hpp"
+#include "CallsChecker.hpp"
+
+#include <shared_mutex>
 
 namespace kotlin::mm {
 
@@ -35,6 +39,45 @@ private:
 
 void safePoint(std::memory_order fastPathOrder = std::memory_order_relaxed) noexcept;
 void safePoint(ThreadData& threadData, std::memory_order fastPathOrder = std::memory_order_relaxed) noexcept;
+
+/**
+ * A helper class template to implement custom safe point action activators.
+ * An implementation has to inherit from this template, providing itself as a CRTP template argument.
+ *
+ * It's guaranteed that the action executed through `doIfActive`
+ * will be fully completed before the activator destructor returns.
+ */
+template <typename Impl>
+class ExtraSafePointActionActivator : private MoveOnly {
+public:
+    template <typename Action>
+    static void doIfActive(Action&& action) {
+        CallsCheckerIgnoreGuard guard;
+        std::shared_lock lock(mutex_);
+        if (active_) {
+            action();
+        }
+    }
+
+    ExtraSafePointActionActivator() noexcept {
+        std::unique_lock lock(mutex_);
+        active_ = true;
+    }
+
+    virtual ~ExtraSafePointActionActivator() noexcept = 0;
+
+private:
+    inline static std::shared_mutex mutex_{};
+    inline static bool active_ = false;
+
+    SafePointActivator safePointActivator_{};
+};
+
+template <typename Impl>
+ExtraSafePointActionActivator<Impl>::~ExtraSafePointActionActivator() noexcept {
+    std::unique_lock lock(mutex_);
+    active_ = false;
+}
 
 namespace test_support {
 
