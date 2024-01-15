@@ -14,14 +14,18 @@ import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.*
 import org.gradle.work.DisableCachingByDefault
+import org.jetbrains.kotlin.gradle.plugin.PropertiesProvider.Companion.kotlinPropertiesProvider
+import org.jetbrains.kotlin.gradle.plugin.diagnostics.KotlinToolingDiagnostics.XcodeVersionTooHighWarning
+import org.jetbrains.kotlin.gradle.plugin.diagnostics.UsesKotlinToolingDiagnostics
 import org.jetbrains.kotlin.gradle.tasks.locateOrRegisterTask
 import org.jetbrains.kotlin.gradle.utils.getFile
 import org.jetbrains.kotlin.gradle.utils.onlyIfCompat
 import org.jetbrains.kotlin.konan.target.HostManager
 import org.jetbrains.kotlin.konan.target.Xcode
+import org.jetbrains.kotlin.konan.target.XcodeVersion
 
 @DisableCachingByDefault
-internal abstract class XcodeVersionTask : DefaultTask() {
+internal abstract class XcodeVersionTask : DefaultTask(), UsesKotlinToolingDiagnostics {
 
     companion object {
         fun locateOrRegister(project: Project): Provider<XcodeVersionTask> {
@@ -37,6 +41,7 @@ internal abstract class XcodeVersionTask : DefaultTask() {
                 // DEVELOPER_DIR may override currently selected Xcode (it's respected by xcode-select and xcrun)
                 task.xcodeDeveloperDir.convention(project.providers.environmentVariable("DEVELOPER_DIR"))
 
+                task.ignoreXcodeVersionCompatibility.convention(project.kotlinPropertiesProvider.appleIgnoreXcodeVersionCompatibility)
                 task.outputFile.convention(project.layout.buildDirectory.file("xcode-version.txt"))
             }
         }
@@ -50,12 +55,29 @@ internal abstract class XcodeVersionTask : DefaultTask() {
     @get:Optional
     abstract val xcodeDeveloperDir: Property<String>
 
+    @get:Input
+    abstract val ignoreXcodeVersionCompatibility: Property<Boolean>
+
     @get:OutputFile
     abstract val outputFile: RegularFileProperty
 
     @TaskAction
     fun execute() {
-        outputFile.getFile().writeText(Xcode.findCurrent().version.toString())
+        val xcodeVersion = Xcode.findCurrent().version
+        checkVersionCompatibility(xcodeVersion)
+
+        outputFile.getFile().writeText(xcodeVersion.toString())
+    }
+
+    private fun checkVersionCompatibility(xcodeVersion: XcodeVersion) {
+        if (!ignoreXcodeVersionCompatibility.get() && xcodeVersion > XcodeVersion.maxTested) {
+            reportDiagnostic(
+                XcodeVersionTooHighWarning(
+                    xcodeVersionString = xcodeVersion.toString(),
+                    maxTested = XcodeVersion.maxTested.toString(),
+                )
+            )
+        }
     }
 }
 

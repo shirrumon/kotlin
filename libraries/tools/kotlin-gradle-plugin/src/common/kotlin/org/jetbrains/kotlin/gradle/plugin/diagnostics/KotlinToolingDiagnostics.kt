@@ -702,6 +702,21 @@ object KotlinToolingDiagnostics {
             """.trimIndent()
         )
     }
+
+    object XcodeVersionTooHighWarning : ToolingDiagnosticFactory(WARNING) {
+        operator fun invoke(xcodeVersionString: String, maxTested: String) = build(
+            """
+                Kotlin <-> Xcode compatibility issue:
+                The selected Xcode version ($xcodeVersionString) is higher 
+                than the maximum known to the Kotlin Gradle Plugin.
+                Stability in such configuration hasn't been tested, please report encountered issues to https://kotl.in/issue"
+                
+                Maximum tested Xcode version: $maxTested
+                
+                To suppress this message add '${PropertiesProvider.PropertyNames.KOTLIN_APPLE_XCODE_COMPATIBILITY_NOWARN}=true' to your gradle.properties
+            """.trimIndent()
+        )
+    }
 }
 
 private fun String.indentLines(nSpaces: Int = 4, skipFirstLine: Boolean = true): String {
