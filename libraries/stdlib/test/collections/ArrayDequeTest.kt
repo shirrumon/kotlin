@@ -352,7 +352,7 @@ class ArrayDequeTest {
     }
 
     private fun testArrayDeque(test: (bufferSize: Int, dequeSize: Int, head: Int, tail: Int) -> Unit) {
-        for (bufferSize in listOf(0, 2, 8)) {
+        for (bufferSize in listOf(0, 2, 8, 15)) {
             for (dequeSize in 0..bufferSize) {
                 for (tail in 0 until bufferSize) {
                     val head = tail - dequeSize
