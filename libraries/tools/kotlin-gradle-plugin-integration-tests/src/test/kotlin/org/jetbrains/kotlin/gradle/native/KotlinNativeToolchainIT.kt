@@ -13,7 +13,7 @@ import java.nio.file.Path
 import kotlin.io.path.absolutePathString
 
 @DisplayName("This test class contains different scenarios with KotlinNativeToolchain feature")
-@NativeGradlePluginTests
+@NativeGradlePluginTestsOld
 class KotlinNativeToolchainIT : KGPBaseTest() {
 
     @OptIn(EnvironmentalVariablesOverride::class)
