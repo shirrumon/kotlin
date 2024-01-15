@@ -609,6 +609,40 @@ class ArrayDequeTest {
         }
     }
 
+    @Test
+    fun removeRange() = testArrayDeque { bufferSize: Int, dequeSize: Int, head: Int, tail: Int ->
+        for (fromIndex in 0..dequeSize) {
+            for (toIndex in fromIndex..dequeSize) {
+                val deque = generateArrayDeque(head, tail, bufferSize).apply { testRemoveRange(fromIndex, toIndex) }
+
+                val length = toIndex - fromIndex
+                val expectedHead = when {
+                    length == 0 -> head
+                    length == dequeSize -> 0
+                    fromIndex < dequeSize - toIndex -> head + length   // shift preceding elements
+                    else ->                                            // shift succeeding elements
+                        if (tail <= length - 1)
+                            head + bufferSize   // head becomes positive(head < tail)
+                        else
+                            head
+                }
+
+                val expectedElements = (head until tail).toMutableList().apply {
+                    repeat(length) { removeAt(fromIndex) }
+                }
+
+                deque.internalStructure { actualHead, actualElements ->
+                    assertEquals(
+                        expectedHead,
+                        actualHead,
+                        "bufferSize: $bufferSize, head: $head, tail: $tail, fromIndex: $fromIndex, toIndex: $toIndex"
+                    )
+                    assertEquals(expectedElements, actualElements.toList())
+                }
+            }
+        }
+    }
+
     @Suppress("INVISIBLE_MEMBER")
     @Test
     fun toArray() {
