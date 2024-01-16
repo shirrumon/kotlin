@@ -27,34 +27,35 @@ internal object TestRunners {
                 }
 
                 if (testTarget == KonanTarget.IOS_ARM64) {
-                    FirebaseCloudXCTestExecutor(configurables).cached().sharedRunnerFor(testRun)
+                    cached { FirebaseCloudXCTestExecutor(configurables) }.sharedRunnerFor(testRun)
                 } else {
                     val executor = when (testTarget) {
-                        hostTarget -> XCTestHostExecutor(configurables)
-                        is KonanTarget.IOS_X64, KonanTarget.IOS_SIMULATOR_ARM64 -> XCTestSimulatorExecutor(configurables)
+                        hostTarget -> cached { XCTestHostExecutor(configurables) }
+                        is KonanTarget.IOS_X64, KonanTarget.IOS_SIMULATOR_ARM64 -> cached { XCTestSimulatorExecutor(configurables) }
                         else -> runningOnUnsupportedTarget("Target is not supported running with XCTest")
                     }
-                    executor.cached().toRunner(testRun)
+                    executor.toRunner(testRun)
                 }
             } else if (testTarget == hostTarget) {
                 LocalTestRunner(testRun)
             } else {
                 val executor = when {
-                    configurables is ConfigurablesWithEmulator -> EmulatorExecutor(configurables)
+                    configurables is ConfigurablesWithEmulator -> cached { EmulatorExecutor(configurables) }
                     configurables is AppleConfigurables && configurables.targetTriple.isSimulator ->
-                        XcodeSimulatorExecutor(configurables)
-                    configurables is AppleConfigurables && RosettaExecutor.availableFor(configurables) -> RosettaExecutor(configurables)
+                        cached { XcodeSimulatorExecutor(configurables) }
+                    configurables is AppleConfigurables && RosettaExecutor.availableFor(configurables) ->
+                        cached { RosettaExecutor(configurables) }
                     else -> runningOnUnsupportedTarget()
                 }
 
-                executor.cached().toRunner(testRun)
+                executor.toRunner(testRun)
             }
         }
 
     private val runnersCache: ConcurrentHashMap<String, Executor> = ConcurrentHashMap()
 
-    private inline fun <reified T : Executor> T.cached(): Executor =
-        runnersCache.computeIfAbsent(T::class.java.simpleName) { this }
+    private inline fun <reified T : Executor> cached(crossinline executor: () -> T): Executor =
+        runnersCache.computeIfAbsent(T::class.java.simpleName) { executor() }
 
     // Currently, only local test name extractor is supported.
     fun extractTestNames(executable: TestExecutable, settings: Settings): Collection<TestName> = with(settings) {
