@@ -32,10 +32,10 @@ class Platform(val configurables: Configurables) : Configurables by configurable
 }
 
 class PlatformManager private constructor(private val serialized: Serialized) :
-    HostManager(serialized.distribution, serialized.experimental), java.io.Serializable {
+    HostManager(), java.io.Serializable {
 
-    constructor(konanHome: String, experimental: Boolean = false, konanDataDir: String? = null) : this(Distribution(konanHome, konanDataDir = konanDataDir), experimental)
-    constructor(distribution: Distribution, experimental: Boolean = false) : this(Serialized(distribution, experimental))
+    constructor(konanHome: String, konanDataDir: String? = null) : this(Distribution(konanHome, konanDataDir = konanDataDir))
+    constructor(distribution: Distribution) : this(Serialized(distribution))
 
     private val distribution by serialized::distribution
 
@@ -56,13 +56,12 @@ class PlatformManager private constructor(private val serialized: Serialized) :
 
     private data class Serialized(
         val distribution: Distribution,
-        val experimental: Boolean,
     ) : java.io.Serializable {
         companion object {
+            // TODO(discuss on review): bump UID? Do something else? How this Serialized is used?
             private const val serialVersionUID: Long = 0L
         }
 
         private fun readResolve(): Any = PlatformManager(this)
     }
 }
-
