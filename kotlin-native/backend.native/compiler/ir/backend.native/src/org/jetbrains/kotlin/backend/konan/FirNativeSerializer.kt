@@ -75,7 +75,7 @@ internal fun PhaseContext.firSerializerBase(
                     ?: firResult.outputs.last().session.moduleData.name.asString(),
             firFilesAndSessionsBySourceFile,
             bodiesOnlyForInlines = produceHeaderKlib,
-            skipPrivateApi = produceHeaderKlib,
+            publicAbiOnly = produceHeaderKlib,
     ) { firFile, session, scopeSession ->
         serializeSingleFirFile(
                 firFile,
@@ -116,7 +116,7 @@ internal fun PhaseContext.serializeNativeModule(
     moduleName: String,
     firFilesAndSessionsBySourceFile: Map<KtSourceFile, Triple<FirFile, FirSession, ScopeSession>>,
     bodiesOnlyForInlines: Boolean = false,
-    skipPrivateApi: Boolean = false,
+    publicAbiOnly: Boolean = false,
     serializeSingleFile: (FirFile, FirSession, ScopeSession) -> ProtoBuf.PackageFragment
 ): SerializerOutput {
     if (moduleFragment != null) {
@@ -135,7 +135,7 @@ internal fun PhaseContext.serializeNativeModule(
                 sourceBaseDirs = sourceBaseDirs,
                 languageVersionSettings = configuration.languageVersionSettings,
                 bodiesOnlyForInlines = bodiesOnlyForInlines,
-                skipPrivateApi = skipPrivateApi
+                publicAbiOnly = publicAbiOnly
         ).serializedIrModule(moduleFragment)
     }
 
