@@ -16176,6 +16176,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
             runTest("compiler/testData/codegen/box/finally/continueAndOuterFinally.kt");
         }
 
+        @TestMetadata("decrementInFinally.kt")
+        public void testDecrementInFinally() throws Exception {
+            runTest("compiler/testData/codegen/box/finally/decrementInFinally.kt");
+        }
+
         @TestMetadata("finallyAndFinally.kt")
         public void testFinallyAndFinally() throws Exception {
             runTest("compiler/testData/codegen/box/finally/finallyAndFinally.kt");
