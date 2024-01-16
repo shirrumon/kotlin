@@ -26,7 +26,7 @@ internal object TestRunners {
                 }
                 val executor = cached(
                     when (testTarget) {
-                        is KonanTarget.IOS_ARM64 -> FirebaseCloudExecutor(configurables)
+                        is KonanTarget.IOS_ARM64 -> FirebaseCloudXCTestExecutor(configurables)
                         hostTarget -> XCTestHostExecutor(configurables)
                         else -> XCTestSimulatorExecutor(configurables)
                     }
