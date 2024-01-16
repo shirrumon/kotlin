@@ -18,6 +18,7 @@ class KotlinNativeToolchainIT : KGPBaseTest() {
 
     @OptIn(EnvironmentalVariablesOverride::class)
     @DisplayName("K/N Gradle project build (on Linux or Mac) with a dependency from a Maven")
+    @GradleTestVersions(minVersion = TestVersions.Gradle.MAX_SUPPORTED)
     @GradleTest
     fun testSetupCommonOptionsForCaches(gradleVersion: GradleVersion, @TempDir tempDir: Path) {
         val anotherKonanDataDir = tempDir.resolve(".konan2")

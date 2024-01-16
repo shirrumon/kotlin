@@ -26,7 +26,7 @@ import kotlin.io.path.appendText
     supportedOn = [OS.MAC, OS.LINUX], enabledOnCI = [OS.MAC, OS.LINUX]
 )
 @DisplayName("Tests for K/N builds with native downloading and platform libs")
-@NativeGradlePluginTestsOld
+@NativeGradlePluginTests
 @Deprecated(
     message =
     """
