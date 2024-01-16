@@ -21879,6 +21879,12 @@ public class FirLightTreeOldFrontendDiagnosticsTestGenerated extends AbstractFir
             }
 
             @Test
+            @TestMetadata("intersectionWithJavaVoidNothing.kt")
+            public void testIntersectionWithJavaVoidNothing() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/j+k/intersectionWithJavaVoidNothing.kt");
+            }
+
+            @Test
             @TestMetadata("invisiblePackagePrivateInheritedMember.kt")
             public void testInvisiblePackagePrivateInheritedMember() throws Exception {
                 runTest("compiler/testData/diagnostics/tests/j+k/invisiblePackagePrivateInheritedMember.kt");
