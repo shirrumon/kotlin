@@ -1,4 +1,5 @@
 // MODULE: lib
+// JVM_ABI_K1_K2_DIFF: overrides were never allowed to have default values!
 // FILE: A.kt
 package lib
 

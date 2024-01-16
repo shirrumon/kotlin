@@ -1,6 +1,7 @@
 // WITH_STDLIB
 // IGNORE_BACKEND: JVM
 // LANGUAGE: +InlineClassImplementationByDelegation, +GenericInlineClassParameter
+// JVM_ABI_K1_K2_DIFF: overrides were never allowed to have default values!
 
 interface I {
     fun o(k: String = "K"): String = "O$k"
