@@ -10,8 +10,10 @@
 #include <atomic>
 #include <optional>
 
+#include "GlobalData.hpp"
 #include "KAssert.h"
 #include "Utils.hpp"
+#include "GCScheduler.hpp"
 
 class GCStateHolder {
 public:
@@ -47,9 +49,11 @@ public:
     }
 
     std::optional<int64_t> waitScheduled() {
-        int64_t result = scheduledEpoch.wait([this] { return *scheduledEpoch > *finishedEpoch || shutdownFlag_; });
+        int64_t epoch = scheduledEpoch.wait([this] { return *scheduledEpoch > *finishedEpoch || shutdownFlag_; });
         if (shutdownFlag_) return std::nullopt;
-        return result;
+        // TODO: Track waiting cycles.
+        kotlin::mm::GlobalData::Instance().gcScheduler().waitGCAllowed(epoch);
+        return epoch;
     }
 
 private:
