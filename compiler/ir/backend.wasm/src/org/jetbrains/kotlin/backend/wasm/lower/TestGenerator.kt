@@ -13,7 +13,11 @@ import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
 import org.jetbrains.kotlin.ir.expressions.IrBlockBody
 
 fun generateWasmTests(context: WasmBackendContext, moduleFragment: IrModuleFragment) {
-    val generator = TestGenerator(context, true)
+    val generator = TestGenerator(
+        context = context,
+        jsPromiseSymbol = if (context.isWasmJsTarget) context.wasmSymbols.jsRelatedSymbols.jsPromise else null,
+        groupByPackage = true
+    )
 
     moduleFragment.files.toList().forEach {
         generator.lower(it)

@@ -379,6 +379,8 @@ class WasmSymbols(
 
         val externRefIsNull = getInternalFunction("wasm_externref_is_null")
 
+        val jsPromise = getIrClass(FqName("kotlin.js.Promise"))
+
         internal val throwAsJsException: IrSimpleFunctionSymbol =
             getInternalFunction("throwAsJsException")
     }

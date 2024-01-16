@@ -22,6 +22,7 @@ class AsyncTest {
 
     @AfterTest
     fun after() {
+        // uncomment after bootstrap
         // KT-61888
         //assertEquals("after", afterLog)
     }

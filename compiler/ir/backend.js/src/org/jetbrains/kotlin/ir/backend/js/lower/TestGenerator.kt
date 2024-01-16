@@ -21,6 +21,7 @@ import org.jetbrains.kotlin.ir.declarations.*
 import org.jetbrains.kotlin.ir.expressions.IrBlockBody
 import org.jetbrains.kotlin.ir.expressions.IrExpression
 import org.jetbrains.kotlin.ir.expressions.impl.IrConstructorCallImpl
+import org.jetbrains.kotlin.ir.symbols.IrClassSymbol
 import org.jetbrains.kotlin.ir.symbols.IrSimpleFunctionSymbol
 import org.jetbrains.kotlin.ir.types.IrSimpleType
 import org.jetbrains.kotlin.ir.types.impl.IrSimpleTypeImpl
@@ -32,14 +33,22 @@ import org.jetbrains.kotlin.utils.findIsInstanceAnd
 import org.jetbrains.kotlin.utils.memoryOptimizedMap
 
 fun generateJsTests(context: JsIrBackendContext, moduleFragment: IrModuleFragment) {
-    val generator = TestGenerator(context, false)
+    val generator = TestGenerator(
+        context = context,
+        jsPromiseSymbol = context.intrinsics.promiseClassSymbol,
+        groupByPackage = false
+    )
 
     moduleFragment.files.toList().forEach {
         generator.lower(it)
     }
 }
 
-class TestGenerator(val context: JsCommonBackendContext, val groupByPackage: Boolean) : FileLoweringPass {
+class TestGenerator(
+    val context: JsCommonBackendContext,
+    private val jsPromiseSymbol: IrClassSymbol?,
+    private val groupByPackage: Boolean,
+) : FileLoweringPass {
 
     override fun lower(irFile: IrFile) {
         // Additional copy to prevent ConcurrentModificationException
@@ -179,8 +188,9 @@ class TestGenerator(val context: JsCommonBackendContext, val groupByPackage: Boo
             return
         }
 
-        if (context is JsIrBackendContext && (testFun.returnType as? IrSimpleType)?.classifier == context.intrinsics.promiseClassSymbol) {
-            val finally = context.intrinsics.promiseClassSymbol.owner.declarations
+        val returnTypeClassifier = (testFun.returnType as? IrSimpleType)?.classifier
+        if (returnTypeClassifier != null && returnTypeClassifier == jsPromiseSymbol) {
+            val finally = jsPromiseSymbol.owner.declarations
                 .findIsInstanceAnd<IrSimpleFunction> { it.name.asString() == "finally" }!!
 
             val refType = IrSimpleTypeImpl(context.ir.symbols.functionN(0), false, emptyList(), emptyList())
