@@ -690,7 +690,7 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
 
             build(":app:jsPublicPackageJson") {
                 val packageJson = subProject("app").projectPath
-                    .resolve("build/tmp/publicPackageJson")
+                    .resolve("build/tmp/jsPublicPackageJson")
                     .resolve(NpmProject.PACKAGE_JSON)
                     .let {
                         Gson().fromJson(it.readText(), PackageJson::class.java)
@@ -1147,7 +1147,7 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
             }
 
             build("assemble") {
-                assertTasksExecuted(":app:browserProductionWebpack")
+                assertTasksExecuted(":app:jsBrowserProductionWebpack")
 
                 assertDirectoryInProjectExists("build/js/packages/kotlin-js-browser-base")
                 assertDirectoryInProjectExists("build/js/packages/kotlin-js-browser-lib")
@@ -1156,10 +1156,10 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
                 assertFileInProjectExists("app/build/${Distribution.DIST}/js/productionExecutable/app.js")
             }
 
-            build("clean", "browserDistribution") {
+            build("clean", "jsBrowserDistribution") {
                 assertTasksExecuted(
-                    ":app:processResources",
-                    ":app:browserDistribution"
+                    ":app:jsProcessResources",
+                    ":app:jsBrowserDistribution"
                 )
 
                 assertFileInProjectExists("app/build/${Distribution.DIST}/js/productionExecutable/index.html")
