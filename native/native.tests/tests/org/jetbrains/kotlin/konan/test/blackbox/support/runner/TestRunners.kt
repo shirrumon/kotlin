@@ -7,6 +7,7 @@ package org.jetbrains.kotlin.konan.test.blackbox.support.runner
 
 import org.jetbrains.kotlin.konan.target.*
 import org.jetbrains.kotlin.konan.test.blackbox.support.TestName
+import org.jetbrains.kotlin.konan.test.blackbox.support.runner.SharedExecution.sharedRunnerFor
 import org.jetbrains.kotlin.konan.test.blackbox.support.settings.*
 import org.jetbrains.kotlin.native.executors.*
 import org.jetbrains.kotlin.test.services.JUnit5Assertions.fail
@@ -24,34 +25,36 @@ internal object TestRunners {
                 check(configurables is AppleConfigurables) {
                     "Running tests with XCTest is not supported on non-Apple $configurables"
                 }
-                val executor = cached(
-                    when (testTarget) {
-                        is KonanTarget.IOS_ARM64 -> FirebaseCloudXCTestExecutor(configurables)
+
+                if (testTarget == KonanTarget.IOS_ARM64) {
+                    FirebaseCloudXCTestExecutor(configurables).cached().sharedRunnerFor(testRun)
+                } else {
+                    val executor = when (testTarget) {
                         hostTarget -> XCTestHostExecutor(configurables)
-                        else -> XCTestSimulatorExecutor(configurables)
+                        is KonanTarget.IOS_X64, KonanTarget.IOS_SIMULATOR_ARM64 -> XCTestSimulatorExecutor(configurables)
+                        else -> runningOnUnsupportedTarget("Target is not supported running with XCTest")
                     }
-                )
-                SharedExecution.buildRunner(executor, testRun)
+                    executor.cached().toRunner(testRun)
+                }
             } else if (testTarget == hostTarget) {
                 LocalTestRunner(testRun)
             } else {
-                val executor = cached(
-                    when {
-                        configurables is ConfigurablesWithEmulator -> EmulatorExecutor(configurables)
-                        configurables is AppleConfigurables && configurables.targetTriple.isSimulator ->
-                            XcodeSimulatorExecutor(configurables)
-                        configurables is AppleConfigurables && RosettaExecutor.availableFor(configurables) -> RosettaExecutor(configurables)
-                        else -> runningOnUnsupportedTarget()
-                    }
-                )
-                RunnerWithExecutor(executor, testRun)
+                val executor = when {
+                    configurables is ConfigurablesWithEmulator -> EmulatorExecutor(configurables)
+                    configurables is AppleConfigurables && configurables.targetTriple.isSimulator ->
+                        XcodeSimulatorExecutor(configurables)
+                    configurables is AppleConfigurables && RosettaExecutor.availableFor(configurables) -> RosettaExecutor(configurables)
+                    else -> runningOnUnsupportedTarget()
+                }
+
+                executor.cached().toRunner(testRun)
             }
         }
 
     private val runnersCache: ConcurrentHashMap<String, Executor> = ConcurrentHashMap()
 
-    private inline fun <reified T : Executor> cached(executor: T): Executor =
-        runnersCache.computeIfAbsent(T::class.java.simpleName) { executor }
+    private inline fun <reified T : Executor> T.cached(): Executor =
+        runnersCache.computeIfAbsent(T::class.java.simpleName) { this }
 
     // Currently, only local test name extractor is supported.
     fun extractTestNames(executable: TestExecutable, settings: Settings): Collection<TestName> = with(settings) {
@@ -63,7 +66,7 @@ internal object TestRunners {
         }
     }
 
-    private fun KotlinNativeTargets.runningOnUnsupportedTarget(): Nothing = fail {
-        "Running tests for $testTarget on $hostTarget is not supported yet."
+    private fun KotlinNativeTargets.runningOnUnsupportedTarget(message: String = ""): Nothing = fail {
+        "Running tests for $testTarget on $hostTarget is not supported yet. $message"
     }
 }
