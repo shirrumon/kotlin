@@ -273,8 +273,10 @@ public class ArrayDeque<E> : AbstractMutableList<E> {
     }
 
     public override fun addAll(elements: Collection<E>): Boolean {
+        // Register comodification even if the `elements` collection is empty to mimic Java ArrayList behavior
         registerModification()
         if (elements.isEmpty()) return false
+
         ensureCapacity(this.size + elements.size)
         copyCollectionElements(internalIndex(size), elements)
         return true
@@ -285,7 +287,9 @@ public class ArrayDeque<E> : AbstractMutableList<E> {
 
         if (index == size) return addAll(elements)
 
+        // Register comodification even if the `elements` collection is empty to mimic Java ArrayList behavior
         registerModification()
+
         if (elements.isEmpty()) return false
         ensureCapacity(this.size + elements.size)
 
