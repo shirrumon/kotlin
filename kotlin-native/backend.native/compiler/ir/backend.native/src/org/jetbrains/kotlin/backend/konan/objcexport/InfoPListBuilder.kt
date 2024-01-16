@@ -103,17 +103,6 @@ internal class InfoPListBuilder(
             )
         }
 
-        if (target == KonanTarget.IOS_ARM32) {
-            contents.append("""
-                |    <key>UIRequiredDeviceCapabilities</key>
-                |    <array>
-                |        <string>armv7</string>
-                |    </array>
-
-                """.trimMargin()
-            )
-        }
-
         contents.append("""
             </dict>
             </plist>

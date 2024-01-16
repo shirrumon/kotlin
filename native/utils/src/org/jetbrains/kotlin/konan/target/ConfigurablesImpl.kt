@@ -27,13 +27,6 @@ class GccConfigurablesImpl(target: KonanTarget, properties: Properties, dependen
 class AndroidConfigurablesImpl(target: KonanTarget, properties: Properties, dependenciesRoot: String?)
     : AndroidConfigurables, KonanPropertiesLoader(target, properties, dependenciesRoot)
 
-class WasmConfigurablesImpl(target: KonanTarget, properties: Properties, dependenciesRoot: String?)
-    : WasmConfigurables, KonanPropertiesLoader(target, properties, dependenciesRoot)
-
-class ZephyrConfigurablesImpl(target: KonanTarget, properties: Properties, dependenciesRoot: String?)
-    : ZephyrConfigurables, KonanPropertiesLoader(target, properties, dependenciesRoot)
-
-
 fun loadConfigurables(target: KonanTarget, properties: Properties, dependenciesRoot: String?): Configurables = when (target.family) {
     Family.LINUX -> GccConfigurablesImpl(target, properties, dependenciesRoot)
 
@@ -42,9 +35,4 @@ fun loadConfigurables(target: KonanTarget, properties: Properties, dependenciesR
     Family.ANDROID -> AndroidConfigurablesImpl(target, properties, dependenciesRoot)
 
     Family.MINGW -> MingwConfigurablesImpl(target, properties, dependenciesRoot)
-
-    Family.WASM -> WasmConfigurablesImpl(target, properties, dependenciesRoot)
-
-    Family.ZEPHYR -> ZephyrConfigurablesImpl(target, properties, dependenciesRoot)
 }
-

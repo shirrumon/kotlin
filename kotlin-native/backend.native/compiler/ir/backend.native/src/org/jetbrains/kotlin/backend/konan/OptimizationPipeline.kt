@@ -116,8 +116,6 @@ internal fun createLTOFinalPipelineConfig(
     }
     val sizeLevel: LlvmSizeLevel = when {
         // We try to optimize code as much as possible on embedded targets.
-        target is KonanTarget.ZEPHYR ||
-                target == KonanTarget.WASM32 -> LlvmSizeLevel.AGGRESSIVE
         context.shouldOptimize() -> LlvmSizeLevel.NONE
         context.shouldContainDebugInfo() -> LlvmSizeLevel.NONE
         else -> LlvmSizeLevel.NONE
