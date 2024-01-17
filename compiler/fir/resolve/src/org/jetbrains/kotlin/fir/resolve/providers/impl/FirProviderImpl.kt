@@ -200,7 +200,6 @@ class FirProviderImpl(val session: FirSession, val kotlinScopeProvider: FirKotli
             val symbol = script.symbol
             data.state.scriptContainerMap[symbol] = data.file
             data.file.sourceFile?.path?.let { data.state.scriptByFilePathMap[it] = symbol }
-            script.acceptChildren(this, data)
         }
     }
 

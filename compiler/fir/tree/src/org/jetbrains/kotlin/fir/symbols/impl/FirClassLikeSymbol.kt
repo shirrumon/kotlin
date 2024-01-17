@@ -47,9 +47,9 @@ sealed class FirClassLikeSymbol<D : FirClassLikeDeclaration>(
     override fun toString(): String = "${this::class.simpleName} ${classId.asString()}"
 }
 
-sealed class FirClassSymbol<C : FirClass>(classId: ClassId) : FirClassLikeSymbol<C>(classId) {
+sealed class FirClassSymbol<C : FirClass>(classId: ClassId, isInScriptContext: Boolean = false) : FirClassLikeSymbol<C>(classId) {
     private val lookupTag: ConeClassLikeLookupTag =
-        if (classId.isLocal) ConeClassLookupTagWithFixedSymbol(classId, this)
+        if (classId.isLocal || isInScriptContext) ConeClassLookupTagWithFixedSymbol(classId, this)
         else classId.toLookupTag()
 
     override fun toLookupTag(): ConeClassLikeLookupTag = lookupTag
@@ -71,7 +71,7 @@ sealed class FirClassSymbol<C : FirClass>(classId: ClassId) : FirClassLikeSymbol
         get() = fir.classKind
 }
 
-class FirRegularClassSymbol(classId: ClassId) : FirClassSymbol<FirRegularClass>(classId), RegularClassSymbolMarker {
+class FirRegularClassSymbol(classId: ClassId, isInScriptContext: Boolean = false) : FirClassSymbol<FirRegularClass>(classId, isInScriptContext), RegularClassSymbolMarker {
     val companionObjectSymbol: FirRegularClassSymbol?
         get() = fir.companionObjectSymbol
 

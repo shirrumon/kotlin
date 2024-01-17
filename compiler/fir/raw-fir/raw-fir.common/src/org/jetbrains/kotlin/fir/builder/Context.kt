@@ -27,6 +27,7 @@ class Context<T> {
     lateinit var packageFqName: FqName
     var className: FqName = FqName.ROOT
     var inLocalContext: Boolean = false
+    var inScriptContext: Boolean = false
     val currentClassId
         get() = when {
             inLocalContext -> ClassId(CallableId.PACKAGE_FQ_NAME_FOR_LOCAL, className, isLocal = true)

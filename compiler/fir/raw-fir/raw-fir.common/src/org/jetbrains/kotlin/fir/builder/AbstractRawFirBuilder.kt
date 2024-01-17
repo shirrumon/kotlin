@@ -162,12 +162,16 @@ abstract class AbstractRawFirBuilder<T>(val baseSession: FirSession, val context
             context.pushContainerSymbol(symbol)
         }
 
+        val previousInScriptContext = context.inScriptContext
+        context.inScriptContext = symbol is FirScriptSymbol
+
         return try {
             block()
         } finally {
             if (!isLocal) {
                 context.popContainerSymbol(symbol)
             }
+            context.inScriptContext = previousInScriptContext
         }
     }
 

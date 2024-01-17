@@ -1496,7 +1496,7 @@ open class PsiRawFirBuilder(
                 isExpect = classIsExpect,
                 forceLocalContext = isLocalWithinParent,
             ) {
-                val classSymbol = FirRegularClassSymbol(context.currentClassId)
+                val classSymbol = FirRegularClassSymbol(context.currentClassId, context.inScriptContext)
                 withContainerSymbol(classSymbol) {
                     val isLocal = context.inLocalContext
                     val classKind = when (classOrObject) {
