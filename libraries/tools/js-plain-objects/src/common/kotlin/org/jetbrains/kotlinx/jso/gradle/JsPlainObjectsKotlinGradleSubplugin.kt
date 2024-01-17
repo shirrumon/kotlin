@@ -16,6 +16,7 @@
 
 package org.jetbrains.kotlinx.jspo.gradle
 
+import org.gradle.api.Project
 import org.gradle.api.provider.Provider
 import org.jetbrains.kotlin.gradle.plugin.*
 
@@ -26,6 +27,22 @@ class JsPlainObjectsKotlinGradleSubplugin : KotlinCompilerPluginSupportPlugin {
 
     override fun isApplicable(kotlinCompilation: KotlinCompilation<*>): Boolean =
         kotlinCompilation.target.isJs() || kotlinCompilation.target.isWasm()
+
+    override fun apply(target: Project) {
+        super.apply(target)
+        target.extensions.findByType(KotlinTargetsContainer::class.java)?.let { kotlinExtension ->
+            // find all compilations given sourceSet belongs to
+            kotlinExtension.targets.all { kotlinTarget ->
+                if (kotlinTarget.platformType == KotlinPlatformType.js) {
+                    kotlinTarget.compilations.forEach { kotlinCompilation ->
+                        kotlinCompilation.dependencies {
+                            implementation(kotlin("js-plain-objects"))
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     override fun applyToCompilation(
         kotlinCompilation: KotlinCompilation<*>
