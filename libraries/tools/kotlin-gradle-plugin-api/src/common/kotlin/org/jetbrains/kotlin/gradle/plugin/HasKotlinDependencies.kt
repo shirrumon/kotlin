@@ -336,7 +336,7 @@ interface KotlinDependencyHandler : HasProject {
      *
      * @param name npm dependency name
      * @param directory path where dependency files are located
-     * (see NPM [directory](https://docs.npmjs.com/cli/v10/configuring-npm/package-json#repository) keyword)
+     * (see NPM [directory](https://docs.npmjs.com/cli/v10/configuring-npm/package-json#local-paths) keyword)
      */
     fun npm(
         name: String,
@@ -363,7 +363,7 @@ interface KotlinDependencyHandler : HasProject {
      * **Note**: Only relevant for Kotlin entities targeting [KotlinPlatformType.js] or [KotlinPlatformType.wasm]!
      *
      * @param directory path where dependency files are located
-     * (see NPM [directory](https://docs.npmjs.com/cli/v10/configuring-npm/package-json#repository) keyword)
+     * (see NPM [directory](https://docs.npmjs.com/cli/v10/configuring-npm/package-json#local-paths) keyword)
      */
     fun npm(
         directory: File
@@ -391,7 +391,7 @@ interface KotlinDependencyHandler : HasProject {
      *
      * @param name npm dependency name
      * @param directory path where dependency files are located
-     * (see NPM [directory](https://docs.npmjs.com/cli/v10/configuring-npm/package-json#repository) keyword)
+     * (see NPM [directory](https://docs.npmjs.com/cli/v10/configuring-npm/package-json#local-paths) keyword)
      */
     fun devNpm(
         name: String,
@@ -460,7 +460,7 @@ interface KotlinDependencyHandler : HasProject {
      *
      * @param name npm dependency name
      * @param directory path where dependency files are located
-     * (see NPM [directory](https://docs.npmjs.com/cli/v10/configuring-npm/package-json#repository) keyword)
+     * (see NPM [directory](https://docs.npmjs.com/cli/v10/configuring-npm/package-json#local-paths) keyword)
      */
     fun optionalNpm(
         name: String,
@@ -487,7 +487,7 @@ interface KotlinDependencyHandler : HasProject {
      * **Note**: Only relevant for Kotlin entities targeting only [KotlinPlatformType.js] or [KotlinPlatformType.wasm]!
      *
      * @param directory path where dependency files are located
-     * (see NPM [directory](https://docs.npmjs.com/cli/v10/configuring-npm/package-json#repository) keyword)
+     * (see NPM [directory](https://docs.npmjs.com/cli/v10/configuring-npm/package-json#local-paths) keyword)
      */
     fun optionalNpm(
         directory: File
