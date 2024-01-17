@@ -46,14 +46,7 @@ internal fun CallableMemberDescriptor.mustNotBeWrittenToDecompiledText(): Boolea
     return when (kind) {
         CallableMemberDescriptor.Kind.DECLARATION, CallableMemberDescriptor.Kind.DELEGATION -> false
         CallableMemberDescriptor.Kind.FAKE_OVERRIDE -> true
-        CallableMemberDescriptor.Kind.SYNTHESIZED -> {
-            // Of all synthesized functions, only `component*` functions are rendered (for historical reasons)
-            !DataClassDescriptorResolver.isComponentLike(name) && name !in listOf(
-                OperatorNameConventions.EQUALS,
-                StandardNames.HASHCODE_NAME,
-                OperatorNameConventions.TO_STRING
-            )
-        }
+        CallableMemberDescriptor.Kind.SYNTHESIZED -> false
     }
 }
 
