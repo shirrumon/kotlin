@@ -1,6 +1,8 @@
 // !LANGUAGE: -AbstractClassMemberNotImplementedWithIntermediateAbstractClass
-// IGNORE_BACKEND: WASM
+// IGNORE_BACKEND_K1: WASM
 // WASM_MUTE_REASON: IGNORED_IN_JS
+// IGNORE_BACKEND_K2: ANY
+// ^Disabling AbstractClassMemberNotImplementedWithIntermediateAbstractClass is not supported in K2.
 
 var result = "Fail"
 
