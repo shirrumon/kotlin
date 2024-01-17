@@ -233,7 +233,9 @@ fun Project.overrideNativeCompilerDownloadUrl() {
 
 fun Project.addCheckRepositoriesTask() {
     val checkRepoTask = tasks.register("checkRepositories") {
-        notCompatibleWithConfigurationCache("Uses project in task action")
+        if (GradleVersion.current() >= GradleVersion.version("7.4")) {
+            notCompatibleWithConfigurationCache("Uses project in task action")
+        }
         val isTeamcityBuildInput = providers
             .provider {
                 project.hasProperty("teamcity") || System.getenv("TEAMCITY_VERSION") != null
