@@ -275,7 +275,7 @@ abstract class BaseGradleIT {
         val stacktraceMode: String? = StacktraceOption.FULL_STACKTRACE_LONG_OPTION,
         val konanDataDir: Path = konanDir,
         // TODO(Dmitrii Krasnov): we can remove this, when downloading konan from maven local will be possible KT-63198
-        val distributionDownloadFromMaven: Boolean? = false,
+        val distributionDownloadFromMaven: Boolean? = true,
     ) {
         val safeAndroidGradlePluginVersion: AGPVersion
             get() = androidGradlePluginVersion ?: error("AGP version is expected to be set")
