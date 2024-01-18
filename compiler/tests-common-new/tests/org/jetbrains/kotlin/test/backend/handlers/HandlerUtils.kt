@@ -23,6 +23,7 @@ import org.jetbrains.kotlin.test.frontend.fir.handlers.toMetaInfos
 import org.jetbrains.kotlin.test.model.BinaryArtifactHandler
 import org.jetbrains.kotlin.test.model.TestModule
 import org.jetbrains.kotlin.test.services.*
+import org.jetbrains.kotlin.test.utils.MultiModuleInfoDumper
 import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
 import java.io.File
 
@@ -55,34 +56,37 @@ fun BinaryArtifactHandler<*>.reportKtDiagnostics(module: TestModule, ktDiagnosti
     processModule(module)
 }
 
-fun BinaryArtifactHandler<*>.checkFullDiagnosticRender(module: TestModule) {
-    if (DiagnosticsDirectives.RENDER_ALL_DIAGNOSTICS_FULL_TEXT !in module.directives) return
-
-    val reportedDiagnostics = mutableListOf<String>()
-    for (testFile in module.files) {
-        val finder =
-            SequentialPositionFinder(testServices.sourceFileProvider.getContentOfSourceFile(testFile).byteInputStream().reader())
-        for (metaInfo in testServices.globalMetadataInfoHandler.getReportedMetaInfosForFile(testFile).sortedBy { it.start }) {
-            when (metaInfo) {
-                is DiagnosticCodeMetaInfo -> metaInfo.diagnostic.let {
-                    val message = DefaultErrorMessages.render(it)
-                    val position = DiagnosticUtils.getLineAndColumnRange(it.psiFile, it.textRanges).start
-                    reportedDiagnostics +=
-                        renderDiagnosticMessage(it.psiFile.name, it.severity, message, position.line, position.column)
-                }
-                is FirDiagnosticCodeMetaInfo -> metaInfo.diagnostic.let {
-                    val message = RootDiagnosticRendererFactory(it).render(it)
-                    val position = finder.findNextPosition(DiagnosticUtils.firstRange(it.textRanges).startOffset, false)
-                    reportedDiagnostics +=
-                        renderDiagnosticMessage(testFile.relativePath, it.severity, message, position.line, position.column)
+fun BinaryArtifactHandler<*>.checkFullDiagnosticRender(moduleStructure: TestModuleStructure) {
+    val dumper = MultiModuleInfoDumper()
+    for (module in moduleStructure.modules) {
+        if (DiagnosticsDirectives.RENDER_ALL_DIAGNOSTICS_FULL_TEXT !in module.directives) continue
+        val reportedDiagnostics = mutableListOf<String>()
+        for (testFile in module.files) {
+            val finder =
+                SequentialPositionFinder(testServices.sourceFileProvider.getContentOfSourceFile(testFile).byteInputStream().reader())
+            for (metaInfo in testServices.globalMetadataInfoHandler.getReportedMetaInfosForFile(testFile).sortedBy { it.start }) {
+                when (metaInfo) {
+                    is DiagnosticCodeMetaInfo -> metaInfo.diagnostic.let {
+                        val message = DefaultErrorMessages.render(it)
+                        val position = DiagnosticUtils.getLineAndColumnRange(it.psiFile, it.textRanges).start
+                        reportedDiagnostics +=
+                            renderDiagnosticMessage(it.psiFile.name, it.severity, message, position.line, position.column)
+                    }
+                    is FirDiagnosticCodeMetaInfo -> metaInfo.diagnostic.let {
+                        val message = RootDiagnosticRendererFactory(it).render(it)
+                        val position = finder.findNextPosition(DiagnosticUtils.firstRange(it.textRanges).startOffset, false)
+                        reportedDiagnostics +=
+                            renderDiagnosticMessage(testFile.relativePath, it.severity, message, position.line, position.column)
+                    }
                 }
             }
         }
+        reportedDiagnostics.joinTo(dumper.builderForModule(module), separator = "\n\n", postfix = "\n")
     }
 
     testServices.assertions.assertEqualsToFile(
-        File(FileUtil.getNameWithoutExtension(module.files.first().originalFile.absolutePath) + ".diag.txt"),
-        reportedDiagnostics.joinToString(separator = "\n\n", postfix = "\n")
+        File(FileUtil.getNameWithoutExtension(moduleStructure.originalTestDataFiles.first().absolutePath) + ".diag.txt"),
+        dumper.generateResultingDump()
     )
 }
 
