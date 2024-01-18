@@ -162,6 +162,7 @@ kotlin {
             }
         }
         val jvmJUnitTest by getting {
+            dependsOn(commonTest)
             kotlin.srcDir("junit/src/test/kotlin")
         }
         val jvmJUnit5 by getting {
@@ -173,6 +174,7 @@ kotlin {
             }
         }
         val jvmJUnit5Test by getting {
+            dependsOn(commonTest)
             kotlin.srcDir("junit5/src/test/kotlin")
             dependencies {
                 runtimeOnly(libs.junit.jupiter.engine)
@@ -187,6 +189,7 @@ kotlin {
             }
         }
         val jvmTestNGTest by getting {
+            dependsOn(commonTest)
             kotlin.srcDir("testng/src/test/kotlin")
         }
         val jsMain by getting {
@@ -265,16 +268,23 @@ tasks {
         dependsOn(jvmJarTasks)
     }
 
-    val jvmTestTasks = jvmTestFrameworks.map { framework ->
-        register("jvm${framework}Test", Test::class) {
-            group = "verification"
-            val compilation = kotlin.jvm().compilations["${framework}Test"]
-            classpath = compilation.runtimeDependencyFiles + compilation.output.allOutputs
-            testClassesDirs = compilation.output.classesDirs
-            when (framework) {
-                JvmTestFramework.JUnit -> useJUnit()
-                JvmTestFramework.JUnit5 -> useJUnitPlatform()
-                JvmTestFramework.TestNG -> useTestNG()
+    val jvmTestTasks = jvmTestFrameworks.flatMap { framework ->
+        listOf(false, true).map { excludeAsserterContributor ->
+            register("jvm${framework}${if (excludeAsserterContributor) "NoAsserter" else ""}Test", Test::class) {
+                group = "verification"
+                val testCompilation = kotlin.jvm().compilations["${framework}Test"]
+                classpath = testCompilation.runtimeDependencyFiles + testCompilation.output.allOutputs
+                if (excludeAsserterContributor) {
+                    val mainCompilation = kotlin.jvm().compilations["$framework"]
+                    classpath -= mainCompilation.output.allOutputs
+                    filter.excludePatterns += "*ContributorTest"
+                }
+                testClassesDirs = testCompilation.output.classesDirs
+                when (framework) {
+                    JvmTestFramework.JUnit -> useJUnit()
+                    JvmTestFramework.JUnit5 -> useJUnitPlatform()
+                    JvmTestFramework.TestNG -> useTestNG()
+                }
             }
         }
     }
