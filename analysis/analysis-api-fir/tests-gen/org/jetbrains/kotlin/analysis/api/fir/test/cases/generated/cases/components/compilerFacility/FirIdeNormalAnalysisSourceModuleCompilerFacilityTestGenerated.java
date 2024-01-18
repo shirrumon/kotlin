@@ -47,6 +47,12 @@ public class FirIdeNormalAnalysisSourceModuleCompilerFacilityTestGenerated exten
     }
 
     @Test
+    @TestMetadata("annotationWithVararg.kt")
+    public void testAnnotationWithVararg() throws Exception {
+        runTest("analysis/analysis-api/testData/components/compilerFacility/compilation/annotationWithVararg.kt");
+    }
+
+    @Test
     @TestMetadata("classKinds.kt")
     public void testClassKinds() throws Exception {
         runTest("analysis/analysis-api/testData/components/compilerFacility/compilation/classKinds.kt");
@@ -68,6 +74,12 @@ public class FirIdeNormalAnalysisSourceModuleCompilerFacilityTestGenerated exten
     @TestMetadata("simple.kt")
     public void testSimple() throws Exception {
         runTest("analysis/analysis-api/testData/components/compilerFacility/compilation/simple.kt");
+    }
+
+    @Test
+    @TestMetadata("valueParametersWithDefaultValues.kt")
+    public void testValueParametersWithDefaultValues() throws Exception {
+        runTest("analysis/analysis-api/testData/components/compilerFacility/compilation/valueParametersWithDefaultValues.kt");
     }
 
     @Nested

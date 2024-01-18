@@ -41,9 +41,7 @@ import org.jetbrains.kotlin.ir.declarations.impl.IrClassImpl
 import org.jetbrains.kotlin.ir.expressions.IrSyntheticBodyKind
 import org.jetbrains.kotlin.ir.symbols.*
 import org.jetbrains.kotlin.ir.symbols.impl.*
-import org.jetbrains.kotlin.ir.util.IdSignature
-import org.jetbrains.kotlin.ir.util.classId
-import org.jetbrains.kotlin.ir.util.createParameterDeclarations
+import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.load.kotlin.FacadeClassSource
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
@@ -1053,12 +1051,25 @@ class Fir2IrDeclarationStorage(
             is FirValueParameter -> {
                 localStorage.getParameter(firDeclaration)
                 // catch parameter is FirValueParameter in FIR but IrVariable in IR
-                    ?: return getIrVariableSymbol(firDeclaration)
+                    ?: localStorage.getVariable(firDeclaration) ?: createAndCacheValueParameter(firDeclaration)
             }
             else -> {
                 getIrVariableSymbol(firDeclaration)
             }
         }
+    }
+
+    private fun createAndCacheValueParameter(firValueParameter: FirValueParameter): IrValueParameterSymbol {
+        val irParentClass = firValueParameter.containingClassLookupTag()?.let { classifierStorage.findIrClass(it) }
+        val functionSymbol = firValueParameter.containingFunctionSymbol
+        val index = functionSymbol.valueParameterSymbols.indexOfFirst { it.fir == firValueParameter }
+        val function = functionSymbol.fir
+        val contextReceivers = function.contextReceiversForFunctionOrContainingProperty()
+        return createAndCacheParameter(
+            firValueParameter, index + contextReceivers.size,
+            useStubForDefaultValueStub = function !is FirConstructor || irParentClass?.name != Name.identifier("Enum"),
+            forcedDefaultValueConversion = irParentClass?.isAnnotationClass == true
+        ).symbol
     }
 
     private fun getIrVariableSymbol(firVariable: FirVariable): IrVariableSymbol {
@@ -1443,7 +1454,8 @@ class Fir2IrDeclarationStorage(
             symbol is IrAnonymousInitializerSymbol ||
             symbol is IrPropertySymbol ||
             symbol is IrEnumEntrySymbol ||
-            symbol is IrScriptSymbol
+            symbol is IrScriptSymbol ||
+            symbol is IrValueParameterSymbol
         ) {
             localStorage.enterCallable()
         }

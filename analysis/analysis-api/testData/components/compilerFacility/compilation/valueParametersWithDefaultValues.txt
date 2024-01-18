@@ -1,0 +1,20 @@
+public final class com/test/A {
+    // source: 'main.kt'
+    private final field a: int
+    private final field b: java.lang.String
+    private final field c: java.util.List
+    private final field d: java.util.List
+    public method <init>(p0: int, p1: java.lang.String, p2: java.util.List, p3: java.util.List): void
+    public synthetic method <init>(p0: int, p1: java.lang.String, p2: java.util.List, p3: java.util.List, p4: int, p5: kotlin.jvm.internal.DefaultConstructorMarker): void
+    public final method getA(): int
+    public final method getB(): java.lang.String
+    public final method getC(): java.util.List
+    public final method getD(): java.util.List
+}
+
+public final class com/test/MainKt {
+    // source: 'main.kt'
+    public final static method bar(): java.lang.String
+    public synthetic static method foo$default(p0: int, p1: java.lang.String, p2: java.util.List, p3: boolean, p4: float, p5: int, p6: java.lang.Object): java.lang.String
+    public final static method foo(p0: int, p1: java.lang.String, p2: java.util.List, p3: boolean, p4: float): java.lang.String
+}

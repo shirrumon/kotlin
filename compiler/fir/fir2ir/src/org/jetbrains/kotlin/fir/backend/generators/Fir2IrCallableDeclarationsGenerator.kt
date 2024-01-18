@@ -764,6 +764,7 @@ class Fir2IrCallableDeclarationsGenerator(val components: Fir2IrComponents) : Fi
                 isNoinline = valueParameter.isNoinline,
                 isHidden = false,
             ).apply {
+                declarationStorage.enterScope(this.symbol)
                 val defaultValue = valueParameter.defaultValue
                 if (!skipDefaultParameter && defaultValue != null) {
                     this.defaultValue = when {
@@ -780,6 +781,7 @@ class Fir2IrCallableDeclarationsGenerator(val components: Fir2IrComponents) : Fi
                     }
                 }
                 annotationGenerator.generate(this, valueParameter)
+                declarationStorage.leaveScope(this.symbol)
             }
         }
         return irParameter

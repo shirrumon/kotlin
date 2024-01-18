@@ -1,0 +1,130 @@
+MODULE_FRAGMENT
+  FILE fqName:com.test fileName:main.kt
+    CLASS CLASS name:A modality:FINAL visibility:public superTypes:[kotlin.Any]
+      $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:com.test.A
+      PROPERTY name:a visibility:public modality:FINAL [val]
+        FIELD PROPERTY_BACKING_FIELD name:a type:kotlin.Int visibility:private [final]
+          EXPRESSION_BODY
+            GET_VAR 'a: kotlin.Int declared in com.test.A.<init>' type=kotlin.Int origin=INITIALIZE_PROPERTY_FROM_PARAMETER
+        FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a> visibility:public modality:FINAL <> ($this:com.test.A) returnType:kotlin.Int
+          correspondingProperty: PROPERTY name:a visibility:public modality:FINAL [val]
+          $this: VALUE_PARAMETER name:<this> type:com.test.A
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='public final fun <get-a> (): kotlin.Int declared in com.test.A'
+              GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a type:kotlin.Int visibility:private [final]' type=kotlin.Int origin=null
+                receiver: GET_VAR '<this>: com.test.A declared in com.test.A.<get-a>' type=com.test.A origin=null
+      PROPERTY name:b visibility:public modality:FINAL [val]
+        FIELD PROPERTY_BACKING_FIELD name:b type:kotlin.String visibility:private [final]
+          EXPRESSION_BODY
+            GET_VAR 'b: kotlin.String declared in com.test.A.<init>' type=kotlin.String origin=INITIALIZE_PROPERTY_FROM_PARAMETER
+        FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b> visibility:public modality:FINAL <> ($this:com.test.A) returnType:kotlin.String
+          correspondingProperty: PROPERTY name:b visibility:public modality:FINAL [val]
+          $this: VALUE_PARAMETER name:<this> type:com.test.A
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='public final fun <get-b> (): kotlin.String declared in com.test.A'
+              GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:b type:kotlin.String visibility:private [final]' type=kotlin.String origin=null
+                receiver: GET_VAR '<this>: com.test.A declared in com.test.A.<get-b>' type=com.test.A origin=null
+      PROPERTY name:c visibility:public modality:FINAL [val]
+        FIELD PROPERTY_BACKING_FIELD name:c type:kotlin.collections.List<kotlin.String> visibility:private [final]
+          EXPRESSION_BODY
+            GET_VAR 'c: kotlin.collections.List<kotlin.String> declared in com.test.A.<init>' type=kotlin.collections.List<kotlin.String> origin=INITIALIZE_PROPERTY_FROM_PARAMETER
+        FUN DEFAULT_PROPERTY_ACCESSOR name:<get-c> visibility:public modality:FINAL <> ($this:com.test.A) returnType:kotlin.collections.List<kotlin.String>
+          correspondingProperty: PROPERTY name:c visibility:public modality:FINAL [val]
+          $this: VALUE_PARAMETER name:<this> type:com.test.A
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='public final fun <get-c> (): kotlin.collections.List<kotlin.String> declared in com.test.A'
+              GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c type:kotlin.collections.List<kotlin.String> visibility:private [final]' type=kotlin.collections.List<kotlin.String> origin=null
+                receiver: GET_VAR '<this>: com.test.A declared in com.test.A.<get-c>' type=com.test.A origin=null
+      PROPERTY name:d visibility:public modality:FINAL [val]
+        FIELD PROPERTY_BACKING_FIELD name:d type:kotlin.collections.List<kotlin.String> visibility:private [final]
+          EXPRESSION_BODY
+            GET_VAR 'd: kotlin.collections.List<kotlin.String> declared in com.test.A.<init>' type=kotlin.collections.List<kotlin.String> origin=INITIALIZE_PROPERTY_FROM_PARAMETER
+        FUN DEFAULT_PROPERTY_ACCESSOR name:<get-d> visibility:public modality:FINAL <> ($this:com.test.A) returnType:kotlin.collections.List<kotlin.String>
+          correspondingProperty: PROPERTY name:d visibility:public modality:FINAL [val]
+          $this: VALUE_PARAMETER name:<this> type:com.test.A
+          BLOCK_BODY
+            RETURN type=kotlin.Nothing from='public final fun <get-d> (): kotlin.collections.List<kotlin.String> declared in com.test.A'
+              GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:d type:kotlin.collections.List<kotlin.String> visibility:private [final]' type=kotlin.collections.List<kotlin.String> origin=null
+                receiver: GET_VAR '<this>: com.test.A declared in com.test.A.<get-d>' type=com.test.A origin=null
+      CONSTRUCTOR visibility:public <> (a:kotlin.Int, b:kotlin.String, c:kotlin.collections.List<kotlin.String>, d:kotlin.collections.List<kotlin.String>) returnType:com.test.A [primary]
+        VALUE_PARAMETER name:a index:0 type:kotlin.Int
+          EXPRESSION_BODY
+            CONST Int type=kotlin.Int value=3
+        VALUE_PARAMETER name:b index:1 type:kotlin.String
+          EXPRESSION_BODY
+            CONST String type=kotlin.String value="foo"
+        VALUE_PARAMETER name:c index:2 type:kotlin.collections.List<kotlin.String>
+          EXPRESSION_BODY
+            CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<kotlin.String> origin=null
+              <T>: kotlin.String
+              elements: VARARG type=kotlin.Array<out kotlin.String> varargElementType=kotlin.String
+                CONST String type=kotlin.String value="foo"
+                CONST String type=kotlin.String value="bar"
+        VALUE_PARAMETER name:d index:3 type:kotlin.collections.List<kotlin.String>
+        BLOCK_BODY
+          DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () [primary] declared in kotlin.Any'
+          INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:A modality:FINAL visibility:public superTypes:[kotlin.Any]'
+      FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
+        overridden:
+          public open fun equals (other: kotlin.Any?): kotlin.Boolean [operator] declared in kotlin.Any
+        $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+        VALUE_PARAMETER name:other index:0 type:kotlin.Any?
+      FUN FAKE_OVERRIDE name:hashCode visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.Int [fake_override]
+        overridden:
+          public open fun hashCode (): kotlin.Int declared in kotlin.Any
+        $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+      FUN FAKE_OVERRIDE name:toString visibility:public modality:OPEN <> ($this:kotlin.Any) returnType:kotlin.String [fake_override]
+        overridden:
+          public open fun toString (): kotlin.String declared in kotlin.Any
+        $this: VALUE_PARAMETER name:<this> type:kotlin.Any
+    FUN name:bar visibility:public modality:FINAL <> () returnType:kotlin.String
+      BLOCK_BODY
+        VAR name:a type:com.test.A [val]
+          CONSTRUCTOR_CALL 'public constructor <init> (a: kotlin.Int, b: kotlin.String, c: kotlin.collections.List<kotlin.String>, d: kotlin.collections.List<kotlin.String>) [primary] declared in com.test.A' type=com.test.A origin=null
+            c: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<kotlin.String> origin=null
+              <T>: kotlin.String
+              elements: VARARG type=kotlin.Array<out kotlin.String> varargElementType=kotlin.String
+                CONST String type=kotlin.String value="a"
+                CONST String type=kotlin.String value="b"
+            d: CALL 'public final fun emptyList <T> (): kotlin.collections.List<T of kotlin.collections.emptyList> declared in kotlin.collections' type=kotlin.collections.List<kotlin.String> origin=null
+              <T>: kotlin.String
+        RETURN type=kotlin.Nothing from='public final fun bar (): kotlin.String declared in com.test'
+          CALL 'public final fun foo (a: kotlin.Int, b: kotlin.String, c: kotlin.collections.List<kotlin.String>, d: kotlin.Boolean, e: kotlin.Float): kotlin.String declared in com.test' type=kotlin.String origin=null
+            a: CALL 'public final fun <get-a> (): kotlin.Int declared in com.test.A' type=kotlin.Int origin=GET_PROPERTY
+              $this: GET_VAR 'val a: com.test.A [val] declared in com.test.bar' type=com.test.A origin=null
+            b: CALL 'public final fun <get-b> (): kotlin.String declared in com.test.A' type=kotlin.String origin=GET_PROPERTY
+              $this: GET_VAR 'val a: com.test.A [val] declared in com.test.bar' type=com.test.A origin=null
+            c: CALL 'public final fun <get-c> (): kotlin.collections.List<kotlin.String> declared in com.test.A' type=kotlin.collections.List<kotlin.String> origin=GET_PROPERTY
+              $this: GET_VAR 'val a: com.test.A [val] declared in com.test.bar' type=com.test.A origin=null
+            d: CONST Boolean type=kotlin.Boolean value=false
+            e: CONST Float type=kotlin.Float value=1.3
+    FUN name:foo visibility:public modality:FINAL <> (a:kotlin.Int, b:kotlin.String, c:kotlin.collections.List<kotlin.String>, d:kotlin.Boolean, e:kotlin.Float) returnType:kotlin.String
+      VALUE_PARAMETER name:a index:0 type:kotlin.Int
+        EXPRESSION_BODY
+          CONST Int type=kotlin.Int value=3
+      VALUE_PARAMETER name:b index:1 type:kotlin.String
+        EXPRESSION_BODY
+          CONST String type=kotlin.String value="foo"
+      VALUE_PARAMETER name:c index:2 type:kotlin.collections.List<kotlin.String>
+        EXPRESSION_BODY
+          CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<kotlin.String> origin=null
+            <T>: kotlin.String
+            elements: VARARG type=kotlin.Array<out kotlin.String> varargElementType=kotlin.String
+              CONST String type=kotlin.String value="foo"
+              CONST String type=kotlin.String value="bar"
+      VALUE_PARAMETER name:d index:3 type:kotlin.Boolean
+      VALUE_PARAMETER name:e index:4 type:kotlin.Float
+      BLOCK_BODY
+        RETURN type=kotlin.Nothing from='public final fun foo (a: kotlin.Int, b: kotlin.String, c: kotlin.collections.List<kotlin.String>, d: kotlin.Boolean, e: kotlin.Float): kotlin.String declared in com.test'
+          CALL 'public final fun plus (other: kotlin.Any?): kotlin.String [operator] declared in kotlin.String' type=kotlin.String origin=PLUS
+            $this: CALL 'public final fun plus (other: kotlin.Any?): kotlin.String [operator] declared in kotlin.String' type=kotlin.String origin=PLUS
+              $this: CALL 'public final fun joinToString <T> (separator: kotlin.CharSequence, prefix: kotlin.CharSequence, postfix: kotlin.CharSequence, limit: kotlin.Int, truncated: kotlin.CharSequence, transform: kotlin.Function1<T of kotlin.collections.joinToString, kotlin.CharSequence>?): kotlin.String declared in kotlin.collections' type=kotlin.String origin=null
+                <T>: kotlin.String
+                $receiver: GET_VAR 'c: kotlin.collections.List<kotlin.String> declared in com.test.foo' type=kotlin.collections.List<kotlin.String> origin=null
+              other: GET_VAR 'b: kotlin.String declared in com.test.foo' type=kotlin.String origin=null
+            other: STRING_CONCATENATION type=kotlin.String
+              GET_VAR 'a: kotlin.Int declared in com.test.foo' type=kotlin.Int origin=null
+              CONST String type=kotlin.String value=" "
+              GET_VAR 'd: kotlin.Boolean declared in com.test.foo' type=kotlin.Boolean origin=null
+              CONST String type=kotlin.String value=" "
+              GET_VAR 'e: kotlin.Float declared in com.test.foo' type=kotlin.Float origin=null

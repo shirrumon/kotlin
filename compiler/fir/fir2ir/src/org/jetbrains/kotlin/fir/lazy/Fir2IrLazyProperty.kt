@@ -13,11 +13,13 @@ import org.jetbrains.kotlin.fir.backend.*
 import org.jetbrains.kotlin.fir.backend.generators.generateOverriddenPropertySymbols
 import org.jetbrains.kotlin.fir.declarations.FirProperty
 import org.jetbrains.kotlin.fir.declarations.FirRegularClass
+import org.jetbrains.kotlin.fir.declarations.FirResolvePhase
 import org.jetbrains.kotlin.fir.declarations.impl.FirDefaultPropertyGetter
 import org.jetbrains.kotlin.fir.declarations.impl.FirDefaultPropertySetter
 import org.jetbrains.kotlin.fir.declarations.utils.*
 import org.jetbrains.kotlin.fir.expressions.FirConstExpression
 import org.jetbrains.kotlin.fir.expressions.FirExpression
+import org.jetbrains.kotlin.fir.symbols.lazyResolveToPhase
 import org.jetbrains.kotlin.fir.types.coneType
 import org.jetbrains.kotlin.fir.types.resolvedType
 import org.jetbrains.kotlin.ir.ObsoleteDescriptorBasedAPI
@@ -96,9 +98,10 @@ class Fir2IrLazyProperty(
     private fun toIrInitializer(initializer: FirExpression?): IrExpressionBody? {
         // Annotations need full initializer information to instantiate them correctly
         return when {
-            containingClass?.classKind?.isAnnotationClass == true -> initializer?.asCompileTimeIrInitializer(
-                components, fir.returnTypeRef.coneType
-            )
+            containingClass?.classKind?.isAnnotationClass == true -> {
+                fir.lazyResolveToPhase(FirResolvePhase.BODY_RESOLVE)
+                initializer?.asCompileTimeIrInitializer(components, fir.returnTypeRef.coneType)
+            }
             // Setting initializers to every other class causes some cryptic errors in lowerings
             initializer is FirConstExpression<*> -> {
                 val constType = with(typeConverter) { initializer.resolvedType.toIrType() }
