@@ -45,7 +45,8 @@ abstract class KmpIncrementalITBase : KGPBaseTest() {
             projectName,
             gradleVersion,
             configureSubProjects = true,
-            test = test
+            test = test,
+            enableDefaultDependencyManagement = false // project this project uses :kotlinYarnSetup task, which adds custom ivy repository during build
         )
     }
 

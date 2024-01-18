@@ -36,7 +36,11 @@ class BrokenLazyConfigurationIT : KGPBaseTest() {
     @GradleTest
     @DisplayName("works in JS")
     fun testBrokenTcaInJs(gradleVersion: GradleVersion) {
-        project("kotlin-js-browser-project", gradleVersion) {
+        project(
+            "kotlin-js-browser-project",
+            gradleVersion,
+            enableDefaultDependencyManagement = false // :kotlinNodeJsSetup sets custom ivy repository
+        ) {
             val subprojects = listOf("app", "base", "lib")
             for (subproject in subprojects) {
                 val subprojectBuildScript = subProject(subproject).buildGradleKts
