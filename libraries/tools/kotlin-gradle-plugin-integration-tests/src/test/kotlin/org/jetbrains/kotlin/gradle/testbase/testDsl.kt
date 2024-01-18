@@ -61,7 +61,7 @@ fun KGPBaseTest.project(
         workingDir,
         projectPathAdditionalSuffix,
     )
-    projectPath.addDefaultSettingsToSettingsGradle(enableDefaultDependencyManagement, additionalDependencyRepositories)
+    projectPath.addDefaultSettingsToSettingsGradle(enableDefaultDependencyManagement, additionalDependencyRepositories, localRepoDir)
     projectPath.enableCacheRedirector()
     projectPath.enableAndroidSdk()
     if (buildOptions.languageVersion != null || buildOptions.languageApiVersion != null) {
@@ -534,14 +534,21 @@ private val String.testProjectPath: Path get() = Paths.get("src", "test", "resou
 internal fun Path.addDefaultSettingsToSettingsGradle(
     enableDefaultDependencyManagement: Boolean = true,
     additionalDependencyRepositories: List<String> = emptyList(),
+    localRepo: Path? = null,
 ) {
     addPluginManagementToSettings()
-    if (enableDefaultDependencyManagement) addDependencyManagementToSettings(additionalDependencyRepositories = additionalDependencyRepositories)
+    if (enableDefaultDependencyManagement) addDependencyManagementToSettings(
+        additionalDependencyRepositories = additionalDependencyRepositories,
+        localRepo = localRepo
+    )
 
     val buildSrc = resolve("buildSrc")
     if (Files.exists(buildSrc)) {
         buildSrc.addPluginManagementToSettings()
-        if (enableDefaultDependencyManagement) buildSrc.addDependencyManagementToSettings(additionalDependencyRepositories = additionalDependencyRepositories)
+        if (enableDefaultDependencyManagement) buildSrc.addDependencyManagementToSettings(
+            additionalDependencyRepositories = additionalDependencyRepositories,
+            localRepo = localRepo
+        )
     }
 }
 
@@ -591,6 +598,7 @@ internal fun Path.addPluginManagementToSettings() {
 internal fun Path.addDependencyManagementToSettings(
     gradleRepositoriesMode: RepositoriesMode = RepositoriesMode.PREFER_SETTINGS,
     additionalDependencyRepositories: List<String>,
+    localRepo: Path? = null,
 ) {
     val buildGradle = resolve("build.gradle")
     val buildGradleKts = resolve("build.gradle.kts")
@@ -602,7 +610,13 @@ internal fun Path.addDependencyManagementToSettings(
                 """
                 |$it
                 |
-                |${getGroovyDependencyManagementBlock(gradleRepositoriesMode, additionalDependencyRepositories)}
+                |${
+                    getGroovyDependencyManagementBlock(
+                        gradleRepositoriesMode,
+                        additionalDependencyRepositories,
+                        localRepo
+                    )
+                }
                 |""".trimMargin()
             } else {
                 it
@@ -614,7 +628,13 @@ internal fun Path.addDependencyManagementToSettings(
                 """
                 |$it
                 |
-                |${getKotlinDependencyManagementBlock(gradleRepositoriesMode, additionalDependencyRepositories)} 
+                |${
+                    getKotlinDependencyManagementBlock(
+                        gradleRepositoriesMode,
+                        additionalDependencyRepositories,
+                        localRepo
+                    )
+                } 
                 """.trimMargin()
             } else {
                 it
@@ -622,10 +642,22 @@ internal fun Path.addDependencyManagementToSettings(
         }
 
         Files.exists(buildGradle) -> settingsGradle.toFile()
-            .writeText(getGroovyDependencyManagementBlock(gradleRepositoriesMode, additionalDependencyRepositories))
+            .writeText(
+                getGroovyDependencyManagementBlock(
+                    gradleRepositoriesMode,
+                    additionalDependencyRepositories,
+                    localRepo
+                )
+            )
 
         Files.exists(buildGradleKts) -> settingsGradleKts.toFile()
-            .writeText(getKotlinDependencyManagementBlock(gradleRepositoriesMode, additionalDependencyRepositories))
+            .writeText(
+                getKotlinDependencyManagementBlock(
+                    gradleRepositoriesMode,
+                    additionalDependencyRepositories,
+                    localRepo
+                )
+            )
 
         else -> error("No build-file or settings file found")
     }

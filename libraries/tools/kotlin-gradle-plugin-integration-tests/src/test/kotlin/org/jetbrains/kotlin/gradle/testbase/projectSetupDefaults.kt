@@ -7,6 +7,8 @@ package org.jetbrains.kotlin.gradle.testbase
 
 import org.gradle.api.initialization.resolve.RepositoriesMode
 import org.intellij.lang.annotations.Language
+import java.nio.file.Path
+import kotlin.io.path.absolutePathString
 
 @Language("Groovy")
 internal val DEFAULT_GROOVY_SETTINGS_FILE =
@@ -69,6 +71,7 @@ internal val DEFAULT_GROOVY_SETTINGS_FILE =
 internal fun getGroovyDependencyManagementBlock(
     gradleRepositoriesMode: RepositoriesMode,
     additionalDependencyRepositories: List<String>,
+    localRepo: Path? = null,
 ): String =
     //language=Groovy
     """    
@@ -86,7 +89,8 @@ internal fun getGroovyDependencyManagementBlock(
                     artifact()
                 }
             }
-            ${additionalDependencyRepositories.map { repo -> "maven{ url = \"$repo\"}" }.joinToString("\n")}
+            ${additionalDependencyRepositories.map { repo -> "maven{ url = \"$repo\" }" }.joinToString("\n")}
+            ${localRepo?.absolutePathString()?.let { repo -> "maven{ url = \"$repo\" }" } ?: ""}
         }
         repositoriesMode.set(${mapRepositoryModeToString(gradleRepositoriesMode)})
     }
@@ -155,6 +159,7 @@ internal val DEFAULT_KOTLIN_SETTINGS_FILE =
 internal fun getKotlinDependencyManagementBlock(
     gradleRepositoriesMode: RepositoriesMode,
     additionalDependencyRepositories: List<String>,
+    localRepo: Path? = null,
 ): String =
     //language=kotlin
     """    
@@ -172,7 +177,8 @@ internal fun getKotlinDependencyManagementBlock(
                     artifact()
                 }
             }
-            ${additionalDependencyRepositories.map { repo -> "maven{ url = uri(\"$repo\")}" }.joinToString("\n")}
+            ${additionalDependencyRepositories.map { repo -> "maven{ url = uri(\"$repo\") }" }.joinToString("\n")}
+            ${localRepo?.absolutePathString()?.let { repo -> "maven{ url = uri(\"$repo\") }" } ?: ""}
         }
         repositoriesMode.set(${mapRepositoryModeToString(gradleRepositoriesMode)})
     }
