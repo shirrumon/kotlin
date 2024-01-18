@@ -1296,7 +1296,7 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
                 val name = "lodash"
                 val version = getPackageJson().overrides?.get(name)
                 val requiredVersion = ">=1.0.0 <1.2.1 || >1.4.0 <2.0.0"
-                assertTrue("Root package.json must have override $name with version $requiredVersion, but $version found") {
+                assertTrue("Root package.json must override $name with version $requiredVersion, but $version found") {
                     version == requiredVersion
                 }
 
