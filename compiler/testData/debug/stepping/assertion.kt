@@ -1,6 +1,6 @@
 // IGNORE_INLINER: IR
-// IGNORE_BACKEND_K2: WASM
 // FILE: test.kt
+
 
 public val MASSERTIONS_ENABLED: Boolean = true
 
@@ -61,7 +61,7 @@ fun box(): String {
 // test.kt:27 $box (4, 4)
 // test.kt:8 $box
 // test.kt:9 $box
-// test.kt:31 $box (12, 12, 12, 12, 4)
+// test.kt:31 $box (11, 11, 11, 11, 4)
 // String.kt:141 $kotlin.stringLiteral (17, 28, 17)
 // Array.kt:59 $kotlin.Array.get (19, 26, 34, 8)
 // ThrowHelpers.kt:29 $kotlin.wasm.internal.rangeCheck (6, 14, 6, 19, 28, 19, 6, 14, 6, 19, 28, 19)
