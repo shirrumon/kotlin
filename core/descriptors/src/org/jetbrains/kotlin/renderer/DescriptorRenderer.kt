@@ -207,6 +207,7 @@ enum class AnnotationArgumentsRenderingPolicy(
 interface DescriptorRendererOptions {
     var classifierNamePolicy: ClassifierNamePolicy
     var withDefinedIn: Boolean
+    var withModuleName: Boolean
     var withSourceFileForTopLevel: Boolean
     var modifiers: Set<DescriptorRendererModifier>
     var startFromName: Boolean

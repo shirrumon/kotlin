@@ -10,14 +10,12 @@ import org.jetbrains.kotlin.backend.common.diagnostics.SerializationDiagnosticRe
 import org.jetbrains.kotlin.descriptors.DeclarationDescriptor
 import org.jetbrains.kotlin.diagnostics.KtDiagnosticFactoryToRendererMap
 import org.jetbrains.kotlin.diagnostics.error1
-import org.jetbrains.kotlin.diagnostics.rendering.BaseDiagnosticRendererFactory
-import org.jetbrains.kotlin.diagnostics.rendering.CommonRenderers
-import org.jetbrains.kotlin.diagnostics.rendering.Renderer
-import org.jetbrains.kotlin.diagnostics.rendering.RootDiagnosticRendererFactory
+import org.jetbrains.kotlin.diagnostics.rendering.*
 import org.jetbrains.kotlin.ir.declarations.IrDeclaration
 import org.jetbrains.kotlin.ir.descriptors.toIrBasedDescriptor
 import org.jetbrains.kotlin.ir.util.render
 import org.jetbrains.kotlin.renderer.DescriptorRenderer
+import org.jetbrains.kotlin.resolve.DescriptorUtils
 import org.jetbrains.kotlin.resolve.MemberComparator
 
 internal object SerializationErrors {
@@ -43,10 +41,24 @@ internal object SerializationDiagnosticRenderers {
         CommonRenderers.renderConflictingSignatureData<DeclarationDescriptor, ConflictingKlibSignaturesData>(
             signatureKind = "KLIB",
             sortUsing = MemberComparator.INSTANCE,
-            declarationRenderer = Renderer {
-                DescriptorRenderer.WITHOUT_MODIFIERS.render(it)
+            declarationRenderer = ContextDependentRenderer { descriptor, renderingContext ->
+                DescriptorRenderer.WITHOUT_MODIFIERS.withOptions {
+                    withModuleName = renderingContext.containsDeclarationsFromDifferentModules
+                }.render(descriptor)
             },
             renderSignature = { append(it.signature.render()) },
             declarations = { it.declarations.map(IrDeclaration::toIrBasedDescriptor) },
         )
+}
+
+private val RenderingContext.containsDeclarationsFromDifferentModules: Boolean
+    get() = this[CONTAINS_DECLARATIONS_FROM_DIFFERENT_MODULES]
+
+@Suppress("ClassName")
+private object CONTAINS_DECLARATIONS_FROM_DIFFERENT_MODULES :
+    RenderingContext.Key<Boolean>("CONTAINS_DECLARATIONS_FROM_DIFFERENT_MODULES") {
+    override fun compute(objectsToRender: Collection<Any?>): Boolean =
+        objectsToRender.mapNotNullTo(hashSetOf()) {
+            (it as? DeclarationDescriptor)?.let(DescriptorUtils::getContainingModuleOrNull)
+        }.size > 1
 }

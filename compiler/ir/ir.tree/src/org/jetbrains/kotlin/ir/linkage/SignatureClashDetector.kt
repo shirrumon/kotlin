@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.diagnostics.KtDiagnosticFactory1
 import org.jetbrains.kotlin.ir.IrDiagnosticReporter
 import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.declarations.IrDeclaration
-import org.jetbrains.kotlin.ir.util.file
+import org.jetbrains.kotlin.ir.util.fileOrNull
 import org.jetbrains.kotlin.ir.util.sourceElement
 import org.jetbrains.kotlin.utils.SmartSet
 
@@ -58,11 +58,14 @@ abstract class SignatureClashDetector<Signature : Any, Declaration : IrDeclarati
         diagnosticFactory: KtDiagnosticFactory1<Data>,
         declarations: Collection<ConflictingDeclaration>,
         data: Data,
-        reportOnIfSynthetic: (ConflictingDeclaration) -> IrElement,
+        reportOnIfSynthetic: (ConflictingDeclaration) -> IrElement?,
     ) {
-        declarations.mapTo(LinkedHashSet()) { declaration ->
-            val reportOn = declaration.takeUnless { it.startOffset < 0 } ?: reportOnIfSynthetic(declaration)
-            diagnosticReporter.at(reportOn.sourceElement(), reportOn, declaration.file)
+        declarations.mapNotNullTo(LinkedHashSet()) { declaration ->
+            // Declarations that come from other modules may not have a file, so we don't show diagnostics on them.
+            declaration.fileOrNull?.let { file ->
+                val reportOn = declaration.takeUnless { it.startOffset < 0 } ?: reportOnIfSynthetic(declaration)
+                reportOn?.let { diagnosticReporter.at(it.sourceElement(), it, file) }
+            }
         }.forEach {
             it.report(diagnosticFactory, data)
         }
