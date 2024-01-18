@@ -74,6 +74,7 @@ abstract class Kapt3BaseIT : KGPBaseTest() {
         buildOptions: BuildOptions = defaultBuildOptions,
         forceOutput: Boolean = false,
         enableBuildScan: Boolean = false,
+        enableDefaultDependencyManagement: Boolean = true,
         addHeapDumpOptions: Boolean = true,
         enableGradleDebug: Boolean = false,
         enableKotlinDaemonMemoryLimitInMb: Int? = 2512,
@@ -81,6 +82,7 @@ abstract class Kapt3BaseIT : KGPBaseTest() {
         buildJdk: File? = null,
         localRepoDir: Path? = null,
         environmentVariables: EnvironmentalVariables = EnvironmentalVariables(),
+        additionalDependencyRepositories: List<String> = emptyList(),
         test: TestProject.() -> Unit = {},
     ): TestProject = testBaseProject(
         projectName = projectName,
@@ -88,6 +90,7 @@ abstract class Kapt3BaseIT : KGPBaseTest() {
         buildOptions = buildOptions,
         forceOutput = forceOutput,
         enableBuildScan = enableBuildScan,
+        enableDefaultDependencyManagement = enableDefaultDependencyManagement,
         addHeapDumpOptions = addHeapDumpOptions,
         enableGradleDebug = enableGradleDebug,
         enableKotlinDaemonMemoryLimitInMb = enableKotlinDaemonMemoryLimitInMb,
@@ -96,6 +99,7 @@ abstract class Kapt3BaseIT : KGPBaseTest() {
         localRepoDir = localRepoDir,
         environmentVariables = environmentVariables,
         test = test,
+        additionalDependencyRepositories = additionalDependencyRepositories,
     )
 
     protected val String.withPrefix get() = "kapt2/$this"
@@ -225,7 +229,7 @@ open class Kapt3IT : Kapt3BaseIT() {
     @GradleWithJdkTest
     fun doTestSimpleWithCustomJdk(
         gradleVersion: GradleVersion,
-        jdk: JdkVersions.ProvidedJdk
+        jdk: JdkVersions.ProvidedJdk,
     ) {
         project(
             "simple".withPrefix,
@@ -254,7 +258,7 @@ open class Kapt3IT : Kapt3BaseIT() {
     @GradleWithJdkTest
     fun kaptClasspathJreToolchain(
         gradleVersion: GradleVersion,
-        jdk: JdkVersions.ProvidedJdk
+        jdk: JdkVersions.ProvidedJdk,
     ) {
         project(
             "simple".withPrefix,
@@ -382,7 +386,7 @@ open class Kapt3IT : Kapt3BaseIT() {
 
     @DisplayName("Kapt is working with incremental compilation")
     @GradleTest
-   open fun testSimpleWithIC(gradleVersion: GradleVersion) {
+    open fun testSimpleWithIC(gradleVersion: GradleVersion) {
         doTestSimpleWithIC(gradleVersion)
     }
 
@@ -567,7 +571,7 @@ open class Kapt3IT : Kapt3BaseIT() {
     // tests all output directories are cleared when IC rebuilds
     private fun testICRebuild(
         gradleVersion: GradleVersion,
-        performChange: (TestProject) -> Unit
+        performChange: (TestProject) -> Unit,
     ) {
         project(
             "incrementalRebuild".withPrefix,
@@ -735,7 +739,7 @@ open class Kapt3IT : Kapt3BaseIT() {
     @DisplayName("Should re-run kapt on changes in local annotation processor")
     @GradleTest
     open fun testChangesInLocalAnnotationProcessor(gradleVersion: GradleVersion) {
-        project("localAnnotationProcessor".withPrefix, gradleVersion) {
+        project("localAnnotationProcessor".withPrefix, gradleVersion, additionalDependencyRepositories = listOf("https://jitpack.io")) {
             build("build")
 
             val testAnnotationProcessor = subProject("annotation-processor").javaSourcesDir().resolve("TestAnnotationProcessor.kt")
@@ -1076,7 +1080,7 @@ open class Kapt3IT : Kapt3BaseIT() {
 
     @DisplayName("Works with JPMS on JDK 9+")
     @GradleTest
-    fun testJpmsModule(gradleVersion: GradleVersion, ) {
+    fun testJpmsModule(gradleVersion: GradleVersion) {
         project(
             "jpms-module".withPrefix,
             gradleVersion,
@@ -1128,7 +1132,7 @@ open class Kapt3IT : Kapt3BaseIT() {
     @DisplayName("KT-47347: kapt processors should not be an input files for stub generation")
     @GradleTest
     open fun testChangesToKaptConfigurationDoNotTriggerStubGeneration(gradleVersion: GradleVersion) {
-        project("localAnnotationProcessor".withPrefix, gradleVersion) {
+        project("localAnnotationProcessor".withPrefix, gradleVersion, additionalDependencyRepositories = listOf("https://jitpack.io")) {
             build("assemble")
 
             ZipOutputStream(projectPath.resolve("fake_processor.jar").outputStream()).close()
