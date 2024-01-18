@@ -1303,7 +1303,7 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
                 val react = "react"
                 val reactVersion = getPackageJson().overrides?.get(react)
                 val requiredReactVersion = "16.0.0"
-                assertTrue("Root package.json must have override $react with version $requiredReactVersion, but $reactVersion found") {
+                assertTrue("Root package.json must override $react with version $requiredReactVersion, but $reactVersion found") {
                     reactVersion == requiredReactVersion
                 }
             }
