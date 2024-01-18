@@ -297,7 +297,7 @@ internal class NativeIrLinkerIssuesIT : KGPBaseTest() {
         block: TestProject.() -> Unit,
     ) {
         nativeProject(
-            directoryPrefix + "/" + projectName,
+            "$directoryPrefix/$projectName",
             gradleVersion = gradleVersion,
             buildOptions = defaultBuildOptions.copy(
                 nativeOptions = defaultBuildOptions.nativeOptions.copy(cacheKind = nativeCacheKind)),
