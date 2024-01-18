@@ -90,7 +90,7 @@ internal fun getGroovyDependencyManagementBlock(
                 }
             }
             ${additionalDependencyRepositories.map { repo -> "maven{ url = \"$repo\" }" }.joinToString("\n")}
-            ${localRepo?.absolutePathString()?.let { repo -> "maven{ url = \"$repo\" }" } ?: ""}
+            ${localRepo?.absolutePathString()?.let { repo -> "maven{ url = \"${repo.replace("\\", "\\\\")}\" }" } ?: ""}
         }
         repositoriesMode.set(${mapRepositoryModeToString(gradleRepositoriesMode)})
     }
@@ -178,7 +178,7 @@ internal fun getKotlinDependencyManagementBlock(
                 }
             }
             ${additionalDependencyRepositories.map { repo -> "maven{ url = uri(\"$repo\") }" }.joinToString("\n")}
-            ${localRepo?.absolutePathString()?.let { repo -> "maven{ url = uri(\"$repo\") }" } ?: ""}
+            ${localRepo?.absolutePathString()?.let { repo -> "maven{ url = uri(\"${repo.replace("\\", "\\\\")}\") }" } ?: ""}
         }
         repositoriesMode.set(${mapRepositoryModeToString(gradleRepositoriesMode)})
     }
