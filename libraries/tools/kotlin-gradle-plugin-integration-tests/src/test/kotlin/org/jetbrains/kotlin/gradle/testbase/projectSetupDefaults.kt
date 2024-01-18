@@ -5,6 +5,7 @@
 
 package org.jetbrains.kotlin.gradle.testbase
 
+import org.gradle.api.initialization.resolve.RepositoriesMode
 import org.intellij.lang.annotations.Language
 
 @Language("Groovy")
@@ -61,6 +62,33 @@ internal val DEFAULT_GROOVY_SETTINGS_FILE =
 
     plugins {
         id("org.jetbrains.kotlin.test.gradle-warnings-detector")
+    }
+    """.trimIndent()
+
+
+internal fun getGroovyDependencyManagementBlock(
+    gradleRepositoriesMode: RepositoriesMode,
+    additionalDependencyRepositories: List<String>,
+): String =
+    //language=Groovy
+    """    
+    dependencyResolutionManagement {
+        repositories {
+            mavenLocal()
+            mavenCentral()
+            google()
+            ivy {
+                url = "https://download.jetbrains.com/kotlin/native/builds/dev"
+                patternLayout {
+                    artifact("[revision]/[classifier]/[artifact]-[classifier]-[revision].[ext]")
+                }
+                metadataSources {
+                    artifact()
+                }
+            }
+            ${additionalDependencyRepositories.map { repo -> "maven{ url = \"$repo\"}" }.joinToString("\n")}
+        }
+        repositoriesMode.set(${mapRepositoryModeToString(gradleRepositoriesMode)})
     }
     """.trimIndent()
 
@@ -123,3 +151,38 @@ internal val DEFAULT_KOTLIN_SETTINGS_FILE =
         id("org.jetbrains.kotlin.test.gradle-warnings-detector")
     }
     """.trimIndent()
+
+internal fun getKotlinDependencyManagementBlock(
+    gradleRepositoriesMode: RepositoriesMode,
+    additionalDependencyRepositories: List<String>,
+): String =
+    //language=kotlin
+    """    
+    dependencyResolutionManagement {
+        repositories {
+            mavenLocal()
+            mavenCentral()
+            google()
+            ivy {
+                url = uri("https://download.jetbrains.com/kotlin/native/builds/dev")
+                patternLayout {
+                    artifact("[revision]/[classifier]/[artifact]-[classifier]-[revision].[ext]")
+                }
+                metadataSources {
+                    artifact()
+                }
+            }
+            ${additionalDependencyRepositories.map { repo -> "maven{ url = uri(\"$repo\")}" }.joinToString("\n")}
+        }
+        repositoriesMode.set(${mapRepositoryModeToString(gradleRepositoriesMode)})
+    }
+    """.trimIndent()
+
+
+private fun mapRepositoryModeToString(gradleRepositoriesMode: RepositoriesMode): String {
+    return when (gradleRepositoriesMode) {
+        RepositoriesMode.PREFER_PROJECT -> "RepositoriesMode.PREFER_PROJECT"
+        RepositoriesMode.PREFER_SETTINGS -> "RepositoriesMode.PREFER_SETTINGS"
+        RepositoriesMode.FAIL_ON_PROJECT_REPOS -> "RepositoriesMode.FAIL_ON_PROJECT_REPOS"
+    }
+}
