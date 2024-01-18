@@ -71,9 +71,6 @@ internal inline fun <F> PhaseContext.firFrontend(
             metadataCompilationMode = config.metadataKlib,
             isCommonSource = isCommonSource,
             fileBelongsToModule = fileBelongsToModule,
-            registerExtraComponents = {
-                it.register(FirOverrideChecker::class, FirNativeOverrideChecker(it))
-            },
     )
 
     val outputs = sessionsWithSources.map { (session, sources) ->

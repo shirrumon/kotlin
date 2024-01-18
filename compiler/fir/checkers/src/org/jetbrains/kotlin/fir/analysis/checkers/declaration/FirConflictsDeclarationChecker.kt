@@ -7,13 +7,17 @@ package org.jetbrains.kotlin.fir.analysis.checkers.declaration
 
 import org.jetbrains.kotlin.KtFakeSourceElementKind
 import org.jetbrains.kotlin.diagnostics.DiagnosticReporter
+import org.jetbrains.kotlin.diagnostics.KtDiagnosticFactory1
 import org.jetbrains.kotlin.diagnostics.reportOn
 import org.jetbrains.kotlin.fir.FirNameConflictsTrackerComponent
+import org.jetbrains.kotlin.fir.FirSession
+import org.jetbrains.kotlin.fir.FirSessionComponent
 import org.jetbrains.kotlin.fir.analysis.checkers.*
 import org.jetbrains.kotlin.fir.analysis.checkers.context.CheckerContext
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors
 import org.jetbrains.kotlin.fir.declarations.*
 import org.jetbrains.kotlin.fir.packageFqName
+import org.jetbrains.kotlin.fir.resolve.getContainingDeclaration
 import org.jetbrains.kotlin.fir.scopes.impl.FirPackageMemberScope
 import org.jetbrains.kotlin.fir.scopes.impl.PACKAGE_MEMBER
 import org.jetbrains.kotlin.fir.scopes.impl.typeAliasForConstructor
@@ -22,6 +26,33 @@ import org.jetbrains.kotlin.fir.symbols.impl.*
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.SpecialNames
 import org.jetbrains.kotlin.utils.SmartSet
+
+fun interface PlatformConflictDeclarationsDiagnosticDispatcher : FirSessionComponent {
+    fun getDiagnostic(
+        conflictingDeclaration: FirBasedSymbol<*>,
+        symbols: SmartSet<FirBasedSymbol<*>>,
+        context: CheckerContext
+    ): KtDiagnosticFactory1<Collection<FirBasedSymbol<*>>>?
+
+    companion object {
+        val DEFAULT: PlatformConflictDeclarationsDiagnosticDispatcher =
+            PlatformConflictDeclarationsDiagnosticDispatcher { conflictingDeclaration: FirBasedSymbol<*>, symbols: SmartSet<FirBasedSymbol<*>>, context: CheckerContext ->
+                FirErrors.REDECLARATION
+                if (conflictingDeclaration is FirFunctionSymbol<*> || conflictingDeclaration is FirConstructorSymbol) {
+                    FirErrors.CONFLICTING_OVERLOADS
+                } else if (conflictingDeclaration is FirClassLikeSymbol<*> &&
+                    conflictingDeclaration.getContainingDeclaration(context.session) == null &&
+                    symbols.any { it is FirClassLikeSymbol<*> }
+                ) {
+                    FirErrors.PACKAGE_OR_CLASSIFIER_REDECLARATION
+                } else {
+                    FirErrors.REDECLARATION
+                }
+            }
+    }
+}
+
+val FirSession.conflictDeclarationsDiagnosticDispatcher: PlatformConflictDeclarationsDiagnosticDispatcher? by FirSession.nullableSessionComponentAccessor()
 
 object FirConflictsDeclarationChecker : FirBasicDeclarationChecker() {
     override fun check(declaration: FirDeclaration, context: CheckerContext, reporter: DiagnosticReporter) {
@@ -87,17 +118,8 @@ object FirConflictsDeclarationChecker : FirBasicDeclarationChecker() {
                 conflictingDeclaration.isPrimaryConstructor && symbols.all { it.isPrimaryConstructor }
             ) return@forEach
 
-            val factory =
-                if (conflictingDeclaration is FirNamedFunctionSymbol || conflictingDeclaration is FirConstructorSymbol) {
-                    FirErrors.CONFLICTING_OVERLOADS
-                } else if (conflictingDeclaration is FirClassLikeSymbol<*> &&
-                    conflictingDeclaration.getContainingClassSymbol(context.session) == null &&
-                    symbols.any { it is FirClassLikeSymbol<*> }
-                ) {
-                    FirErrors.PACKAGE_OR_CLASSIFIER_REDECLARATION
-                } else {
-                    FirErrors.REDECLARATION
-                }
+            val factory = (context.session.conflictDeclarationsDiagnosticDispatcher ?: PlatformConflictDeclarationsDiagnosticDispatcher.DEFAULT)
+                            .getDiagnostic(conflictingDeclaration, symbols, context) ?: return@forEach
 
             reporter.reportOn(source, factory, symbols, context)
         }

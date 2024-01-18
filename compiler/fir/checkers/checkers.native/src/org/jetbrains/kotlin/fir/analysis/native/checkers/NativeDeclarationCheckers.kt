@@ -14,7 +14,12 @@ object NativeDeclarationCheckers : DeclarationCheckers() {
             FirNativeSharedImmutableChecker,
             FirNativeThreadLocalChecker,
             FirNativeIdentifierChecker,
-            FirNativeObjCNameChecker
+            FirNativeObjCNameChecker,
+        )
+
+    override val functionCheckers: Set<FirFunctionChecker>
+        get() = setOf(
+            FirNativeObjcOverrideChecker
         )
 
     override val callableDeclarationCheckers: Set<FirCallableDeclarationChecker>

@@ -63,3 +63,19 @@ public annotation class BetaInteropApi
 @Retention(AnnotationRetention.BINARY)
 @RequiresOptIn(level = RequiresOptIn.Level.ERROR)
 public annotation class ExperimentalForeignApi
+
+/**
+ * Marks functions for which Objective-C rules should be used for determinating whether two function are conflicting.
+ *
+ * Objective-C allowes overloads by parameter names, while kotlin generally doesn't. This leads to an error,
+ * when a kotlin class attempts to override both versions of a method, that is overloaded by names only.
+ *
+ * If all such methods are annotated by this annotation, the error would be suppressed.
+ *
+ * Annotation is only applicable to overrides of methods comming from Objective-C interop.
+ */
+@Target(AnnotationTarget.FUNCTION)
+@Retention(AnnotationRetention.BINARY)
+@Suppress("NEWER_VERSION_IN_SINCE_KOTLIN")
+@SinceKotlin("2.0")
+public annotation class ExperimentalObjCOverride

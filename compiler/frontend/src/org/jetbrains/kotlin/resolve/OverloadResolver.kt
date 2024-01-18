@@ -16,9 +16,12 @@
 
 package org.jetbrains.kotlin.resolve
 
+import com.intellij.psi.PsiElement
 import com.intellij.util.containers.MultiMap
 import org.jetbrains.kotlin.config.LanguageVersionSettings
+import org.jetbrains.kotlin.container.DefaultImplementation
 import org.jetbrains.kotlin.descriptors.*
+import org.jetbrains.kotlin.diagnostics.DiagnosticFactory1
 import org.jetbrains.kotlin.diagnostics.Errors
 import org.jetbrains.kotlin.diagnostics.reportOnDeclaration
 import org.jetbrains.kotlin.idea.MainFunctionDetector
@@ -30,10 +33,29 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.platform
 import org.jetbrains.kotlin.resolve.scopes.MemberScope
 import java.util.*
 
+@DefaultImplementation(impl = ConflictingOverloadsDispatcher.Default::class)
+interface ConflictingOverloadsDispatcher {
+    fun getDiagnostic(
+        declaration: DeclarationDescriptor,
+        redeclarations: Collection<DeclarationDescriptor>
+    ): DiagnosticFactory1<PsiElement, Collection<DeclarationDescriptor>>?
+
+    object Default : ConflictingOverloadsDispatcher {
+        override fun getDiagnostic(declaration: DeclarationDescriptor, redeclarations: Collection<DeclarationDescriptor>): DiagnosticFactory1<PsiElement, Collection<DeclarationDescriptor>>? {
+            return when (declaration) {
+                is PropertyDescriptor, is ClassifierDescriptor -> Errors.REDECLARATION
+                is FunctionDescriptor -> Errors.CONFLICTING_OVERLOADS
+                else -> null
+            }
+        }
+    }
+}
+
 class OverloadResolver(
     private val trace: BindingTrace,
     private val overloadFilter: OverloadFilter,
     private val overloadChecker: OverloadChecker,
+    private val errorDispatcher: ConflictingOverloadsDispatcher,
     languageVersionSettings: LanguageVersionSettings,
     mainFunctionDetectorFactory: MainFunctionDetector.Factory
 ) {
@@ -299,12 +321,9 @@ class OverloadResolver(
         if (redeclarations.isEmpty()) return
 
         for (memberDescriptor in redeclarations) {
-            when (memberDescriptor) {
-                is PropertyDescriptor,
-                is ClassifierDescriptor ->
-                    reportOnDeclaration(trace, memberDescriptor) { Errors.REDECLARATION.on(it, redeclarations) }
-                is FunctionDescriptor ->
-                    reportOnDeclaration(trace, memberDescriptor) { Errors.CONFLICTING_OVERLOADS.on(it, redeclarations) }
+            val diagnostic = errorDispatcher.getDiagnostic(memberDescriptor, redeclarations) ?: continue
+            reportOnDeclaration(trace, memberDescriptor) {
+                diagnostic.on(it, redeclarations)
             }
         }
     }
