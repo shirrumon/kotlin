@@ -737,20 +737,23 @@ open class HierarchicalMppIT : KGPBaseTest() {
             build(":my-lib-foo:compileJvmAndJsMainKotlinMetadata")
         }
 
+    @GradleTestVersions(minVersion = TestVersions.Gradle.G_7_0)
     @GradleTest
     @DisplayName("HMPP dependencies in js tests")
     fun testHmppDependenciesInJsTests(gradleVersion: GradleVersion, @TempDir tempDir: Path) {
-        // For some reason Gradle 6.* fails with message about using deprecated API which will fail in 7.0
-        // But for Gradle 7.* everything works, so seems false positive
-        if (gradleVersion.baseVersion.version.substringBefore(".").toInt() < 7) {
-            return
-        }
+
         publishThirdPartyLib(
             withGranularMetadata = true,
             gradleVersion = gradleVersion,
             localRepoDir = tempDir
         )
-        with(project("hierarchical-mpp-js-test", gradleVersion)) {
+        with(
+            project(
+                "hierarchical-mpp-js-test",
+                gradleVersion,
+                enableDefaultDependencyManagement = false // :kotlinNodeJsSetup requires custom ivy repository during build
+            )
+        ) {
             val taskToExecute = ":jsNodeTest"
             build(taskToExecute, "-PthirdPartyRepo=${tempDir.absolutePathString()}") {
                 assertTasksExecuted(taskToExecute)
@@ -1068,7 +1071,11 @@ open class HierarchicalMppIT : KGPBaseTest() {
     @GradleTest
     @DisplayName("KT-52216: [TYPE_MISMATCH] Caused by unexpected metadata dependencies of leaf source sets")
     fun `test default platform compilation source set has no metadata dependencies`(gradleVersion: GradleVersion) {
-        with(project("kt-52216", gradleVersion = gradleVersion)) {
+        project(
+            "kt-52216",
+            gradleVersion = gradleVersion,
+            localRepoDir = workingDir.resolve(gradleVersion.version).resolve("repo")
+        ) {
             build(":lib:publish")
             testDependencyTransformations("p1") { reports ->
                 for (leafSourceSetName in listOf("jvmMain", "jsMain", "linuxX64Main")) {
@@ -1138,7 +1145,11 @@ open class HierarchicalMppIT : KGPBaseTest() {
     @GradleTest
     @DisplayName("KT-55071: Shared Native Compilations: Use default parameters declared in dependsOn source set")
     fun `test shared native compilation with default parameters declared in dependsOn source set`(gradleVersion: GradleVersion) {
-        with(project("kt-55071-compileSharedNative-withDefaultParameters", gradleVersion = gradleVersion)) {
+        project(
+            "kt-55071-compileSharedNative-withDefaultParameters",
+            gradleVersion = gradleVersion,
+            localRepoDir = workingDir.resolve(gradleVersion.version).resolve("repo")
+        ) {
             build(":producer:publish") {
                 assertTasksExecuted(":producer:compileCommonMainKotlinMetadata")
                 assertTasksExecuted(":producer:compileSecondCommonMainKotlinMetadata")
