@@ -183,17 +183,22 @@ ALWAYS_INLINE ObjHeader* gc::barriers::weakRefReadBarrier(std::atomic<ObjHeader*
     auto weak = weakReferee.load(std::memory_order_relaxed);
     if (!weak) return nullptr;
 
-    // Mark dispatcher requires weak reads be protected by the following:
-    auto weakReadProtector = markDispatcher().weakReadProtector();
+    if (__builtin_expect(currentPhase() != BarriersPhase::kDisabled, false)) {
+        // Mark dispatcher requires weak reads be protected by the following:
+        auto weakReadProtector = markDispatcher().weakReadProtector();
 
-    auto phase = currentPhase();
-    BarriersLogDebug(phase, "Weak read %p", weak);
-    if (__builtin_expect(phase == BarriersPhase::kMarkClosure, false)) {
-        weakRefReadInMarkSlowPath(weak);
-    } else {
-        if (__builtin_expect(phase == BarriersPhase::kWeakProcessing, false)) {
-            return weakRefReadInWeakSweepSlowPath(weakReferee);
+        auto phase = currentPhase();
+        BarriersLogDebug(phase, "Weak read %p", weak);
+
+        if (__builtin_expect(phase == BarriersPhase::kMarkClosure, false)) {
+            weakRefReadInMarkSlowPath(weak);
+        } else {
+            if (__builtin_expect(phase == BarriersPhase::kWeakProcessing, false)) {
+                return weakRefReadInWeakSweepSlowPath(weakReferee);
+            }
         }
+        return weak;
     }
+
     return weak;
 }

@@ -143,12 +143,6 @@ void gc::ConcurrentMarkAndSweep::PerformFullGC(int64_t epoch) noexcept {
 
     markDispatcher_.runMainInSTW();
 
-    markDispatcher_.endMarkingEpoch();
-
-    // TODO re-enable concurrent weak sweep again
-
-    gc::processWeaks<DefaultProcessWeaksTraits>(gcHandle, mm::SpecialRefRegistry::instance());
-
     // TODO outline as mark_.isolateMarkedHeapAndFinishMark()
     // By this point all the alive heap must be marked.
     // All the mutations (incl. allocations) after this method will be subject for the next GC.

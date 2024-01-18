@@ -74,14 +74,18 @@ void gc::mark::ConcurrentMark::runMainInSTW() {
         ++iter;
     } while (!tryTerminateMark(everSharedBatches));
 
+    for (auto& thread : *lockedMutatorsList_) {
+        thread.gc().impl().gc().mark().markQueue().destroy();
+    }
+
+    endMarkingEpoch();
+
+    gc::processWeaks<DefaultProcessWeaksTraits>(gcHandle(), mm::SpecialRefRegistry::instance());
+
     stopTheWorld(gcHandle(), "GC stop the world #2: finish mark");
 
     // TODO do weak sweep before
     barriers::disableBarriers();
-
-    for (auto& thread : *lockedMutatorsList_) {
-        thread.gc().impl().gc().mark().markQueue().destroy();
-    }
 }
 
 void gc::mark::ConcurrentMark::runOnMutator(mm::ThreadData&) {
