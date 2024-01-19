@@ -494,9 +494,8 @@ internal class CodeGeneratorVisitor(
     //-------------------------------------------------------------------------//
 
     val ctorFunctionSignature = LlvmFunctionSignature(LlvmRetType(llvm.voidType))
-    val kNodeInitType = LLVMGetTypeByName(llvm.module, "struct.InitNode")!!
-    val kMemoryStateType = LLVMGetTypeByName(llvm.module, "struct.MemoryState")!!
-    val kInitFuncType = LlvmFunctionSignature(LlvmRetType(llvm.voidType), listOf(LlvmParamType(llvm.int32Type), LlvmParamType(pointerType(kMemoryStateType))))
+    val kNodeInitType = llvm.runtime.getStructType("InitNode")
+    val kInitFuncType = LlvmFunctionSignature(LlvmRetType(llvm.voidType), listOf(LlvmParamType(llvm.int32Type), LlvmParamType(llvm.int8PtrType)))
 
     //-------------------------------------------------------------------------//
 
