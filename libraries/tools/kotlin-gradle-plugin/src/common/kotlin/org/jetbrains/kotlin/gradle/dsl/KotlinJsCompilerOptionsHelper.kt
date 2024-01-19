@@ -15,7 +15,7 @@ internal object KotlinJsCompilerOptionsHelper {
         args.friendModulesDisabled = from.friendModulesDisabled.get()
         args.main = from.main.get().mode
         args.metaInfo = from.metaInfo.get()
-        args.moduleKind = from.moduleKind.get().kind
+        args.moduleKind = from.moduleKind.orNull?.kind
         args.moduleName = from.moduleName.orNull
         args.noStdlib = from.noStdlib.get()
         args.outputFile = from.outputFile.orNull
@@ -25,7 +25,7 @@ internal object KotlinJsCompilerOptionsHelper {
         args.sourceMapPrefix = from.sourceMapPrefix.orNull
         args.target = from.target.get()
         args.typedArrays = from.typedArrays.get()
-        args.useEsClasses = from.useEsClasses.get()
+        args.useEsClasses = from.useEsClasses.orNull
     }
 
     internal fun syncOptionsAsConvention(
