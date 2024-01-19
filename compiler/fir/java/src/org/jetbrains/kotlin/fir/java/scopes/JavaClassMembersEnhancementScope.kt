@@ -56,11 +56,7 @@ class JavaClassMembersEnhancementScope(
     }
 
     private fun FirCallableDeclaration.overriddenMembers(): List<FirCallableDeclaration> {
-        return when (val symbol = this.symbol) {
-            is FirNamedFunctionSymbol -> useSiteMemberScope.getDirectOverriddenMembers(symbol)
-            is FirPropertySymbol -> useSiteMemberScope.getDirectOverriddenProperties(symbol)
-            else -> emptyList()
-        }.map { it.fir }
+        return useSiteMemberScope.getDirectOverriddenMembers(symbol).map { it.fir }
     }
 
     override fun processDeclaredConstructors(processor: (FirConstructorSymbol) -> Unit) {
