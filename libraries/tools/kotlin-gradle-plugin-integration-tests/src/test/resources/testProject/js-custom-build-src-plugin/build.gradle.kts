@@ -10,15 +10,19 @@ repositories {
     mavenLocal()
 }
 
-dependencies {
-    implementation(npm("async", "3.2.4"))
-}
-
 kotlin {
     js {
         tasks.register("checkConfigurationsResolve") {
             doLast {
                 configurations.named(compilations["main"].npmAggregatedConfigurationName).get().resolve()
+            }
+        }
+    }
+
+    sourceSets {
+        val jsMain by getting {
+            dependencies {
+                implementation(npm("async", "3.2.4"))
             }
         }
     }

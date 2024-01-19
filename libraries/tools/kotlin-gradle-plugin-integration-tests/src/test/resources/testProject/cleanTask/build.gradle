@@ -3,7 +3,7 @@ import java.time.*
 import java.util.concurrent.*
 
 plugins {
-    id "org.jetbrains.kotlin.js"
+    id "org.jetbrains.kotlin.multiplatform"
 }
 
 String nodeJsVersion
@@ -149,8 +149,12 @@ afterEvaluate {
     println("Use $nodeJsLocation location")
 }
 
-dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-js"
+kotlin {
+    js() {
+        browser()
+    }
 }
 
-kotlin.target.browser {}
+dependencies {
+    jsMainImplementation "org.jetbrains.kotlin:kotlin-stdlib-js"
+}

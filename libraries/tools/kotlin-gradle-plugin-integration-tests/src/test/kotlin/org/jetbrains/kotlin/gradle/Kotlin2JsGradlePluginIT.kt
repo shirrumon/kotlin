@@ -59,7 +59,7 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
                 |}
                """.trimMargin()
             )
-            build("nodeRun") {
+            build("jsNodeRun") {
                 assertOutputContains("ACCEPTED: test;'Hello, World'")
             }
         }
@@ -1198,9 +1198,9 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
         project("kotlin-js-nodejs-custom-node-module", gradleVersion) {
             build("build") {
                 // It makes sense only since Tests will be run on Gradle 7.2
-                assertOutputDoesNotContain("Execution optimizations have been disabled for task ':nodeTest'")
+                assertOutputDoesNotContain("Execution optimizations have been disabled for task ':jsNodeTest'")
 
-                assertTasksExecuted(":nodeTest")
+                assertTasksExecuted(":jsNodeTest")
             }
         }
     }
@@ -1268,7 +1268,7 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
                 """.trimMargin()
             )
 
-            build("packageJson")
+            build("jsPackageJson")
         }
     }
 
@@ -1328,11 +1328,11 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
     @GradleTest
     fun testMochaFailedModuleNotFound(gradleVersion: GradleVersion) {
         project("kotlin-js-nodejs-project", gradleVersion) {
-            build("nodeTest") {
+            build("jsNodeTest") {
                 assertOutputDoesNotContain("##teamcity[")
             }
 
-            projectPath.resolve("src/test/kotlin/Tests.kt").appendText(
+            projectPath.resolve("src/jsTest/kotlin/Tests.kt").appendText(
                 "\n" + """
                 |class Tests3 {
                 |   @Test
@@ -1342,16 +1342,16 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
                 |}
                 """.trimMargin()
             )
-            buildAndFail("nodeTest") {
-                assertTasksFailed(":nodeTest")
+            buildAndFail("jsNodeTest") {
+                assertTasksFailed(":jsNodeTest")
 
                 assertTestResults(
                     projectPath.resolve("TEST-all.xml"),
-                    "nodeTest"
+                    "jsNodeTest"
                 )
             }
 
-            projectPath.resolve("src/test/kotlin/Tests.kt").appendText(
+            projectPath.resolve("src/jsTest/kotlin/Tests.kt").appendText(
                 "\n" + """
                 |
                 |@JsModule("foo")
@@ -1366,8 +1366,8 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
                 |}
                 """.trimMargin()
             )
-            buildAndFail("nodeTest") {
-                assertTasksFailed(":nodeTest")
+            buildAndFail("jsNodeTest") {
+                assertTasksFailed(":jsNodeTest")
                 assertOutputContains("Cannot find module 'foo'")
             }
         }
@@ -1377,7 +1377,7 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
     @GradleTest
     fun testMochaHasNoDryRunOutput(gradleVersion: GradleVersion) {
         project("kotlin-js-nodejs-project", gradleVersion) {
-            build("nodeTest") {
+            build("jsNodeTest") {
                 assertOutputDoesNotContain("0 passing")
             }
         }

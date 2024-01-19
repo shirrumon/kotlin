@@ -1,10 +1,5 @@
 plugins {
-    id("org.jetbrains.kotlin.js")
-}
-
-dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-js")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-js")
+    id("org.jetbrains.kotlin.multiplatform")
 }
 
 repositories {
@@ -19,4 +14,9 @@ kotlin {
         nodejs {
         }
     }
+}
+
+dependencies {
+    "jsMainImplementation"("org.jetbrains.kotlin:kotlin-stdlib-js")
+    "jsTestImplementation"("org.jetbrains.kotlin:kotlin-test-js")
 }

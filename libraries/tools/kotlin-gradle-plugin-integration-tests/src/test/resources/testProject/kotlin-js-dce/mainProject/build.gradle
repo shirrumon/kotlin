@@ -1,5 +1,5 @@
 plugins {
-    id("org.jetbrains.kotlin.js")
+    id("org.jetbrains.kotlin.multiplatform")
 }
 
 repositories {
@@ -7,16 +7,16 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    implementation project(":libraryProject")
-    implementation "org.mozilla:rhino:1.7.7.1"
-}
-
 kotlin {
     js {
         binaries.executable()
         browser()
     }
+}
+
+dependencies {
+    jsMainImplementation project(":libraryProject")
+    jsMainImplementation "org.mozilla:rhino:1.7.7.1"
 }
 
 //def compileKotlinJs = tasks.named('compileKotlinJs') {
@@ -37,7 +37,7 @@ rootProject.plugins.withType(org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJ
     def kotlinNodeJs = rootProject.extensions.getByType(org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension)
 
     tasks.register("runWebpack", Exec) {
-        dependsOn(tasks.named('browserProductionWebpack'))
+        dependsOn(tasks.named('jsBrowserProductionWebpack'))
 
         executable(kotlinNodeJs.requireConfigured().nodeExecutable)
 
@@ -54,7 +54,7 @@ rootProject.plugins.withType(org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJ
 
 tasks.register('runRhino', JavaExec) {
     dependsOn(tasks.named('processDceKotlinJs'))
-    classpath = configurations.runtimeClasspath
+    classpath = configurations.jsMainRuntimeClasspath
     workingDir = "${buildDir}"
     mainClass = 'org.mozilla.javascript.tools.shell.Main'
     args = ["-opt", "-1",

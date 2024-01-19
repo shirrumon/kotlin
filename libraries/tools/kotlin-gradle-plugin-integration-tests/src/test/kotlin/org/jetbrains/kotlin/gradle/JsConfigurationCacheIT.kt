@@ -76,11 +76,11 @@ class JsIrConfigurationCacheIT : KGPBaseTest() {
                 ":build",
                 buildOptions = defaultBuildOptions,
                 executedTaskNames = listOf(
-                    ":packageJson",
-                    ":publicPackageJson",
+                    ":jsPackageJson",
+                    ":jsPublicPackageJson",
                     ":rootPackageJson",
                     ":compileKotlinJs",
-                    ":nodeTest",
+                    ":jsNodeTest",
                 ) + listOf(":compileProductionExecutableKotlinJs")
             )
         }
@@ -98,11 +98,11 @@ class JsIrConfigurationCacheIT : KGPBaseTest() {
             build(":build", "-Didea.version=2020.1") {
                 assertConfigurationCacheReused()
                 val upToDateTasks = listOf(
-                    ":packageJson",
-                    ":publicPackageJson",
+                    ":jsPackageJson",
+                    ":jsPublicPackageJson",
                     ":rootPackageJson",
                     ":compileKotlinJs",
-                    ":nodeTest",
+                    ":jsNodeTest",
                 ) + listOf(":compileProductionExecutableKotlinJs")
                 assertTasksUpToDate(*upToDateTasks.toTypedArray())
             }
@@ -125,8 +125,8 @@ class JsIrConfigurationCacheIT : KGPBaseTest() {
     @GradleTest
     fun testNodeJsRun(gradleVersion: GradleVersion) {
         project("kotlin-js-nodejs-project", gradleVersion) {
-            build("nodeRun", buildOptions = buildOptions) {
-                assertTasksExecuted(":nodeRun")
+            build("jsNodeRun", buildOptions = buildOptions) {
+                assertTasksExecuted(":jsNodeRun")
                 assertOutputContains(
                     "Calculating task graph as no configuration cache is available for tasks: nodeRun"
                 )
@@ -137,8 +137,8 @@ class JsIrConfigurationCacheIT : KGPBaseTest() {
             build("clean", buildOptions = buildOptions)
 
             // Then run a build where tasks states are deserialized to check that they work correctly in this mode
-            build("nodeRun", buildOptions = buildOptions) {
-                assertTasksExecuted(":nodeRun")
+            build("jsNodeRun", buildOptions = buildOptions) {
+                assertTasksExecuted(":jsNodeRun")
                 assertConfigurationCacheReused()
             }
         }
