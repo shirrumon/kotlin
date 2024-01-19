@@ -30,17 +30,9 @@ class JsPlainObjectsKotlinGradleSubplugin : KotlinCompilerPluginSupportPlugin {
 
     override fun apply(target: Project) {
         super.apply(target)
-        target.extensions.findByType(KotlinTargetsContainer::class.java)?.let { kotlinExtension ->
-            // find all compilations given sourceSet belongs to
-            kotlinExtension.targets.all { kotlinTarget ->
-                if (kotlinTarget.platformType == KotlinPlatformType.js) {
-                    kotlinTarget.compilations.forEach { kotlinCompilation ->
-                        kotlinCompilation.dependencies {
-                            implementation(kotlin("js-plain-objects"))
-                        }
-                    }
-                }
-            }
+
+        target.withPluginWhenEvaluated("kotlin-multiplatform") {
+            withKotlinJsTargets { addRuntimeDependency() }
         }
     }
 
@@ -57,4 +49,35 @@ class JsPlainObjectsKotlinGradleSubplugin : KotlinCompilerPluginSupportPlugin {
     private fun KotlinTarget.isJs() = platformType == KotlinPlatformType.js
 
     private fun KotlinTarget.isWasm() = platformType == KotlinPlatformType.wasm
+
+    private fun Project.withKotlinJsTargets(fn: KotlinTarget.() -> Unit) {
+        extensions.findByType(KotlinTargetsContainer::class.java)?.let { kotlinExtension ->
+            // find all compilations given sourceSet belongs to
+            kotlinExtension.targets.all { kotlinTarget ->
+                if (kotlinTarget.isJs()) {
+                    kotlinTarget.fn()
+                }
+            }
+        }
+    }
+
+    private fun KotlinTarget.addRuntimeDependency() {
+        compilations.all { kotlinCompilation ->
+            kotlinCompilation.dependencies {
+                implementation(kotlin("js-plain-objects"))
+            }
+        }
+    }
+
+    private fun Project.withPluginWhenEvaluated(plugin: String, fn: Project.() -> Unit) {
+        pluginManager.withPlugin(plugin) { whenEvaluated(fn) }
+    }
+
+    private fun <T> Project.whenEvaluated(fn: Project.() -> T) {
+        if (state.executed) {
+            fn()
+        } else {
+            afterEvaluate { fn() }
+        }
+    }
 }
