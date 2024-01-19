@@ -89,6 +89,35 @@ internal fun getGroovyDependencyManagementBlock(
                     artifact()
                 }
             }
+            maven {
+                url "https://packages.jetbrains.team/maven/p/ij/intellij-dependencies/"
+            }
+            ivy {
+                url = "https://github.com/yarnpkg/yarn/releases/download"
+
+                patternLayout {
+                    artifact("v[revision]/[artifact](-v[revision]).[ext]")
+                }
+                metadataSources { 
+                    artifact() 
+                }
+                content { 
+                    includeModule("com.yarnpkg", "yarn") 
+                }
+            }
+            ivy {
+                url = "https://nodejs.org/dist"
+
+                patternLayout {
+                    artifact("v[revision]/[artifact](-v[revision]-[classifier]).[ext]")
+                }
+                metadataSources { 
+                    artifact() 
+                }
+                content { 
+                    includeModule("org.nodejs", "node") 
+                }
+            }
             ${additionalDependencyRepositories.map { repo -> "maven{ url = \"$repo\" }" }.joinToString("\n")}
             ${localRepo?.absolutePathString()?.let { repo -> "maven{ url = \"${repo.replace("\\", "\\\\")}\" }" } ?: ""}
         }
@@ -176,6 +205,35 @@ internal fun getKotlinDependencyManagementBlock(
                 metadataSources {
                     artifact()
                 }
+            }
+            ivy {
+                url = uri("https://github.com/yarnpkg/yarn/releases/download")
+
+                patternLayout {
+                    artifact("v[revision]/[artifact](-v[revision]).[ext]")
+                }
+                metadataSources { 
+                    artifact() 
+                }
+                content { 
+                    includeModule("com.yarnpkg", "yarn") 
+                }
+            }
+            ivy {
+                url = uri("https://nodejs.org/dist")
+
+                patternLayout {
+                    artifact("v[revision]/[artifact](-v[revision]-[classifier]).[ext]")
+                }
+                metadataSources { 
+                    artifact() 
+                }
+                content { 
+                    includeModule("org.nodejs", "node") 
+                }
+            }
+            maven {
+                url = uri("https://packages.jetbrains.team/maven/p/ij/intellij-dependencies/")
             }
             ${additionalDependencyRepositories.map { repo -> "maven{ url = uri(\"$repo\") }" }.joinToString("\n")}
             ${localRepo?.absolutePathString()?.let { repo -> "maven{ url = uri(\"${repo.replace("\\", "\\\\")}\") }" } ?: ""}
