@@ -15,6 +15,7 @@ import com.intellij.psi.PsiWhiteSpace
 import com.intellij.psi.tree.IElementType
 import com.intellij.util.diff.FlyweightCapableTreeStructure
 import org.jetbrains.kotlin.name.Name
+import org.jetbrains.kotlin.util.OperatorNameConventions
 import org.jetbrains.kotlin.utils.getElementTextWithContext
 
 sealed class KtSourceElementKind {
@@ -613,12 +614,12 @@ inline fun LighterASTNode.toKtLightSourceElement(
 ): KtLightSourceElement = KtLightSourceElement(this, startOffset, endOffset, tree, kind)
 
 fun sourceKindForIncOrDec(operation: Name, isPrefix: Boolean) = when (operation.identifier) {
-    "inc" -> if (isPrefix) {
+    OperatorNameConventions.INC.identifier -> if (isPrefix) {
         KtFakeSourceElementKind.DesugaredPrefixInc
     } else {
         KtFakeSourceElementKind.DesugaredPostfixInc
     }
-    "dec" -> if (isPrefix) {
+    OperatorNameConventions.DEC.identifier -> if (isPrefix) {
         KtFakeSourceElementKind.DesugaredPrefixDec
     } else {
         KtFakeSourceElementKind.DesugaredPostfixDec

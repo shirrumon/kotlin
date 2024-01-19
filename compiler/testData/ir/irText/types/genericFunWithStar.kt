@@ -1,4 +1,3 @@
-// FIR_IDENTICAL
 interface IBase
 interface IFoo : IBase
 interface IBar : IBase

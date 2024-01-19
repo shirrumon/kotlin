@@ -661,8 +661,8 @@ abstract class AbstractRawFirBuilder<T>(val baseSession: FirSession, val context
     ): FirExpression {
         val array = receiver.arrayExpression
         val isInc = when (callName.identifier) {
-            "inc" -> true
-            "dec" -> false
+            OperatorNameConventions.INC.identifier -> true
+            OperatorNameConventions.DEC.identifier -> false
             else -> error("Unexpected operator: $callName")
         }
         val sourceKind = sourceKindForIncOrDec(callName, prefix)
