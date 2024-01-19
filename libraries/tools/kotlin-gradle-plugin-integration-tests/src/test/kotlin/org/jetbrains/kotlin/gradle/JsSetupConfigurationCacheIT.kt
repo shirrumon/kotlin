@@ -28,7 +28,15 @@ class JsSetupConfigurationCacheIT : KGPBaseTest() {
     @DisplayName("Check Node.JS setup on different platforms")
     @GradleTest
     fun checkNodeJsSetup(gradleVersion: GradleVersion) {
-        project("kotlin-js-browser-project", gradleVersion) {
+        project(
+            "kotlin-js-browser-project",
+            gradleVersion,
+            buildOptions = defaultBuildOptions.copy(
+                jsOptions = defaultBuildOptions.jsOptions?.copy(
+                    yarn = false
+                )
+            )
+        ) {
             checkNodeJsSetup("kotlinUpgradePackageLock")
         }
     }

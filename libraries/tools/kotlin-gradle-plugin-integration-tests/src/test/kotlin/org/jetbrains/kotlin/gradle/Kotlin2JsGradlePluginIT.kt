@@ -1037,7 +1037,15 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
     @DisplayName("public NPM dependencies are included into package.json")
     @GradleTest
     fun testPackageJsonWithPublicNpmDependencies(gradleVersion: GradleVersion) {
-        project("npm-dependencies", gradleVersion) {
+        project(
+            "npm-dependencies",
+            gradleVersion,
+            buildOptions = defaultBuildOptions.copy(
+                jsOptions = defaultBuildOptions.jsOptions?.copy(
+                    yarn = false
+                )
+            )
+        ) {
             build("jsJar") {
                 val archive = projectPath
                     .resolve("build/libs")
@@ -1229,7 +1237,15 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
     @DisplayName("npm overrides works")
     @GradleTest
     fun testNpmOverrides(gradleVersion: GradleVersion) {
-        project("kotlin-js-npm-overrides", gradleVersion) {
+        project(
+            "kotlin-js-npm-overrides",
+            gradleVersion,
+            buildOptions = defaultBuildOptions.copy(
+                jsOptions = defaultBuildOptions.jsOptions?.copy(
+                    yarn = false
+                )
+            )
+        ) {
             build("packageJson", "rootPackageJson", "kotlinNpmInstall") {
                 fun getPackageJson() =
                     projectPath.resolve("build/js")
