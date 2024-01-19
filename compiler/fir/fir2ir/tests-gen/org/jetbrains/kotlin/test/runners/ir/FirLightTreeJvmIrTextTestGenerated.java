@@ -3547,6 +3547,12 @@ public class FirLightTreeJvmIrTextTestGenerated extends AbstractFirLightTreeJvmI
         }
 
         @Test
+        @TestMetadata("javaPropertiesWithNullabilityAnnotations.kt")
+        public void testJavaPropertiesWithNullabilityAnnotations() throws Exception {
+            runTest("compiler/testData/ir/irText/types/javaPropertiesWithNullabilityAnnotations.kt");
+        }
+
+        @Test
         @TestMetadata("javaWildcardType.kt")
         public void testJavaWildcardType() throws Exception {
             runTest("compiler/testData/ir/irText/types/javaWildcardType.kt");
@@ -3562,6 +3568,12 @@ public class FirLightTreeJvmIrTextTestGenerated extends AbstractFirLightTreeJvmI
         @TestMetadata("kt49526.kt")
         public void testKt49526() throws Exception {
             runTest("compiler/testData/ir/irText/types/kt49526.kt");
+        }
+
+        @Test
+        @TestMetadata("kt62118.kt")
+        public void testKt62118() throws Exception {
+            runTest("compiler/testData/ir/irText/types/kt62118.kt");
         }
 
         @Test

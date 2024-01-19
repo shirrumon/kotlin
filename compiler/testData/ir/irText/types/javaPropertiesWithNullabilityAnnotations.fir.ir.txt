@@ -1,0 +1,74 @@
+FILE fqName:<root> fileName:/main.kt
+  FUN name:funGetNullableGet visibility:public modality:FINAL <> (foo:<root>.GetNullable) returnType:kotlin.reflect.KFunction0<kotlin.Int?>
+    VALUE_PARAMETER name:foo index:0 type:<root>.GetNullable
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun funGetNullableGet (foo: <root>.GetNullable): kotlin.reflect.KFunction0<kotlin.Int?> declared in <root>'
+        FUNCTION_REFERENCE 'public/*package*/ open fun getFoo (): kotlin.Int? declared in <root>.GetNullable' type=kotlin.reflect.KFunction0<kotlin.Int?> origin=null reflectionTarget=<same>
+          $this: GET_VAR 'foo: <root>.GetNullable declared in <root>.funGetNullableGet' type=<root>.GetNullable origin=null
+  FUN name:funGetNullableSet visibility:public modality:FINAL <> (foo:<root>.GetNullable) returnType:kotlin.reflect.KFunction1<@[FlexibleNullability] kotlin.Int?, kotlin.Unit>
+    VALUE_PARAMETER name:foo index:0 type:<root>.GetNullable
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun funGetNullableSet (foo: <root>.GetNullable): kotlin.reflect.KFunction1<@[FlexibleNullability] kotlin.Int?, kotlin.Unit> declared in <root>'
+        FUNCTION_REFERENCE 'public/*package*/ open fun setFoo (newFoo: @[FlexibleNullability] kotlin.Int?): kotlin.Unit declared in <root>.GetNullable' type=kotlin.reflect.KFunction1<@[FlexibleNullability] kotlin.Int?, kotlin.Unit> origin=null reflectionTarget=<same>
+          $this: GET_VAR 'foo: <root>.GetNullable declared in <root>.funGetNullableSet' type=<root>.GetNullable origin=null
+  FUN name:funGetNullableField visibility:public modality:FINAL <> (foo:<root>.GetNullable) returnType:kotlin.Int?
+    VALUE_PARAMETER name:foo index:0 type:<root>.GetNullable
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun funGetNullableField (foo: <root>.GetNullable): kotlin.Int? declared in <root>'
+        CALL 'public/*package*/ open fun getFoo (): kotlin.Int? declared in <root>.GetNullable' type=kotlin.Int? origin=GET_PROPERTY
+          $this: GET_VAR 'foo: <root>.GetNullable declared in <root>.funGetNullableField' type=<root>.GetNullable origin=null
+  FUN name:funSetNullableGet visibility:public modality:FINAL <> (foo:<root>.SetNullable) returnType:kotlin.reflect.KFunction0<@[FlexibleNullability] kotlin.Int?>
+    VALUE_PARAMETER name:foo index:0 type:<root>.SetNullable
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun funSetNullableGet (foo: <root>.SetNullable): kotlin.reflect.KFunction0<@[FlexibleNullability] kotlin.Int?> declared in <root>'
+        FUNCTION_REFERENCE 'public/*package*/ open fun getFoo (): @[FlexibleNullability] kotlin.Int? declared in <root>.SetNullable' type=kotlin.reflect.KFunction0<@[FlexibleNullability] kotlin.Int?> origin=null reflectionTarget=<same>
+          $this: GET_VAR 'foo: <root>.SetNullable declared in <root>.funSetNullableGet' type=<root>.SetNullable origin=null
+  FUN name:funSetNullableSet visibility:public modality:FINAL <> (foo:<root>.SetNullable) returnType:kotlin.reflect.KFunction1<kotlin.Int?, kotlin.Unit>
+    VALUE_PARAMETER name:foo index:0 type:<root>.SetNullable
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun funSetNullableSet (foo: <root>.SetNullable): kotlin.reflect.KFunction1<kotlin.Int?, kotlin.Unit> declared in <root>'
+        FUNCTION_REFERENCE 'public/*package*/ open fun setFoo (newFoo: kotlin.Int?): kotlin.Unit declared in <root>.SetNullable' type=kotlin.reflect.KFunction1<kotlin.Int?, kotlin.Unit> origin=null reflectionTarget=<same>
+          $this: GET_VAR 'foo: <root>.SetNullable declared in <root>.funSetNullableSet' type=<root>.SetNullable origin=null
+  FUN name:funSetNullableField visibility:public modality:FINAL <> (foo:<root>.SetNullable) returnType:@[FlexibleNullability] kotlin.Int?
+    VALUE_PARAMETER name:foo index:0 type:<root>.SetNullable
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun funSetNullableField (foo: <root>.SetNullable): @[FlexibleNullability] kotlin.Int? declared in <root>'
+        CALL 'public/*package*/ open fun getFoo (): @[FlexibleNullability] kotlin.Int? declared in <root>.SetNullable' type=@[FlexibleNullability] kotlin.Int? origin=GET_PROPERTY
+          $this: GET_VAR 'foo: <root>.SetNullable declared in <root>.funSetNullableField' type=<root>.SetNullable origin=null
+  FUN name:funGetNullableSetNotNullGet visibility:public modality:FINAL <> (foo:<root>.GetNullableSetNotNull) returnType:kotlin.reflect.KFunction0<kotlin.Int?>
+    VALUE_PARAMETER name:foo index:0 type:<root>.GetNullableSetNotNull
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun funGetNullableSetNotNullGet (foo: <root>.GetNullableSetNotNull): kotlin.reflect.KFunction0<kotlin.Int?> declared in <root>'
+        FUNCTION_REFERENCE 'public/*package*/ open fun getFoo (): kotlin.Int? declared in <root>.GetNullableSetNotNull' type=kotlin.reflect.KFunction0<kotlin.Int?> origin=null reflectionTarget=<same>
+          $this: GET_VAR 'foo: <root>.GetNullableSetNotNull declared in <root>.funGetNullableSetNotNullGet' type=<root>.GetNullableSetNotNull origin=null
+  FUN name:funGetNullableSetNotNullSet visibility:public modality:FINAL <> (foo:<root>.GetNullableSetNotNull) returnType:kotlin.reflect.KFunction1<@[EnhancedNullability] kotlin.Int, kotlin.Unit>
+    VALUE_PARAMETER name:foo index:0 type:<root>.GetNullableSetNotNull
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun funGetNullableSetNotNullSet (foo: <root>.GetNullableSetNotNull): kotlin.reflect.KFunction1<@[EnhancedNullability] kotlin.Int, kotlin.Unit> declared in <root>'
+        FUNCTION_REFERENCE 'public/*package*/ open fun setFoo (newFoo: @[EnhancedNullability] kotlin.Int): kotlin.Unit declared in <root>.GetNullableSetNotNull' type=kotlin.reflect.KFunction1<@[EnhancedNullability] kotlin.Int, kotlin.Unit> origin=null reflectionTarget=<same>
+          $this: GET_VAR 'foo: <root>.GetNullableSetNotNull declared in <root>.funGetNullableSetNotNullSet' type=<root>.GetNullableSetNotNull origin=null
+  FUN name:funGetNullableSetNotNullField visibility:public modality:FINAL <> (foo:<root>.GetNullableSetNotNull) returnType:kotlin.Int?
+    VALUE_PARAMETER name:foo index:0 type:<root>.GetNullableSetNotNull
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun funGetNullableSetNotNullField (foo: <root>.GetNullableSetNotNull): kotlin.Int? declared in <root>'
+        CALL 'public/*package*/ open fun getFoo (): kotlin.Int? declared in <root>.GetNullableSetNotNull' type=kotlin.Int? origin=GET_PROPERTY
+          $this: GET_VAR 'foo: <root>.GetNullableSetNotNull declared in <root>.funGetNullableSetNotNullField' type=<root>.GetNullableSetNotNull origin=null
+  FUN name:funSetNullableGetNotNullGet visibility:public modality:FINAL <> (foo:<root>.SetNullableGetNotNull) returnType:kotlin.reflect.KFunction0<@[EnhancedNullability] kotlin.Int>
+    VALUE_PARAMETER name:foo index:0 type:<root>.SetNullableGetNotNull
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun funSetNullableGetNotNullGet (foo: <root>.SetNullableGetNotNull): kotlin.reflect.KFunction0<@[EnhancedNullability] kotlin.Int> declared in <root>'
+        FUNCTION_REFERENCE 'public/*package*/ open fun getFoo (): @[EnhancedNullability] kotlin.Int declared in <root>.SetNullableGetNotNull' type=kotlin.reflect.KFunction0<@[EnhancedNullability] kotlin.Int> origin=null reflectionTarget=<same>
+          $this: GET_VAR 'foo: <root>.SetNullableGetNotNull declared in <root>.funSetNullableGetNotNullGet' type=<root>.SetNullableGetNotNull origin=null
+  FUN name:funSetNullableGetNotNullSet visibility:public modality:FINAL <> (foo:<root>.SetNullableGetNotNull) returnType:kotlin.reflect.KFunction1<kotlin.Int?, kotlin.Unit>
+    VALUE_PARAMETER name:foo index:0 type:<root>.SetNullableGetNotNull
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun funSetNullableGetNotNullSet (foo: <root>.SetNullableGetNotNull): kotlin.reflect.KFunction1<kotlin.Int?, kotlin.Unit> declared in <root>'
+        FUNCTION_REFERENCE 'public/*package*/ open fun setFoo (newFoo: kotlin.Int?): kotlin.Unit declared in <root>.SetNullableGetNotNull' type=kotlin.reflect.KFunction1<kotlin.Int?, kotlin.Unit> origin=null reflectionTarget=<same>
+          $this: GET_VAR 'foo: <root>.SetNullableGetNotNull declared in <root>.funSetNullableGetNotNullSet' type=<root>.SetNullableGetNotNull origin=null
+  FUN name:funSetNullableGetNotNullField visibility:public modality:FINAL <> (foo:<root>.SetNullableGetNotNull) returnType:kotlin.Int
+    VALUE_PARAMETER name:foo index:0 type:<root>.SetNullableGetNotNull
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun funSetNullableGetNotNullField (foo: <root>.SetNullableGetNotNull): kotlin.Int declared in <root>'
+        TYPE_OP type=kotlin.Int origin=IMPLICIT_NOTNULL typeOperand=kotlin.Int
+          CALL 'public/*package*/ open fun getFoo (): @[EnhancedNullability] kotlin.Int declared in <root>.SetNullableGetNotNull' type=@[EnhancedNullability] kotlin.Int origin=GET_PROPERTY
+            $this: GET_VAR 'foo: <root>.SetNullableGetNotNull declared in <root>.funSetNullableGetNotNullField' type=<root>.SetNullableGetNotNull origin=null

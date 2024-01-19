@@ -1,0 +1,19 @@
+package test
+
+// CHECK JVM_IR:
+//   Mangled name: test#entries(java.util.HashMap<kotlin.String,kotlin.Int>){}kotlin.collections.MutableSet<kotlin.collections.MutableMap.MutableEntry<kotlin.String{EnhancedNullability},kotlin.Int{EnhancedNullability}>{EnhancedNullability}>
+//   Public signature: test/entries|-1409161031648152843[0]
+//   Public signature debug description: entries(java.util.HashMap<kotlin.String,kotlin.Int>){}kotlin.collections.MutableSet<kotlin.collections.MutableMap.MutableEntry<kotlin.String{EnhancedNullability},kotlin.Int{EnhancedNullability}>{EnhancedNullability}>
+fun entries(map: HashMap<String, Int>): MutableSet<@EnhancedNullability MutableEntry<@EnhancedNullability String, @EnhancedNullability Int>>
+
+// CHECK JVM_IR:
+//   Mangled name: test#keys(java.util.HashMap<kotlin.String,kotlin.Int>){}kotlin.collections.MutableSet<kotlin.String{EnhancedNullability}>
+//   Public signature: test/keys|-8906675245575110753[0]
+//   Public signature debug description: keys(java.util.HashMap<kotlin.String,kotlin.Int>){}kotlin.collections.MutableSet<kotlin.String{EnhancedNullability}>
+fun keys(map: HashMap<String, Int>): MutableSet<@EnhancedNullability String>
+
+// CHECK JVM_IR:
+//   Mangled name: test#value(java.util.HashMap<kotlin.String,kotlin.Int>){}kotlin.collections.MutableCollection<kotlin.Int{EnhancedNullability}>
+//   Public signature: test/value|7014558520686771666[0]
+//   Public signature debug description: value(java.util.HashMap<kotlin.String,kotlin.Int>){}kotlin.collections.MutableCollection<kotlin.Int{EnhancedNullability}>
+fun value(map: HashMap<String, Int>): MutableCollection<@EnhancedNullability Int>

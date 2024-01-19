@@ -61,7 +61,7 @@ import org.jetbrains.kotlin.utils.exceptions.errorWithAttachment
 class FirSignatureEnhancement(
     private val owner: FirRegularClass,
     private val session: FirSession,
-    private val overridden: FirSimpleFunction.() -> List<FirCallableDeclaration>
+    private val overridden: FirCallableDeclaration.() -> List<FirCallableDeclaration>
 ) {
     /*
      * FirSignatureEnhancement may be created with library session which doesn't have single module data,
@@ -163,16 +163,37 @@ class FirSignatureEnhancement(
                 val accessorSymbol = firElement.symbol
                 val getterDelegate = firElement.getter.delegate
                 val enhancedGetterSymbol = if (getterDelegate.isJava) {
+                    // Enhance the return type separately from getter to be able to pass overrides from property
+                    val overriddenMembers = firElement.overridden()
+                    val enhancedReturnType = enhanceReturnType(
+                        getterDelegate, overriddenMembers, getterDelegate.computeDefaultQualifiers(),
+                        predefinedEnhancementInfo = null
+                    )
+                    getterDelegate.replaceReturnTypeRef(enhancedReturnType)
+
+                    // And remember to enhance getter as a whole, otherwise we could miss match override from superclass
                     enhancementsCache.enhancedFunctions.getValue(getterDelegate.symbol, this to getterDelegate.name)
                 } else {
                     getterDelegate.symbol
                 }
+
                 val setterDelegate = firElement.setter?.delegate
                 val enhancedSetterSymbol = if (setterDelegate?.isJava == true) {
+                    val overriddenMembers = firElement.overridden()
+                    val valueParameter = setterDelegate.valueParameters.single() as FirJavaValueParameter
+                    val enhancedValueParameterType = enhanceValueParameterType(
+                        setterDelegate, overriddenMembers, hasReceiver = false, setterDelegate.computeDefaultQualifiers(),
+                        predefinedEnhancementInfo = null,
+                        valueParameter, 0,
+                    )
+                    valueParameter.replaceReturnTypeRef(enhancedValueParameterType)
+                    setterDelegate.replaceReturnTypeRef(session.builtinTypes.unitType)
+
                     enhancementsCache.enhancedFunctions.getValue(setterDelegate.symbol, this to setterDelegate.name)
                 } else {
                     setterDelegate?.symbol
                 }
+
                 if (!getterDelegate.isJava && setterDelegate?.isJava != true) {
                     return original
                 }
@@ -643,10 +664,11 @@ class FirSignatureEnhancement(
 
         class ValueParameter(val hasReceiver: Boolean, val index: Int) : TypeInSignature() {
             override fun getTypeRef(member: FirCallableDeclaration): FirTypeRef {
-                if (hasReceiver && member is FirSimpleFunction && member.isJava) {
-                    return member.valueParameters[index + 1].returnTypeRef
+                return when {
+                    hasReceiver && member is FirSimpleFunction && member.isJava -> member.valueParameters[index + 1].returnTypeRef
+                    member is FirProperty -> member.setter!!.valueParameters.single().returnTypeRef
+                    else -> (member as FirFunction).valueParameters[index].returnTypeRef
                 }
-                return (member as FirFunction).valueParameters[index].returnTypeRef
             }
         }
     }

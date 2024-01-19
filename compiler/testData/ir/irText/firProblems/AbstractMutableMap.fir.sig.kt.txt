@@ -144,12 +144,12 @@ class MyMap<K : Any, V : Any> : AbstractMutableMap<K, V> {
   //   Mangled name: MyMap{}keys
   //   Public signature: /MyMap.keys|-1539062068328255324[0]
   //   Public signature debug description: {}keys
-  /* fake */ override val keys: MutableSet<K?>?
+  /* fake */ override val keys: @EnhancedNullability MutableSet<K?>
     // CHECK JVM_IR:
-    //   Mangled name: MyMap#<get-keys>(){}kotlin.collections.MutableSet<1:0?>?
-    //   Public signature: /MyMap.keys.<get-keys>|-1655820107680360252[0]
-    //   Public signature debug description: <get-keys>(){}kotlin.collections.MutableSet<1:0?>?
-    /* fake */ override get(): MutableSet<K?>?
+    //   Mangled name: MyMap#<get-keys>(){}kotlin.collections.MutableSet<1:0?>{EnhancedNullability}
+    //   Public signature: /MyMap.keys.<get-keys>|649304329200166856[0]
+    //   Public signature debug description: <get-keys>(){}kotlin.collections.MutableSet<1:0?>{EnhancedNullability}
+    /* fake */ override get(): @EnhancedNullability MutableSet<K?>
 
   // CHECK:
   //   Mangled name: MyMap{}size
@@ -166,12 +166,12 @@ class MyMap<K : Any, V : Any> : AbstractMutableMap<K, V> {
   //   Mangled name: MyMap{}values
   //   Public signature: /MyMap.values|-764749005844117249[0]
   //   Public signature debug description: {}values
-  /* fake */ override val values: MutableCollection<V?>?
+  /* fake */ override val values: @EnhancedNullability MutableCollection<V?>
     // CHECK JVM_IR:
-    //   Mangled name: MyMap#<get-values>(){}kotlin.collections.MutableCollection<1:1?>?
-    //   Public signature: /MyMap.values.<get-values>|-600458440523652989[0]
-    //   Public signature debug description: <get-values>(){}kotlin.collections.MutableCollection<1:1?>?
-    /* fake */ override get(): MutableCollection<V?>?
+    //   Mangled name: MyMap#<get-values>(){}kotlin.collections.MutableCollection<1:1?>{EnhancedNullability}
+    //   Public signature: /MyMap.values.<get-values>|7096132650747533268[0]
+    //   Public signature debug description: <get-values>(){}kotlin.collections.MutableCollection<1:1?>{EnhancedNullability}
+    /* fake */ override get(): @EnhancedNullability MutableCollection<V?>
 
   // CHECK:
   //   Mangled name: MyMap{}entries

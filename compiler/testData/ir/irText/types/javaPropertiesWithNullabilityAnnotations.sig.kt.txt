@@ -1,0 +1,71 @@
+// CHECK JVM_IR:
+//   Mangled name: #funGetNullableField(GetNullable){}kotlin.Int?
+//   Public signature: /funGetNullableField|8503688791411359096[0]
+//   Public signature debug description: funGetNullableField(GetNullable){}kotlin.Int?
+fun funGetNullableField(foo: GetNullable): Int?
+
+// CHECK JVM_IR:
+//   Mangled name: #funGetNullableGet(GetNullable){}kotlin.reflect.KFunction0<kotlin.Int?{EnhancedNullability}>
+//   Public signature: /funGetNullableGet|8547622094821586729[0]
+//   Public signature debug description: funGetNullableGet(GetNullable){}kotlin.reflect.KFunction0<kotlin.Int?{EnhancedNullability}>
+fun funGetNullableGet(foo: GetNullable): KFunction0<@EnhancedNullability Int?>
+
+// CHECK JVM_IR:
+//   Mangled name: #funGetNullableSet(GetNullable){}kotlin.reflect.KFunction1<kotlin.Int?,kotlin.Unit>
+//   Public signature: /funGetNullableSet|-8269756856111687794[0]
+//   Public signature debug description: funGetNullableSet(GetNullable){}kotlin.reflect.KFunction1<kotlin.Int?,kotlin.Unit>
+fun funGetNullableSet(foo: GetNullable): KFunction1<Int?, Unit>
+
+// CHECK JVM_IR:
+//   Mangled name: #funGetNullableSetNotNullField(GetNullableSetNotNull){}kotlin.Int?
+//   Public signature: /funGetNullableSetNotNullField|-3926839506491682816[0]
+//   Public signature debug description: funGetNullableSetNotNullField(GetNullableSetNotNull){}kotlin.Int?
+fun funGetNullableSetNotNullField(foo: GetNullableSetNotNull): Int?
+
+// CHECK JVM_IR:
+//   Mangled name: #funGetNullableSetNotNullGet(GetNullableSetNotNull){}kotlin.reflect.KFunction0<kotlin.Int?{EnhancedNullability}>
+//   Public signature: /funGetNullableSetNotNullGet|5220837964798877374[0]
+//   Public signature debug description: funGetNullableSetNotNullGet(GetNullableSetNotNull){}kotlin.reflect.KFunction0<kotlin.Int?{EnhancedNullability}>
+fun funGetNullableSetNotNullGet(foo: GetNullableSetNotNull): KFunction0<@EnhancedNullability Int?>
+
+// CHECK JVM_IR:
+//   Mangled name: #funGetNullableSetNotNullSet(GetNullableSetNotNull){}kotlin.reflect.KFunction1<kotlin.Int,kotlin.Unit>
+//   Public signature: /funGetNullableSetNotNullSet|-1896634589242061287[0]
+//   Public signature debug description: funGetNullableSetNotNullSet(GetNullableSetNotNull){}kotlin.reflect.KFunction1<kotlin.Int,kotlin.Unit>
+fun funGetNullableSetNotNullSet(foo: GetNullableSetNotNull): KFunction1<Int, Unit>
+
+// CHECK JVM_IR:
+//   Mangled name: #funSetNullableField(SetNullable){}kotlin.Int?
+//   Public signature: /funSetNullableField|-2012595013426854218[0]
+//   Public signature debug description: funSetNullableField(SetNullable){}kotlin.Int?
+fun funSetNullableField(foo: SetNullable): Int?
+
+// CHECK JVM_IR:
+//   Mangled name: #funSetNullableGet(SetNullable){}kotlin.reflect.KFunction0<kotlin.Int?>
+//   Public signature: /funSetNullableGet|1168232548652395126[0]
+//   Public signature debug description: funSetNullableGet(SetNullable){}kotlin.reflect.KFunction0<kotlin.Int?>
+fun funSetNullableGet(foo: SetNullable): KFunction0<Int?>
+
+// CHECK JVM_IR:
+//   Mangled name: #funSetNullableGetNotNullField(SetNullableGetNotNull){}kotlin.Int
+//   Public signature: /funSetNullableGetNotNullField|-2283343745096964053[0]
+//   Public signature debug description: funSetNullableGetNotNullField(SetNullableGetNotNull){}kotlin.Int
+fun funSetNullableGetNotNullField(foo: SetNullableGetNotNull): Int
+
+// CHECK JVM_IR:
+//   Mangled name: #funSetNullableGetNotNullGet(SetNullableGetNotNull){}kotlin.reflect.KFunction0<kotlin.Int{EnhancedNullability}>
+//   Public signature: /funSetNullableGetNotNullGet|3053636658862879979[0]
+//   Public signature debug description: funSetNullableGetNotNullGet(SetNullableGetNotNull){}kotlin.reflect.KFunction0<kotlin.Int{EnhancedNullability}>
+fun funSetNullableGetNotNullGet(foo: SetNullableGetNotNull): KFunction0<@EnhancedNullability Int>
+
+// CHECK JVM_IR:
+//   Mangled name: #funSetNullableGetNotNullSet(SetNullableGetNotNull){}kotlin.reflect.KFunction1<kotlin.Int?,kotlin.Unit>
+//   Public signature: /funSetNullableGetNotNullSet|7974000923559538697[0]
+//   Public signature debug description: funSetNullableGetNotNullSet(SetNullableGetNotNull){}kotlin.reflect.KFunction1<kotlin.Int?,kotlin.Unit>
+fun funSetNullableGetNotNullSet(foo: SetNullableGetNotNull): KFunction1<Int?, Unit>
+
+// CHECK JVM_IR:
+//   Mangled name: #funSetNullableSet(SetNullable){}kotlin.reflect.KFunction1<kotlin.Int?,kotlin.Unit>
+//   Public signature: /funSetNullableSet|-5319218295425864441[0]
+//   Public signature debug description: funSetNullableSet(SetNullable){}kotlin.reflect.KFunction1<kotlin.Int?,kotlin.Unit>
+fun funSetNullableSet(foo: SetNullable): KFunction1<Int?, Unit>

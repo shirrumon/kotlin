@@ -1,0 +1,13 @@
+package test
+
+fun entries(map: HashMap<String, Int>): MutableSet<@EnhancedNullability MutableEntry<@EnhancedNullability String, @EnhancedNullability Int>> {
+  return map.<get-entries>() /*!! MutableSet<@EnhancedNullability MutableEntry<@EnhancedNullability String, @EnhancedNullability Int>> */
+}
+
+fun keys(map: HashMap<String, Int>): MutableSet<@EnhancedNullability String> {
+  return map.<get-keys>() /*!! MutableSet<@EnhancedNullability String> */
+}
+
+fun value(map: HashMap<String, Int>): MutableCollection<@EnhancedNullability Int> {
+  return map.<get-values>() /*!! MutableCollection<@EnhancedNullability Int> */
+}

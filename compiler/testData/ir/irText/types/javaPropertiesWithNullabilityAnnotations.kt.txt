@@ -1,0 +1,48 @@
+fun funGetNullableGet(foo: GetNullable): KFunction0<@EnhancedNullability Int?> {
+  return foo::getFoo
+}
+
+fun funGetNullableSet(foo: GetNullable): KFunction1<@ParameterName(name = "newFoo") @FlexibleNullability Int?, Unit> {
+  return foo::setFoo
+}
+
+fun funGetNullableField(foo: GetNullable): Int? {
+  return foo.getFoo()
+}
+
+fun funSetNullableGet(foo: SetNullable): KFunction0<@FlexibleNullability Int?> {
+  return foo::getFoo
+}
+
+fun funSetNullableSet(foo: SetNullable): KFunction1<@ParameterName(name = "newFoo") Int?, Unit> {
+  return foo::setFoo
+}
+
+fun funSetNullableField(foo: SetNullable): @FlexibleNullability Int? {
+  return foo.getFoo()
+}
+
+fun funGetNullableSetNotNullGet(foo: GetNullableSetNotNull): KFunction0<@EnhancedNullability Int?> {
+  return foo::getFoo
+}
+
+fun funGetNullableSetNotNullSet(foo: GetNullableSetNotNull): KFunction1<@ParameterName(name = "newFoo") Int, Unit> {
+  return foo::setFoo
+}
+
+fun funGetNullableSetNotNullField(foo: GetNullableSetNotNull): Int? {
+  return foo.getFoo()
+}
+
+fun funSetNullableGetNotNullGet(foo: SetNullableGetNotNull): KFunction0<@EnhancedNullability Int> {
+  return foo::getFoo
+}
+
+fun funSetNullableGetNotNullSet(foo: SetNullableGetNotNull): KFunction1<@ParameterName(name = "newFoo") Int?, Unit> {
+  return foo::setFoo
+}
+
+fun funSetNullableGetNotNullField(foo: SetNullableGetNotNull): Int {
+  return foo.getFoo() /*!! Int */
+}
+

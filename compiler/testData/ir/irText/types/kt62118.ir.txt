@@ -1,0 +1,22 @@
+FILE fqName:test fileName:/kt62118.kt
+  FUN name:entries visibility:public modality:FINAL <> (map:java.util.HashMap<kotlin.String, kotlin.Int>) returnType:kotlin.collections.MutableSet<@[EnhancedNullability] kotlin.collections.MutableMap.MutableEntry<@[EnhancedNullability] kotlin.String, @[EnhancedNullability] kotlin.Int>>
+    VALUE_PARAMETER name:map index:0 type:java.util.HashMap<kotlin.String, kotlin.Int>
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun entries (map: java.util.HashMap<kotlin.String, kotlin.Int>): kotlin.collections.MutableSet<@[EnhancedNullability] kotlin.collections.MutableMap.MutableEntry<@[EnhancedNullability] kotlin.String, @[EnhancedNullability] kotlin.Int>> declared in test'
+        TYPE_OP type=kotlin.collections.MutableSet<@[EnhancedNullability] kotlin.collections.MutableMap.MutableEntry<@[EnhancedNullability] kotlin.String, @[EnhancedNullability] kotlin.Int>> origin=IMPLICIT_NOTNULL typeOperand=kotlin.collections.MutableSet<@[EnhancedNullability] kotlin.collections.MutableMap.MutableEntry<@[EnhancedNullability] kotlin.String, @[EnhancedNullability] kotlin.Int>>
+          CALL 'public open fun <get-entries> (): @[EnhancedNullability] kotlin.collections.MutableSet<@[EnhancedNullability] kotlin.collections.MutableMap.MutableEntry<@[EnhancedNullability] K of java.util.HashMap, @[EnhancedNullability] V of java.util.HashMap>> declared in java.util.HashMap' type=@[EnhancedNullability] kotlin.collections.MutableSet<@[EnhancedNullability] kotlin.collections.MutableMap.MutableEntry<@[EnhancedNullability] kotlin.String, @[EnhancedNullability] kotlin.Int>> origin=GET_PROPERTY
+            $this: GET_VAR 'map: java.util.HashMap<kotlin.String, kotlin.Int> declared in test.entries' type=java.util.HashMap<kotlin.String, kotlin.Int> origin=null
+  FUN name:keys visibility:public modality:FINAL <> (map:java.util.HashMap<kotlin.String, kotlin.Int>) returnType:kotlin.collections.MutableSet<@[EnhancedNullability] kotlin.String>
+    VALUE_PARAMETER name:map index:0 type:java.util.HashMap<kotlin.String, kotlin.Int>
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun keys (map: java.util.HashMap<kotlin.String, kotlin.Int>): kotlin.collections.MutableSet<@[EnhancedNullability] kotlin.String> declared in test'
+        TYPE_OP type=kotlin.collections.MutableSet<@[EnhancedNullability] kotlin.String> origin=IMPLICIT_NOTNULL typeOperand=kotlin.collections.MutableSet<@[EnhancedNullability] kotlin.String>
+          CALL 'public open fun <get-keys> (): @[EnhancedNullability] kotlin.collections.MutableSet<@[EnhancedNullability] K of java.util.HashMap> declared in java.util.HashMap' type=@[EnhancedNullability] kotlin.collections.MutableSet<@[EnhancedNullability] kotlin.String> origin=GET_PROPERTY
+            $this: GET_VAR 'map: java.util.HashMap<kotlin.String, kotlin.Int> declared in test.keys' type=java.util.HashMap<kotlin.String, kotlin.Int> origin=null
+  FUN name:value visibility:public modality:FINAL <> (map:java.util.HashMap<kotlin.String, kotlin.Int>) returnType:kotlin.collections.MutableCollection<@[EnhancedNullability] kotlin.Int>
+    VALUE_PARAMETER name:map index:0 type:java.util.HashMap<kotlin.String, kotlin.Int>
+    BLOCK_BODY
+      RETURN type=kotlin.Nothing from='public final fun value (map: java.util.HashMap<kotlin.String, kotlin.Int>): kotlin.collections.MutableCollection<@[EnhancedNullability] kotlin.Int> declared in test'
+        TYPE_OP type=kotlin.collections.MutableCollection<@[EnhancedNullability] kotlin.Int> origin=IMPLICIT_NOTNULL typeOperand=kotlin.collections.MutableCollection<@[EnhancedNullability] kotlin.Int>
+          CALL 'public open fun <get-values> (): @[EnhancedNullability] kotlin.collections.MutableCollection<@[EnhancedNullability] V of java.util.HashMap> declared in java.util.HashMap' type=@[EnhancedNullability] kotlin.collections.MutableCollection<@[EnhancedNullability] kotlin.Int> origin=GET_PROPERTY
+            $this: GET_VAR 'map: java.util.HashMap<kotlin.String, kotlin.Int> declared in test.value' type=java.util.HashMap<kotlin.String, kotlin.Int> origin=null
