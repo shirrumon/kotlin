@@ -636,7 +636,7 @@ open class SerializationPluginDeclarationChecker : DeclarationChecker {
         val isExternalSerializer = serializerDescriptor.serializerForClass != null
         if ( // for external serializer, the verification will be carried out at the definition
             !isExternalSerializer
-            // it is allowed that parameters con not be passed in regular serializers at all
+            // it is allowed that parameters are not passed to regular serializers at all
             && primaryConstructor.valueParameters.isNotEmpty()
             // if the parameters are still specified, then their number must match in the serializable class and constructor
             && primaryConstructor.valueParameters.size != serializableType.arguments.size
