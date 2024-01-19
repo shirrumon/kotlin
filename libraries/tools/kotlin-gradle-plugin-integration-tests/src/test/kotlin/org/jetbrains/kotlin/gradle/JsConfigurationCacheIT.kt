@@ -130,10 +130,13 @@ abstract class JsIrConfigurationCacheIT : KGPBaseTest() {
     @GradleTest
     fun testTestDependenciesYarnLock(gradleVersion: GradleVersion) {
         project("kotlin-js-project-with-test-dependencies", gradleVersion) {
-            applyYarn()
             assertSimpleConfigurationCacheScenarioWorks(
                 "assemble", "kotlinStoreYarnLock",
-                buildOptions = defaultBuildOptions,
+                buildOptions = defaultBuildOptions.copy(
+                    jsOptions = defaultBuildOptions.jsOptions?.copy(
+                        yarn = true
+                    )
+                ),
                 executedTaskNames = listOf(":rootPackageJson")
             )
         }

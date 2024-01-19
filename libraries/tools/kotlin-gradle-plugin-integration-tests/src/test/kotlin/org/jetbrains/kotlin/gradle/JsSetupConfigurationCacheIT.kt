@@ -37,8 +37,15 @@ class JsSetupConfigurationCacheIT : KGPBaseTest() {
     @DisplayName("Check Node.JS setup on different platforms with Yarn")
     @GradleTest
     fun checkNodeJsSetupYarn(gradleVersion: GradleVersion) {
-        project("kotlin-js-browser-project", gradleVersion) {
-            applyYarn()
+        project(
+            "kotlin-js-browser-project",
+            gradleVersion,
+            buildOptions = defaultBuildOptions.copy(
+                jsOptions = defaultBuildOptions.jsOptions?.copy(
+                    yarn = true
+                )
+            )
+        ) {
             checkNodeJsSetup("kotlinUpgradeYarnLock")
         }
     }
