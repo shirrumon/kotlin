@@ -12,6 +12,7 @@ import org.jetbrains.kotlin.fir.*
 import org.jetbrains.kotlin.fir.caches.*
 import org.jetbrains.kotlin.fir.declarations.FirDeclarationOrigin
 import org.jetbrains.kotlin.fir.declarations.FirMemberDeclaration
+import org.jetbrains.kotlin.fir.declarations.FirResolvedDeclarationStatus
 import org.jetbrains.kotlin.fir.declarations.FirVariable
 import org.jetbrains.kotlin.fir.declarations.utils.isExpect
 import org.jetbrains.kotlin.fir.declarations.utils.modality
@@ -24,6 +25,7 @@ import org.jetbrains.kotlin.fir.symbols.impl.*
 import org.jetbrains.kotlin.fir.types.*
 import org.jetbrains.kotlin.name.CallableId
 import org.jetbrains.kotlin.name.Name
+import org.jetbrains.kotlin.name.StandardClassIds
 import org.jetbrains.kotlin.utils.addToStdlib.runIf
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
@@ -347,17 +349,45 @@ class FirTypeIntersectionScopeContext(
 
     private fun <D : FirCallableSymbol<*>> chooseIntersectionVisibility(
         extractedOverrides: Collection<MemberWithBaseScope<D>>
-    ): Visibility {
+    ): Visibility = chooseIntersectionVisibilityOrNull(extractedOverrides) ?: Visibilities.Unknown
+
+    private fun <D : FirCallableSymbol<*>> chooseIntersectionVisibilityOrNull(
+        extractedOverrides: Collection<MemberWithBaseScope<D>>
+    ): Visibility? {
+        val nonAbstract = extractedOverrides.filter {
+            require(it.member.rawStatus is FirResolvedDeclarationStatus) {
+                "We expect that to be true already, but we can't yet call resolvedStatus"
+            }
+            // Kotlin's Cloneable interface contains phantom `protected open fun clone()`.
+            it.member.rawStatus.modality != Modality.ABSTRACT && it.member.callableId != StandardClassIds.Callables.clone
+        }
+        val allAreAbstract = nonAbstract.isEmpty()
+
+        if (allAreAbstract) {
+            return findMaxVisibilityOrNull(extractedOverrides)
+        }
+
+        if (nonAbstract.size >= 2) {
+            return null
+        }
+
+        return nonAbstract.single().member.rawStatus.visibility
+    }
+
+    private fun <D : FirCallableSymbol<*>> findMaxVisibilityOrNull(
+        extractedOverrides: Collection<MemberWithBaseScope<D>>
+    ): Visibility? {
         var maxVisibility: Visibility = Visibilities.Private
+
         for ((override) in extractedOverrides) {
             val visibility = (override.fir as FirMemberDeclaration).visibility
-            // TODO: There is more complex logic at org.jetbrains.kotlin.resolve.OverridingUtil.resolveUnknownVisibilityForMember
-            // TODO: and org.jetbrains.kotlin.resolve.OverridingUtil.findMaxVisibility
-            val compare = Visibilities.compare(visibility, maxVisibility) ?: return Visibilities.DEFAULT_VISIBILITY
+            val compare = Visibilities.compare(visibility, maxVisibility) ?: return null
+
             if (compare > 0) {
                 maxVisibility = visibility
             }
         }
+
         return maxVisibility
     }
 

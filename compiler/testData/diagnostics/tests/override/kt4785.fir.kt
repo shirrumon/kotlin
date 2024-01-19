@@ -6,6 +6,6 @@ open class C {
     protected fun foo() {}
 }
 
-class E : C(), T
+class <!CANNOT_WEAKEN_ACCESS_PRIVILEGE!>E<!> : C(), T
 
-val z: T = object : C(), T {}
+val z: T = <!CANNOT_WEAKEN_ACCESS_PRIVILEGE!>object<!> : C(), T {}
