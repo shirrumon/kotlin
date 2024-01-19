@@ -1262,8 +1262,8 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
                 """
                 |
                 |dependencies {
-                |     implementation(files("${"$"}{projectDir}/custom"))
-                |     implementation(files("${"$"}{projectDir}/custom2"))
+                |     jsMainImplementation(files("${"$"}{projectDir}/custom"))
+                |     jsMainImplementation(files("${"$"}{projectDir}/custom2"))
                 |}
                 """.trimMargin()
             )
@@ -1410,7 +1410,7 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
                 it + "\n" +
                         """
                         dependencies {
-                            implementation(npm("decamelize", "6.0.0"))
+                            "jsMainImplementation"(npm("decamelize", "6.0.0"))
                         }
                             
                         rootProject.plugins.withType(org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin::class.java) {
@@ -1434,7 +1434,7 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
             }
 
             buildGradleKts.modify {
-                val replaced = it.replace("implementation(npm(\"decamelize\", \"6.0.0\"))", "")
+                val replaced = it.replace("\"jsMainImplementation\"(npm(\"decamelize\", \"6.0.0\"))", "")
                 replaced + "\n" +
                         """
                         rootProject.plugins.withType(org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin::class.java) {
@@ -1458,7 +1458,7 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
                 it + "\n" +
                         """
                         dependencies {
-                            implementation(npm("decamelize", "6.0.0"))
+                            "jsMainImplementation"(npm("decamelize", "6.0.0"))
                         }
                             
                         rootProject.plugins.withType(org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin::class.java) {
@@ -1479,7 +1479,7 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
             }
 
             buildGradleKts.modify {
-                it.replace("implementation(npm(\"decamelize\", \"6.0.0\"))", "")
+                it.replace("\"jsMainImplementation\"(npm(\"decamelize\", \"6.0.0\"))", "")
             }
 
             projectPath.resolve("kotlin-js-store").deleteRecursively()
@@ -1506,7 +1506,7 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
                 it + "\n" +
                         """
                         dependencies {
-                            implementation(npm("decamelize", "6.0.0"))
+                            "jsMainImplementation"(npm("decamelize", "6.0.0"))
                         }
                             
                         rootProject.plugins.withType(org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin::class.java) {
@@ -1528,7 +1528,7 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
             }
 
             buildGradleKts.modify {
-                it.replace("implementation(npm(\"decamelize\", \"6.0.0\"))", "")
+                it.replace("\"jsMainImplementation\"(npm(\"decamelize\", \"6.0.0\"))", "")
             }
 
             // check if everything ok without build/js/yarn.lock
@@ -1673,7 +1673,7 @@ class Kotlin2JsIrGradlePluginIT : KGPBaseTest() {
                 it + "\n" +
                         """
                         dependencies {
-                            implementation(npm("puppeteer", "11.0.0"))
+                            "jsMainImplementation"(npm("puppeteer", "11.0.0"))
                         }
                         """.trimIndent()
             }
