@@ -200,7 +200,7 @@ object KtDefaultErrorMessagesSerialization : BaseDiagnosticRendererFactory() {
 
         put(
             FirSerializationErrors.EXTERNAL_SERIALIZER_NO_SUITABLE_CONSTRUCTOR,
-            "Cannot generate external serializer ''{0}'': it must have a constructor with three {2} value parameters, because class ''{1}'' has type parameters",
+            "Cannot generate external serializer ''{0}'': it must have a constructor with {2} value parameters, because class ''{1}'' has type parameters",
             FirDiagnosticRenderers.SYMBOL,
             FirDiagnosticRenderers.RENDER_TYPE,
             CommonRenderers.STRING
