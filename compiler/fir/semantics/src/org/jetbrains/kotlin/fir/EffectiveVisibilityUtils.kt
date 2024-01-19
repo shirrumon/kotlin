@@ -37,6 +37,8 @@ fun Visibility.toEffectiveVisibility(
         }
         Visibilities.Public -> EffectiveVisibility.Public
         Visibilities.Local -> EffectiveVisibility.Local
+        // Unknown visibility should
+        Visibilities.Unknown -> EffectiveVisibility.Public
         else -> errorWithAttachment("Unknown visibility: $this") {
             withFirLookupTagEntry("owner", owner)
         }
