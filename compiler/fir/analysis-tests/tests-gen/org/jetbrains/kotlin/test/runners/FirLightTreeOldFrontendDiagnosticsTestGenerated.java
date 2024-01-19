@@ -22474,6 +22474,12 @@ public class FirLightTreeOldFrontendDiagnosticsTestGenerated extends AbstractFir
                 }
 
                 @Test
+                @TestMetadata("charAtAndOverload.kt")
+                public void testCharAtAndOverload() throws Exception {
+                    runTest("compiler/testData/diagnostics/tests/j+k/collectionOverrides/charAtAndOverload.kt");
+                }
+
+                @Test
                 @TestMetadata("charBuffer.kt")
                 public void testCharBuffer() throws Exception {
                     runTest("compiler/testData/diagnostics/tests/j+k/collectionOverrides/charBuffer.kt");
