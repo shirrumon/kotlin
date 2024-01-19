@@ -5,6 +5,9 @@
 
 package org.jetbrains.kotlinx.serialization.compiler.diagnostic
 
+import com.intellij.psi.PsiElement
+import org.jetbrains.kotlin.diagnostics.DiagnosticFactory0
+import org.jetbrains.kotlin.diagnostics.Severity
 import org.jetbrains.kotlin.diagnostics.rendering.CommonRenderers
 import org.jetbrains.kotlin.diagnostics.rendering.DefaultErrorMessages
 import org.jetbrains.kotlin.diagnostics.rendering.DiagnosticFactoryToRendererMap
@@ -193,6 +196,16 @@ object SerializationPluginErrorsRendering : DefaultErrorMessages.Extension {
             "Cannot generate external serializer ''{0}'': class ''{1}'' is defined in another module",
             Renderers.RENDER_TYPE,
             Renderers.RENDER_TYPE
+        )
+
+        MAP.put(
+            SerializationErrors.KEEP_SERIALIZER_ANNOTATION_USELESS,
+            "@KeepGeneratedSerializer annotation is useless, it is acceptable to use it only on classes marked @Serializable(CustomSerializer)"
+        )
+
+        MAP.put(
+            SerializationErrors.KEEP_SERIALIZER_ANNOTATION_ON_POLYMORPHIC,
+            "@KeepGeneratedSerializer annotation not applicable for abstract or sealed classes and interfaces"
         )
     }
 }

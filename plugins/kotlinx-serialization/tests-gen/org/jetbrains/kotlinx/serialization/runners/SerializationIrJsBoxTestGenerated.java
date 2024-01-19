@@ -128,6 +128,12 @@ public class SerializationIrJsBoxTestGenerated extends AbstractSerializationIrJs
     }
 
     @Test
+    @TestMetadata("KeepGeneratedSerializer.kt")
+    public void testKeepGeneratedSerializer() throws Exception {
+        runTest("plugins/kotlinx-serialization/testData/boxIr/KeepGeneratedSerializer.kt");
+    }
+
+    @Test
     @TestMetadata("metaSerializable.kt")
     public void testMetaSerializable() throws Exception {
         runTest("plugins/kotlinx-serialization/testData/boxIr/metaSerializable.kt");

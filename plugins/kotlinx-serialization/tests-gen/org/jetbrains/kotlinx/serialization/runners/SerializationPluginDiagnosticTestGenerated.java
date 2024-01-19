@@ -85,6 +85,12 @@ public class SerializationPluginDiagnosticTestGenerated extends AbstractSerializ
     }
 
     @Test
+    @TestMetadata("KeepGeneratedSerializerDiagnostic.kt")
+    public void testKeepGeneratedSerializerDiagnostic() throws Exception {
+        runTest("plugins/kotlinx-serialization/testData/diagnostics/KeepGeneratedSerializerDiagnostic.kt");
+    }
+
+    @Test
     @TestMetadata("LazyRecursionBug.kt")
     public void testLazyRecursionBug() throws Exception {
         runTest("plugins/kotlinx-serialization/testData/diagnostics/LazyRecursionBug.kt");
