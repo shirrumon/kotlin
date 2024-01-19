@@ -128,7 +128,7 @@ class JsIrConfigurationCacheIT : KGPBaseTest() {
             build("jsNodeRun", buildOptions = buildOptions) {
                 assertTasksExecuted(":jsNodeRun")
                 assertOutputContains(
-                    "Calculating task graph as no configuration cache is available for tasks: nodeRun"
+                    "Calculating task graph as no configuration cache is available for tasks: jsNodeRun"
                 )
 
                 assertConfigurationCacheStored()
