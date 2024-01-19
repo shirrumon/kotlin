@@ -211,7 +211,7 @@ object SerializationPluginErrorsRendering : DefaultErrorMessages.Extension {
 
         MAP.put(
             SerializationErrors.EXTERNAL_SERIALIZER_NO_SUITABLE_CONSTRUCTOR,
-            "Cannot generate external serializer ''{0}'': it must have a constructor with three {2} value parameters, because class ''{1}'' has type parameters",
+            "Cannot generate external serializer ''{0}'': it must have a constructor with {2} value parameters, because class ''{1}'' has type parameters",
             Renderers.RENDER_TYPE,
             Renderers.RENDER_TYPE,
             CommonRenderers.STRING
