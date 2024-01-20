@@ -654,7 +654,7 @@ object FirSerializationPluginClassChecker : FirClassChecker() {
             && serializerForType.typeArguments.size != primaryConstructor.valueParameterSymbols.size
         ) {
             val message = if (serializerForType.typeArguments.isNotEmpty()) {
-                "expected no parameters or ${serializerForType.typeArguments.size}, but actual ${primaryConstructor.valueParameterSymbols.size}"
+                "expected no parameters or ${serializerForType.typeArguments.size}, but has ${primaryConstructor.valueParameterSymbols.size} parameters"
             } else {
                 "expected no parameters but has ${primaryConstructor.valueParameterSymbols.size} parameters"
             }
