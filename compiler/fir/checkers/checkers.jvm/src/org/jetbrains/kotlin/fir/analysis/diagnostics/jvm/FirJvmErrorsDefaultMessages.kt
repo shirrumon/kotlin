@@ -15,6 +15,7 @@ import org.jetbrains.kotlin.fir.analysis.diagnostics.FirDiagnosticRenderers.DECL
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirDiagnosticRenderers.OPTIONAL_SENTENCE
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirDiagnosticRenderers.RENDER_TYPE
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirDiagnosticRenderers.SYMBOL
+import org.jetbrains.kotlin.fir.analysis.diagnostics.jvm.FirJvmErrors.ACCIDENTAL_OVERRIDE_CLASH_BY_JVM_SIGNATURE
 import org.jetbrains.kotlin.fir.analysis.diagnostics.jvm.FirJvmErrors.CONCURRENT_HASH_MAP_CONTAINS_OPERATOR
 import org.jetbrains.kotlin.fir.analysis.diagnostics.jvm.FirJvmErrors.DELEGATION_BY_IN_JVM_RECORD
 import org.jetbrains.kotlin.fir.analysis.diagnostics.jvm.FirJvmErrors.DEPRECATED_JAVA_ANNOTATION
@@ -111,6 +112,13 @@ object FirJvmErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
         map.put(
             WRONG_NULLABILITY_FOR_JAVA_OVERRIDE,
             "Override ''{0}'' has incorrect nullability in its signature compared to the overridden declaration ''{1}''.",
+            SYMBOL,
+            SYMBOL,
+        )
+
+        map.put(
+            ACCIDENTAL_OVERRIDE_CLASH_BY_JVM_SIGNATURE,
+            "This function accidentally overrides two different base functions by JVM signature:\nregular ''{0}''\nhidden ''{1}''\nThus it can never be called.",
             SYMBOL,
             SYMBOL,
         )

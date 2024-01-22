@@ -3539,6 +3539,12 @@ sealed interface KtFirDiagnostic<PSI : PsiElement> : KtDiagnosticWithPsi<PSI> {
         val base: KtCallableSymbol
     }
 
+    interface AccidentalOverrideClashByJvmSignature : KtFirDiagnostic<KtNamedFunction> {
+        override val diagnosticClass get() = AccidentalOverrideClashByJvmSignature::class
+        val regular: KtFunctionLikeSymbol
+        val hidden: KtFunctionLikeSymbol
+    }
+
     interface JavaTypeMismatch : KtFirDiagnostic<KtExpression> {
         override val diagnosticClass get() = JavaTypeMismatch::class
         val expectedType: KtType
