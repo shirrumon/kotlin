@@ -13,6 +13,7 @@ import org.gradle.api.Action
 import org.gradle.api.attributes.AttributeContainer
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.TaskProvider
+import org.jetbrains.kotlin.cli.common.arguments.K2JsArgumentConstants
 import org.jetbrains.kotlin.gradle.dsl.JsModuleKind
 import org.jetbrains.kotlin.gradle.dsl.KotlinJsCompilerOptions
 import org.jetbrains.kotlin.gradle.dsl.KotlinJsOptions
@@ -107,11 +108,19 @@ open class KotlinJsCompilation @Inject internal constructor(
 val KotlinJsCompilation.fileExtension: Provider<String>
     get() {
         val isWasm = platformType == KotlinPlatformType.wasm
-        return compilerOptions.options.moduleKind.map { moduleKind ->
-            if (isWasm || moduleKind == JsModuleKind.MODULE_ES) {
-                "mjs"
-            } else {
-                "js"
+        return compilerOptions.options.moduleKind
+            .orElse(
+                compilerOptions.options.target.map {
+                    if (it == K2JsArgumentConstants.ES_2015) {
+                        JsModuleKind.MODULE_ES
+                    } else JsModuleKind.MODULE_UMD
+                }
+            )
+            .map { moduleKind ->
+                if (isWasm || moduleKind == JsModuleKind.MODULE_ES) {
+                    "mjs"
+                } else {
+                    "js"
+                }
             }
-        }
     }

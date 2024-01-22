@@ -223,7 +223,7 @@ class K2JsIrCompiler : CLICompiler<K2JSCompilerArguments>() {
         val moduleKind = configuration[JSConfigurationKeys.MODULE_KIND]
             ?: moduleKindMap[arguments.moduleKind]
             ?: ModuleKind.ES.takeIf { isES2015 }
-            ?: ModuleKind.PLAIN
+            ?: ModuleKind.UMD
 
         configurationJs.put(JSConfigurationKeys.MODULE_KIND, moduleKind)
         configurationJs.put(CLIConfigurationKeys.ALLOW_KOTLIN_PACKAGE, arguments.allowKotlinPackage)
@@ -234,10 +234,6 @@ class K2JsIrCompiler : CLICompiler<K2JSCompilerArguments>() {
         configurationJs.put(JSConfigurationKeys.GENERATE_INLINE_ANONYMOUS_FUNCTIONS, arguments.irGenerateInlineAnonymousFunctions)
         configurationJs.put(JSConfigurationKeys.USE_ES6_CLASSES, arguments.useEsClasses ?: isES2015)
         configurationJs.put(JSConfigurationKeys.COMPILE_SUSPEND_AS_JS_GENERATOR, arguments.useEsGenerators ?: isES2015)
-
-        if (configurationJs.get(JSConfigurationKeys.USE_ES6_CLASSES) != true) {
-            error("Unexpected value: ${configurationJs.get(JSConfigurationKeys.USE_ES6_CLASSES)}")
-        }
 
         arguments.platformArgumentsProviderJsExpression?.let {
             configurationJs.put(JSConfigurationKeys.DEFINE_PLATFORM_MAIN_FUNCTION_ARGUMENTS, it)
