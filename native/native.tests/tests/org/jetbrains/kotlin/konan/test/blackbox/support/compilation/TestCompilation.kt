@@ -378,6 +378,57 @@ internal class CInteropCompilation(
     }
 }
 
+internal class SwiftCompilation(
+    testRunSettings: Settings,
+    sources: List<File>,
+    expectedArtifact: Executable,
+    swiftExtraOpts: List<String>,
+) : TestCompilation<Executable>() {
+    override val result: TestCompilationResult<out Executable> by lazy {
+        val buildDir = testRunSettings.get<Binaries>().testBinariesDir
+        val options = swiftExtraOpts + listOf(
+            "-g",
+            "-Xlinker", "-rpath", "-Xlinker", "@executable_path/Frameworks",
+            "-Xlinker", "-rpath", "-Xlinker", buildDir.absolutePath,
+            "-F", buildDir.absolutePath,
+            "-Xcc", "-Werror" // To fail compilation on warnings in framework header.
+        )
+
+        val loggedSwiftCParameters = LoggedData.SwiftCParameters(extraArgs = options.toTypedArray(), sources = sources)
+        val (loggedCall: LoggedData, immediateResult: TestCompilationResult.ImmediateResult<out Executable>) = try {
+            val (exitCode, swiftcOutput, swiftcOutputHasErrors, duration) = invokeSwiftC(
+                testRunSettings,
+                sources,
+                expectedArtifact.executableFile,
+                options
+            )
+
+            val loggedSwiftCCall = LoggedData.CompilationToolCall(
+                toolName = "SWIFTC",
+                input = null,
+                parameters = loggedSwiftCParameters,
+                exitCode = exitCode,
+                toolOutput = swiftcOutput,
+                toolOutputHasErrors = swiftcOutputHasErrors,
+                duration = duration
+            )
+            val res = if (exitCode != ExitCode.OK || swiftcOutputHasErrors)
+                TestCompilationResult.CompilationToolFailure(loggedSwiftCCall)
+            else
+                TestCompilationResult.Success(expectedArtifact, loggedSwiftCCall)
+
+            loggedSwiftCCall to res
+        } catch (unexpectedThrowable: Throwable) {
+            val loggedFailure = LoggedData.CompilationToolCallUnexpectedFailure(loggedSwiftCParameters, unexpectedThrowable)
+            val res = TestCompilationResult.UnexpectedFailure(loggedFailure)
+
+            loggedFailure to res
+        }
+        expectedArtifact.logFile.writeText(loggedCall.toString())
+        immediateResult
+    }
+}
+
 internal class ExecutableCompilation(
     settings: Settings,
     freeCompilerArgs: TestCompilerArgs,

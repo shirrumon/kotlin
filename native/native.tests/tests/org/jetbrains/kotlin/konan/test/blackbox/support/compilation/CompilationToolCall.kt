@@ -10,8 +10,14 @@ import org.jetbrains.kotlin.cli.common.messages.*
 import org.jetbrains.kotlin.compilerRunner.OutputItemsCollectorImpl
 import org.jetbrains.kotlin.compilerRunner.processCompilerOutput
 import org.jetbrains.kotlin.config.Services
+import org.jetbrains.kotlin.konan.target.AppleConfigurables
+import org.jetbrains.kotlin.konan.target.HostManager
+import org.jetbrains.kotlin.konan.target.withOSVersion
 import org.jetbrains.kotlin.konan.test.blackbox.support.NativeTestSupport
 import org.jetbrains.kotlin.konan.test.blackbox.support.settings.KotlinNativeTargets
+import org.jetbrains.kotlin.konan.test.blackbox.support.settings.Settings
+import org.jetbrains.kotlin.konan.test.blackbox.support.settings.configurables
+import org.junit.jupiter.api.Assumptions
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.PrintStream
@@ -165,5 +171,72 @@ internal fun invokeCInterop(
             //      from C-interop tool invocation at the moment. This should be fixed in the future.
             CompilationToolCallResult(exitCode = ExitCode.OK, toolOutput = "", toolOutputHasErrors = false, duration)
         }
+    }
+}
+
+private data class HostExecutionOutput(val executablePath: String, var exitCode: Int, var duration: Duration, val stdOut: String, val stdErr: String)
+
+private fun executeHostProcess(executable: String, args: List<String> = listOf(), env: Map<String, String> = emptyMap()): HostExecutionOutput {
+    val processBuilder = ProcessBuilder(executable, *args.toTypedArray())
+        .redirectOutput(ProcessBuilder.Redirect.PIPE)
+        .redirectError(ProcessBuilder.Redirect.PIPE)
+    processBuilder.environment().putAll(env)
+    val process = processBuilder.start()
+    val (exitCode, duration) = measureTimedValue {
+        process.waitFor()
+    }
+    return HostExecutionOutput(
+        executable,
+        exitCode,
+        duration,
+        process.inputStream.bufferedReader().readText(),
+        process.errorStream.bufferedReader().readText(),
+    )
+}
+
+internal fun invokeSwiftC(
+    settings: Settings,
+    sources: List<File>,
+    outputExecutable: File,
+    extraArgs: List<String>,
+): CompilationToolCallResult {
+    val targets = settings.get<KotlinNativeTargets>()
+    assert(targets.testTarget.family.isAppleFamily)
+    val configs = settings.configurables as AppleConfigurables
+    val swiftCompiler = with(configs.absoluteTargetToolchain) {
+        // This is a follow up to the change "Consolidate toolchain paths between platforms" (3aeca1956e1a)
+        // The absoluteTargetToolchain has started to include usr subdir, but the bootstrap version still has the old path without.
+        this + if (this.endsWith("/usr")) "/bin/swiftc" else "/usr/bin/swiftc"
+    }
+    val swiftTarget = configs.targetTriple.withOSVersion(configs.osVersionMin).toString()
+
+    val args = listOf("-sdk", configs.absoluteTargetSysRoot, "-target", swiftTarget) +
+            extraArgs + listOf("-o", outputExecutable.absolutePath) + sources.map { it.absolutePath } +
+            listOf("-Xlinker", "-adhoc_codesign") // Linker doesn't do adhoc codesigning for tvOS arm64 simulator by default.
+
+    val processOutput = executeHostProcess(
+        swiftCompiler,
+        args,
+        env = mapOf("DYLD_FALLBACK_FRAMEWORK_PATH" to File(configs.absoluteTargetToolchain).resolveSibling("ExtraFrameworks").absolutePath))
+    val toolOutput = "STDOUT: ${processOutput.stdOut}\nSTDERR: ${processOutput.stdErr}"
+    return if (processOutput.exitCode != 0) {
+        CompilationToolCallResult(
+            exitCode = ExitCode.COMPILATION_ERROR,
+            toolOutput = "EXIT CODE of ${processOutput.executablePath} is ${processOutput.exitCode}\n$toolOutput",
+            toolOutputHasErrors = true,
+            processOutput.duration
+        )
+    } else CompilationToolCallResult(exitCode = ExitCode.OK, toolOutput = toolOutput, toolOutputHasErrors = false, processOutput.duration)
+}
+
+internal fun codesign(path: String) {
+    Assumptions.assumeTrue(HostManager.hostIsMac) { "Apple specific code signing is needed" }
+    val processOutput = executeHostProcess(executable = "/usr/bin/codesign", args = listOf("--verbose", "-s", "-", path))
+    check(processOutput.exitCode == 0) {
+        """
+        |Codesign failed with exitCode: ${processOutput.exitCode}
+        |stdout: ${processOutput.stdOut}
+        |stderr: ${processOutput.stdErr}
+        """.trimMargin()
     }
 }

@@ -127,7 +127,7 @@ internal class TestCompilationFactory {
                 sourceModules = sourceModules,
                 dependencies = dependencies,
                 expectedArtifact = ObjCFramework(
-                    settings.artifactDirForPackageName(testCase.nominalPackageName),
+                    settings.get<Binaries>().testBinariesDir,
                     testCase.nominalPackageName.compressedPackageName
                 )
             )

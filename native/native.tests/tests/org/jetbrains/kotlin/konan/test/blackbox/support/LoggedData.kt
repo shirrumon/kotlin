@@ -107,6 +107,21 @@ internal abstract class LoggedData {
         }
     }
 
+    class SwiftCParameters(
+        private val extraArgs: Array<String>,
+        private val sources: List<File>,
+        private val environment: JVMEnvironment = JVMEnvironment() // Capture environment.
+    ) : LoggedData() {
+        override fun computeText() = buildString {
+            appendArguments("SWIFTC INVOCATION EXTRA ARGUMENTS:", extraArgs.toList())
+            appendLine()
+            appendLine(environment)
+
+            appendLine()
+            appendLine("TEST SWIFT SOURCES: ${sources.map { it.absolutePath }}")
+        }
+    }
+
     class CompilationToolCall(
         private val toolName: String,
         private val input: LoggedData?,
