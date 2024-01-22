@@ -10,15 +10,18 @@ import org.jetbrains.kotlin.analysis.api.KtAnalysisApiInternals
 import org.jetbrains.kotlin.analysis.api.KtAnalysisSession
 import org.jetbrains.kotlin.analysis.api.session.KtAnalysisSessionProvider
 import org.jetbrains.kotlin.analysis.project.structure.KtModule
-import org.jetbrains.kotlin.analysis.api.lifetime.KtLifetimeTokenFactory
+import org.jetbrains.kotlin.analysis.providers.createProjectWideOutOfBlockModificationTracker
 import org.jetbrains.kotlin.psi.KtElement
 import java.lang.UnsupportedOperationException
-
 
 @OptIn(KtAnalysisApiInternals::class)
 class KtFe10AnalysisSessionProvider(project: Project) : KtAnalysisSessionProvider(project) {
     override fun getAnalysisSession(useSiteKtElement: KtElement): KtAnalysisSession {
-        return KtFe10AnalysisSession(project, useSiteKtElement, tokenFactory.create(project))
+        return KtFe10AnalysisSession(
+            project,
+            useSiteKtElement,
+            tokenFactory.create(project, project.createProjectWideOutOfBlockModificationTracker()),
+        )
     }
 
     override fun getAnalysisSessionByUseSiteKtModule(useSiteKtModule: KtModule): KtAnalysisSession {

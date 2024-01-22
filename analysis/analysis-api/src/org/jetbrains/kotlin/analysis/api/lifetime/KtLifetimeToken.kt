@@ -6,6 +6,7 @@
 package org.jetbrains.kotlin.analysis.api.lifetime
 
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.util.ModificationTracker
 import kotlin.reflect.KClass
 
 public abstract class KtLifetimeToken {
@@ -20,7 +21,11 @@ public abstract class KtLifetimeToken {
 
 public abstract class KtLifetimeTokenFactory {
     public abstract val identifier: KClass<out KtLifetimeToken>
-    public abstract fun create(project: Project): KtLifetimeToken
+
+    // TODO (marco): It would be much better if we passed the `KtModule` instead, since a modification tracker only makes sense for a
+    //               subset of tokens. But for the read action confinement token, we cannot get the `LLFirSession`'s modification tracker,
+    //               because the token is implemented here in `analysis-api`. It should rather be implemented in `analysis-api-fir`.
+    public abstract fun create(project: Project, modificationTracker: ModificationTracker): KtLifetimeToken
 
     public open fun beforeEnteringAnalysisContext(token: KtLifetimeToken) {}
     public open fun afterLeavingAnalysisContext(token: KtLifetimeToken) {}
