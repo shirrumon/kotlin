@@ -116,6 +116,7 @@ TEST(ParallelProcessorTest, Sharing) {
 
     EXPECT_FALSE(taker.retainsNoWork());
     taker.clear();
+    giver.clear();
 }
 
 TEST(ParallelProcessorTest, SharingFromNonWorkerSource) {
@@ -137,6 +138,7 @@ TEST(ParallelProcessorTest, SharingFromNonWorkerSource) {
 
     EXPECT_FALSE(taker.retainsNoWork());
     taker.clear();
+    giver.clear();
 }
 
 TEST(ParallelProcessorTest, Overflow) {
