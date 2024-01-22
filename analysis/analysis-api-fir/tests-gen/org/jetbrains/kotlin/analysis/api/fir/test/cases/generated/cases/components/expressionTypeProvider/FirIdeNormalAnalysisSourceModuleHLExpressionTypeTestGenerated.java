@@ -125,6 +125,12 @@ public class FirIdeNormalAnalysisSourceModuleHLExpressionTypeTestGenerated exten
     }
 
     @Test
+    @TestMetadata("javaEnhancedType.kt")
+    public void testJavaEnhancedType() throws Exception {
+        runTest("analysis/analysis-api/testData/components/expressionTypeProvider/expressionType/javaEnhancedType.kt");
+    }
+
+    @Test
     @TestMetadata("listElement_listOf.kt")
     public void testListElement_listOf() throws Exception {
         runTest("analysis/analysis-api/testData/components/expressionTypeProvider/expressionType/listElement_listOf.kt");

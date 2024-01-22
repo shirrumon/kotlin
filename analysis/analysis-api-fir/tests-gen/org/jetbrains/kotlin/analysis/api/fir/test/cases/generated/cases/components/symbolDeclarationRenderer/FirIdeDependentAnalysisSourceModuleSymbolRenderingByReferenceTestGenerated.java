@@ -47,6 +47,12 @@ public class FirIdeDependentAnalysisSourceModuleSymbolRenderingByReferenceTestGe
     }
 
     @Test
+    @TestMetadata("javaEnhancedType.kt")
+    public void testJavaEnhancedType() throws Exception {
+        runTest("analysis/analysis-api/testData/components/symbolDeclarationRenderer/symbolRenderingByReference/javaEnhancedType.kt");
+    }
+
+    @Test
     @TestMetadata("javaMethodWithMultipleTypeParametersBound.kt")
     public void testJavaMethodWithMultipleTypeParametersBound() throws Exception {
         runTest("analysis/analysis-api/testData/components/symbolDeclarationRenderer/symbolRenderingByReference/javaMethodWithMultipleTypeParametersBound.kt");
