@@ -613,13 +613,13 @@ inline fun LighterASTNode.toKtLightSourceElement(
     endOffset: Int = this.endOffset,
 ): KtLightSourceElement = KtLightSourceElement(this, startOffset, endOffset, tree, kind)
 
-fun sourceKindForIncOrDec(operation: Name, isPrefix: Boolean) = when (operation.identifier) {
-    OperatorNameConventions.INC.identifier -> if (isPrefix) {
+fun sourceKindForIncOrDec(operation: Name, isPrefix: Boolean) = when (operation) {
+    OperatorNameConventions.INC -> if (isPrefix) {
         KtFakeSourceElementKind.DesugaredPrefixInc
     } else {
         KtFakeSourceElementKind.DesugaredPostfixInc
     }
-    OperatorNameConventions.DEC.identifier -> if (isPrefix) {
+    OperatorNameConventions.DEC -> if (isPrefix) {
         KtFakeSourceElementKind.DesugaredPrefixDec
     } else {
         KtFakeSourceElementKind.DesugaredPostfixDec
