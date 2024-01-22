@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.test.services.RuntimeClasspathProvider
 import org.jetbrains.kotlin.test.services.TestServices
 import java.io.File
 
-private val junit5Classpath = System.getProperty("junit5.classpath").split(":")
+private val junit5Classpath = System.getProperty("junit5.classpath").split(",")
 
 fun TestConfigurationBuilder.enableJunit() {
     useConfigurators(::JunitEnvironmentConfigurator)

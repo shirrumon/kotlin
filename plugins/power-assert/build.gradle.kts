@@ -48,6 +48,6 @@ projectTest(parallel = true) {
     val localJunit5Classpath: FileCollection = junit5Classpath
 
     doFirst {
-        systemProperty("junit5.classpath", localJunit5Classpath.asPath)
+        systemProperty("junit5.classpath", localJunit5Classpath.files.joinToString(",") { it.absolutePath })
     }
 }
