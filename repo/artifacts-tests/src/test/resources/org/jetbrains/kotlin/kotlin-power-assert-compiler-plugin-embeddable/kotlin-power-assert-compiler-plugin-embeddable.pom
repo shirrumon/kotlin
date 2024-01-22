@@ -5,7 +5,7 @@
   <artifactId>kotlin-power-assert-compiler-plugin-embeddable</artifactId>
   <version>ArtifactsTest.version</version>
   <name>Kotlin Power Assert Compiler Plugin.embeddable</name>
-  <description>Kotlin Power-Assert Compiler Plugin.embeddable</description>
+  <description>Kotlin Power Assert Compiler Plugin.embeddable</description>
   <url>https://kotlinlang.org/</url>
   <licenses>
     <license>

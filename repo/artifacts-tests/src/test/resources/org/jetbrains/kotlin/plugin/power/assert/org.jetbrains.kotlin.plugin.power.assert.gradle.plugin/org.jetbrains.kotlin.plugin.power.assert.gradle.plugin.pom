@@ -29,7 +29,7 @@
   <dependencies>
     <dependency>
       <groupId>org.jetbrains.kotlin</groupId>
-      <artifactId>kotlin-gradle-plugin</artifactId>
+      <artifactId>kotlin-power-assert</artifactId>
       <version>ArtifactsTest.version</version>
     </dependency>
   </dependencies>
