@@ -12,7 +12,8 @@ import org.jetbrains.kotlin.analysis.low.level.api.fir.util.errorWithFirSpecific
 import org.jetbrains.kotlin.analysis.low.level.api.fir.util.lockWithPCECheck
 import org.jetbrains.kotlin.fir.FirElementWithResolveState
 import org.jetbrains.kotlin.fir.declarations.*
-import java.util.concurrent.CountDownLatch
+import org.jetbrains.kotlin.fir.utils.exceptions.withFirEntry
+import org.jetbrains.kotlin.utils.exceptions.requireWithAttachment
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicReferenceFieldUpdater
 import java.util.concurrent.locks.ReentrantLock
@@ -75,6 +76,7 @@ internal class LLFirLockProvider(private val checker: LLFirLazyResolveContractCh
      * [action] will be executed once if [target] is not yet resolved to [phase] phase.
      *
      * @see withReadLock
+     * @see withJumpingLock
      */
     inline fun withWriteLock(
         target: FirElementWithResolveState,
@@ -101,16 +103,6 @@ internal class LLFirLockProvider(private val checker: LLFirLazyResolveContractCh
     ) {
         checker.lazyResolveToPhaseInside(phase) {
             target.withLock(toPhase = phase, updatePhase = false, action = action)
-        }
-    }
-
-    inline fun withJumpingLock(
-        target: FirElementWithResolveState,
-        phase: FirResolvePhase,
-        action: () -> Unit,
-    ) {
-        checker.lazyResolveToPhaseInside(phase, isJumpingPhase = true) {
-            target.withLock(toPhase = phase, updatePhase = true, action = action)
         }
     }
 
@@ -178,6 +170,10 @@ internal class LLFirLockProvider(private val checker: LLFirLazyResolveContractCh
 
                     return
                 }
+
+                is FirInProcessOfResolvingToJumpingPhaseState -> {
+                    errorWithFirSpecificEntries("$stateSnapshot state are not allowed to be inside non-jumping lock", fir = this)
+                }
             }
         }
     }
@@ -192,8 +188,7 @@ internal class LLFirLockProvider(private val checker: LLFirLazyResolveContractCh
         toPhase: FirResolvePhase,
         stateSnapshot: FirResolveState,
     ) {
-        val latch = CountDownLatch(1)
-        val newState = FirInProcessOfResolvingToPhaseStateWithBarrier(toPhase, latch)
+        val newState = FirInProcessOfResolvingToPhaseStateWithBarrier(toPhase)
         resolveStateFieldUpdater.compareAndSet(this, stateSnapshot, newState)
     }
 
@@ -211,10 +206,200 @@ internal class LLFirLockProvider(private val checker: LLFirLazyResolveContractCh
             is FirInProcessOfResolvingToPhaseStateWithBarrier -> {
                 stateSnapshotAfter.barrier.countDown()
             }
-            is FirResolvedToPhaseState -> {
+            is FirResolvedToPhaseState, is FirInProcessOfResolvingToJumpingPhaseState -> {
                 errorWithFirSpecificEntries("phase is unexpectedly unlocked $stateSnapshotAfter", fir = this)
             }
         }
+    }
+
+    /**
+     * Locks on an a [FirElementWithResolveState] to resolve from `phase - 1` to [phase] and
+     * then updates the [resolve state][FirElementWithResolveState.resolveState] to a [phase].
+     * Does nothing if [target] already has at least [phase] phase.
+     *
+     * @param actionUnderLock will be executed once under the lock if [target] is not yet resolved to [phase] phase and there are no cycles
+     * @param actionOnCycle will be executed once without the lock if [target] is not yet resolved to [phase] phase and a resolution cycle is found
+     *
+     * @see withWriteLock
+     * @see withJumpingLockImpl
+     */
+    inline fun withJumpingLock(
+        target: FirElementWithResolveState,
+        phase: FirResolvePhase,
+        actionUnderLock: () -> Unit,
+        actionOnCycle: () -> Unit,
+    ) {
+        checker.lazyResolveToPhaseInside(phase, isJumpingPhase = true) {
+            target.withJumpingLockImpl(phase, actionUnderLock, actionOnCycle)
+        }
+    }
+
+    /**
+     * Holds resolution states of the current thread.
+     * This information is required to properly process possible cycles
+     * during resolution.
+     *
+     * @see withJumpingLockImpl
+     * @see tryJumpingLock
+     * @see jumpingUnlock
+     */
+    private val jumpingResolutionStatesStack = ThreadLocal.withInitial<MutableList<FirInProcessOfResolvingToJumpingPhaseState>> {
+        mutableListOf()
+    }
+
+    /**
+     * Locks an a [FirElementWithResolveState] to resolve from `toPhase - 1` to [toPhase] and
+     * then updates the [FirElementWithResolveState.resolveState] to a
+     * [toPhase] if no exceptions were found during [actionUnderLock].
+     *
+     * If [FirElementWithResolveState] is already at least at [toPhase], does nothing.
+     *
+     * ### Happy path:
+     *  1. Marks [FirElementWithResolveState] as in a process of resolve
+     *  2. Performs the resolve by calling [actionUnderLock]
+     *  3. Updates the resolve phase to [toPhase] if there is no exceptions
+     *  4. Notifies other threads waiting on the same lock that this thread already resolved the declaration,
+     *  so other threads can continue its execution
+     *
+     *  ### Cycle handling
+     *  During step 1 we can realize someone already set [FirInProcessOfResolvingToJumpingPhaseState]
+     *  for the current [FirElementWithResolveState], so there is a room for a possible deadlock.
+     *
+     *  The requirement for the deadlock is not empty [jumpingResolutionStatesStack] as we should already hold another lock.
+     *  Otherwise, we can just wait on the [latch][FirInProcessOfResolvingToJumpingPhaseState.latch].
+     *
+     *  In the case of not empty [jumpingResolutionStatesStack], we have the following algorithm:
+     *  1. Set [waitingFor][FirInProcessOfResolvingToJumpingPhaseState.waitingFor] for the previous state
+     *  as we have an intention to take the next lock
+     *  2. Iterate over all [waitingFor][FirInProcessOfResolvingToJumpingPhaseState.waitingFor] recursively
+     *  to detect the possible cycle
+     *  3. Execute [actionOnCycle] without the lock in the case of cycle or waining on
+     *  the [latch][FirInProcessOfResolvingToJumpingPhaseState.latch] to try to take the lock again later
+     *
+     * @param actionUnderLock will be executed once under the lock if [this] is not yet resolved to [toPhase] phase and there are no cycles
+     * @param actionOnCycle will be executed once without the lock if [this] is not yet resolved to [toPhase] phase and a resolution cycle is found
+     *
+     *  @see withJumpingLock
+     */
+    private inline fun FirElementWithResolveState.withJumpingLockImpl(
+        toPhase: FirResolvePhase,
+        actionUnderLock: () -> Unit,
+        actionOnCycle: () -> Unit,
+    ) {
+        while (true) {
+            checkCanceled()
+
+            @OptIn(ResolveStateAccess::class)
+            val stateSnapshot = resolveState
+            if (stateSnapshot.resolvePhase >= toPhase) {
+                // already resolved by some other thread
+                return
+            }
+
+            when (stateSnapshot) {
+                is FirResolvedToPhaseState -> {
+                    if (!tryJumpingLock(toPhase, stateSnapshot)) continue
+
+                    var exceptionOccurred = false
+                    try {
+                        actionUnderLock()
+                    } catch (e: Throwable) {
+                        exceptionOccurred = true
+                        throw e
+                    } finally {
+                        val newPhase = if (!exceptionOccurred) toPhase else stateSnapshot.resolvePhase
+                        jumpingUnlock(toPhase = newPhase)
+                    }
+
+                    return
+                }
+
+                is FirInProcessOfResolvingToJumpingPhaseState -> {
+                    val previousState = jumpingResolutionStatesStack.get().lastOrNull()
+
+                    // Not null value means we already hold a lock for another declaration in the current thread,
+                    // so we have to check the possible cycle
+                    if (previousState != null) {
+                        // All writing to waitingFor will be consistent, as it is the last writing if we have cycle
+                        previousState.waitingFor = stateSnapshot
+
+                        // Cycle check
+                        var next: FirInProcessOfResolvingToJumpingPhaseState? = stateSnapshot
+                        while (next != null) {
+                            if (next === previousState) {
+                                previousState.waitingFor = null
+                                return actionOnCycle()
+                            }
+
+                            next = next.waitingFor
+                        }
+                    }
+
+                    try {
+                        // Waiting until another thread released the lock
+                        stateSnapshot.latch.await(DEFAULT_LOCKING_INTERVAL, TimeUnit.MILLISECONDS)
+                    } finally {
+                        previousState?.waitingFor = null
+                    }
+                }
+
+                is FirInProcessOfResolvingToPhaseStateWithoutBarrier, is FirInProcessOfResolvingToPhaseStateWithBarrier -> {
+                    errorWithFirSpecificEntries("$stateSnapshot state are not allowed to be inside jumping lock", fir = this)
+                }
+            }
+        }
+    }
+
+    /**
+     * Trying to set [FirInProcessOfResolvingToJumpingPhaseState] to [this].
+     *
+     * @return **true** if the state is published successfully
+     *
+     * @see withJumpingLockImpl
+     * @see FirInProcessOfResolvingToJumpingPhaseState
+     */
+    private fun FirElementWithResolveState.tryJumpingLock(
+        toPhase: FirResolvePhase,
+        stateSnapshot: FirResolveState,
+    ): Boolean {
+        val newState = FirInProcessOfResolvingToJumpingPhaseState(toPhase)
+        val isSucceed = resolveStateFieldUpdater.compareAndSet(this, stateSnapshot, newState)
+        if (!isSucceed) return false
+
+        val states = jumpingResolutionStatesStack.get()
+        states.lastOrNull()?.waitingFor = newState
+        states += newState
+
+        return true
+    }
+
+    /**
+     * Publish [FirResolvedToPhaseState] with [toPhase] phase and unlocks current [FirInProcessOfResolvingToJumpingPhaseState].
+     *
+     * @see withJumpingLockImpl
+     * @see FirInProcessOfResolvingToJumpingPhaseState
+     * @see FirResolvedToPhaseState
+     */
+    private fun FirElementWithResolveState.jumpingUnlock(toPhase: FirResolvePhase) {
+        val states = jumpingResolutionStatesStack.get()
+        val currentState = states.removeLast()
+        val prevState = states.lastOrNull()
+        requireWithAttachment(
+            condition = prevState == null || prevState.waitingFor == currentState,
+            message = { "The lock contact is violated" },
+        ) {
+            withFirEntry("element", this@jumpingUnlock)
+        }
+
+        prevState?.waitingFor = null
+
+        // Drop the empty stack to avoid memory leak
+        if (states.isEmpty()) {
+            jumpingResolutionStatesStack.remove()
+        }
+
+        resolveStateFieldUpdater.set(this, FirResolvedToPhaseState(toPhase))
+        currentState.latch.countDown()
     }
 }
 
@@ -229,7 +414,7 @@ private val globalLockEnabled: Boolean by lazy(LazyThreadSafetyMode.PUBLICATION)
 }
 
 private val implicitPhaseLockEnabled: Boolean by lazy(LazyThreadSafetyMode.PUBLICATION) {
-    Registry.`is`("kotlin.implicit.resolve.phase.under.global.lock", true)
+    Registry.`is`("kotlin.implicit.resolve.phase.under.global.lock", false)
 }
 
 private const val DEFAULT_LOCKING_INTERVAL = 50L
