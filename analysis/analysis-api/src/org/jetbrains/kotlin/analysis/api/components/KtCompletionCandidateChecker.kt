@@ -5,6 +5,7 @@
 
 package org.jetbrains.kotlin.analysis.api.components
 
+import org.jetbrains.kotlin.analysis.api.KtAnalysisSession
 import org.jetbrains.kotlin.analysis.api.lifetime.KtLifetimeOwner
 import org.jetbrains.kotlin.analysis.api.lifetime.KtLifetimeToken
 import org.jetbrains.kotlin.analysis.api.lifetime.withValidityAssertion
@@ -15,6 +16,13 @@ import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtSimpleNameExpression
 
 public abstract class KtCompletionCandidateChecker : KtAnalysisSessionComponent() {
+    public abstract fun createExtensionCandidateChecker(
+        originalFile: KtFile,
+        nameExpression: KtSimpleNameExpression,
+        explicitReceiver: KtExpression?
+    ): KtCompletionExtensionCandidateChecker
+
+    @Deprecated("Use createExtensionCandidateChecker() instead.")
     public abstract fun checkExtensionFitsCandidate(
         firSymbolForCandidate: KtCallableSymbol,
         originalFile: KtFile,
@@ -23,6 +31,10 @@ public abstract class KtCompletionCandidateChecker : KtAnalysisSessionComponent(
     ): KtExtensionApplicabilityResult
 }
 
+public interface KtCompletionExtensionCandidateChecker {
+    context(KtAnalysisSession)
+    public fun computeApplicability(candidate: KtCallableSymbol): KtExtensionApplicabilityResult
+}
 
 public sealed class KtExtensionApplicabilityResult : KtLifetimeOwner {
     public sealed class Applicable : KtExtensionApplicabilityResult() {
@@ -54,11 +66,25 @@ public sealed class KtExtensionApplicabilityResult : KtLifetimeOwner {
 }
 
 public interface KtCompletionCandidateCheckerMixIn : KtAnalysisSessionMixIn {
+    public fun createExtensionCandidateChecker(
+        originalFile: KtFile,
+        nameExpression: KtSimpleNameExpression,
+        explicitReceiver: KtExpression?
+    ): KtCompletionExtensionCandidateChecker {
+        return analysisSession.completionCandidateChecker.createExtensionCandidateChecker(
+            originalFile,
+            nameExpression,
+            explicitReceiver
+        )
+    }
+
+    @Deprecated("Use createExtensionCandidateChecker() instead.")
     public fun KtCallableSymbol.checkExtensionIsSuitable(
         originalPsiFile: KtFile,
         psiFakeCompletionExpression: KtSimpleNameExpression,
         psiReceiverExpression: KtExpression?,
     ): KtExtensionApplicabilityResult = withValidityAssertion {
+        @Suppress("DEPRECATION")
         analysisSession.completionCandidateChecker.checkExtensionFitsCandidate(
             this,
             originalPsiFile,
