@@ -248,7 +248,7 @@ def clone_llvm_repository(repo, branch, llvm_repo_destination, dry_run):
     if host_is_darwin():
         default_repo, default_branch = "https://github.com/troelsbjerre/llvm-project", "patch/20221013/ignore_jvm_gc_sigs"
     else:
-        default_repo, default_branch = "https://github.com/troelsbjerre/llvm-project", "patch/16.x/ignore_jvm_gc_sigs"
+        default_repo, default_branch = "https://github.com/troelsbjerre/llvm-project", "patch/17.x/ignore_jvm_gc_sigs"
     repo = default_repo if repo is None else repo
     branch = default_branch if branch is None else branch
     # Download only single commit because we don't need whole history just for building LLVM.

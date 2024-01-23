@@ -97,13 +97,13 @@ internal val RuntimeAware.kTypeInfo: LLVMTypeRef
 internal val RuntimeAware.kObjHeader: LLVMTypeRef
     get() = runtime.objHeaderType
 internal val RuntimeAware.kObjHeaderPtr: LLVMTypeRef
-    get() = pointerType(kObjHeader)
+    get() = pointerType(kObjHeader, 1)
 internal val RuntimeAware.kObjHeaderPtrPtr: LLVMTypeRef
     get() = pointerType(kObjHeaderPtr)
 internal val RuntimeAware.kArrayHeader: LLVMTypeRef
     get() = runtime.arrayHeaderType
 internal val RuntimeAware.kArrayHeaderPtr: LLVMTypeRef
-    get() = pointerType(kArrayHeader)
+    get() = pointerType(kArrayHeader, 1)
 internal val RuntimeAware.kTypeInfoPtr: LLVMTypeRef
     get() = pointerType(kTypeInfo)
 internal val RuntimeAware.kNullObjHeaderPtr: LLVMValueRef
@@ -115,7 +115,7 @@ internal val RuntimeAware.kNullObjHeaderPtrPtr: LLVMValueRef
 internal val RuntimeAware.kNothingFakeValue: LLVMValueRef
     get() = LLVMGetUndef(kObjHeaderPtr)!!
 
-internal fun pointerType(pointeeType: LLVMTypeRef) = LLVMPointerType(pointeeType, 0)!!
+internal fun pointerType(pointeeType: LLVMTypeRef, addressSpace: Int = 0) = LLVMPointerType(pointeeType, addressSpace)!!
 
 fun extractConstUnsignedInt(value: LLVMValueRef): Long {
     assert(LLVMIsConstant(value) != 0)
@@ -127,7 +127,7 @@ internal fun ContextUtils.isObjectRef(value: LLVMValueRef): Boolean {
 }
 
 internal fun RuntimeAware.isObjectType(type: LLVMTypeRef): Boolean {
-    return type == kObjHeaderPtr || type == kArrayHeaderPtr
+    return LLVMGetPointerAddressSpace(type) != 0
 }
 
 /**
