@@ -90,7 +90,7 @@ data class KotlinWebpackConfig(
     @Suppress("unused")
     data class DevServer(
         var open: Any = true,
-        var port: Int? = null,
+        var port: Int = 8080,
         var proxy: MutableMap<String, Any>? = null,
         var static: MutableList<String>? = null,
         var contentBase: MutableList<String>? = null,
