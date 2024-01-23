@@ -353,7 +353,7 @@ val jar = runtimeJar {
     dependsOn(compilerVersion)
 
     from {
-        pack.map { zipTree(it.singleOutputFile()) }
+        pack.map { zipTree(it.singleOutputFile(layout)) }
     }
 
     from {
