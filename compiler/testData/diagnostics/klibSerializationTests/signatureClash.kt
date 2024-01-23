@@ -21,8 +21,8 @@ fun foo(): String = ""<!>
 
 <!CONFLICTING_KLIB_SIGNATURES_ERROR!>fun foo(): Int = 0<!>
 
-<!CONFLICTING_KLIB_SIGNATURES_ERROR!>@Deprecated("This function moved to the 'lib' module", level = DeprecationLevel.HIDDEN)
-fun movedToLib() {}<!>
+@Deprecated("This function moved to the 'lib' module", level = DeprecationLevel.HIDDEN)
+fun movedToLib() {}
 
 fun main() {
     foo()

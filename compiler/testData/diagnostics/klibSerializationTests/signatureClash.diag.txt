@@ -1,6 +1,3 @@
-Module: lib
-
-Module: main
 /foo.kt:13:1: error: Platform declaration clash: The following declarations have the same KLIB signature (com.example.klib.serialization.diagnostics/foo|foo(){}[0]):
     fun foo(): kotlin.Long defined in com.example.klib.serialization.diagnostics
     fun foo(): kotlin.String defined in com.example.klib.serialization.diagnostics
@@ -15,7 +12,3 @@ Module: main
     fun foo(): kotlin.Long defined in com.example.klib.serialization.diagnostics
     fun foo(): kotlin.String defined in com.example.klib.serialization.diagnostics
     fun foo(): kotlin.Int defined in com.example.klib.serialization.diagnostics
-
-/main.kt:24:1: error: Platform declaration clash: The following declarations have the same KLIB signature (com.example.klib.serialization.diagnostics/movedToLib|movedToLib(){}[0]):
-    fun movedToLib(): kotlin.Unit defined in com.example.klib.serialization.diagnostics in module `<main>`
-    fun movedToLib(): kotlin.Unit defined in com.example.klib.serialization.diagnostics in module `<lib>`

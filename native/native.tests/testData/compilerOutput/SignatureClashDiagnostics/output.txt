@@ -8,9 +8,4 @@ native/native.tests/testData/compilerOutput/SignatureClashDiagnostics/main.kt:7:
     fun foo(): kotlin.Int defined in com.example.klib.serialization.diagnostics.A
     fun foo(): Int = 0
     ^
-native/native.tests/testData/compilerOutput/SignatureClashDiagnostics/main.kt:10:1: error: platform declaration clash: The following declarations have the same KLIB signature (com.example.klib.serialization.diagnostics/movedToLib|movedToLib(){}[0]):
-    fun movedToLib(): kotlin.Unit defined in com.example.klib.serialization.diagnostics in module `<main.kt>`
-    fun movedToLib(): kotlin.Unit defined in com.example.klib.serialization.diagnostics in module `<regular dependencies of <main.kt>>`
-@Deprecated("This function moved to the 'lib' module", level = DeprecationLevel.HIDDEN)
-^
 COMPILATION_ERROR

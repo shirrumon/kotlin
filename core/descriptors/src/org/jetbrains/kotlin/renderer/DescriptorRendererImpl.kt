@@ -429,12 +429,6 @@ internal class DescriptorRendererImpl(
         }
     }
 
-    private fun StringBuilder.appendModuleName(descriptor: DeclarationDescriptor) {
-        val module = DescriptorUtils.getContainingModuleOrNull(descriptor) ?: return
-        append(" ").append(renderMessage("in module")).append(" ")
-        append(renderName(module.name, false))
-    }
-
     private fun StringBuilder.renderAnnotations(annotated: Annotated, target: AnnotationUseSiteTarget? = null) {
         if (DescriptorRendererModifier.ANNOTATIONS !in modifiers) return
 
@@ -612,9 +606,6 @@ internal class DescriptorRendererImpl(
 
             if (withDefinedIn) {
                 appendDefinedIn(declarationDescriptor)
-            }
-            if (withModuleName) {
-                appendModuleName(declarationDescriptor)
             }
         }
     }
