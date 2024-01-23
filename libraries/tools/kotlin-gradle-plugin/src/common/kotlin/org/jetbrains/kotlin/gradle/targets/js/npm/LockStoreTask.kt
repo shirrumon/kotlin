@@ -25,7 +25,7 @@ abstract class LockStoreTask : LockCopyTask() {
     override fun copy() {
         val outputFile = outputDirectory.get().asFile.resolve(fileName.get())
 
-        val value = inputFile.get()
+        val value = inputFile.orNull
         requireNotNull(value) {
             "Input file $fileName should exist"
         }
