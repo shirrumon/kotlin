@@ -59,8 +59,10 @@ fun BinaryArtifactHandler<*>.reportKtDiagnostics(module: TestModule, ktDiagnosti
 fun BinaryArtifactHandler<*>.checkFullDiagnosticRender() {
     val dumper = MultiModuleInfoDumper()
     val moduleStructure = testServices.moduleStructure
+    var needToVerifyDiagnostics = false
     for (module in moduleStructure.modules) {
         if (DiagnosticsDirectives.RENDER_ALL_DIAGNOSTICS_FULL_TEXT !in module.directives) continue
+        needToVerifyDiagnostics = true
         val reportedDiagnostics = mutableListOf<String>()
         for (testFile in module.files) {
             val finder =
@@ -87,7 +89,7 @@ fun BinaryArtifactHandler<*>.checkFullDiagnosticRender() {
         }
     }
 
-    if (!dumper.isEmpty()) {
+    if (needToVerifyDiagnostics) {
         testServices.assertions.assertEqualsToFile(
             File(FileUtil.getNameWithoutExtension(moduleStructure.originalTestDataFiles.first().absolutePath) + ".diag.txt"),
             dumper.generateResultingDump()
