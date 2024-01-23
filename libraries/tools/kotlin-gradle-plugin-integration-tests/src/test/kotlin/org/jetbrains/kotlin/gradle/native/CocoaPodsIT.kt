@@ -132,7 +132,18 @@ class CocoaPodsIT : KGPBaseTest() {
     fun testDummyUTD(gradleVersion: GradleVersion) {
         nativeProjectWithCocoapodsAndIosAppPodFile(gradleVersion = gradleVersion) {
 
+            buildGradleKts.addCocoapodsBlock(
+                """
+                    framework {
+                        baseName = "shared"
+                        isStatic = false
+                    }
+                """.trimIndent()
+            )
+
             buildWithCocoapodsWrapper(dummyTaskName) {
+                assertDirectoryInProjectExists("build/cocoapods/framework/shared.framework")
+                assertDirectoryInProjectExists("build/cocoapods/framework/shared.framework.dSYM")
                 assertTasksExecuted(dummyTaskName)
             }
             buildWithCocoapodsWrapper(dummyTaskName) {

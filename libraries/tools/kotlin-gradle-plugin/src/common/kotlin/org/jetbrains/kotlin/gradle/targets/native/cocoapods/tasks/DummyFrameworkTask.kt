@@ -16,6 +16,7 @@ import org.gradle.api.tasks.TaskAction
 import org.gradle.work.DisableCachingByDefault
 import org.jetbrains.kotlin.gradle.utils.MachO
 import org.jetbrains.kotlin.gradle.utils.getFile
+import org.jetbrains.kotlin.incremental.createDirectory
 import java.io.File
 
 /**
@@ -88,6 +89,18 @@ abstract class DummyFrameworkTask : DefaultTask() {
         transform
     )
 
+    private fun copyFrameworkDsym() {
+        if (useStaticFramework.get()) {
+            return
+        }
+
+        outputFramework.getFile().parentFile.resolve("${frameworkName.get()}.framework.dSYM").apply {
+            if (!exists()) {
+                createDirectory()
+            }
+        }
+    }
+
     private fun copyFramework() {
         // Reset the destination directory
         with(outputFramework.getFile()) {
@@ -106,6 +119,9 @@ abstract class DummyFrameworkTask : DefaultTask() {
                 it
             }
         }
+
+        // Copy dSYM
+        copyFrameworkDsym()
     }
 
 
