@@ -18,6 +18,6 @@ class JsBackendDiagnosticsHandler(testServices: TestServices) : KlibArtifactHand
     }
 
     override fun processAfterAllModules(someAssertionWasFailed: Boolean) {
-        checkFullDiagnosticRender(testServices.moduleStructure)
+        checkFullDiagnosticRender()
     }
 }

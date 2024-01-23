@@ -26,7 +26,7 @@ class JvmBackendDiagnosticsHandler(testServices: TestServices) : JvmBinaryArtifa
     }
 
     override fun processAfterAllModules(someAssertionWasFailed: Boolean) {
-        checkFullDiagnosticRender(testServices.moduleStructure)
+        checkFullDiagnosticRender()
     }
 
     private fun reportDiagnostics(module: TestModule, info: BinaryArtifacts.Jvm) {

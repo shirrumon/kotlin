@@ -56,8 +56,9 @@ fun BinaryArtifactHandler<*>.reportKtDiagnostics(module: TestModule, ktDiagnosti
     processModule(module)
 }
 
-fun BinaryArtifactHandler<*>.checkFullDiagnosticRender(moduleStructure: TestModuleStructure) {
+fun BinaryArtifactHandler<*>.checkFullDiagnosticRender() {
     val dumper = MultiModuleInfoDumper()
+    val moduleStructure = testServices.moduleStructure
     for (module in moduleStructure.modules) {
         if (DiagnosticsDirectives.RENDER_ALL_DIAGNOSTICS_FULL_TEXT !in module.directives) continue
         val reportedDiagnostics = mutableListOf<String>()
@@ -81,13 +82,17 @@ fun BinaryArtifactHandler<*>.checkFullDiagnosticRender(moduleStructure: TestModu
                 }
             }
         }
-        reportedDiagnostics.joinTo(dumper.builderForModule(module), separator = "\n\n", postfix = "\n")
+        if (reportedDiagnostics.isNotEmpty()) {
+            reportedDiagnostics.joinTo(dumper.builderForModule(module), separator = "\n\n", postfix = "\n")
+        }
     }
 
-    testServices.assertions.assertEqualsToFile(
-        File(FileUtil.getNameWithoutExtension(moduleStructure.originalTestDataFiles.first().absolutePath) + ".diag.txt"),
-        dumper.generateResultingDump()
-    )
+    if (!dumper.isEmpty()) {
+        testServices.assertions.assertEqualsToFile(
+            File(FileUtil.getNameWithoutExtension(moduleStructure.originalTestDataFiles.first().absolutePath) + ".diag.txt"),
+            dumper.generateResultingDump()
+        )
+    }
 }
 
 private fun renderDiagnosticMessage(fileName: String, severity: Severity, message: String?, line: Int, column: Int): String {
