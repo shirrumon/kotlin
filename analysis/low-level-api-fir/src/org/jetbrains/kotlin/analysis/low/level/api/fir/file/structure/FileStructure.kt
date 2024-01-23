@@ -28,6 +28,7 @@ import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.psi.psiUtil.isAncestor
 import org.jetbrains.kotlin.utils.exceptions.errorWithAttachment
 import org.jetbrains.kotlin.utils.exceptions.withPsiEntry
+import java.util.Collections
 import java.util.concurrent.ConcurrentHashMap
 
 internal class FileStructure private constructor(
@@ -114,21 +115,21 @@ internal class FileStructure private constructor(
     }
 
     fun getAllDiagnosticsForFile(diagnosticCheckerFilter: DiagnosticCheckerFilter): List<KtPsiDiagnostic> {
-        // TODO, KT-60799: Add a new FileStructure for file diagnostics
-        firFile.lazyResolveToPhase(FirResolvePhase.BODY_RESOLVE)
         val structureElements = getAllStructureElements()
-        return buildList {
+        return Collections.synchronizedList(ArrayList<KtPsiDiagnostic>()).apply {
             collectDiagnosticsFromStructureElements(structureElements, diagnosticCheckerFilter)
-        }
+        }.toList()
     }
 
     private fun MutableCollection<KtPsiDiagnostic>.collectDiagnosticsFromStructureElements(
         structureElements: Collection<FileStructureElement>,
         diagnosticCheckerFilter: DiagnosticCheckerFilter,
     ) {
-        structureElements.forEach { structureElement ->
+        structureElements.parallelStream().forEach { structureElement ->
             structureElement.diagnostics.forEach(diagnosticCheckerFilter) { diagnostics ->
-                addAll(diagnostics)
+                if (diagnostics.isNotEmpty()) {
+                    addAll(diagnostics)
+                }
             }
         }
     }
