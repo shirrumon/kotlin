@@ -907,6 +907,23 @@ internal fun CValue<CXSourceLocation>.getContainingFile(): CXFile? = memScoped {
     fileVar.value
 }
 
+internal fun getObjCCategoryClassCursor(cursor: CValue<CXCursor>): CValue<CXCursor> {
+    assert(cursor.kind == CXCursorKind.CXCursor_ObjCCategoryDecl)
+    var classRef: CValue<CXCursor>? = null
+    visitChildren(cursor) { child, _ ->
+        if (child.kind == CXCursorKind.CXCursor_ObjCClassRef) {
+            classRef = child
+            CXChildVisitResult.CXChildVisit_Break
+        } else {
+            CXChildVisitResult.CXChildVisit_Continue
+        }
+    }
+
+    return clang_getCursorReferenced(classRef!!).apply {
+        assert(this.kind == CXCursorKind.CXCursor_ObjCInterfaceDecl)
+    }
+}
+
 @JvmName("getFileContainingCursor")
 internal fun getContainingFile(cursor: CValue<CXCursor>): CXFile? {
     return clang_getCursorLocation(cursor).getContainingFile()

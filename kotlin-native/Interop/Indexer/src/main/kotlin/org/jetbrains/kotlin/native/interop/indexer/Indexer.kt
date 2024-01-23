@@ -352,23 +352,6 @@ public open class NativeIndexImpl(val library: NativeLibrary, val verbose: Boole
         return EnumDefImpl(typeSpelling, baseType, getLocation(cursor))
     }
 
-    private fun getObjCCategoryClassCursor(cursor: CValue<CXCursor>): CValue<CXCursor> {
-        assert(cursor.kind == CXCursorKind.CXCursor_ObjCCategoryDecl)
-        var classRef: CValue<CXCursor>? = null
-        visitChildren(cursor) { child, _ ->
-            if (child.kind == CXCursorKind.CXCursor_ObjCClassRef) {
-                classRef = child
-                CXChildVisitResult.CXChildVisit_Break
-            } else {
-                CXChildVisitResult.CXChildVisit_Continue
-            }
-        }
-
-        return clang_getCursorReferenced(classRef!!).apply {
-            assert(this.kind == CXCursorKind.CXCursor_ObjCInterfaceDecl)
-        }
-    }
-
     private fun isObjCInterfaceDeclForward(cursor: CValue<CXCursor>): Boolean {
         assert(cursor.kind == CXCursorKind.CXCursor_ObjCInterfaceDecl) { cursor.kind }
 
@@ -405,37 +388,55 @@ public open class NativeIndexImpl(val library: NativeLibrary, val verbose: Boole
         }
     }
 
+    private class CategoryFileIndex private constructor(private val map: Map<Key, List<CValue<CXCursor>>>) {
+        private data class Key(val className: String, val file: CXFile)
+
+        companion object {
+            fun create(translationUnit: CXTranslationUnit): CategoryFileIndex {
+                val map = mutableMapOf<Key, MutableList<CValue<CXCursor>>>()
+                visitChildren(clang_getTranslationUnitCursor(translationUnit)) { childCursor, _ ->
+                    if (childCursor.kind == CXCursorKind.CXCursor_ObjCCategoryDecl) {
+                        val categoryClassCursor = getObjCCategoryClassCursor(childCursor)
+                        val categoryClassName = clang_getCursorDisplayName(categoryClassCursor).convertAndDispose()
+                        val categoryFile = getContainingFile(childCursor)
+                        if (categoryFile != null) {
+                            map.getOrPut(Key(categoryClassName, categoryFile)) { mutableListOf() }.add(childCursor)
+                        }
+                    }
+                    CXChildVisitResult.CXChildVisit_Continue
+                }
+                return CategoryFileIndex(map)
+            }
+        }
+
+        fun getAllObjCCategoriesForClassInFile(className: String, file: CXFile): List<CValue<CXCursor>> {
+            return map[Key(className, file)].orEmpty()
+        }
+    }
+
+    private val categoryFileIndexCache = mutableMapOf<CXTranslationUnit, CategoryFileIndex>()
+
     /**
      * Find all categories for a class that is pointed by [classCursor] in the same file.
      * NB: Current implementation is rather slow as it walks the whole translation unit.
+     *     Some caching is applied though, so amortized time throughout the whole indexing process should be fine.
      */
     private fun collectClassCategories(classCursor: CValue<CXCursor>, className: String): List<CValue<CXCursor>> {
         assert(classCursor.kind == CXCursorKind.CXCursor_ObjCInterfaceDecl) { classCursor.kind }
-        val classFile = getContainingFile(classCursor)
-        val result = mutableListOf<CValue<CXCursor>>()
-        // Accessing the whole translation unit (TU) is overkill, but it is the simplest solution which is doable
-        // since we use this function for a narrow set of cases.
-        // Possible improvements:
-        // 1. Find/create a function that returns a file scope. `clang_findReferencesInFile` does not seem to work because for categories
-        // it returns `CXCursor_ObjCClassRef` (@interface >CLASS_REFERENCE<(CategoryName)) and there is no easy way to access category from
-        // there.
-        // 2. Extract categories collection into a separate TU pass and create Class -> [Category] mapping. This way we can avoid visiting
-        // TU for every class.
-        val translationUnit = clang_getCursorLexicalParent(classCursor)
-        visitChildren(translationUnit) { childCursor, _ ->
-            if (childCursor.kind == CXCursorKind.CXCursor_ObjCCategoryDecl) {
-                val categoryClassCursor = getObjCCategoryClassCursor(childCursor)
-                val categoryClassName = clang_getCursorDisplayName(categoryClassCursor).convertAndDispose()
-                if (className == categoryClassName) {
-                    val categoryFile = getContainingFile(childCursor)
-                    if (clang_File_isEqual(categoryFile, classFile) != 0) {
-                        result += childCursor
-                    }
-                }
-            }
-            CXChildVisitResult.CXChildVisit_Continue
-        }
-        return result
+        val classFile = getContainingFile(classCursor) ?: return emptyList()
+
+        val translationUnit = clang_Cursor_getTranslationUnit(classCursor) ?: return emptyList()
+
+        // Accessing the whole translation unit (TU) is overkill, but there are no simple alternatives.
+        //
+        // At the first glance, we could have applied clang_findReferencesInFile, but it does not seem to work here
+        // because for categories it returns `CXCursor_ObjCClassRef` (@interface >CLASS_REFERENCE<(CategoryName))
+        // and there is no easy way to access category from there. In particular, clang_getCursorLexicalParent returns
+        // a CXCursor_InvalidFile for such a cursor.
+
+        return categoryFileIndexCache.getOrPut(translationUnit) {
+            CategoryFileIndex.create(translationUnit)
+        }.getAllObjCCategoriesForClassInFile(className, classFile)
     }
 
     private fun getObjCProtocolAt(cursor: CValue<CXCursor>): ObjCProtocolImpl {
