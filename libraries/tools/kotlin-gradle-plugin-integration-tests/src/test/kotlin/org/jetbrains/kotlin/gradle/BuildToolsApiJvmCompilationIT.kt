@@ -156,7 +156,7 @@ private fun TestProject.enableOtherVersionBuildToolsImpl() {
             maven { setUrl("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/bootstrap") }
         }
         kotlin {
-            useCompilerVersion("$OTHER_KOTLIN_VERSION")
+            compilerVersion.set("$OTHER_KOTLIN_VERSION")
         }
         """.trimIndent()
     )
