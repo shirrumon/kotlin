@@ -89,7 +89,7 @@ abstract class BirLazyElementBase(
         set(value) = mutationNotSupported()
 
     @OptIn(ObsoleteDescriptorBasedAPI::class)
-    final override fun <T> getDynamicProperty(token: BirElementDynamicPropertyToken<*, T>): T? {
+    final override fun <T> getDynamicProperty(token: BirDynamicPropertyAccessToken<*, T>): T? {
         if (token.key == GlobalBirElementDynamicProperties.Descriptor) {
             return originalIrElement.descriptor as T
         }

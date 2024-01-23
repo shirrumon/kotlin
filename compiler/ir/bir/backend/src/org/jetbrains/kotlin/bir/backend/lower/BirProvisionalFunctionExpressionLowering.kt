@@ -22,7 +22,6 @@ import org.jetbrains.kotlin.ir.ObsoleteDescriptorBasedAPI
 context(JvmBirBackendContext)
 class BirProvisionalFunctionExpressionLowering : BirLoweringPhase() {
     private val functionExpressions = registerIndexKey(BirFunctionExpression, false)
-    private val originalBeforeInlineToken = acquireProperty(GlobalBirElementDynamicProperties.OriginalBeforeInline)
 
     @OptIn(ObsoleteDescriptorBasedAPI::class)
     override fun lower(module: BirModuleFragment) {
@@ -60,7 +59,7 @@ class BirProvisionalFunctionExpressionLowering : BirLoweringPhase() {
                 reflectionTarget = null,
             ).apply {
                 valueArguments.resetWithNulls(function.valueParameters.size)
-                copyAttributes(expression, originalBeforeInlineToken)
+                copyAttributes(expression)
             }
         }
         expression.replaceWith(block)

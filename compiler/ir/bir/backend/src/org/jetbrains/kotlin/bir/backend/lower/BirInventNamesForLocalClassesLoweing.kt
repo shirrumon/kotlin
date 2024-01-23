@@ -39,7 +39,6 @@ abstract class BirInventNamesForLocalClassesLowering(
     }
 
     private val localNameScopeKey = acquireTemporaryProperty<_, LocalNameScope>(BirElement)
-    private val originalBeforeInlineKey = acquireProperty(GlobalBirElementDynamicProperties.OriginalBeforeInline)
 
     private val anonymousClassesCount = mutableMapOf<String, Int>()
 
@@ -71,7 +70,7 @@ abstract class BirInventNamesForLocalClassesLowering(
 
         getAllElementsWithIndex(functionReferences).forEach { reference ->
             val localNameScope = getLocalNameScopeIfApplicable(reference) ?: return@forEach
-            if (localNameScope.processingInlinedFunction && reference[originalBeforeInlineKey] == null) {
+            if (localNameScope.processingInlinedFunction && reference[GlobalBirElementDynamicProperties.OriginalBeforeInline] == null) {
                 // skip BirFunctionReference from `singleArgumentInlineFunction`
                 return@forEach
             }

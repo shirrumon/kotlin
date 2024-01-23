@@ -16,6 +16,7 @@ import org.jetbrains.kotlin.bir.expressions.*
 import org.jetbrains.kotlin.bir.expressions.impl.*
 import org.jetbrains.kotlin.bir.types.BirUninitializedType
 import org.jetbrains.kotlin.bir.CompressedSourceSpan.Companion.CompressedSourceSpan
+import org.jetbrains.kotlin.bir.GlobalBirElementDynamicProperties.SealedSubclasses
 import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.ObsoleteDescriptorBasedAPI
 import org.jetbrains.kotlin.ir.declarations.*
@@ -26,7 +27,7 @@ import org.jetbrains.kotlin.utils.memoryOptimizedMap
 // todo: Could be adjusted for the change that all child fields are now nullable
 @OptIn(ObsoleteDescriptorBasedAPI::class)
 class Ir2BirConverter(
-    dynamicPropertyManager: BirElementDynamicPropertyManager,
+    dynamicPropertyManager: BirDynamicPropertiesManager,
     compressedSourceSpanManager: CompressedSourceSpanManager,
     expectedTreeSize: Int = 0,
 ) : Ir2BirConverterBase(compressedSourceSpanManager) {
@@ -47,13 +48,6 @@ class Ir2BirConverter(
     private val localDelegatedProperties = createElementMap<BirLocalDelegatedProperty, IrLocalDelegatedProperty>()
     private val typeAliases = createElementMap<BirTypeAlias, IrTypeAlias>()
     private val loops = createElementMap<BirLoop, IrLoop>()
-
-    private val Descriptor = dynamicPropertyManager.acquireProperty(GlobalBirElementDynamicProperties.Descriptor)
-    private val Metadata = dynamicPropertyManager.acquireProperty(GlobalBirElementDynamicProperties.Metadata)
-    private val ContainerSource = dynamicPropertyManager.acquireProperty(GlobalBirElementDynamicProperties.ContainerSource)
-    private val SealedSubclasses = dynamicPropertyManager.acquireProperty(GlobalBirElementDynamicProperties.SealedSubclasses)
-    private val OriginalBeforeInline = dynamicPropertyManager.acquireProperty(GlobalBirElementDynamicProperties.OriginalBeforeInline)
-    private val CapturedConstructor = dynamicPropertyManager.acquireProperty(GlobalBirElementDynamicProperties.CapturedConstructor)
 
     @Suppress("UNCHECKED_CAST")
     override fun <Bir : BirElement> copyElement(old: IrElement): Bir = when (old) {
@@ -1125,28 +1119,28 @@ class Ir2BirConverter(
         this as BirElementBase
 
         if (from is IrExternalPackageFragment) {
-            (this as BirExternalPackageFragment)[Descriptor] =
+            (this as BirExternalPackageFragment)[GlobalBirElementDynamicProperties.Descriptor] =
                 if (from.symbol is DescriptorlessExternalPackageFragmentSymbol) null
                 else mapDescriptor { from.packageFragmentDescriptor }
         } else if (from is IrDeclaration) {
-            (this as BirDeclaration)[Descriptor] = mapDescriptor { from.descriptor }
+            (this as BirDeclaration)[GlobalBirElementDynamicProperties.Descriptor] = mapDescriptor { from.descriptor }
         }
 
         if (from is IrMetadataSourceOwner) {
-            (this as BirMetadataSourceOwner)[Metadata] = from.metadata
+            (this as BirMetadataSourceOwner)[GlobalBirElementDynamicProperties.Metadata] = from.metadata
         }
 
         if (from is IrMemberWithContainerSource) {
-            (this as BirMemberWithContainerSource)[ContainerSource] = from.containerSource
+            (this as BirMemberWithContainerSource)[GlobalBirElementDynamicProperties.ContainerSource] = from.containerSource
         }
 
         if (from is IrAttributeContainer) {
-            (this as BirAttributeContainer)[OriginalBeforeInline] =
+            (this as BirAttributeContainer)[GlobalBirElementDynamicProperties.OriginalBeforeInline] =
                 from.originalBeforeInline?.let { remapElement(it) as BirAttributeContainer }
         }
 
         if (from is IrClass) {
-            (this as BirClass)[SealedSubclasses] = from.sealedSubclasses.memoryOptimizedMap { remapSymbol(it) }
+            (this as BirClass)[GlobalBirElementDynamicProperties.SealedSubclasses] = from.sealedSubclasses.memoryOptimizedMap { remapSymbol(it) }
         }
     }
 

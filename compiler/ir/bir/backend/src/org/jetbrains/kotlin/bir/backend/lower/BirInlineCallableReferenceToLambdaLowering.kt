@@ -30,7 +30,6 @@ context(JvmBirBackendContext)
 class BirInlineCallableReferenceToLambdaLowering : BirLoweringPhase() {
     private val inlineFunctions = registerIndexKey(BirFunction, true) { it.isInlineFunctionCall() }
     private val functionAccesses = registerBackReferencesKey_functionSymbol(BirFunctionAccessExpression, BirFunctionAccessExpression::symbol)
-    private val originalBeforeInlineToken = acquireProperty(GlobalBirElementDynamicProperties.OriginalBeforeInline)
 
     override fun lower(module: BirModuleFragment) {
         getAllElementsWithIndex(inlineFunctions).forEach { function ->
@@ -177,7 +176,7 @@ class BirInlineCallableReferenceToLambdaLowering : BirLoweringPhase() {
             birBlock {
                 +function
                 +birFunctionReference(function, original.type, origin = JvmLoweredStatementOrigin.INLINE_LAMBDA) {
-                    copyAttributes(original, originalBeforeInlineToken)
+                    copyAttributes(original)
                     extensionReceiver = original.dispatchReceiver ?: original.extensionReceiver
                 }
             }
