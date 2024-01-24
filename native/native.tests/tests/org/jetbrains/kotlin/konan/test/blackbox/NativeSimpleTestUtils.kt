@@ -201,7 +201,8 @@ internal fun AbstractNativeSimpleTest.compileToStaticCache(
 
 internal fun AbstractNativeSimpleTest.generateTestCaseWithSingleModule(
     moduleDir: File?,
-    freeCompilerArgs: TestCompilerArgs = TestCompilerArgs.EMPTY
+    freeCompilerArgs: TestCompilerArgs = TestCompilerArgs.EMPTY,
+    extras: TestCase.Extras = TestCase.WithTestRunnerExtras(TestRunnerType.DEFAULT),
 ): TestCase {
     val moduleName: String = moduleDir?.name ?: LAUNCHER_MODULE_NAME
     val module = TestModule.Exclusive(moduleName, emptySet(), emptySet(), emptySet())
@@ -217,7 +218,7 @@ internal fun AbstractNativeSimpleTest.generateTestCaseWithSingleModule(
         freeCompilerArgs = freeCompilerArgs,
         nominalPackageName = PackageName.EMPTY,
         checks = TestRunChecks.Default(testRunSettings.get<Timeouts>().executionTimeout),
-        extras = TestCase.WithTestRunnerExtras(TestRunnerType.DEFAULT)
+        extras = extras
     ).apply {
         initialize(null, null)
     }
@@ -228,7 +229,8 @@ internal fun AbstractNativeSimpleTest.generateTestCaseWithSingleFile(
     moduleName: String = sourceFile.name,
     freeCompilerArgs: TestCompilerArgs = TestCompilerArgs.EMPTY,
     testKind: TestKind = TestKind.STANDALONE,
-    extras: TestCase.Extras = TestCase.WithTestRunnerExtras(TestRunnerType.DEFAULT)
+    extras: TestCase.Extras = TestCase.WithTestRunnerExtras(TestRunnerType.DEFAULT),
+    checks: TestRunChecks = TestRunChecks.Default(testRunSettings.get<Timeouts>().executionTimeout),
 ): TestCase {
     val module = TestModule.Exclusive(moduleName, emptySet(), emptySet(), emptySet())
     module.files += TestFile.createCommitted(sourceFile, module)
@@ -239,7 +241,7 @@ internal fun AbstractNativeSimpleTest.generateTestCaseWithSingleFile(
         modules = setOf(module),
         freeCompilerArgs = freeCompilerArgs,
         nominalPackageName = PackageName.EMPTY,
-        checks = TestRunChecks.Default(testRunSettings.get<Timeouts>().executionTimeout),
+        checks = checks,
         extras = extras
     ).apply {
         initialize(null, null)
