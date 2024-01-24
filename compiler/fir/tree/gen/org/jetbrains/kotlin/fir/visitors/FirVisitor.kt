@@ -44,6 +44,9 @@ abstract class FirVisitor<out R, in D> {
     open fun visitDeclarationStatus(declarationStatus: FirDeclarationStatus, data: D): R =
         visitElement(declarationStatus, data)
 
+    open fun visitDeclarationStatusBase(declarationStatusBase: FirDeclarationStatusBase, data: D): R =
+        visitElement(declarationStatusBase, data)
+
     open fun visitResolvedDeclarationStatus(resolvedDeclarationStatus: FirResolvedDeclarationStatus, data: D): R =
         visitElement(resolvedDeclarationStatus, data)
 

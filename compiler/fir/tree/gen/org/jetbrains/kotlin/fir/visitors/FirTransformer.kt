@@ -83,6 +83,14 @@ abstract class FirTransformer<in D> : FirVisitor<FirElement, D>() {
         return transformDeclarationStatus(declarationStatus, data)
     }
 
+    open fun transformDeclarationStatusBase(declarationStatusBase: FirDeclarationStatusBase, data: D): FirDeclarationStatus {
+        return transformElement(declarationStatusBase, data)
+    }
+
+    final override fun visitDeclarationStatusBase(declarationStatusBase: FirDeclarationStatusBase, data: D): FirDeclarationStatus {
+        return transformDeclarationStatusBase(declarationStatusBase, data)
+    }
+
     open fun transformResolvedDeclarationStatus(resolvedDeclarationStatus: FirResolvedDeclarationStatus, data: D): FirDeclarationStatus {
         return transformElement(resolvedDeclarationStatus, data)
     }

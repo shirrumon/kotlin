@@ -83,6 +83,14 @@ abstract class FirVisitorVoid : FirVisitor<Unit, Nothing?>() {
         visitElement(declarationStatus)
     }
 
+    final override fun visitDeclarationStatusBase(declarationStatusBase: FirDeclarationStatusBase, data: Nothing?) {
+        visitDeclarationStatusBase(declarationStatusBase)
+    }
+
+    open fun visitDeclarationStatusBase(declarationStatusBase: FirDeclarationStatusBase) {
+        visitElement(declarationStatusBase)
+    }
+
     final override fun visitResolvedDeclarationStatus(resolvedDeclarationStatus: FirResolvedDeclarationStatus, data: Nothing?) {
         visitResolvedDeclarationStatus(resolvedDeclarationStatus)
     }

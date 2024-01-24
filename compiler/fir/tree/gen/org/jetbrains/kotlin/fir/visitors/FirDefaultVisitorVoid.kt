@@ -24,6 +24,8 @@ import org.jetbrains.kotlin.fir.types.*
 abstract class FirDefaultVisitorVoid : FirVisitorVoid() {
     override fun visitTypeRef(typeRef: FirTypeRef) = visitAnnotationContainer(typeRef)
 
+    override fun visitDeclarationStatusBase(declarationStatusBase: FirDeclarationStatusBase) = visitDeclarationStatus(declarationStatusBase)
+
     override fun visitResolvedDeclarationStatus(resolvedDeclarationStatus: FirResolvedDeclarationStatus) = visitDeclarationStatus(resolvedDeclarationStatus)
 
     override fun visitStatement(statement: FirStatement) = visitAnnotationContainer(statement)

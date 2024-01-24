@@ -412,6 +412,10 @@ object NodeConfigurator : AbstractFieldConfigurator<FirTreeBuilder>(FirTreeBuild
             +booleanField("isCallWithExplicitReceiver")
         }
 
+        declarationStatusBase.configure {
+            shouldBeAbstractClass()
+        }
+
         constructor.configure {
             +annotations
             +symbol("FirConstructorSymbol")

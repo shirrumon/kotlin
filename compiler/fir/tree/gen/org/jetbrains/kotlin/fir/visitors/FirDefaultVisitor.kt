@@ -26,6 +26,9 @@ abstract class FirDefaultVisitor<out R, in D> : FirVisitor<R, D>() {
     override fun visitTypeRef(typeRef: FirTypeRef, data: D): R =
         visitAnnotationContainer(typeRef, data)
 
+    override fun visitDeclarationStatusBase(declarationStatusBase: FirDeclarationStatusBase, data: D): R =
+        visitDeclarationStatus(declarationStatusBase, data)
+
     override fun visitResolvedDeclarationStatus(resolvedDeclarationStatus: FirResolvedDeclarationStatus, data: D): R =
         visitDeclarationStatus(resolvedDeclarationStatus, data)
 
