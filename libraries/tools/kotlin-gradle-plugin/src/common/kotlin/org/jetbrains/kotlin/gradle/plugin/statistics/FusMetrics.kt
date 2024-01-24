@@ -21,7 +21,6 @@ import org.jetbrains.kotlin.gradle.report.TaskExecutionResult
 import org.jetbrains.kotlin.gradle.targets.js.ir.KotlinJsIrOutputGranularity
 import org.jetbrains.kotlin.gradle.utils.addConfigurationMetrics
 import org.jetbrains.kotlin.gradle.utils.runMetricMethodSafely
-import org.jetbrains.kotlin.gradle.utils.runProjectConfigurationHealthCheckWhenEvaluated
 import org.jetbrains.kotlin.statistics.metrics.BooleanMetrics
 import org.jetbrains.kotlin.statistics.metrics.NumericalMetrics
 import org.jetbrains.kotlin.statistics.metrics.StatisticsValuesConsumer
@@ -251,16 +250,15 @@ internal object UrlRepoConfigurationMetrics : FusMetrics {
 
 internal object KotlinJsIrTargetMetrics : FusMetrics {
     internal fun collectMetrics(isBrowserConfigured: Boolean, isNodejsConfigured: Boolean, project: Project) {
-        project.runProjectConfigurationHealthCheckWhenEvaluated {
-            project.addConfigurationMetrics {
-                when {
-                    isBrowserConfigured && isNodejsConfigured -> it.put(StringMetrics.JS_TARGET_MODE, "both")
-                    isBrowserConfigured -> it.put(StringMetrics.JS_TARGET_MODE, "browser")
-                    isNodejsConfigured -> it.put(StringMetrics.JS_TARGET_MODE, "nodejs")
-                    !isBrowserConfigured && !isNodejsConfigured -> it.put(StringMetrics.JS_TARGET_MODE, "none")
-                }
+        project.addConfigurationMetrics { metricContainer ->
+            when {
+                isBrowserConfigured && isNodejsConfigured -> metricContainer.put(StringMetrics.JS_TARGET_MODE, "both")
+                isBrowserConfigured -> metricContainer.put(StringMetrics.JS_TARGET_MODE, "browser")
+                isNodejsConfigured -> metricContainer.put(StringMetrics.JS_TARGET_MODE, "nodejs")
+                !isBrowserConfigured && !isNodejsConfigured -> metricContainer.put(StringMetrics.JS_TARGET_MODE, "none")
             }
         }
+
     }
 }
 
