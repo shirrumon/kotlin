@@ -21,6 +21,8 @@ void LLVMAddObjCARCContractPass(LLVMPassManagerRef passManagerRef);
 
 void LLVMKotlinInitializeTargets();
 
+int LLVMIsPointerTy(LLVMTypeRef Ty);
+
 void LLVMSetNoTailCall(LLVMValueRef Call);
 
 int LLVMInlineCall(LLVMValueRef call);

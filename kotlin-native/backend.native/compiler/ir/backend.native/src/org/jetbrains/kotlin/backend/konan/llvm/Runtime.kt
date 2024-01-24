@@ -22,10 +22,19 @@ class Runtime(llvmContext: LLVMContextRef, bitcodeFile: String) {
     private fun getStructTypeOrNull(name: String) =
             LLVMGetTypeByName(llvmModule, "struct.$name") ?: LLVMGetNamedGlobal(llvmModule, "touch$name")?.let(::LLVMGlobalGetValueType)
 
-    internal fun getStructType(name: String) = getStructTypeOrNull(name)
-            ?: error("type $name is not found in the Runtime module.")
+    internal fun getStructType(name: String, vararg refs: Int): LLVMTypeRef {
+        val struct = getStructTypeOrNull(name) ?: error("type $name is not found in the Runtime module.")
+        if (refs.isEmpty()) return struct
+        val newTypes = List(LLVMCountStructElementTypes(struct)) { index ->
+            if (index in refs) objHeaderPtrType
+            else LLVMStructGetTypeAtIndex(struct, index)!!
+        }
+        val context = LLVMGetTypeContext(struct)
+        val packed = LLVMIsPackedStruct(struct)
+        return LLVMStructTypeInContext(context, newTypes.toCValues(), newTypes.size, packed)!!
+    }
 
-    val typeInfoType = getStructType("TypeInfo")
+    val typeInfoType = getStructType("TypeInfo")//, 11, 12)
     val extendedTypeInfoType = getStructType("ExtendedTypeInfo")
     val writableTypeInfoType = getStructTypeOrNull("WritableTypeInfo")
     val interfaceTableRecordType = getStructType("InterfaceTableRecord")

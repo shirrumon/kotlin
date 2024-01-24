@@ -63,7 +63,8 @@ internal open class Struct(val type: LLVMTypeRef?, val elements: List<ConstValue
             LLVMConstNull(expectedType)!!
         } else {
             element.llvm.also {
-                assert(it.type == expectedType) {
+                // The check for pointer-types is because we want to consider pointers in different address spaces as the same type here.
+                assert(it.type == expectedType || (LLVMIsPointerTy(it.type) != 0 && LLVMIsPointerTy(expectedType) != 0)) {
                     "Unexpected type at $index: expected ${LLVMPrintTypeToString(expectedType)!!.toKString()} " +
                             "got ${LLVMPrintTypeToString(it.type)!!.toKString()}"
                 }
@@ -127,7 +128,7 @@ internal fun ContextUtils.isObjectRef(value: LLVMValueRef): Boolean {
 }
 
 internal fun RuntimeAware.isObjectType(type: LLVMTypeRef): Boolean {
-    return LLVMGetPointerAddressSpace(type) != 0
+    return type == kObjHeaderPtr || type == kArrayHeaderPtr
 }
 
 /**

@@ -47,6 +47,10 @@ void LLVMKotlinInitializeTargets() {
 #undef INIT_LLVM_TARGET
 }
 
+int LLVMIsPointerTy(LLVMTypeRef Ty) {
+    return unwrap(Ty)->isPointerTy();
+}
+
 void LLVMSetNoTailCall(LLVMValueRef Call) {
     unwrap<CallInst>(Call)->setTailCallKind(CallInst::TCK_NoTail);
 }

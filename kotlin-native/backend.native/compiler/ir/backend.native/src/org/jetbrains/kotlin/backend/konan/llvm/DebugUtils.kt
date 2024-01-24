@@ -150,7 +150,7 @@ internal class DebugInfo(override val generationState: NativeGenerationState) : 
             context.irBuiltIns.doubleType to llvm.doubleType)
     private val llvmTypeSizes = llvmTypes.map { it.key to LLVMSizeOfTypeInBits(llvmTargetData, it.value) }.toMap()
     private val llvmTypeAlignments = llvmTypes.map { it.key to LLVMPreferredAlignmentOfType(llvmTargetData, it.value) }.toMap()
-    private val otherLlvmType = LLVMPointerType(llvm.int64Type, 0)!!
+    private val otherLlvmType = pointerType(llvm.int64Type)
     private val otherTypeSize = LLVMSizeOfTypeInBits(llvmTargetData, otherLlvmType)
     private val otherTypeAlignment = LLVMPreferredAlignmentOfType(llvmTargetData, otherLlvmType)
 
