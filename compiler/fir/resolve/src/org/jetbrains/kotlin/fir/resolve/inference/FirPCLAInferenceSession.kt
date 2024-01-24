@@ -192,37 +192,38 @@ class FirPCLAInferenceSession(
     }
 
     private fun FirExpression.shouldBePostponed(): Boolean {
-        if (this is FirWrappedArgumentExpression) return expression.shouldBePostponed()
-        if (this is FirAnonymousFunctionExpression) return true
-        if (this is FirCallableReferenceAccess) return true
-        if (this is FirAnonymousObjectExpression) return true
-        return false
+        return when (this) {
+            is FirWrappedArgumentExpression -> expression.shouldBePostponed()
+            is FirAnonymousFunctionExpression -> true
+            is FirCallableReferenceAccess -> true
+            is FirAnonymousObjectExpression -> true
+            else -> false
+        }
     }
 
     private fun Candidate.needsToBePostponed(): Boolean {
-        if (dispatchReceiver?.isReceiverPostponed() == true) return true
-        if (givenExtensionReceiverOptions.any { it.isReceiverPostponed() }) return true
-
-        if (callInfo.arguments.any { it.shouldBePostponed() }) return true
-
-        if (callInfo.callKind == CallKind.VariableAccess) {
-            val returnType = (symbol as? FirVariableSymbol)?.let(returnTypeCalculator::tryCalculateReturnType)
-            if (returnType?.type?.containsNotFixedTypeVariables() == true) return true
+        val arguments = callInfo.arguments
+        val callKind = callInfo.callKind
+        when {
+            dispatchReceiver?.isReceiverPostponed() == true -> return true
+            givenExtensionReceiverOptions.any { it.isReceiverPostponed() } -> return true
+            arguments.any { it.shouldBePostponed() } -> return true
+            callKind == CallKind.VariableAccess -> {
+                val returnType = (symbol as? FirVariableSymbol)?.let(returnTypeCalculator::tryCalculateReturnType)
+                if (returnType?.type?.containsNotFixedTypeVariables() == true) return true
+            }
         }
-        if (callInfo.arguments.any { it.isQualifiedAccessContainingTypeVariables() || it.doesArgumentUseOuterCS() }) return true
-
-        if (callInfo.resolutionMode is ResolutionMode.ContextDependent.Delegate) return true
-
-        // For assignments like myVarContainingTV = SomeCallWithNonTrivialInference(...)
-        // We should integrate the call into the PCLA tree, too
-        if ((callInfo.resolutionMode as? ResolutionMode.WithExpectedType)?.expectedTypeRef?.type?.containsNotFixedTypeVariables() == true) {
-            return true
+        val resolutionMode = callInfo.resolutionMode
+        return when {
+            arguments.any { it.isQualifiedAccessContainingTypeVariables() || it.doesArgumentUseOuterCS() } -> true
+            resolutionMode is ResolutionMode.ContextDependent.Delegate -> true
+            // For assignments like myVarContainingTV = SomeCallWithNonTrivialInference(...)
+            // We should integrate the call into the PCLA tree, too
+            (resolutionMode as? ResolutionMode.WithExpectedType)?.expectedTypeRef?.type?.containsNotFixedTypeVariables() == true -> true
+            // Synthetic calls with blocks work like lambdas
+            callKind == CallKind.SyntheticSelect -> true
+            else -> false
         }
-
-        // Synthetic calls with blocks work like lambdas
-        if (callInfo.callKind == CallKind.SyntheticSelect) return true
-
-        return false
     }
 
     private fun FirExpression.doesArgumentUseOuterCS(): Boolean {
@@ -237,19 +238,21 @@ class FirPCLAInferenceSession(
     }
 
     private fun FirExpression.isReceiverPostponed(): Boolean {
-        if (resolvedType.containsNotFixedTypeVariables()) return true
-        if ((this as? FirResolvable)?.candidate()?.usedOuterCs == true) return true
-
-        return false
+        return when {
+            resolvedType.containsNotFixedTypeVariables() -> true
+            (this as? FirResolvable)?.candidate()?.usedOuterCs == true -> true
+            else -> false
+        }
     }
 
     private fun FirExpression.isQualifiedAccessContainingTypeVariables(): Boolean {
-        if (this is FirNamedArgumentExpression) return expression.isQualifiedAccessContainingTypeVariables()
-
-        if (!isQualifiedAccessOrSmartCastOnIt()) return false
-        if (this is FirCallableReferenceAccess) return false
-
-        return resolvedType.containsNotFixedTypeVariables() && (this as? FirResolvable)?.candidate() == null
+        return when (this) {
+            is FirNamedArgumentExpression -> expression.isQualifiedAccessContainingTypeVariables()
+            is FirCallableReferenceAccess -> false
+            else -> isQualifiedAccessOrSmartCastOnIt() &&
+                    resolvedType.containsNotFixedTypeVariables() &&
+                    (this as? FirResolvable)?.candidate() == null
+        }
     }
 
     private fun FirExpression.isQualifiedAccessOrSmartCastOnIt(): Boolean = when (this) {
