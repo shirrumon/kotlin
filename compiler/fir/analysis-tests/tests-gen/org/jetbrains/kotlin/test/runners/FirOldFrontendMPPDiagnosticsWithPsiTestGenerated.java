@@ -182,6 +182,12 @@ public class FirOldFrontendMPPDiagnosticsWithPsiTestGenerated extends AbstractFi
     }
 
     @Test
+    @TestMetadata("expectKeywordIsMissing.kt")
+    public void testExpectKeywordIsMissing() throws Exception {
+        runTest("compiler/testData/diagnostics/tests/multiplatform/expectKeywordIsMissing.kt");
+    }
+
+    @Test
     @TestMetadata("expectObjectWithAbstractMember.kt")
     public void testExpectObjectWithAbstractMember() throws Exception {
         runTest("compiler/testData/diagnostics/tests/multiplatform/expectObjectWithAbstractMember.kt");
