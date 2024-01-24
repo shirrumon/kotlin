@@ -89,7 +89,7 @@ abstract class DummyFrameworkTask : DefaultTask() {
         transform
     )
 
-    private fun copyFrameworkDsym() {
+    private fun createDummyDsym() {
         if (useStaticFramework.get()) {
             return
         }
@@ -120,8 +120,8 @@ abstract class DummyFrameworkTask : DefaultTask() {
             }
         }
 
-        // Copy dSYM
-        copyFrameworkDsym()
+        // Create dSYM
+        createDummyDsym()
     }
 
 
