@@ -12,4 +12,6 @@ object JvmAbiConfigurationKeys {
         CompilerConfigurationKey.create(JvmAbiCommandLineProcessor.OUTPUT_PATH_OPTION.description)
     val REMOVE_DEBUG_INFO: CompilerConfigurationKey<Boolean> =
         CompilerConfigurationKey.create(JvmAbiCommandLineProcessor.REMOVE_DEBUG_INFO_OPTION.description)
+    val DO_NOT_SORT_MEMBERS: CompilerConfigurationKey<Boolean> =
+        CompilerConfigurationKey.create(JvmAbiCommandLineProcessor.DO_NOT_SORT_MEMBERS_OPTION.description)
 }

@@ -90,6 +90,11 @@ public class CompareJvmAbiTestGenerated extends AbstractCompareJvmAbiTest {
         runTest("plugins/jvm-abi-gen/testData/compare/declarationOrderPrivateInline/");
     }
 
+    @TestMetadata("doNotSortMembers")
+    public void testDoNotSortMembers() throws Exception {
+        runTest("plugins/jvm-abi-gen/testData/compare/doNotSortMembers/");
+    }
+
     @TestMetadata("fieldOrder")
     public void testFieldOrder() throws Exception {
         runTest("plugins/jvm-abi-gen/testData/compare/fieldOrder/");

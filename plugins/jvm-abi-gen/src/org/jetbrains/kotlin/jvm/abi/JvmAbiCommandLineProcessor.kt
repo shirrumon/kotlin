@@ -32,18 +32,28 @@ class JvmAbiCommandLineProcessor : CommandLineProcessor {
                         "sites of inline functions.",
                 false,
             )
+
+        val DO_NOT_SORT_MEMBERS_OPTION: CliOption =
+            CliOption(
+                "doNotSortMembers",
+                "true/false",
+                "Do not sort class members in output abi.jar. Legacy flag that allows tools that rely on methods/fields order in the source" +
+                        "to keep working. Flipping this to true reduces stability of the ABI.",
+                false,
+            )
     }
 
     override val pluginId: String
         get() = COMPILER_PLUGIN_ID
 
     override val pluginOptions: Collection<CliOption>
-        get() = listOf(OUTPUT_PATH_OPTION, REMOVE_DEBUG_INFO_OPTION)
+        get() = listOf(OUTPUT_PATH_OPTION, REMOVE_DEBUG_INFO_OPTION, DO_NOT_SORT_MEMBERS_OPTION)
 
     override fun processOption(option: AbstractCliOption, value: String, configuration: CompilerConfiguration) {
         when (option) {
             OUTPUT_PATH_OPTION -> configuration.put(JvmAbiConfigurationKeys.OUTPUT_PATH, value)
             REMOVE_DEBUG_INFO_OPTION -> configuration.put(JvmAbiConfigurationKeys.REMOVE_DEBUG_INFO, value == "true")
+            DO_NOT_SORT_MEMBERS_OPTION -> configuration.put(JvmAbiConfigurationKeys.DO_NOT_SORT_MEMBERS, value == "true")
             else -> throw CliOptionProcessingException("Unknown option: ${option.optionName}")
         }
     }

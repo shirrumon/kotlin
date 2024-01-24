@@ -79,6 +79,9 @@ abstract class BaseJvmAbiTest : TestCase() {
                 abiOption(JvmAbiCommandLineProcessor.OUTPUT_PATH_OPTION.optionName, compilation.abiDir.canonicalPath),
                 abiOption(JvmAbiCommandLineProcessor.REMOVE_DEBUG_INFO_OPTION.optionName, true.toString()).takeIf {
                     InTextDirectivesUtils.findStringWithPrefixes(directives, "// REMOVE_DEBUG_INFO") != null
+                },
+                abiOption(JvmAbiCommandLineProcessor.DO_NOT_SORT_MEMBERS_OPTION.optionName, true.toString()).takeIf {
+                    InTextDirectivesUtils.findStringWithPrefixes(directives, "// DO_NOT_SORT_MEMBERS") != null
                 }
             ).toTypedArray()
             destination = compilation.destinationDir.canonicalPath
