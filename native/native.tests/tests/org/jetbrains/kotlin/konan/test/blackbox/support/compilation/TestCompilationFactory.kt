@@ -184,7 +184,8 @@ internal class TestCompilationFactory {
             }
             TestMode.TWO_STAGE_MULTI_MODULE -> {
                 // Compile root modules to KLIB. Pass this KLIB as included dependency to executable compilation.
-                val klibCompilations = modulesToKlib(rootModules, freeCompilerArgs, produceStaticCache(), settings)
+                val klibCompilations =
+                    modulesToKlib(rootModules, freeCompilerArgs.transformedFor1stStage, produceStaticCache(), settings)
 
                 Pair(
                     // Include just compiled KLIB as -Xinclude dependency.

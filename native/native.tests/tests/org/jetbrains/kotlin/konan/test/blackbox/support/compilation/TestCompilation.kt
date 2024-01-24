@@ -7,6 +7,8 @@ package org.jetbrains.kotlin.konan.test.blackbox.support.compilation
 
 import org.jetbrains.kotlin.cli.common.ExitCode
 import org.jetbrains.kotlin.konan.properties.resolvablePropertyList
+import org.jetbrains.kotlin.konan.target.AppleConfigurables
+import org.jetbrains.kotlin.konan.target.withOSVersion
 import org.jetbrains.kotlin.konan.test.blackbox.support.*
 import org.jetbrains.kotlin.konan.test.blackbox.support.TestCase.*
 import org.jetbrains.kotlin.konan.test.blackbox.support.TestModule.Companion.allDependsOn
@@ -327,28 +329,21 @@ internal class CInteropCompilation(
 ) : TestCompilation<KLIB>() {
 
     override val result: TestCompilationResult<out KLIB> by lazy {
-        val extraArgsArray = buildList {
-            addAll(freeCompilerArgs.cinteropArgs)
-            sources.forEach {
-                add("-Xcompile-source")
-                add(it.absolutePath)
-            }
-            add("-Xsource-compiler-option")
-            add("-fobjc-arc")
-            add("-Xsource-compiler-option")
-            add("-DNS_FORMAT_ARGUMENT(A)=")
-            add("-compiler-option")
-            add("-I${defFile.parentFile}")
-        }.toTypedArray()
+        val args = listOf("-no-default-libs", "-target", targets.testTarget.name,
+            "-o", expectedArtifact.klibFile.canonicalPath, "-def", defFile.canonicalPath,
+            "-Xsource-compiler-option", "-fobjc-arc",
+            "-Xsource-compiler-option", "-DNS_FORMAT_ARGUMENT(A)=",
+            "-compiler-option", "-I${defFile.parentFile}",
+        ) + sources.flatMap {
+            listOf("-Xcompile-source", it.absolutePath)
+        } + freeCompilerArgs.cinteropArgs
 
-        val loggedCInteropParameters = LoggedData.CInteropParameters(extraArgs = extraArgsArray, defFile = defFile)
+        val loggedCInteropParameters = LoggedData.CInteropParameters(args, defFile)
         val (loggedCall: LoggedData, immediateResult: TestCompilationResult.ImmediateResult<out KLIB>) = try {
             val (exitCode, cinteropOutput, cinteropOutputHasErrors, duration) = invokeCInterop(
                 classLoader.classLoader,
-                targets,
-                defFile,
                 expectedArtifact.klibFile,
-                extraArgsArray
+                args.toTypedArray()
             )
 
             val loggedInteropCall = LoggedData.CompilationToolCall(
@@ -386,22 +381,22 @@ internal class SwiftCompilation(
 ) : TestCompilation<Executable>() {
     override val result: TestCompilationResult<out Executable> by lazy {
         val buildDir = testRunSettings.get<Binaries>().testBinariesDir
-        val options = swiftExtraOpts + listOf(
-            "-g",
+        val configs = testRunSettings.configurables as AppleConfigurables
+        val swiftTarget = configs.targetTriple.withOSVersion(configs.osVersionMin).toString()
+        val args = swiftExtraOpts + sources.map { it.absolutePath } + listOf(
+            "-sdk", configs.absoluteTargetSysRoot, "-target", swiftTarget,
+            "-g", "-o", expectedArtifact.executableFile.absolutePath,
             "-Xlinker", "-rpath", "-Xlinker", "@executable_path/Frameworks",
             "-Xlinker", "-rpath", "-Xlinker", buildDir.absolutePath,
             "-F", buildDir.absolutePath,
-            "-Xcc", "-Werror" // To fail compilation on warnings in framework header.
+            "-Xcc", "-Werror", // To fail compilation on warnings in framework header.
+            "-Xlinker", "-adhoc_codesign", // Linker doesn't do adhoc codesigning for tvOS arm64 simulator by default.
         )
 
-        val loggedSwiftCParameters = LoggedData.SwiftCParameters(extraArgs = options.toTypedArray(), sources = sources)
+        val loggedSwiftCParameters = LoggedData.SwiftCParameters(args, sources)
         val (loggedCall: LoggedData, immediateResult: TestCompilationResult.ImmediateResult<out Executable>) = try {
-            val (exitCode, swiftcOutput, swiftcOutputHasErrors, duration) = invokeSwiftC(
-                testRunSettings,
-                sources,
-                expectedArtifact.executableFile,
-                options
-            )
+            val (exitCode, swiftcOutput, swiftcOutputHasErrors, duration) =
+                invokeSwiftC(testRunSettings, args)
 
             val loggedSwiftCCall = LoggedData.CompilationToolCall(
                 toolName = "SWIFTC",

@@ -8,11 +8,6 @@ package org.jetbrains.kotlin.konan.test.blackbox
 import com.intellij.testFramework.TestDataPath
 import org.jetbrains.kotlin.konan.target.Family
 import org.jetbrains.kotlin.konan.test.blackbox.support.*
-import org.jetbrains.kotlin.konan.test.blackbox.support.ClassLevelProperty
-import org.jetbrains.kotlin.konan.test.blackbox.support.EnforcedProperty
-import org.jetbrains.kotlin.konan.test.blackbox.support.TestCase
-import org.jetbrains.kotlin.konan.test.blackbox.support.TestCompilerArgs
-import org.jetbrains.kotlin.konan.test.blackbox.support.TestModule
 import org.jetbrains.kotlin.konan.test.blackbox.support.compilation.*
 import org.jetbrains.kotlin.konan.test.blackbox.support.compilation.TestCompilationResult.Companion.assertSuccess
 import org.jetbrains.kotlin.konan.test.blackbox.support.group.FirPipeline
@@ -20,25 +15,20 @@ import org.jetbrains.kotlin.konan.test.blackbox.support.runner.TestExecutable
 import org.jetbrains.kotlin.konan.test.blackbox.support.runner.TestRunCheck
 import org.jetbrains.kotlin.konan.test.blackbox.support.runner.TestRunChecks
 import org.jetbrains.kotlin.konan.test.blackbox.support.settings.*
-import org.jetbrains.kotlin.konan.test.blackbox.support.settings.Binaries
-import org.jetbrains.kotlin.konan.test.blackbox.support.settings.KotlinNativeTargets
-import org.jetbrains.kotlin.konan.test.blackbox.support.settings.Timeouts
+import org.jetbrains.kotlin.test.services.JUnit5Assertions.assertTrue
 import org.junit.jupiter.api.Assumptions
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import java.io.File
 import java.io.FileWriter
+import kotlin.test.assertTrue
 
 @TestDataPath("\$PROJECT_ROOT")
-@EnforcedProperty(ClassLevelProperty.COMPILER_OUTPUT_INTERCEPTOR, "NONE")
-@EnforcedProperty(ClassLevelProperty.TEST_MODE, "ONE_STAGE_MULTI_MODULE")
 class ClassicFrameworkTest : FrameworkTestBase()
 
 @FirPipeline
 @Tag("frontend-fir")
 @TestDataPath("\$PROJECT_ROOT")
-@EnforcedProperty(ClassLevelProperty.COMPILER_OUTPUT_INTERCEPTOR, "NONE")
-@EnforcedProperty(ClassLevelProperty.TEST_MODE, "ONE_STAGE_MULTI_MODULE")
 class FirFrameworkTest : FrameworkTestBase()
 
 abstract class FrameworkTestBase : AbstractNativeSimpleTest() {
@@ -80,27 +70,28 @@ abstract class FrameworkTestBase : AbstractNativeSimpleTest() {
         val testDir = testSuiteDir.resolve(testName)
         val framework1Dir = testDir.resolve("framework1")
         val sharedDir = testDir.resolve("shared")
-        val freeCompilerArgs = TestCompilerArgs(listOf("-Xstatic-framework", "-Xpre-link-caches=enable"))
+        val moduleName1st = "First"
         val testCase1 = generateObjCFrameworkTestCase(
-            TestKind.STANDALONE_NO_TR, extras, "First",
+            TestKind.STANDALONE_NO_TR, extras, moduleName1st,
             listOf(
                 framework1Dir.resolve("first.kt"),
                 framework1Dir.resolve("test.kt"),
                 sharedDir.resolve("shared.kt"),
             ),
-            freeCompilerArgs
+            TestCompilerArgs("-Xbinary=bundleId=$moduleName1st")
         )
         testCompilationFactory.testCaseToObjCFrameworkCompilation(testCase1, testRunSettings).result.assertSuccess()
 
         val framework2Dir = testDir.resolve("framework2")
+        val moduleName2nd = "Second"
         val testCase2 = generateObjCFrameworkTestCase(
-            TestKind.STANDALONE_NO_TR, extras, "Second",
+            TestKind.STANDALONE_NO_TR, extras, moduleName2nd,
             listOf(
                 framework2Dir.resolve("second.kt"),
                 framework2Dir.resolve("test.kt"),
                 sharedDir.resolve("shared.kt"),
             ),
-            freeCompilerArgs
+            TestCompilerArgs("-Xbinary=bundleId=$moduleName2nd")
         )
         testCompilationFactory.testCaseToObjCFrameworkCompilation(testCase2, testRunSettings).result.assertSuccess()
 
@@ -116,25 +107,28 @@ abstract class FrameworkTestBase : AbstractNativeSimpleTest() {
         val testDir = testSuiteDir.resolve(testName)
         val framework1Dir = testDir.resolve("framework1")
         val sharedDir = testDir.resolve("shared")
+        val freeCompilerArgs = listOf("-Xstatic-framework", "-Xpre-link-caches=enable")
+        val moduleName1st = "First"
         val testCase1 = generateObjCFrameworkTestCase(
-            TestKind.STANDALONE_NO_TR, extras, "First",
+            TestKind.STANDALONE_NO_TR, extras, moduleName1st,
             listOf(
                 framework1Dir.resolve("first.kt"),
                 framework1Dir.resolve("test.kt"),
                 sharedDir.resolve("shared.kt"),
             ),
-            freeCompilerArgs = TestCompilerArgs(listOf("-Xstatic-framework", "-Xpre-link-caches=enable"))
+            freeCompilerArgs = TestCompilerArgs(freeCompilerArgs + "-Xbinary=bundleId=$moduleName1st")
         )
         testCompilationFactory.testCaseToObjCFrameworkCompilation(testCase1, testRunSettings).result.assertSuccess()
 
         val framework2Dir = testDir.resolve("framework2")
+        val moduleName2nd = "Second"
         val testCase2 = generateObjCFrameworkTestCase(
-            TestKind.STANDALONE_NO_TR, extras, "Second",
+            TestKind.STANDALONE_NO_TR, extras, moduleName2nd,
             listOf(
                 framework2Dir.resolve("second.kt"),
                 framework2Dir.resolve("test.kt"),
                 sharedDir.resolve("shared.kt"),
-            ), freeCompilerArgs = TestCompilerArgs(listOf("-Xstatic-framework", "-Xpre-link-caches=enable"))
+            ), freeCompilerArgs = TestCompilerArgs(freeCompilerArgs + "-Xbinary=bundleId=$moduleName2nd")
         )
         testCompilationFactory.testCaseToObjCFrameworkCompilation(testCase2, testRunSettings).result.assertSuccess()
 
@@ -188,6 +182,7 @@ abstract class FrameworkTestBase : AbstractNativeSimpleTest() {
 
     @Test
     fun testStacktraceByLibbacktrace() {
+        Assumptions.assumeFalse(testRunSettings.get<OptimizationMode>() == OptimizationMode.OPT)
         val testName = "stacktraceByLibbacktrace"
         val testCase = generateObjCFramework(testName, listOf("-g", "-Xbinary=sourceInfoType=libbacktrace"))
         compileAndRunSwift(testName, testCase)
@@ -210,6 +205,7 @@ abstract class FrameworkTestBase : AbstractNativeSimpleTest() {
         val testDir = testSuiteDir.resolve(testName)
         val freeCompilerArgs = TestCompilerArgs(
             listOf(
+                "-Xbinary=bundleId=$testName",
                 "-Xbinary=bundleVersion=FooBundleVersion",
                 "-Xbinary=bundleShortVersionString=FooBundleShortVersionString"
             )
@@ -225,14 +221,15 @@ abstract class FrameworkTestBase : AbstractNativeSimpleTest() {
         testCompilationFactory.testCaseToObjCFrameworkCompilation(testCase, testRunSettings).result.assertSuccess()
 
         val buildDir = testRunSettings.get<Binaries>().testBinariesDir
-        val infoPlistContents = buildDir.resolve("$testName.framework/Resources/Info.plist").readText()
+        val infoPlist = buildDir.resolve("$testName.framework/Resources/Info.plist")
+        val infoPlistContents = infoPlist.readText()
         listOf(
             "<key>CFBundleIdentifier</key>\\s*<string>$testName</string>",
             "<key>CFBundleShortVersionString</key>\\s*<string>FooBundleShortVersionString</string>",
             "<key>CFBundleVersion</key>\\s*<string>FooBundleVersion</string>",
         ).forEach {
-            assert(infoPlistContents.contains(Regex(it))) {
-                "Modulemap does not contain pattern `$it`:\n$infoPlistContents"
+            assertTrue(infoPlistContents.contains(Regex(it))) {
+                "${infoPlist.absolutePath} does not contain pattern `$it`:\n$infoPlistContents"
             }
         }
     }
@@ -259,17 +256,18 @@ abstract class FrameworkTestBase : AbstractNativeSimpleTest() {
     fun testUseFoundationModule() {
         val testName = "use_foundation_module"
         generateObjCFramework(testName)
-        val modulemapContents = buildDir.resolve("$testName.framework/Modules/module.modulemap").readText()
+        val modulemap = buildDir.resolve("$testName.framework/Modules/module.modulemap")
+        val modulemapContents = modulemap.readText()
         val expectedPattern = "use Foundation"
-        assert(modulemapContents.contains(expectedPattern)) {
-            "Modulemap must contain `$expectedPattern`:\n$modulemapContents"
+        assertTrue(modulemapContents.contains(expectedPattern)) {
+            "${modulemap.absolutePath} must contain `$expectedPattern`:\n$modulemapContents"
         }
     }
 
     @Test
     fun testKT56233() {
         val testName = "kt56233"
-        // test must make huge amount of repetitions to make sure there's no race conditions, so bigger timeout is needed.
+        // test must make huge amount of repetitions to make sure there's no race conditions, so bigger timeout is needed. Double is not enough
         val checks = TestRunChecks.Default(testRunSettings.get<Timeouts>().executionTimeout * 10)
         val testCase = generateObjCFramework(testName, checks = checks)
         val swiftExtraOpts = if (testRunSettings.get<GCScheduler>() != GCScheduler.AGGRESSIVE) listOf() else
@@ -352,9 +350,12 @@ abstract class FrameworkTestBase : AbstractNativeSimpleTest() {
             emptyList(),
         )
 
-        // Convert KT sources info ObjC framework using two KLIbs
-        val ktFiles = testSuiteDir.resolve("objcexport").listFiles { file: File -> file.name.endsWith(".kt") }
-        assert(ktFiles != null)
+        // Convert KT sources into ObjC framework using two KLIbs
+        val objcExportTestSuiteDir = testSuiteDir.resolve("objcexport")
+        val ktFiles = objcExportTestSuiteDir.listFiles { file: File -> file.name.endsWith(".kt") }
+        assertTrue(ktFiles != null && ktFiles.isNotEmpty()) {
+            "Some .kt files must be in test folder $objcExportTestSuiteDir"
+        }
         val frameworkName = "Kt"
         val testCase = generateObjCFrameworkTestCase(
             TestKind.STANDALONE_NO_TR, extras, "Kt",
@@ -370,7 +371,8 @@ abstract class FrameworkTestBase : AbstractNativeSimpleTest() {
                 )
             ),
             givenDependencies = setOf(TestModule.Given(library.klibFile), TestModule.Given(noEnumEntries.klibFile)),
-            checks = TestRunChecks.Default(testRunSettings.get<Timeouts>().executionTimeout * 10),
+            // test must make huge amount of repetitions to make sure there's no race conditions, so bigger timeout is needed.
+            checks = TestRunChecks.Default(testRunSettings.get<Timeouts>().executionTimeout * 2),
         )
         val framework =
             testCompilationFactory.testCaseToObjCFrameworkCompilation(testCase, testRunSettings).result.assertSuccess()
@@ -378,8 +380,10 @@ abstract class FrameworkTestBase : AbstractNativeSimpleTest() {
             codesign(framework.resultingArtifact.frameworkDir.absolutePath)
 
         // compile Swift sources using generated ObjC framework
-        val swiftFiles = testSuiteDir.resolve("objcexport").listFiles { file: File -> file.name.endsWith(".swift") }
-        assert(swiftFiles != null)
+        val swiftFiles = objcExportTestSuiteDir.listFiles { file: File -> file.name.endsWith(".swift") }
+        assertTrue(swiftFiles != null && swiftFiles.isNotEmpty()) {
+            "Some .swift files must be in test folder $objcExportTestSuiteDir"
+        }
         val swiftExtraOpts = buildList {
             addAll(swiftOpts)
             if (testRunSettings.get<GCScheduler>() == GCScheduler.AGGRESSIVE) {
@@ -401,9 +405,10 @@ abstract class FrameworkTestBase : AbstractNativeSimpleTest() {
 
         // check Info.plist for expected bundle identifier
         val plistFName = if (targets.testTarget.family == Family.OSX) "Resources/Info.plist" else "Info.plist"
-        val infoPlistContents = buildDir.resolve("$frameworkName.framework/$plistFName").readText()
-        assert(infoPlistContents.contains(Regex("<key>CFBundleIdentifier</key>\\s*<string>foo.bar</string>"))) {
-            "Modulemap does not contain expected pattern with `foo.bar`:\n$infoPlistContents"
+        val infoPlist = buildDir.resolve("$frameworkName.framework/$plistFName")
+        val infoPlistContents = infoPlist.readText()
+        assertTrue(infoPlistContents.contains(Regex("<key>CFBundleIdentifier</key>\\s*<string>foo.bar</string>"))) {
+            "${infoPlist.absolutePath} does not contain expected pattern with `foo.bar`:\n$infoPlistContents"
         }
     }
 
@@ -420,7 +425,7 @@ abstract class FrameworkTestBase : AbstractNativeSimpleTest() {
             extras,
             name.replaceFirstChar { it.uppercase() },
             listOf(testSuiteDir.resolve(name).resolve("$name.kt")),
-            TestCompilerArgs(testCompilerArgs),
+            TestCompilerArgs(testCompilerArgs + listOf("-Xbinary=bundleId=$name")),
             givenDependencies,
             checks = checks,
         )

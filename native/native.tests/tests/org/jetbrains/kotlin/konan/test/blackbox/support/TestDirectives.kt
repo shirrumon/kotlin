@@ -265,6 +265,19 @@ internal open class TestCompilerArgs(
         else fail { "Cannot add ${this.assertionsMode} and ${otherCompilerArgs.assertionsMode}" },
     )
 
+    val transformedFor1stStage: TestCompilerArgs by lazy {
+        // options `-Xexport-library=` and `-Xstatic-framework`
+        // - strictly must not be supplied for 1st stage (compile sources to KLIB)
+        // - anyway are useful only for 2nd stage (compile KLIB to framework or native library), but not for 1st stage.
+        TestCompilerArgs(
+            compilerArgs.filter {
+                !it.startsWith("-Xexport-library=") && it != "-Xstatic-framework"
+            },
+            cinteropArgs,
+            assertionsMode
+        )
+    }
+
     companion object {
         val EMPTY = TestCompilerArgs(emptyList())
 
