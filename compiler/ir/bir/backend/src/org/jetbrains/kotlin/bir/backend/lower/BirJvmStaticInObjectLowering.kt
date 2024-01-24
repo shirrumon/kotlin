@@ -5,14 +5,13 @@
 
 package org.jetbrains.kotlin.bir.backend.lower
 
+import org.jetbrains.kotlin.bir.BirElement
+import org.jetbrains.kotlin.bir.accept
 import org.jetbrains.kotlin.bir.backend.BirLoweringPhase
 import org.jetbrains.kotlin.bir.backend.jvm.JvmBirBackendContext
 import org.jetbrains.kotlin.bir.backend.jvm.JvmCachedDeclarations
 import org.jetbrains.kotlin.bir.declarations.*
-import org.jetbrains.kotlin.bir.expressions.BirCall
-import org.jetbrains.kotlin.bir.expressions.BirExpression
-import org.jetbrains.kotlin.bir.expressions.BirGetValue
-import org.jetbrains.kotlin.bir.expressions.BirMemberAccessExpression
+import org.jetbrains.kotlin.bir.expressions.*
 import org.jetbrains.kotlin.bir.expressions.impl.BirBlockImpl
 import org.jetbrains.kotlin.bir.expressions.impl.BirGetFieldImpl
 import org.jetbrains.kotlin.bir.expressions.impl.BirTypeOperatorCallImpl
@@ -22,6 +21,7 @@ import org.jetbrains.kotlin.bir.util.defaultType
 import org.jetbrains.kotlin.bir.util.hasAnnotation
 import org.jetbrains.kotlin.bir.util.isTrivial
 import org.jetbrains.kotlin.descriptors.ClassKind
+import org.jetbrains.kotlin.ir.declarations.IrDeclaration
 import org.jetbrains.kotlin.ir.expressions.IrTypeOperator
 import org.jetbrains.kotlin.resolve.annotations.JVM_STATIC_ANNOTATION_FQ_NAME
 import org.jetbrains.kotlin.utils.addIfNotNull
@@ -30,38 +30,35 @@ context(JvmBirBackendContext)
 class BirJvmStaticInObjectLowering : BirLoweringPhase() {
     private val JvmStaticAnnotation by lz { birBuiltIns.findClass(JVM_STATIC_ANNOTATION_FQ_NAME) }
 
-    private val staticDeclarations = registerIndexKey<BirDeclaration>(BirSimpleFunction or BirProperty, true) { declaration ->
-        JvmStaticAnnotation?.let { declaration.hasAnnotation(it) } == true
-    }
-    private val memberAccesses = registerBackReferencesKeyWithUntypedSymbolProperty(BirMemberAccessExpression, BirMemberAccessExpression<*>::symbol)
-    private val valueReads = registerBackReferencesKey(BirGetValue, BirGetValue::symbol)
+    private val allFunctions = registerIndexKey(BirSimpleFunction, false)
+    private val allMemberAccesses = registerIndexKey(BirMemberAccessExpression, false)
 
     override fun lower(module: BirModuleFragment) {
-        val effectivelyStaticDeclarations = buildSet {
-            getAllElementsWithIndex(staticDeclarations).forEach { declaration ->
-                add(declaration)
-                if (declaration is BirSimpleFunction) {
-                    addIfNotNull(declaration.correspondingPropertySymbol?.owner)
-                }
-                if (declaration is BirProperty) {
-                    addIfNotNull(declaration.getter?.owner)
+        getAllElementsWithIndex(allFunctions).forEach { function ->
+            val parent = function.parent
+            if (parent is BirClass && parent.kind == ClassKind.OBJECT && !parent.isCompanion) {
+                if (function.isJvmStaticDeclaration()) {
+                    function.removeStaticDispatchReceiver(parent)
                 }
             }
         }
 
-        for (declaration in effectivelyStaticDeclarations) {
-            val parent = declaration.parent
+        getAllElementsWithIndex(allMemberAccesses).forEach { expression ->
+            val callee = expression.symbol.owner
+            val parent = callee.parent
             if (parent is BirClass && parent.kind == ClassKind.OBJECT && !parent.isCompanion) {
-                declaration.getBackReferences(memberAccesses).forEach { call ->
-                    call.replaceWithStatic(replaceCallee = null)
-                }
-
-                if (declaration is BirSimpleFunction && declaration.getContainingDatabase() == compiledBir) {
-                    declaration.removeStaticDispatchReceiver(parent)
+                if (callee is BirDeclaration && callee.isJvmStaticDeclaration()) {
+                    return expression.replaceWithStatic(replaceCallee = null)
                 }
             }
         }
     }
+
+    private fun BirDeclaration.isJvmStaticDeclaration(): Boolean = JvmStaticAnnotation?.let { annotation ->
+        hasAnnotation(annotation)
+                || (this as? BirSimpleFunction)?.correspondingPropertySymbol?.owner?.hasAnnotation(annotation) == true
+                || (this as? BirProperty)?.getter?.hasAnnotation(annotation) == true
+    } == true
 
     private fun BirSimpleFunction.removeStaticDispatchReceiver(parentObject: BirClass) {
         dispatchReceiverParameter?.let { oldDispatchReceiverParameter ->
@@ -90,14 +87,17 @@ class BirJvmStaticInObjectLowering : BirLoweringPhase() {
     private fun BirExpression.coerceToUnit() =
         BirTypeOperatorCallImpl(sourceSpan, birBuiltIns.unitType, IrTypeOperator.IMPLICIT_COERCION_TO_UNIT, this, birBuiltIns.unitType)
 
-    private fun replaceThisByStaticReference(
+    private fun BirElement.replaceThisByStaticReference(
         birClass: BirClass,
         oldThisReceiverParameter: BirValueParameter,
     ) {
-        val field = JvmCachedDeclarations.getPrivateFieldForObjectInstance(birClass)
-        oldThisReceiverParameter.getBackReferences(valueReads).forEach { getValue ->
-            val new = BirGetFieldImpl(getValue.sourceSpan, birClass.defaultType, field, null, null, null)
-            getValue.replaceWith(new)
+        accept { element ->
+            if (element is BirGetValue) {
+                val new = BirGetFieldImpl(element.sourceSpan, birClass.defaultType, field, null, null, null)
+                element.replaceWith(new)
+            } else {
+                element.walkIntoChildren()
+            }
         }
     }
 }

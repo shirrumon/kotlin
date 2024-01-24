@@ -42,18 +42,14 @@ import java.lang.AutoCloseable
 class BirDatabase : BirElementParent() {
     private val possiblyRootElements = mutableListOf<BirElementBase>()
 
-    private val elementIndexSlots = arrayOfNulls<ElementsIndexSlot>(256)
-    private var elementIndexSlotCount = 0
-    private val registeredIndexers = mutableListOf<BirElementGeneralIndexerKey>()
-    private val indexerIndexes = mutableMapOf<BirElementGeneralIndexerKey, Int>()
-    private var elementClassifier: BirElementIndexClassifier? = null
+    private val elementIndexSlots =
+        arrayOfNulls<ElementsIndexSlot>(BirMetadata.allElements.filter { it.hasImplementation }.maxOf { it.id } + 1)
+    private val registeredIndexers = mutableListOf<BirElementsIndexKey<*>>()
+    private val indexerIndexes = mutableMapOf<BirElementsIndexKey<*>, Int>()
     private var currentElementsIndexSlotIterator: ElementsIndexSlotIterator<*>? = null
     private var currentIndexSlot = 0
     internal var mutableElementCurrentlyBeingClassified: BirImplElementBase? = null
         private set
-
-    private val invalidatedElementsBuffer = arrayOfNulls<BirElementBase>(64)
-    private var invalidatedElementsBufferSize = 0
 
     private val movedElementBuffer = arrayOfNulls<BirElementBase>(64)
     private var movedElementBufferSize = 0
@@ -91,7 +87,6 @@ class BirDatabase : BirElementParent() {
             element as BirImplElementBase
             val propertyId = element.replacedWithInternal(null)
             element.setParentWithInvalidation(this)
-            (oldParent as? BirImplElementBase)?.invalidate(propertyId)
 
             elementMoved(element, oldParent)
         } else {
@@ -116,7 +111,6 @@ class BirDatabase : BirElementParent() {
 
     private fun detachElement(element: BirElementBase) {
         element._containingDatabase = null
-        removeElementFromIndex(element)
     }
 
     internal fun elementMoved(element: BirElementBase, oldParent: BirElementParent) {
@@ -253,81 +247,16 @@ class BirDatabase : BirElementParent() {
      * based on forward references of this element. Otherwise, just update the index.
      */
     internal fun indexElement(element: BirElementBase, updateBackReferences: Boolean) {
-        val classifier = elementClassifier ?: return
         if (element._containingDatabase !== this) return
 
-        val forwardReferenceRecorder = if (updateBackReferences) ForwardReferenceRecorder() else null
-
-        assert(mutableElementCurrentlyBeingClassified == null)
-        if (element is BirImplElementBase) {
-            mutableElementCurrentlyBeingClassified = element
-        }
-        val indexSlot = classifier.classify(element, currentIndexSlot + 1, forwardReferenceRecorder)
-        mutableElementCurrentlyBeingClassified = null
-
-        if (indexSlot != 0) {
-            if (element.indexSlot.toInt() != indexSlot) {
-                removeElementFromIndex(element)
-                val targetSlot = elementIndexSlots[indexSlot]!!
+        if (!element.hasFlag(BirElementBase.IS_INDEXED)) {
+            val indexSlot = element.elementClassId.toInt()
+            val targetSlot = elementIndexSlots[indexSlot]
+            if (targetSlot != null) {
                 targetSlot.add(element)
-                element.indexSlot = indexSlot.toUByte()
+                element.setFlag(BirElementBase.IS_INDEXED, true)
             }
-        } else {
-            removeElementFromIndex(element)
         }
-
-        val recordedRef = forwardReferenceRecorder?.recordedRef
-        recordedRef?.registerBackReference(element)
-
-        element.setFlag(BirElementBase.FLAG_INVALIDATED, false)
-    }
-
-    internal fun indexElementAndDependent(element: BirElementBase) {
-        indexElement(element, true)
-        (element as? BirImplElementBase)?.indexInvalidatedDependentElements()
-    }
-
-    private fun removeElementFromIndex(element: BirElementBase) {
-        element.indexSlot = 0u
-
-        // Don't eagerly remove an element from the index slot, as it is too slow.
-        // perf: But when detaching a bigger subtree, maybe we can, instead of finding and
-        //  removing each element individually, rather scan the list for detached elements.
-        //  Maybe also formalize and leverage the invariant that sub-elements must appear later
-        //  than their ancestor (so start scanning from the index of the root one).
-    }
-
-    internal val isInsideElementClassification: Boolean
-        get() = mutableElementCurrentlyBeingClassified != null
-
-    internal fun invalidateElement(element: BirElementBase) {
-        if (!element.hasFlag(BirElementBase.FLAG_INVALIDATED)) {
-            var size = invalidatedElementsBufferSize
-            val buffer = invalidatedElementsBuffer
-            if (size == buffer.size) {
-                flushInvalidatedElementBuffer()
-                size = invalidatedElementsBufferSize
-            }
-
-            buffer[size] = element
-            invalidatedElementsBufferSize = size + 1
-            element.setFlag(BirElementBase.FLAG_INVALIDATED, true)
-        }
-    }
-
-    internal fun flushInvalidatedElementBuffer() {
-        realizeTreeMovements()
-
-        val buffer = invalidatedElementsBuffer
-        for (i in 0..<invalidatedElementsBufferSize) {
-            val element = buffer[i]!!
-            // Element may have already been indexed, e.g., by another element which depends on it.
-            if (element.hasFlag(BirElementBase.FLAG_INVALIDATED)) {
-                indexElementAndDependent(element)
-            }
-            buffer[i] = null
-        }
-        invalidatedElementsBufferSize = 0
     }
 
 
@@ -338,12 +267,6 @@ class BirDatabase : BirElementParent() {
         registeredIndexers += key
     }
 
-    /**
-     * Note: For the index to be used, also call [activateNewRegisteredIndices].
-     */
-    fun registerElementBackReferencesKey(key: BirElementBackReferencesKey<*, *>) {
-        registeredIndexers += key
-    }
 
     /**
      * Activates index keys added with [registerElementIndexingKey] and [registerElementBackReferencesKey] functions
@@ -352,36 +275,18 @@ class BirDatabase : BirElementParent() {
      * To apply those for all currently stored elements as well, call [reindexAllElements].
      */
     fun activateNewRegisteredIndices() {
-        if (registeredIndexers.size != elementIndexSlotCount) {
-            val indexers = registeredIndexers.mapIndexed { i, indexerKey ->
-                val index = i + 1
-                when (indexerKey) {
-                    is BirElementsIndexKey<*> -> {
-                        indexerIndexes[indexerKey] = index
-                        val slot = ElementsIndexSlot(index, indexerKey.condition)
-                        elementIndexSlots[index] = slot
-                        BirElementIndexClassifierFunctionGenerator.Indexer(
-                            BirElementGeneralIndexer.Kind.IndexMatcher,
-                            indexerKey.condition,
-                            indexerKey.elementType,
-                            null,
-                            index
-                        )
-                    }
-                    is BirElementBackReferencesKey<*, *> -> {
-                        BirElementIndexClassifierFunctionGenerator.Indexer(
-                            BirElementGeneralIndexer.Kind.BackReferenceRecorder,
-                            indexerKey.recorder,
-                            indexerKey.elementType,
-                            indexerKey.forwardReferenceProperty,
-                            index
-                        )
-                    }
-                }
+        for (indexer in registeredIndexers) {
+            val possibleClasses = when (val type = indexer.elementType) {
+                is BirElementClass<*> -> setOf(type)
+                is BirElementUnionType<*> -> type.possibleClasses
             }
 
-            elementClassifier = BirElementIndexClassifierFunctionGenerator.createClassifierFunction(indexers)
-            elementIndexSlotCount = registeredIndexers.size
+            for (elementClass in possibleClasses) {
+                val id = elementClass.id
+                if (elementIndexSlots[id] == null) {
+                    elementIndexSlots[id] = ElementsIndexSlot(id)
+                }
+            }
         }
     }
 
@@ -418,28 +323,12 @@ class BirDatabase : BirElementParent() {
      */
     fun <E : BirElement> getElementsWithIndex(key: BirElementsIndexKey<E>): Sequence<E> {
         val cacheSlotIndex = indexerIndexes.getValue(key)
-        require(cacheSlotIndex > currentIndexSlot)
-
-        flushInvalidatedElementBuffer()
 
         currentElementsIndexSlotIterator?.let { iterator ->
             cancelElementsIndexSlotIterator(iterator)
         }
 
-        for (i in currentIndexSlot until cacheSlotIndex) {
-            val slot = elementIndexSlots[i]
-            if (slot != null) {
-                // Execute empty iteration of all previous slots to ensure
-                //  the indices are updated for all elements contained in them.
-                ElementsIndexSlotIterator<BirElementBase>(slot).close()
-            }
-        }
         currentIndexSlot = cacheSlotIndex
-
-        if (cacheSlotIndex >= elementIndexSlotCount) {
-            // We reached the last index, no more indexing is possible.
-            elementClassifier = null
-        }
 
         val slot = elementIndexSlots[cacheSlotIndex]!!
         val iter = ElementsIndexSlotIterator<E>(slot)
@@ -448,16 +337,14 @@ class BirDatabase : BirElementParent() {
     }
 
     private fun cancelElementsIndexSlotIterator(iterator: ElementsIndexSlotIterator<*>) {
-        iterator.close()
         currentElementsIndexSlotIterator = null
     }
 
 
     private inner class ElementsIndexSlot(
         val index: Int,
-        val condition: BirElementIndexMatcher?,
     ) {
-        var array = emptyArray<BirElementBase?>()
+        var array = arrayOfNulls<BirElementBase?>(8)
             private set
         var size = 0
 
@@ -465,10 +352,7 @@ class BirDatabase : BirElementParent() {
             var array = array
             val size = size
 
-            if (array.isEmpty()) {
-                array = acquireNewArray(size)
-                this.array = array
-            } else if (size == array.size) {
+            if (size == array.size) {
                 array = array.copyOf(size * 2)
                 this.array = array
             }
@@ -476,26 +360,11 @@ class BirDatabase : BirElementParent() {
             array[size] = element
             this.size = size + 1
         }
-
-        private fun acquireNewArray(size: Int): Array<BirElementBase?> {
-            for (i in 1..<currentIndexSlot) {
-                val slot = elementIndexSlots[i] ?: continue
-                if (slot.array.size > size) {
-                    // Steal a nice, preallocated and nulled-out array from some previous slot.
-                    // It won't use it anyway.
-                    val array = slot.array
-                    slot.array = emptyArray<BirElementBase?>()
-                    return array
-                }
-            }
-
-            return arrayOfNulls(8)
-        }
     }
 
     private inner class ElementsIndexSlotIterator<E : BirElement>(
         private val slot: ElementsIndexSlot,
-    ) : Iterator<E>, Sequence<E>, AutoCloseable {
+    ) : Iterator<E>, Sequence<E> {
         private var canceled = false
         var mainListIdx = 0
             private set
@@ -522,10 +391,6 @@ class BirDatabase : BirElementParent() {
             require(!canceled) { "Iterator was cancelled" }
             val array = slot.array
 
-            // An operation after last computeNext might have invalidated
-            // some element which we are about to yield here, so check for that.
-            flushInvalidatedElementBuffer()
-
             val slotIndex = slotIndex
             while (true) {
                 val idx = mainListIdx
@@ -535,14 +400,13 @@ class BirDatabase : BirElementParent() {
                     if (
                     // We have to check whether this element sill matches the given index,
                     //  because elements are not removed eagerly.
-                        element.indexSlot == slotIndex
+                        element._containingDatabase === this@BirDatabase
                         // We have to check if this element has not been returned before,
                         //  as the the sequence is guaranteed to yield each one only once.
                         //  An element may be encountered twice in the buffer in the case
                         //  it was yielded, then removed, and then added to the index again.
                         && element.lastReturnedInQueryOfIndexSlot != slotIndex
                     ) {
-                        array[idx] = null
                         break
                     } else {
                         val lastIdx = slot.size - 1
@@ -557,11 +421,6 @@ class BirDatabase : BirElementParent() {
                 }
 
                 if (element != null) {
-                    // Element classification stops at the first successful match.
-                    // Now that the element has matched this particular index, we always
-                    // have to check whether it will also match some proceeding one.
-                    indexElement(element, false)
-
                     element.lastReturnedInQueryOfIndexSlot = slotIndex
                     mainListIdx++
                     return element
@@ -572,19 +431,6 @@ class BirDatabase : BirElementParent() {
                     return null
                 }
             }
-        }
-
-        override fun close() {
-            val array = slot.array
-            for (i in maxOf(0, mainListIdx - 1)..<slot.size) {
-                val element = array[i]!!
-                array[i] = null
-                indexElement(element, false)
-            }
-
-            slot.size = 0
-            next = null
-            canceled = true
         }
 
         override fun iterator(): Iterator<E> {

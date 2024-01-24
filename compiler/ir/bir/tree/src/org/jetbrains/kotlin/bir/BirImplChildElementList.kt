@@ -12,38 +12,13 @@ class BirImplChildElementList<E : BirElement?>(
 ) : BirChildElementList<E>(id, isNullable) {
 
     override val size: Int
-        get() {
-            recordRead()
-            return _size
-        }
-
-    override fun get(index: Int): E {
-        recordRead()
-        return super.get(index)
-    }
-
-    override fun contains(element: E): Boolean {
-        recordRead()
-        return super.contains(element)
-    }
-
-    override fun indexOf(element: E): Int {
-        recordRead()
-        return super.indexOf(element)
-    }
-
-    override fun lastIndexOf(element: E): Int {
-        recordRead()
-        return super.lastIndexOf(element)
-    }
-
+        get() = _size
 
     override fun set(index: Int, element: E): E {
         val old = super.get(index) as BirElementBase?
         if (element !== old) {
             parent.childReplaced(old, element)
             setInternal(index, element as BirElementBase?, old)
-            invalidate()
         }
         @Suppress("UNCHECKED_CAST")
         return old as E
@@ -99,7 +74,6 @@ class BirImplChildElementList<E : BirElement?>(
 
         _size = newSize
         element?.setContainingList()
-        invalidate()
 
         return true
     }
@@ -144,7 +118,6 @@ class BirImplChildElementList<E : BirElement?>(
 
         _size = newSize
         element?.setContainingList()
-        invalidate()
     }
 
     override fun addAll(elements: Collection<E>): Boolean = addAll(_size, elements)
@@ -200,7 +173,6 @@ class BirImplChildElementList<E : BirElement?>(
         }
 
         _size = newSize
-        invalidate()
 
         return true
     }
@@ -226,13 +198,11 @@ class BirImplChildElementList<E : BirElement?>(
         }
 
         _size = count
-        invalidate()
     }
 
     override fun removeAt(index: Int): E {
         val element = removeAtInternal(index)
         parent.childReplaced(element, null)
-        invalidate()
         @Suppress("UNCHECKED_CAST")
         return element as E
     }
@@ -334,7 +304,6 @@ class BirImplChildElementList<E : BirElement?>(
         }
 
         _size = 0
-        invalidate()
     }
 
     fun ensureCapacity(capacity: Int) {
@@ -348,15 +317,6 @@ class BirImplChildElementList<E : BirElement?>(
             }
             this.elementArray = newArray
         }
-    }
-
-
-    private fun recordRead() {
-        parent.recordPropertyRead(id)
-    }
-
-    private fun invalidate() {
-        parent.invalidate(id)
     }
 
 
@@ -386,7 +346,6 @@ class BirImplChildElementList<E : BirElement?>(
     }
 
     override fun iterator(): MutableIterator<E> {
-        recordRead()
         return IteratorImpl<E>(this)
     }
 
