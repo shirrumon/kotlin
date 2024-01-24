@@ -234,7 +234,7 @@ fun Project.overrideNativeCompilerDownloadUrl() {
 fun Project.addCheckRepositoriesTask() {
     val checkRepoTask = tasks.register("checkRepositories") {
         if (GradleVersion.current() >= GradleVersion.version("7.4")) {
-            notCompatibleWithConfigurationCache("Uses project in task action")
+            withGroovyBuilder { "notCompatibleWithConfigurationCache"("Uses project in task action") }
         }
         val isTeamcityBuildInput = providers
             .provider {
