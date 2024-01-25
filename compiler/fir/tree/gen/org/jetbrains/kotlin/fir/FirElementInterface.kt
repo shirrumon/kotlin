@@ -11,8 +11,8 @@ package org.jetbrains.kotlin.fir
 import org.jetbrains.kotlin.KtSourceElement
 
 /**
- * Generated from: [org.jetbrains.kotlin.fir.tree.generator.FirTreeBuilder.targetElement]
+ * Generated from: [org.jetbrains.kotlin.fir.tree.generator.context.AbstractFirTreeBuilder.Companion.baseFirElement]
  */
-interface FirTargetElement : FirElementInterface {
-    override val source: KtSourceElement?
+interface FirElementInterface {
+    val source: KtSourceElement?
 }
