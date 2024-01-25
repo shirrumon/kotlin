@@ -59,7 +59,7 @@ class FirDelegatedPropertyInferenceSession(
     private var wasCompletionRun = false
 
     override fun customCompletionModeInsteadOfFull(call: FirResolvable): ConstraintSystemCompletionMode? = when {
-        call.isAnyOfDelegateOperators() && !wasCompletionRun -> ConstraintSystemCompletionMode.PARTIAL
+        (call as FirElement).isAnyOfDelegateOperators() && !wasCompletionRun -> ConstraintSystemCompletionMode.PARTIAL
         else -> null
     }
 
@@ -68,7 +68,7 @@ class FirDelegatedPropertyInferenceSession(
         resolutionMode: ResolutionMode,
         completionMode: ConstraintSystemCompletionMode,
     ) where T : FirResolvable, T : FirStatement {
-        if (wasCompletionRun || !call.isAnyOfDelegateOperators()) return
+        if (wasCompletionRun || !(call as FirElement).isAnyOfDelegateOperators()) return
 
         requireCallIsDelegateOperator(call)
 
@@ -85,13 +85,13 @@ class FirDelegatedPropertyInferenceSession(
     }
 
     private fun <T> requireCallIsDelegateOperator(call: T) where T : FirResolvable, T : FirStatement {
-        require(call.isAnyOfDelegateOperators()) {
+        require((call as FirElement).isAnyOfDelegateOperators()) {
             "Unexpected ${call.render()} call"
         }
     }
 
     private fun <T> T.isProvideDelegate() where T : FirResolvable, T : FirStatement =
-        isAnyOfDelegateOperators() && (this as FirResolvable).candidate()?.callInfo?.name == OperatorNameConventions.PROVIDE_DELEGATE
+        (this as FirElement).isAnyOfDelegateOperators() && (this as FirResolvable).candidate()?.callInfo?.name == OperatorNameConventions.PROVIDE_DELEGATE
 
     override fun baseConstraintStorageForCandidate(candidate: Candidate): ConstraintStorage? {
         if (wasCompletionRun || !candidate.callInfo.callSite.isAnyOfDelegateOperators()) return null

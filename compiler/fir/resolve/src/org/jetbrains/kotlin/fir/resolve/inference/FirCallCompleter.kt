@@ -96,7 +96,8 @@ class FirCallCompleter(
                 runCompletionForCall(candidate, completionMode, call, initialType, analyzer)
                 val finalSubstitutor = candidate.system.asReadOnlyStorage()
                     .buildAbstractResultingSubstitutor(session.typeContext) as ConeSubstitutor
-                call.transformSingle(
+                @Suppress("UNCHECKED_CAST")
+                (call as FirElement).transformSingle(
                     FirCallCompletionResultsWriterTransformer(
                         session, components.scopeSession, finalSubstitutor,
                         components.returnTypeCalculator,
@@ -107,7 +108,7 @@ class FirCallCompleter(
                         components.context,
                     ),
                     null
-                )
+                ) as T
             }
 
             ConstraintSystemCompletionMode.PARTIAL, ConstraintSystemCompletionMode.PCLA_POSTPONED_CALL -> {
