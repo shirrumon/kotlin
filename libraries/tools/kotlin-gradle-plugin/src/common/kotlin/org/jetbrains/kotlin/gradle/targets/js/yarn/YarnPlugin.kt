@@ -55,6 +55,7 @@ open class YarnPlugin : Plugin<Project> {
         val kotlinNpmResolutionManager = project.kotlinNpmResolutionManager
 
         val rootPackageJson = tasks.register(RootPackageJsonTask.NAME, RootPackageJsonTask::class.java) { task ->
+            task.notCompatibleWithConfigurationCache("RootPackageJsonTask reads Task.project")
             task.dependsOn(nodeJsTaskProviders.npmCachesSetupTaskProvider)
             task.group = NodeJsRootPlugin.TASKS_GROUP_NAME
             task.description = "Create root package.json"

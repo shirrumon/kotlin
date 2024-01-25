@@ -28,6 +28,7 @@ abstract class RootPackageJsonTask :
     DefaultTask(),
     UsesKotlinNpmResolutionManager {
     init {
+        notCompatibleWithConfigurationCache("RootPackageJsonTask uses Task.project")
         check(project == project.rootProject)
     }
 
