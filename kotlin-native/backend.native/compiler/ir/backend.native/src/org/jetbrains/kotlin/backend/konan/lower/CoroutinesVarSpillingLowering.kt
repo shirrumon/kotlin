@@ -5,12 +5,9 @@
 
 package org.jetbrains.kotlin.backend.konan.lower
 
-import org.jetbrains.kotlin.backend.common.BodyLoweringPass
+import org.jetbrains.kotlin.backend.common.*
 import org.jetbrains.kotlin.backend.common.lower.createIrBuilder
 import org.jetbrains.kotlin.backend.common.lower.irBlock
-import org.jetbrains.kotlin.backend.common.peek
-import org.jetbrains.kotlin.backend.common.pop
-import org.jetbrains.kotlin.backend.common.push
 import org.jetbrains.kotlin.backend.konan.NativeGenerationState
 import org.jetbrains.kotlin.backend.konan.ir.KonanSymbols
 import org.jetbrains.kotlin.descriptors.DescriptorVisibilities
@@ -26,6 +23,7 @@ import org.jetbrains.kotlin.ir.symbols.IrVariableSymbol
 import org.jetbrains.kotlin.ir.util.addChild
 import org.jetbrains.kotlin.ir.util.overrides
 import org.jetbrains.kotlin.ir.util.parentAsClass
+import org.jetbrains.kotlin.ir.util.render
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformer
 import org.jetbrains.kotlin.ir.visitors.IrElementVisitorVoid
 import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
@@ -46,7 +44,6 @@ internal class CoroutinesVarSpillingLowering(val generationState: NativeGenerati
             return
 
         val coroutineClass = container.parentAsClass
-        val liveLocals = generationState.liveVariablesAtSuspensionPoints
 
         // TODO: optimize by using the same property for different locals.
         val localToPropertyMap = mutableMapOf<IrVariableSymbol, IrField>()
@@ -69,7 +66,10 @@ internal class CoroutinesVarSpillingLowering(val generationState: NativeGenerati
         val irBuilder = context.createIrBuilder(container.symbol, container.startOffset, container.endOffset)
         irBody.transformChildren(object : IrElementTransformer<List<IrVariable>> {
             override fun visitSuspensionPoint(expression: IrSuspensionPoint, data: List<IrVariable>): IrExpression {
-                expression.transformChildren(this, liveLocals[expression]!!)
+                val liveVariables = generationState.liveVariablesAtSuspensionPoints[expression]
+                        ?: generationState.visibleVariablesAtSuspensionPoints[expression]
+                        ?: error("No live variables for ${container.render()} at ${expression.suspensionPointIdParameter.name}")
+                expression.transformChildren(this, liveVariables)
 
                 return expression
             }
@@ -101,18 +101,25 @@ internal class CoroutinesVarSpillingLowering(val generationState: NativeGenerati
     }
 }
 
-internal class CoroutinesLivenessAnalysisFallback(
-        symbols: KonanSymbols,
-        private val liveVariablesAtSuspensionPoints: MutableMap<IrSuspensionPoint, List<IrVariable>>
-) : BodyLoweringPass {
-    private val invokeSuspendFunction = symbols.invokeSuspendFunction
+internal class CoroutinesLivenessAnalysisFallback(val generationState: NativeGenerationState) : FileLoweringPass, IrElementVisitorVoid {
+    private val invokeSuspendFunction = generationState.context.ir.symbols.invokeSuspendFunction
 
-    override fun lower(irBody: IrBody, container: IrDeclaration) {
-        val thisReceiver = (container as? IrSimpleFunction)?.dispatchReceiverParameter
-        if (thisReceiver == null || !container.overrides(invokeSuspendFunction.owner))
-            return
+    override fun lower(irFile: IrFile) {
+        if (generationState.liveVariablesAtSuspensionPoints.isEmpty())
+            irFile.acceptChildrenVoid(this)
+    }
 
-        computeVisibleVariablesAtSuspensionPoints(irBody)
+    override fun visitElement(element: IrElement) {
+        element.acceptChildrenVoid(this)
+    }
+
+    override fun visitFunction(declaration: IrFunction) {
+        val body = declaration.body
+        if (body != null && declaration.dispatchReceiverParameter != null
+                && (declaration as? IrSimpleFunction)?.overrides(invokeSuspendFunction.owner) == true
+        ) {
+            computeVisibleVariablesAtSuspensionPoints(body)
+        }
     }
 
     private fun computeVisibleVariablesAtSuspensionPoints(body: IrBody) {
@@ -149,7 +156,7 @@ internal class CoroutinesLivenessAnalysisFallback(
 
                 val visibleVariables = mutableListOf<IrVariable>()
                 scopeStack.forEach { visibleVariables += it }
-                liveVariablesAtSuspensionPoints[expression] = visibleVariables
+                generationState.visibleVariablesAtSuspensionPoints[expression] = visibleVariables
             }
         })
     }

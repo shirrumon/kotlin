@@ -75,6 +75,7 @@ internal class NativeGenerationState(
     val constructedFromExportedInlineFunctions = mutableSetOf<IrClass>()
     val inlineFunctionOrigins = mutableMapOf<IrFunction, InlineFunctionOriginInfo>()
     val liveVariablesAtSuspensionPoints = mutableMapOf<IrSuspensionPoint, List<IrVariable>>()
+    val visibleVariablesAtSuspensionPoints = mutableMapOf<IrSuspensionPoint, List<IrVariable>>()
 
     private val localClassNames = mutableMapOf<IrAttributeContainer, String>()
     fun getLocalClassName(container: IrAttributeContainer): String? = localClassNames[container.attributeOwnerId]
