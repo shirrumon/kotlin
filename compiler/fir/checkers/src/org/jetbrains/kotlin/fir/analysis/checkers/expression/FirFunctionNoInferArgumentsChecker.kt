@@ -23,8 +23,8 @@ object FirFunctionNoInferArgumentsChecker : FirFunctionCallChecker(MppCheckerKin
     override fun check(expression: FirFunctionCall, context: CheckerContext, reporter: DiagnosticReporter) {
         val mapping = (expression.argumentList as? FirResolvedArgumentList)?.mapping ?: return
 
-        if (!mapping.any { pair ->
-                pair.value.returnTypeRef.coneType.contains { it.attributes.contains(CompilerConeAttributes.NoInfer) }
+        if (mapping.none { (_, valueParameter) ->
+                valueParameter.returnTypeRef.coneType.contains { it.attributes.contains(CompilerConeAttributes.NoInfer) }
             }
         ) {
             // Optimization: don't allocate anything if there is no `@NoInfer` type parameter (most common case)
