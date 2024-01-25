@@ -7,6 +7,7 @@ package org.jetbrains.kotlin.fir.pipeline
 
 import org.jetbrains.kotlin.KtSourceFile
 import org.jetbrains.kotlin.backend.common.serialization.metadata.KlibSingleFileMetadataSerializer
+import org.jetbrains.kotlin.config.CommonConfigurationKeys
 import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.config.languageVersionSettings
 import org.jetbrains.kotlin.fir.FirSession
@@ -18,9 +19,9 @@ import org.jetbrains.kotlin.fir.resolve.ScopeSession
 import org.jetbrains.kotlin.fir.resolve.providers.firProvider
 import org.jetbrains.kotlin.fir.serialization.FirKLibSerializerExtension
 import org.jetbrains.kotlin.fir.serialization.serializeSingleFirFile
+import org.jetbrains.kotlin.library.metadata.KlibMetadataVersion
 import org.jetbrains.kotlin.metadata.ProtoBuf
 import org.jetbrains.kotlin.name.FqName
-import org.jetbrains.kotlin.utils.metadataVersion
 
 /**
  * Responsible for serializing a FIR file metadata into a protobuf to be later written to a KLIB.
@@ -46,9 +47,10 @@ class Fir2KlibMetadataSerializer(
         fir2IrActualizedResult?.irActualizedResult?.actualizedExpectDeclarations?.extractFirDeclarations()
     }
 
-    private val metadataVersion = compilerConfiguration.metadataVersion()
-
     private val languageVersionSettings = compilerConfiguration.languageVersionSettings
+
+    private val metadataVersion = compilerConfiguration.get(CommonConfigurationKeys.METADATA_VERSION) as? KlibMetadataVersion
+        ?: KlibMetadataVersion.INSTANCE
 
     /**
      * The list of source files whose metadata is to be serialized.
