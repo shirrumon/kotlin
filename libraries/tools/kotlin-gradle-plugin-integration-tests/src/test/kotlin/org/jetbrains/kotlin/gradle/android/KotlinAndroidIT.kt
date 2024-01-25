@@ -95,7 +95,8 @@ class KotlinAndroidIT : KGPBaseTest() {
             "AndroidIcepickProject",
             gradleVersion,
             buildOptions = defaultBuildOptions.copy(androidVersion = agpVersion),
-            buildJdk = jdkVersion.location
+            buildJdk = jdkVersion.location,
+            additionalDependencyRepositories = listOf("https://clojars.org/repo/")
         ) {
             build("assembleDebug")
         }

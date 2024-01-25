@@ -170,7 +170,6 @@ class MppCompositeBuildIT : KGPBaseTest() {
         project(
             "mpp-composite-build/sample1",
             gradleVersion,
-            enableDefaultDependencyManagement = false // :kotlinNodeJsSetup task sets up a custom ivy repository
         ) {
             projectPath.resolve("included-build").addDefaultSettingsToSettingsGradle()
             buildGradleKts.replaceText("<kgp_version>", KOTLIN_VERSION)

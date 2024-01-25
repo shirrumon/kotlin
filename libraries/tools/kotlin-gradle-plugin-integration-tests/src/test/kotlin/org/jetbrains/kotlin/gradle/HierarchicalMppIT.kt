@@ -751,7 +751,6 @@ open class HierarchicalMppIT : KGPBaseTest() {
             project(
                 "hierarchical-mpp-js-test",
                 gradleVersion,
-                enableDefaultDependencyManagement = false // :kotlinNodeJsSetup requires custom ivy repository during build
             )
         ) {
             val taskToExecute = ":jsNodeTest"

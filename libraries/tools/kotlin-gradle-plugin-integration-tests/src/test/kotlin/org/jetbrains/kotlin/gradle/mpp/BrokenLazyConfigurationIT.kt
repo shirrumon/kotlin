@@ -39,7 +39,6 @@ class BrokenLazyConfigurationIT : KGPBaseTest() {
         project(
             "kotlin-js-browser-project",
             gradleVersion,
-            enableDefaultDependencyManagement = false // :kotlinNodeJsSetup sets custom ivy repository
         ) {
             val subprojects = listOf("app", "base", "lib")
             for (subproject in subprojects) {
