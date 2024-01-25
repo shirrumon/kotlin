@@ -9,6 +9,7 @@ fun box(): String {
         this as DerivedBuildee<*, *>
         getTypeVariableA()
         getTypeVariableB()
+        Unit
     }
     return "OK"
 }

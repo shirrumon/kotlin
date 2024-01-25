@@ -7,7 +7,7 @@ fun test() {
             setInProjectedTypeVariable(TargetType())
         },
         {
-            consumeDifferentType(<!ARGUMENT_TYPE_MISMATCH!>getOutProjectedTypeVariable()<!>)
+            consumeDifferentType(<!ARGUMENT_TYPE_MISMATCH("DifferentType; TargetType")!>getOutProjectedTypeVariable()<!>)
         }
     )
     // exact type equality check — turns unexpected compile-time behavior into red code

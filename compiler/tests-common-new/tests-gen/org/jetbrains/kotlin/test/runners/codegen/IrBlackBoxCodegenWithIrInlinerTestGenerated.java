@@ -2837,15 +2837,9 @@ public class IrBlackBoxCodegenWithIrInlinerTestGenerated extends AbstractIrBlack
             }
 
             @Test
-            @TestMetadata("kt50827a.kt")
-            public void testKt50827a() throws Exception {
-                runTest("compiler/testData/codegen/box/builderInference/issues/kt50827a.kt");
-            }
-
-            @Test
-            @TestMetadata("kt50827b.kt")
-            public void testKt50827b() throws Exception {
-                runTest("compiler/testData/codegen/box/builderInference/issues/kt50827b.kt");
+            @TestMetadata("kt50827.kt")
+            public void testKt50827() throws Exception {
+                runTest("compiler/testData/codegen/box/builderInference/issues/kt50827.kt");
             }
 
             @Test
@@ -3062,6 +3056,18 @@ public class IrBlackBoxCodegenWithIrInlinerTestGenerated extends AbstractIrBlack
             @TestMetadata("kt63840c.kt")
             public void testKt63840c() throws Exception {
                 runTest("compiler/testData/codegen/box/builderInference/issues/kt63840c.kt");
+            }
+
+            @Test
+            @TestMetadata("kt64222a.kt")
+            public void testKt64222a() throws Exception {
+                runTest("compiler/testData/codegen/box/builderInference/issues/kt64222a.kt");
+            }
+
+            @Test
+            @TestMetadata("kt64222b.kt")
+            public void testKt64222b() throws Exception {
+                runTest("compiler/testData/codegen/box/builderInference/issues/kt64222b.kt");
             }
         }
 

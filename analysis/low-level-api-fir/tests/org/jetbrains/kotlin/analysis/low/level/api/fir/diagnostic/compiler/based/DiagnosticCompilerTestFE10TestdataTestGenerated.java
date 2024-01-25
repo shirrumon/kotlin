@@ -4130,9 +4130,15 @@ public class DiagnosticCompilerTestFE10TestdataTestGenerated extends AbstractDia
                 }
 
                 @Test
-                @TestMetadata("kt64222.kt")
-                public void testKt64222() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/builderInference/issues/kt64222.kt");
+                @TestMetadata("kt64222a.kt")
+                public void testKt64222a() throws Exception {
+                    runTest("compiler/testData/diagnostics/tests/builderInference/issues/kt64222a.kt");
+                }
+
+                @Test
+                @TestMetadata("kt64222b.kt")
+                public void testKt64222b() throws Exception {
+                    runTest("compiler/testData/diagnostics/tests/builderInference/issues/kt64222b.kt");
                 }
             }
 

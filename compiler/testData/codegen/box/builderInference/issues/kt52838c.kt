@@ -1,10 +1,13 @@
 // ISSUE: KT-52838
-// JVM_ABI_K1_K2_DIFF: KT-64738
+
+// IGNORE_BACKEND_K2: ANY
+// REASON: red code (see corresponding diagnostic test)
 
 fun box(): String {
     build {
         this as DerivedBuildee<*>
         getTypeVariable()
+        Unit
     }
     return "OK"
 }

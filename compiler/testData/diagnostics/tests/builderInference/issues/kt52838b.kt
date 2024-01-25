@@ -6,6 +6,7 @@ fun test() {
         this as DerivedBuildee<*>
         getTypeVariable()
         <!RECEIVER_TYPE_MISMATCH("CapturedType(*); CapturedType(*)"), RECEIVER_TYPE_MISMATCH("CapturedType(*); CapturedType(*)")!>getTypeVariable<!>()
+        Unit
     }
     // exact type equality check — turns unexpected compile-time behavior into red code
     // considered to be non-user-reproducible code for the purposes of these tests
