@@ -25,6 +25,9 @@ abstract class CommonCompilerPerformanceManager(private val presentableName: Str
     private var irLoweringStart: Long = 0
     private var irGenerationStart: Long = 0
 
+    var irElementCountBeforeLowering = -1
+        private set
+
     private var targetDescription: String? = null
     protected var files: Int? = null
     protected var lines: Int? = null
@@ -95,7 +98,8 @@ abstract class CommonCompilerPerformanceManager(private val presentableName: Str
         )
     }
 
-    open fun notifyIRLoweringStarted() {
+    open fun notifyIRLoweringStarted(irElementCount: Int = -1) {
+        this.irElementCountBeforeLowering = irElementCount
         irLoweringStart = PerformanceCounter.currentTime()
     }
 

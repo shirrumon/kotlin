@@ -54,7 +54,11 @@ import org.jetbrains.kotlin.fir.resolve.providers.FirSymbolProvider
 import org.jetbrains.kotlin.fir.session.IncrementalCompilationContext
 import org.jetbrains.kotlin.fir.session.environment.AbstractProjectEnvironment
 import org.jetbrains.kotlin.fir.session.environment.AbstractProjectFileSearchScope
+import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.backend.jvm.serialization.JvmIrMangler
+import org.jetbrains.kotlin.ir.visitors.IrElementVisitorVoid
+import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
+import org.jetbrains.kotlin.ir.visitors.acceptVoid
 import org.jetbrains.kotlin.load.kotlin.MetadataFinderFactory
 import org.jetbrains.kotlin.load.kotlin.PackagePartProvider
 import org.jetbrains.kotlin.load.kotlin.VirtualFileFinderFactory
@@ -242,7 +246,15 @@ fun generateCodeFromIr(
         environment.diagnosticsReporter
     ).build()
 
-    performanceManager?.notifyIRLoweringStarted()
+    var irElementCount = 0
+    input.irModuleFragment.acceptVoid(object : IrElementVisitorVoid {
+        override fun visitElement(element: IrElement) {
+            irElementCount++
+            element.acceptChildrenVoid(this)
+        }
+    })
+
+    performanceManager?.notifyIRLoweringStarted(irElementCount)
     generationState.beforeCompile()
     codegenFactory.generateModuleInFrontendIRMode(
         generationState,
