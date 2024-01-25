@@ -23879,6 +23879,12 @@ public class DiagnosticTestGenerated extends AbstractDiagnosticTest {
             public void testLabelsMustBeNamed() throws Exception {
                 runTest("compiler/testData/diagnostics/tests/labels/labelsMustBeNamed.kt");
             }
+
+            @Test
+            @TestMetadata("multipleLabels.kt")
+            public void testMultipleLabels() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/labels/multipleLabels.kt");
+            }
         }
 
         @Nested
