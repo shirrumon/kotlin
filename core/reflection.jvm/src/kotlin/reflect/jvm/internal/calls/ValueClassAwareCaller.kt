@@ -10,11 +10,9 @@ import org.jetbrains.kotlin.descriptors.*
 import org.jetbrains.kotlin.descriptors.runtime.structure.desc
 import org.jetbrains.kotlin.load.java.JvmAbi
 import org.jetbrains.kotlin.metadata.jvm.deserialization.ClassMapperLite
-import org.jetbrains.kotlin.metadata.jvm.deserialization.JvmProtoBufUtil
 import org.jetbrains.kotlin.resolve.*
 import org.jetbrains.kotlin.resolve.descriptorUtil.classId
 import org.jetbrains.kotlin.resolve.descriptorUtil.multiFieldValueClassRepresentation
-import org.jetbrains.kotlin.serialization.deserialization.descriptors.DeserializedClassDescriptor
 import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.SimpleType
 import org.jetbrains.kotlin.types.TypeUtils
@@ -24,7 +22,6 @@ import java.lang.reflect.Member
 import java.lang.reflect.Method
 import java.lang.reflect.Type
 import kotlin.coroutines.intrinsics.COROUTINE_SUSPENDED
-import kotlin.reflect.jvm.internal.KClassImpl
 import kotlin.reflect.jvm.internal.KDeclarationContainerImpl
 import kotlin.reflect.jvm.internal.KotlinReflectionInternalError
 import kotlin.reflect.jvm.internal.defaultPrimitiveValue
@@ -291,7 +288,7 @@ private fun makeKotlinParameterTypes(
     } else {
         val containingDeclaration = descriptor.containingDeclaration
         if (containingDeclaration is ClassDescriptor && containingDeclaration.isSpecificClass()) {
-            if (member?.isFromDefaultImpls() == true || member?.declaringClass?.isInterface == true) {
+            if (member?.acceptsBoxedReceiverParameter() == true) {
                 // hack to forbid unboxing dispatchReceiver if it is used upcasted
                 // kotlinParameterTypes are used to determine shifts and calls according to whether type is MFVC/IC or not.
                 // If it is a MFVC/IC, boxes are unboxed. If the actual called member lies in the interface/DefaultImpls class,
@@ -306,11 +303,15 @@ private fun makeKotlinParameterTypes(
     descriptor.valueParameters.mapTo(kotlinParameterTypes, ValueParameterDescriptor::getType)
 }
 
-private fun Member.isFromDefaultImpls(): Boolean {
+private fun Member.acceptsBoxedReceiverParameter(): Boolean {
+    // Method implementation can be placed either in
+    //  * the value class itself,
+    //  * interface$DefaultImpls, 
+    //  * interface default method (Java 8+).
+    // Here we need to understand that it is the second or the third case. Both of the cases cannot be value classes,
+    // so the simplest solution is to check declaringClass for being a value class.
     val clazz = declaringClass ?: return false
-    if (clazz.simpleName != JvmAbi.DEFAULT_IMPLS_CLASS_NAME) return false
-    val descriptor = (clazz.enclosingClass?.kotlin as? KClassImpl)?.descriptor as? DeserializedClassDescriptor ?: return false
-    return descriptor.kind == ClassKind.INTERFACE && !JvmProtoBufUtil.isNewPlaceForBodyGeneration(descriptor.classProto)
+    return !clazz.kotlin.isValue
 }
 
 internal fun <M : Member?> Caller<M>.createValueClassAwareCallerIfNeeded(
