@@ -28635,6 +28635,24 @@ public class DiagnosticTestGenerated extends AbstractDiagnosticTest {
             }
 
             @Test
+            @TestMetadata("intersectionOfAbstractAndOpen.kt")
+            public void testIntersectionOfAbstractAndOpen() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/override/intersectionOfAbstractAndOpen.kt");
+            }
+
+            @Test
+            @TestMetadata("intersectionOfSubstitutedProperties.kt")
+            public void testIntersectionOfSubstitutedProperties() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/override/intersectionOfSubstitutedProperties.kt");
+            }
+
+            @Test
+            @TestMetadata("intersectionOverrideWithSubsumedDifferentType.kt")
+            public void testIntersectionOverrideWithSubsumedDifferentType() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/override/intersectionOverrideWithSubsumedDifferentType.kt");
+            }
+
+            @Test
             @TestMetadata("intersectionOverridesIntersection.kt")
             public void testIntersectionOverridesIntersection() throws Exception {
                 runTest("compiler/testData/diagnostics/tests/override/intersectionOverridesIntersection.kt");

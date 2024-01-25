@@ -10,10 +10,7 @@ import org.jetbrains.kotlin.descriptors.Visibilities
 import org.jetbrains.kotlin.descriptors.Visibility
 import org.jetbrains.kotlin.fir.*
 import org.jetbrains.kotlin.fir.caches.*
-import org.jetbrains.kotlin.fir.declarations.FirCallableDeclaration
-import org.jetbrains.kotlin.fir.declarations.FirDeclarationOrigin
-import org.jetbrains.kotlin.fir.declarations.FirMemberDeclaration
-import org.jetbrains.kotlin.fir.declarations.FirVariable
+import org.jetbrains.kotlin.fir.declarations.*
 import org.jetbrains.kotlin.fir.declarations.utils.isExpect
 import org.jetbrains.kotlin.fir.declarations.utils.modality
 import org.jetbrains.kotlin.fir.declarations.utils.visibility
@@ -207,7 +204,7 @@ class FirTypeIntersectionScopeContext(
         mostSpecific: List<MemberWithBaseScope<D>>,
         extractedOverrides: List<MemberWithBaseScope<D>>,
     ): MemberWithBaseScope<FirCallableSymbol<*>> {
-        val newModality = chooseIntersectionOverrideModality(extractedOverrides)
+        val newModality = chooseIntersectionOverrideModality(extractedOverrides.flatMap { it.flattenIntersectionsRecursively() }.nonSubsumed())
         val newVisibility = chooseIntersectionVisibility(extractedOverrides)
         val mostSpecificSymbols = mostSpecific.map { it.member }
         val extractedOverridesSymbols = extractedOverrides.map { it.member }

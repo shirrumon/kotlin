@@ -139,7 +139,11 @@ fun FirIntersectionCallableSymbol.getNonSubsumedOverriddenSymbols(
     require(this is FirCallableSymbol<*>)
 
     val dispatchReceiverScope = dispatchReceiverScope(session, scopeSession)
-    return MemberWithBaseScope(this, dispatchReceiverScope).nonSubsumedRecursively(session, scopeSession).map { it.member }
+    return MemberWithBaseScope(this, dispatchReceiverScope)
+        .flattenIntersectionsRecursively()
+        .nonSubsumed()
+        .distinctBy { it.member.unwrapSubstitutionOverrides<FirCallableSymbol<*>>() }
+        .map { it.member }
 }
 
 private fun FirCallableSymbol<*>.dispatchReceiverScope(session: FirSession, scopeSession: ScopeSession): FirTypeScope {
@@ -151,30 +155,17 @@ private fun FirCallableSymbol<*>.dispatchReceiverScope(session: FirSession, scop
     ) ?: FirTypeScope.Empty
 }
 
-private fun MemberWithBaseScope<FirCallableSymbol<*>>.nonSubsumedRecursively(
-    session: FirSession,
-    scopeSession: ScopeSession,
-): List<MemberWithBaseScope<FirCallableSymbol<*>>> {
+fun MemberWithBaseScope<FirCallableSymbol<*>>.flattenIntersectionsRecursively(): List<MemberWithBaseScope<FirCallableSymbol<*>>> {
     if (member.origin != FirDeclarationOrigin.IntersectionOverride) return listOf(this)
 
-    return baseScope
-        .getDirectOverriddenMembersWithBaseScope(member)
-        .map {
-            if (it.member.origin != FirDeclarationOrigin.SubstitutionOverride.DeclarationSite) return@map it
-            val unwrapped = it.member.unwrapSubstitutionOverrides()
-            MemberWithBaseScope(unwrapped, unwrapped.dispatchReceiverScope(session, scopeSession))
-        }
-        .flatMap { it.nonSubsumedRecursively(session, scopeSession) }
-        // We can get the same symbol multiple times if we're overriding another intersection symbol.
-        .distinctBy { it.member }
-        .nonSubsumed()
+    return baseScope.getDirectOverriddenMembersWithBaseScope(member).flatMap { it.flattenIntersectionsRecursively() }
 }
 
 /**
  * A callable declaration D [subsumes](https://kotlinlang.org/spec/inheritance.html#matching-and-subsumption-of-declarations)
  * a callable declaration B if D overrides B.
  */
-private fun List<MemberWithBaseScope<FirCallableSymbol<*>>>.nonSubsumed(): List<MemberWithBaseScope<FirCallableSymbol<*>>> {
+fun Collection<MemberWithBaseScope<FirCallableSymbol<*>>>.nonSubsumed(): List<MemberWithBaseScope<FirCallableSymbol<*>>> {
     val baseMembers = mutableSetOf<FirCallableSymbol<*>>()
     for ((member, scope) in this) {
         val unwrapped = member.unwrapSubstitutionOverrides<FirCallableSymbol<*>>()

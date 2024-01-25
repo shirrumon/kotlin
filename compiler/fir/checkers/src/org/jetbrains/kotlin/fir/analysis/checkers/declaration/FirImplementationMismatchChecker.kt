@@ -19,6 +19,7 @@ import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors
 import org.jetbrains.kotlin.fir.containingClassLookupTag
 import org.jetbrains.kotlin.fir.declarations.FirClass
 import org.jetbrains.kotlin.fir.declarations.FirRegularClass
+import org.jetbrains.kotlin.fir.declarations.getNonSubsumedOverriddenSymbols
 import org.jetbrains.kotlin.fir.declarations.utils.classId
 import org.jetbrains.kotlin.fir.declarations.utils.isAbstract
 import org.jetbrains.kotlin.fir.declarations.utils.isExpect
@@ -129,13 +130,13 @@ sealed class FirImplementationMismatchChecker(mppKind: MppCheckerKind) : FirClas
                 //if there is intersection override - take its intersections - they will contain all substitutions
                 //otherwise we get base members with unsubstituted params too
                 val cleared = allOverridden.find { it is FirIntersectionCallableSymbol }?.let {
-                    (it as FirIntersectionCallableSymbol).intersections
+                    (it as FirIntersectionCallableSymbol).getNonSubsumedOverriddenSymbols(context.session, context.scopeSession)
                 } ?: allOverridden
                 //current symbol needs to be added, because basically it is the implementation
                 cleared + symbol
             }
             symbol is FirIntersectionCallableSymbol && symbol.callableId.classId == containingClass.classId ->
-                symbol.intersections
+                symbol.getNonSubsumedOverriddenSymbols(context.session, context.scopeSession)
             else -> return
         }
 
