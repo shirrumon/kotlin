@@ -21,6 +21,7 @@ import org.jetbrains.kotlin.fir.declarations.utils.*
 import org.jetbrains.kotlin.fir.diagnostics.DiagnosticKind
 import org.jetbrains.kotlin.fir.expressions.*
 import org.jetbrains.kotlin.fir.isCatchParameter
+import org.jetbrains.kotlin.fir.isDoWhileLoopConditional
 import org.jetbrains.kotlin.fir.references.toResolvedPropertySymbol
 import org.jetbrains.kotlin.fir.resolve.dfa.cfg.*
 import org.jetbrains.kotlin.fir.resolve.dfa.cfg.ControlFlowGraph.Kind
@@ -63,7 +64,7 @@ fun FirPropertySymbol.requiresInitialization(isForInitialization: Boolean): Bool
     return when {
         this is FirSyntheticPropertySymbol -> false
         isForInitialization -> hasDelegate || hasImplicitBackingField
-        else -> hasImplicitBackingField && fir.isCatchParameter != true
+        else -> (!hasInitializer || fir.isDoWhileLoopConditional) && hasImplicitBackingField && fir.isCatchParameter != true
     }
 }
 

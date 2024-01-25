@@ -175,6 +175,13 @@ open class FirExpressionsResolveTransformer(transformer: FirAbstractBodyResolveT
         if (data !is ResolutionMode.AssignmentLValue) {
             when (result) {
                 is FirQualifiedAccessExpression -> {
+                    if (context.insideDoWhileLoopCondition) {
+                        val property = result.calleeReference.toResolvedPropertySymbol()
+                        if (property != null) {
+                            property.fir.containingDoWhileLoopCondition = context.containingDoWhileLoops.last()
+                        }
+                    }
+
                     dataFlowAnalyzer.exitQualifiedAccessExpression(result)
                     result = components.transformQualifiedAccessUsingSmartcastInfo(result, ignoreCallArguments = false)
                     if (result is FirSmartCastExpression) {

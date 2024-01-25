@@ -34,22 +34,26 @@ class FirControlFlowStatementsResolveTransformer(transformer: FirAbstractBodyRes
         return whileLoop.also(dataFlowAnalyzer::enterWhileLoop)
             .transformCondition(transformer, withExpectedType(session.builtinTypes.booleanType))
             .also(dataFlowAnalyzer::exitWhileLoopCondition)
-            .transformBlock(transformer, context).also(dataFlowAnalyzer::exitWhileLoop)
+            .transformBlock(transformer, context)
+            .also(dataFlowAnalyzer::exitWhileLoop)
             .transformOtherChildren(transformer, context)
     }
 
     override fun transformDoWhileLoop(doWhileLoop: FirDoWhileLoop, data: ResolutionMode): FirStatement {
         // Do-while has a specific scope structure (its block and condition effectively share the scope)
-        return context.forBlock(session) {
-            val context = ResolutionMode.ContextIndependent
+        return context.withDoWhileLoop(doWhileLoop, session) {
             doWhileLoop.also(dataFlowAnalyzer::enterDoWhileLoop)
                 .also {
-                    transformer.expressionsTransformer?.transformBlockInCurrentScope(it.block, context)
+                    transformer.expressionsTransformer?.transformBlockInCurrentScope(it.block, ResolutionMode.ContextIndependent)
                 }
-                .also(dataFlowAnalyzer::enterDoWhileLoopCondition)
-                .transformCondition(transformer, withExpectedType(session.builtinTypes.booleanType))
-                .also(dataFlowAnalyzer::exitDoWhileLoop)
-                .transformOtherChildren(transformer, context)
+
+            context.withDoWhileCondition {
+                doWhileLoop.also(dataFlowAnalyzer::enterDoWhileLoopCondition)
+                    .transformCondition(transformer, withExpectedType(session.builtinTypes.booleanType))
+            }
+
+            doWhileLoop.also(dataFlowAnalyzer::exitDoWhileLoop)
+                .transformOtherChildren(transformer, ResolutionMode.ContextIndependent)
         }
     }
 
