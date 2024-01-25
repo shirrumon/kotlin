@@ -172,12 +172,16 @@ TEST_F(ExtraSafePointActionActivatorTest, ExtraActionActivator) {
 }
 
 TEST_F(ExtraSafePointActionActivatorTest, ExtraActionActivatorStress) {
-    std::atomic finish = false;
+    std::atomic tryDoAction = true;
+    std::atomic terminate = false;
+
     std::vector<ScopedThread> threads;
     for (int i = 0; i < kDefaultThreadCount; ++i) {
         threads.emplace_back([&]() noexcept {
-            while (!finish) {
-                ActivatorImpl::doIfActive([&] { mockAction().Call(); });
+            while (!terminate) {
+                if (tryDoAction) {
+                    ActivatorImpl::doIfActive([&] { mockAction().Call(); });
+                }
                 std::this_thread::yield();
             }
         });
@@ -185,10 +189,14 @@ TEST_F(ExtraSafePointActionActivatorTest, ExtraActionActivatorStress) {
 
     EXPECT_CALL(mockAction(), Call()).Times(testing::AnyNumber());
     {
+        tryDoAction = false; // give the activator a chane to obtain the lock
         ActivatorImpl activator;
+        tryDoAction = true;
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        tryDoAction = false;
     }
+    tryDoAction = true;
     testing::Mock::VerifyAndClearExpectations(&mockAction());
 
-    finish = true;
+    terminate = true;
 }
