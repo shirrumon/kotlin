@@ -94,7 +94,7 @@ public:
     public:
         auto& markQueue() noexcept { return markQueue_; }
     private:
-        ManuallyScoped<MutatorQueue> markQueue_{};
+        ManuallyScoped<MutatorQueue, true> markQueue_{};
     };
 
     void beginMarkingEpoch(GCHandle gcHandle);
@@ -120,6 +120,6 @@ private:
 
     GCHandle gcHandle_ = GCHandle::invalid();
     std::optional<mm::ThreadRegistry::Iterable> lockedMutatorsList_;
-    ManuallyScoped<ParallelProcessor> parallelProcessor_{};
+    ManuallyScoped<ParallelProcessor, true> parallelProcessor_{};
 };
 } // namespace kotlin::gc::mark
