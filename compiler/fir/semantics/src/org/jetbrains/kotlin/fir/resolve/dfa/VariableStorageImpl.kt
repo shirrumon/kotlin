@@ -11,10 +11,7 @@ import org.jetbrains.kotlin.fir.FirElement
 import org.jetbrains.kotlin.fir.FirSession
 import org.jetbrains.kotlin.fir.declarations.*
 import org.jetbrains.kotlin.fir.declarations.impl.FirDefaultPropertyAccessor
-import org.jetbrains.kotlin.fir.declarations.utils.isExpect
-import org.jetbrains.kotlin.fir.declarations.utils.isFinal
-import org.jetbrains.kotlin.fir.declarations.utils.modality
-import org.jetbrains.kotlin.fir.declarations.utils.visibility
+import org.jetbrains.kotlin.fir.declarations.utils.*
 import org.jetbrains.kotlin.fir.expressions.*
 import org.jetbrains.kotlin.fir.moduleData
 import org.jetbrains.kotlin.fir.originalOrSelf
@@ -172,7 +169,14 @@ class VariableStorageImpl(private val session: FirSession) : VariableStorage() {
             is FirEnumEntry, is FirErrorProperty, is FirValueParameter -> return PropertyStability.STABLE_VALUE
 
             // NB: FirJavaField is expected here. FirFieldImpl should've been handled by FirBackingFieldSymbol check above
-            is FirField -> return variable.determineStabilityByModule()
+            is FirField -> {
+                if (variable.isJava)
+                    return variable.determineStabilityByModule()
+                else
+                    errorWithAttachment("Expected to handle non-Java FirFields via symbol-based checks") {
+                        withFirEntry("fir", variable)
+                    }
+            }
 
             is FirBackingField -> errorWithAttachment("Expected to handle Backing Field entirely via symbol-based checks") {
                 withFirEntry("fir", variable)
