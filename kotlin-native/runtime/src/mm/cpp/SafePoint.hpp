@@ -67,7 +67,7 @@ public:
     virtual ~ExtraSafePointActionActivator() noexcept = 0;
 
 private:
-    inline static std::shared_mutex mutex_{};
+    [[clang::no_destroy]] inline static std::shared_mutex mutex_{};
     inline static bool active_ = false;
 
     SafePointActivator safePointActivator_{};
