@@ -2664,6 +2664,56 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
             public void testKt63840c() throws Exception {
                 runTest("compiler/testData/codegen/box/builderInference/issues/kt63840c.kt");
             }
+
+            @TestMetadata("kt65300a.kt")
+            public void testKt65300a() throws Exception {
+                runTest("compiler/testData/codegen/box/builderInference/issues/kt65300a.kt");
+            }
+
+            @TestMetadata("kt65300b.kt")
+            public void testKt65300b() throws Exception {
+                runTest("compiler/testData/codegen/box/builderInference/issues/kt65300b.kt");
+            }
+
+            @TestMetadata("kt65300c.kt")
+            public void testKt65300c() throws Exception {
+                runTest("compiler/testData/codegen/box/builderInference/issues/kt65300c.kt");
+            }
+
+            @TestMetadata("kt65300d.kt")
+            public void testKt65300d() throws Exception {
+                runTest("compiler/testData/codegen/box/builderInference/issues/kt65300d.kt");
+            }
+
+            @TestMetadata("kt65300e.kt")
+            public void testKt65300e() throws Exception {
+                runTest("compiler/testData/codegen/box/builderInference/issues/kt65300e.kt");
+            }
+
+            @TestMetadata("kt65300f.kt")
+            public void testKt65300f() throws Exception {
+                runTest("compiler/testData/codegen/box/builderInference/issues/kt65300f.kt");
+            }
+
+            @TestMetadata("kt65300g.kt")
+            public void testKt65300g() throws Exception {
+                runTest("compiler/testData/codegen/box/builderInference/issues/kt65300g.kt");
+            }
+
+            @TestMetadata("kt65300h.kt")
+            public void testKt65300h() throws Exception {
+                runTest("compiler/testData/codegen/box/builderInference/issues/kt65300h.kt");
+            }
+
+            @TestMetadata("kt65300i.kt")
+            public void testKt65300i() throws Exception {
+                runTest("compiler/testData/codegen/box/builderInference/issues/kt65300i.kt");
+            }
+
+            @TestMetadata("kt65300j.kt")
+            public void testKt65300j() throws Exception {
+                runTest("compiler/testData/codegen/box/builderInference/issues/kt65300j.kt");
+            }
         }
 
         @TestMetadata("compiler/testData/codegen/box/builderInference/oneParameter")
