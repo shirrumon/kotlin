@@ -17,22 +17,19 @@ internal object TestRunners {
         if (get<ForcedNoopTestRunner>().value) {
             NoopTestRunner
         } else with(get<KotlinNativeTargets>()) {
-            if (testTarget == hostTarget) {
-                RunnerWithExecutor(HostExecutor(), testRun)
-            } else {
-                val configurables = configurables
+            val configurables = configurables
 
-                val executor = cached(
-                    when {
-                        configurables is ConfigurablesWithEmulator -> EmulatorExecutor(configurables)
-                        configurables is AppleConfigurables && configurables.targetTriple.isSimulator ->
-                            XcodeSimulatorExecutor(configurables)
-                        configurables is AppleConfigurables && RosettaExecutor.availableFor(configurables) -> RosettaExecutor(configurables)
-                        else -> runningOnUnsupportedTarget()
-                    }
-                )
-                RunnerWithExecutor(executor, testRun)
-            }
+            val executor = cached(
+                when {
+                    testTarget == hostTarget -> HostExecutor()
+                    configurables is ConfigurablesWithEmulator -> EmulatorExecutor(configurables)
+                    configurables is AppleConfigurables && configurables.targetTriple.isSimulator ->
+                        XcodeSimulatorExecutor(configurables)
+                    configurables is AppleConfigurables && RosettaExecutor.availableFor(configurables) -> RosettaExecutor(configurables)
+                    else -> runningOnUnsupportedTarget()
+                }
+            )
+            RunnerWithExecutor(executor, testRun)
         }
     }
 
