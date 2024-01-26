@@ -368,7 +368,7 @@ class KotlinCoreEnvironment private constructor(
         }
 
     private fun updateClasspathFromRootsIndex(index: JvmDependenciesIndex) {
-        index.indexedRoots.forEach {
+        index.indexedRoots.filter { it.file.isDirectory }.forEach {
             projectEnvironment.addSourcesToClasspath(it.file)
         }
     }
