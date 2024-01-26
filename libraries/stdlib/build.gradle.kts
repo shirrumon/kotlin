@@ -566,7 +566,6 @@ kotlin {
 
         all sourceSet@ {
             languageSettings {
-                //languageVersion = "2.0"
                 // TODO: progressiveMode = use build property 'test.progressive.mode'
                 if (this@sourceSet == jvmCompileOnlyDeclarations) {
                     return@languageSettings
@@ -785,9 +784,6 @@ tasks {
         }
     }
 
-    /*withType<Kotlin2JsCompile>().configureEach {
-        compilerOptions.languageVersion.set(KotlinVersion.KOTLIN_2_0)
-    }*/
 }
 
 
