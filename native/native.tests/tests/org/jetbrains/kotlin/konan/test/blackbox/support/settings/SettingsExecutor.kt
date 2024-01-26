@@ -13,29 +13,19 @@ import org.jetbrains.kotlin.native.executors.*
 import org.jetbrains.kotlin.test.services.JUnit5Assertions
 import java.util.concurrent.ConcurrentHashMap
 
-private object ExecutorCache {
-    fun executor(settings: Settings) = with(settings) {
-        with(get<KotlinNativeTargets>()) {
-            executorCache.computeIfAbsent(testTarget) {
-                val configurables = configurables
-                when {
-                    configurables.target == hostTarget -> HostExecutor()
-                    configurables is ConfigurablesWithEmulator -> EmulatorExecutor(configurables)
-                    configurables is AppleConfigurables && configurables.targetTriple.isSimulator ->
-                        XcodeSimulatorExecutor(configurables)
-                    configurables is AppleConfigurables && RosettaExecutor.availableFor(configurables) -> RosettaExecutor(configurables)
-                    else -> runningOnUnsupportedTarget()
-                }
+private val executorCache: ConcurrentHashMap<KonanTarget, Executor> = ConcurrentHashMap()
+
+internal val Settings.executor: Executor
+    get() = with(get<KotlinNativeTargets>()) {
+        executorCache.computeIfAbsent(testTarget) {
+            val configurables = configurables
+            when {
+                configurables.target == hostTarget -> HostExecutor()
+                configurables is ConfigurablesWithEmulator -> EmulatorExecutor(configurables)
+                configurables is AppleConfigurables && configurables.targetTriple.isSimulator ->
+                    XcodeSimulatorExecutor(configurables)
+                configurables is AppleConfigurables && RosettaExecutor.availableFor(configurables) -> RosettaExecutor(configurables)
+                else -> JUnit5Assertions.fail { "Running tests for $testTarget on $hostTarget is not supported yet." }
             }
         }
     }
-
-    private val executorCache: ConcurrentHashMap<KonanTarget, Executor> = ConcurrentHashMap()
-
-    private fun KotlinNativeTargets.runningOnUnsupportedTarget(): Nothing = JUnit5Assertions.fail {
-        "Running tests for $testTarget on $hostTarget is not supported yet."
-    }
-}
-
-internal val Settings.executor: Executor
-    get() = ExecutorCache.executor(this)
