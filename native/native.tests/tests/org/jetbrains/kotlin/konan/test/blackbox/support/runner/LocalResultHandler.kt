@@ -160,7 +160,7 @@ internal abstract class LocalResultHandler<R>(
 }
 
 // Shameless borrowing `val KonanTarget.abiInfo` from module `:kotlin-native:backend.native`, which cannot be imported here for now.
-val KonanTarget.abiInfoString: String
+private val KonanTarget.abiInfoString: String
     get() = when {
         this == KonanTarget.MINGW_X64 -> "WINDOWSX64"
         !family.isAppleFamily && architecture == Architecture.ARM64 -> "AAPCS"
