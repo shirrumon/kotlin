@@ -29,8 +29,7 @@ import org.jetbrains.kotlin.name.SpecialNames
 
 class Fir2IrClassifierStorage(
     private val components: Fir2IrComponents,
-    commonMemberStorage: Fir2IrCommonMemberStorage,
-    val conversionScope: Fir2IrConversionScope,
+    commonMemberStorage: Fir2IrCommonMemberStorage
 ) : Fir2IrComponents by components {
     private val classCache: MutableMap<FirRegularClass, IrClass> = commonMemberStorage.classCache
 
@@ -288,28 +287,19 @@ class Fir2IrClassifierStorage(
         // Before the call it's not possible, because f/o binding for regular classes isn't done yet
         processMembersOfClassesOnTheFlyImmediately = true
         for ((klass, irClass) in localClassesCreatedOnTheFly) {
-            fun process() {
-                classifiersGenerator.processClassHeader(klass, irClass)
-                converter.processClassMembers(klass, irClass)
-                // See the problem from KT-57441
-                //            class Wrapper {
-                //                private val dummy = object: Bar {}
-                //                private val bar = object: Bar by dummy {}
-                //            }
-                //            interface Bar {
-                //                val foo: String
-                //                    get() = ""
-                //            }
-                // When we are building bar.foo fake override, we should call dummy.foo,
-                // so we should have object : Bar.foo fake override to be built and bound.
-                converter.bindFakeOverridesInClass(irClass)
-            }
-
-            if (klass is FirAnonymousObject) {
-                conversionScope.withTypeErasureForDelegatedObject { process() }
-            } else {
-                process()
-            }
+            converter.processClassMembers(klass, irClass)
+            // See the problem from KT-57441
+//            class Wrapper {
+//                private val dummy = object: Bar {}
+//                private val bar = object: Bar by dummy {}
+//            }
+//            interface Bar {
+//                val foo: String
+//                    get() = ""
+//            }
+            // When we are building bar.foo fake override, we should call dummy.foo,
+            // so we should have object : Bar.foo fake override to be built and bound.
+            converter.bindFakeOverridesInClass(irClass)
         }
         localClassesCreatedOnTheFly.clear()
     }

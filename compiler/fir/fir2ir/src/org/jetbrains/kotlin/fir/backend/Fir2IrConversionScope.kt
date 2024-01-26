@@ -153,19 +153,6 @@ class Fir2IrConversionScope(val configuration: Fir2IrConfiguration) {
 
     @PublishedApi
     @PrivateForInline
-    internal var typeErasureForDelegatedObjectCounter = 0
-
-    inline fun <R> withTypeErasureForDelegatedObject(f: () -> R): R {
-        typeErasureForDelegatedObjectCounter++
-        try {
-            return f()
-        } finally {
-            typeErasureForDelegatedObjectCounter--
-        }
-    }
-
-    @PublishedApi
-    @PrivateForInline
     internal val classStack = mutableListOf<IrClass>()
 
     inline fun <R> withClass(klass: IrClass, f: IrClass.() -> R): R {
@@ -251,5 +238,4 @@ class Fir2IrConversionScope(val configuration: Fir2IrConfiguration) {
 
     fun lastWhenSubject(): IrVariable = whenSubjectVariableStack.last()
     fun lastSafeCallSubject(): IrVariable = safeCallSubjectVariableStack.last()
-    fun shouldEraseTypeForDelegatedObject(): Boolean = typeErasureForDelegatedObjectCounter > 0
 }

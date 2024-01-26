@@ -348,34 +348,32 @@ class Fir2IrVisitor(
     override fun visitAnonymousObject(anonymousObject: FirAnonymousObject, data: Any?): IrElement = whileAnalysing(
         session, anonymousObject
     ) {
-        conversionScope.withTypeErasureForDelegatedObject<IrElement> {
-            val irParent = conversionScope.parentFromStack()
-            // NB: for implicit types it is possible that anonymous object is already cached
-            val irAnonymousObject = classifierStorage.getCachedIrClass(anonymousObject)?.apply { this.parent = irParent }
-                ?: converter.processLocalClassAndNestedClasses(anonymousObject, irParent)
+        val irParent = conversionScope.parentFromStack()
+        // NB: for implicit types it is possible that anonymous object is already cached
+        val irAnonymousObject = classifierStorage.getCachedIrClass(anonymousObject)?.apply { this.parent = irParent }
+            ?: converter.processLocalClassAndNestedClasses(anonymousObject, irParent)
 
-            conversionScope.withParent(irAnonymousObject) {
-                memberGenerator.convertClassContent(irAnonymousObject, anonymousObject)
-            }
-            val anonymousClassType = irAnonymousObject.thisReceiver!!.type
-            return anonymousObject.convertWithOffsets { startOffset, endOffset ->
-                IrBlockImpl(
-                    startOffset, endOffset, anonymousClassType, IrStatementOrigin.OBJECT_LITERAL,
-                    listOf(
-                        irAnonymousObject,
-                        IrConstructorCallImpl.fromSymbolOwner(
-                            startOffset,
-                            endOffset,
-                            anonymousClassType,
-                            // a class for an anonymous object definitely is not a lazy class
-                            @OptIn(UnsafeDuringIrConstructionAPI::class)
-                            irAnonymousObject.constructors.first().symbol,
-                            irAnonymousObject.typeParameters.size,
-                            origin = IrStatementOrigin.OBJECT_LITERAL
-                        )
+        conversionScope.withParent(irAnonymousObject) {
+            memberGenerator.convertClassContent(irAnonymousObject, anonymousObject)
+        }
+        val anonymousClassType = irAnonymousObject.thisReceiver!!.type
+        return anonymousObject.convertWithOffsets { startOffset, endOffset ->
+            IrBlockImpl(
+                startOffset, endOffset, anonymousClassType, IrStatementOrigin.OBJECT_LITERAL,
+                listOf(
+                    irAnonymousObject,
+                    IrConstructorCallImpl.fromSymbolOwner(
+                        startOffset,
+                        endOffset,
+                        anonymousClassType,
+                        // a class for an anonymous object definitely is not a lazy class
+                        @OptIn(UnsafeDuringIrConstructionAPI::class)
+                        irAnonymousObject.constructors.first().symbol,
+                        irAnonymousObject.typeParameters.size,
+                        origin = IrStatementOrigin.OBJECT_LITERAL
                     )
                 )
-            }
+            )
         }
     }
 
