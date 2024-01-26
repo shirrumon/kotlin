@@ -138,12 +138,6 @@ open class FirDeclarationsResolveTransformer(
     override fun transformProperty(property: FirProperty, data: ResolutionMode): FirProperty = whileAnalysing(session, property) {
         require(property !is FirSyntheticProperty) { "Synthetic properties should not be processed by body transformers" }
 
-        if (property.isLocal) {
-            context.containingDoWhileLoops.lastOrNull()?.let { loop ->
-                property.containingDoWhileLoop = loop
-            }
-        }
-
         // script top level destructuring declaration container variables should be treated as properties here
         // to avoid CFG/DFA complications
         if (property.isLocal && property.origin != FirDeclarationOrigin.Synthetic.ScriptTopLevelDestructuringDeclarationContainer) {

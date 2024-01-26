@@ -21,7 +21,6 @@ import org.jetbrains.kotlin.fir.declarations.utils.*
 import org.jetbrains.kotlin.fir.diagnostics.DiagnosticKind
 import org.jetbrains.kotlin.fir.expressions.*
 import org.jetbrains.kotlin.fir.isCatchParameter
-import org.jetbrains.kotlin.fir.isDoWhileLoopConditional
 import org.jetbrains.kotlin.fir.references.toResolvedPropertySymbol
 import org.jetbrains.kotlin.fir.resolve.dfa.cfg.*
 import org.jetbrains.kotlin.fir.resolve.dfa.cfg.ControlFlowGraph.Kind
@@ -59,12 +58,15 @@ val FirDeclaration.evaluatedInPlace: Boolean
  * ```
  */
 @OptIn(SymbolInternals::class)
-fun FirPropertySymbol.requiresInitialization(isForInitialization: Boolean): Boolean {
+fun FirPropertySymbol.requiresInitialization(
+    isForInitialization: Boolean,
+    ignoreInitializer: Set<FirPropertySymbol> = emptySet(),
+): Boolean {
     val hasImplicitBackingField = !hasExplicitBackingField && hasBackingField
     return when {
         this is FirSyntheticPropertySymbol -> false
         isForInitialization -> hasDelegate || hasImplicitBackingField
-        else -> (!hasInitializer || fir.isDoWhileLoopConditional) && hasImplicitBackingField && fir.isCatchParameter != true
+        else -> (!hasInitializer || this in ignoreInitializer) && hasImplicitBackingField && fir.isCatchParameter != true
     }
 }
 
@@ -75,7 +77,7 @@ fun PropertyInitializationInfoData.checkPropertyAccesses(
 ) {
     // If a property has an initializer (or does not need one), then any reads are OK while any writes are OK
     // if it's a `var` and bad if it's a `val`. `FirReassignmentAndInvisibleSetterChecker` does this without a CFG.
-    val filtered = properties.filterTo(mutableSetOf()) { it.requiresInitialization(isForInitialization) }
+    val filtered = properties.filterTo(mutableSetOf()) { it.requiresInitialization(isForInitialization, conditionallyInitialized) }
     if (filtered.isEmpty()) return
 
     checkPropertyAccesses(

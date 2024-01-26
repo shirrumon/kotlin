@@ -14,7 +14,6 @@ import org.jetbrains.kotlin.fir.declarations.impl.FirDefaultPropertyAccessor
 import org.jetbrains.kotlin.fir.declarations.utils.isCompanion
 import org.jetbrains.kotlin.fir.declarations.utils.isInner
 import org.jetbrains.kotlin.fir.expressions.FirCallableReferenceAccess
-import org.jetbrains.kotlin.fir.expressions.FirDoWhileLoop
 import org.jetbrains.kotlin.fir.expressions.FirWhenExpression
 import org.jetbrains.kotlin.fir.languageVersionSettings
 import org.jetbrains.kotlin.fir.resolve.*
@@ -370,7 +369,6 @@ class BodyResolveContext(
             containers = this@BodyResolveContext.containers
             containingClassDeclarations = ArrayDeque(this@BodyResolveContext.containingClassDeclarations)
             containingClass = this@BodyResolveContext.containingClass
-            containingDoWhileLoops = ArrayDeque(this@BodyResolveContext.containingDoWhileLoops)
             replaceTowerDataContext(this@BodyResolveContext.towerDataContext)
             anonymousFunctionsAnalyzedInDependentContext.addAll(this@BodyResolveContext.anonymousFunctionsAnalyzedInDependentContext)
             // Looks like we should copy this session only for builder inference to be able
@@ -941,29 +939,6 @@ class BodyResolveContext(
         return withTowerDataCleanup {
             addLocalScope(FirLocalScope(session))
             f()
-        }
-    }
-
-    var containingDoWhileLoops: ArrayDeque<FirDoWhileLoop> = ArrayDeque()
-
-    var insideDoWhileLoopCondition: Boolean = false
-
-    inline fun <T> withDoWhileLoop(loop: FirDoWhileLoop, session: FirSession, f: () -> T): T {
-        containingDoWhileLoops.add(loop)
-        return try {
-            forBlock(session, f)
-        } finally {
-            containingDoWhileLoops.removeLast()
-        }
-    }
-
-    inline fun withDoWhileCondition(action: () -> Unit) {
-        val old = insideDoWhileLoopCondition
-        insideDoWhileLoopCondition = true
-        try {
-            action()
-        } finally {
-            insideDoWhileLoopCondition = old
         }
     }
 }

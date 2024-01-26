@@ -8,7 +8,6 @@ package org.jetbrains.kotlin.fir
 import org.jetbrains.kotlin.fir.declarations.*
 import org.jetbrains.kotlin.fir.declarations.utils.isLocal
 import org.jetbrains.kotlin.fir.declarations.utils.isSynthetic
-import org.jetbrains.kotlin.fir.expressions.FirDoWhileLoop
 import org.jetbrains.kotlin.fir.symbols.ConeClassLikeLookupTag
 import org.jetbrains.kotlin.fir.symbols.impl.FirCallableSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirClassLikeSymbol
@@ -233,18 +232,3 @@ var <D : FirCallableDeclaration>
 
 val <D : FirCallableDeclaration> FirCallableSymbol<out D>.delegatedWrapperData: DelegatedWrapperData<D>?
     get() = fir.delegatedWrapperData
-
-private object DoWhileScopedKey : FirDeclarationDataKey()
-
-var FirProperty.containingDoWhileLoop: FirDoWhileLoop? by FirDeclarationDataRegistry.data(DoWhileScopedKey)
-
-private object UseInDoWhileConditionKey : FirDeclarationDataKey()
-
-var FirProperty.containingDoWhileLoopCondition: FirDoWhileLoop? by FirDeclarationDataRegistry.data(UseInDoWhileConditionKey)
-
-val FirProperty.isDoWhileLoopConditional: Boolean
-    get() {
-        val loop = containingDoWhileLoop ?: return false
-        val conditionLoop = containingDoWhileLoopCondition ?: return false
-        return loop == conditionLoop
-    }

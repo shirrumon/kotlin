@@ -18,6 +18,7 @@ import org.jetbrains.kotlin.fir.symbols.impl.FirPropertySymbol
 
 class PropertyInitializationInfoData(
     val properties: Set<FirPropertySymbol>,
+    val conditionallyInitialized: Set<FirPropertySymbol>,
     val receiver: FirBasedSymbol<*>?,
     val graph: ControlFlowGraph,
 ) {

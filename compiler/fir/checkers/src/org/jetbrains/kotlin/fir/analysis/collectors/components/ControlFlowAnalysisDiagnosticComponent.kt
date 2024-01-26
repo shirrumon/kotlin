@@ -13,10 +13,12 @@ import org.jetbrains.kotlin.fir.analysis.checkers.context.CheckerContext
 import org.jetbrains.kotlin.fir.analysis.checkers.declaration.DeclarationCheckers
 import org.jetbrains.kotlin.fir.analysis.checkersComponent
 import org.jetbrains.kotlin.fir.declarations.*
-import org.jetbrains.kotlin.fir.resolve.dfa.cfg.CFGNode
-import org.jetbrains.kotlin.fir.resolve.dfa.cfg.ControlFlowGraphVisitorVoid
-import org.jetbrains.kotlin.fir.resolve.dfa.cfg.VariableDeclarationNode
+import org.jetbrains.kotlin.fir.expressions.FirDoWhileLoop
+import org.jetbrains.kotlin.fir.references.toResolvedPropertySymbol
+import org.jetbrains.kotlin.fir.resolve.dfa.cfg.*
 import org.jetbrains.kotlin.fir.resolve.dfa.controlFlowGraph
+import org.jetbrains.kotlin.fir.resolve.dfa.stackOf
+import org.jetbrains.kotlin.fir.resolve.dfa.topOrNull
 import org.jetbrains.kotlin.fir.symbols.impl.FirPropertySymbol
 
 class ControlFlowAnalysisDiagnosticComponent(
@@ -41,9 +43,10 @@ class ControlFlowAnalysisDiagnosticComponent(
         if (graph.isSubGraph) return
         cfaCheckers.forEach { it.analyze(graph, reporter, context) }
 
-        val properties = mutableSetOf<FirPropertySymbol>().apply { graph.traverse(LocalPropertyCollector(this)) }
+        val collector = LocalPropertyCollector().apply { graph.traverse(this) }
+        val properties = collector.properties
         if (properties.isNotEmpty()) {
-            val data = PropertyInitializationInfoData(properties, receiver = null, graph)
+            val data = PropertyInitializationInfoData(properties, collector.conditionallyInitialized, receiver = null, graph)
             variableAssignmentCheckers.forEach { it.analyze(data, reporter, context) }
         }
     }
@@ -94,11 +97,57 @@ class ControlFlowAnalysisDiagnosticComponent(
         analyze(constructor, data)
     }
 
-    private class LocalPropertyCollector(private val result: MutableSet<FirPropertySymbol>) : ControlFlowGraphVisitorVoid() {
+    private class LocalPropertyCollector : ControlFlowGraphVisitorVoid() {
+        val properties = mutableSetOf<FirPropertySymbol>()
+
+        // Properties which may not be initialized when used, even if they have an initializer.
+        val conditionallyInitialized = mutableSetOf<FirPropertySymbol>()
+
+        // Properties defined within do-while loops, and used within the condition of that same do-while loop, are considered conditionally
+        // initialized. It is possible they may not even be defined by the loop condition due to a `continue` in the do-while loop. Track
+        // do-while loop properties so those used in the condition can be recorded.
+        private val doWhileLoopProperties = stackOf<MutableSet<FirPropertySymbol>>()
+        private var inDoWhileLoopCondition = false
+
         override fun visitNode(node: CFGNode<*>) {}
 
         override fun visitVariableDeclarationNode(node: VariableDeclarationNode) {
-            result.add(node.fir.symbol)
+            val symbol = node.fir.symbol
+            properties.add(symbol)
+            doWhileLoopProperties.topOrNull()?.add(symbol)
+        }
+
+        override fun visitQualifiedAccessNode(node: QualifiedAccessNode) {
+            if (inDoWhileLoopCondition) {
+                val symbol = node.fir.calleeReference.toResolvedPropertySymbol() ?: return
+                if (symbol in doWhileLoopProperties.top()) {
+                    conditionallyInitialized.add(symbol)
+                }
+            }
+        }
+
+        override fun visitLoopEnterNode(node: LoopEnterNode) {
+            if (node.fir is FirDoWhileLoop) {
+                doWhileLoopProperties.push(mutableSetOf())
+            }
+        }
+
+        override fun visitLoopExitNode(node: LoopExitNode) {
+            if (node.fir is FirDoWhileLoop) {
+                doWhileLoopProperties.pop()
+            }
+        }
+
+        override fun visitLoopConditionEnterNode(node: LoopConditionEnterNode) {
+            if (node.loop is FirDoWhileLoop) {
+                inDoWhileLoopCondition = true
+            }
+        }
+
+        override fun visitLoopConditionExitNode(node: LoopConditionExitNode) {
+            if (node.loop is FirDoWhileLoop) {
+                inDoWhileLoopCondition = false
+            }
         }
     }
 }
