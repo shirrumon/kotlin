@@ -60,7 +60,7 @@ class KotlinFileSerializedData private constructor(
     constructor(metadata: ByteArray, path: String?, fqName: String) : this(metadata, irData = null, path, fqName)
 }
 
-data class SerializerOutput<Dependency : KotlinLibrary>(
+class SerializerOutput<Dependency : KotlinLibrary>(
     val serializedMetadata: SerializedMetadata?,
     val serializedIr: SerializedIrModule?,
     val dataFlowGraph: ByteArray?,
