@@ -19,19 +19,6 @@ FILE fqName:<root> fileName:/kt43342.kt
           RETURN type=kotlin.Nothing from='public final fun <get-map> (): kotlin.collections.Map<K of <root>.ControlFlowInfo, V of <root>.ControlFlowInfo> declared in <root>.ControlFlowInfo'
             GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:map type:kotlin.collections.Map<K of <root>.ControlFlowInfo, V of <root>.ControlFlowInfo> visibility:private [final]' type=kotlin.collections.Map<K of <root>.ControlFlowInfo, V of <root>.ControlFlowInfo> origin=null
               receiver: GET_VAR '<this>: <root>.ControlFlowInfo<K of <root>.ControlFlowInfo, V of <root>.ControlFlowInfo> declared in <root>.ControlFlowInfo.<get-map>' type=<root>.ControlFlowInfo<K of <root>.ControlFlowInfo, V of <root>.ControlFlowInfo> origin=null
-    FUN DELEGATED_MEMBER name:asJsReadonlyMapView visibility:public modality:OPEN <> ($this:<root>.ControlFlowInfo<K of <root>.ControlFlowInfo, V of <root>.ControlFlowInfo>) returnType:kotlin.js.collections.JsReadonlyMap<K of <root>.ControlFlowInfo, V of <root>.ControlFlowInfo>
-      annotations:
-        ExperimentalJsExport
-        ExperimentalJsCollectionsApi
-        SinceKotlin(version = "1.9")
-      overridden:
-        public open fun asJsReadonlyMapView (): kotlin.js.collections.JsReadonlyMap<K of kotlin.collections.Map, V of kotlin.collections.Map> declared in kotlin.collections.Map
-      $this: VALUE_PARAMETER name:<this> type:<root>.ControlFlowInfo<K of <root>.ControlFlowInfo, V of <root>.ControlFlowInfo>
-      BLOCK_BODY
-        RETURN type=kotlin.Nothing from='public open fun asJsReadonlyMapView (): kotlin.js.collections.JsReadonlyMap<K of <root>.ControlFlowInfo, V of <root>.ControlFlowInfo> declared in <root>.ControlFlowInfo'
-          CALL 'public open fun asJsReadonlyMapView (): kotlin.js.collections.JsReadonlyMap<K of kotlin.collections.Map, V of kotlin.collections.Map> declared in kotlin.collections.Map' type=kotlin.js.collections.JsReadonlyMap<K of <root>.ControlFlowInfo, V of <root>.ControlFlowInfo> origin=null
-            $this: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:map type:kotlin.collections.Map<K of <root>.ControlFlowInfo, V of <root>.ControlFlowInfo> visibility:private [final]' type=kotlin.collections.Map<K of <root>.ControlFlowInfo, V of <root>.ControlFlowInfo> origin=null
-              receiver: GET_VAR '<this>: <root>.ControlFlowInfo<K of <root>.ControlFlowInfo, V of <root>.ControlFlowInfo> declared in <root>.ControlFlowInfo.asJsReadonlyMapView' type=<root>.ControlFlowInfo<K of <root>.ControlFlowInfo, V of <root>.ControlFlowInfo> origin=null
     FUN DELEGATED_MEMBER name:containsKey visibility:public modality:OPEN <> ($this:<root>.ControlFlowInfo<K of <root>.ControlFlowInfo, V of <root>.ControlFlowInfo>, key:K of <root>.ControlFlowInfo) returnType:kotlin.Boolean
       overridden:
         public abstract fun containsKey (key: K of kotlin.collections.Map): kotlin.Boolean declared in kotlin.collections.Map
@@ -167,14 +154,6 @@ FILE fqName:<root> fileName:/kt43342.kt
         overridden:
           public final fun <get-map> (): kotlin.collections.Map<K of <root>.ControlFlowInfo, V of <root>.ControlFlowInfo> declared in <root>.ControlFlowInfo
         $this: VALUE_PARAMETER name:<this> type:<root>.ControlFlowInfo<kotlin.String, kotlin.String>
-    FUN FAKE_OVERRIDE name:asJsReadonlyMapView visibility:public modality:OPEN <> ($this:<root>.ControlFlowInfo<kotlin.String, kotlin.String>) returnType:kotlin.js.collections.JsReadonlyMap<kotlin.String, kotlin.String> [fake_override]
-      annotations:
-        ExperimentalJsExport
-        ExperimentalJsCollectionsApi
-        SinceKotlin(version = "1.9")
-      overridden:
-        public open fun asJsReadonlyMapView (): kotlin.js.collections.JsReadonlyMap<K of <root>.ControlFlowInfo, V of <root>.ControlFlowInfo> declared in <root>.ControlFlowInfo
-      $this: VALUE_PARAMETER name:<this> type:<root>.ControlFlowInfo<kotlin.String, kotlin.String>
     FUN FAKE_OVERRIDE name:containsKey visibility:public modality:OPEN <> ($this:<root>.ControlFlowInfo<kotlin.String, kotlin.String>, key:kotlin.String) returnType:kotlin.Boolean [fake_override]
       overridden:
         public open fun containsKey (key: K of <root>.ControlFlowInfo): kotlin.Boolean declared in <root>.ControlFlowInfo

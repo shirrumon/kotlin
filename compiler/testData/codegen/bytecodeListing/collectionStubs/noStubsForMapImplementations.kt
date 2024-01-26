@@ -1,3 +1,5 @@
+// JVM_ABI_K1_K2_DIFF: ???
+
 // Ensure the proper collection stubs are added, in
 // particular *not* when specialized implementations are provided.
 

@@ -1,3 +1,5 @@
+// JVM_ABI_K1_K2_DIFF: ???
+
 class DGenericIterator<T>(d: Iterator<T>) : Iterator<T> by d
 
 class DGenericListIterator<T>(d: ListIterator<T>) : ListIterator<T> by d
