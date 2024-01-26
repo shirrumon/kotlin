@@ -19,7 +19,6 @@ import org.jetbrains.kotlin.fir.declarations.FirResolvePhase
 import org.jetbrains.kotlin.fir.resolve.transformers.FirSealedClassInheritorsProcessor
 import org.jetbrains.kotlin.fir.symbols.lazyResolveToPhaseRecursively
 import org.jetbrains.kotlin.name.ClassId
-import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.test.directives.model.DirectiveApplicability
 import org.jetbrains.kotlin.test.directives.model.SimpleDirectivesContainer
 import org.jetbrains.kotlin.test.services.PreAnalysisHandler
@@ -27,7 +26,7 @@ import org.jetbrains.kotlin.test.services.TestModuleStructure
 import org.jetbrains.kotlin.test.services.TestServices
 import org.jetbrains.kotlin.test.services.compilerConfigurationProvider
 
-class SealedClassesInheritorsCaclulatorPreAnalysisHandler(
+class SealedClassesInheritorsCalculatorPreAnalysisHandler(
     testServices: TestServices,
 ) : PreAnalysisHandler(testServices) {
 
