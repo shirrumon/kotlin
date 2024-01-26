@@ -63,6 +63,12 @@ public class FirOldFrontendMPPDiagnosticsWithLightTreeTestGenerated extends Abst
     }
 
     @Test
+    @TestMetadata("actualWithoutExpectWhenExpectIsFakeOverride.kt")
+    public void testActualWithoutExpectWhenExpectIsFakeOverride() throws Exception {
+        runTest("compiler/testData/diagnostics/tests/multiplatform/actualWithoutExpectWhenExpectIsFakeOverride.kt");
+    }
+
+    @Test
     public void testAllFilesPresentInMultiplatform() throws Exception {
         KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/diagnostics/tests/multiplatform"), Pattern.compile("^(.*)\\.kts?$"), Pattern.compile("^(.+)\\.(reversed|fir|ll)\\.kts?$"), TargetBackend.JVM_IR, true);
     }
@@ -179,12 +185,6 @@ public class FirOldFrontendMPPDiagnosticsWithLightTreeTestGenerated extends Abst
     @TestMetadata("expectInterfaceApplicability.kt")
     public void testExpectInterfaceApplicability() throws Exception {
         runTest("compiler/testData/diagnostics/tests/multiplatform/expectInterfaceApplicability.kt");
-    }
-
-    @Test
-    @TestMetadata("expectKeywordIsMissing.kt")
-    public void testExpectKeywordIsMissing() throws Exception {
-        runTest("compiler/testData/diagnostics/tests/multiplatform/expectKeywordIsMissing.kt");
     }
 
     @Test

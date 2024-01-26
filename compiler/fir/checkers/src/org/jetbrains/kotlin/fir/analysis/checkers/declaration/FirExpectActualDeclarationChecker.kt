@@ -177,7 +177,7 @@ object FirExpectActualDeclarationChecker : FirBasicDeclarationChecker(MppChecker
             ExpectActualMatchingCompatibility.MatchedSuccessfully !in matchingCompatibilityToMembersMap ||
                     expectedSingleCandidate != null &&
                     declaration.hasActualModifier() &&
-                    (expectedSingleCandidate.isFakeOverride(expectContainingClass, expectActualMatchingContext)) -> {
+                    expectedSingleCandidate.isFakeOverride(expectContainingClass, expectActualMatchingContext) -> {
                 reporter.reportOn(
                     source,
                     FirErrors.ACTUAL_WITHOUT_EXPECT,
