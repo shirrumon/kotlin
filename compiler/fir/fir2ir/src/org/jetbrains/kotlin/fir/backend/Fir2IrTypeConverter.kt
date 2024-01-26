@@ -5,10 +5,8 @@
 
 package org.jetbrains.kotlin.fir.backend
 
-import org.jetbrains.kotlin.fir.declarations.FirProperty
 import org.jetbrains.kotlin.fir.declarations.getAnnotationsByClassId
 import org.jetbrains.kotlin.fir.expressions.FirAnnotation
-import org.jetbrains.kotlin.fir.expressions.FirAnonymousObjectExpression
 import org.jetbrains.kotlin.fir.expressions.unexpandedConeClassLikeType
 import org.jetbrains.kotlin.fir.resolve.fullyExpandedType
 import org.jetbrains.kotlin.fir.resolve.substitution.AbstractConeSubstitutor
@@ -161,18 +159,11 @@ class Fir2IrTypeConverter(
                 val expandedType = fullyExpandedType(session)
                 val approximatedType = approximateType(expandedType)
 
-                if (conversionScope.shouldEraseTypeForDelegatedObject() && approximatedType is ConeTypeParameterType) {
-                    val typeParameterSymbol = approximatedType.lookupTag.typeParameterSymbol
-                    val containingDeclarationFir = typeParameterSymbol.containingDeclarationSymbol.fir
-                    val anonymousObjectDelegate = (containingDeclarationFir as? FirProperty)?.delegate as? FirAnonymousObjectExpression
-                    if (anonymousObjectDelegate != null &&
-                        anonymousObjectDelegate.anonymousObject.typeParameters.any { it.symbol == typeParameterSymbol }
-                    ) {
-                        // This hack is about type parameter leak in case of generic delegated property
-                        // It maybe will be prohibited after 2.0
-                        // For more details see KT-24643
-                        return approximateUpperBounds(typeParameterSymbol.resolvedBounds)
-                    }
+                if (approximatedType is ConeTypeParameterType && conversionScope.shouldEraseTypeInsideDelegatedObject(approximatedType)) {
+                    // This hack is about type parameter leak in case of generic delegated property
+                    // It probably will be prohibited after 2.0
+                    // For more details see KT-24643
+                    return approximateUpperBounds(approximatedType.lookupTag.typeParameterSymbol.resolvedBounds)
                 }
 
                 IrSimpleTypeImpl(

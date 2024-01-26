@@ -5,11 +5,10 @@
 
 package org.jetbrains.kotlin.fir.backend
 
-import org.jetbrains.kotlin.fir.declarations.FirClass
-import org.jetbrains.kotlin.fir.declarations.FirConstructor
-import org.jetbrains.kotlin.fir.declarations.FirProperty
-import org.jetbrains.kotlin.fir.declarations.FirPropertyAccessor
+import org.jetbrains.kotlin.fir.declarations.*
+import org.jetbrains.kotlin.fir.expressions.FirAnonymousObjectExpression
 import org.jetbrains.kotlin.fir.expressions.FirReturnExpression
+import org.jetbrains.kotlin.fir.types.ConeTypeParameterType
 import org.jetbrains.kotlin.ir.builders.Scope
 import org.jetbrains.kotlin.ir.declarations.*
 import org.jetbrains.kotlin.ir.symbols.*
@@ -238,4 +237,17 @@ class Fir2IrConversionScope(val configuration: Fir2IrConfiguration) {
 
     fun lastWhenSubject(): IrVariable = whenSubjectVariableStack.last()
     fun lastSafeCallSubject(): IrVariable = safeCallSubjectVariableStack.last()
+
+    fun shouldEraseTypeInsideDelegatedObject(type: ConeTypeParameterType): Boolean = containingFirClassStack.asReversed().any { clazz ->
+        if (clazz !is FirAnonymousObject) return@any false
+
+        val typeParameterSymbol = type.lookupTag.typeParameterSymbol
+        val containingDeclarationFir = typeParameterSymbol.containingDeclarationSymbol.fir
+        val anonymousObjectDelegate = (containingDeclarationFir as? FirProperty)?.delegate as? FirAnonymousObjectExpression
+        if (anonymousObjectDelegate?.anonymousObject === clazz) {
+            return@any clazz.typeParameters.any { it.symbol === typeParameterSymbol }
+        }
+
+        return@any false
+    }
 }
