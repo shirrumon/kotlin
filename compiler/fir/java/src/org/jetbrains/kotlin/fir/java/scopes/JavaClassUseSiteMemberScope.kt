@@ -447,7 +447,7 @@ class JavaClassUseSiteMemberScope(
      * in case base methods should have their value parameters erased in Java,
      * e.g. Collection.contains(T) in Kotlin is paired with Collection.contains(Object) in Java.
      *
-     * Given we have a Java class [klass] and some its method(s) name [naturalName]
+     * Given we have a Java class [klass] and some its method(s) name [name]
      * with base method group [resultOfIntersectionWithNaturalName] and (maybe)
      * explicitly declared [explicitlyDeclaredFunctionWithNaturalName],
      * this function builds a synthetic override for [resultOfIntersectionWithNaturalName] in the Java class,
@@ -456,16 +456,16 @@ class JavaClassUseSiteMemberScope(
      *
      * Important: all explicitly declared functions are already collected at this point, there is no reason to collect them once more!
      *
-     * @param naturalName a given method name ("natural" in fact means nothing here)
+     * @param name a given method name
      * @param destination used to collect base functions for [explicitlyDeclaredFunctionWithNaturalName] with erased value parameters in Java
      * @param resultOfIntersectionWithNaturalName one group of intersected base methods, each "overridden member" inside is a pair of (base method, its scope)
-     * @param explicitlyDeclaredFunctionWithNaturalName the function in the Java class [klass] with the name [naturalName], which overrides [resultOfIntersectionWithNaturalName] (if any)
+     * @param explicitlyDeclaredFunctionWithNaturalName the function in the Java class [klass] with the name [name], which overrides [resultOfIntersectionWithNaturalName] (if any)
      * @return true if we collected something, false otherwise
      * @see [SpecialGenericSignatures.GENERIC_PARAMETERS_METHODS_TO_DEFAULT_VALUES_MAP] and
      * [SpecialGenericSignatures.ERASED_COLLECTION_PARAMETER_NAME_AND_SIGNATURES]
      */
     private fun processOverridesForFunctionsWithErasedValueParameter(
-        naturalName: Name,
+        name: Name,
         destination: MutableCollection<FirNamedFunctionSymbol>,
         resultOfIntersectionWithNaturalName: ResultOfIntersection<FirNamedFunctionSymbol>,
         explicitlyDeclaredFunctionWithNaturalName: FirNamedFunctionSymbol?
@@ -488,7 +488,7 @@ class JavaClassUseSiteMemberScope(
 
         // E.g. contains(Object) from Java
         val explicitlyDeclaredFunctionWithErasedValueParameters =
-            declaredMemberScope.getFunctions(naturalName).firstOrNull { declaredFunction ->
+            declaredMemberScope.getFunctions(name).firstOrNull { declaredFunction ->
                 declaredFunction.hasSameJvmDescriptor(functionFromSupertypeWithValueParametersToBeErased) &&
                         declaredFunction.hasErasedParameters() &&
                         javaOverrideChecker.doesReturnTypesHaveSameKind(
@@ -506,7 +506,7 @@ class JavaClassUseSiteMemberScope(
         val declaredFunctionCopyWithParameterTypesFromSupertype = buildJavaMethodCopy(
             explicitlyDeclaredFunctionWithErasedValueParameters.fir as FirJavaMethod
         ) {
-            name = naturalName
+            this.name = name
             symbol = FirNamedFunctionSymbol(explicitlyDeclaredFunctionWithErasedValueParameters.callableId)
             this.valueParameters.clear()
             explicitlyDeclaredFunctionWithErasedValueParameters.fir.valueParameters.zip(
@@ -541,7 +541,7 @@ class JavaClassUseSiteMemberScope(
             val newSymbol = FirNamedFunctionSymbol(accidentalOverrideWithDeclaredFunction.callableId)
             val original = accidentalOverrideWithDeclaredFunction.fir
             val accidentalOverrideWithDeclaredFunctionHiddenCopy = buildSimpleFunctionCopy(original) {
-                name = naturalName
+                this.name = name
                 symbol = newSymbol
                 dispatchReceiverType = klass.defaultType()
             }.apply {
