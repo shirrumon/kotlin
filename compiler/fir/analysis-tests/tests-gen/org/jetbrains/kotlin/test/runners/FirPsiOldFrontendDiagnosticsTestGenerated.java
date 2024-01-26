@@ -26726,6 +26726,12 @@ public class FirPsiOldFrontendDiagnosticsTestGenerated extends AbstractFirPsiDia
                 }
 
                 @Test
+                @TestMetadata("intersectionReturnTypeMismatchSubsumed.kt")
+                public void testIntersectionReturnTypeMismatchSubsumed() throws Exception {
+                    runTest("compiler/testData/diagnostics/tests/override/clashesOnInheritance/intersectionReturnTypeMismatchSubsumed.kt");
+                }
+
+                @Test
                 @TestMetadata("kt13355.kt")
                 public void testKt13355() throws Exception {
                     runTest("compiler/testData/diagnostics/tests/override/clashesOnInheritance/kt13355.kt");

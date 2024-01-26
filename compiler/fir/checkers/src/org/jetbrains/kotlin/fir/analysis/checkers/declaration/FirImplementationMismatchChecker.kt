@@ -20,6 +20,7 @@ import org.jetbrains.kotlin.fir.containingClassLookupTag
 import org.jetbrains.kotlin.fir.declarations.FirClass
 import org.jetbrains.kotlin.fir.declarations.FirRegularClass
 import org.jetbrains.kotlin.fir.declarations.getNonSubsumedOverriddenSymbols
+import org.jetbrains.kotlin.fir.declarations.nonSubsumed
 import org.jetbrains.kotlin.fir.declarations.utils.classId
 import org.jetbrains.kotlin.fir.declarations.utils.isAbstract
 import org.jetbrains.kotlin.fir.declarations.utils.isExpect
@@ -29,6 +30,7 @@ import org.jetbrains.kotlin.fir.isSubstitutionOverride
 import org.jetbrains.kotlin.fir.resolve.substitution.substitutorByMap
 import org.jetbrains.kotlin.fir.scopes.FirTypeScope
 import org.jetbrains.kotlin.fir.scopes.getDirectOverriddenMembers
+import org.jetbrains.kotlin.fir.scopes.getDirectOverriddenMembersWithBaseScope
 import org.jetbrains.kotlin.fir.scopes.getDirectOverriddenProperties
 import org.jetbrains.kotlin.fir.scopes.impl.toConeType
 import org.jetbrains.kotlin.fir.symbols.impl.*
@@ -36,6 +38,7 @@ import org.jetbrains.kotlin.fir.types.ConeErrorType
 import org.jetbrains.kotlin.fir.types.ConeKotlinType
 import org.jetbrains.kotlin.fir.types.coneType
 import org.jetbrains.kotlin.fir.types.typeContext
+import org.jetbrains.kotlin.fir.unwrapSubstitutionOverrides
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.types.AbstractTypeChecker
 import org.jetbrains.kotlin.types.TypeCheckerState
@@ -122,6 +125,18 @@ sealed class FirImplementationMismatchChecker(mppKind: MppCheckerKind) : FirClas
                 AbstractTypeChecker.isSubtypeOf(typeCheckerState, inheritedTypeSubstituted, baseType)
         }
 
+        /**
+         * An intersection override is trivial if one of the overridden symbols subsumes all others.
+         *
+         * @see org.jetbrains.kotlin.fir.scopes.impl.FirTypeIntersectionScopeContext.convertGroupedCallablesToIntersectionResults
+         */
+        fun FirCallableSymbol<*>.isTrivialIntersectionOverride(): Boolean {
+            return callableId.classId != containingClass.classId ||
+                    classScope.getDirectOverriddenMembersWithBaseScope(this)
+                        .nonSubsumed()
+                        .mapTo(mutableSetOf()) { it.member.unwrapSubstitutionOverrides() }.size == 1
+        }
+
         val intersectionSymbols = when {
             //substitution override means simple materialization of single method, so nothing to check
             symbol.isSubstitutionOverride -> return
@@ -130,13 +145,15 @@ sealed class FirImplementationMismatchChecker(mppKind: MppCheckerKind) : FirClas
                 //if there is intersection override - take its intersections - they will contain all substitutions
                 //otherwise we get base members with unsubstituted params too
                 val cleared = allOverridden.find { it is FirIntersectionCallableSymbol }?.let {
-                    (it as FirIntersectionCallableSymbol).getNonSubsumedOverriddenSymbols(context.session, context.scopeSession)
+                    (it as FirIntersectionCallableSymbol).intersections
                 } ?: allOverridden
                 //current symbol needs to be added, because basically it is the implementation
                 cleared + symbol
             }
-            symbol is FirIntersectionCallableSymbol && symbol.callableId.classId == containingClass.classId ->
-                symbol.getNonSubsumedOverriddenSymbols(context.session, context.scopeSession)
+            symbol is FirIntersectionCallableSymbol && !symbol.isTrivialIntersectionOverride() ->
+                // We intentionally don't use getNonSubsumedOverriddenSymbols here, otherwise we'll get lots of new errors (compared to K1)
+                // in cases where a Java superclass inherits multiple members with conflicting nullability annotations.
+                symbol.intersections
             else -> return
         }
 
@@ -204,12 +221,18 @@ sealed class FirImplementationMismatchChecker(mppKind: MppCheckerKind) : FirClas
         reporter.reportOn(containingClass.source, FirErrors.VAR_OVERRIDDEN_BY_VAL_BY_DELEGATION, symbol, overriddenVar, context)
     }
 
-    private fun FirTypeScope.collectFunctionsNamed(name: Name, containingClass: FirClass): List<FirNamedFunctionSymbol> {
+    private fun FirTypeScope.collectFunctionsNamed(
+        name: Name,
+        containingClass: FirClass,
+        context: CheckerContext,
+    ): List<FirNamedFunctionSymbol> {
         val allFunctions = mutableListOf<FirNamedFunctionSymbol>()
 
         processFunctionsByName(name) { sym ->
             when (sym) {
-                is FirIntersectionOverrideFunctionSymbol -> sym.intersections.mapNotNullTo(allFunctions) { it as? FirNamedFunctionSymbol }
+                is FirIntersectionOverrideFunctionSymbol -> sym
+                    .getNonSubsumedOverriddenSymbols(context.session, context.scopeSession)
+                    .mapNotNullTo(allFunctions) { it as? FirNamedFunctionSymbol }
                 else -> allFunctions.add(sym)
             }
         }
@@ -226,7 +249,7 @@ sealed class FirImplementationMismatchChecker(mppKind: MppCheckerKind) : FirClas
         scope: FirTypeScope,
         name: Name
     ) {
-        val allFunctions = scope.collectFunctionsNamed(name, containingClass)
+        val allFunctions = scope.collectFunctionsNamed(name, containingClass, context)
 
         val sameArgumentGroups = allFunctions.groupBy { function ->
             buildList {
