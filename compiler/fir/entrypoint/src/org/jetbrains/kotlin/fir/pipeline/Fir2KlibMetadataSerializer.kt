@@ -16,6 +16,7 @@ import org.jetbrains.kotlin.fir.backend.extractFirDeclarations
 import org.jetbrains.kotlin.fir.declarations.FirFile
 import org.jetbrains.kotlin.fir.packageFqName
 import org.jetbrains.kotlin.fir.resolve.ScopeSession
+import org.jetbrains.kotlin.fir.resolve.providers.FirProvider
 import org.jetbrains.kotlin.fir.resolve.providers.firProvider
 import org.jetbrains.kotlin.fir.serialization.FirKLibSerializerExtension
 import org.jetbrains.kotlin.fir.serialization.serializeSingleFirFile
@@ -61,10 +62,20 @@ class Fir2KlibMetadataSerializer(
         get() = firFilesAndSessions.size
 
     override fun serializeSingleFileMetadata(file: FirFile): ProtoBuf.PackageFragment {
+        val session: FirSession
+        val scopeSession: ScopeSession
+        val firProvider: FirProvider
         val components = fir2IrActualizedResult?.components
-        val session = components?.session ?: firFilesAndSessions[file]?.first ?: error("Missing FirSession")
-        val scopeSession = components?.scopeSession ?: firFilesAndSessions[file]?.second ?: error("Missing ScopeSession")
-        val firProvider = components?.firProvider ?: firFilesAndSessions[file]?.first?.firProvider ?: error("Missing FirProvider")
+        if (components != null) {
+            session = components.session
+            scopeSession = components.scopeSession
+            firProvider = components.firProvider
+        } else {
+            val sessionAndScopeSession = firFilesAndSessions[file] ?: error("Missing FirSession and ScopeSession")
+            session = sessionAndScopeSession.first
+            scopeSession = sessionAndScopeSession.second
+            firProvider = session.firProvider
+        }
         return serializeSingleFirFile(
             file,
             session,
