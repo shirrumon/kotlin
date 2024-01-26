@@ -53,22 +53,27 @@ public:
     template <typename Action>
     static void doIfActive(Action&& action) {
         CallsCheckerIgnoreGuard guard;
+
+        // Without this check and with many frequent-enough readers,
+        // a writer might never get a chance to obtain the lock.
+        if (!active_.load(std::memory_order_relaxed)) return;
+
         std::shared_lock lock(mutex_);
-        if (active_) {
+        if (active_.load(std::memory_order_relaxed)) {
             action();
         }
     }
 
     ExtraSafePointActionActivator() noexcept {
         std::unique_lock lock(mutex_);
-        active_ = true;
+        active_.store(true, std::memory_order_relaxed);
     }
 
     virtual ~ExtraSafePointActionActivator() noexcept = 0;
 
 private:
     [[clang::no_destroy]] inline static std::shared_mutex mutex_{};
-    inline static bool active_ = false;
+    inline static std::atomic<bool> active_ = false;
 
     SafePointActivator safePointActivator_{};
 };
@@ -76,7 +81,7 @@ private:
 template <typename Impl>
 ExtraSafePointActionActivator<Impl>::~ExtraSafePointActionActivator() noexcept {
     std::unique_lock lock(mutex_);
-    active_ = false;
+    active_.store(false, std::memory_order_relaxed);
 }
 
 namespace test_support {
