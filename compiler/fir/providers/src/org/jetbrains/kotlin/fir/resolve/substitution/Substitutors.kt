@@ -89,7 +89,11 @@ abstract class AbstractConeSubstitutor(protected val typeContext: ConeTypeContex
         }
 
         val substitutedType = newType ?: type.substituteRecursive()
-        val substitutedAttributes = (substitutedType ?: type).attributes.transformTypesWith(this::substituteOrNull)
+        val substitutedAttributesOfUnsubstitutedType = type.attributes.transformTypesWith(this::substituteOrNull)
+        // ConeAttribute.add is typically implemented to favor the RHS if both are not-null, so we use the substituted attributes as RHS.
+        // We can't do `(substitutedType ?: type).attributes.transformTypesWith(this::substituteOrNull)` because it could lead to an
+        // infinite loop in a situation like `{E -> Attr(E) Foo}` applied to `E`.
+        val substitutedAttributes = substitutedType?.attributes?.add(substitutedAttributesOfUnsubstitutedType ?: ConeAttributes.Empty) ?: substitutedAttributesOfUnsubstitutedType
 
         return if (substitutedType != null || substitutedAttributes != null) {
             var result = substitutedType ?: type
