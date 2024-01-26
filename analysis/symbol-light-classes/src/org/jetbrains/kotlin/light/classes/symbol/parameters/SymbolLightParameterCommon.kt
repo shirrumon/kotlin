@@ -33,7 +33,7 @@ internal abstract class SymbolLightParameterCommon(
         parameterSymbolPointer = with(ktAnalysisSession) { parameterSymbol.createPointer() },
         parameterDeclaration = parameterSymbol.sourcePsiSafe(),
         containingMethod = containingMethod,
-        kotlinOrigin = parameterSymbol.psiSafe(),
+        kotlinOrigin = parameterSymbol.sourcePsiSafe(),
     )
 
     private val _name: String by lazyPub {
